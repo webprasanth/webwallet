@@ -1015,7 +1015,7 @@ SystemJS.config({
         "sass.js": "npm:sass.js@0.9.11",
         "postcss": "npm:postcss@5.1.2",
         "autoprefixer": "npm:autoprefixer@6.4.0",
-        "reqwest": "github:ded/reqwest@2.0.5",
+        "reqwest": "npm:reqwest@2.0.5",
         "path": "github:jspm/nodelibs-path@0.1.0",
         "url": "github:jspm/nodelibs-url@0.1.0",
         "fs": "github:jspm/nodelibs-fs@0.1.2"
