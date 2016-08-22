@@ -163,6 +163,7 @@
     "gulp-shell": "^0.5.2",
     "jspm": "^0.17.0-beta.22",
     "riot": "^2.5.0",
-    "systemjs-builder": "^0.15.23"
+    "systemjs-builder": "^0.15.23",
+    "typescript": "^2.0.0"
   }
 }

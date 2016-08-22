@@ -1,17 +1,22 @@
 {
-    "compileOnSave": true,
+    "compileOnSave": false,
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "system",
         "noImplicitAny": false,
         "preserveConstEnums": true,
         "sourceMap": false,
+        "outDir": "dist/",
         "allowJs": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "target": "es5"
     },
-    "files": [
-        "src/components/ts/main.ts",
-        "typings/index.d.ts"
+    "exclude": [
+        "jspm_packages",
+        "node_modules",
+        "assets",
+        "dist",
+        "public",
+        "jspm.config.js"
     ]
 }

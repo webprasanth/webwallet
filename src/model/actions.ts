@@ -132,7 +132,7 @@ export const userActions = {
     ssoLoginFailed(resp){
         return {type: USERS.SSO_LOGIN_FAILED, data: resp};
     },
-    saveAccessToken(token){
+    saveAccessToken(){
         var state = store.getState();
         var user = state.userData.user;
 
@@ -175,4 +175,8 @@ export const activityActions = {
     getMoreTxnsFailed(resp){
         return {type: ACTIVITIES.GET_MORE_TXN_FAILED, data: resp};
     }
+};
+
+export const sendActions = {
+    
 };

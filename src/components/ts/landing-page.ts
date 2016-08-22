@@ -5,6 +5,9 @@ import * as templates from '../templates/templates';
 
 @template(templates.LandingPageTemplate)
 export default class LandingPage extends Element{
+    constructor(){
+    }
+
     mounted(){
         store.subscribe(this.onApplicationStateChanged.bind(this));
     }

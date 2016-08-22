@@ -39,7 +39,7 @@ gulp.task('copy-lib', function () {
 gulp.task('copy-rs', ['copy-css', 'copy-images', 'copy-lib', 'copy-font']);
 
 gulp.task('andaman', function(){
-    var cmd = new run.Command('browserify src/services/andaman.js -o src/services/andaman-service.js --standalone AndamanService');
+    var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
     cmd.exec();
 });
 

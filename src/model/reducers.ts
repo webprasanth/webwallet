@@ -1,5 +1,5 @@
 import * as redux from 'redux';
-import {COMMONS, USERS, ROUTES, TABS, ACTIVITIES} from './actions';
+import {COMMONS, USERS, TABS, ACTIVITIES} from './actions';
 
 var tabs = [
     {id: 'activity', name: 'Activity', isActive: true},

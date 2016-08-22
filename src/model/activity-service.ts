@@ -1,8 +1,7 @@
-import * as AndamanService from '../services/andaman-service';
+import AndamanService from './andaman-service';
 
 export default class ActivityService{
     constructor(){
-
     }
 
     getTransList(pageSettings){
