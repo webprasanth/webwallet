@@ -38,10 +38,16 @@ gulp.task('copy-lib', function () {
 
 gulp.task('copy-rs', ['copy-css', 'copy-images', 'copy-lib', 'copy-font']);
 
-gulp.task('andaman', function(){
-    var cmd = new run.Command('browserify src/services/andaman.js -o src/services/andaman-service.js --standalone AndamanService');
-    cmd.exec();
-});
+gulp.task('andaman', buildAndamanFile);
 
 gulp.task('build-debug', ['copy-rs', 'build-debug-js']);
 gulp.task('default', ['copy-rs', 'bundle-js']);
+
+gulp.task('watch-andaman', function() {
+    gulp.watch('src/services/andaman.js', buildAndamanFile);
+});
+
+function buildAndamanFile() {
+    var cmd = new run.Command('browserify src/services/andaman.js -o src/services/andaman-service.js --standalone AndamanService');
+    cmd.exec();
+}

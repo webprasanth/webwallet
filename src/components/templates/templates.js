@@ -6,6 +6,7 @@ import MainHeaderTemplate from './home/header.html!text';
 import MainNavBarTemplate from './home/navbar.html!text';
 
 import HomeActivityTemplate from './home/activity.html!text';
+import HomeHeaderTemplate from './home/header.html!text';
 import HomeSendTemplate from './home/send.html!text';
 import HomeRequestTemplate from './home/request.html!text';
 
@@ -18,6 +19,7 @@ export {
     MainHeaderTemplate,
     MainNavBarTemplate,
     HomeActivityTemplate,
+    HomeHeaderTemplate,
     HomeSendTemplate,
     HomeRequestTemplate,
     AppTemplate

@@ -12,7 +12,7 @@ export default class SSO{
         this.initPromise = null;
     }
 
-    ready(){
+    ready() {
         if(this.initialized) return Promise.resolve();
         if(this.initPromise) return this.initPromise;
 

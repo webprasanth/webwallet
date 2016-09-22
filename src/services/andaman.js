@@ -70,5 +70,6 @@ module.exports = {
         });
 
         return readyPromise;
-    }
+    },
+    opts: opts
 };

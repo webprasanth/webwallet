@@ -4,12 +4,13 @@
 var events = require('events'),
 	machina = require('machina'),
 	nacl = require('tweetnacl'),
+	nacl_util = require('tweetnacl-util'),
 	BufferView = require('./buffer-view'),
 	PollSocket = require('./poll-socket'),
 	util = require('util');
 
 function CurveWebSocket(opts) {
-	this.srv_pub_p = nacl.util.decodeBase64(opts.server_publicKey);
+	this.srv_pub_p = nacl_util.decodeBase64(opts.server_publicKey);
 	var keys = nacl.box.keyPair();
 	this.pub_t = keys.publicKey;
 	this.priv_t = keys.secretKey;

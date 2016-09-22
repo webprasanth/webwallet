@@ -24,8 +24,6 @@ export default class HomeActivity extends Element{
 
         store.subscribe(this.onApplicationStateChanged.bind(this));
 
-        
-
         UIkit.ready(() => {
             this.initDatePickers();
             this.loadTxns();
@@ -140,7 +138,6 @@ export default class HomeActivity extends Element{
             this.buildPagination();
             this.txns = data.txns;
             this.tabs = data.tabs;
-
             this.update();
         }
     }

@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-7 login-form">
                     <div class="col-xs-12 col-sm-6">
-                        <input type="text" class="validate form-control login-email" placeholder="Enter your email">
+                        <input type="text" class="validate form-control login-email" placeholder="Enter your email" tabindex="1">
                         <div class="remember-me">
                             <input type="checkbox" class="filled-in with-gap remember-me-checkbox" onchange="{onRememberMeCheckBoxChange}" />
                             <label> Keep me logged in</label>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
-                        <input type="text" class="form-control login-password" placeholder="Password">
+                        <input type="password" class="form-control login-password" placeholder="Password" tabindex="2">
                         <div class="remember-me mobile">
                             <input type="checkbox" class="filled-in with-gap remember-me-checkbox" onchange="{onRememberMeCheckBoxChange}" />
                             <label> Keep me logged in</label>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="btn-login form-group">
-                        <button class="btn btn-default" onclick={onLoginButtonClick}>Login</button>
+                        <button class="btn btn-default" onclick={onLoginButtonClick} tabindex="3">Login</button>
                     </div>
                 </div>
                 <div class="col-xs-12 show-linkS text-center">

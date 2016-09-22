@@ -14,6 +14,7 @@
       "redux-thunk": "npm:redux-thunk@^2.1.0",
       "riot": "npm:riot@^2.5.0",
       "riot-router": "npm:riot-router@^0.8.0",
+      "rollup": "npm:rollup@^0.36.0",
       "scss": "github:KevCJones/plugin-scss@^0.2.11",
       "tag": "npm:systemjs-riot@^1.4.1",
       "text": "github:systemjs/plugin-text@^0.0.8"
@@ -26,6 +27,7 @@
     },
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
+      "bcrypt-pbkdf": "npm:bcrypt-pbkdf@^1.0.0",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
       "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
       "cluster": "github:jspm/nodelibs-cluster@^0.2.0-alpha",
@@ -54,7 +56,7 @@
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
       "tls": "github:jspm/nodelibs-tls@^0.2.0-alpha",
       "tty": "github:jspm/nodelibs-tty@^0.2.0-alpha",
-      "tweetnacl": "npm:tweetnacl@0.13",
+      "tweetnacl": "npm:tweetnacl@^0.14.3",
       "url": "github:jspm/nodelibs-url@^0.2.0-alpha",
       "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
       "vm": "github:jspm/nodelibs-vm@^0.2.0-alpha",
@@ -84,7 +86,7 @@
           "util": "@node/util"
         }
       },
-      "npm:esprima@2.7.2": {
+      "npm:esprima@2.7.3": {
         "jspmNodeConversion": false
       },
       "npm:font-awesome@4.6.3": {
@@ -95,24 +97,21 @@
           "css": "0.1"
         }
       },
-      "npm:inherits@2.0.1": {
+      "npm:inherits@2.0.3": {
         "ignore": [
           "test.js"
         ]
       },
-      "npm:lodash@4.13.1": {
+      "npm:jquery@3.1.0": {
+        "format": "amd"
+      },
+      "npm:lodash@4.16.1": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
         }
       },
-      "npm:lodash@4.14.2": {
-        "map": {
-          "buffer": "@empty",
-          "process": "@empty"
-        }
-      },
-      "npm:moment@2.14.1": {
+      "npm:moment@2.15.0": {
         "jspmNodeConversion": false
       },
       "npm:ms@0.7.1": {
@@ -134,7 +133,7 @@
           "stream-browserify": "^1.0.0"
         }
       },
-      "npm:sass.js@0.9.11": {
+      "npm:sass.js@0.9.12": {
         "map": {
           "ws": "@empty"
         },
@@ -144,7 +143,7 @@
           }
         }
       },
-      "npm:typescript@2.0.0": {
+      "npm:typescript@2.0.2": {
         "browser": {},
         "map": {
           "buffer": "@empty",
@@ -161,8 +160,13 @@
     "gulp": "^3.9.1",
     "gulp-run": "^1.7.1",
     "gulp-shell": "^0.5.2",
-    "jspm": "^0.17.0-beta.22",
-    "riot": "^2.5.0",
-    "systemjs-builder": "^0.15.23"
+    "jspm": "^0.17.0-beta.28",
+    "riot": "^2.6.2",
+    "systemjs-builder": "^0.15.31"
+  },
+  "dependencies": {
+    "machina": "^2.0.0",
+    "tweetnacl": "^0.14.3",
+    "tweetnacl-util": "^0.13.3"
   }
 }

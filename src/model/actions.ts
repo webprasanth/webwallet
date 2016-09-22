@@ -136,7 +136,7 @@ export const userActions = {
         var state = store.getState();
         var user = state.userData.user;
 
-        if(user) localStorage.setItem('access_token', user.idToken);
+        if (user) localStorage.setItem('access_token', user.idToken);
 
         return {type: USERS.SAVE_ACCESS_TOKEN};
     },

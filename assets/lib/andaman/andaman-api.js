@@ -1,7 +1,7 @@
 /**
  * Created by sontt on 8/24/15.
  */
-Event = require('./def/evt').Event;
+const Event = require('./def/evt').Event;
 
 var internals = {};
 module.exports = internals.API = function() {

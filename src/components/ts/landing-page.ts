@@ -10,15 +10,15 @@ export default class LandingPage extends Element{
     }
 
     onApplicationStateChanged(){
+        
     }
 
     onLoginButtonClick(event: Event){
         event.preventDefault();
         event.stopPropagation();
-        
+
         var emailField = <HTMLInputElement>this.root.querySelector('.login-email');
         var passwordField = <HTMLInputElement>this.root.querySelector('.login-password');
-
         this.doLogin(emailField.value, passwordField.value);
     }
 

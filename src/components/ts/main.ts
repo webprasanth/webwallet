@@ -26,7 +26,7 @@ riot.route((action) => {
 
 store.subscribe(() => {
     var state = store.getState();
-    if(state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS){
+    if(state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
         riot.route('');
     }
     else if(!state.userData.user){
@@ -36,4 +36,4 @@ store.subscribe(() => {
 
 riot.route.start(true);
 
-store.dispatch(actions.userActions.ssoLogin());
+//store.dispatch(actions.userActions.ssoLogin());

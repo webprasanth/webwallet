@@ -52,7 +52,6 @@ function commonReducer(state = {isLoading: false}, action) {
 }
 
 function lastAction(state = null, action) {
-    console.log(action);
     return action;
 }
 
@@ -61,6 +60,7 @@ var homeTabs = [
     {id: 1, code: 'RECEIVED', name: 'Payments Received', isActive: false},
     {id: 2, code: 'SENT', name: 'Payments Sent', isActive: false}
 ];
+
 function activityReducer(state = {txns: [], total_txns: 0, page_size: 5, tabs: homeTabs}, action){
     switch(action.type){
         case ACTIVITIES.GET_MORE_TXN_SUCCESS:
@@ -70,10 +70,8 @@ function activityReducer(state = {txns: [], total_txns: 0, page_size: 5, tabs: h
             var oldList = state.tabs;
             var newList = oldList.map((tab) => {
                 tab.isActive = (tab.id == action.data);
-
                 return tab;
             });
-
             return Object.assign({}, state, {tabs: newList});
         default:
             return state;
