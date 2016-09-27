@@ -6,7 +6,7 @@ import * as templates from '../../templates/templates';
 @template(templates.HomeHeaderTemplate)
 export default class HomeHeader extends Element {
     public userEmail: string = store.getState().userData.user.email;
-    public avatarUrl: string = `http://${AndamanService.opts.host}/profile/${store.getState().userData.user.profile_pic_url}`;
+    public avatarUrl: string = `http://${(<any>window).AndamanService.opts.host}/profile/${store.getState().userData.user.profile_pic_url}`;
 
     mounted() {
         let state = store.getState();
@@ -16,7 +16,6 @@ export default class HomeHeader extends Element {
 
     onApplicationStateChanged() {
         var state: ApplicationState = store.getState();
-
     }
 
     onLogoutButtonClick(event: Event) {

@@ -1,4 +1,4 @@
-import {riot, template, Element} from '../riot-ts';
+import {riot, template, Element} from '../../ts/riot-ts';
 import store, {ApplicationState} from '../../../model/store';
 import {activityActions} from '../../../model/activities/actions';
 import {ACTIVITIES} from '../../../model/action-types';

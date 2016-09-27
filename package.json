@@ -159,10 +159,10 @@
     "gulp": "^3.9.1",
     "gulp-run": "^1.7.1",
     "gulp-shell": "^0.5.2",
-    "jspm": "^0.17.0-beta.22",
-    "riot": "^2.5.0",
-    "systemjs-builder": "^0.15.23",
-    "typescript": "^2.0.0"
+    "jspm": "^0.17.0-beta.28",
+    "riot": "^2.6.2",
+    "systemjs-builder": "^0.15.32",
+    "typescript": "^2.0.3"
   },
   "dependencies": {
     "tweetnacl-util": "^0.13.3"

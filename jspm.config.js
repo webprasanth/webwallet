@@ -494,7 +494,7 @@ SystemJS.config({
     },
     "npm:readdirp@2.1.0": {
       "map": {
-        "graceful-fs": "npm:graceful-fs@4.1.6",
+        "graceful-fs": "npm:graceful-fs@4.1.8",
         "minimatch": "npm:minimatch@3.0.3",
         "readable-stream": "npm:readable-stream@2.1.5",
         "set-immediate-shim": "npm:set-immediate-shim@1.0.1"
@@ -652,7 +652,7 @@ SystemJS.config({
     },
     "npm:fstream@1.0.10": {
       "map": {
-        "graceful-fs": "npm:graceful-fs@4.1.6",
+        "graceful-fs": "npm:graceful-fs@4.1.8",
         "inherits": "npm:inherits@2.0.3",
         "mkdirp": "npm:mkdirp@0.5.1",
         "rimraf": "npm:rimraf@2.5.4"
@@ -945,7 +945,7 @@ SystemJS.config({
       "map": {
         "lodash": "npm:lodash@4.16.2",
         "sass.js": "npm:sass.js@0.9.13",
-        "postcss": "npm:postcss@5.2.0",
+        "postcss": "npm:postcss@5.2.2",
         "autoprefixer": "npm:autoprefixer@6.4.1",
         "reqwest": "github:ded/reqwest@2.0.5",
         "path": "github:jspm/nodelibs-path@0.1.0",
@@ -1013,24 +1013,17 @@ SystemJS.config({
     },
     "npm:autoprefixer@6.4.1": {
       "map": {
-        "postcss": "npm:postcss@5.2.0",
+        "postcss": "npm:postcss@5.2.2",
         "browserslist": "npm:browserslist@1.3.6",
         "postcss-value-parser": "npm:postcss-value-parser@3.3.0",
         "num2fraction": "npm:num2fraction@1.2.2",
-        "caniuse-db": "npm:caniuse-db@1.0.30000539",
+        "caniuse-db": "npm:caniuse-db@1.0.30000540",
         "normalize-range": "npm:normalize-range@0.1.2"
-      }
-    },
-    "npm:postcss@5.2.0": {
-      "map": {
-        "supports-color": "npm:supports-color@3.1.2",
-        "source-map": "npm:source-map@0.5.6",
-        "js-base64": "npm:js-base64@2.1.9"
       }
     },
     "npm:browserslist@1.3.6": {
       "map": {
-        "caniuse-db": "npm:caniuse-db@1.0.30000539"
+        "caniuse-db": "npm:caniuse-db@1.0.30000540"
       }
     },
     "npm:riot-router@0.8.1": {
@@ -1223,6 +1216,13 @@ SystemJS.config({
         "bn.js": "npm:bn.js@4.11.6",
         "inherits": "npm:inherits@2.0.3",
         "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
+      }
+    },
+    "npm:postcss@5.2.2": {
+      "map": {
+        "source-map": "npm:source-map@0.5.6",
+        "supports-color": "npm:supports-color@3.1.2",
+        "js-base64": "npm:js-base64@2.1.9"
       }
     }
   }

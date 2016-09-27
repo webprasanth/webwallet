@@ -5,7 +5,6 @@ import activityReducer from './activities/reducers';
 import tabReducer from './tabs/reducers';
 
 function lastAction(state = null, action) {
-    console.log(action);
     return action;
 }
 
