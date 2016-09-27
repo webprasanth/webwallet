@@ -1,10 +1,10 @@
 import {riot} from './riot-ts';
 import * as components from './components';
 
-import store from '../../model/store';
-import * as actions from '../../model/action-types';
-import {userActions} from '../../model/users/actions';
-import UserService from '../../model/users/user-service';
+import store from '../model/store';
+import * as actions from '../model/action-types';
+import {userActions} from '../model/users/actions';
+import UserService from '../model/users/user-service';
 
 components.initialize();
 
@@ -32,7 +32,7 @@ store.subscribe(() => {
     if(state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS){
         riot.route('');
     }
-    else if(!state.userData.user){
+    else if(!state.userData.user && state.lastAction.type !== actions.USERS.FORGOT_PASSWORD) {
         riot.route('login');
     }
 });

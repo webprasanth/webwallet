@@ -1,10 +1,11 @@
-import {template, Element} from './riot-ts';
+import {template, Element} from '../riot-ts';
 
-import * as templates from '../templates/templates';
+import SmSplitterTemplate from './sm-splitter.html!text';
+import SmPaneTemplate from './sm-pane.html!text';
 
 declare var jQuery;
 
-@template(templates.SmSplitterTemplate)
+@template(SmSplitterTemplate)
 export class SmSplitter extends Element {
     private panes: SmPane[] = null;
     private drag: boolean = false;
@@ -215,7 +216,7 @@ export class SmSplitter extends Element {
     }
 }
 
-@template(templates.SmPaneTemplate)
+@template(SmPaneTemplate)
 export class SmPane extends Element {
     minSize: number = 200;
     size: number = null;

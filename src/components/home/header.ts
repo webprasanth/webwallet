@@ -1,9 +1,9 @@
 import {template, Element} from '../riot-ts';
-import store, {ApplicationState}  from '../../../model/store';
-import {userActions} from '../../../model/users/actions';
-import * as templates from '../../templates/templates';
+import store, {ApplicationState}  from '../../model/store';
+import {userActions} from '../../model/users/actions';
+import HomeHeaderTemplate from './header.html!text';
 
-@template(templates.HomeHeaderTemplate)
+@template(HomeHeaderTemplate)
 export default class HomeHeader extends Element {
     public userEmail: string = store.getState().userData.user.email;
     public avatarUrl: string = `http://${(<any>window).AndamanService.opts.host}/profile/${store.getState().userData.user.profile_pic_url}`;

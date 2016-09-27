@@ -1,13 +1,11 @@
 import {riot, template, Element} from './riot-ts';
 
-import LandingPage from './landing-page';
+import LandingPage from './landing-page/landing-page';
 import Home from './home/index';
 import HomeHeader from './home/header';
-import LoadingIndicator from './loading-indicator';
-import App from './app';
-import SubmitEmail from './submit-email-to-reset-pass';
-
-import * as templates from '../templates/templates';
+import LoadingIndicator from './loading-indicator/loading-indicator';
+import App from './app/app';
+import SubmitEmail from './reset-pass/submit-email';
 
 export {LoadingIndicator, LandingPage, Home, HomeHeader, App, SubmitEmail};
 

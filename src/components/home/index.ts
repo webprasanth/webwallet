@@ -1,15 +1,17 @@
 import {riot, template, Element} from '../riot-ts';
-import store, {ApplicationState} from '../../../model/store';
+import store, {ApplicationState} from '../../model/store';
 
 import HomeActivity from './activity';
 import HomeSend from './send';
 import HomeRequest from './request';
 
-import {userActions} from '../../../model/users/actions';
-import {tabActions} from '../../../model/tabs/actions';
-import * as templates from '../../templates/templates';
+import {userActions} from '../../model/users/actions';
+import {tabActions} from '../../model/tabs/actions';
+import HomePageTemplate from './index.html!text';
+import MainHeaderTemplate from './header.html!text';
+import MainNavBarTemplate from './navbar.html!text';
 
-@template(templates.HomePageTemplate)
+@template(HomePageTemplate)
 export default class HomePage extends Element{
     private route = riot.route.create();
     private lastView = null;
@@ -28,7 +30,7 @@ export default class HomePage extends Element{
     initialize(){
         this.route((action) => {
             var mainContent = document.querySelector('#main-content');
-            
+
 
             switch(action){
                 case 'activity':
@@ -36,7 +38,7 @@ export default class HomePage extends Element{
                 case 'request':
                     var id = this.widgets[action];
                     if(this.lastView && this.lastView.id != id) {
-                        UIkit.$(this.lastView).hide();
+                        (<any>window).UIkit.$(this.lastView).hide();
                     }
 
                     var el = mainContent.querySelector('#' + id);
@@ -63,7 +65,7 @@ export default class HomePage extends Element{
     }
 }
 
-@template(templates.MainHeaderTemplate)
+@template(MainHeaderTemplate)
 export class MainHeader extends Element{
     onLogoutButtonClick(event: Event){
         event.preventDefault();
@@ -74,7 +76,7 @@ export class MainHeader extends Element{
     }
 }
 
-@template(templates.MainNavBarTemplate)
+@template(MainNavBarTemplate)
 export class MainNavBar extends Element{
     state: ApplicationState = <any>{tabData: {tabs: []}};
 

@@ -1,4 +1,4 @@
-SystemJS.config({
+window.SystemJS.config({
   paths: {
     "github:": "jspm_packages/github/",
     "npm:": "jspm_packages/npm/"
@@ -51,7 +51,7 @@ SystemJS.config({
   },
   packages: {
     "src": {
-      "defaultExtension": "js"
+      //"defaultExtension": "js"
     },
     "src/model": {
       "defaultExtension": "ts",
@@ -61,7 +61,7 @@ SystemJS.config({
         }
       }
     },
-    "src/components/ts": {
+    "src/components": {
       "defaultExtension": "ts",
       "map": {
         "./riot-ts": "./riot-ts.ts"
@@ -189,7 +189,7 @@ SystemJS.config({
   }
 });
 
-SystemJS.config({
+window.SystemJS.config({
   packageConfigPaths: [
     "github:*/*.json",
     "npm:@*/*.json",

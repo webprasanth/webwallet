@@ -1,8 +1,8 @@
-import {template, Element} from './riot-ts';
+import {template, Element} from '../riot-ts';
 import store, {ApplicationState} from '../../model/store';
-import * as templates from '../templates/templates';
+import AppTemplate from './app.html!text';
 
-@template(templates.AppTemplate)
+@template(AppTemplate)
 export default class App extends Element{
     state: ApplicationState = <any>{commonData: {isLoading: false}};
 

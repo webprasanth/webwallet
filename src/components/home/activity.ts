@@ -1,10 +1,10 @@
-import {riot, template, Element} from '../../ts/riot-ts';
-import store, {ApplicationState} from '../../../model/store';
-import {activityActions} from '../../../model/activities/actions';
-import {ACTIVITIES} from '../../../model/action-types';
-import * as templates from '../../templates/templates';
+import {riot, template, Element} from '../riot-ts';
+import store, {ApplicationState} from '../../model/store';
+import {activityActions} from '../../model/activities/actions';
+import {ACTIVITIES} from '../../model/action-types';
+import HomeActivityTemplate from './activity.html!text';
 
-@template(templates.HomeActivityTemplate)
+@template(HomeActivityTemplate)
 export default class HomeActivity extends Element{
     private fromDateObject;
     private toDateObject;
@@ -24,8 +24,6 @@ export default class HomeActivity extends Element{
         var state = store.getState();
 
         store.subscribe(this.onApplicationStateChanged.bind(this));
-
-        
 
         UIkit.ready(() => {
             this.initDatePickers();

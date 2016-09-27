@@ -70,6 +70,7 @@ export default class UserService{
     }
 
     private static _instance: UserService;
+    
     static singleton(){
         if(!UserService._instance) {
             UserService._instance = new UserService();

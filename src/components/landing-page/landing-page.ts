@@ -1,9 +1,9 @@
-import {template, Element} from './riot-ts';
+import {template, Element} from '../riot-ts';
 import store from '../../model/store';
 import {userActions} from '../../model/users/actions';
-import * as templates from '../templates/templates';
+import LandingPageTemplate from './landing-page.html!text';
 
-@template(templates.LandingPageTemplate)
+@template(LandingPageTemplate)
 export default class LandingPage extends Element{
     constructor(){
         super();

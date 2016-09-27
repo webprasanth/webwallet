@@ -1,4 +1,4 @@
-import Riot from '../../services/riot-service';
+import Riot from '../services/riot-service';
 
 var riot: Base = <any>Riot;
 

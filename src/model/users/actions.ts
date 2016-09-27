@@ -2,7 +2,7 @@ import {USERS} from '../action-types';
 import {commonActions} from '../commons/actions';
 import store from '../store';
 import UserService from './user-service';
-import {riot} from '../../components/ts/riot-ts';
+import {riot} from '../../components/riot-ts';
 
 export const userActions = {
     login(email, password) {
