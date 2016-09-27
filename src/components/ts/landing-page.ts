@@ -1,18 +1,20 @@
 import {template, Element} from './riot-ts';
 import store from '../../model/store';
-import * as actions from '../../model/actions';
+import {userActions} from '../../model/users/actions';
 import * as templates from '../templates/templates';
 
 @template(templates.LandingPageTemplate)
 export default class LandingPage extends Element{
     constructor(){
+        super();
     }
 
     mounted(){
         store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
-    onApplicationStateChanged(){
+    onApplicationStateChanged() {
+
     }
 
     onLoginButtonClick(event: Event){
@@ -30,10 +32,18 @@ export default class LandingPage extends Element{
     }
 
     doLogin(email, password) {
-        store.dispatch(actions.userActions.login(email, password));
+        store.dispatch(userActions.login(email, password));
     }
 
     onRememberMeCheckBoxChange(event: Event){
-        store.dispatch(actions.userActions.rememberMe(event.target.checked));
+        store.dispatch(userActions.rememberMe(event.target.checked));
+    }
+
+    onForgotPasswordLinkClick(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        store.dispatch(userActions.forgotPassword());
     }
 }
+

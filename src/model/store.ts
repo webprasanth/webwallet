@@ -8,6 +8,8 @@ interface IUser{
     role: string;
     res: string;
     sessionToken: string;
+    profile_pic_url: string;
+    created_ts: string;
 }
 
 interface ITAB{
@@ -20,13 +22,21 @@ export interface ApplicationState{
     lastAction: {type: string, data: any},
     userData: {user: IUser},
     commonData: {isLoading: boolean},
+    activityData: {txns: any[], total_txns: number, page_size: number, tabs: ITAB[]},
     tabData: {tabs: ITAB[]}
 }
 
-var createStoreWithMiddleware = redux.compose(
-    redux.applyMiddleware(thunk)
-)(redux.createStore);
+const logger = store => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
 
-var store = createStoreWithMiddleware(reducers) as redux.Store<ApplicationState>;
+// var createStoreWithMiddleware = redux.compose(
+//     redux.applyMiddleware(thunk)
+// )(redux.createStore);
 
+//var store = createStoreWithMiddleware(reducers) as redux.Store<ApplicationState>;
+var store = redux.createStore(reducers, redux.applyMiddleware(thunk, logger)) as redux.Store<ApplicationState>;
 export default store;

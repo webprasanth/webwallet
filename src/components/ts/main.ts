@@ -2,8 +2,9 @@ import {riot} from './riot-ts';
 import * as components from './components';
 
 import store from '../../model/store';
-import * as actions from '../../model/actions';
-import UserService from '../../model/user-service';
+import * as actions from '../../model/action-types';
+import {userActions} from '../../model/users/actions';
+import UserService from '../../model/users/user-service';
 
 components.initialize();
 
@@ -13,7 +14,7 @@ riot.route((action) => {
     }
 
     var state = store.getState();
-    if(!state.userData.user){
+    if (!state.userData.user && action != 'reset_password'){
         return riot.route('login');
     }
 
@@ -21,6 +22,8 @@ riot.route((action) => {
         case '':
         case 'home':
             return riot.mount('#main', 'home-page');
+        case 'reset_password':
+            return riot.mount('#main', 'submit-email');
     }
 });
 
@@ -36,4 +39,4 @@ store.subscribe(() => {
 
 riot.route.start(true);
 
-store.dispatch(actions.userActions.ssoLogin());
+store.dispatch(userActions.ssoLogin());

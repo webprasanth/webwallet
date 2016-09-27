@@ -7,7 +7,7 @@ interface IAndaman{
 
 export default class AndamanService{
     private static service = (<any>window).AndamanService;
-
+    public static opts = AndamanService.opts;
     static ready(): Promise<{andaman: IAndaman, pipe: any}>{
         return AndamanService.service.ready();
     }

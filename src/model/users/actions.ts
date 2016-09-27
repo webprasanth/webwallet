@@ -1,61 +1,15 @@
-import {riot} from '../components/ts/riot-ts';
-import store from './store';
-
-import ActivityService from './activity-service';
+import {USERS} from '../action-types';
+import {commonActions} from '../commons/actions';
+import store from '../store';
 import UserService from './user-service';
-
-export const TABS = {
-    SET_ACTIVE: 'TABS.SET_ACTIVE'
-};
-
-export const COMMONS = {
-    TOGGLE_LOADING: 'COMMONS.TOGGLE_LOADING'
-};
-
-export const USERS = {
-    LOGIN: 'USERS.LOGIN',
-    LOGIN_SUCCESS: 'USERS.LOGIN_SUCCESS',
-    LOGIN_FAILED: 'USERS.LOGIN_FAILED',
-    LOGOUT: 'USERS.LOGOUT',
-    SSO_LOGIN_SUCCESS: 'USERS.SSO_LOGIN_SUCCESS',
-    SSO_LOGIN_FAILED: 'USERS.SSO_LOGIN_FAILED',
-    GET_PROFILE_SUCCESS: 'USERS.GET_PROFILE_SUCCESS',
-    GET_PROFILE_FAILED: 'USERS.GET_PROFILE_FAILED',
-    REMEMBER_ME: 'USERS.REMEMBER_ME',
-    SAVE_ACCESS_TOKEN: 'USERS.SAVE_ACCESS_TOKEN',
-    REMOVE_ACCESS_TOKEN: 'USERS.REMOVE_ACCESS_TOKEN'
-};
-
-export const ACTIVITIES = {
-    SET_ACTIVE_TAB: 'ACTIVITIES.SET_ACTIVE_TAB',
-    GET_MORE_TXN: 'ACTIVITIES.GET_MORE_TXN',
-    GET_MORE_TXN_SUCCESS: 'ACTIVITIES.GET_MORE_TXN_SUCCESS',
-    GET_MORE_TXN_FAILED: 'ACTIVITIES.GET_MORE_TXN_FAILED'
-};
-
-export const tabActions = {
-    setActive(id){
-        return {type: TABS.SET_ACTIVE, data: id};
-    }
-};
-
-export const routeActions = {
-    route(id){
-    }
-};
-
-export const commonActions = {
-    toggleLoading(isLoading){
-        return {type: COMMONS.TOGGLE_LOADING, data: isLoading};
-    }
-};
+import {riot} from '../../components/ts/riot-ts';
 
 export const userActions = {
     login(email, password) {
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
 
-            UserService.singleton().login(email, password).then((resp) => {
+            UserService.singleton().login(email, password).then((resp: any) => {
                 dispatch(commonActions.toggleLoading(false));
 
                 if(resp.rc === 1){
@@ -86,7 +40,7 @@ export const userActions = {
     },
     getProfile(){
         return (dispatch) => {
-            UserService.singleton().getProfile().then((resp) => {
+            UserService.singleton().getProfile().then((resp: any) => {
                 console.log('+++++ get_profile resp = ' + JSON.stringify(resp));
 
                 if(resp.rc === 1){
@@ -111,7 +65,7 @@ export const userActions = {
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
 
-            UserService.singleton().ssoLogin().then((resp) => {
+            UserService.singleton().ssoLogin().then((resp: any) => {
                 dispatch(commonActions.toggleLoading(false));
 
                 if(resp){
@@ -119,7 +73,7 @@ export const userActions = {
                         dispatch(userActions.ssoLoginSuccess(resp.profile));
                         dispatch(userActions.getProfile());
                     }
-                    else{
+                    else {
                         dispatch(userActions.ssoLoginFailed(resp));
                     }
                 }
@@ -136,7 +90,7 @@ export const userActions = {
         var state = store.getState();
         var user = state.userData.user;
 
-        if(user) localStorage.setItem('access_token', user.idToken);
+        if (user) localStorage.setItem('access_token', user.idToken);
 
         return {type: USERS.SAVE_ACCESS_TOKEN};
     },
@@ -144,39 +98,11 @@ export const userActions = {
         localStorage.removeItem('access_token');
 
         return {type: USERS.REMOVE_ACCESS_TOKEN};
+    },
+    forgotPassword() {
+        let clientHost = window.location.host;
+
+        riot.route("reset_password?token=");
+        return {type: USERS.FORGOT_PASSWORD};
     }
-};
-
-export const activityActions = {
-    setActiveTab(tabId){
-        return {type: ACTIVITIES.SET_ACTIVE_TAB, data: tabId};
-    },
-    getMoreTxns(pageSettings){
-        let {date_from, date_to, type, start, size = 10, order = 'desc'} = pageSettings;
-        
-        return (dispatch) => {
-            dispatch(commonActions.toggleLoading(true));
-
-            ActivityService.singleton().getTransList(pageSettings).then((resp) => {
-                dispatch(commonActions.toggleLoading(false));
-
-                if(resp.rc == 1){
-                    dispatch(activityActions.getMoreTxnsSuccess(resp));
-                }
-                else{
-                    dispatch(activityActions.getMoreTxnsFailed(resp));
-                }
-            });
-        };
-    },
-    getMoreTxnsSuccess(resp){
-        return {type: ACTIVITIES.GET_MORE_TXN_SUCCESS, data: resp};
-    },
-    getMoreTxnsFailed(resp){
-        return {type: ACTIVITIES.GET_MORE_TXN_FAILED, data: resp};
-    }
-};
-
-export const sendActions = {
-    
 };

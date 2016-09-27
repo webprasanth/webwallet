@@ -1,12 +1,12 @@
 var io = require('../../assets/lib/andaman/io/event-pipe-b');
-var Event = require('../../assets/lib/andaman/def/evt').Event;
+//var Event = require('../../assets/lib/andaman/def/evt').Event;
 var API = require('../../assets/lib/andaman/andaman-api');
 
 var srv_pub_p = '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A=';
 var clt_pub_p = 'r4dHh2mSrijGSOK76k1DssBNcrjyGrV4LA9abowFTAk=';
 var clt_priv_p = 'Uih8sq+XRSbQO4ySOs0a0WovV8YDdw28efPf+NPt9M4=';
 
-var opts = {
+let opts = {
     host: 'qakeys.safe.cash',
     proto: 'ws',
     port: 80,
@@ -62,7 +62,7 @@ module.exports = {
             });
 
             eventPipe.on('connect', function () {
-                console.log(eventPipe.id, 'connected with the server');
+                //console.log(eventPipe.id, 'connected with the server');
                 readyPromise = null;
                 isReady = true;
                 resolve({andaman: andamanApi, pipe: eventPipe});
@@ -70,5 +70,6 @@ module.exports = {
         });
 
         return readyPromise;
-    }
+    },
+    opts: opts
 };

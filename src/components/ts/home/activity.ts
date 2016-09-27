@@ -1,6 +1,7 @@
 import {riot, template, Element} from '../riot-ts';
 import store, {ApplicationState} from '../../../model/store';
-import * as actions from '../../../model/actions';
+import {activityActions} from '../../../model/activities/actions';
+import {ACTIVITIES} from '../../../model/action-types';
 import * as templates from '../../templates/templates';
 
 @template(templates.HomeActivityTemplate)
@@ -112,7 +113,7 @@ export default class HomeActivity extends Element{
             order: 'desc'
         };
 
-        store.dispatch(actions.activityActions.getMoreTxns(pageSettings));
+        store.dispatch(activityActions.getMoreTxns(pageSettings));
     }
 
     reloadTxns(){
@@ -136,7 +137,7 @@ export default class HomeActivity extends Element{
         var data = state.activityData;
         var type = state.lastAction.type;
 
-        if(type == actions.ACTIVITIES.GET_MORE_TXN_SUCCESS){
+        if(type == ACTIVITIES.GET_MORE_TXN_SUCCESS){
             this.buildPagination();
             this.txns = data.txns;
             this.tabs = data.tabs;
@@ -163,7 +164,7 @@ export default class HomeActivity extends Element{
         event.preventDefault();
         event.stopPropagation();
 
-        store.dispatch(actions.activityActions.setActiveTab(event.item.tabItem.id));
+        store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
         this.reloadTxns();
     }
 }

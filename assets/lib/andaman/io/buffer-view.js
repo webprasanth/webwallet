@@ -1,7 +1,7 @@
 /**
  * Helper class for a array buffer backing usually by an Uint8Array
  */
-var utf8 = require('tweetnacl').util;
+var utf8 = require('tweetnacl-util');
 
 function BufferView(b) {
 	if (!b instanceof Uint8Array)

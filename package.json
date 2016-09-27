@@ -26,6 +26,7 @@
     },
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
+      "bcrypt-pbkdf": "npm:bcrypt-pbkdf@^1.0.0",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
       "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
       "cluster": "github:jspm/nodelibs-cluster@^0.2.0-alpha",
@@ -84,7 +85,7 @@
           "util": "@node/util"
         }
       },
-      "npm:esprima@2.7.2": {
+      "npm:esprima@2.7.3": {
         "jspmNodeConversion": false
       },
       "npm:font-awesome@4.6.3": {
@@ -95,24 +96,21 @@
           "css": "0.1"
         }
       },
-      "npm:inherits@2.0.1": {
+      "npm:inherits@2.0.3": {
         "ignore": [
           "test.js"
         ]
       },
-      "npm:lodash@4.13.1": {
+      "npm:jquery@3.1.1": {
+        "format": "amd"
+      },
+      "npm:lodash@4.16.2": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
         }
       },
-      "npm:lodash@4.14.2": {
-        "map": {
-          "buffer": "@empty",
-          "process": "@empty"
-        }
-      },
-      "npm:moment@2.14.1": {
+      "npm:moment@2.15.1": {
         "jspmNodeConversion": false
       },
       "npm:ms@0.7.1": {
@@ -134,7 +132,7 @@
           "stream-browserify": "^1.0.0"
         }
       },
-      "npm:sass.js@0.9.11": {
+      "npm:sass.js@0.9.13": {
         "map": {
           "ws": "@empty"
         },
@@ -144,7 +142,7 @@
           }
         }
       },
-      "npm:typescript@2.0.0": {
+      "npm:typescript@2.0.3": {
         "browser": {},
         "map": {
           "buffer": "@empty",
@@ -165,5 +163,8 @@
     "riot": "^2.5.0",
     "systemjs-builder": "^0.15.23",
     "typescript": "^2.0.0"
+  },
+  "dependencies": {
+    "tweetnacl-util": "^0.13.3"
   }
 }

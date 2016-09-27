@@ -5,7 +5,8 @@ import HomeActivity from './activity';
 import HomeSend from './send';
 import HomeRequest from './request';
 
-import * as actions from '../../../model/actions';
+import {userActions} from '../../../model/users/actions';
+import {tabActions} from '../../../model/tabs/actions';
 import * as templates from '../../templates/templates';
 
 @template(templates.HomePageTemplate)
@@ -52,7 +53,7 @@ export default class HomePage extends Element{
 
                     this.lastView = el;
 
-                    store.dispatch(actions.tabActions.setActive(action));
+                    store.dispatch(tabActions.setActive(action));
                     break;
             }
         });
@@ -68,7 +69,7 @@ export class MainHeader extends Element{
         event.preventDefault();
         event.stopPropagation();
 
-        var action = actions.userActions.logout();
+        var action = userActions.logout();
         store.dispatch(action);
     }
 }
@@ -105,7 +106,7 @@ export class MainNavBar extends Element{
         event.preventDefault();
         event.stopPropagation();
 
-        var action = actions.userActions.logout();
+        var action = userActions.logout();
         store.dispatch(action);
     }
 }

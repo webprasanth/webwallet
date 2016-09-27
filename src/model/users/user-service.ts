@@ -1,14 +1,14 @@
-import AndamanService from './andaman-service';
-import store from './store';
+import AndamanService from '../andaman-service';
+import store from '../store';
 import * as actions from './actions';
 
 export default class UserService{
     constructor(){}
 
     ssoLogin(){
-        return new Promise<any>((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let accessToken = localStorage.getItem('access_token');
-            if(accessToken){
+            if (accessToken){
                 AndamanService.ready().then((opts) => {
                     let andaman = opts.andaman;
                     let pipe = opts.pipe;
@@ -34,7 +34,7 @@ export default class UserService{
     }
 
     login(email, password){
-        return new Promise<any>((resolve) => {
+        return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 var andaman = opts.andaman;
                 var pipe = opts.pipe;
@@ -57,7 +57,7 @@ export default class UserService{
     }
 
     getProfile(){
-        return new Promise<any>((resolve) => {
+        return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 var andaman = opts.andaman;
                 var pipe = opts.pipe;
