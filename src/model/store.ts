@@ -22,7 +22,7 @@ export interface ApplicationState{
     lastAction: {type: string, data: any},
     userData: {user: IUser},
     commonData: {isLoading: boolean},
-    activityData: {txns: any[], total_txns: number, page_size: number, tabs: ITAB[]},
+    activityData: {txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any},
     tabData: {tabs: ITAB[]}
 }
 

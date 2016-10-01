@@ -39,4 +39,4 @@ store.subscribe(() => {
 
 riot.route.start(true);
 
-store.dispatch(userActions.ssoLogin());
+//store.dispatch(userActions.ssoLogin());

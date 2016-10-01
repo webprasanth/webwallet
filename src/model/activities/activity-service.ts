@@ -1,4 +1,5 @@
 import AndamanService from '../andaman-service';
+import Big from 'big.js';
 
 export default class ActivityService{
     constructor() {
@@ -28,9 +29,59 @@ export default class ActivityService{
         });
     }
 
+    getTransactionDetail(transactionId) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                let params = {
+                    transaction_id: transactionId
+                };
+
+                andaman.get_txn_details(pipe, params, (resp) => {
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
+    convertToTnx(obj) {
+        let tran = {
+            "id": obj.txid,
+            "amount": new Big(obj.vout[0].value).times(100000000),
+            "timestamp": obj.time,
+            "confirmations": obj.confirmations,
+            "fee": obj.fees * 100000000,
+            "ins": [],
+            "outs": []
+        };
+
+        let temp = null;
+
+        for (let i = 0; i < obj.vin.length; i++) {
+            temp = obj.vin[i];
+            tran.ins.push({
+                "address": temp.addr,
+                "amount": new Big(temp.value).times(100000000)
+            })
+        }
+
+        for (let i = 0; i < obj.vout.length; i++) {
+            temp = obj.vout[i];
+            tran.outs.push({
+                "address": temp.scriptPubKey.addresses[0],
+                "amount": new Big(temp.value).times(100000000)
+            })
+        }
+
+        return tran;
+    }
+
     private static _instance: ActivityService;
+
     static singleton(){
-        if(!ActivityService._instance) {
+        if (!ActivityService._instance) {
             ActivityService._instance = new ActivityService();
         }
 

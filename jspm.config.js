@@ -1,4 +1,4 @@
-window.SystemJS.config({
+SystemJS.config({
   paths: {
     "github:": "jspm_packages/github/",
     "npm:": "jspm_packages/npm/"
@@ -50,9 +50,7 @@ window.SystemJS.config({
     }
   },
   packages: {
-    "src": {
-      //"defaultExtension": "js"
-    },
+    "src": {},
     "src/model": {
       "defaultExtension": "ts",
       "meta": {
@@ -189,7 +187,7 @@ window.SystemJS.config({
   }
 });
 
-window.SystemJS.config({
+SystemJS.config({
   packageConfigPaths: [
     "github:*/*.json",
     "npm:@*/*.json",
@@ -198,6 +196,7 @@ window.SystemJS.config({
   map: {
     "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
     "bcrypt-pbkdf": "npm:bcrypt-pbkdf@1.0.0",
+    "big.js": "npm:big.js@3.1.3",
     "bowser": "npm:bowser@1.4.6",
     "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
     "child_process": "github:jspm/nodelibs-child_process@0.2.0-alpha",
@@ -241,6 +240,7 @@ window.SystemJS.config({
     "tls": "github:jspm/nodelibs-tls@0.2.0-alpha",
     "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
     "tweetnacl": "npm:tweetnacl@0.13.3",
+    "tweetnacl-util": "npm:tweetnacl-util@0.13.3",
     "url": "github:jspm/nodelibs-url@0.2.0-alpha",
     "util": "github:jspm/nodelibs-util@0.2.0-alpha",
     "vm": "github:jspm/nodelibs-vm@0.2.0-alpha",

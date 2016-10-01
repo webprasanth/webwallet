@@ -165,6 +165,15 @@ export default class HomeActivity extends Element{
         store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
         this.reloadTxns();
     }
+
+    showTransactionDetail(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let state = store.getState();
+
+        store.dispatch(activityActions.getTransactionDetail(event.item.txn));
+    }
 }
 
-declare var UIkit: {$: Function, ready: (cb: Function) => {}, datepicker: Function};
+declare var UIkit: {$: Function, ready: (cb: Function) => {}, datepicker: Function, pagination: Function};

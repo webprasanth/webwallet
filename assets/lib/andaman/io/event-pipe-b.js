@@ -50,18 +50,12 @@ function EventPipe(opts) {
 	this.seqno = 0;
 }
 
-EventPipe.prototype.setTokens = function(sessionToken, idToken){
-	this._sessionToken = sessionToken;
-	this._idToken = idToken;
-};
-
 EventPipe.prototype.emit = function(e, payload) {
 	if ( ! this.ready ) {
 		console.log('websocket not ready');
 		return;
 	}
 	
-	payload.sessionToken = this._sessionToken;
 	var ptr = write_header(this.buf, 0, ++this.seqno, 0, Cmd.event);
 	var len = write_event(this.buf.subarray(ptr), e, payload);
 	

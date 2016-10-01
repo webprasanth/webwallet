@@ -45,9 +45,9 @@ export default class UserService{
                     res: 'web',
                 };
 
-                andaman.sso_login(pipe, credentials, function (resp) {
+                andaman.sso_login_v2(pipe, credentials, function (resp) {
                     if(resp.rc == 1){
-                        pipe.setTokens(resp.profile.sessionToken, resp.profile.idToken);
+                        pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
                     }
 
                     resolve(resp);

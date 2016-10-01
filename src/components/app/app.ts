@@ -4,7 +4,7 @@ import AppTemplate from './app.html!text';
 
 @template(AppTemplate)
 export default class App extends Element{
-    state: ApplicationState = <any>{commonData: {isLoading: false}};
+    state: ApplicationState = <any>{commonData: {isLoading: false}, activityData: {showTransactionDetail: false}};
 
     constructor(){
         super();

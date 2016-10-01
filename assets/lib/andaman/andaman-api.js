@@ -1,7 +1,7 @@
 /**
  * Created by sontt on 8/24/15.
  */
-Event = require('./def/evt').Event;
+const Event = require('./def/evt').Event;
 
 var internals = {};
 module.exports = internals.API = function() {
@@ -92,9 +92,9 @@ internals.API.prototype.login = function(pipe, credentials, cb) {
  * @param credentials: email, password, res
  * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken, idToken}
  */
-internals.API.prototype.sso_login = function(pipe, credentials, cb) {
-	pipe.emit(Event.SSO_LOGIN, credentials);
-	pipe.once(Event.SSO_LOGIN_ACK, cb);
+internals.API.prototype.sso_login_v2 = function(pipe, credentials, cb) {
+	pipe.emit(Event.SSO_LOGIN_V2, credentials);
+	pipe.once(Event.SSO_LOGIN_V2_ACK, cb);
 };
 
 /**

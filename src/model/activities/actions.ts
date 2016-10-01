@@ -1,6 +1,7 @@
 import {ACTIVITIES} from '../action-types';
 import {commonActions} from '../commons/actions';
 import ActivityService from './activity-service';
+import {TransactionDetail} from './types';
 
 export const activityActions = {
     setActiveTab(tabId){
@@ -29,5 +30,29 @@ export const activityActions = {
     },
     getMoreTxnsFailed(resp){
         return {type: ACTIVITIES.GET_MORE_TXN_FAILED, data: resp};
+    },
+    getTransactionDetail(txn) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            ActivityService.singleton().getTransactionDetail(txn.transaction_id).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if(resp.rc === 1){
+                    let txData: any = ActivityService.singleton().convertToTnx(resp.transaction);
+                    txData.meta = txn;
+                    dispatch(activityActions.getTransactionDetailSuccess(txData));
+                }
+                else{
+                    dispatch(activityActions.getTransactionDetailFailed(resp));
+                }
+            });
+        };
+    },
+    getTransactionDetailSuccess(resp) {
+        return {type: ACTIVITIES.GET_TXN_DETAIL_SUCCESS, data: resp};
+    },
+    getTransactionDetailFailed(resp) {
+        return {type: ACTIVITIES.GET_TXN_DETAIL_FAILED, data: resp};
     }
 };
