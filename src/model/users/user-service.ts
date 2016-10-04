@@ -1,39 +1,40 @@
 import AndamanService from '../andaman-service';
 import store from '../store';
 import * as actions from './actions';
+import {storeUserKey, getUserKey} from '../utils';
 
-export default class UserService{
-    constructor(){}
+export default class UserService {
+    constructor() { }
 
-    ssoLogin(){
+    ssoLogin() {
         return new Promise((resolve, reject) => {
-            let accessToken = localStorage.getItem('access_token');
-            if (accessToken){
+            let userKey = getUserKey();
+            if (userKey) {
                 AndamanService.ready().then((opts) => {
                     let andaman = opts.andaman;
                     let pipe = opts.pipe;
 
                     let params = {
-                        idToken: accessToken,
+                        idToken: userKey.idToken,
                         res: 'web'
                     };
 
-                    andaman.get_session_token(pipe, params, function(resp) {
-                        if(resp.rc == 1){
-                            pipe.setTokens(resp.profile.sessionToken, resp.profile.idToken);
+                    andaman.get_session_token_v2(pipe, params, function (resp) {
+                        if (resp.rc == 1) {
+                            pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
                         }
 
                         resolve(resp);
                     });
                 });
             }
-            else{
+            else {
                 resolve();
             }
         });
     }
 
-    login(email, password){
+    login(email, password) {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 var andaman = opts.andaman;
@@ -46,8 +47,14 @@ export default class UserService{
                 };
 
                 andaman.sso_login_v2(pipe, credentials, function (resp) {
-                    if(resp.rc == 1){
+                    if (resp.rc == 1) {
                         pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
+                        let userKey = {
+                            idToken: resp.profile.idToken,
+                            encryptedPrivKey: resp.profile.privateKey,
+                            publicKey: resp.profile.publicKey
+                        };
+                        storeUserKey(userKey);
                     }
 
                     resolve(resp);
@@ -56,7 +63,7 @@ export default class UserService{
         });
     }
 
-    getProfile(){
+    getProfile() {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 var andaman = opts.andaman;
@@ -70,9 +77,9 @@ export default class UserService{
     }
 
     private static _instance: UserService;
-    
-    static singleton(){
-        if(!UserService._instance) {
+
+    static singleton() {
+        if (!UserService._instance) {
             UserService._instance = new UserService();
         }
 

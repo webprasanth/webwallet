@@ -1,12 +1,12 @@
-<transaction-detail-div>
-    <div class="modal fade" id="txDetailDlg" tabindex="-1" role="dialog">
-        <div class="modal-dialog transaction-detail" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+<transaction-details>
+    <div id="txDetailDlg">
+        <div role="document">
+            <div>
+                <div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Transaction Details</h4>
+                    <h4>Transaction Details</h4>
                 </div>
-                <div class="modal-body">
+                <div>
                     <div class="listItems">
                         <div class="name-item">Date/Time</div>
                         <div class="data-item">{getDisplayDate(meta.created_ts)}</div>
@@ -39,11 +39,11 @@
                     </div>
                     <div class="listItems">
                         <div class="name-item">Amount</div>
-                        <div class="data-item"><b>{type==2 ? '+' : '-'}&nbsp;{formatCurrency(satoshiToFlash(amount))}&nbsp;</b></div>
+                        <div class="data-item"><b>{type==2 ? '+' : '-'}&nbsp;{formatCurrency(satoshiToFlash(txnDetail.amount.toString()))}&nbsp;</b></div>
                     </div>
                     <div class="listItems" show={type==1}>
                         <div class="name-item">Fee</div>
-                        <div class="data-item">&nbsp;{formatCurrency(satoshiToFlash(fee))}&nbsp;</div>
+                        <div class="data-item">&nbsp;{formatCurrency(satoshiToFlash(txnDetail.fee))}&nbsp;</div>
                     </div>
                     <div class="listItems">
                         <div class="name-item">Note</div>
@@ -59,9 +59,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="uk-modal-close uk-close">Close</button>
                 </div>
             </div>
         </div>
     </div>
-</transaction-detail-div>
+</transaction-details>

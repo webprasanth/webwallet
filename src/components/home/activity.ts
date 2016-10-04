@@ -139,9 +139,11 @@ export default class HomeActivity extends Element{
             this.buildPagination();
             this.txns = data.txns;
             this.tabs = data.tabs;
-
-            this.update();
+        } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
+            UIkit.modal.blockUI("<transaction-details></transaction-details>");
+            riot.mount('transaction-details');
         }
+        this.update();
     }
 
     getDisplayDate(date){
@@ -171,7 +173,6 @@ export default class HomeActivity extends Element{
         event.stopPropagation();
 
         let state = store.getState();
-
         store.dispatch(activityActions.getTransactionDetail(event.item.txn));
     }
 }

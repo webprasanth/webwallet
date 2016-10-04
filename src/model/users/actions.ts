@@ -3,6 +3,7 @@ import {commonActions} from '../commons/actions';
 import store from '../store';
 import UserService from './user-service';
 import {riot} from '../../components/riot-ts';
+import {removeUserKey} from '../utils';
 
 export const userActions = {
     login(email, password) {
@@ -14,7 +15,6 @@ export const userActions = {
 
                 if(resp.rc === 1){
                     dispatch(userActions.loginSuccess(resp.profile));
-                    dispatch(userActions.saveAccessToken());
                     dispatch(userActions.getProfile());
                 }
                 else {
@@ -31,7 +31,7 @@ export const userActions = {
     },
     logout(){
         return (dispatch) => {
-            dispatch(userActions.removeAccessToken());
+            removeUserKey();
             dispatch(userActions._logout());
         };
     },
@@ -90,7 +90,9 @@ export const userActions = {
         var state = store.getState();
         var user = state.userData.user;
 
-        if (user) localStorage.setItem('access_token', user.idToken);
+        if (user) {
+            localStorage.setItem('access_token', user.idToken);
+        }
 
         return {type: USERS.SAVE_ACCESS_TOKEN};
     },

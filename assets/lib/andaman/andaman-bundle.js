@@ -3224,9 +3224,9 @@ internals.API.prototype.prepare_upgrade_unity = function(pipe, request, cb) {
  * @param {Object} request: idToken, res (resource of the client e.g 'web')
  * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken}
  */
-internals.API.prototype.get_session_token = function(pipe, request, cb) {
-	pipe.emit(Event.SSO_GET_SESSION_TOKEN, request);
-	pipe.once(Event.SSO_GET_SESSION_TOKEN_ACK, cb);
+internals.API.prototype.get_session_token_v2 = function(pipe, request, cb) {
+	pipe.emit(Event.SSO_GET_SESSION_TOKEN_V2, request);
+	pipe.once(Event.SSO_GET_SESSION_TOKEN_V2_ACK, cb);
 };
 
 /**
@@ -21155,7 +21155,7 @@ module.exports = {
 
             customEventPipe.emit = function(e, payload) {
                 payload.sessionToken = this.session_token;
-                payload.auth_version = this.auth_version;
+                payload.auth_version = this.auth_version || 4;
                 eventPipe.emit(e, payload);
             };
 

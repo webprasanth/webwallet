@@ -63,7 +63,7 @@ module.exports = {
 
             customEventPipe.emit = function(e, payload) {
                 payload.sessionToken = this.session_token;
-                payload.auth_version = this.auth_version;
+                payload.auth_version = this.auth_version || 4;
                 eventPipe.emit(e, payload);
             };
 
