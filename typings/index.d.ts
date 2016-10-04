@@ -6,3 +6,5 @@
 /// <reference path="globals/redux/index.d.ts" />
 /// <reference path="../src/components/template.d.ts" />
 /// <reference path="globals/big.js/index.d.ts" />
+/// <reference path="globals/uikit/index.d.ts" />
+/// <reference path="globals/jquery/jquery.d.ts" />

@@ -160,7 +160,7 @@ export default class HomeActivity extends Element{
         this.reloadTxns();
     }
 
-    onTabItemClick(event: Event){
+    onTabItemClick(event: Event1){
         event.preventDefault();
         event.stopPropagation();
 
@@ -168,7 +168,7 @@ export default class HomeActivity extends Element{
         this.reloadTxns();
     }
 
-    showTransactionDetail(event: Event) {
+    showTransactionDetail(event: Event1) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -177,4 +177,6 @@ export default class HomeActivity extends Element{
     }
 }
 
-declare var UIkit: {$: Function, ready: (cb: Function) => {}, datepicker: Function, pagination: Function};
+interface Event1 extends Event {
+    item: any;
+}
