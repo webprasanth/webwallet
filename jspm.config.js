@@ -8,7 +8,7 @@ SystemJS.config({
   },
   devConfig: {
     "map": {
-      "plugin-typescript": "github:frankwallis/plugin-typescript@5.1.2",
+      "plugin-typescript": "github:frankwallis/plugin-typescript@5.2.4",
       "plugin-babel": "npm:systemjs-plugin-babel@0.0.12",
       "plugin-traceur": "npm:systemjs-plugin-traceur@0.0.2",
       "clean-css": "npm:clean-css@3.4.20"
@@ -36,7 +36,7 @@ SystemJS.config({
           "commander": "npm:commander@2.8.1"
         }
       },
-      "github:frankwallis/plugin-typescript@5.1.2": {
+      "github:frankwallis/plugin-typescript@5.2.4": {
         "map": {
           "typescript": "npm:typescript@2.0.3"
         }
@@ -204,7 +204,7 @@ SystemJS.config({
     "constants": "github:jspm/nodelibs-constants@0.2.0-alpha",
     "core-js": "npm:core-js@2.4.1",
     "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
-    "css": "github:systemjs/plugin-css@0.1.29",
+    "css": "github:systemjs/plugin-css@0.1.30",
     "dgram": "github:jspm/nodelibs-dgram@0.2.0-alpha",
     "dns": "github:jspm/nodelibs-dns@0.2.0-alpha",
     "ecc-jsbn": "npm:ecc-jsbn@0.1.1",
@@ -239,7 +239,7 @@ SystemJS.config({
     "text": "github:systemjs/plugin-text@0.0.8",
     "tls": "github:jspm/nodelibs-tls@0.2.0-alpha",
     "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
-    "tweetnacl": "npm:tweetnacl@0.13.3",
+    "tweetnacl": "npm:tweetnacl@0.14.3",
     "tweetnacl-util": "npm:tweetnacl-util@0.13.3",
     "underscore": "npm:underscore@1.8.3",
     "url": "github:jspm/nodelibs-url@0.2.0-alpha",
@@ -444,7 +444,7 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "is-glob": "npm:is-glob@2.0.1",
-        "path-is-absolute": "npm:path-is-absolute@1.0.0",
+        "path-is-absolute": "npm:path-is-absolute@1.0.1",
         "glob-parent": "npm:glob-parent@2.0.0",
         "readdirp": "npm:readdirp@2.1.0",
         "async-each": "npm:async-each@1.0.1",
@@ -470,7 +470,7 @@ SystemJS.config({
     },
     "npm:rollup@0.32.4": {
       "map": {
-        "source-map-support": "npm:source-map-support@0.4.2"
+        "source-map-support": "npm:source-map-support@0.4.3"
       }
     },
     "npm:strip-ansi@3.0.1": {
@@ -495,7 +495,7 @@ SystemJS.config({
     },
     "npm:readdirp@2.1.0": {
       "map": {
-        "graceful-fs": "npm:graceful-fs@4.1.8",
+        "graceful-fs": "npm:graceful-fs@4.1.9",
         "minimatch": "npm:minimatch@3.0.3",
         "readable-stream": "npm:readable-stream@2.1.5",
         "set-immediate-shim": "npm:set-immediate-shim@1.0.1"
@@ -515,17 +515,12 @@ SystemJS.config({
     },
     "npm:is-binary-path@1.0.1": {
       "map": {
-        "binary-extensions": "npm:binary-extensions@1.6.0"
+        "binary-extensions": "npm:binary-extensions@1.7.0"
       }
     },
     "npm:once@1.3.3": {
       "map": {
         "wrappy": "npm:wrappy@1.0.2"
-      }
-    },
-    "npm:source-map@0.1.32": {
-      "map": {
-        "amdefine": "npm:amdefine@1.0.0"
       }
     },
     "npm:parse-glob@3.0.4": {
@@ -653,7 +648,7 @@ SystemJS.config({
     },
     "npm:fstream@1.0.10": {
       "map": {
-        "graceful-fs": "npm:graceful-fs@4.1.8",
+        "graceful-fs": "npm:graceful-fs@4.1.9",
         "inherits": "npm:inherits@2.0.3",
         "mkdirp": "npm:mkdirp@0.5.1",
         "rimraf": "npm:rimraf@2.5.4"
@@ -684,7 +679,7 @@ SystemJS.config({
     "npm:har-validator@2.0.6": {
       "map": {
         "chalk": "npm:chalk@1.1.3",
-        "is-my-json-valid": "npm:is-my-json-valid@2.14.0",
+        "is-my-json-valid": "npm:is-my-json-valid@2.15.0",
         "pinkie-promise": "npm:pinkie-promise@2.0.1",
         "commander": "npm:commander@2.9.0"
       }
@@ -693,7 +688,7 @@ SystemJS.config({
       "map": {
         "jsprim": "npm:jsprim@1.3.1",
         "assert-plus": "npm:assert-plus@0.2.0",
-        "sshpk": "npm:sshpk@1.10.0"
+        "sshpk": "npm:sshpk@1.10.1"
       }
     },
     "npm:expand-range@1.8.2": {
@@ -831,14 +826,9 @@ SystemJS.config({
         "graceful-readlink": "npm:graceful-readlink@1.0.1"
       }
     },
-    "npm:code-point-at@1.0.0": {
-      "map": {
-        "number-is-nan": "npm:number-is-nan@1.0.0"
-      }
-    },
     "npm:is-fullwidth-code-point@1.0.0": {
       "map": {
-        "number-is-nan": "npm:number-is-nan@1.0.0"
+        "number-is-nan": "npm:number-is-nan@1.0.1"
       }
     },
     "npm:url@0.11.0": {
@@ -864,7 +854,7 @@ SystemJS.config({
     },
     "npm:font-awesome@4.6.3": {
       "map": {
-        "css": "github:systemjs/plugin-css@0.1.29"
+        "css": "github:systemjs/plugin-css@0.1.30"
       }
     },
     "npm:micromatch@2.3.11": {
@@ -887,11 +877,6 @@ SystemJS.config({
     "npm:rimraf@2.5.4": {
       "map": {
         "glob": "npm:glob@7.1.0"
-      }
-    },
-    "npm:source-map-support@0.4.2": {
-      "map": {
-        "source-map": "npm:source-map@0.1.32"
       }
     },
     "npm:brace-expansion@1.1.6": {
@@ -944,10 +929,10 @@ SystemJS.config({
     },
     "github:KevCJones/plugin-scss@0.2.11": {
       "map": {
-        "lodash": "npm:lodash@4.16.2",
+        "lodash": "npm:lodash@4.16.3",
         "sass.js": "npm:sass.js@0.9.13",
-        "postcss": "npm:postcss@5.2.2",
-        "autoprefixer": "npm:autoprefixer@6.4.1",
+        "postcss": "npm:postcss@5.2.4",
+        "autoprefixer": "npm:autoprefixer@6.5.0",
         "reqwest": "github:ded/reqwest@2.0.5",
         "path": "github:jspm/nodelibs-path@0.1.0",
         "url": "github:jspm/nodelibs-url@0.1.0",
@@ -1002,7 +987,7 @@ SystemJS.config({
         "levn": "npm:levn@0.3.0",
         "wordwrap": "npm:wordwrap@1.0.0",
         "deep-is": "npm:deep-is@0.1.3",
-        "fast-levenshtein": "npm:fast-levenshtein@2.0.4"
+        "fast-levenshtein": "npm:fast-levenshtein@2.0.5"
       }
     },
     "npm:shelljs@0.7.4": {
@@ -1010,21 +995,6 @@ SystemJS.config({
         "glob": "npm:glob@7.1.0",
         "interpret": "npm:interpret@1.0.1",
         "rechoir": "npm:rechoir@0.6.2"
-      }
-    },
-    "npm:autoprefixer@6.4.1": {
-      "map": {
-        "postcss": "npm:postcss@5.2.2",
-        "browserslist": "npm:browserslist@1.3.6",
-        "postcss-value-parser": "npm:postcss-value-parser@3.3.0",
-        "num2fraction": "npm:num2fraction@1.2.2",
-        "caniuse-db": "npm:caniuse-db@1.0.30000540",
-        "normalize-range": "npm:normalize-range@0.1.2"
-      }
-    },
-    "npm:browserslist@1.3.6": {
-      "map": {
-        "caniuse-db": "npm:caniuse-db@1.0.30000540"
       }
     },
     "npm:riot-router@0.8.1": {
@@ -1037,8 +1007,8 @@ SystemJS.config({
       "map": {
         "symbol-observable": "npm:symbol-observable@1.0.2",
         "loose-envify": "npm:loose-envify@1.2.0",
-        "lodash-es": "npm:lodash-es@4.16.2",
-        "lodash": "npm:lodash@4.16.2"
+        "lodash-es": "npm:lodash-es@4.16.3",
+        "lodash": "npm:lodash@4.16.3"
       }
     },
     "npm:fsevents@1.0.14": {
@@ -1130,29 +1100,13 @@ SystemJS.config({
       "map": {
         "base64-js": "npm:base64-js@1.2.0",
         "isarray": "npm:isarray@1.0.0",
-        "ieee754": "npm:ieee754@1.1.6"
-      }
-    },
-    "npm:sshpk@1.10.0": {
-      "map": {
-        "assert-plus": "npm:assert-plus@1.0.0",
-        "dashdash": "npm:dashdash@1.14.0",
-        "getpass": "npm:getpass@0.1.6",
-        "asn1": "npm:asn1@0.2.3"
-      }
-    },
-    "npm:is-my-json-valid@2.14.0": {
-      "map": {
-        "xtend": "npm:xtend@4.0.1",
-        "jsonpointer": "npm:jsonpointer@2.0.0",
-        "generate-function": "npm:generate-function@2.0.0",
-        "generate-object-property": "npm:generate-object-property@1.2.0"
+        "ieee754": "npm:ieee754@1.1.8"
       }
     },
     "npm:glob@7.1.0": {
       "map": {
         "once": "npm:once@1.4.0",
-        "path-is-absolute": "npm:path-is-absolute@1.0.0",
+        "path-is-absolute": "npm:path-is-absolute@1.0.1",
         "inherits": "npm:inherits@2.0.3",
         "minimatch": "npm:minimatch@3.0.3",
         "inflight": "npm:inflight@1.0.5",
@@ -1209,7 +1163,7 @@ SystemJS.config({
       "map": {
         "strip-ansi": "npm:strip-ansi@3.0.1",
         "is-fullwidth-code-point": "npm:is-fullwidth-code-point@1.0.0",
-        "code-point-at": "npm:code-point-at@1.0.0"
+        "code-point-at": "npm:code-point-at@1.0.1"
       }
     },
     "npm:asn1.js@4.8.1": {
@@ -1219,11 +1173,53 @@ SystemJS.config({
         "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
       }
     },
-    "npm:postcss@5.2.2": {
+    "npm:postcss@5.2.4": {
       "map": {
         "source-map": "npm:source-map@0.5.6",
-        "supports-color": "npm:supports-color@3.1.2",
-        "js-base64": "npm:js-base64@2.1.9"
+        "chalk": "npm:chalk@1.1.3",
+        "js-base64": "npm:js-base64@2.1.9",
+        "supports-color": "npm:supports-color@3.1.2"
+      }
+    },
+    "npm:autoprefixer@6.5.0": {
+      "map": {
+        "postcss": "npm:postcss@5.2.4",
+        "postcss-value-parser": "npm:postcss-value-parser@3.3.0",
+        "num2fraction": "npm:num2fraction@1.2.2",
+        "normalize-range": "npm:normalize-range@0.1.2",
+        "browserslist": "npm:browserslist@1.4.0",
+        "caniuse-db": "npm:caniuse-db@1.0.30000544"
+      }
+    },
+    "npm:is-my-json-valid@2.15.0": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1",
+        "jsonpointer": "npm:jsonpointer@4.0.0",
+        "generate-function": "npm:generate-function@2.0.0",
+        "generate-object-property": "npm:generate-object-property@1.2.0"
+      }
+    },
+    "npm:sshpk@1.10.1": {
+      "map": {
+        "assert-plus": "npm:assert-plus@1.0.0",
+        "asn1": "npm:asn1@0.2.3",
+        "getpass": "npm:getpass@0.1.6",
+        "dashdash": "npm:dashdash@1.14.0"
+      }
+    },
+    "npm:browserslist@1.4.0": {
+      "map": {
+        "caniuse-db": "npm:caniuse-db@1.0.30000544"
+      }
+    },
+    "npm:source-map-support@0.4.3": {
+      "map": {
+        "source-map": "npm:source-map@0.5.6"
+      }
+    },
+    "npm:code-point-at@1.0.1": {
+      "map": {
+        "number-is-nan": "npm:number-is-nan@1.0.1"
       }
     }
   }
