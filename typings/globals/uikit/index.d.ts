@@ -199,7 +199,7 @@ declare namespace UIkit {
         (element:string|JQuery, options?:LightBoxOptions): LightBoxElement
 
     }
-    type CallbackAutoComplete = () => string
+    type CallbackAutoComplete = (realse) => any
     interface AutoCompleteOptions {
         /**
          * Data source
@@ -221,6 +221,11 @@ declare namespace UIkit {
          * @default 300
          */
         delay?: number
+        /**
+         * Template for show item
+         * @default '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.value}}"><a>{{$item.value}}</a></li>{{/items}}</ul>'
+         */
+        template?: string
     }
     /**
      * Create inputs that allow users to choose from a list of pre-generated values while typing

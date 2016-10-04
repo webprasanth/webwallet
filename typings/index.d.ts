@@ -8,3 +8,4 @@
 /// <reference path="globals/big.js/index.d.ts" />
 /// <reference path="globals/uikit/index.d.ts" />
 /// <reference path="globals/jquery/jquery.d.ts" />
+/// <reference path="globals/underscore/underscore.d.ts" />

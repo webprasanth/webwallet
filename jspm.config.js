@@ -241,6 +241,7 @@ SystemJS.config({
     "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
     "tweetnacl": "npm:tweetnacl@0.13.3",
     "tweetnacl-util": "npm:tweetnacl-util@0.13.3",
+    "underscore": "npm:underscore@1.8.3",
     "url": "github:jspm/nodelibs-url@0.2.0-alpha",
     "util": "github:jspm/nodelibs-util@0.2.0-alpha",
     "vm": "github:jspm/nodelibs-vm@0.2.0-alpha",

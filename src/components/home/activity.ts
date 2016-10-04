@@ -16,7 +16,7 @@ export default class HomeActivity extends Element{
     public txns = [];
     public tabs = store.getState().activityData.tabs;
 
-    constructor(){
+    constructor() {
         super();
     }
 

@@ -4,6 +4,7 @@ interface IAndaman{
     sso_login_v2(pipe, credentials: {email: string, password: string, res?: string}, cb: (resp) => any);
     get_profile(pipe, opts:any, cb:(resp) => any);
     get_txn_details(pipe, params: {transaction_id: string}, cb: (resp) => any);
+    search_wallet(pipe, params: {term: string, start: number, size: number}, cb: (resp) => any);
 }
 
 export default class AndamanService{
