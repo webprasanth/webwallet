@@ -8,10 +8,8 @@
             <div class="col-xs-12 main-content">
                 <div class="form-group email-account">
                     <label>Email</label>
-                    <div class="input-group col-xs-12" >
-                        <div class="wrap-email-input">
-                            <input type="email" class="form-control" id="to_email_id" placeholder="Search by email">
-                        </div>
+                    <div class="input-group">
+                        <input type="email" class="form-control typeahead" id="to-email-id" placeholder="Search by email">
                         <span class="input-group-addon glyphicon glyphicon-search"></span>
                     </div>
                 </div>
@@ -19,12 +17,12 @@
                     <label>Amount</label>
                     <div class="input-group">
                         <span class="input-group-addon">Flash</span>
-                        <input type="text" class="form-control">
+                        <input type="number" id="amount-input" class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <label>Transaction Note</label>
-                    <textarea type="text" class="form-control" placeholder=""></textarea>
+                    <textarea type="text" class="form-control" id="payment-memo" placeholder=""></textarea>
                 </div>
                 <div class="send__buttons form-group col-xs-12">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" onclick="{onContinueButtonClick}">CONTINUE

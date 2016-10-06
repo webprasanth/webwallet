@@ -7,11 +7,12 @@ import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
+import ErrorAlert from './modals/error-alert/error-alert';
 
-export {LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail};
+export {LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert};
 
 export function initialize(){
-    riot.mount('*');
+    riot.mount('app');
 }
 
 

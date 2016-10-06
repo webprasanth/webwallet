@@ -1,0 +1,60 @@
+<send-confirm>
+<div class="modal fade" id="sendDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{dlgTitle}}</h4>
+            </div>
+                {{#confirmation}}
+                <div class="modal-body">
+                    <div class="confirm__transaction">
+                    <div class="_amount text-center"><span class="_value">{{formatCurrency(amount)}}</span> <span class="_currency"></span></div>
+                    <div class="text-center">
+                        <p><span class="_fee">+ {{formatCurrency(fee)}} {{translate("send_transactionfee_label")}}</span></p>
+
+                        {{#if sending}}
+                        <div class="refresh-data text-center"><span class="_icon glyphicon glyphicon-refresh spinning"></span></div>
+                        {{else}}
+                        <p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+                        {{/if}}
+                    </div>
+                    <div class="info-modal">
+                        <div class="avatar">
+                            {{#if wallet.profile_pic_url}}
+                            <img class="img-circle" src="{{AvartarServer}}{{wallet.profile_pic_url}}" width="40"/>
+                            {{else}}
+                            <img class="img-circle" src="assets/images/coin.png" width="40"/>
+                            {{/if}}
+                        </div>
+                        <div class="_info">
+                            <div class="name">{{wallet.display_name?wallet.display_name:wallet.username}}</div>
+                            <div class="name">{{wallet.email}}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                {{^sending}}
+                <div class="modal-footer">
+                    <button class="btn btn-default" id="send-cancel" data-dismiss="modal">{{translate("common_cancel_label")}}</button>
+                    <button id="send-direct" class="btn btn-primary" on-click="send-direct">{{translate("common_send_label")}}</button>
+                </div>
+                {{/sending}}
+                {{/confirmation}}
+                {{#success}}
+                    <div class="modal-body">
+                        <div class="confirm-success">
+                            <p>{{translate('send_processtime_message', {processing_duration:processing_duration})}}</p>
+
+                            <p>{{translate("send_success_message2")}}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal">{{translate("common_close_label")}}</button>
+                    </div>
+                {{/success}}
+        </div>
+    </div>
+</div>
+</send-confirm>
