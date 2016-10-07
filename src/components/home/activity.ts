@@ -140,8 +140,7 @@ export default class HomeActivity extends Element{
             this.txns = data.txns;
             this.tabs = data.tabs;
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
-            UIkit.modal.blockUI("<transaction-details></transaction-details>");
-            riot.mount('transaction-details');
+            riot.mount('#transaction-detail','transaction-details');
         }
         this.update();
     }

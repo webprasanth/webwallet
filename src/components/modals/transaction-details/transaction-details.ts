@@ -18,7 +18,7 @@ export default class TransactionDetails extends Element {
     }    
 
     mounted() {
-        
+        $('#txDetailDlg').modal('show');
     }
     
     getDisplayDate(date){

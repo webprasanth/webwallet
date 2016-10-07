@@ -1,12 +1,12 @@
 <transaction-details>
-    <div id="txDetailDlg">
-        <div role="document">
-            <div>
-                <div>
+    <div class="modal fade" id="txDetailDlg" tabindex="-1" role="dialog">
+        <div class="modal-dialog transaction-detail" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4>Transaction Details</h4>
                 </div>
-                <div>
+                <div class="modal-body">
                     <div class="listItems">
                         <div class="name-item">Date/Time</div>
                         <div class="data-item">{getDisplayDate(meta.created_ts)}</div>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="uk-modal-close uk-close">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
