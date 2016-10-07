@@ -31,3 +31,7 @@ export function calcFee(amount) {
   return 1;
 }
 
+export function formatCurrency(amount) {
+  return `${amount} Flash`;
+}
+

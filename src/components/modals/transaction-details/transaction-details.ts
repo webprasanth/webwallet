@@ -2,7 +2,7 @@ import {riot, template, Element} from '../../riot-ts';
 import TransactionDetailsTemplate from './transaction-details.html!text';
 import store from '../../../model/store';
 import AndamanService from '../../../model/andaman-service'; 
-import {satoshiToFlash} from '../../../model/utils';
+import {satoshiToFlash, formatCurrency} from '../../../model/utils';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
@@ -12,6 +12,7 @@ export default class TransactionDetails extends Element {
     private AvartarServer = `http://${AndamanService.opts.host}:8098/profile/`;
 
     private satoshiToFlash = satoshiToFlash;
+    private formatCurrency = formatCurrency;
     
     constructor() {
         super();
@@ -26,9 +27,4 @@ export default class TransactionDetails extends Element {
         return moment(date).format('MM D, YYYY hh:mm:ss a');
     }
 
-    formatCurrency(amount) {
-        return `${amount} Flash`;
-    }
-
-   
 }
