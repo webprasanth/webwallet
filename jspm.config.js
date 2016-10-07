@@ -221,6 +221,7 @@ SystemJS.config({
     "machina": "npm:machina@2.0.0",
     "module": "github:jspm/nodelibs-module@0.2.0-alpha",
     "moment": "npm:moment@2.15.1",
+    "moment-timezone": "npm:moment-timezone@0.5.5",
     "net": "github:jspm/nodelibs-net@0.2.0-alpha",
     "os": "github:jspm/nodelibs-os@0.2.0-alpha",
     "path": "github:jspm/nodelibs-path@0.2.0-alpha",
@@ -1220,6 +1221,11 @@ SystemJS.config({
     "npm:code-point-at@1.0.1": {
       "map": {
         "number-is-nan": "npm:number-is-nan@1.0.1"
+      }
+    },
+    "npm:moment-timezone@0.5.5": {
+      "map": {
+        "moment": "npm:moment@2.15.1"
       }
     }
   }

@@ -11,6 +11,7 @@
       "jquery": "npm:jquery@^3.1.0",
       "machina": "npm:machina@^2.0.0",
       "moment": "npm:moment@^2.14.1",
+      "moment-timezone": "npm:moment-timezone@^0.5.5",
       "redux": "npm:redux@^3.5.2",
       "redux-thunk": "npm:redux-thunk@^2.1.0",
       "riot": "npm:riot@^2.5.0",

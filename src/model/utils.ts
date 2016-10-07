@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import _tmp from 'moment-timezone';
 
 export function satoshiToFlash(num) {
   if (num == undefined || num === '') return;
@@ -34,4 +35,24 @@ export function calcFee(amount) {
 export function formatCurrency(amount) {
   return `${amount} Flash`;
 }
+
+const MOMENT_FORMAT = {
+    DATE: "MMM DD, YYYY",
+    DATE_TIME: "MMM DD, YYYY hh:mm A",
+    DATE_TIME_2: "MMM DD, YYYY hh:mm:ss A"
+}
+
+export function getDisplayDate(date, toTimeZone) {
+    if (toTimeZone)
+        return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE);
+    return _tmp(date).local().format(MOMENT_FORMAT.DATE);
+}
+
+export function getDisplayDateTime(date, toTimeZone) {
+    if (toTimeZone)
+        return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE_TIME_2);
+    return _tmp(date).local().format(MOMENT_FORMAT.DATE_TIME_2);
+}
+
+     
 

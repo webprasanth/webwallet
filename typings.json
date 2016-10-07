@@ -1,11 +1,13 @@
 {
   "globalDependencies": {
     "bootstrap": "registry:dt/bootstrap#3.3.5+20160619023404",
+    "bootstrap-datepicker": "registry:dt/bootstrap-datepicker#0.0.0+20161006051730",
     "core-js": "registry:dt/core-js#0.0.0+20160602141332",
     "es6-collections": "registry:dt/es6-collections#0.5.1+20160316155526",
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "moment": "registry:dt/moment#2.8.0+20160316155526",
+    "moment-timezone": "registry:dt/moment-timezone#0.2.5+20160329220348",
     "redux": "registry:dt/redux#3.5.2+20160703092728",
     "redux-thunk": "registry:dt/redux-thunk#2.1.0+20160703120921",
     "underscore": "registry:dt/underscore#1.8.3+20160908111004"

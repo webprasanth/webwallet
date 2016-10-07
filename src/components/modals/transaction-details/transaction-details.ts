@@ -2,7 +2,7 @@ import {riot, template, Element} from '../../riot-ts';
 import TransactionDetailsTemplate from './transaction-details.html!text';
 import store from '../../../model/store';
 import AndamanService from '../../../model/andaman-service'; 
-import {satoshiToFlash, formatCurrency} from '../../../model/utils';
+import {satoshiToFlash, formatCurrency, getDisplayDateTime} from '../../../model/utils';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
@@ -22,9 +22,6 @@ export default class TransactionDetails extends Element {
         $('#txDetailDlg').modal('show');
     }
     
-    getDisplayDate(date){
-        var moment = (<any>window).UIkit.Utils.moment;
-        return moment(date).format('MM D, YYYY hh:mm:ss a');
-    }
+    getDisplayDateTime = getDisplayDateTime;
 
 }
