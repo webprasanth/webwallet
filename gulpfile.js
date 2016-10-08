@@ -31,9 +31,6 @@ gulp.task('copy-images', function () {
 gulp.task('copy-lib', function () {
     gulp.src('assets/lib/jquery/**/*')
         .pipe(gulp.dest('public/assets/lib/jquery/'));
-
-    gulp.src('assets/lib/uikit-2.26.4/**/*')
-        .pipe(gulp.dest('public/assets/lib/uikit-2.26.4/'));
 });
 
 gulp.task('copy-rs', ['copy-css', 'copy-images', 'copy-lib', 'copy-font']);

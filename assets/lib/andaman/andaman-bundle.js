@@ -1796,6 +1796,7 @@ function isnan (val) {
 },{"base64-js":3,"ieee754":4,"isarray":5}],3:[function(require,module,exports){
 'use strict'
 
+exports.byteLength = byteLength
 exports.toByteArray = toByteArray
 exports.fromByteArray = fromByteArray
 
@@ -1803,23 +1804,17 @@ var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
 }
 
-init()
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
 
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
+function placeHoldersCount (b64) {
   var len = b64.length
-
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
@@ -1829,9 +1824,19 @@ function toByteArray (b64) {
   // represent one byte
   // if there is only one, then the three characters before it represent 2 bytes
   // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
 
+function byteLength (b64) {
   // base64 is 4/3 + up to two characters of the original data
+  return b64.length * 3 / 4 - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
+
   arr = new Arr(len * 3 / 4 - placeHolders)
 
   // if there are placeholders, only get up to the last complete 4 chars
@@ -21098,37 +21103,12 @@ var srv_pub_p = '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A=';
 var clt_pub_p = 'r4dHh2mSrijGSOK76k1DssBNcrjyGrV4LA9abowFTAk=';
 var clt_priv_p = 'Uih8sq+XRSbQO4ySOs0a0WovV8YDdw28efPf+NPt9M4=';
 
-let opts = {
+var opts = {
     host: 'keys.flashcoin.io',
     proto: 'wss',
     port: 443,
     server_publicKey: '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A='
 };
-
-// switch (process.env.KS_ENV) {
-//     case 'prod':
-//         opts.host = 'keys.safe.cash';
-//         break;
-//     case 'dev':
-//         opts.host = 'devkeys.unseen.is';
-//         break;
-//     case 'dev02':
-//         opts.host = 'qakeys02.unseen.is';
-//         break;
-//     case 'dev03':
-//         opts.host = 'qakeys03.unseen.is';
-//         break;
-//     case 'qa':
-//         opts.host = 'qakeys.safe.cash';
-//         break;
-//     default:
-//         break;
-// }
-
-// if (process.env.SSL === "yes") {
-//     opts.proto = 'wss';
-//     opts.port = 443;
-// }
 
 var readyPromise = null;
 var isReady = false;
@@ -21142,7 +21122,7 @@ module.exports = {
 
         readyPromise = new Promise(function (resolve) {
             var buffer = new Buffer(1024);
-            let eventPipe = io({
+            var eventPipe = io({
                 host: opts.host,
                 port: opts.port,
                 proto: opts.proto,

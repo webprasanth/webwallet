@@ -38,7 +38,7 @@ export default class HomePage extends Element{
                 case 'request':
                     var id = this.widgets[action];
                     if(this.lastView && this.lastView.id != id) {
-                        (<any>window).UIkit.$(this.lastView).hide();
+                        $(this.lastView).hide();
                     }
 
                     var el = mainContent.querySelector('#' + id);

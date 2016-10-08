@@ -3,14 +3,15 @@ import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
-import {getDisplayDate} from '../../model/utils';
+import { getDisplayDate } from '../../model/utils';
 
 @template(HomeActivityTemplate)
 export default class HomeActivity extends Element {
     private fromDateObject = null;
     private toDateObject = null;
-    private paginationObject;
-    private pageIndex = 0;
+    private paginationObject = null;
+    private oldActiveTabId = "";
+    private currentActiveTabId = "0";
 
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
@@ -29,9 +30,7 @@ export default class HomeActivity extends Element {
         this.timeZone = state.userData.user.timezone;
         store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers();
-        UIkit.ready(() => {
-            this.loadTxns();
-        });
+        this.loadTxns(1, null);
     }
 
     unmounted() {
@@ -42,13 +41,7 @@ export default class HomeActivity extends Element {
 
     initDatePickers() {
         var state = store.getState();
-
-        // var fromDateInput = this.root.querySelector('.activity-from-date');
-        // var toDateInput = this.root.querySelector('.activity-to-date');
-
-        //var dateOpts = { format: this.DATE_PICKER_FORMAT };
-
-        //var moment = UIkit.Utils.moment;
+;
         if (!this.fromDateObject) {
             this.fromDateObject = $("#fromDate").parent().datepicker({
                 format: this.DATE_PICKER_FORMAT,
@@ -65,7 +58,7 @@ export default class HomeActivity extends Element {
 
         this.fromDateObject.datepicker('setDate', new Date(state.userData.user.created_ts));
         this.toDateObject.datepicker('setDate', '-0d');
-        
+
         // Auto set date range validation
         this.fromDateObject.datepicker('setStartDate', new Date(state.userData.user.created_ts));
         this.fromDateObject.datepicker('setEndDate', this.toDateObject.datepicker('getDate'));
@@ -85,30 +78,21 @@ export default class HomeActivity extends Element {
     buildPagination() {
         var state = store.getState();
         var {total_txns, page_size} = state.activityData;
-        var pagination = this.paginationObject;
-
-        if (!pagination) {
-            var paginationEl = this.root.querySelector('.txn-pagination');
-            pagination = UIkit.pagination(paginationEl, { items: total_txns, itemsOnPage: page_size, currentPage: this.pageIndex });
-            pagination.on('select.uk.pagination', (e, pageIndex) => {
-                this.pageIndex = pageIndex;
-                this.loadTxns();
+        
+        if (this.oldActiveTabId !== this.currentActiveTabId) {
+            this.oldActiveTabId = this.currentActiveTabId;
+            this.paginationObject = $(() => {
+                $('.txn-pagination').pagination({
+                    items: total_txns,
+                    itemsOnPage: page_size,
+                    cssStyle: 'light-theme',
+                    onPageClick: this.loadTxns
+                });
             });
-            this.paginationObject = pagination;
-        }
-        else {
-            var opts = pagination.options;
-            if (opts.items != total_txns || opts.itemsOnPage != page_size) {
-                opts.items = total_txns;
-                opts.itemsOnPage = page_size;
-
-                var pages = Math.ceil(opts.items / opts.itemsOnPage);
-                pagination.render(pages);
-            }
         }
     }
 
-    loadTxns() {
+    loadTxns = (pageNumber = 1, event) => {
         var data = store.getState().activityData;
 
         var pageSize = data.page_size;
@@ -118,13 +102,14 @@ export default class HomeActivity extends Element {
         var activeTab = data.tabs.filter((tab) => {
             return tab.isActive;
         })[0];
-        var type = activeTab ? activeTab.id : 0;
+        var type = activeTab ? activeTab.id : "0";
+        this.currentActiveTabId = type;
 
         var pageSettings = {
             type: type,
             date_from: fromDate,
             date_to: toDate,
-            start: this.pageIndex * pageSize,
+            start: (pageNumber - 1) * pageSize,
             size: pageSize,
             order: 'desc'
         };
@@ -133,19 +118,7 @@ export default class HomeActivity extends Element {
     }
 
     reloadTxns() {
-        this.pageIndex = 0;
-
-        var state = store.getState();
-        var {total_txns, page_size} = state.activityData;
-
-        var pagination = this.paginationObject;
-        var opts = pagination.options;
-        opts.items = total_txns;
-        opts.itemsOnPage = page_size;
-
-        var pages = Math.ceil(opts.items / opts.itemsOnPage);
-
-        pagination.selectPage(this.pageIndex, pages);
+        this.paginationObject = null;
     }
 
     onApplicationStateChanged() {
@@ -157,6 +130,8 @@ export default class HomeActivity extends Element {
             this.buildPagination();
             this.txns = data.txns;
             this.tabs = data.tabs;
+        } else if (type == ACTIVITIES.SET_ACTIVE_TAB) {
+            this.loadTxns(1, null);
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
             riot.mount('#transaction-detail', 'transaction-details');
         }
@@ -177,9 +152,8 @@ export default class HomeActivity extends Element {
     onTabItemClick(event: Event1) {
         event.preventDefault();
         event.stopPropagation();
-
-        store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
         this.reloadTxns();
+        store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
     }
 
     showTransactionDetail(event: Event1) {

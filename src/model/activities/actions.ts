@@ -8,7 +8,7 @@ export const activityActions = {
         return {type: ACTIVITIES.SET_ACTIVE_TAB, data: tabId};
     },
     getMoreTxns(pageSettings){
-        let {date_from, date_to, type, start, size = 10, order = 'desc'} = pageSettings;
+        let {date_from, date_to, type, start, size = 5, order = 'desc'} = pageSettings;
         
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
