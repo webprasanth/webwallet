@@ -1,13 +1,24 @@
 import Big from 'big.js';
 import _tmp from 'moment-timezone';
 
+interface UserKey {
+  idToken: string;
+  encryptedPrivKey: string;
+  publicKey: string;
+}
+
 export function satoshiToFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(new Big(num).div(10000000).toString());
 }
 
-export function storeUserKey(userKey) {
-  if (userKey && userKey.idToken && userKey.encryptedPrivKey && userKey.publicKey) {
+export function flashToSatoshi(num) {
+  if (num == undefined || num === '') return;
+  return parseInt(new Big(num).times(10000000).toString(), 10);
+}
+
+export function storeUserKey(userKey: UserKey) {
+  if (userKey) {
     localStorage.setItem("scuserkeys", JSON.stringify(userKey));
   }
 }
@@ -16,16 +27,13 @@ export function removeUserKey() {
   localStorage.removeItem('scuserkeys');
 }
 
-export function getUserKey() {
-  var str = localStorage.getItem('scuserkeys');
+export function getUserKey(): UserKey {
+  let str = localStorage.getItem('scuserkeys');
+  let userKey = null;
   if (str && str.length > 0) {
-    var userKey = JSON.parse(str);
-
-    if (userKey && userKey.idToken && userKey.encryptedPrivKey && userKey.publicKey) {
-      return userKey;
-    }
+    userKey = JSON.parse(str);
   }
-  return null;
+  return userKey;
 }
 
 export function calcFee(amount) {
@@ -37,22 +45,69 @@ export function formatCurrency(amount) {
 }
 
 const MOMENT_FORMAT = {
-    DATE: "MMM DD, YYYY",
-    DATE_TIME: "MMM DD, YYYY hh:mm A",
-    DATE_TIME_2: "MMM DD, YYYY hh:mm:ss A"
+  DATE: "MMM DD, YYYY",
+  DATE_TIME: "MMM DD, YYYY hh:mm A",
+  DATE_TIME_2: "MMM DD, YYYY hh:mm:ss A"
 }
 
 export function getDisplayDate(date, toTimeZone) {
-    if (toTimeZone)
-        return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE);
-    return _tmp(date).local().format(MOMENT_FORMAT.DATE);
+  if (toTimeZone)
+    return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE);
+  return _tmp(date).local().format(MOMENT_FORMAT.DATE);
 }
 
 export function getDisplayDateTime(date, toTimeZone) {
-    if (toTimeZone)
-        return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE_TIME_2);
-    return _tmp(date).local().format(MOMENT_FORMAT.DATE_TIME_2);
+  if (toTimeZone)
+    return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE_TIME_2);
+  return _tmp(date).local().format(MOMENT_FORMAT.DATE_TIME_2);
 }
 
-     
+export function setLocation(location) {
+  localStorage.setItem('location', JSON.stringify(location));
+  this.location = location;
+}
 
+export function getLocation() {
+  let str = localStorage.getItem('location');
+  let location = null;
+  if (str && str.length > 0) {
+    location = JSON.parse(str);
+  }
+  return location;
+}
+
+export function b64DecodeUnicode(str: string) {
+  return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
+export function hexToBase64(str: string) {
+  return btoa(String.fromCharCode.apply(null,
+    str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+  );
+}
+
+export function strFromUtf8Ab(ab) {
+  return decodeURIComponent(escape(String.fromCharCode.apply(null, ab)));
+}
+
+export function decodeBase64(s) {
+  if (typeof atob === 'undefined') {
+    return new Uint8Array(Array.prototype.slice.call(new Buffer(s, 'base64'), 0));
+  } else {
+    var i, d = atob(s), b = new Uint8Array(d.length);
+    for (i = 0; i < d.length; i++) b[i] = d.charCodeAt(i);
+    return b;
+  }
+}
+
+export function encodeBase64(arr) {
+  if (typeof btoa === 'undefined') {
+    return (new Buffer(arr)).toString('base64');
+  } else {
+    var i, s = [], len = arr.length;
+    for (i = 0; i < len; i++) s.push(String.fromCharCode(arr[i]));
+    return btoa(s.join(''));
+  }
+}

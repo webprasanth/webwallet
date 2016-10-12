@@ -1,6 +1,2461 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.AndamanService = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/**
+ * Created by sontt on 8/24/15.
+ */
+const Event = require('./def/evt').Event;
 
-},{}],2:[function(require,module,exports){
+var internals = {};
+module.exports = internals.API = function () {
+
+};
+
+internals.API.prototype.signup = function (pipe, account, cb) {
+	pipe.emit(Event.CREATE_ACCOUNT, account);
+	pipe.once(Event.CREATE_ACCOUNT_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param account: email, name, callback_link, appId (unity or bnp), g_recaptcha_response
+ * @param cb
+ */
+internals.API.prototype.create_account_easy = function (pipe, account, cb) {
+	pipe.emit(Event.CREATE_ACCOUNT_EASY, account);
+	pipe.once(Event.CREATE_ACCOUNT_EASY_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: password, token, privateKey, publicKey
+ * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {idToken}
+ */
+internals.API.prototype.set_password = function (pipe, request, cb) {
+	pipe.emit(Event.SET_PASSWORD, request);
+	pipe.once(Event.SET_PASSWORD_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: idToken, sc1, sc2, sc3
+ * @param {Function} cb: function(resp){}, resp -> {rc}
+ */
+internals.API.prototype.set_recovery_keys = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_SET_RECOVERY_KEYS, request);
+	pipe.once(Event.SSO_SET_RECOVERY_KEYS_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: idToken
+ * @param {Function} cb: function(resp) {}, resp -> {rc, keys}
+ */
+internals.API.prototype.get_recovery_keys = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_GET_RECOVERY_KEYS, request);
+	pipe.once(Event.SSO_GET_RECOVERY_KEYS_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: pin
+ * @param cb
+ * CHECK_PIN: 315, CHECK_PIN_ACK: 316,
+ */
+internals.API.prototype.check_pin = function (pipe, request, cb) {
+	pipe.emit(Event.CHECK_PIN, request);
+	pipe.once(Event.CHECK_PIN_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param account: email, password, name
+ * @param {Function} cb: function(resp){} resp -> {rc, idToken}
+ * SSO_SIGNUP: 301, SSO_SIGNUP_ACK: 302
+ */
+internals.API.prototype.sso_signup = function (pipe, account, cb) {
+	pipe.emit(Event.SSO_SIGNUP, account);
+	pipe.once(Event.SSO_SIGNUP_ACK, cb);
+};
+
+internals.API.prototype.login = function (pipe, credentials, cb) {
+	pipe.emit(Event.LOGIN, credentials);
+	pipe.once(Event.LOGIN_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param credentials: email, password, res
+ * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken, idToken}
+ */
+internals.API.prototype.sso_login_v2 = function (pipe, credentials, cb) {
+	pipe.emit(Event.SSO_LOGIN_V2, credentials);
+	pipe.once(Event.SSO_LOGIN_V2_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: email
+ * @param cb
+ * PREPARE_UPGRADE_UNITY: 313, PREPARE_UPGRADE_UNITY_ACK: 314,
+ */
+internals.API.prototype.prepare_upgrade_unity = function (pipe, request, cb) {
+	pipe.emit(Event.PREPARE_UPGRADE_UNITY, request);
+	pipe.once(Event.PREPARE_UPGRADE_UNITY_ACK, cb);
+};
+
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: idToken, res (resource of the client e.g 'web')
+ * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken}
+ */
+internals.API.prototype.get_session_token_v2 = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_GET_SESSION_TOKEN_V2, request);
+	pipe.once(Event.SSO_GET_SESSION_TOKEN_V2_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: sessionToken, res
+ * @param {Function} cb: function(resp){}, resp -> {rc, profile}; rc = 404 if token is invalid
+ */
+internals.API.prototype.check_session_token = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_CHECK_SESSION_TOKEN, request);
+	pipe.once(Event.SSO_CHECK_SESSION_TOKEN_ACK, cb);
+};
+
+internals.API.prototype.logout = function (pipe, cb) {
+	pipe.emit(Event.LOGOUT);
+	pipe.once(Event.LOGOUT_ACK, cb);
+};
+
+internals.API.prototype.update_profile = function (pipe, account, cb) {
+	pipe.emit(Event.UPDATE_ACCOUNT, account);
+	pipe.once(Event.UPDATE_ACCOUNT_ACK, cb);
+};
+
+internals.API.prototype.get_profile = function (pipe, request, cb) {
+	pipe.emit(Event.GET_PROFILE, request);
+	pipe.once(Event.GET_PROFILE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: idToken
+ * @param {Function} cb: function(resp){}, resp -> {rc, wallet}, wallet -> {secret}
+ */
+internals.API.prototype.get_wallet_secret = function (pipe, request, cb) {
+	pipe.emit(Event.GET_WALLET_SECRET, request);
+	pipe.once(Event.GET_WALLET_SECRET_ACK, cb);
+};
+
+internals.API.prototype.send_verify_email = function (pipe, request, cb) {
+	pipe.emit(Event.SEND_VERIF_EMAIL, request);
+	pipe.once(Event.SEND_VERIF_EMAIL_ACK, cb);
+};
+
+internals.API.prototype.verify_email = function (pipe, request, cb) {
+	pipe.emit(Event.VERIFY_EMAIL, request);
+	pipe.once(Event.VERIFY_EMAIL_ACK, cb);
+};
+
+internals.API.prototype.check_email_in_use = function (pipe, request, cb) {
+	pipe.emit(Event.CHECK_EMAIL_IN_USE, request);
+	pipe.once(Event.CHECK_EMAIL_IN_USE_ACK, cb);
+};
+
+internals.API.prototype.check_phone_number_in_use = function (pipe, request, cb) {
+	pipe.emit(Event.CHECK_PHONE_NUMBER_IN_USE, request);
+	pipe.once(Event.CHECK_PHONE_NUMBER_IN_USE_ACK, cb);
+};
+
+// keys api
+internals.API.prototype.search_wallet = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_SEARCH_WALLET, criteria);
+	pipe.once(Event.KEYS_SEARCH_WALLET_ACK, cb);
+};
+
+internals.API.prototype.get_recv_money_req_by_id = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_RECV_MONEY_REQ_BY_ID, criteria);
+	pipe.once(Event.KEYS_GET_RECV_MONEY_REQ_BY_ID_ACK, cb);
+};
+
+internals.API.prototype.get_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_REQS, criteria);
+	pipe.once(Event.KEYS_GET_REQS_ACK, cb);
+};
+
+internals.API.prototype.update_wallet_balance = function (pipe, balance_info, cb) {
+	pipe.emit(Event.KEYS_UPDATE_WALLET_BALANCE, balance_info);
+	pipe.once(Event.KEYS_UPDATE_WALLET_BALANCE_ACK, cb);
+};
+
+internals.API.prototype.get_txns = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_TXN, criteria);
+	pipe.once(Event.KEYS_GET_TXN_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param criteria: transaction_id
+ * @param {Function} cb: function(resp){}, resp = {rc, transaction}
+ */
+internals.API.prototype.get_txn_by_id = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_TXN_BY_ID, criteria);
+	pipe.once(Event.KEYS_GET_TXN_BY_ID_ACK, cb);
+};
+
+internals.API.prototype.get_sent_txns = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_SENT_TXN, criteria);
+	pipe.once(Event.KEYS_GET_SENT_TXN_ACK, cb);
+};
+
+internals.API.prototype.get_recv_txns = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_RECV_TXN, criteria);
+	pipe.once(Event.KEYS_GET_RECV_TXN_ACK, cb);
+};
+
+internals.API.prototype.add_txn = function (pipe, txn_info, cb) {
+	pipe.emit(Event.KEYS_ADD_TXN_LOG, txn_info);
+	pipe.once(Event.KEYS_ADD_TXN_LOG_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request
+ * @param {string} request.sessionToken
+ * @param cb
+ */
+internals.API.prototype.get_my_wallets = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_GET_MY_WALLETS, request);
+	pipe.once(Event.KEYS_GET_MY_WALLETS_ACK, cb);
+};
+
+internals.API.prototype.send_verification_sms = function (pipe, request, cb) {
+	pipe.emit(Event.SEND_VERIF_SMS, request);
+	pipe.once(Event.SEND_VERIF_SMS_ACK, cb);
+};
+
+internals.API.prototype.add_session_token_listener = function (pipe, callback) {
+	pipe.removeAllListeners(Event.SESSION_TOKEN_RECV);
+	pipe.on(Event.SESSION_TOKEN_RECV, function (response) {
+		//set_session_token(response, callback);
+	});
+};
+
+internals.API.prototype.add_session_invalid_listener = function (pipe, callback) {
+	pipe.removeAllListeners(Event.SESSION_INVALID);
+	this._on(pipe, Event.SESSION_INVALID, callback);
+};
+
+/**
+ * @param: to, amount, note, bare_uid
+ */
+internals.API.prototype.request_money = function (pipe, request, callback) {
+	pipe.emit(Event.KEYS_ADD_MONEY_REQ, request);
+	pipe.once(Event.KEYS_ADD_MONEY_REQ_ACK, callback);
+};
+
+internals.API.prototype.mark_sent_money_requests = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_MARK_ACCEPT_MONEY_REQ, request);
+	pipe.once(Event.KEYS_MARK_ACCEPT_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.mark_rejected_money_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_MARK_REJECTED_MONEY_REQ, criteria);
+	pipe.once(Event.KEYS_MARK_REJECTED_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.mark_cancelled_money_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_MARK_CANCELLED_MONEY_REQ, criteria);
+	pipe.once(Event.KEYS_MARK_CANCELLED_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.mark_read_money_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_MARK_READ_MONEY_REQ, criteria);
+	pipe.once(Event.KEYS_MARK_READ_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.get_roster = function (pipe, criteria, cb) {
+	pipe.emit(Event.ROS_GET, criteria);
+	pipe.once(Event.ROS_GET_ACK, cb);
+};
+
+internals.API.prototype.add_contact = function (pipe, criteria, cb) {
+	pipe.emit(Event.ROS_ADD, criteria);
+	pipe.once(Event.ROS_ADD_ACK, cb);
+};
+
+internals.API.prototype.remove_contact = function (pipe, criteria, cb) {
+	criteria.op = 3;
+	pipe.emit(Event.ROS_OP, criteria);
+	pipe.once(Event.ROS_OP_ACK, cb);
+};
+
+
+internals.API.prototype.store_wallet_data = function (pipe, request, cb) {
+	pipe.emit(Event.CL_STORE_WALLET_DATA, request);
+	pipe.once(Event.CL_STORE_WALLET_DATA_ACK, cb);
+};
+
+internals.API.prototype.restore_wallet_data = function (pipe, request, cb) {
+	pipe.emit(Event.CL_RESTORE_WALLET_DATA, request);
+	pipe.once(Event.CL_RESTORE_WALLET_DATA_ACK, cb);
+};
+
+internals.API.prototype.create_wallet = function (pipe, wallet, cb) {
+	pipe.emit(Event.KEYS_CREATE_WALLET, wallet);
+	pipe.once(Event.KEYS_CREATE_WALLET_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: wallet_secret, idToken, appId (safecash -> unity, bnb -> bnb)
+ * @param cb: function(resp){}, resp -> {rc, wallet}, wallet -> {passphrase, currency_type, wallet_id, address, label}
+ * KEYS_CREATE_UNITY_WALLET: 1028, KEYS_CREATE_UNITY_WALLET_ACK: 1528,
+ */
+internals.API.prototype.create_unity_wallet = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_CREATE_UNITY_WALLET, request);
+	pipe.once(Event.KEYS_CREATE_UNITY_WALLET_ACK, cb);
+};
+
+internals.API.prototype.add_wallet_address = function (pipe, addr_info, cb) {
+	pipe.emit(Event.KEYS_ADD_WALLET_ADDRESS, addr_info);
+	pipe.once(Event.KEYS_ADD_WALLET_ADDRESS_ACK, cb);
+};
+
+internals.API.prototype.create_wallet_and_address = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_CREATE_WALLET_AND_ADDRESS, request);
+	pipe.once(Event.KEYS_CREATE_WALLET_AND_ADDRESS_ACK, cb);
+};
+
+internals.API.prototype.get_txns_by_contact = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_TXN_BY_CONTACT, criteria);
+	pipe.once(Event.KEYS_GET_TXN_BY_CONTACT_ACK, cb);
+};
+
+internals.API.prototype.get_money_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_RECV_MONEY_REQ, criteria);
+	pipe.once(Event.KEYS_GET_RECV_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.get_sent_money_requests = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_SENT_MONEY_REQ, criteria);
+	pipe.once(Event.KEYS_GET_SENT_MONEY_REQ_ACK, cb);
+};
+
+internals.API.prototype.get_wallets_by_email = function (pipe, criteria, cb) {
+	pipe.emit(Event.KEYS_GET_WALLET_BY_EMAIL, criteria);
+	pipe.once(Event.KEYS_GET_WALLET_BY_EMAIL_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: from_address, to_address, amount, message
+ * @param {Function} cb: function(resp){}, where resp -> {rc, transaction}, transaction -> {txid, rawtx}
+ * const: KEYS_CREATE_USN_RAW_TXN: 1031, KEYS_CREATE_USN_RAW_TXN_ACK: 1032,
+ */
+internals.API.prototype.create_unsigned_raw_txn = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_CREATE_USN_RAW_TXN, request);
+	pipe.once(Event.KEYS_CREATE_USN_RAW_TXN_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: transaction_id
+ * @param {Function} cb: function(resp){}, where resp -> {rc, transaction}, transaction -> data from blockchain
+ * const: KEYS_GET_TXN_DETAILS: 1033, KEYS_GET_TXN_DETAILS_ACK: 1034,
+ */
+internals.API.prototype.get_txn_details = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_GET_TXN_DETAILS, request);
+	pipe.once(Event.KEYS_GET_TXN_DETAILS_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: {}
+ * @param {Function} cb: function(resp){}, where resp -> {rc, balance}
+ * const: KEYS_GET_BALANCE: 1035, KEYS_GET_BALANCE_ACK: 1036,
+ */
+internals.API.prototype.get_balance = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_GET_BALANCE, request);
+	pipe.once(Event.KEYS_GET_BALANCE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: idToken, sessionToken, domains (array of allowd domain), amount (Unity unit)
+ * @param {Function} cb: function(resp){}, where resp -> {rc}
+ * const: KEYS_FOUNTAIN_ENABLE: 1045, KEYS_FOUNTAIN_ENABLE_ACK: 1046,
+ */
+internals.API.prototype.enable_fountain = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_FOUNTAIN_ENABLE, request);
+	pipe.once(Event.KEYS_FOUNTAIN_ENABLE_ACK, cb);
+};
+
+/**
+ * @param pipe
+ * @param {Object} request: sessionToken, fountainId, {Object} settings -> {amount, domains}
+ * @param {Function} cb: function(resp) {}, where resp -> {rc}
+ * const: KEYS_FOUNTAIN_UPDATE: 1051, KEYS_FOUNTAIN_UPDATE_ACK: 1052,
+ */
+internals.API.prototype.update_fountain = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_FOUNTAIN_UPDATE, request);
+	pipe.once(Event.KEYS_FOUNTAIN_UPDATE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: fountainId
+ * @param {Function} cb: function(resp){}, where resp -> {rc}
+ * const: KEYS_FOUNTAIN_DISABLE: 1047, KEYS_FOUNTAIN_DISABLE_ACK: 1048,
+ */
+internals.API.prototype.disable_fountain = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_FOUNTAIN_DISABLE, request);
+	pipe.once(Event.KEYS_FOUNTAIN_DISABLE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param {Object} request: {}
+ * @param {Function} cb: function(resp){}, where resp -> {rc, fountain}
+ * const: KEYS_FOUNTAIN_MY: 1049, KEYS_FOUNTAIN_MY_ACK: 1050,
+ */
+internals.API.prototype.get_my_fountain = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_FOUNTAIN_MY, request);
+	pipe.once(Event.KEYS_FOUNTAIN_MY_ACK, cb);
+};
+
+internals.API.prototype.admin_get_signup_daily_stats = function (pipe, criteria, cb) {
+	pipe.emit(Event.ADMIN_GET_SIGNUP_DAILY_STATS, criteria);
+	pipe.once(Event.ADMIN_GET_SIGNUP_DAILY_STATS_ACK, cb);
+};
+
+internals.API.prototype.create_flash_wallet = function (pipe, request, cb) {
+	pipe.emit(Event.KEYS_CREATE_FLASH_WALLET, request);
+	pipe.once(Event.KEYS_CREATE_FLASH_WALLET_ACK, cb);
+};
+
+internals.API.prototype.add_to_roster = function (pipe, request, cb) {
+	pipe.emit(Event.ROS_ADD, request);
+	pipe.once(Event.ROS_ADD_ACK, cb);
+};
+
+internals.API.prototype._on = function (pipe, ev, cb) {
+	// register for the event
+	var listener;
+	if (ev && cb) {
+		listener = function () {
+			console.log('Andaman resp received for  - ', ev, ' resp ', JSON.stringify(arguments));
+			// remove timer
+			if (arguments.length > 0) {
+				cb.apply(this, arguments);
+			} else {
+				cb();
+			}
+		};
+
+		pipe.on(ev, listener);
+	}
+};
+
+},{"./def/evt":2}],2:[function(require,module,exports){
+const Event = {
+    //AUTH
+    RESTORE_SESSION: 100,
+    LOGIN: 101,
+    LOGOUT: 102,
+    CREATE_ACCOUNT: 103,
+    UPDATE_ACCOUNT: 104,
+    UPDATE_PASSWORD: 105,
+    RESET_PASSWORD: 106,
+    SEARCH_USERS: 107,
+    GET_USERS_BY_UID: 108,
+    UPLOAD_PROFILE_PIC: 109,
+    UPLOAD_FILE_XFER: 110,
+    VALIDATE_SERVICE_TICKET: 112,
+    VALIDATE_SESSION_COOKIE: 113,
+    USER_LOCK: 114,
+    USER_UNLOCK: 115,
+    SEND_VERIF_EMAIL: 116,
+    VERIFY_EMAIL: 117,
+    SEND_VERIF_SMS: 118,
+    VERIFY_PHONE: 119,
+    SET_PIN: 120,
+    CHANGE_PIN: 121,
+    GET_CONTACT_DETAIL_BY_USERNAME: 122,
+    GET_CONTACT_DETAIL_BY_EMAIL: 123,
+    CREATE_ACCOUNT_EASY: 128,
+    SET_PASSWORD: 129,
+    CREATE_ACCOUNT_EASY_ACK: 158,
+    SET_PASSWORD_ACK: 159,
+
+    SSO_SIGNUP: 301,
+    SSO_SIGNUP_ACK: 302,
+    SSO_LOGIN: 303,
+    SSO_LOGIN_ACK: 304,
+    SSO_GET_SESSION_TOKEN: 305,
+    SSO_GET_SESSION_TOKEN_ACK: 306,
+    GET_PROFILE: 307,
+    GET_PROFILE_ACK: 308,
+    SSO_CHECK_SESSION_TOKEN: 311,
+    SSO_CHECK_SESSION_TOKEN_ACK: 312,
+    PREPARE_UPGRADE_UNITY: 313,
+    PREPARE_UPGRADE_UNITY_ACK: 314,
+    SSO_SET_PASSWORD_V2: 317,
+    SSO_SET_PASSWORD_V2_ACK: 318,
+    SSO_SET_RECOVERY_KEYS: 319,
+    SSO_SET_RECOVERY_KEYS_ACK: 320,
+    SSO_GET_RECOVERY_KEYS: 321,
+    SSO_GET_RECOVERY_KEYS_ACK: 322,
+    SSO_LOGIN_V2: 323,
+    SSO_LOGIN_V2_ACK: 324,
+    SSO_RESET_PASSWORD: 325,
+    SSO_RESET_PASSWORD_ACK: 326,
+    SSO_RESET_PASSWORD_MAIL: 327,
+    SSO_RESET_PASSWORD_MAIL_ACK: 328,
+    SSO_GET_KEYPAIR: 329,
+    SSO_GET_KEYPAIR_ACK: 330,
+    SSO_CHANGE_PASSWORD: 331,
+    SSO_CHANGE_PASSWORD_ACK: 332,
+    SSO_GET_SESSION_TOKEN_V2: 333,
+    SSO_GET_SESSION_TOKEN_V2_ACK: 334,
+    START_TFA_CODE: 335,
+    START_TFA_CODE_ACK: 336,
+    CONFIRM_TFA_CODE: 337,
+    CONFIRM_TFA_CODE_ACK: 338,
+    TURN_OFF_TFA: 339,
+    TURN_OFF_TFA_ACK: 340,
+    CHECK_TFA_CODE: 341,
+    CHECK_TFA_CODE_ACK: 342,
+
+
+    KEYS_CREATE_FLASH_WALLET: 1037,
+    KEYS_CREATE_FLASH_WALLET_ACK: 1038,
+
+    CHECK_RESET_PW_TOKEN: 1105,
+
+    ADMIN_UPDT_PASSWORD_OF_USER: 1102,
+    ADMIN_SEND_MAIL: 1103,
+    ADMIN_GET_RESET_PW_TOKEN: 1104,
+    REQUEST_RESET_PW: 1106,
+    ADMIN_GET_RESET_PW_REQ: 1107,
+    ADMIN_UPDT_RESET_PW_REQ: 1108,
+    ADMIN_LOCK: 1109,
+    ADMIN_UNLOCK: 1110,
+    ADMIN_GET_GENERAL_STATS: 1111,
+    UPGRADE_PASSWORD_V1_V2: 1112,
+    ADMIN_GET_WALLET_DAILY_STATS: 1113,
+    ADMIN_GET_WALLET_BL_SNAPSHOT: 1114,
+    ADMIN_GET_TX_DAILY_STATS: 1115,
+    ADMIN_SEARCH_USERS: 1116,
+    ADMIN_SET_WALLET_CFG: 1117,
+
+    RESTORE_SESSION_ACK: 130,
+    LOGIN_ACK: 131,
+    LOGOUT_ACK: 132,
+    CREATE_ACCOUNT_ACK: 133,
+    UPDATE_ACCOUNT_ACK: 134,
+    UPDATE_PASSWORD_ACK: 135,
+    RESET_PASSWORD_ACK: 136,
+    SEARCH_USERS_ACK: 137,
+    GET_USERS_BY_UID_ACK: 138,
+    UPLOAD_PROFILE_PIC_ACK: 139,
+    UPLOAD_FILE_XFER_ACK: 140,
+    VALIDATE_SERVICE_TICKET_ACK: 142,
+    VALIDATE_SESSION_COOKIE_ACK: 143,
+    USER_LOCK_ACK: 144,
+    USER_UNLOCK_ACK: 145,
+    SEND_VERIF_EMAIL_ACK: 146,
+    VERIFY_EMAIL_ACK: 147,
+    SEND_VERIF_SMS_ACK: 148,
+    VERIFY_PHONE_ACK: 149,
+    SET_PIN_ACK: 150,
+    CHANGE_PIN_ACK: 151,
+    GET_CONTACT_DETAIL_BY_USERNAME_ACK: 152,
+    GET_CONTACT_DETAIL_BY_EMAIL_ACK: 153,
+
+    KEYS_CREATE_UNITY_WALLET: 1028,
+    KEYS_CREATE_UNITY_WALLET_ACK: 1528,
+
+    CHECK_RESET_PW_TOKEN_ACK: 1605,
+
+    ADMIN_UPDT_PASSWORD_OF_USER_ACK: 1602,
+    ADMIN_SEND_MAIL_ACK: 1603,
+    ADMIN_GET_RESET_PW_TOKEN_ACK: 1604,
+    REQUEST_RESET_PW_ACK: 1606,
+    ADMIN_GET_RESET_PW_REQ_ACK: 1607,
+    ADMIN_UPDT_RESET_PW_REQ_ACK: 1608,
+    ADMIN_LOCK_ACK: 1609,
+    ADMIN_UNLOCK_ACK: 1610,
+    ADMIN_GET_GENERAL_STATS_ACK: 1611,
+    UPGRADE_PASSWORD_V1_V2_ACK: 1612,
+    ADMIN_GET_WALLET_DAILY_STATS_ACK: 1613,
+    ADMIN_GET_WALLET_BL_SNAPSHOT_ACK: 1614,
+    ADMIN_GET_TX_DAILY_STATS_ACK: 1615,
+    ADMIN_SEARCH_USERS_ACK: 1616,
+    ADMIN_SET_WALLET_CFG_ACK: 1617,
+
+    SESSION_INVALID: 141,
+    SESSION_TOKEN_RECV: 200,
+
+    VERIFY_EMAIL_RECV: 1742,
+
+    /* Begin - nlttoan added for SC-149: Speed-up log-in */
+    CL_STORE_WALLET_DATA: 1300,
+    CL_STORE_WALLET_DATA_ACK: 1301,
+    CL_RESTORE_WALLET_DATA: 1302,
+    CL_RESTORE_WALLET_DATA_ACK: 1303,
+    /* End */
+
+    GET_WALLET_SECRET: 309,
+    GET_WALLET_SECRET_ACK: 310,
+    CHECK_PIN: 315,
+    CHECK_PIN_ACK: 316,
+
+    //KEYS OPERATIONS
+    KEYS_CREATE_WALLET: 1000,
+    KEYS_ADD_WALLET_ADDRESS: 1001,
+    KEYS_SEARCH_WALLET: 1002,
+    KEYS_ADD_WALLET_KEYS: 1003,
+    KEYS_UPDT_WALLET_KEYS: 1003,
+    KEYS_ACTIVATE_WALLET: 1004,
+    KEYS_DEACTIVATE_WALLET: 1005,
+    KEYS_ADD_WALLET_CONTACT: 1006,
+    KEYS_REM_WALLET_CONTACT: 1007,
+    KEYS_GET_MY_WALLETS: 1008,
+    KEYS_UPDT_WALLET_ADDRESS: 1009,
+    KEYS_GET_WALLET_BY_EMAIL: 1010,
+    KEYS_ADD_TXN_LOG: 1011,
+    KEYS_GET_SENT_TXN: 1012,
+    KEYS_GET_RECV_TXN: 1013,
+
+    KEYS_ADD_MONEY_REQ: 1014,
+    KEYS_GET_SENT_MONEY_REQ: 1015,
+    KEYS_GET_RECV_MONEY_REQ: 1016,
+    KEYS_MARK_SENT_MONEY_REQ: 1017,
+    KEYS_MARK_REJECTED_MONEY_REQ: 1018,
+    KEYS_MARK_CANCELLED_MONEY_REQ: 1019,
+    KEYS_MARK_READ_MONEY_REQ: 1020,
+
+    KEYS_GET_WALLET_BY_USERNAME: 1021,
+    KEYS_GET_RECV_MONEY_REQ_BY_ID: 1022,
+    KEYS_UPDATE_WALLET_BALANCE: 1023,
+
+
+    KEYS_GET_TXN: 1024,
+    KEYS_UPDATE_TXN_LOG: 1025,
+    KEYS_GET_REQS: 1026,
+    KEYS_GET_TXN_BY_CONTACT: 1027,
+    KEYS_GET_WALLET_BALANCE: 1028,
+    KEYS_CREATE_WALLET_AND_ADDRESS: 1029,
+    KEYS_CREATE_USN_RAW_TXN: 1031,
+    KEYS_CREATE_USN_RAW_TXN_ACK: 1032,
+    KEYS_GET_TXN_DETAILS: 1033,
+    KEYS_GET_TXN_DETAILS_ACK: 1034,
+    KEYS_GET_BALANCE: 1035,
+    KEYS_GET_BALANCE_ACK: 1036,
+
+    KEYS_GET_LIST_MESSAGE: 1042,
+    KEYS_GET_MESSAGE_BY_ID: 1043,
+    KEYS_MARK_MESSAGE_AS_READ: 1044,
+    KEYS_MARK_MESSAGE_AS_DELETED: 1045,
+    KEYS_FOUNTAIN_ENABLE: 1045,
+    KEYS_FOUNTAIN_ENABLE_ACK: 1046,
+    KEYS_FOUNTAIN_DISABLE: 1047,
+    KEYS_FOUNTAIN_DISABLE_ACK: 1048,
+    KEYS_FOUNTAIN_MY: 1049,
+    KEYS_FOUNTAIN_MY_ACK: 1050,
+    KEYS_FOUNTAIN_UPDATE: 1051,
+    KEYS_FOUNTAIN_UPDATE_ACK: 1052,
+
+    ADMIN_GET_WALLETS_OF_USER: 1100,
+    ADMIN_UPDT_WALLETS_OF_USER: 1101,
+
+
+    //KEYS OPERATIONS ACK
+    KEYS_CREATE_WALLET_ACK: 1500,
+    KEYS_ADD_WALLET_ADDRESS_ACK: 1501,
+    KEYS_SEARCH_WALLET_ACK: 1502,
+    KEYS_ADD_WALLET_KEYS_ACK: 1503,
+    KEYS_UPDT_WALLET_KEYS_ACK: 1503,
+    KEYS_ACTIVATE_WALLET_ACK: 1504,
+    KEYS_DEACTIVATE_WALLET_ACK: 1505,
+    KEYS_ADD_CONTACT_ACK: 1506,
+    KEYS_REM_CONTACT_ACK: 1507,
+    KEYS_GET_MY_WALLETS_ACK: 1508,
+    KEYS_UPDT_WALLET_ADDRESS_ACK: 1509,
+    KEYS_GET_WALLET_BY_EMAIL_ACK: 1510,
+    KEYS_ADD_TXN_LOG_ACK: 1511,
+    KEYS_GET_SENT_TXN_ACK: 1512,
+    KEYS_GET_RECV_TXN_ACK: 1513,
+
+    KEYS_ADD_MONEY_REQ_ACK: 1514,
+    KEYS_GET_SENT_MONEY_REQ_ACK: 1515,
+    KEYS_GET_RECV_MONEY_REQ_ACK: 1516,
+    KEYS_MARK_SENT_MONEY_REQ_ACK: 1517,
+    KEYS_MARK_REJECTED_MONEY_REQ_ACK: 1518,
+    KEYS_MARK_CANCELLED_MONEY_REQ_ACK: 1519,
+    KEYS_MARK_READ_MONEY_REQ_ACK: 1520,
+
+    KEYS_GET_WALLET_BY_USERNAME_ACK: 1521,
+    KEYS_GET_RECV_MONEY_REQ_BY_ID_ACK: 1522,
+    KEYS_UPDATE_WALLET_BALANCE_ACK: 1523,
+
+    KEYS_GET_TXN_ACK: 1524,
+    KEYS_UPDATE_TXN_LOG_ACK: 1525,
+    KEYS_GET_REQS_ACK: 1526,
+    KEYS_GET_TXN_BY_CONTACT_ACK: 1527,
+
+    KEYS_GET_LIST_MESSAGE_ACK: 1542,
+    KEYS_GET_MESSAGE_BY_ID_ACK: 1543,
+    KEYS_MARK_MESSAGE_AS_READ_ACK: 1544,
+    KEYS_MARK_MESSAGE_AS_DELETED_ACK: 1545,
+
+    ADMIN_GET_WALLETS_OF_USER_ACK: 1600,
+    ADMIN_UPDT_WALLETS_OF_USER_ACK: 1601,
+
+
+    //KEYS OPERATIONS RECV
+    KEYS_ADD_TXN_LOG_RECV: 1711,
+    KEYS_UPDATE_TXN_LOG_RECV: 1712,
+    KEYS_ADD_MONEY_REQ_RECV: 1714,
+
+    KEYS_MARK_MONEY_REQ_RECV: 1719,
+    KEYS_MARK_READ_MONEY_REQ_RECV: 1720,
+
+    KEYS_ADD_MESSAGE_RECV: 1741,
+    KEYS_CHECK_SESSION: 141,
+    KEYS_GET_TXN_BY_ID: 1030,
+    KEYS_GET_TXN_BY_ID_ACK: 1530
+
+};
+
+const Err = {
+    unknown: 1,
+    ok: 2,
+    again: 3
+};
+
+const Cmd = {
+    open: 1,
+    ping: 2,
+    close: 3,
+    event: 4,
+    join: 5,
+    leave: 6,
+    xfer_start: 7,
+    xfer: 8,
+    xfer_err: 9,
+    xfer_end: 10,
+    get_file: 11,
+};
+
+const OBJ_TYPE = {
+    string: 0,
+    blob: 1,
+    json: 2
+};
+
+/**
+ ********************************************
+ * event pipe header structure
+ * All fields are network byte order. The payload includes a
+ * 1. header, 2. extended header, and 3. event sections.
+ *
+ * version  : uint8_t
+ * flag     : uint16_t
+ * seqno    : uint32_t
+ * txn      : uint16_t
+ * cmd      : uint8_t
+ * ext_len  : uint16_t ; length of the extended header
+ * ext_type : uint8_t : extended header type
+ *                      0: string, 1. binary, 2. json stringify object
+ * ext      : variable length ; extended header data
+ *
+ * event structure
+ * event    : uint16_t : the event enumeration
+ * data_len : uint32_t : the length of the data
+ * data_type: uint8_t: the object type of the data payload
+ * data     : the data
+ */
+
+// minimum header length
+const HEADER_MIN_LEN = 12;
+
+const Off = {
+    FLAG: 1,
+    SEQNO: 3,
+    TXN: 7,
+    CMD: 9,
+    EXT_LEN: 10,
+    EXT_TYPE: 12,
+    EXT: 13
+};
+
+
+const FLAG_ACK = 0x01;
+
+module.exports = {
+    EVP_VER: 1,
+    EVP_PATH: '/_evp',
+    DEFAULT_NSP: null,
+    Err: Err,
+    Cmd: Cmd,
+    HEADER_MIN_LEN: HEADER_MIN_LEN,
+    Off: Off,
+    FLAG_ACK: FLAG_ACK,
+    OBJ_TYPE: OBJ_TYPE,
+    Event: Event
+}
+},{}],3:[function(require,module,exports){
+/**
+ * Helper class for a array buffer backing usually by an Uint8Array
+ */
+var utf8 = require('tweetnacl-util');
+
+function BufferView(b) {
+	if (!b instanceof Uint8Array)
+		throw 'backing buffer needs to be Uint8Array';
+	this.view = new DataView(b.buffer, b.byteOffset, b.byteLength);
+	this.offset = 0;
+	this.mark = 0;
+	this.buffer = b;
+}
+
+BufferView.prototype.readUInt8 = function(offset) {
+	if (!offset) {
+		var res = this.view.getUint8(this.offset, false);
+		this.offset += 1;
+		return res;
+	} else
+		return this.view.getUint8(offset, false);
+}
+
+BufferView.prototype.readInt8 = function(offset) {
+	if (!offset) {
+		var res = this.view.getInt8(this.offset, false);
+		this.offset += 1;
+		return res;
+	} else
+		return this.view.getInt8(offset, false);
+}
+
+BufferView.prototype.readUInt16 = function(offset) {
+	if (!offset) {
+		var res = this.view.getUint16(this.offset, false);
+		this.offset += 2;
+		return res;
+	} else
+		return this.view.getUint16(offset, false);
+}
+
+BufferView.prototype.readUInt32 = function(offset) {
+	if (!offset) {
+		var res = this.view.getUint32(this.offset, false);
+		this.offset += 4;
+		return res;
+	} else
+		return this.view.getUint32(offset, false);
+}
+
+BufferView.prototype.readInt32 = function(offset) {
+	if (!offset) {
+		var res = this.view.getInt32(this.offset, false);
+		this.offset += 4;
+		return res;
+	} else
+		return this.view.getInt32(offset, false);
+}
+
+BufferView.prototype.reset = function() {
+	this.offset = this.mark;
+}
+
+BufferView.prototype.rewind = function() {
+	this.offset = this.mark = 0;
+}
+
+BufferView.prototype.set = function(offset) {
+	this.offset = offset;
+}
+
+BufferView.prototype.skip = function(s) {
+	this.offset += s;
+}
+
+BufferView.prototype.mark = function() {
+	this.mark = offset;
+}
+
+BufferView.prototype.slice = function(start, end) {
+	if (!end)
+		end = this.buffer.byteLength;
+	var res = this.buffer.subarray(start, end);
+	return res;
+}
+
+BufferView.prototype.writeUInt8 = function(v, offset) {
+	if (!offset) {
+		this.view.setUint8(this.offset, v)
+		this.offset += 1;
+	} else
+		this.view.setUint8(offset, v)
+}
+
+BufferView.prototype.writeInt8 = function(v, offset) {
+	if (!offset) {
+		this.view.setInt8(this.offset, v)
+		this.offset += 1;
+	} else
+		this.view.setInt8(offset, v)
+}
+
+BufferView.prototype.writeUInt16 = function(v, offset) {
+	if (!offset) {
+		this.view.setUint16(this.offset, v, false)
+		this.offset += 2;
+	} else
+		this.view.setUint16(offset, v, false)
+}
+
+BufferView.prototype.writeUInt32 = function(v, offset) {
+	if (!offset) {
+		this.view.setUint32(this.offset, v, false)
+		this.offset += 4;
+	} else
+		this.view.setUint32(offset, v, false)
+}
+
+BufferView.prototype.writeInt32 = function(v, offset) {
+	if (!offset) {
+		this.view.setInt32(this.offset, v, false)
+		this.offset += 4;
+	} else
+		this.view.setInt32(offset, v, false)
+}
+
+/**
+ * estimate the UTF8 array
+ * @param string
+ * @returns the encoded UTF8 array
+ */
+BufferView.prototype.decodeUTF8 = function(string) {
+	var a = utf8.decodeUTF8(string);
+	return a;
+}
+
+BufferView.prototype.writeUTF8 = function(string, offset) {
+	var a = utf8.decodeUTF8(string);
+	var pos = (offset ? offset : this.offset);
+	if (pos + a.byteLength > this.buffer.byteLength)
+		throw 'range error';
+
+	for (var i = 0; i < a.byteLength; i++)
+		this.buffer[pos + i] = a[i];
+	if (!offset)
+		this.offset += a.byteLength;
+
+	return a.byteLength;
+}
+
+BufferView.prototype.append = function(buf, offset) {
+	if (!buf instanceof Uint8Array)
+		throw 'buffer needs to be Uint8Array';
+	var pos = (offset ? offset : this.offset)
+
+	if (pos + buf.byteLength > this.buffer.byteLength)
+		throw 'range error';
+
+	this.buffer.set(buf, pos);
+	if (!offset)
+		this.offset += buf.byteLength;
+}
+
+BufferView.prototype.readUTF8 = function(length, offset) {
+	var pos = (offset ? offset : this.offset);
+	if (pos + length > this.buffer.byteLength)
+		throw 'range error';
+	var sub = this.buffer.subarray(pos, pos + length);
+	var res = utf8.encodeUTF8(sub);
+	if (!offset)
+		this.offset += length;
+	return res;
+}
+
+BufferView.prototype.fill = function(v, start, end) {
+	var use_offset = false;
+	if (!start) {
+		start = 0;
+		end = this.buffer.byteLength;
+		use_offset = true;
+	}
+
+	for (var i = start; i < end; i++)
+		this.buffer[i] = v;
+	if (use_offset)
+		this.offset += (end - start);
+}
+
+BufferView.prototype.length = function() {
+	return this.buffer.byteLength;
+}
+
+BufferView.prototype.toString = function() {
+	return 'offset:' + this.offset + 'buf.length:' + this.buffer.byteLength;
+}
+
+module.exports = BufferView;
+},{"tweetnacl-util":20}],4:[function(require,module,exports){
+/**
+ * A secure client implementing CurveZMQ on top of websocket
+ */
+var events = require('events'),
+	machina = require('machina'),
+	nacl = require('tweetnacl'),
+	naclUtil = require('tweetnacl-util'),
+	BufferView = require('./buffer-view'),
+	PollSocket = require('./poll-socket'),
+	util = require('util');
+
+function CurveWebSocket(opts) {
+	this.srv_pub_p = naclUtil.decodeBase64(opts.server_publicKey);
+	var keys = nacl.box.keyPair();
+	this.pub_t = keys.publicKey;
+	this.priv_t = keys.secretKey;
+	
+	// for the time being we have no permanent
+	this.pub_p = this.pub_t;
+	this.priv_p = this.priv_t;
+	this.message_buf = new BufferView(new Uint8Array(64*1024));
+	this.fsm = this._fsm(opts);
+}
+
+util.inherits(CurveWebSocket, events.EventEmitter);
+
+CurveWebSocket.prototype.encode_hello = function() {
+	var pkt_hello = new BufferView(new Uint8Array(215+16));
+	pkt_hello.fill(0);
+	pkt_hello.rewind();
+	pkt_hello.writeUTF8('HELLO');
+	pkt_hello.writeUInt8(1);
+	pkt_hello.writeUInt8(0);
+	pkt_hello.fill(0, pkt_hello.offset, pkt_hello.offset+72);
+	pkt_hello.skip(72);
+	pkt_hello.append(this.pub_t);
+
+	var nonce = gen_nonce('CurveZMQHELLO---', 8);
+	var zeros = new Uint8Array(64);
+	var box = nacl.box(zeros, nonce, this.srv_pub_p, this.priv_t);
+	pkt_hello.append(nonce);
+	pkt_hello.append(new Uint8Array(box.buffer));
+	
+	return {pkt: pkt_hello.buffer, s_nonce: nonce.subarray(16)};
+}
+
+CurveWebSocket.prototype.decode_welcome = function(pkt) {
+	if ( pkt.length() !== (183+32) ) 
+		return {err: 'wrong length'};
+	
+	var cmd = pkt.readUTF8(7);
+	if ( cmd !== 'WELCOME' )
+		return { err: 'wrong cmd' };	
+	
+	var welcome_nonce = pkt.slice(pkt.offset, pkt.offset+24);
+	pkt.skip(24);
+	var welcome = nacl.box.open(pkt.slice(pkt.offset+16), welcome_nonce, this.srv_pub_p, this.priv_t);
+	if ( ! welcome )
+		return {err : 'authentication fails'};
+	var srv_pub_t = welcome.subarray(0,32);
+	
+	var cookie = welcome.subarray(32);
+	return {c:cookie, sk: srv_pub_t};
+}
+
+CurveWebSocket.prototype.decode_ready = function(pkt) {
+	if ( pkt.length() < 46 ) 
+		return {err: 'wrong length'};
+	
+	var cmd = pkt.readUTF8(5);
+	if ( cmd !== 'READY' )
+		return { err: 'wrong cmd' };
+	
+	var ready_nonce = pkt.slice(pkt.offset, pkt.offset+24);
+	pkt.skip(24);
+		
+	var ready = nacl.box.open(pkt.slice(pkt.offset+16), ready_nonce, this.srv_pub_t, this.priv_t);
+	if ( ! ready )
+		return {err : 'authentication fails'};
+	// no need to check meta data for the time being
+	return {s_nonce: ready_nonce.subarray(16)};
+}
+
+CurveWebSocket.prototype.send = function(data) {
+	increment_nonce(this.fsm.short_nonce);
+	var msg = this.encode_message(data, this.message_buf, this.fsm.short_nonce);
+	this.ws.send(msg.pkt);
+}
+
+CurveWebSocket.prototype.close = function() {
+	if ( this.fsm.ws )
+		this.fsm.ws.close();
+}
+
+CurveWebSocket.prototype.encode_message = function(payload, pkt_message, short_nonce) {
+	pkt_message.rewind();
+	pkt_message.writeUTF8('MESSAGE');
+	
+	var mark = pkt_message.offset;
+	pkt_message.writeUTF8('CurveZMQMESSAGE-');
+	pkt_message.append(short_nonce);
+	var message_nonce = pkt_message.slice(mark, pkt_message.offset);
+	
+	mark = pkt_message.offset;	
+	pkt_message.append(payload);
+	
+	var box = nacl.box(pkt_message.slice(mark, pkt_message.offset), message_nonce, this.srv_pub_t, this.priv_t);
+	var b = new Uint8Array(box.buffer);
+	pkt_message.append(b, mark);
+	pkt_message.set(mark+b.byteLength);
+	return {pkt: pkt_message.buffer.subarray(0, pkt_message.offset) };	
+}
+
+CurveWebSocket.prototype.decode_message = function(pkt, short_nonce) {
+	if ( pkt.length() < 49 ) 
+		return {err: 'wrong length'};
+		
+	var cmd = pkt.readUTF8(7);
+	if ( cmd !== 'MESSAGE' )
+		return { err: 'wrong cmd' };
+		
+	var message_nonce = pkt.slice(pkt.offset, pkt.offset+24);
+	pkt.skip(24);
+	
+	var expected_nonce = new BufferView(new Uint8Array(24));
+	expected_nonce.writeUTF8('CurveZMQMESSAGE-');
+	expected_nonce.append(short_nonce);
+	
+	var err = comp(expected_nonce.buffer, message_nonce);
+	if ( err )
+		return {err: 'wrong nonce'};
+	var message = nacl.box.open(pkt.slice(pkt.offset+16), message_nonce, this.srv_pub_t, this.priv_t);
+	if ( ! message )
+		return {err : 'authentication fails'};
+	
+	return {data: message};
+}
+
+CurveWebSocket.prototype.encode_initiate = function(cookie, short_nonce) {
+	var vouch = new BufferView(new Uint8Array(120));
+	var vouch_nonce = gen_nonce('VOUCH---', 16);
+	vouch.append(vouch_nonce);
+	vouch.append(this.pub_t);
+	vouch.append(this.srv_pub_p);
+	var vouch_box = nacl.box(vouch.slice(24, 24+64), vouch_nonce, this.srv_pub_t, this.priv_p);
+	vouch.append(new Uint8Array(vouch_box.buffer), 24);
+	
+	var len = 8+cookie.byteLength+24+32+vouch.length()+32;
+	var pkt_initiate = new BufferView(new Uint8Array(len));
+	pkt_initiate.writeUTF8('INITIATE');
+	pkt_initiate.append(cookie);
+	var mark = pkt_initiate.offset;
+	pkt_initiate.writeUTF8('CurveZMQINITIATE');
+	pkt_initiate.append(short_nonce);
+	var initiate_nonce = pkt_initiate.slice(mark, pkt_initiate.offset);
+	mark = pkt_initiate.offset;	
+	pkt_initiate.append(this.pub_p);
+	pkt_initiate.append(vouch.buffer);
+	var init_box = nacl.box(pkt_initiate.slice(mark, pkt_initiate.offset), initiate_nonce, this.srv_pub_t, this.priv_t);
+	pkt_initiate.append(new Uint8Array(init_box.buffer), mark);
+
+	return pkt_initiate.buffer;
+}
+
+CurveWebSocket.prototype._fsm = function(opts) {
+	var owner = this;
+	var m = new machina.Fsm({
+		initialState : "init",
+
+		states : {
+			init : {
+				_onEnter : function() {
+					if ( opts.poll ) {
+						this.ws = new PollSocket(opts);
+					}
+					else {
+						this.ws = new WebSocket(opts.url);
+						this.ws.binaryType = "arraybuffer";						
+					}
+					var self = this;
+					this.ws.addEventListener('open', function() {
+						console.log('connected websocket with', opts.url);
+						self.ws.addEventListener('message', function(data) {
+							self.handle('data', new BufferView(new Uint8Array(data.data)));
+						});
+						self.ws.addEventListener('close', function() {
+							console.log('backing ws closed', self.ws.readyState);							
+							owner.emit('close');
+						});
+						self.ws.addEventListener('error', function() {
+							console.log('backing ws error', self.ws.readyState);
+							owner.emit('error');
+						});
+						self.transition('hello');
+					});
+				}
+			},
+			
+			hello : {
+				_onEnter : function() {
+					var hello = owner.encode_hello();
+					this.short_nonce = hello.s_nonce;
+					console.log('sending hello');
+				    this.ws.send(hello.pkt);
+				    this.transition('wait_welcome');
+				}				
+			},
+			
+			wait_welcome : {
+				data : function(buffer) {
+					var welcome = owner.decode_welcome(buffer);
+					if ( ! welcome.err ) {
+						owner.srv_pub_t = welcome.sk;
+						increment_nonce(this.short_nonce);
+						var pkt = owner.encode_initiate(welcome.c, this.short_nonce);
+						console.log('received welcome, sennding initiate');
+						this.ws.send(pkt);
+						this.transition('wait_ready');
+					}
+					else {
+						owner.emit('err', welcome.err);
+						this.ws.close();
+					}					
+				}
+			},
+			
+			wait_ready : {
+				data : function(buffer) {
+					var ready = owner.decode_ready(buffer);
+					if ( ! ready.err ) {
+						console.log('channel ready');
+						owner.ws = this.ws;
+						owner.emit('open');
+						this.srv_short_nonce = ready.s_nonce;
+						this.transition('wait_message');
+					}
+					else {
+						owner.emit('err', ready.err);
+						this.ws.close();
+					}
+				}
+			},
+			
+			wait_message : {
+				data : function(buffer) {
+					increment_nonce(this.srv_short_nonce);
+					var message = owner.decode_message(buffer, this.srv_short_nonce);
+					if ( ! message.err )
+						owner.emit('message', message.data);
+					else {
+						owner.emit('err', message.err);
+						this.ws.close();
+					}					
+				}
+			}
+		}
+	});
+	return m;
+};
+
+module.exports = CurveWebSocket;
+
+const MAX_INT = Math.pow(2, 32); 
+function increment_nonce(n) {
+	var hi = (n[0] << 24 & 0xffffffff) | (n[1] << 16 & 0xffffff) | (n[2] << 8 & 0xffff ) | (n[3] & 0xff);
+	var lo = (n[4] << 24 & 0xffffffff) | (n[5] << 16 & 0xffffff) | (n[6] << 8 & 0xffff ) | (n[7] & 0xff);
+	lo += 1;
+	if ( lo >= MAX_INT ) {
+		lo -= MAX_INT;
+		hi += 1;
+	}
+	n[0] = (hi >>> 24 & 0xff);
+	n[1] = (hi >>> 16 & 0xff);
+	n[2] = (hi >>> 8 & 0xff);
+	n[3] = (hi & 0xff);
+	n[4] = (lo >>> 24 & 0xff);
+	n[5] = (lo >>> 16 & 0xff);
+	n[6] = (lo >>> 8 & 0xff);
+	n[7] = (lo & 0xff);
+};
+
+function comp(a, b) {
+	if ( a.byteLength == b.byteLength ) {
+		for ( var i = 0; i < a.byteLength; i++ )
+			if ( a[i] != b[i] )
+				return i+':' + a[i] + '<->' + b[i];
+	}
+	else
+		return 'len<>';
+}
+
+function gen_nonce(prefix, len) {
+	var b = new Uint8Array(24);
+	var buf = new BufferView(b);
+	var start = buf.offset;
+	buf.writeUTF8(prefix);
+	var rnd = nacl.randomBytes(len);
+	buf.append(rnd);
+	return b;
+}
+
+
+},{"./buffer-view":3,"./poll-socket":7,"events":13,"machina":18,"tweetnacl":21,"tweetnacl-util":20,"util":17}],5:[function(require,module,exports){
+var events = require('events'),
+	machina = require('machina'),
+	BufferView = require('./buffer-view'),
+	nacl = require('tweetnacl'),	
+	CurveWebSocket = require('./curvews-client'),
+	Cmd = require('../def/evt').Cmd,
+	Err = require('../def/evt').Err,
+	EVP_PATH = require('../def/evt').EVP_PATH,
+	FLAG_ACK = require('../def/evt').FLAG_ACK,
+	DEFAULT_NSP = require('../def/evt').DEFAULT_NSP;
+
+var EVP_VER = require('../def/evt').EVP_VER,
+	HEADER_MIN_LEN = require('../def/evt').HEADER_MIN_LEN,
+	Off = require('../def/evt').Off,
+	OBJ_TYPE = require('../def/evt').OBJ_TYPE,
+	FLAG_ACK = require('../def/evt').FLAG_ACK;
+
+WebSocket.prototype.on = WebSocket.prototype.addEventListener;
+
+const DEFAULT_HB_INTERVAL = 15000;
+const DEFAULT_HB_TMO = 46000;
+const RECONNECT_WAIT = 300;
+const OPEN_RETRY = 3;
+const OPEN_WAIT = 1000;
+const XFER_TMO = 10000;
+const POLL_REC_TMO = 4000;
+
+// large object or file transfer chunk size
+const XFER_CHUNK_SIZE = 48*1024;
+const MAX_GET_FILE_SIZE = 32*1024*1024;
+var txn_num = 0;
+
+function event_client(opts) {
+	return new EventPipe(opts);
+}
+
+function EventPipe(opts) {
+	this.delegate = new events.EventEmitter();
+	if ( ! opts.buf instanceof Uint8Array )
+		throw 'backing buffee needs to be Uint8Array';	
+	this.buf = opts.buf;
+	this.server_url = opts.proto + '://' + opts.host + ':' + opts.port + EVP_PATH;
+	this.namespace = (opts.namespace ? opts.namespace : DEFAULT_NSP);
+	this.srv_pub = opts.server_publicKey;
+	this.poll = opts.poll;
+	//this has to be more than two times of the server ping interval: poll-server.js: var KEEP_ALIVE_INTERVAL = 45000;
+	this.ping_tmo = 30000 * 2;
+	this.fsm = this._fsm(opts);
+	this.fsm.handle('start');
+	this.seqno = 0;
+}
+
+EventPipe.prototype.emit = function(e, payload) {
+	if ( ! this.ready ) {
+		console.log('websocket not ready');
+		return;
+	}
+	
+	var ptr = write_header(this.buf, 0, ++this.seqno, 0, Cmd.event);
+	var len = write_event(this.buf.subarray(ptr), e, payload);
+	
+	this.ws.send(this.buf.subarray(0, ptr+len), {binary: true});
+};
+
+EventPipe.prototype.on = function(e, fn) {	
+	this.delegate.on(e, fn);
+};
+
+EventPipe.prototype.once = function(e, fn) {	
+	this.delegate.once(e, fn);
+};
+
+
+EventPipe.prototype.removeListener = function(e, fn) {	
+	this.delegate.removeListener(e, fn);
+};
+
+EventPipe.prototype.removeAllListeners = function(e) {	
+	this.delegate.removeAllListeners(e);
+};
+
+
+EventPipe.prototype.once = function(e, fn) {	
+	this.delegate.once(e, fn);
+};
+
+EventPipe.prototype.join = function(channel) {
+	if ( ! this.ready ) {
+		console.log('not ready');
+		return;
+	}
+	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.join, channel);
+	this.ws.send(this.buf.subarray(0, p));	
+}
+
+EventPipe.prototype._send_complete = function(txn, context, rx_error, cb) {
+	if ( rx_error.e )
+		return;
+	
+	var reg = xfer_end_ack(txn);
+	var timer;
+	var self = this;
+	
+	var listener = function() {
+		if ( timer )
+			clearTimeout(timer);
+		console.log('xfer', txn, 'peer has acked end');
+		cb()
+	};
+		
+	timer = setTimeout(function() {
+		self.delegate.removeListener(reg, listener);
+		cb('end timeout');
+	}, 1000);
+	
+	this.delegate.once(reg, listener);
+	
+	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.xfer_end, context);
+	this.ws.send(this.buf.subarray(0, p));
+}
+
+EventPipe.prototype._send_chunk = function(txn, file, remaining, offset, rx_error, cb, size) {
+	if ( rx_error.e ) {
+		console.log('xfer:send_chunk', txn, 'peer error, bailing out');
+		return;
+	}
+	var chunk_size;
+	if ( size ) 
+		chunk_size = Math.min(Math.max(XFER_CHUNK_SIZE, size), remaining);
+	else
+		chunk_size = Math.min(XFER_CHUNK_SIZE, remaining);
+    var reader = new FileReader();
+    var chunk = file.slice(offset, offset+chunk_size);
+    console.log('request to read', chunk_size, 'bytes');
+    var self = this;
+    reader.onload = function(evt) { 
+        remaining -= chunk_size;
+        console.log('xfer', txn,'send_chunk: offset', offset, 'read', evt.target.result.byteLength, 'remaining', remaining);
+    	var p = write_header(self.buf, 0, ++self.seqno, txn, Cmd.xfer, new Uint8Array(evt.target.result));
+    	self.ws.send(self.buf.subarray(0, p));        
+        offset += chunk_size;       
+    	var once_timer;
+    	self.delegate.once(xfer_req_ack(txn), function() {
+    		if ( once_timer )
+    			clearTimeout(once_timer);
+        	cb(undefined, offset);
+        	if ( remaining > 0 )
+        		self._send_chunk(txn, file, remaining, offset, rx_error, cb, size);
+    	});
+    	once_timer = setTimeout(function(){
+    		console.log('xfer', txn, 'timeout at offset', offset);
+    		self.delegate.removeAllListeners(xfer_req_ack(txn));
+    		cb('timeout at offset' + offset);
+    	}, 3000);            
+    }
+    reader.onerror = function(err) {
+        console.log('xfer', txn, 'send_chunk:err', err);
+        cb(err);
+    };
+    reader.readAsArrayBuffer(chunk);
+}
+
+/**
+ * send a file. 
+ * @context is the context in json format.
+ * @file the file handle.
+ * @cb a callback that takes 1. error and 2. percentage
+ * @size the suggested chunk size
+ */
+EventPipe.prototype.sendfile = function(context, file, cb, size) {
+	if ( ! this.ready ) {
+		console.log('not ready');
+		cb('not ready');
+		return;
+	}	
+
+	var txn = next_txn();
+	console.log('xfer: start with txn', txn, file.name, 'type', file.type, 'size', file.size);	
+	var reg = xfer_start_ack(txn);
+	var timer;
+	var self = this;
+	var rx_error = {};
+	
+	var listener = function() {
+		if ( timer )
+			clearTimeout(timer);
+		console.log('xfer:peer has acked start', txn);
+		self._send_chunk(txn, file, file.size, 0, rx_error, function(err, offset) {
+			if ( ! err ) {
+				var p = Math.floor((offset/file.size)*100);
+				cb(Err.again, p);
+				if ( p === 100 ) {
+					console.log('xfer:chunk send completed', txn);
+					self._send_complete(txn, context, rx_error, function(err) {
+						if ( ! err ) {
+							console.log('xfer:send complete', txn);
+							self.delegate.removeAllListeners(xfer_err(txn));
+							cb(Err.ok);
+						}
+						else {
+							console.log('xfer:send complte err', err);
+							self.delegate.removeAllListeners(xfer_err(txn));
+							cb(err);
+						}
+					});
+				}
+			}
+			else {
+				console.log('chunk sending error', err);
+				self.delegate.removeAllListeners(xfer_err(txn));
+				cb(err);
+			}
+		}, size);
+	};
+		
+	timer = setTimeout(function() {
+		self.delegate.removeListener(reg, listener);
+		if ( cb )
+			cb('start timeout');
+	}, 2000);
+	
+	this.delegate.once(reg, listener);
+	var self = this;
+	this.delegate.once(xfer_err(txn), function(message) {
+		console.log('xfer', txn, 'peer error', message);
+		rx_error.e = true;
+		self.delegate.removeAllListeners(xfer_start_ack(txn));
+		self.delegate.removeAllListeners(xfer_end_ack(txn));
+		cb('peer error');
+	});
+	
+	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.xfer_start, {size: file.size, type: file.type});
+	this.ws.send(this.buf.subarray(0, p));
+}
+
+/**
+ * get file from peer
+ * @token is the token used to identify peer's local file.
+ * @cb the callback function that takes
+ *     1. err: if error occurs
+ *     2. percentage
+ *     3. result: {size (file size in bytes), type (file type:string), result (blob:Uint8Array), context (any context information, json formatted)}      
+ */
+EventPipe.prototype.getfile = function(token, cb) {
+	if ( ! this.ready ) {
+		console.log('not ready');
+		cb('not ready');
+		return;
+	}
+	
+	var self = this;
+	var txn = next_txn();	
+	var listener = function(err, ack) {
+		if ( ! err ) {
+			var txn = ack.txn;
+			console.log('get file acked with txn', txn);
+			var wait_start = function(err, txn, file) {
+				if ( ! err ) {
+					console.log('peer send file txn started');
+					self._create_xfer_receiver(txn, file, cb);					
+				}
+				else
+					cb(err);
+			}
+		    once(self.delegate, xfer_start(txn), 1000, wait_start);
+		}
+		else
+			cb(err);
+	};
+		
+    once(this.delegate, xfer_getfile_ack(txn), 1000, listener);
+	
+	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.get_file, token);
+	this.ws.send(this.buf.subarray(0, p));	
+}
+
+EventPipe.prototype._create_xfer_receiver = function(txn, file, cb) {
+	var pipe = this;
+	var fsm;
+	new machina.Fsm({
+		
+		initialState: 'init',
+		
+		tmo : function() {
+			console.log('xfer fsm', txn, 'timeout');
+			this.transition('stop');
+			this.handle('result', 'timeout');
+		},
+		
+		io_err : function(err) {
+			console.log('xfer', txn, 'io err', err.message);
+			this.transition('stop');
+			this.handle('result', err.message);			
+		},
+		
+		states: {
+			init : {
+				_onEnter : function() {
+					fsm = this;
+					console.log('start xfer fsm', txn, ' with file type', file.type, 'size', file.size);
+					if ( file.size > MAX_GET_FILE_SIZE ) {
+						fsm.transition('stop');
+						fsm.handle('result', 'file too large');
+						return;
+					}
+					this.type = file.type;
+					this.size = file.size;
+					this.offset = 0;
+					this.res_buf = new Uint8Array(file.size);
+					pipe.delegate.on(xfer_req(txn), function(length, buffer) {
+						fsm.handle('data', length, buffer);
+					});
+					pipe.delegate.once(xfer_end_req(txn), function(context) {
+						fsm.handle('end', context);
+					});
+					var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer_start);
+					console.log('sending xfer start ack, txn', txn);
+					pipe.ws.send(pipe.buf.subarray(0, len));
+
+					this.transition('wait_data');
+				}
+			},
+			
+			wait_data : {
+				_onEnter : function() {
+					this.timer = setTimeout(this.tmo, XFER_TMO);
+					var self = this;
+				},
+				
+				data : function(chunk_size, buffer) {					
+					// append the chunk
+					this.res_buf.set(buffer, this.offset);
+					clearTimeout(this.timer);
+					this.timer = setTimeout(this.tmo, XFER_TMO);
+					this.offset += chunk_size;
+					var remaining = this.size-this.offset;
+
+					// ack the chunk
+					var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer);
+					pipe.ws.send(pipe.buf.subarray(0, len));
+					var p = Math.floor((fsm.offset*100.0/fsm.size));
+					cb(undefined, p);
+				},
+				
+				end : function(context) {
+					console.log('end xfer fsm', txn, 'context', context);
+					clearTimeout(this.timer);
+					this.transition('stop');
+					this.handle('result', undefined, context);
+				}
+			},
+			
+			stop : {
+				result : function(err, context) {
+					pipe.delegate.removeAllListeners(xfer_req(txn));
+					pipe.delegate.removeAllListeners(xfer_end_req(txn));
+					if ( ! err ) {
+						console.log('xfer', txn, 'end', context);
+						var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer_end);
+						console.log('sending xfer end ack, txn', txn);
+						pipe.ws.send(pipe.buf.subarray(0, len));
+						cb(undefined, 100, {size: this.size, type: this.type, result: this.res_buf, context: context});
+					}
+					else {
+						var len = write_header(pipe.buf, 0, ++pipe.seqno, txn, Cmd.xfer_err, err);
+						console.log('sending xfer err, txn', txn);
+						pipe.ws.send(pipe.buf.subarray(0, len));
+						cb(err);
+					}
+				}
+			}
+		}		
+	});
+}
+
+EventPipe.prototype.leave = function(channel) {
+	if ( ! this.ready ) {
+		console.log('not ready');
+		return;
+	}	
+	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.leave, channel);
+	this.ws.send(this.buf.subarray(0, p));	
+}
+
+EventPipe.prototype._dispatch_event = function(buf) {
+	var event = read_event(buf);
+	if ( event.data )
+		this.delegate.emit(event.event, event.data)
+	else
+		this.delegate.emit(event.event);
+}
+
+EventPipe.prototype._up = function(e) {
+	this.delegate.emit(e);
+}
+
+EventPipe.prototype._dispatch = function(data) {
+	//read the command
+	var hdr = read_header(data);
+	switch ( hdr.cmd ) {
+	case Cmd.open :
+		if ( hdr.flag & FLAG_ACK )
+			this.fsm.handle('open_ack', hdr.ext);	
+		break;
+	case Cmd.ping :
+		if ( hdr.flag & FLAG_ACK )
+			this.fsm.handle('pong');
+		break;
+	case Cmd.close:
+		this.fsm.handle('close');
+		break;
+	case Cmd.event:
+		var ebuf = data.subarray(hdr.hlen);
+		this._dispatch_event(ebuf);
+		break;
+	case Cmd.xfer_start:
+		if ( hdr.flag & FLAG_ACK )
+			this.delegate.emit(xfer_start_ack(hdr.txn));
+		else
+			this.delegate.emit(xfer_start(hdr.txn), hdr.txn, hdr.ext);
+		break;
+	case Cmd.xfer_err:
+		this.delegate.emit(xfer_err(hdr.txn), hdr.ext);
+		break;
+	case Cmd.xfer:
+		if ( hdr.flag & FLAG_ACK )
+			this.delegate.emit(xfer_req_ack(hdr.txn));
+		else
+			this.delegate.emit(xfer_req(hdr.txn), hdr.ext_len, hdr.ext);
+		break;		
+	case Cmd.xfer_end:
+		if ( hdr.flag & FLAG_ACK )
+			this.delegate.emit(xfer_end_ack(hdr.txn));
+		else
+			this.delegate.emit(xfer_end_req(hdr.txn), hdr.ext);
+		break;
+	case Cmd.get_file:
+		if ( hdr.flag & FLAG_ACK )
+			this.delegate.emit(xfer_getfile_ack(hdr.txn), hdr.ext);
+		break;
+	default:
+		console.log('unknown command, header:', data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7], data[8]);
+		break;
+	}	
+}
+
+EventPipe.prototype._ping = function() {
+	if (this.poll) {
+		console.debug("is poll will not _ping");
+		this.fsm.handle('pong');
+		return;
+	}
+	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.ping);
+	this.ws.send(this.buf.subarray(0, p));	
+};
+
+EventPipe.prototype._fsm = function(opts) {
+	var evp = this;
+	var fsm = new machina.Fsm({				
+		initialState : "init",		
+		
+		open : function() {
+			var p = write_header(evp.buf, 0, ++evp.seqno, 0, Cmd.open, evp.namespace);
+			evp.ws.send(evp.buf.subarray(0, p));
+		},
+		
+		// exponential backoff interval calculation
+		gen_interval : function(k) {
+			  var base = (Math.pow(2, k) - 1) * 30;
+			  
+			  if ( base > 30000 )
+				 base = 30000; // If the generated interval is more than 30 seconds, truncate it down to 30 seconds.
+			  if ( base < 0 )
+				  base = 0;
+			  
+			  // generate the interval to a random number between 500 ms and the maxInterval determined from above
+			  return Math.random() * 1000 + 300 + base; 
+		},
+		
+		states : {
+			init : { 
+				_onEnter: function() {
+					evp.ready = false;
+				},
+				
+				"start" : function() {
+					this.connect_attempt = 1;
+					this.transition("connecting");
+				}
+			},
+			
+			connecting : {
+				_onEnter : function() {
+					console.log('try connection', evp.server_url, 'attemp', this.connect_attempt);
+					evp.ready = false;
+					//evp.ws = new WebSocket(evp.server_url);
+					//evp.ws.binaryType = "arraybuffer";
+					evp.ws = new CurveWebSocket({url: evp.server_url, server_publicKey: evp.srv_pub, poll: evp.poll,
+						ping_tmo: evp.ping_tmo});
+					var self = this;
+					evp.ws.on('open', function() {
+						self.connect_attempt = 1;
+						if ( self.reconnect_timer )
+							clearTimeout(self.reconnect_timer);
+						    evp.ws.on('message', function(data) {
+								//console.log('msg event data length', data.byteLength, ':', data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);																
+								evp._dispatch(data);								
+						    });
+						
+						evp.ws.on('close', function() {
+							console.log('connection closed');
+							self.transition('disconnected');
+							evp._up('close');
+						});
+						
+						evp.ws.on('error', function() {
+							console.log('ws error, state',  evp.ws.readyState);
+							self.transition('disconnected');
+							evp._up('error');							
+						});
+
+						self.open_retry = 0;
+						self.transition('wait_open');
+					});
+
+					var rec_tmo = evp.poll? POLL_REC_TMO : this.gen_interval(this.connect_attempt);
+					rec_tmo = 10 * 1000;
+					console.log('connection timeout in', rec_tmo, "ms");
+					this.reconnect_timer = setTimeout(function() {
+						self.connect_attempt++;
+						console.log('connection timeout');
+						self.transition('disconnected');
+					}, rec_tmo);
+				}
+			},
+			
+			wait_open : { 
+				_onEnter: function() {
+					if ( this.open_retry > OPEN_RETRY ) {
+						console.log('open reached max retry');
+						if ( this.open_timer )
+							clearTimeout(this.open_timer);
+						this.handle('disconnected');
+					}
+					else {
+						this.open_retry++;
+						this.open();
+						if ( this.open_timer )
+							clearTimeout(this.open_timer);
+						var self = this;
+						this.open_timer = setTimeout(function() {
+							self.transition('wait_open');
+						}, OPEN_WAIT);
+					}
+				},
+				
+				"open_ack" : function(pipe_id) {
+					// sanity check for the heartbeat generation
+					console.log('pipe opened with id', pipe_id);
+					clearTimeout(this.open_timer);
+					evp.id = pipe_id;
+					evp.ready = true;
+					var hb_interval = (opts.hb_int ? opts.hb_int : DEFAULT_HB_INTERVAL);
+					this.tx_timer = setInterval(function() {
+						evp._ping();
+					}, hb_interval);
+					// emit local event
+					evp.delegate.emit('connect');					
+					this.transition("connected");
+				}				
+			},			
+			connected : {
+				_onEnter : function() {
+					var self = this;
+					// register a timer to monitor heartbeat
+					this.hb_tmo = (opts.hb_tmo ? opts.hb_tmo : DEFAULT_HB_TMO);
+					this.rx_timer = setTimeout(function() {
+						self.handle("tmo");
+					}, self.hb_tmo);
+				},
+				
+				"pong" : function() {
+					clearTimeout(this.rx_timer);
+					var self = this;
+					this.rx_timer = setTimeout(function() {
+						self.handle("tmo");
+					}, self.hb_tmo);					
+				},
+				
+				"close" : function() {
+					console.log('tear down connection');
+					this.transition("disconnected");
+				},
+				
+				"tmo" : function () {
+					console.log('server may have disconnected');
+					this.transition("disconnected");
+				}
+			},
+			
+			disconnected : {
+				_onEnter : function() {
+					console.log('socket disconnected or fail to connect');
+					if ( evp.ws )
+						evp.ws.close();
+					clearTimeout(this.rx_timer);
+					clearInterval(this.tx_timer);
+					var self = this;
+					// setup a timer to reconnect
+					setTimeout(function() {
+						self.transition("connecting");
+					}, RECONNECT_WAIT);
+				}
+			}
+		}
+	});
+	return fsm;	
+}
+
+var read_event = function(buf) {
+	var view = new BufferView(buf);
+	var event = view.readUInt16();
+	var data = undefined;
+	var len = view.readUInt32();
+	if ( len > 0 ) {
+		var type = view.readUInt8();
+		switch ( type ) {
+		case OBJ_TYPE.string:			
+			data = view.readUTF8(len);
+			break;
+		case OBJ_TYPE.blob:
+			data = view.slice(view.offset, view.offset + len);
+			break;
+		case OBJ_TYPE.json:
+			data = view.readUTF8(len);
+			data = JSON.parse(data);
+			break;
+		default:
+			//FIXME: bail out
+			console.log('unknow data type', type);
+		}
+	}
+	
+	console.log('read_event', event, 'data', data);
+	
+	return {event: event, data: data};
+}
+
+var write_event = function(buf, event, payload) {
+	var view = new BufferView(buf);
+	var start = view.offset;
+	view.writeUInt16(event);
+	var len = 0;
+	if ( payload ) {
+		if ( payload.constructor === String ) {
+			var a = view.decodeUTF8(payload);
+			len = a.byteLength;
+			view.writeUInt32(len);
+			if ( len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.string);					
+				view.append(a);
+			}
+		}
+		else if ( payload instanceof Uint8Array ) {
+			len = payload.byteLength;
+			view.writeUInt32(len);
+			if ( len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.blob);
+				view.append(payload);				
+			}
+		}
+		else {
+			var json_string = JSON.stringify(payload);
+			var a = view.decodeUTF8(json_string);
+			len = a.byteLength;
+			view.writeUInt32(len);
+			if ( len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.json);
+				view.append(a);			
+			}
+		}		
+	}
+	else {
+		view.writeUInt32(0);
+	}
+	
+	return view.offset-start;
+}
+
+var xfer_start = function(txn) {
+	return '_xfer_start_' + txn;
+}
+
+var xfer_start_ack = function(txn) {
+	return '_xfer_start_ack_' + txn;
+}
+
+var xfer_end_ack = function(txn) {
+	return '_xfer_end_ack_' + txn;
+}
+
+var xfer_end_req = function(txn) {
+	return '_xfer_end_req_' + txn;
+}
+
+var xfer_getfile_ack = function(txn) {
+	return '_xfer_getfile_ack_' + txn;
+}
+
+var xfer_err = function(txn) {
+	return '_xfer_err_' + txn;
+}
+
+var xfer_req = function(txn) {
+	return '_xfer_req_' + txn;
+}
+
+var xfer_req_ack = function(txn) {
+	return '_xfer_ack_' + txn;
+}
+
+var next_txn = function() {
+	return ++txn_num;
+}
+
+var once = function(source, evt, tmo, cb) {
+	var timer;
+	var listener = function() {
+		if ( timer )
+			clearTimeout(timer);
+		if ( arguments.length > 0 ) {
+			var args = [undefined].concat(Array.prototype.slice.call(arguments));
+			cb.apply(this,args);
+		}
+		else
+			cb();
+	}
+	source.once(evt, listener)
+	timer = setTimeout(function() {
+		source.removeListener(evt, listener);
+		cb('timeout');
+	}, tmo);
+}
+
+var read_header = function(data) {
+	var view = new BufferView(data);
+	var v = view.readUInt8();
+	var flag = view.readUInt16();
+	var seqno = view.readUInt32();
+	var txn = view.readUInt16();
+	var c = view.readUInt8();	
+	var ext_len = view.readUInt16();
+	var ext = undefined;
+	var hdr_len = HEADER_MIN_LEN;
+	if ( ext_len > 0 ) {
+		hdr_len = HEADER_MIN_LEN + ext_len + 1;
+		var ext_type = view.readUInt8();
+		if ( ext_type === OBJ_TYPE.string )
+			ext = view.readUTF8(ext_len);
+		else if ( ext_type === OBJ_TYPE.json )
+			ext = JSON.parse(view.readUTF8(ext_len));
+		else if ( ext_type === OBJ_TYPE.blob )
+			ext = view.slice(Off.EXT, Off.EXT+ext_len);
+		else
+			//FIXME: bail out
+			comnsole.log('unknown ext type', ext_type);		
+	}
+
+	return {ver : v, flag: flag, seq: seqno, txn: txn, cmd: c, ext: ext, ext_len: ext_len, hlen: hdr_len};
+}
+
+var write_header = function(buf, flag, seqno, txn, cmd, ext) {
+	var view = new BufferView(buf);	
+	view.writeUInt8(EVP_VER);
+	view.writeUInt16(flag);
+	view.writeUInt32(seqno);
+	view.writeUInt16(txn);
+	view.writeUInt8(cmd);
+	var ext_len = 0;
+	var hdr_len = HEADER_MIN_LEN;
+	if ( ! ext ) {
+		view.writeUInt16(0);
+	}
+	else {
+		if ( ext.constructor === String ) {
+			var a = view.decodeUTF8(ext);
+			ext_len = a.byteLength;
+			view.writeUInt16(ext_len);
+			if ( ext_len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.string);					
+				view.append(a);
+				hdr_len = HEADER_MIN_LEN + ext_len + 1;
+			}
+			else
+				console.log('write_header:ext', ext, 'length=0');
+		}
+		else if ( ext instanceof Uint8Array ) {
+			ext_len = ext.byteLength;
+			view.writeUInt16(ext_len);
+			if ( ext_len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.blob);
+				view.append(ext);
+				hdr_len = HEADER_MIN_LEN + ext_len + 1;				
+			}
+			else
+				console.log('write_header:ext', ext, 'length=0');
+		}
+		else {
+			// a json object
+			var json_string = JSON.stringify(ext);
+			var a = view.decodeUTF8(json_string);
+			ext_len = a.byteLength;
+			view.writeUInt16(ext_len);
+			if ( ext_len > 0 ) {
+				view.writeUInt8(OBJ_TYPE.json);
+				view.append(a);
+				hdr_len = HEADER_MIN_LEN + ext_len + 1;				
+			}
+			else
+				console.log('write_header:ext', ext, 'length=0');
+		}
+	}
+	
+	return hdr_len;
+};
+
+module.exports = event_client;
+},{"../def/evt":2,"./buffer-view":3,"./curvews-client":4,"events":13,"machina":18,"tweetnacl":21}],6:[function(require,module,exports){
+/**
+ * Common utilities and shared data structure
+ */
+
+module.exports = {
+	// verssion constant
+    VER : 1,
+    
+    // command constants
+    CONN_SYNC : 1,		// client connection initialization
+    CONN_SYNC_ACK : 2,	// server connection sync-ack    
+    CONN_ACK : 3,		// client connection ack
+    DCONN: 4,			// client disconnect request
+    PING: 5,			// server ping
+    PING_ACK: 6,		// client ping ack
+    TERM: 7,			// server termination
+    EVT: 8,				// application event,
+    RECONN: 9			// client reconnect
+}
+},{}],7:[function(require,module,exports){
+/**
+ * long poll client socket implementation
+ */
+var events = require('events'),
+	Consts = require('./poll-common'),
+	machina = require('machina'),
+	BufferView = require('./buffer-view'),
+	util = require('util');
+
+
+const OPEN_TMO = 5000;
+const RETRY_INTERVAL = 5000;
+const WAIT_TERM_TMO = 5000;
+
+function write_header(cmd, id, data, buf) {
+	buf.reset();
+	buf.writeUInt8(Consts.VER);
+	buf.writeUInt8(cmd);
+	if ( id ) {
+		buf.writeUInt16(id);
+		if ( data )
+			buf.append(data)
+	}
+	return buf.offset;
+}
+
+function read_header(buf) {
+	var ver = buf.readUInt8();
+	var cmd = buf.readUInt8();
+	var id = undefined;
+	var data = undefined;
+	if ( buf.length() >= 4) {
+		id = buf.readUInt16();
+		if ( buf.length() > 4 )
+			data = buf.slice(buf.offset, buf.length());
+	}
+	return {ver: ver, cmd: cmd, id: id, b: data};
+}
+
+var fsm;
+function PollSocket(opts) {
+	this.url = opts.url;
+	
+	//this has to be more than two times of the server ping interval
+	this.ping_tmo = opts.ping_tmo;	
+	fsm = this.create_fsm(this);
+}
+
+util.inherits(PollSocket, events.EventEmitter);
+
+// data has to be a Uint8Array
+PollSocket.prototype.send = function(data) {
+	fsm.handle('send', data);
+}
+
+PollSocket.prototype.addEventListener = function(event, listener) {
+	this.on(event, listener);
+}
+
+PollSocket.prototype.error = function(id) {
+	console.log('error xhr ', id);
+	fsm.handle('error', id);
+}
+
+PollSocket.prototype.result = function(id, buf) {
+	var p = read_header(buf);		
+	var cmd = p.cmd;
+	var data = p.b;
+	switch ( cmd ) {
+		case Consts.CONN_SYNC_ACK:
+			fsm.handle('conn_sync_ack', id, p.id);
+			break;
+		case Consts.PING:
+			fsm.handle('ping', id, p.id);
+			break;
+		case Consts.TERM:
+			fsm.handle('term', id, p.id);
+			break;
+		case Consts.EVT:
+			fsm.handle('event', id, p.id, data);
+			break;
+		default:
+			console.log('unknown command', cmd);
+	}	
+}
+
+var xhr_id = 0;
+function create_xhr(fsm, err_cb, res_cb) {
+	fsm.prev_id = fsm.id;
+	fsm.prev_xhr = fsm.xhr;
+	fsm.id = ++xhr_id;
+	console.log('creating xhr with id', fsm.id);
+	var xhr = new XMLHttpRequest();	
+	var x_id = fsm.id;
+	xhr.addEventListener('error', function() {
+		console.log('xhr', x_id, 'error', arguments);
+		err_cb(x_id);
+	});
+	
+	xhr.onreadystatechange = function() {
+		if ( xhr.readyState == 4 ) {
+			if ( xhr.status == 200 ) {
+				var bv = new BufferView(new Uint8Array(xhr.response));
+				res_cb(x_id, bv);
+			}
+			else {
+				console.log('xhr', x_id, 'error status', xhr.status);
+				err_cb(x_id);
+			}
+		}
+	};
+	
+	xhr.responseType = "arraybuffer";
+	fsm.xhr = xhr;	
+}
+
+function xhr_send(xhr, url, buf, cmd, id, data) {
+	xhr.open('POST', url);
+	var len = write_header(cmd, id, data, buf);
+	xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+	xhr.send(buf.slice(0, len));	
+}
+
+PollSocket.prototype.create_fsm = function(socket) {
+	var buf = new BufferView(new Uint8Array(64*1024));
+	var m = new machina.Fsm({
+		initialState : "init",
+		
+		states : {
+			init : {
+				_onEnter : function() {
+					this.connected = false;
+					this.handle('restart');
+				},
+				
+				restart : function() {
+					create_xhr(this, socket.error, socket.result);
+					xhr_send(this.xhr, socket.url, buf, Consts.CONN_SYNC);
+					var self = this;
+					this.open_timer = setTimeout(function() {
+						console.log('open timeout for xhr', self.id);
+						self.xhr.abort();
+						setTimeout(function() {
+							console.log('retry connection');
+							self.handle('restart');
+						}, RETRY_INTERVAL);
+					}, OPEN_TMO);
+				},
+				
+				conn_sync_ack : function(xhr_id, reg_id) {
+					//validate this is the response we are waiting for
+					if ( xhr_id == this.id ) {
+						console.log('received conn_sync_ack with reg id', reg_id);
+						socket.id = reg_id;
+						clearTimeout(this.open_timer);
+						create_xhr(this, socket.error, socket.result);	
+						xhr_send(this.xhr, socket.url, buf, Consts.CONN_ACK, reg_id);						
+						this.transition('connected');
+					}
+					else
+						console.log('received conn_sync_ack with wrong xhr id, expected', this.id, 'incommning', xhr_id);
+				},
+				
+				error : function(xhr_id) {
+					// let open timer takes care of restart
+					// or emit an error
+				}
+			},
+			
+			connected : {
+				_onEnter: function() {
+					var self = this;
+					this.ping_timer = setTimeout(function() {
+						self.handle('tmo');
+					}, socket.ping_tmo);
+					if ( ! this.connected ) {
+						socket.emit('open', socket);
+						this.connected = true;
+					}
+				},
+				
+				tmo : function() {
+					console.log('server ping timeout');
+					this.handle('error', 'na');
+				},
+				
+				ping : function(xhr_id, reg_id) {
+					if ( xhr_id == this.id && socket.id == reg_id) {
+						console.log('received ping');
+						clearTimeout(this.ping_timer);						
+						create_xhr(this, socket.error, socket.result);	
+						xhr_send(this.xhr, socket.url, buf, Consts.PING_ACK, reg_id);
+						console.debug('sent PING_ACK for ' + reg_id);
+						var self = this;
+						this.ping_timer = setTimeout(function() {
+							self.handle('tmo');
+						}, socket.ping_tmo);
+					}
+					else
+						console.log('received ping with wrong xhr id or reg id, expected:', this.id, socket.id, 'incommning', xhr_id, reg_id);					
+				},
+				
+				send : function(data) {
+					console.debug('creating new xhr for sending');
+					create_xhr(this, socket.error, socket.result);					
+					xhr_send(this.xhr, socket.url, buf, Consts.EVT, socket.id, data);
+					clearTimeout(this.ping_timer);					
+					this.transition('wait_term');
+				},
+				
+				event : function(xhr_id, reg_id, data) {
+					if ( xhr_id == this.id && socket.id == reg_id) {
+						console.debug('received event');
+						clearTimeout(this.ping_timer);						
+						create_xhr(this, socket.error, socket.result);	
+						xhr_send(this.xhr, socket.url, buf, Consts.RECONN, reg_id);
+						console.debug('sent RECONN for ' + reg_id);
+						var self = this;
+						this.ping_timer = setTimeout(function() {
+							self.handle('tmo');
+						}, socket.ping_tmo);
+						socket.emit('message', {data: data});
+					}
+					else
+						console.log('received event with wrong xhr id or reg id, expected:', this.id, socket.id, 'incommning', xhr_id, reg_id);					
+				},				
+				
+				error : function(xhr_id) {
+					console.log('xhr error in connected state');
+					this.xhr.abort();
+					clearTimeout(this.ping_timer);
+					if ( this.connected ) {
+						this.connected = false;
+						socket.emit('close', socket);
+					}					
+				}				
+			},
+			
+			wait_term : {
+				_onEnter : function() {
+					var self = this;
+					this.wait_term_tmr = setTimeout(function() {
+						console.log('timeout waiting for term');
+						self.handle('error');
+					},WAIT_TERM_TMO); 
+				},
+								
+				term : function(xhr_id, reg_id) {
+					if ( xhr_id == this.prev_id && socket.id == reg_id) {
+						console.log('received term');
+						clearTimeout(this.wait_term_tmr);
+						this.transition('connected');
+					}
+					else
+						console.log('received term with wrong xhr id or reg id, expected:', this.prev_id, socket.id, 'incommning', xhr_id, reg_id);										
+				},
+				
+				error : function(xhr_id) {
+					console.log('xhr error in wait-term state, connected');
+					this.prev_xhr.abort();
+					this.xhr.abort();
+					if ( this.connected ) {
+						this.connected = false;
+						socket.emit('close');
+					}					
+				}
+			}
+		}
+	});
+	return m;	
+};
+PollSocket.prototype.close = function() {
+
+};
+
+module.exports = PollSocket;
+},{"./buffer-view":3,"./poll-common":6,"events":13,"machina":18,"util":17}],8:[function(require,module,exports){
+
+},{}],9:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -1793,7 +4248,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":3,"ieee754":4,"isarray":5}],3:[function(require,module,exports){
+},{"base64-js":10,"ieee754":11,"isarray":12}],10:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -1909,7 +4364,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],4:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -1995,14 +4450,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],5:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],6:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2306,7 +4761,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],7:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2488,7 +4943,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],8:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -2513,14 +4968,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],9:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],10:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -3110,2452 +5565,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":9,"_process":7,"inherits":8}],11:[function(require,module,exports){
-/**
- * Created by sontt on 8/24/15.
- */
-const Event = require('./def/evt').Event;
-
-var internals = {};
-module.exports = internals.API = function() {
-
-};
-
-internals.API.prototype.signup = function(pipe, account, cb) {
-	pipe.emit(Event.CREATE_ACCOUNT, account);
-	pipe.once(Event.CREATE_ACCOUNT_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param account: email, name, callback_link, appId (unity or bnp), g_recaptcha_response
- * @param cb
- */
-internals.API.prototype.create_account_easy = function(pipe, account, cb) {
-	pipe.emit(Event.CREATE_ACCOUNT_EASY, account);
-	pipe.once(Event.CREATE_ACCOUNT_EASY_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: password, token, privateKey, publicKey
- * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {idToken}
- */
-internals.API.prototype.set_password = function(pipe, request, cb) {
-	pipe.emit(Event.SET_PASSWORD, request);
-	pipe.once(Event.SET_PASSWORD_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: idToken, sc1, sc2, sc3
- * @param {Function} cb: function(resp){}, resp -> {rc}
- */
-internals.API.prototype.set_recovery_keys = function(pipe, request, cb) {
-	pipe.emit(Event.SSO_SET_RECOVERY_KEYS, request);
-	pipe.once(Event.SSO_SET_RECOVERY_KEYS_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: idToken
- * @param {Function} cb: function(resp) {}, resp -> {rc, keys}
- */
-internals.API.prototype.get_recovery_keys = function(pipe, request, cb) {
-	pipe.emit(Event.SSO_GET_RECOVERY_KEYS, request);
-	pipe.once(Event.SSO_GET_RECOVERY_KEYS_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: pin
- * @param cb
- * CHECK_PIN: 315, CHECK_PIN_ACK: 316,
- */
-internals.API.prototype.check_pin = function(pipe, request, cb) {
-	pipe.emit(Event.CHECK_PIN, request);
-	pipe.once(Event.CHECK_PIN_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param account: email, password, name
- * @param {Function} cb: function(resp){} resp -> {rc, idToken}
- * SSO_SIGNUP: 301, SSO_SIGNUP_ACK: 302
- */
-internals.API.prototype.sso_signup = function(pipe, account, cb) {
-	pipe.emit(Event.SSO_SIGNUP, account);
-	pipe.once(Event.SSO_SIGNUP_ACK, cb);
-};
-
-internals.API.prototype.login = function(pipe, credentials, cb) {
-	pipe.emit(Event.LOGIN, credentials);
-	pipe.once(Event.LOGIN_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param credentials: email, password, res
- * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken, idToken}
- */
-internals.API.prototype.sso_login_v2 = function(pipe, credentials, cb) {
-	pipe.emit(Event.SSO_LOGIN_V2, credentials);
-	pipe.once(Event.SSO_LOGIN_V2_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: email
- * @param cb
- * PREPARE_UPGRADE_UNITY: 313, PREPARE_UPGRADE_UNITY_ACK: 314,
- */
-internals.API.prototype.prepare_upgrade_unity = function(pipe, request, cb) {
-	pipe.emit(Event.PREPARE_UPGRADE_UNITY, request);
-	pipe.once(Event.PREPARE_UPGRADE_UNITY_ACK, cb);
-};
-
-
-/**
- *
- * @param pipe
- * @param {Object} request: idToken, res (resource of the client e.g 'web')
- * @param {Function} cb: function(resp){}, resp -> {rc, profile}, profile -> {sessionToken}
- */
-internals.API.prototype.get_session_token_v2 = function(pipe, request, cb) {
-	pipe.emit(Event.SSO_GET_SESSION_TOKEN_V2, request);
-	pipe.once(Event.SSO_GET_SESSION_TOKEN_V2_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: sessionToken, res
- * @param {Function} cb: function(resp){}, resp -> {rc, profile}; rc = 404 if token is invalid
- */
-internals.API.prototype.check_session_token = function(pipe, request, cb) {
-	pipe.emit(Event.SSO_CHECK_SESSION_TOKEN, request);
-	pipe.once(Event.SSO_CHECK_SESSION_TOKEN_ACK, cb);
-};
-
-internals.API.prototype.logout = function(pipe, cb) {
-	pipe.emit(Event.LOGOUT);
-	pipe.once(Event.LOGOUT_ACK, cb);
-};
-
-internals.API.prototype.update_profile = function(pipe, account, cb) {
-	pipe.emit(Event.UPDATE_ACCOUNT, account);
-	pipe.once(Event.UPDATE_ACCOUNT_ACK, cb);
-};
-
-internals.API.prototype.get_profile = function(pipe, request, cb) {
-	pipe.emit(Event.GET_PROFILE, request);
-	pipe.once(Event.GET_PROFILE_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: idToken
- * @param {Function} cb: function(resp){}, resp -> {rc, wallet}, wallet -> {secret}
- */
-internals.API.prototype.get_wallet_secret = function(pipe, request, cb) {
-	pipe.emit(Event.GET_WALLET_SECRET, request);
-	pipe.once(Event.GET_WALLET_SECRET_ACK, cb);
-};
-
-internals.API.prototype.send_verify_email = function(pipe, request, cb) {
-	pipe.emit(Event.SEND_VERIF_EMAIL, request);
-	pipe.once(Event.SEND_VERIF_EMAIL_ACK, cb);
-};
-
-internals.API.prototype.verify_email = function(pipe, request, cb) {
-	pipe.emit(Event.VERIFY_EMAIL, request);
-	pipe.once(Event.VERIFY_EMAIL_ACK, cb);
-};
-
-internals.API.prototype.check_email_in_use = function(pipe, request, cb) {
-	pipe.emit(Event.CHECK_EMAIL_IN_USE, request);
-	pipe.once(Event.CHECK_EMAIL_IN_USE_ACK, cb);
-};
-
-internals.API.prototype.check_phone_number_in_use = function(pipe, request, cb) {
-	pipe.emit(Event.CHECK_PHONE_NUMBER_IN_USE, request);
-	pipe.once(Event.CHECK_PHONE_NUMBER_IN_USE_ACK, cb);
-};
-
-// keys api
-internals.API.prototype.search_wallet = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_SEARCH_WALLET, criteria);
-	pipe.once(Event.KEYS_SEARCH_WALLET_ACK, cb);
-};
-
-internals.API.prototype.get_recv_money_req_by_id = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_RECV_MONEY_REQ_BY_ID, criteria);
-	pipe.once(Event.KEYS_GET_RECV_MONEY_REQ_BY_ID_ACK, cb);
-};
-
-internals.API.prototype.get_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_REQS, criteria);
-	pipe.once(Event.KEYS_GET_REQS_ACK, cb);
-};
-
-internals.API.prototype.update_wallet_balance = function(pipe, balance_info, cb) {
-	pipe.emit(Event.KEYS_UPDATE_WALLET_BALANCE, balance_info);
-	pipe.once(Event.KEYS_UPDATE_WALLET_BALANCE_ACK, cb);
-};
-
-internals.API.prototype.get_txns = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_TXN, criteria);
-	pipe.once(Event.KEYS_GET_TXN_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param criteria: transaction_id
- * @param {Function} cb: function(resp){}, resp = {rc, transaction}
- */
-internals.API.prototype.get_txn_by_id = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_TXN_BY_ID, criteria);
-	pipe.once(Event.KEYS_GET_TXN_BY_ID_ACK, cb);
-};
-
-internals.API.prototype.get_sent_txns = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_SENT_TXN, criteria);
-	pipe.once(Event.KEYS_GET_SENT_TXN_ACK, cb);
-};
-
-internals.API.prototype.get_recv_txns = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_RECV_TXN, criteria);
-	pipe.once(Event.KEYS_GET_RECV_TXN_ACK, cb);
-};
-
-internals.API.prototype.add_txn = function(pipe, txn_info, cb) {
-	pipe.emit(Event.KEYS_ADD_TXN_LOG, txn_info);
-	pipe.once(Event.KEYS_ADD_TXN_LOG_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request
- * @param {string} request.sessionToken
- * @param cb
- */
-internals.API.prototype.get_my_wallets = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_GET_MY_WALLETS, request);
-	pipe.once(Event.KEYS_GET_MY_WALLETS_ACK, cb);
-};
-
-internals.API.prototype.send_verification_sms = function(pipe, request, cb) {
-	pipe.emit(Event.SEND_VERIF_SMS, request);
-	pipe.once(Event.SEND_VERIF_SMS_ACK, cb);
-};
-
-internals.API.prototype.add_session_token_listener = function(pipe, callback) {
-	pipe.removeAllListeners(Event.SESSION_TOKEN_RECV);
-	pipe.on(Event.SESSION_TOKEN_RECV, function(response) {
-		//set_session_token(response, callback);
-	});
-};
-
-internals.API.prototype.add_session_invalid_listener = function(pipe, callback) {
-	pipe.removeAllListeners(Event.SESSION_INVALID);
-	this._on(pipe, Event.SESSION_INVALID, callback);
-};
-
-/**
- * @param: to, amount, note, bare_uid
- */
-internals.API.prototype.request_money = function(pipe, request, callback) {
-	pipe.emit(Event.KEYS_ADD_MONEY_REQ, request);
-	pipe.once(Event.KEYS_ADD_MONEY_REQ_ACK, callback);
-};
-
-internals.API.prototype.mark_sent_money_requests = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_MARK_ACCEPT_MONEY_REQ, request);
-	pipe.once(Event.KEYS_MARK_ACCEPT_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.mark_rejected_money_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_MARK_REJECTED_MONEY_REQ, criteria);
-	pipe.once(Event.KEYS_MARK_REJECTED_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.mark_cancelled_money_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_MARK_CANCELLED_MONEY_REQ, criteria);
-	pipe.once(Event.KEYS_MARK_CANCELLED_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.mark_read_money_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_MARK_READ_MONEY_REQ, criteria);
-	pipe.once(Event.KEYS_MARK_READ_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.get_roster = function(pipe, criteria, cb) {
-	pipe.emit(Event.ROS_GET, criteria);
-	pipe.once(Event.ROS_GET_ACK, cb);
-};
-
-internals.API.prototype.add_contact = function(pipe, criteria, cb) {
-	pipe.emit(Event.ROS_ADD, criteria);
-	pipe.once(Event.ROS_ADD_ACK, cb);
-};
-
-internals.API.prototype.remove_contact = function(pipe, criteria, cb) {
-	criteria.op = 3;
-	pipe.emit(Event.ROS_OP, criteria);
-	pipe.once(Event.ROS_OP_ACK, cb);
-};
-
-
-internals.API.prototype.store_wallet_data = function(pipe, request, cb) {
-	pipe.emit(Event.CL_STORE_WALLET_DATA, request);
-	pipe.once(Event.CL_STORE_WALLET_DATA_ACK, cb);
-};
-
-internals.API.prototype.restore_wallet_data = function(pipe, request, cb) {
-	pipe.emit(Event.CL_RESTORE_WALLET_DATA, request);
-	pipe.once(Event.CL_RESTORE_WALLET_DATA_ACK, cb);
-};
-
-internals.API.prototype.create_wallet = function(pipe, wallet, cb) {
-	pipe.emit(Event.KEYS_CREATE_WALLET, wallet);
-	pipe.once(Event.KEYS_CREATE_WALLET_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param request: wallet_secret, idToken, appId (safecash -> unity, bnb -> bnb)
- * @param cb: function(resp){}, resp -> {rc, wallet}, wallet -> {passphrase, currency_type, wallet_id, address, label}
- * KEYS_CREATE_UNITY_WALLET: 1028, KEYS_CREATE_UNITY_WALLET_ACK: 1528,
- */
-internals.API.prototype.create_unity_wallet = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_CREATE_UNITY_WALLET, request);
-	pipe.once(Event.KEYS_CREATE_UNITY_WALLET_ACK, cb);
-};
-
-internals.API.prototype.add_wallet_address = function(pipe, addr_info, cb) {
-	pipe.emit(Event.KEYS_ADD_WALLET_ADDRESS, addr_info);
-	pipe.once(Event.KEYS_ADD_WALLET_ADDRESS_ACK, cb);
-};
-
-internals.API.prototype.create_wallet_and_address = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_CREATE_WALLET_AND_ADDRESS, request);
-	pipe.once(Event.KEYS_CREATE_WALLET_AND_ADDRESS_ACK, cb);
-};
-
-internals.API.prototype.get_txns_by_contact = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_TXN_BY_CONTACT, criteria);
-	pipe.once(Event.KEYS_GET_TXN_BY_CONTACT_ACK, cb);
-};
-
-internals.API.prototype.get_money_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_RECV_MONEY_REQ, criteria);
-	pipe.once(Event.KEYS_GET_RECV_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.get_sent_money_requests = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_SENT_MONEY_REQ, criteria);
-	pipe.once(Event.KEYS_GET_SENT_MONEY_REQ_ACK, cb);
-};
-
-internals.API.prototype.get_wallets_by_email = function(pipe, criteria, cb) {
-	pipe.emit(Event.KEYS_GET_WALLET_BY_EMAIL, criteria);
-	pipe.once(Event.KEYS_GET_WALLET_BY_EMAIL_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: from_address, to_address, amount, message
- * @param {Function} cb: function(resp){}, where resp -> {rc, transaction}, transaction -> {txid, rawtx}
- * const: KEYS_CREATE_USN_RAW_TXN: 1031, KEYS_CREATE_USN_RAW_TXN_ACK: 1032,
- */
-internals.API.prototype.create_unsigned_raw_txn = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_CREATE_USN_RAW_TXN, request);
-	pipe.once(Event.KEYS_CREATE_USN_RAW_TXN_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: transaction_id
- * @param {Function} cb: function(resp){}, where resp -> {rc, transaction}, transaction -> data from blockchain
- * const: KEYS_GET_TXN_DETAILS: 1033, KEYS_GET_TXN_DETAILS_ACK: 1034,
- */
-internals.API.prototype.get_txn_details = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_GET_TXN_DETAILS, request);
-	pipe.once(Event.KEYS_GET_TXN_DETAILS_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: {}
- * @param {Function} cb: function(resp){}, where resp -> {rc, balance}
- * const: KEYS_GET_BALANCE: 1035, KEYS_GET_BALANCE_ACK: 1036,
- */
-internals.API.prototype.get_balance = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_GET_BALANCE, request);
-	pipe.once(Event.KEYS_GET_BALANCE_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: idToken, sessionToken, domains (array of allowd domain), amount (Unity unit)
- * @param {Function} cb: function(resp){}, where resp -> {rc}
- * const: KEYS_FOUNTAIN_ENABLE: 1045, KEYS_FOUNTAIN_ENABLE_ACK: 1046,
- */
-internals.API.prototype.enable_fountain = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_FOUNTAIN_ENABLE, request);
-	pipe.once(Event.KEYS_FOUNTAIN_ENABLE_ACK, cb);
-};
-
-/**
- * @param pipe
- * @param {Object} request: sessionToken, fountainId, {Object} settings -> {amount, domains}
- * @param {Function} cb: function(resp) {}, where resp -> {rc}
- * const: KEYS_FOUNTAIN_UPDATE: 1051, KEYS_FOUNTAIN_UPDATE_ACK: 1052,
- */
-internals.API.prototype.update_fountain = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_FOUNTAIN_UPDATE, request);
-	pipe.once(Event.KEYS_FOUNTAIN_UPDATE_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: fountainId
- * @param {Function} cb: function(resp){}, where resp -> {rc}
- * const: KEYS_FOUNTAIN_DISABLE: 1047, KEYS_FOUNTAIN_DISABLE_ACK: 1048,
- */
-internals.API.prototype.disable_fountain = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_FOUNTAIN_DISABLE, request);
-	pipe.once(Event.KEYS_FOUNTAIN_DISABLE_ACK, cb);
-};
-
-/**
- *
- * @param pipe
- * @param {Object} request: {}
- * @param {Function} cb: function(resp){}, where resp -> {rc, fountain}
- * const: KEYS_FOUNTAIN_MY: 1049, KEYS_FOUNTAIN_MY_ACK: 1050,
- */
-internals.API.prototype.get_my_fountain = function(pipe, request, cb) {
-	pipe.emit(Event.KEYS_FOUNTAIN_MY, request);
-	pipe.once(Event.KEYS_FOUNTAIN_MY_ACK, cb);
-};
-
-internals.API.prototype.admin_get_signup_daily_stats = function(pipe, criteria, cb) {
-	pipe.emit(Event.ADMIN_GET_SIGNUP_DAILY_STATS, criteria);
-	pipe.once(Event.ADMIN_GET_SIGNUP_DAILY_STATS_ACK, cb);
-};
-
-internals.API.prototype._on = function(pipe, ev, cb) {
-	// register for the event
-	var listener;
-	if (ev && cb) {
-		listener = function() {
-			console.log('Andaman resp received for  - ', ev, ' resp ', JSON.stringify(arguments));
-			// remove timer
-			if (arguments.length > 0) {
-				cb.apply(this, arguments);
-			} else {
-				cb();
-			}
-		};
-
-		pipe.on(ev, listener);
-	}
-};
-
-},{"./def/evt":12}],12:[function(require,module,exports){
-const Event = {
-    //AUTH
-    RESTORE_SESSION: 100,
-    LOGIN: 101,
-    LOGOUT: 102,
-    CREATE_ACCOUNT: 103,
-    UPDATE_ACCOUNT: 104,
-    UPDATE_PASSWORD: 105,
-    RESET_PASSWORD: 106,
-    SEARCH_USERS: 107,
-    GET_USERS_BY_UID: 108,
-    UPLOAD_PROFILE_PIC: 109,
-    UPLOAD_FILE_XFER: 110,
-    VALIDATE_SERVICE_TICKET: 112,
-    VALIDATE_SESSION_COOKIE: 113,
-    USER_LOCK: 114,
-    USER_UNLOCK: 115,
-    SEND_VERIF_EMAIL: 116,
-    VERIFY_EMAIL: 117,
-    SEND_VERIF_SMS: 118,
-    VERIFY_PHONE: 119,
-    SET_PIN: 120,
-    CHANGE_PIN: 121,
-    GET_CONTACT_DETAIL_BY_USERNAME: 122,
-    GET_CONTACT_DETAIL_BY_EMAIL: 123,
-    CREATE_ACCOUNT_EASY: 128,
-    SET_PASSWORD: 129,
-    CREATE_ACCOUNT_EASY_ACK: 158,
-    SET_PASSWORD_ACK: 159,
-
-    SSO_SIGNUP: 301,
-    SSO_SIGNUP_ACK: 302,
-    SSO_LOGIN: 303,
-    SSO_LOGIN_ACK: 304,
-    SSO_GET_SESSION_TOKEN: 305,
-    SSO_GET_SESSION_TOKEN_ACK: 306,
-    GET_PROFILE: 307,
-    GET_PROFILE_ACK: 308,
-    SSO_CHECK_SESSION_TOKEN: 311,
-    SSO_CHECK_SESSION_TOKEN_ACK: 312,
-    PREPARE_UPGRADE_UNITY: 313,
-    PREPARE_UPGRADE_UNITY_ACK: 314,
-    SSO_SET_PASSWORD_V2: 317,
-    SSO_SET_PASSWORD_V2_ACK: 318,
-    SSO_SET_RECOVERY_KEYS: 319,
-    SSO_SET_RECOVERY_KEYS_ACK: 320,
-    SSO_GET_RECOVERY_KEYS: 321,
-    SSO_GET_RECOVERY_KEYS_ACK: 322,
-    SSO_LOGIN_V2: 323,
-    SSO_LOGIN_V2_ACK: 324,
-    SSO_RESET_PASSWORD: 325,
-    SSO_RESET_PASSWORD_ACK: 326,
-    SSO_RESET_PASSWORD_MAIL: 327,
-    SSO_RESET_PASSWORD_MAIL_ACK: 328,
-    SSO_GET_KEYPAIR: 329,
-    SSO_GET_KEYPAIR_ACK: 330,
-    SSO_CHANGE_PASSWORD: 331,
-    SSO_CHANGE_PASSWORD_ACK: 332,
-    SSO_GET_SESSION_TOKEN_V2: 333,
-    SSO_GET_SESSION_TOKEN_V2_ACK: 334,
-    START_TFA_CODE: 335,
-    START_TFA_CODE_ACK: 336,
-    CONFIRM_TFA_CODE: 337,
-    CONFIRM_TFA_CODE_ACK: 338,
-    TURN_OFF_TFA: 339,
-    TURN_OFF_TFA_ACK: 340,
-    CHECK_TFA_CODE: 341,
-    CHECK_TFA_CODE_ACK: 342,
-
-
-    KEYS_CREATE_FLASH_WALLET: 1037,
-    KEYS_CREATE_FLASH_WALLET_ACK: 1038,
-
-    CHECK_RESET_PW_TOKEN: 1105,
-
-    ADMIN_UPDT_PASSWORD_OF_USER: 1102,
-    ADMIN_SEND_MAIL: 1103,
-    ADMIN_GET_RESET_PW_TOKEN: 1104,
-    REQUEST_RESET_PW: 1106,
-    ADMIN_GET_RESET_PW_REQ: 1107,
-    ADMIN_UPDT_RESET_PW_REQ: 1108,
-    ADMIN_LOCK: 1109,
-    ADMIN_UNLOCK: 1110,
-    ADMIN_GET_GENERAL_STATS: 1111,
-    UPGRADE_PASSWORD_V1_V2: 1112,
-    ADMIN_GET_WALLET_DAILY_STATS: 1113,
-    ADMIN_GET_WALLET_BL_SNAPSHOT: 1114,
-    ADMIN_GET_TX_DAILY_STATS: 1115,
-    ADMIN_SEARCH_USERS: 1116,
-    ADMIN_SET_WALLET_CFG: 1117,
-
-    RESTORE_SESSION_ACK: 130,
-    LOGIN_ACK: 131,
-    LOGOUT_ACK: 132,
-    CREATE_ACCOUNT_ACK: 133,
-    UPDATE_ACCOUNT_ACK: 134,
-    UPDATE_PASSWORD_ACK: 135,
-    RESET_PASSWORD_ACK: 136,
-    SEARCH_USERS_ACK: 137,
-    GET_USERS_BY_UID_ACK: 138,
-    UPLOAD_PROFILE_PIC_ACK: 139,
-    UPLOAD_FILE_XFER_ACK: 140,
-    VALIDATE_SERVICE_TICKET_ACK: 142,
-    VALIDATE_SESSION_COOKIE_ACK: 143,
-    USER_LOCK_ACK: 144,
-    USER_UNLOCK_ACK: 145,
-    SEND_VERIF_EMAIL_ACK: 146,
-    VERIFY_EMAIL_ACK: 147,
-    SEND_VERIF_SMS_ACK: 148,
-    VERIFY_PHONE_ACK: 149,
-    SET_PIN_ACK: 150,
-    CHANGE_PIN_ACK: 151,
-    GET_CONTACT_DETAIL_BY_USERNAME_ACK: 152,
-    GET_CONTACT_DETAIL_BY_EMAIL_ACK: 153,
-
-    KEYS_CREATE_UNITY_WALLET: 1028,
-    KEYS_CREATE_UNITY_WALLET_ACK: 1528,
-
-    CHECK_RESET_PW_TOKEN_ACK: 1605,
-
-    ADMIN_UPDT_PASSWORD_OF_USER_ACK: 1602,
-    ADMIN_SEND_MAIL_ACK: 1603,
-    ADMIN_GET_RESET_PW_TOKEN_ACK: 1604,
-    REQUEST_RESET_PW_ACK: 1606,
-    ADMIN_GET_RESET_PW_REQ_ACK: 1607,
-    ADMIN_UPDT_RESET_PW_REQ_ACK: 1608,
-    ADMIN_LOCK_ACK: 1609,
-    ADMIN_UNLOCK_ACK: 1610,
-    ADMIN_GET_GENERAL_STATS_ACK: 1611,
-    UPGRADE_PASSWORD_V1_V2_ACK: 1612,
-    ADMIN_GET_WALLET_DAILY_STATS_ACK: 1613,
-    ADMIN_GET_WALLET_BL_SNAPSHOT_ACK: 1614,
-    ADMIN_GET_TX_DAILY_STATS_ACK: 1615,
-    ADMIN_SEARCH_USERS_ACK: 1616,
-    ADMIN_SET_WALLET_CFG_ACK: 1617,
-
-    SESSION_INVALID: 141,
-    SESSION_TOKEN_RECV: 200,
-
-    VERIFY_EMAIL_RECV: 1742,
-
-    /* Begin - nlttoan added for SC-149: Speed-up log-in */
-    CL_STORE_WALLET_DATA: 1300,
-    CL_STORE_WALLET_DATA_ACK: 1301,
-    CL_RESTORE_WALLET_DATA: 1302,
-    CL_RESTORE_WALLET_DATA_ACK: 1303,
-    /* End */
-
-    GET_WALLET_SECRET: 309,
-    GET_WALLET_SECRET_ACK: 310,
-    CHECK_PIN: 315,
-    CHECK_PIN_ACK: 316,
-
-    //KEYS OPERATIONS
-    KEYS_CREATE_WALLET: 1000,
-    KEYS_ADD_WALLET_ADDRESS: 1001,
-    KEYS_SEARCH_WALLET: 1002,
-    KEYS_ADD_WALLET_KEYS: 1003,
-    KEYS_UPDT_WALLET_KEYS: 1003,
-    KEYS_ACTIVATE_WALLET: 1004,
-    KEYS_DEACTIVATE_WALLET: 1005,
-    KEYS_ADD_WALLET_CONTACT: 1006,
-    KEYS_REM_WALLET_CONTACT: 1007,
-    KEYS_GET_MY_WALLETS: 1008,
-    KEYS_UPDT_WALLET_ADDRESS: 1009,
-    KEYS_GET_WALLET_BY_EMAIL: 1010,
-    KEYS_ADD_TXN_LOG: 1011,
-    KEYS_GET_SENT_TXN: 1012,
-    KEYS_GET_RECV_TXN: 1013,
-
-    KEYS_ADD_MONEY_REQ: 1014,
-    KEYS_GET_SENT_MONEY_REQ: 1015,
-    KEYS_GET_RECV_MONEY_REQ: 1016,
-    KEYS_MARK_SENT_MONEY_REQ: 1017,
-    KEYS_MARK_REJECTED_MONEY_REQ: 1018,
-    KEYS_MARK_CANCELLED_MONEY_REQ: 1019,
-    KEYS_MARK_READ_MONEY_REQ: 1020,
-
-    KEYS_GET_WALLET_BY_USERNAME: 1021,
-    KEYS_GET_RECV_MONEY_REQ_BY_ID: 1022,
-    KEYS_UPDATE_WALLET_BALANCE: 1023,
-
-
-    KEYS_GET_TXN: 1024,
-    KEYS_UPDATE_TXN_LOG: 1025,
-    KEYS_GET_REQS: 1026,
-    KEYS_GET_TXN_BY_CONTACT: 1027,
-    KEYS_GET_WALLET_BALANCE: 1028,
-    KEYS_CREATE_WALLET_AND_ADDRESS: 1029,
-    KEYS_CREATE_USN_RAW_TXN: 1031,
-    KEYS_CREATE_USN_RAW_TXN_ACK: 1032,
-    KEYS_GET_TXN_DETAILS: 1033,
-    KEYS_GET_TXN_DETAILS_ACK: 1034,
-    KEYS_GET_BALANCE: 1035,
-    KEYS_GET_BALANCE_ACK: 1036,
-
-    KEYS_GET_LIST_MESSAGE: 1042,
-    KEYS_GET_MESSAGE_BY_ID: 1043,
-    KEYS_MARK_MESSAGE_AS_READ: 1044,
-    KEYS_MARK_MESSAGE_AS_DELETED: 1045,
-    KEYS_FOUNTAIN_ENABLE: 1045,
-    KEYS_FOUNTAIN_ENABLE_ACK: 1046,
-    KEYS_FOUNTAIN_DISABLE: 1047,
-    KEYS_FOUNTAIN_DISABLE_ACK: 1048,
-    KEYS_FOUNTAIN_MY: 1049,
-    KEYS_FOUNTAIN_MY_ACK: 1050,
-    KEYS_FOUNTAIN_UPDATE: 1051,
-    KEYS_FOUNTAIN_UPDATE_ACK: 1052,
-
-    ADMIN_GET_WALLETS_OF_USER: 1100,
-    ADMIN_UPDT_WALLETS_OF_USER: 1101,
-
-
-    //KEYS OPERATIONS ACK
-    KEYS_CREATE_WALLET_ACK: 1500,
-    KEYS_ADD_WALLET_ADDRESS_ACK: 1501,
-    KEYS_SEARCH_WALLET_ACK: 1502,
-    KEYS_ADD_WALLET_KEYS_ACK: 1503,
-    KEYS_UPDT_WALLET_KEYS_ACK: 1503,
-    KEYS_ACTIVATE_WALLET_ACK: 1504,
-    KEYS_DEACTIVATE_WALLET_ACK: 1505,
-    KEYS_ADD_CONTACT_ACK: 1506,
-    KEYS_REM_CONTACT_ACK: 1507,
-    KEYS_GET_MY_WALLETS_ACK: 1508,
-    KEYS_UPDT_WALLET_ADDRESS_ACK: 1509,
-    KEYS_GET_WALLET_BY_EMAIL_ACK: 1510,
-    KEYS_ADD_TXN_LOG_ACK: 1511,
-    KEYS_GET_SENT_TXN_ACK: 1512,
-    KEYS_GET_RECV_TXN_ACK: 1513,
-
-    KEYS_ADD_MONEY_REQ_ACK: 1514,
-    KEYS_GET_SENT_MONEY_REQ_ACK: 1515,
-    KEYS_GET_RECV_MONEY_REQ_ACK: 1516,
-    KEYS_MARK_SENT_MONEY_REQ_ACK: 1517,
-    KEYS_MARK_REJECTED_MONEY_REQ_ACK: 1518,
-    KEYS_MARK_CANCELLED_MONEY_REQ_ACK: 1519,
-    KEYS_MARK_READ_MONEY_REQ_ACK: 1520,
-
-    KEYS_GET_WALLET_BY_USERNAME_ACK: 1521,
-    KEYS_GET_RECV_MONEY_REQ_BY_ID_ACK: 1522,
-    KEYS_UPDATE_WALLET_BALANCE_ACK: 1523,
-
-    KEYS_GET_TXN_ACK: 1524,
-    KEYS_UPDATE_TXN_LOG_ACK: 1525,
-    KEYS_GET_REQS_ACK: 1526,
-    KEYS_GET_TXN_BY_CONTACT_ACK: 1527,
-
-    KEYS_GET_LIST_MESSAGE_ACK: 1542,
-    KEYS_GET_MESSAGE_BY_ID_ACK: 1543,
-    KEYS_MARK_MESSAGE_AS_READ_ACK: 1544,
-    KEYS_MARK_MESSAGE_AS_DELETED_ACK: 1545,
-
-    ADMIN_GET_WALLETS_OF_USER_ACK: 1600,
-    ADMIN_UPDT_WALLETS_OF_USER_ACK: 1601,
-
-
-    //KEYS OPERATIONS RECV
-    KEYS_ADD_TXN_LOG_RECV: 1711,
-    KEYS_UPDATE_TXN_LOG_RECV: 1712,
-    KEYS_ADD_MONEY_REQ_RECV: 1714,
-
-    KEYS_MARK_MONEY_REQ_RECV: 1719,
-    KEYS_MARK_READ_MONEY_REQ_RECV: 1720,
-
-    KEYS_ADD_MESSAGE_RECV: 1741,
-    KEYS_CHECK_SESSION: 141,
-    KEYS_GET_TXN_BY_ID: 1030,
-    KEYS_GET_TXN_BY_ID_ACK: 1530
-
-};
-
-const Err = {
-    unknown: 1,
-    ok: 2,
-    again: 3
-};
-
-const Cmd = {
-    open: 1,
-    ping: 2,
-    close: 3,
-    event: 4,
-    join: 5,
-    leave: 6,
-    xfer_start: 7,
-    xfer: 8,
-    xfer_err: 9,
-    xfer_end: 10,
-    get_file: 11,
-};
-
-const OBJ_TYPE = {
-    string: 0,
-    blob: 1,
-    json: 2
-};
-
-/**
- ********************************************
- * event pipe header structure
- * All fields are network byte order. The payload includes a
- * 1. header, 2. extended header, and 3. event sections.
- *
- * version  : uint8_t
- * flag     : uint16_t
- * seqno    : uint32_t
- * txn      : uint16_t
- * cmd      : uint8_t
- * ext_len  : uint16_t ; length of the extended header
- * ext_type : uint8_t : extended header type
- *                      0: string, 1. binary, 2. json stringify object
- * ext      : variable length ; extended header data
- *
- * event structure
- * event    : uint16_t : the event enumeration
- * data_len : uint32_t : the length of the data
- * data_type: uint8_t: the object type of the data payload
- * data     : the data
- */
-
-// minimum header length
-const HEADER_MIN_LEN = 12;
-
-const Off = {
-    FLAG: 1,
-    SEQNO: 3,
-    TXN: 7,
-    CMD: 9,
-    EXT_LEN: 10,
-    EXT_TYPE: 12,
-    EXT: 13
-};
-
-
-const FLAG_ACK = 0x01;
-
-module.exports = {
-    EVP_VER: 1,
-    EVP_PATH: '/_evp',
-    DEFAULT_NSP: null,
-    Err: Err,
-    Cmd: Cmd,
-    HEADER_MIN_LEN: HEADER_MIN_LEN,
-    Off: Off,
-    FLAG_ACK: FLAG_ACK,
-    OBJ_TYPE: OBJ_TYPE,
-    Event: Event
-}
-},{}],13:[function(require,module,exports){
-/**
- * Helper class for a array buffer backing usually by an Uint8Array
- */
-var utf8 = require('tweetnacl-util');
-
-function BufferView(b) {
-	if (!b instanceof Uint8Array)
-		throw 'backing buffer needs to be Uint8Array';
-	this.view = new DataView(b.buffer, b.byteOffset, b.byteLength);
-	this.offset = 0;
-	this.mark = 0;
-	this.buffer = b;
-}
-
-BufferView.prototype.readUInt8 = function(offset) {
-	if (!offset) {
-		var res = this.view.getUint8(this.offset, false);
-		this.offset += 1;
-		return res;
-	} else
-		return this.view.getUint8(offset, false);
-}
-
-BufferView.prototype.readInt8 = function(offset) {
-	if (!offset) {
-		var res = this.view.getInt8(this.offset, false);
-		this.offset += 1;
-		return res;
-	} else
-		return this.view.getInt8(offset, false);
-}
-
-BufferView.prototype.readUInt16 = function(offset) {
-	if (!offset) {
-		var res = this.view.getUint16(this.offset, false);
-		this.offset += 2;
-		return res;
-	} else
-		return this.view.getUint16(offset, false);
-}
-
-BufferView.prototype.readUInt32 = function(offset) {
-	if (!offset) {
-		var res = this.view.getUint32(this.offset, false);
-		this.offset += 4;
-		return res;
-	} else
-		return this.view.getUint32(offset, false);
-}
-
-BufferView.prototype.readInt32 = function(offset) {
-	if (!offset) {
-		var res = this.view.getInt32(this.offset, false);
-		this.offset += 4;
-		return res;
-	} else
-		return this.view.getInt32(offset, false);
-}
-
-BufferView.prototype.reset = function() {
-	this.offset = this.mark;
-}
-
-BufferView.prototype.rewind = function() {
-	this.offset = this.mark = 0;
-}
-
-BufferView.prototype.set = function(offset) {
-	this.offset = offset;
-}
-
-BufferView.prototype.skip = function(s) {
-	this.offset += s;
-}
-
-BufferView.prototype.mark = function() {
-	this.mark = offset;
-}
-
-BufferView.prototype.slice = function(start, end) {
-	if (!end)
-		end = this.buffer.byteLength;
-	var res = this.buffer.subarray(start, end);
-	return res;
-}
-
-BufferView.prototype.writeUInt8 = function(v, offset) {
-	if (!offset) {
-		this.view.setUint8(this.offset, v)
-		this.offset += 1;
-	} else
-		this.view.setUint8(offset, v)
-}
-
-BufferView.prototype.writeInt8 = function(v, offset) {
-	if (!offset) {
-		this.view.setInt8(this.offset, v)
-		this.offset += 1;
-	} else
-		this.view.setInt8(offset, v)
-}
-
-BufferView.prototype.writeUInt16 = function(v, offset) {
-	if (!offset) {
-		this.view.setUint16(this.offset, v, false)
-		this.offset += 2;
-	} else
-		this.view.setUint16(offset, v, false)
-}
-
-BufferView.prototype.writeUInt32 = function(v, offset) {
-	if (!offset) {
-		this.view.setUint32(this.offset, v, false)
-		this.offset += 4;
-	} else
-		this.view.setUint32(offset, v, false)
-}
-
-BufferView.prototype.writeInt32 = function(v, offset) {
-	if (!offset) {
-		this.view.setInt32(this.offset, v, false)
-		this.offset += 4;
-	} else
-		this.view.setInt32(offset, v, false)
-}
-
-/**
- * estimate the UTF8 array
- * @param string
- * @returns the encoded UTF8 array
- */
-BufferView.prototype.decodeUTF8 = function(string) {
-	var a = utf8.decodeUTF8(string);
-	return a;
-}
-
-BufferView.prototype.writeUTF8 = function(string, offset) {
-	var a = utf8.decodeUTF8(string);
-	var pos = (offset ? offset : this.offset);
-	if (pos + a.byteLength > this.buffer.byteLength)
-		throw 'range error';
-
-	for (var i = 0; i < a.byteLength; i++)
-		this.buffer[pos + i] = a[i];
-	if (!offset)
-		this.offset += a.byteLength;
-
-	return a.byteLength;
-}
-
-BufferView.prototype.append = function(buf, offset) {
-	if (!buf instanceof Uint8Array)
-		throw 'buffer needs to be Uint8Array';
-	var pos = (offset ? offset : this.offset)
-
-	if (pos + buf.byteLength > this.buffer.byteLength)
-		throw 'range error';
-
-	this.buffer.set(buf, pos);
-	if (!offset)
-		this.offset += buf.byteLength;
-}
-
-BufferView.prototype.readUTF8 = function(length, offset) {
-	var pos = (offset ? offset : this.offset);
-	if (pos + length > this.buffer.byteLength)
-		throw 'range error';
-	var sub = this.buffer.subarray(pos, pos + length);
-	var res = utf8.encodeUTF8(sub);
-	if (!offset)
-		this.offset += length;
-	return res;
-}
-
-BufferView.prototype.fill = function(v, start, end) {
-	var use_offset = false;
-	if (!start) {
-		start = 0;
-		end = this.buffer.byteLength;
-		use_offset = true;
-	}
-
-	for (var i = start; i < end; i++)
-		this.buffer[i] = v;
-	if (use_offset)
-		this.offset += (end - start);
-}
-
-BufferView.prototype.length = function() {
-	return this.buffer.byteLength;
-}
-
-BufferView.prototype.toString = function() {
-	return 'offset:' + this.offset + 'buf.length:' + this.buffer.byteLength;
-}
-
-module.exports = BufferView;
-},{"tweetnacl-util":20}],14:[function(require,module,exports){
-/**
- * A secure client implementing CurveZMQ on top of websocket
- */
-var events = require('events'),
-	machina = require('machina'),
-	nacl = require('tweetnacl'),
-	naclUtil = require('tweetnacl-util'),
-	BufferView = require('./buffer-view'),
-	PollSocket = require('./poll-socket'),
-	util = require('util');
-
-function CurveWebSocket(opts) {
-	this.srv_pub_p = naclUtil.decodeBase64(opts.server_publicKey);
-	var keys = nacl.box.keyPair();
-	this.pub_t = keys.publicKey;
-	this.priv_t = keys.secretKey;
-	
-	// for the time being we have no permanent
-	this.pub_p = this.pub_t;
-	this.priv_p = this.priv_t;
-	this.message_buf = new BufferView(new Uint8Array(64*1024));
-	this.fsm = this._fsm(opts);
-}
-
-util.inherits(CurveWebSocket, events.EventEmitter);
-
-CurveWebSocket.prototype.encode_hello = function() {
-	var pkt_hello = new BufferView(new Uint8Array(215+16));
-	pkt_hello.fill(0);
-	pkt_hello.rewind();
-	pkt_hello.writeUTF8('HELLO');
-	pkt_hello.writeUInt8(1);
-	pkt_hello.writeUInt8(0);
-	pkt_hello.fill(0, pkt_hello.offset, pkt_hello.offset+72);
-	pkt_hello.skip(72);
-	pkt_hello.append(this.pub_t);
-
-	var nonce = gen_nonce('CurveZMQHELLO---', 8);
-	var zeros = new Uint8Array(64);
-	var box = nacl.box(zeros, nonce, this.srv_pub_p, this.priv_t);
-	pkt_hello.append(nonce);
-	pkt_hello.append(new Uint8Array(box.buffer));
-	
-	return {pkt: pkt_hello.buffer, s_nonce: nonce.subarray(16)};
-}
-
-CurveWebSocket.prototype.decode_welcome = function(pkt) {
-	if ( pkt.length() !== (183+32) ) 
-		return {err: 'wrong length'};
-	
-	var cmd = pkt.readUTF8(7);
-	if ( cmd !== 'WELCOME' )
-		return { err: 'wrong cmd' };	
-	
-	var welcome_nonce = pkt.slice(pkt.offset, pkt.offset+24);
-	pkt.skip(24);
-	var welcome = nacl.box.open(pkt.slice(pkt.offset+16), welcome_nonce, this.srv_pub_p, this.priv_t);
-	if ( ! welcome )
-		return {err : 'authentication fails'};
-	var srv_pub_t = welcome.subarray(0,32);
-	
-	var cookie = welcome.subarray(32);
-	return {c:cookie, sk: srv_pub_t};
-}
-
-CurveWebSocket.prototype.decode_ready = function(pkt) {
-	if ( pkt.length() < 46 ) 
-		return {err: 'wrong length'};
-	
-	var cmd = pkt.readUTF8(5);
-	if ( cmd !== 'READY' )
-		return { err: 'wrong cmd' };
-	
-	var ready_nonce = pkt.slice(pkt.offset, pkt.offset+24);
-	pkt.skip(24);
-		
-	var ready = nacl.box.open(pkt.slice(pkt.offset+16), ready_nonce, this.srv_pub_t, this.priv_t);
-	if ( ! ready )
-		return {err : 'authentication fails'};
-	// no need to check meta data for the time being
-	return {s_nonce: ready_nonce.subarray(16)};
-}
-
-CurveWebSocket.prototype.send = function(data) {
-	increment_nonce(this.fsm.short_nonce);
-	var msg = this.encode_message(data, this.message_buf, this.fsm.short_nonce);
-	this.ws.send(msg.pkt);
-}
-
-CurveWebSocket.prototype.close = function() {
-	if ( this.fsm.ws )
-		this.fsm.ws.close();
-}
-
-CurveWebSocket.prototype.encode_message = function(payload, pkt_message, short_nonce) {
-	pkt_message.rewind();
-	pkt_message.writeUTF8('MESSAGE');
-	
-	var mark = pkt_message.offset;
-	pkt_message.writeUTF8('CurveZMQMESSAGE-');
-	pkt_message.append(short_nonce);
-	var message_nonce = pkt_message.slice(mark, pkt_message.offset);
-	
-	mark = pkt_message.offset;	
-	pkt_message.append(payload);
-	
-	var box = nacl.box(pkt_message.slice(mark, pkt_message.offset), message_nonce, this.srv_pub_t, this.priv_t);
-	var b = new Uint8Array(box.buffer);
-	pkt_message.append(b, mark);
-	pkt_message.set(mark+b.byteLength);
-	return {pkt: pkt_message.buffer.subarray(0, pkt_message.offset) };	
-}
-
-CurveWebSocket.prototype.decode_message = function(pkt, short_nonce) {
-	if ( pkt.length() < 49 ) 
-		return {err: 'wrong length'};
-		
-	var cmd = pkt.readUTF8(7);
-	if ( cmd !== 'MESSAGE' )
-		return { err: 'wrong cmd' };
-		
-	var message_nonce = pkt.slice(pkt.offset, pkt.offset+24);
-	pkt.skip(24);
-	
-	var expected_nonce = new BufferView(new Uint8Array(24));
-	expected_nonce.writeUTF8('CurveZMQMESSAGE-');
-	expected_nonce.append(short_nonce);
-	
-	var err = comp(expected_nonce.buffer, message_nonce);
-	if ( err )
-		return {err: 'wrong nonce'};
-	var message = nacl.box.open(pkt.slice(pkt.offset+16), message_nonce, this.srv_pub_t, this.priv_t);
-	if ( ! message )
-		return {err : 'authentication fails'};
-	
-	return {data: message};
-}
-
-CurveWebSocket.prototype.encode_initiate = function(cookie, short_nonce) {
-	var vouch = new BufferView(new Uint8Array(120));
-	var vouch_nonce = gen_nonce('VOUCH---', 16);
-	vouch.append(vouch_nonce);
-	vouch.append(this.pub_t);
-	vouch.append(this.srv_pub_p);
-	var vouch_box = nacl.box(vouch.slice(24, 24+64), vouch_nonce, this.srv_pub_t, this.priv_p);
-	vouch.append(new Uint8Array(vouch_box.buffer), 24);
-	
-	var len = 8+cookie.byteLength+24+32+vouch.length()+32;
-	var pkt_initiate = new BufferView(new Uint8Array(len));
-	pkt_initiate.writeUTF8('INITIATE');
-	pkt_initiate.append(cookie);
-	var mark = pkt_initiate.offset;
-	pkt_initiate.writeUTF8('CurveZMQINITIATE');
-	pkt_initiate.append(short_nonce);
-	var initiate_nonce = pkt_initiate.slice(mark, pkt_initiate.offset);
-	mark = pkt_initiate.offset;	
-	pkt_initiate.append(this.pub_p);
-	pkt_initiate.append(vouch.buffer);
-	var init_box = nacl.box(pkt_initiate.slice(mark, pkt_initiate.offset), initiate_nonce, this.srv_pub_t, this.priv_t);
-	pkt_initiate.append(new Uint8Array(init_box.buffer), mark);
-
-	return pkt_initiate.buffer;
-}
-
-CurveWebSocket.prototype._fsm = function(opts) {
-	var owner = this;
-	var m = new machina.Fsm({
-		initialState : "init",
-
-		states : {
-			init : {
-				_onEnter : function() {
-					if ( opts.poll ) {
-						this.ws = new PollSocket(opts);
-					}
-					else {
-						this.ws = new WebSocket(opts.url);
-						this.ws.binaryType = "arraybuffer";						
-					}
-					var self = this;
-					this.ws.addEventListener('open', function() {
-						console.log('connected websocket with', opts.url);
-						self.ws.addEventListener('message', function(data) {
-							self.handle('data', new BufferView(new Uint8Array(data.data)));
-						});
-						self.ws.addEventListener('close', function() {
-							console.log('backing ws closed', self.ws.readyState);							
-							owner.emit('close');
-						});
-						self.ws.addEventListener('error', function() {
-							console.log('backing ws error', self.ws.readyState);
-							owner.emit('error');
-						});
-						self.transition('hello');
-					});
-				}
-			},
-			
-			hello : {
-				_onEnter : function() {
-					var hello = owner.encode_hello();
-					this.short_nonce = hello.s_nonce;
-					console.log('sending hello');
-				    this.ws.send(hello.pkt);
-				    this.transition('wait_welcome');
-				}				
-			},
-			
-			wait_welcome : {
-				data : function(buffer) {
-					var welcome = owner.decode_welcome(buffer);
-					if ( ! welcome.err ) {
-						owner.srv_pub_t = welcome.sk;
-						increment_nonce(this.short_nonce);
-						var pkt = owner.encode_initiate(welcome.c, this.short_nonce);
-						console.log('received welcome, sennding initiate');
-						this.ws.send(pkt);
-						this.transition('wait_ready');
-					}
-					else {
-						owner.emit('err', welcome.err);
-						this.ws.close();
-					}					
-				}
-			},
-			
-			wait_ready : {
-				data : function(buffer) {
-					var ready = owner.decode_ready(buffer);
-					if ( ! ready.err ) {
-						console.log('channel ready');
-						owner.ws = this.ws;
-						owner.emit('open');
-						this.srv_short_nonce = ready.s_nonce;
-						this.transition('wait_message');
-					}
-					else {
-						owner.emit('err', ready.err);
-						this.ws.close();
-					}
-				}
-			},
-			
-			wait_message : {
-				data : function(buffer) {
-					increment_nonce(this.srv_short_nonce);
-					var message = owner.decode_message(buffer, this.srv_short_nonce);
-					if ( ! message.err )
-						owner.emit('message', message.data);
-					else {
-						owner.emit('err', message.err);
-						this.ws.close();
-					}					
-				}
-			}
-		}
-	});
-	return m;
-};
-
-module.exports = CurveWebSocket;
-
-const MAX_INT = Math.pow(2, 32); 
-function increment_nonce(n) {
-	var hi = (n[0] << 24 & 0xffffffff) | (n[1] << 16 & 0xffffff) | (n[2] << 8 & 0xffff ) | (n[3] & 0xff);
-	var lo = (n[4] << 24 & 0xffffffff) | (n[5] << 16 & 0xffffff) | (n[6] << 8 & 0xffff ) | (n[7] & 0xff);
-	lo += 1;
-	if ( lo >= MAX_INT ) {
-		lo -= MAX_INT;
-		hi += 1;
-	}
-	n[0] = (hi >>> 24 & 0xff);
-	n[1] = (hi >>> 16 & 0xff);
-	n[2] = (hi >>> 8 & 0xff);
-	n[3] = (hi & 0xff);
-	n[4] = (lo >>> 24 & 0xff);
-	n[5] = (lo >>> 16 & 0xff);
-	n[6] = (lo >>> 8 & 0xff);
-	n[7] = (lo & 0xff);
-};
-
-function comp(a, b) {
-	if ( a.byteLength == b.byteLength ) {
-		for ( var i = 0; i < a.byteLength; i++ )
-			if ( a[i] != b[i] )
-				return i+':' + a[i] + '<->' + b[i];
-	}
-	else
-		return 'len<>';
-}
-
-function gen_nonce(prefix, len) {
-	var b = new Uint8Array(24);
-	var buf = new BufferView(b);
-	var start = buf.offset;
-	buf.writeUTF8(prefix);
-	var rnd = nacl.randomBytes(len);
-	buf.append(rnd);
-	return b;
-}
-
-
-},{"./buffer-view":13,"./poll-socket":17,"events":6,"machina":18,"tweetnacl":21,"tweetnacl-util":20,"util":10}],15:[function(require,module,exports){
-var events = require('events'),
-	machina = require('machina'),
-	BufferView = require('./buffer-view'),
-	nacl = require('tweetnacl'),	
-	CurveWebSocket = require('./curvews-client'),
-	Cmd = require('../def/evt').Cmd,
-	Err = require('../def/evt').Err,
-	EVP_PATH = require('../def/evt').EVP_PATH,
-	FLAG_ACK = require('../def/evt').FLAG_ACK,
-	DEFAULT_NSP = require('../def/evt').DEFAULT_NSP;
-
-var EVP_VER = require('../def/evt').EVP_VER,
-	HEADER_MIN_LEN = require('../def/evt').HEADER_MIN_LEN,
-	Off = require('../def/evt').Off,
-	OBJ_TYPE = require('../def/evt').OBJ_TYPE,
-	FLAG_ACK = require('../def/evt').FLAG_ACK;
-
-WebSocket.prototype.on = WebSocket.prototype.addEventListener;
-
-const DEFAULT_HB_INTERVAL = 15000;
-const DEFAULT_HB_TMO = 46000;
-const RECONNECT_WAIT = 300;
-const OPEN_RETRY = 3;
-const OPEN_WAIT = 1000;
-const XFER_TMO = 10000;
-const POLL_REC_TMO = 4000;
-
-// large object or file transfer chunk size
-const XFER_CHUNK_SIZE = 48*1024;
-const MAX_GET_FILE_SIZE = 32*1024*1024;
-var txn_num = 0;
-
-function event_client(opts) {
-	return new EventPipe(opts);
-}
-
-function EventPipe(opts) {
-	this.delegate = new events.EventEmitter();
-	if ( ! opts.buf instanceof Uint8Array )
-		throw 'backing buffee needs to be Uint8Array';	
-	this.buf = opts.buf;
-	this.server_url = opts.proto + '://' + opts.host + ':' + opts.port + EVP_PATH;
-	this.namespace = (opts.namespace ? opts.namespace : DEFAULT_NSP);
-	this.srv_pub = opts.server_publicKey;
-	this.poll = opts.poll;
-	//this has to be more than two times of the server ping interval: poll-server.js: var KEEP_ALIVE_INTERVAL = 45000;
-	this.ping_tmo = 30000 * 2;
-	this.fsm = this._fsm(opts);
-	this.fsm.handle('start');
-	this.seqno = 0;
-}
-
-EventPipe.prototype.emit = function(e, payload) {
-	if ( ! this.ready ) {
-		console.log('websocket not ready');
-		return;
-	}
-	
-	var ptr = write_header(this.buf, 0, ++this.seqno, 0, Cmd.event);
-	var len = write_event(this.buf.subarray(ptr), e, payload);
-	
-	this.ws.send(this.buf.subarray(0, ptr+len), {binary: true});
-};
-
-EventPipe.prototype.on = function(e, fn) {	
-	this.delegate.on(e, fn);
-};
-
-EventPipe.prototype.once = function(e, fn) {	
-	this.delegate.once(e, fn);
-};
-
-
-EventPipe.prototype.removeListener = function(e, fn) {	
-	this.delegate.removeListener(e, fn);
-};
-
-EventPipe.prototype.removeAllListeners = function(e) {	
-	this.delegate.removeAllListeners(e);
-};
-
-
-EventPipe.prototype.once = function(e, fn) {	
-	this.delegate.once(e, fn);
-};
-
-EventPipe.prototype.join = function(channel) {
-	if ( ! this.ready ) {
-		console.log('not ready');
-		return;
-	}
-	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.join, channel);
-	this.ws.send(this.buf.subarray(0, p));	
-}
-
-EventPipe.prototype._send_complete = function(txn, context, rx_error, cb) {
-	if ( rx_error.e )
-		return;
-	
-	var reg = xfer_end_ack(txn);
-	var timer;
-	var self = this;
-	
-	var listener = function() {
-		if ( timer )
-			clearTimeout(timer);
-		console.log('xfer', txn, 'peer has acked end');
-		cb()
-	};
-		
-	timer = setTimeout(function() {
-		self.delegate.removeListener(reg, listener);
-		cb('end timeout');
-	}, 1000);
-	
-	this.delegate.once(reg, listener);
-	
-	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.xfer_end, context);
-	this.ws.send(this.buf.subarray(0, p));
-}
-
-EventPipe.prototype._send_chunk = function(txn, file, remaining, offset, rx_error, cb, size) {
-	if ( rx_error.e ) {
-		console.log('xfer:send_chunk', txn, 'peer error, bailing out');
-		return;
-	}
-	var chunk_size;
-	if ( size ) 
-		chunk_size = Math.min(Math.max(XFER_CHUNK_SIZE, size), remaining);
-	else
-		chunk_size = Math.min(XFER_CHUNK_SIZE, remaining);
-    var reader = new FileReader();
-    var chunk = file.slice(offset, offset+chunk_size);
-    console.log('request to read', chunk_size, 'bytes');
-    var self = this;
-    reader.onload = function(evt) { 
-        remaining -= chunk_size;
-        console.log('xfer', txn,'send_chunk: offset', offset, 'read', evt.target.result.byteLength, 'remaining', remaining);
-    	var p = write_header(self.buf, 0, ++self.seqno, txn, Cmd.xfer, new Uint8Array(evt.target.result));
-    	self.ws.send(self.buf.subarray(0, p));        
-        offset += chunk_size;       
-    	var once_timer;
-    	self.delegate.once(xfer_req_ack(txn), function() {
-    		if ( once_timer )
-    			clearTimeout(once_timer);
-        	cb(undefined, offset);
-        	if ( remaining > 0 )
-        		self._send_chunk(txn, file, remaining, offset, rx_error, cb, size);
-    	});
-    	once_timer = setTimeout(function(){
-    		console.log('xfer', txn, 'timeout at offset', offset);
-    		self.delegate.removeAllListeners(xfer_req_ack(txn));
-    		cb('timeout at offset' + offset);
-    	}, 3000);            
-    }
-    reader.onerror = function(err) {
-        console.log('xfer', txn, 'send_chunk:err', err);
-        cb(err);
-    };
-    reader.readAsArrayBuffer(chunk);
-}
-
-/**
- * send a file. 
- * @context is the context in json format.
- * @file the file handle.
- * @cb a callback that takes 1. error and 2. percentage
- * @size the suggested chunk size
- */
-EventPipe.prototype.sendfile = function(context, file, cb, size) {
-	if ( ! this.ready ) {
-		console.log('not ready');
-		cb('not ready');
-		return;
-	}	
-
-	var txn = next_txn();
-	console.log('xfer: start with txn', txn, file.name, 'type', file.type, 'size', file.size);	
-	var reg = xfer_start_ack(txn);
-	var timer;
-	var self = this;
-	var rx_error = {};
-	
-	var listener = function() {
-		if ( timer )
-			clearTimeout(timer);
-		console.log('xfer:peer has acked start', txn);
-		self._send_chunk(txn, file, file.size, 0, rx_error, function(err, offset) {
-			if ( ! err ) {
-				var p = Math.floor((offset/file.size)*100);
-				cb(Err.again, p);
-				if ( p === 100 ) {
-					console.log('xfer:chunk send completed', txn);
-					self._send_complete(txn, context, rx_error, function(err) {
-						if ( ! err ) {
-							console.log('xfer:send complete', txn);
-							self.delegate.removeAllListeners(xfer_err(txn));
-							cb(Err.ok);
-						}
-						else {
-							console.log('xfer:send complte err', err);
-							self.delegate.removeAllListeners(xfer_err(txn));
-							cb(err);
-						}
-					});
-				}
-			}
-			else {
-				console.log('chunk sending error', err);
-				self.delegate.removeAllListeners(xfer_err(txn));
-				cb(err);
-			}
-		}, size);
-	};
-		
-	timer = setTimeout(function() {
-		self.delegate.removeListener(reg, listener);
-		if ( cb )
-			cb('start timeout');
-	}, 2000);
-	
-	this.delegate.once(reg, listener);
-	var self = this;
-	this.delegate.once(xfer_err(txn), function(message) {
-		console.log('xfer', txn, 'peer error', message);
-		rx_error.e = true;
-		self.delegate.removeAllListeners(xfer_start_ack(txn));
-		self.delegate.removeAllListeners(xfer_end_ack(txn));
-		cb('peer error');
-	});
-	
-	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.xfer_start, {size: file.size, type: file.type});
-	this.ws.send(this.buf.subarray(0, p));
-}
-
-/**
- * get file from peer
- * @token is the token used to identify peer's local file.
- * @cb the callback function that takes
- *     1. err: if error occurs
- *     2. percentage
- *     3. result: {size (file size in bytes), type (file type:string), result (blob:Uint8Array), context (any context information, json formatted)}      
- */
-EventPipe.prototype.getfile = function(token, cb) {
-	if ( ! this.ready ) {
-		console.log('not ready');
-		cb('not ready');
-		return;
-	}
-	
-	var self = this;
-	var txn = next_txn();	
-	var listener = function(err, ack) {
-		if ( ! err ) {
-			var txn = ack.txn;
-			console.log('get file acked with txn', txn);
-			var wait_start = function(err, txn, file) {
-				if ( ! err ) {
-					console.log('peer send file txn started');
-					self._create_xfer_receiver(txn, file, cb);					
-				}
-				else
-					cb(err);
-			}
-		    once(self.delegate, xfer_start(txn), 1000, wait_start);
-		}
-		else
-			cb(err);
-	};
-		
-    once(this.delegate, xfer_getfile_ack(txn), 1000, listener);
-	
-	var p = write_header(this.buf, 0, ++this.seqno, txn, Cmd.get_file, token);
-	this.ws.send(this.buf.subarray(0, p));	
-}
-
-EventPipe.prototype._create_xfer_receiver = function(txn, file, cb) {
-	var pipe = this;
-	var fsm;
-	new machina.Fsm({
-		
-		initialState: 'init',
-		
-		tmo : function() {
-			console.log('xfer fsm', txn, 'timeout');
-			this.transition('stop');
-			this.handle('result', 'timeout');
-		},
-		
-		io_err : function(err) {
-			console.log('xfer', txn, 'io err', err.message);
-			this.transition('stop');
-			this.handle('result', err.message);			
-		},
-		
-		states: {
-			init : {
-				_onEnter : function() {
-					fsm = this;
-					console.log('start xfer fsm', txn, ' with file type', file.type, 'size', file.size);
-					if ( file.size > MAX_GET_FILE_SIZE ) {
-						fsm.transition('stop');
-						fsm.handle('result', 'file too large');
-						return;
-					}
-					this.type = file.type;
-					this.size = file.size;
-					this.offset = 0;
-					this.res_buf = new Uint8Array(file.size);
-					pipe.delegate.on(xfer_req(txn), function(length, buffer) {
-						fsm.handle('data', length, buffer);
-					});
-					pipe.delegate.once(xfer_end_req(txn), function(context) {
-						fsm.handle('end', context);
-					});
-					var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer_start);
-					console.log('sending xfer start ack, txn', txn);
-					pipe.ws.send(pipe.buf.subarray(0, len));
-
-					this.transition('wait_data');
-				}
-			},
-			
-			wait_data : {
-				_onEnter : function() {
-					this.timer = setTimeout(this.tmo, XFER_TMO);
-					var self = this;
-				},
-				
-				data : function(chunk_size, buffer) {					
-					// append the chunk
-					this.res_buf.set(buffer, this.offset);
-					clearTimeout(this.timer);
-					this.timer = setTimeout(this.tmo, XFER_TMO);
-					this.offset += chunk_size;
-					var remaining = this.size-this.offset;
-
-					// ack the chunk
-					var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer);
-					pipe.ws.send(pipe.buf.subarray(0, len));
-					var p = Math.floor((fsm.offset*100.0/fsm.size));
-					cb(undefined, p);
-				},
-				
-				end : function(context) {
-					console.log('end xfer fsm', txn, 'context', context);
-					clearTimeout(this.timer);
-					this.transition('stop');
-					this.handle('result', undefined, context);
-				}
-			},
-			
-			stop : {
-				result : function(err, context) {
-					pipe.delegate.removeAllListeners(xfer_req(txn));
-					pipe.delegate.removeAllListeners(xfer_end_req(txn));
-					if ( ! err ) {
-						console.log('xfer', txn, 'end', context);
-						var len = write_header(pipe.buf, FLAG_ACK, ++pipe.seqno, txn, Cmd.xfer_end);
-						console.log('sending xfer end ack, txn', txn);
-						pipe.ws.send(pipe.buf.subarray(0, len));
-						cb(undefined, 100, {size: this.size, type: this.type, result: this.res_buf, context: context});
-					}
-					else {
-						var len = write_header(pipe.buf, 0, ++pipe.seqno, txn, Cmd.xfer_err, err);
-						console.log('sending xfer err, txn', txn);
-						pipe.ws.send(pipe.buf.subarray(0, len));
-						cb(err);
-					}
-				}
-			}
-		}		
-	});
-}
-
-EventPipe.prototype.leave = function(channel) {
-	if ( ! this.ready ) {
-		console.log('not ready');
-		return;
-	}	
-	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.leave, channel);
-	this.ws.send(this.buf.subarray(0, p));	
-}
-
-EventPipe.prototype._dispatch_event = function(buf) {
-	var event = read_event(buf);
-	if ( event.data )
-		this.delegate.emit(event.event, event.data)
-	else
-		this.delegate.emit(event.event);
-}
-
-EventPipe.prototype._up = function(e) {
-	this.delegate.emit(e);
-}
-
-EventPipe.prototype._dispatch = function(data) {
-	//read the command
-	var hdr = read_header(data);
-	switch ( hdr.cmd ) {
-	case Cmd.open :
-		if ( hdr.flag & FLAG_ACK )
-			this.fsm.handle('open_ack', hdr.ext);	
-		break;
-	case Cmd.ping :
-		if ( hdr.flag & FLAG_ACK )
-			this.fsm.handle('pong');
-		break;
-	case Cmd.close:
-		this.fsm.handle('close');
-		break;
-	case Cmd.event:
-		var ebuf = data.subarray(hdr.hlen);
-		this._dispatch_event(ebuf);
-		break;
-	case Cmd.xfer_start:
-		if ( hdr.flag & FLAG_ACK )
-			this.delegate.emit(xfer_start_ack(hdr.txn));
-		else
-			this.delegate.emit(xfer_start(hdr.txn), hdr.txn, hdr.ext);
-		break;
-	case Cmd.xfer_err:
-		this.delegate.emit(xfer_err(hdr.txn), hdr.ext);
-		break;
-	case Cmd.xfer:
-		if ( hdr.flag & FLAG_ACK )
-			this.delegate.emit(xfer_req_ack(hdr.txn));
-		else
-			this.delegate.emit(xfer_req(hdr.txn), hdr.ext_len, hdr.ext);
-		break;		
-	case Cmd.xfer_end:
-		if ( hdr.flag & FLAG_ACK )
-			this.delegate.emit(xfer_end_ack(hdr.txn));
-		else
-			this.delegate.emit(xfer_end_req(hdr.txn), hdr.ext);
-		break;
-	case Cmd.get_file:
-		if ( hdr.flag & FLAG_ACK )
-			this.delegate.emit(xfer_getfile_ack(hdr.txn), hdr.ext);
-		break;
-	default:
-		console.log('unknown command, header:', data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7], data[8]);
-		break;
-	}	
-}
-
-EventPipe.prototype._ping = function() {
-	if (this.poll) {
-		console.debug("is poll will not _ping");
-		this.fsm.handle('pong');
-		return;
-	}
-	var p = write_header(this.buf, 0, ++this.seqno, 0, Cmd.ping);
-	this.ws.send(this.buf.subarray(0, p));	
-};
-
-EventPipe.prototype._fsm = function(opts) {
-	var evp = this;
-	var fsm = new machina.Fsm({				
-		initialState : "init",		
-		
-		open : function() {
-			var p = write_header(evp.buf, 0, ++evp.seqno, 0, Cmd.open, evp.namespace);
-			evp.ws.send(evp.buf.subarray(0, p));
-		},
-		
-		// exponential backoff interval calculation
-		gen_interval : function(k) {
-			  var base = (Math.pow(2, k) - 1) * 30;
-			  
-			  if ( base > 30000 )
-				 base = 30000; // If the generated interval is more than 30 seconds, truncate it down to 30 seconds.
-			  if ( base < 0 )
-				  base = 0;
-			  
-			  // generate the interval to a random number between 500 ms and the maxInterval determined from above
-			  return Math.random() * 1000 + 300 + base; 
-		},
-		
-		states : {
-			init : { 
-				_onEnter: function() {
-					evp.ready = false;
-				},
-				
-				"start" : function() {
-					this.connect_attempt = 1;
-					this.transition("connecting");
-				}
-			},
-			
-			connecting : {
-				_onEnter : function() {
-					console.log('try connection', evp.server_url, 'attemp', this.connect_attempt);
-					evp.ready = false;
-					//evp.ws = new WebSocket(evp.server_url);
-					//evp.ws.binaryType = "arraybuffer";
-					evp.ws = new CurveWebSocket({url: evp.server_url, server_publicKey: evp.srv_pub, poll: evp.poll,
-						ping_tmo: evp.ping_tmo});
-					var self = this;
-					evp.ws.on('open', function() {
-						self.connect_attempt = 1;
-						if ( self.reconnect_timer )
-							clearTimeout(self.reconnect_timer);
-						    evp.ws.on('message', function(data) {
-								//console.log('msg event data length', data.byteLength, ':', data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);																
-								evp._dispatch(data);								
-						    });
-						
-						evp.ws.on('close', function() {
-							console.log('connection closed');
-							self.transition('disconnected');
-							evp._up('close');
-						});
-						
-						evp.ws.on('error', function() {
-							console.log('ws error, state',  evp.ws.readyState);
-							self.transition('disconnected');
-							evp._up('error');							
-						});
-
-						self.open_retry = 0;
-						self.transition('wait_open');
-					});
-
-					var rec_tmo = evp.poll? POLL_REC_TMO : this.gen_interval(this.connect_attempt);
-					rec_tmo = 10 * 1000;
-					console.log('connection timeout in', rec_tmo, "ms");
-					this.reconnect_timer = setTimeout(function() {
-						self.connect_attempt++;
-						console.log('connection timeout');
-						self.transition('disconnected');
-					}, rec_tmo);
-				}
-			},
-			
-			wait_open : { 
-				_onEnter: function() {
-					if ( this.open_retry > OPEN_RETRY ) {
-						console.log('open reached max retry');
-						if ( this.open_timer )
-							clearTimeout(this.open_timer);
-						this.handle('disconnected');
-					}
-					else {
-						this.open_retry++;
-						this.open();
-						if ( this.open_timer )
-							clearTimeout(this.open_timer);
-						var self = this;
-						this.open_timer = setTimeout(function() {
-							self.transition('wait_open');
-						}, OPEN_WAIT);
-					}
-				},
-				
-				"open_ack" : function(pipe_id) {
-					// sanity check for the heartbeat generation
-					console.log('pipe opened with id', pipe_id);
-					clearTimeout(this.open_timer);
-					evp.id = pipe_id;
-					evp.ready = true;
-					var hb_interval = (opts.hb_int ? opts.hb_int : DEFAULT_HB_INTERVAL);
-					this.tx_timer = setInterval(function() {
-						evp._ping();
-					}, hb_interval);
-					// emit local event
-					evp.delegate.emit('connect');					
-					this.transition("connected");
-				}				
-			},			
-			connected : {
-				_onEnter : function() {
-					var self = this;
-					// register a timer to monitor heartbeat
-					this.hb_tmo = (opts.hb_tmo ? opts.hb_tmo : DEFAULT_HB_TMO);
-					this.rx_timer = setTimeout(function() {
-						self.handle("tmo");
-					}, self.hb_tmo);
-				},
-				
-				"pong" : function() {
-					clearTimeout(this.rx_timer);
-					var self = this;
-					this.rx_timer = setTimeout(function() {
-						self.handle("tmo");
-					}, self.hb_tmo);					
-				},
-				
-				"close" : function() {
-					console.log('tear down connection');
-					this.transition("disconnected");
-				},
-				
-				"tmo" : function () {
-					console.log('server may have disconnected');
-					this.transition("disconnected");
-				}
-			},
-			
-			disconnected : {
-				_onEnter : function() {
-					console.log('socket disconnected or fail to connect');
-					if ( evp.ws )
-						evp.ws.close();
-					clearTimeout(this.rx_timer);
-					clearInterval(this.tx_timer);
-					var self = this;
-					// setup a timer to reconnect
-					setTimeout(function() {
-						self.transition("connecting");
-					}, RECONNECT_WAIT);
-				}
-			}
-		}
-	});
-	return fsm;	
-}
-
-var read_event = function(buf) {
-	var view = new BufferView(buf);
-	var event = view.readUInt16();
-	var data = undefined;
-	var len = view.readUInt32();
-	if ( len > 0 ) {
-		var type = view.readUInt8();
-		switch ( type ) {
-		case OBJ_TYPE.string:			
-			data = view.readUTF8(len);
-			break;
-		case OBJ_TYPE.blob:
-			data = view.slice(view.offset, view.offset + len);
-			break;
-		case OBJ_TYPE.json:
-			data = view.readUTF8(len);
-			data = JSON.parse(data);
-			break;
-		default:
-			//FIXME: bail out
-			console.log('unknow data type', type);
-		}
-	}
-	
-	console.log('read_event', event, 'data', data);
-	
-	return {event: event, data: data};
-}
-
-var write_event = function(buf, event, payload) {
-	var view = new BufferView(buf);
-	var start = view.offset;
-	view.writeUInt16(event);
-	var len = 0;
-	if ( payload ) {
-		if ( payload.constructor === String ) {
-			var a = view.decodeUTF8(payload);
-			len = a.byteLength;
-			view.writeUInt32(len);
-			if ( len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.string);					
-				view.append(a);
-			}
-		}
-		else if ( payload instanceof Uint8Array ) {
-			len = payload.byteLength;
-			view.writeUInt32(len);
-			if ( len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.blob);
-				view.append(payload);				
-			}
-		}
-		else {
-			var json_string = JSON.stringify(payload);
-			var a = view.decodeUTF8(json_string);
-			len = a.byteLength;
-			view.writeUInt32(len);
-			if ( len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.json);
-				view.append(a);			
-			}
-		}		
-	}
-	else {
-		view.writeUInt32(0);
-	}
-	
-	return view.offset-start;
-}
-
-var xfer_start = function(txn) {
-	return '_xfer_start_' + txn;
-}
-
-var xfer_start_ack = function(txn) {
-	return '_xfer_start_ack_' + txn;
-}
-
-var xfer_end_ack = function(txn) {
-	return '_xfer_end_ack_' + txn;
-}
-
-var xfer_end_req = function(txn) {
-	return '_xfer_end_req_' + txn;
-}
-
-var xfer_getfile_ack = function(txn) {
-	return '_xfer_getfile_ack_' + txn;
-}
-
-var xfer_err = function(txn) {
-	return '_xfer_err_' + txn;
-}
-
-var xfer_req = function(txn) {
-	return '_xfer_req_' + txn;
-}
-
-var xfer_req_ack = function(txn) {
-	return '_xfer_ack_' + txn;
-}
-
-var next_txn = function() {
-	return ++txn_num;
-}
-
-var once = function(source, evt, tmo, cb) {
-	var timer;
-	var listener = function() {
-		if ( timer )
-			clearTimeout(timer);
-		if ( arguments.length > 0 ) {
-			var args = [undefined].concat(Array.prototype.slice.call(arguments));
-			cb.apply(this,args);
-		}
-		else
-			cb();
-	}
-	source.once(evt, listener)
-	timer = setTimeout(function() {
-		source.removeListener(evt, listener);
-		cb('timeout');
-	}, tmo);
-}
-
-var read_header = function(data) {
-	var view = new BufferView(data);
-	var v = view.readUInt8();
-	var flag = view.readUInt16();
-	var seqno = view.readUInt32();
-	var txn = view.readUInt16();
-	var c = view.readUInt8();	
-	var ext_len = view.readUInt16();
-	var ext = undefined;
-	var hdr_len = HEADER_MIN_LEN;
-	if ( ext_len > 0 ) {
-		hdr_len = HEADER_MIN_LEN + ext_len + 1;
-		var ext_type = view.readUInt8();
-		if ( ext_type === OBJ_TYPE.string )
-			ext = view.readUTF8(ext_len);
-		else if ( ext_type === OBJ_TYPE.json )
-			ext = JSON.parse(view.readUTF8(ext_len));
-		else if ( ext_type === OBJ_TYPE.blob )
-			ext = view.slice(Off.EXT, Off.EXT+ext_len);
-		else
-			//FIXME: bail out
-			comnsole.log('unknown ext type', ext_type);		
-	}
-
-	return {ver : v, flag: flag, seq: seqno, txn: txn, cmd: c, ext: ext, ext_len: ext_len, hlen: hdr_len};
-}
-
-var write_header = function(buf, flag, seqno, txn, cmd, ext) {
-	var view = new BufferView(buf);	
-	view.writeUInt8(EVP_VER);
-	view.writeUInt16(flag);
-	view.writeUInt32(seqno);
-	view.writeUInt16(txn);
-	view.writeUInt8(cmd);
-	var ext_len = 0;
-	var hdr_len = HEADER_MIN_LEN;
-	if ( ! ext ) {
-		view.writeUInt16(0);
-	}
-	else {
-		if ( ext.constructor === String ) {
-			var a = view.decodeUTF8(ext);
-			ext_len = a.byteLength;
-			view.writeUInt16(ext_len);
-			if ( ext_len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.string);					
-				view.append(a);
-				hdr_len = HEADER_MIN_LEN + ext_len + 1;
-			}
-			else
-				console.log('write_header:ext', ext, 'length=0');
-		}
-		else if ( ext instanceof Uint8Array ) {
-			ext_len = ext.byteLength;
-			view.writeUInt16(ext_len);
-			if ( ext_len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.blob);
-				view.append(ext);
-				hdr_len = HEADER_MIN_LEN + ext_len + 1;				
-			}
-			else
-				console.log('write_header:ext', ext, 'length=0');
-		}
-		else {
-			// a json object
-			var json_string = JSON.stringify(ext);
-			var a = view.decodeUTF8(json_string);
-			ext_len = a.byteLength;
-			view.writeUInt16(ext_len);
-			if ( ext_len > 0 ) {
-				view.writeUInt8(OBJ_TYPE.json);
-				view.append(a);
-				hdr_len = HEADER_MIN_LEN + ext_len + 1;				
-			}
-			else
-				console.log('write_header:ext', ext, 'length=0');
-		}
-	}
-	
-	return hdr_len;
-};
-
-module.exports = event_client;
-},{"../def/evt":12,"./buffer-view":13,"./curvews-client":14,"events":6,"machina":18,"tweetnacl":21}],16:[function(require,module,exports){
-/**
- * Common utilities and shared data structure
- */
-
-module.exports = {
-	// verssion constant
-    VER : 1,
-    
-    // command constants
-    CONN_SYNC : 1,		// client connection initialization
-    CONN_SYNC_ACK : 2,	// server connection sync-ack    
-    CONN_ACK : 3,		// client connection ack
-    DCONN: 4,			// client disconnect request
-    PING: 5,			// server ping
-    PING_ACK: 6,		// client ping ack
-    TERM: 7,			// server termination
-    EVT: 8,				// application event,
-    RECONN: 9			// client reconnect
-}
-},{}],17:[function(require,module,exports){
-/**
- * long poll client socket implementation
- */
-var events = require('events'),
-	Consts = require('./poll-common'),
-	machina = require('machina'),
-	BufferView = require('./buffer-view'),
-	util = require('util');
-
-
-const OPEN_TMO = 5000;
-const RETRY_INTERVAL = 5000;
-const WAIT_TERM_TMO = 5000;
-
-function write_header(cmd, id, data, buf) {
-	buf.reset();
-	buf.writeUInt8(Consts.VER);
-	buf.writeUInt8(cmd);
-	if ( id ) {
-		buf.writeUInt16(id);
-		if ( data )
-			buf.append(data)
-	}
-	return buf.offset;
-}
-
-function read_header(buf) {
-	var ver = buf.readUInt8();
-	var cmd = buf.readUInt8();
-	var id = undefined;
-	var data = undefined;
-	if ( buf.length() >= 4) {
-		id = buf.readUInt16();
-		if ( buf.length() > 4 )
-			data = buf.slice(buf.offset, buf.length());
-	}
-	return {ver: ver, cmd: cmd, id: id, b: data};
-}
-
-var fsm;
-function PollSocket(opts) {
-	this.url = opts.url;
-	
-	//this has to be more than two times of the server ping interval
-	this.ping_tmo = opts.ping_tmo;	
-	fsm = this.create_fsm(this);
-}
-
-util.inherits(PollSocket, events.EventEmitter);
-
-// data has to be a Uint8Array
-PollSocket.prototype.send = function(data) {
-	fsm.handle('send', data);
-}
-
-PollSocket.prototype.addEventListener = function(event, listener) {
-	this.on(event, listener);
-}
-
-PollSocket.prototype.error = function(id) {
-	console.log('error xhr ', id);
-	fsm.handle('error', id);
-}
-
-PollSocket.prototype.result = function(id, buf) {
-	var p = read_header(buf);		
-	var cmd = p.cmd;
-	var data = p.b;
-	switch ( cmd ) {
-		case Consts.CONN_SYNC_ACK:
-			fsm.handle('conn_sync_ack', id, p.id);
-			break;
-		case Consts.PING:
-			fsm.handle('ping', id, p.id);
-			break;
-		case Consts.TERM:
-			fsm.handle('term', id, p.id);
-			break;
-		case Consts.EVT:
-			fsm.handle('event', id, p.id, data);
-			break;
-		default:
-			console.log('unknown command', cmd);
-	}	
-}
-
-var xhr_id = 0;
-function create_xhr(fsm, err_cb, res_cb) {
-	fsm.prev_id = fsm.id;
-	fsm.prev_xhr = fsm.xhr;
-	fsm.id = ++xhr_id;
-	console.log('creating xhr with id', fsm.id);
-	var xhr = new XMLHttpRequest();	
-	var x_id = fsm.id;
-	xhr.addEventListener('error', function() {
-		console.log('xhr', x_id, 'error', arguments);
-		err_cb(x_id);
-	});
-	
-	xhr.onreadystatechange = function() {
-		if ( xhr.readyState == 4 ) {
-			if ( xhr.status == 200 ) {
-				var bv = new BufferView(new Uint8Array(xhr.response));
-				res_cb(x_id, bv);
-			}
-			else {
-				console.log('xhr', x_id, 'error status', xhr.status);
-				err_cb(x_id);
-			}
-		}
-	};
-	
-	xhr.responseType = "arraybuffer";
-	fsm.xhr = xhr;	
-}
-
-function xhr_send(xhr, url, buf, cmd, id, data) {
-	xhr.open('POST', url);
-	var len = write_header(cmd, id, data, buf);
-	xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-	xhr.send(buf.slice(0, len));	
-}
-
-PollSocket.prototype.create_fsm = function(socket) {
-	var buf = new BufferView(new Uint8Array(64*1024));
-	var m = new machina.Fsm({
-		initialState : "init",
-		
-		states : {
-			init : {
-				_onEnter : function() {
-					this.connected = false;
-					this.handle('restart');
-				},
-				
-				restart : function() {
-					create_xhr(this, socket.error, socket.result);
-					xhr_send(this.xhr, socket.url, buf, Consts.CONN_SYNC);
-					var self = this;
-					this.open_timer = setTimeout(function() {
-						console.log('open timeout for xhr', self.id);
-						self.xhr.abort();
-						setTimeout(function() {
-							console.log('retry connection');
-							self.handle('restart');
-						}, RETRY_INTERVAL);
-					}, OPEN_TMO);
-				},
-				
-				conn_sync_ack : function(xhr_id, reg_id) {
-					//validate this is the response we are waiting for
-					if ( xhr_id == this.id ) {
-						console.log('received conn_sync_ack with reg id', reg_id);
-						socket.id = reg_id;
-						clearTimeout(this.open_timer);
-						create_xhr(this, socket.error, socket.result);	
-						xhr_send(this.xhr, socket.url, buf, Consts.CONN_ACK, reg_id);						
-						this.transition('connected');
-					}
-					else
-						console.log('received conn_sync_ack with wrong xhr id, expected', this.id, 'incommning', xhr_id);
-				},
-				
-				error : function(xhr_id) {
-					// let open timer takes care of restart
-					// or emit an error
-				}
-			},
-			
-			connected : {
-				_onEnter: function() {
-					var self = this;
-					this.ping_timer = setTimeout(function() {
-						self.handle('tmo');
-					}, socket.ping_tmo);
-					if ( ! this.connected ) {
-						socket.emit('open', socket);
-						this.connected = true;
-					}
-				},
-				
-				tmo : function() {
-					console.log('server ping timeout');
-					this.handle('error', 'na');
-				},
-				
-				ping : function(xhr_id, reg_id) {
-					if ( xhr_id == this.id && socket.id == reg_id) {
-						console.log('received ping');
-						clearTimeout(this.ping_timer);						
-						create_xhr(this, socket.error, socket.result);	
-						xhr_send(this.xhr, socket.url, buf, Consts.PING_ACK, reg_id);
-						console.debug('sent PING_ACK for ' + reg_id);
-						var self = this;
-						this.ping_timer = setTimeout(function() {
-							self.handle('tmo');
-						}, socket.ping_tmo);
-					}
-					else
-						console.log('received ping with wrong xhr id or reg id, expected:', this.id, socket.id, 'incommning', xhr_id, reg_id);					
-				},
-				
-				send : function(data) {
-					console.debug('creating new xhr for sending');
-					create_xhr(this, socket.error, socket.result);					
-					xhr_send(this.xhr, socket.url, buf, Consts.EVT, socket.id, data);
-					clearTimeout(this.ping_timer);					
-					this.transition('wait_term');
-				},
-				
-				event : function(xhr_id, reg_id, data) {
-					if ( xhr_id == this.id && socket.id == reg_id) {
-						console.debug('received event');
-						clearTimeout(this.ping_timer);						
-						create_xhr(this, socket.error, socket.result);	
-						xhr_send(this.xhr, socket.url, buf, Consts.RECONN, reg_id);
-						console.debug('sent RECONN for ' + reg_id);
-						var self = this;
-						this.ping_timer = setTimeout(function() {
-							self.handle('tmo');
-						}, socket.ping_tmo);
-						socket.emit('message', {data: data});
-					}
-					else
-						console.log('received event with wrong xhr id or reg id, expected:', this.id, socket.id, 'incommning', xhr_id, reg_id);					
-				},				
-				
-				error : function(xhr_id) {
-					console.log('xhr error in connected state');
-					this.xhr.abort();
-					clearTimeout(this.ping_timer);
-					if ( this.connected ) {
-						this.connected = false;
-						socket.emit('close', socket);
-					}					
-				}				
-			},
-			
-			wait_term : {
-				_onEnter : function() {
-					var self = this;
-					this.wait_term_tmr = setTimeout(function() {
-						console.log('timeout waiting for term');
-						self.handle('error');
-					},WAIT_TERM_TMO); 
-				},
-								
-				term : function(xhr_id, reg_id) {
-					if ( xhr_id == this.prev_id && socket.id == reg_id) {
-						console.log('received term');
-						clearTimeout(this.wait_term_tmr);
-						this.transition('connected');
-					}
-					else
-						console.log('received term with wrong xhr id or reg id, expected:', this.prev_id, socket.id, 'incommning', xhr_id, reg_id);										
-				},
-				
-				error : function(xhr_id) {
-					console.log('xhr error in wait-term state, connected');
-					this.prev_xhr.abort();
-					this.xhr.abort();
-					if ( this.connected ) {
-						this.connected = false;
-						socket.emit('close');
-					}					
-				}
-			}
-		}
-	});
-	return m;	
-};
-PollSocket.prototype.close = function() {
-
-};
-
-module.exports = PollSocket;
-},{"./buffer-view":13,"./poll-common":16,"events":6,"machina":18,"util":10}],18:[function(require,module,exports){
+},{"./support/isBuffer":16,"_process":14,"inherits":15}],18:[function(require,module,exports){
 /*!
  *  * machina - A library for creating powerful and flexible finite state machines. Loosely inspired by Erlang/OTP's gen_fsm behavior.
  *  * Author: Jim Cowart (http://ifandelse.com)
@@ -18703,7 +18713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 }));
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":1}],21:[function(require,module,exports){
+},{"buffer":8}],21:[function(require,module,exports){
 (function(nacl) {
 'use strict';
 
@@ -21093,7 +21103,7 @@ nacl.setPRNG = function(fn) {
 
 })(typeof module !== 'undefined' && module.exports ? module.exports : (self.nacl = self.nacl || {}));
 
-},{"crypto":1}],22:[function(require,module,exports){
+},{"crypto":8}],22:[function(require,module,exports){
 (function (Buffer){
 var io = require('../../assets/lib/andaman/io/event-pipe-b');
 //var Event = require('../../assets/lib/andaman/def/evt').Event;
@@ -21160,5 +21170,5 @@ module.exports = {
     opts: opts
 };
 }).call(this,require("buffer").Buffer)
-},{"../../assets/lib/andaman/andaman-api":11,"../../assets/lib/andaman/io/event-pipe-b":15,"buffer":2}]},{},[22])(22)
+},{"../../assets/lib/andaman/andaman-api":1,"../../assets/lib/andaman/io/event-pipe-b":5,"buffer":9}]},{},[22])(22)
 });

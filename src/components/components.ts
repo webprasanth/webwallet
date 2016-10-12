@@ -1,4 +1,4 @@
-import {riot, template, Element} from './riot-ts';
+import { riot, template, Element } from './riot-ts';
 
 import LandingPage from './landing-page/landing-page';
 import Home from './home/index';
@@ -10,13 +10,10 @@ import SubmitEmail from './reset-pass/submit-email';
 import ErrorAlert from './modals/error-alert/error-alert';
 import SendConfirm from './modals/send-confirm/send-confirm';
 
-export {LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendConfirm};
+export { LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendConfirm };
 
-export function initialize(){
+export function initialize() {
     riot.mount('app');
 }
-
-
-
 
 

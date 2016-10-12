@@ -1,51 +1,51 @@
 <send-confirm>
-    <div class="modal fade" id="sendDialog" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+	<div class="modal fade" id="sendDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{opts.dlgTitle}</h4>
-                </div>
-                <virtual show={confirmation}>
-                    <div class="modal-body">
-                        <div class="confirm__transaction">
-                            <div class="_amount text-center"><span class="_value">{formatCurrency(opts.amount)}</span> <span class="_currency"></span></div>
-                            <div class="text-center">
-                                <p><span class="_fee">+ {formatCurrency(opts.fee)} transaction fee</span></p>
-                                <div class="refresh-data text-center" show={sending}><span class="_icon glyphicon glyphicon-refresh spinning"></span></div>
-                                <p show={!sending}><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
-                            </div>
-                            <div class="info-modal">
-                                <div class="avatar">
-                                    <img class="img-circle" src="{AvartarServer + opts.wallet.profile_pic_url}" width="40" show={opts.wallet.profile_pic_url}/>
-                                    <img class="img-circle" src="assets/images/pages/coin.png" width="40" show={!opts.wallet.profile_pic_url}/>
-                                </div>
-                                <div class="_info">
-                                    <div class="name">{opts.wallet.display_name ? opts.wallet.display_name : opts.wallet.username}</div>
-                                    <div class="name">{opts.wallet.email}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer" show={!sending}>
-                        <button class="btn btn-default" id="send-cancel" data-dismiss="modal">Cancel</button>
-                        <button id="send-direct" class="btn btn-primary" on-click="sendDirect">Send</button>
-                    </div>
-                </virtual>
-                <virtual show={success}>
-                <div class="modal-body">
-                    <div class="confirm-success">
-                        <p>Processing time: {processing_duration} second(s)</p>
+					<h4 class="modal-title">{opts.dlgTitle}</h4>
+				</div>
+				<virtual show={confirmation}>
+					<div class="modal-body">
+						<div class="confirm__transaction">
+							<div class="_amount text-center"><span class="_value">{formatCurrency(opts.amount)}</span> <span class="_currency"></span></div>
+							<div class="text-center">
+								<p><span class="_fee">+ {formatCurrency(opts.fee)} transaction fee</span></p>
+								<div class="refresh-data text-center" show={sending}><span class="_icon glyphicon glyphicon-refresh spinning"></span></div>
+								<p show={!sending}><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+							</div>
+							<div class="info-modal">
+								<div class="avatar">
+									<img class="img-circle" src="{AvartarServer + opts.wallet.profile_pic_url}" width="40" show={opts.wallet.profile_pic_url}/>
+									<img class="img-circle" src="assets/images/pages/coin.png" width="40" show={!opts.wallet.profile_pic_url}/>
+								</div>
+								<div class="_info">
+									<div class="name">{opts.wallet.display_name ? opts.wallet.display_name : opts.wallet.username}</div>
+									<div class="name">{opts.wallet.email}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" show={!sending}>
+						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">Cancel</button>
+						<button id="send-direct" class="btn btn-primary" onclick={sendDirect}>Send</button>
+					</div>
+				</virtual>
+				<virtual show={success}>
+					<div class="modal-body">
+						<div class="confirm-success">
+							<p>Processing time: {processing_duration} second(s)</p>
 
-                        <p>Your transaction will appear in your activity tab shortly.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-                </virtual>
-            </div>
-        </div>
-    </div>
+							<p>Your transaction will appear in your activity tab shortly.</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</virtual>
+			</div>
+		</div>
+	</div>
 </send-confirm>

@@ -1,10 +1,20 @@
 import AndamanService from '../andaman-service';
 import store from '../store';
 import * as actions from './actions';
-import {storeUserKey, getUserKey} from '../utils';
+import { storeUserKey, getUserKey } from '../utils';
 
 export default class UserService {
     constructor() { }
+
+    private static _instance: UserService;
+
+    static singleton() {
+        if (!UserService._instance) {
+            UserService._instance = new UserService();
+        }
+
+        return UserService._instance;
+    }
 
     ssoLogin() {
         return new Promise((resolve, reject) => {
@@ -76,13 +86,40 @@ export default class UserService {
         });
     }
 
-    private static _instance: UserService;
+    getMyWallets() {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+                andaman.get_my_wallets(pipe, {}, function (resp) {
+                    resolve(resp);
+                });
+            });
+        });
+    }
 
-    static singleton() {
-        if (!UserService._instance) {
-            UserService._instance = new UserService();
-        }
+    createFlashWallet(sessionToken, publicKey) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+                andaman.get_my_wallets(pipe, {}, function (resp) {
+                    resolve(resp);
+                });
+            });
+        });
+    }
 
-        return UserService._instance;
+    getWalletSecret(idToken) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.get_wallet_secret(pipe, { idToken: idToken }, resp => {
+                    resolve(resp);
+                });
+            });
+        });
     }
 }

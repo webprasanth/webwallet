@@ -85,10 +85,10 @@ export default class HomeSend extends Element {
             return riot.mount('#error-dialog', 'error-alert', { title: '', message: 'You do not have enough funds to make this payment' });
         }
 
-        let memo = $('#payment-memo').val();
+        this.sendWallet.memo = $('#payment-memo').val();
 
         return riot.mount('#confirm-send-money', 'send-confirm', {
-            to: this.sendWallet,
+            to: this.sendWallet.address,
             amount: amount,
             fee: fee,
             wallet: this.sendWallet

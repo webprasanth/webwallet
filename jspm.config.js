@@ -6,6 +6,9 @@ SystemJS.config({
   browserConfig: {
     "baseURL": "/"
   },
+  map: {
+    "Premium": "./assets/lib/Premium/build.js"
+  },
   devConfig: {
     "map": {
       "plugin-typescript": "github:frankwallis/plugin-typescript@5.2.7",
@@ -197,6 +200,8 @@ SystemJS.config({
     "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
     "bcrypt-pbkdf": "npm:bcrypt-pbkdf@1.0.0",
     "big.js": "npm:big.js@3.1.3",
+    "bip39": "npm:bip39@2.2.0",
+    "bitcoinjs-lib": "npm:bitcoinjs-lib@2.3.0",
     "bowser": "npm:bowser@1.4.6",
     "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
     "child_process": "github:jspm/nodelibs-child_process@0.2.0-alpha",
@@ -204,6 +209,7 @@ SystemJS.config({
     "constants": "github:jspm/nodelibs-constants@0.2.0-alpha",
     "core-js": "npm:core-js@2.4.1",
     "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
+    "crypto-js": "npm:crypto-js@3.1.7",
     "css": "github:systemjs/plugin-css@0.1.31",
     "dgram": "github:jspm/nodelibs-dgram@0.2.0-alpha",
     "dns": "github:jspm/nodelibs-dns@0.2.0-alpha",
@@ -1226,6 +1232,51 @@ SystemJS.config({
     "npm:pbkdf2@3.0.9": {
       "map": {
         "create-hmac": "npm:create-hmac@1.1.4"
+      }
+    },
+    "npm:bitcoinjs-lib@2.3.0": {
+      "map": {
+        "create-hash": "npm:create-hash@1.1.2",
+        "randombytes": "npm:randombytes@2.0.3",
+        "create-hmac": "npm:create-hmac@1.1.4",
+        "buffer-compare": "npm:buffer-compare@1.1.1",
+        "buffer-equals": "npm:buffer-equals@1.0.4",
+        "buffer-reverse": "npm:buffer-reverse@1.0.1",
+        "wif": "npm:wif@2.0.1",
+        "bs58check": "npm:bs58check@1.0.8",
+        "bigi": "npm:bigi@1.4.2",
+        "bip66": "npm:bip66@1.1.4",
+        "ecurve": "npm:ecurve@1.0.3",
+        "typeforce": "npm:typeforce@1.8.7"
+      }
+    },
+    "npm:bs58check@1.0.8": {
+      "map": {
+        "create-hash": "npm:create-hash@1.1.2",
+        "bs58": "npm:bs58@2.0.1"
+      }
+    },
+    "npm:wif@2.0.1": {
+      "map": {
+        "bs58check": "npm:bs58check@1.0.8"
+      }
+    },
+    "npm:ecurve@1.0.3": {
+      "map": {
+        "bigi": "npm:bigi@1.4.2"
+      }
+    },
+    "npm:typeforce@1.8.7": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3"
+      }
+    },
+    "npm:bip39@2.2.0": {
+      "map": {
+        "unorm": "npm:unorm@1.4.1",
+        "randombytes": "npm:randombytes@2.0.3",
+        "pbkdf2": "npm:pbkdf2@3.0.9",
+        "create-hash": "npm:create-hash@1.1.2"
       }
     }
   }
