@@ -1,3 +1,5 @@
+import Andaman from "Andaman";
+
 interface IAndaman {
     get_txns(pipe, credentials, callback: (resp) => any);
     get_session_token_v2(pipe, credentials: { idToken: string, res?: string }, cb: (resp) => any);
@@ -15,8 +17,8 @@ interface IAndaman {
 }
 
 export default class AndamanService {
-    private static service = (<any>window).AndamanService;
-    public static opts = (<any>window).AndamanService.opts;
+    private static service = Andaman;
+    public static opts = Andaman.opts;
     static ready(): Promise<{ andaman: IAndaman, pipe: any }> {
         return AndamanService.service.ready();
     }

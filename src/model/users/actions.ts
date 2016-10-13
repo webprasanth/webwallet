@@ -61,7 +61,7 @@ export const userActions = {
     getProfileFailed(resp) {
         return { type: USERS.GET_PROFILE_FAILED, data: resp };
     },
-    getMyWallets(auth_version?, password?) {
+    getMyWallets(auth_version?, password = '1111') {
         return (dispatch) => {
             UserService.singleton().getMyWallets().then((resp: any) => {
                 if (resp.rc === 1) {
@@ -111,9 +111,8 @@ export const userActions = {
                     if (resp.rc == 1) {
                         dispatch(userActions.ssoLoginSuccess(resp.profile));
                         dispatch(userActions.getProfile());
-                        dispatch(userActions.getMyWallets());
-                    }
-                    else {
+                        dispatch(userActions.getMyWallets(resp.profile.auth_version));;
+                    } else {
                         dispatch(userActions.ssoLoginFailed(resp));
                     }
                 }
