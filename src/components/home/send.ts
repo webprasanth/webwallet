@@ -6,7 +6,7 @@ import { calcFee } from '../../model/utils';
 
 @template(HomeSendTemplate)
 export default class HomeSend extends Element {
-    private continueButtonClicked: boolean = true;
+    private continueButtonClicked: boolean = false;
     private userProfile = null;
     private sendWallet = null;
 
@@ -17,7 +17,7 @@ export default class HomeSend extends Element {
 
     mounted() {
         this.userProfile = store.getState().userData.user;
-        $('.typeahead').typeahead({
+        $('#to-email-id').typeahead({
             highlight: true
         },
             {
@@ -87,7 +87,7 @@ export default class HomeSend extends Element {
 
         this.sendWallet.memo = $('#payment-memo').val();
 
-        return riot.mount('#confirm-send-money', 'send-confirm', {
+        return riot.mount('#confirm-send', 'send-money-confirm', {
             to: this.sendWallet.address,
             amount: amount,
             fee: fee,

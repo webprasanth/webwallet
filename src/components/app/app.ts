@@ -23,16 +23,15 @@ export default class App extends Element {
 function checkLocation() {
     var url = 'https://keys.flashcoin.io/api/check-location';
 
-    if (window.location.protocol == 'http:') {
-        url = 'http://keys.flashcoin.io:8098/api/check-location';
-    }
+    // if (window.location.protocol == 'http:') {
+    //     url = 'http://keys.flashcoin.io:8098/api/check-location';
+    // }
 
     $.ajax({
         url: url,
         type: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-
         success: function (data) {
             if (data.rc == 1) {
                 setLocation(data);

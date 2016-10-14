@@ -127,8 +127,8 @@
     .modal-body .wallet-name {
         max-width: 200px;
     }
-    #confirm-send-money .modal-dialog,
-    #confirm-send-money .modal-dialog{
+    #confirm-send .modal-dialog,
+    #confirm-send .modal-dialog{
             width: 80%;
     }
     .btn-control{
@@ -465,8 +465,8 @@
     .modal-body .wallet-name {
         max-width: 140px;
     }
-    #confirm-send-money .modal-dialog,
-    #confirm-send-money .modal-dialog {
+    #confirm-send .modal-dialog,
+    #confirm-send .modal-dialog {
         width: 91%;
     }
     .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th,

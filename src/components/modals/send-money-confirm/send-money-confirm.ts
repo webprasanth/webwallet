@@ -1,13 +1,13 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
-import SendConfirmTemplate from './send-confirm.html!text';
+import SendMoneyConfirmTemplate from './send-money-confirm.html!text';
 import { formatCurrency } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 
-@template(SendConfirmTemplate)
-export default class SendConfirm extends Element {
+@template(SendMoneyConfirmTemplate)
+export default class SendMoneyConfirm extends Element {
 
     private userProfile = null;
     private confirmation: boolean = true;
@@ -25,9 +25,9 @@ export default class SendConfirm extends Element {
     }
 
     onApplicationStateChanged() {
-        var state = store.getState();
-        var data = state.activityData;
-        var actionType = state.lastAction.type;
+        let state = store.getState();
+        let data = state.activityData;
+        let actionType = state.lastAction.type;
 
         if (actionType === SEND.SEND_TXN_SUCCESSFUL) {
             this.confirmation = false;

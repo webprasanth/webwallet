@@ -17,8 +17,7 @@ export const sendActions = {
                 if (resp.rc === 1) {
                     tx = wallet.signTx(resp.transaction.rawtx);
                     let txn_info: any = {
-                        // TODO: Get location IP: ip: getLocation().info.ip,
-                        ip: '1.1.1.1',
+                        ip: getLocation().info.ip,
                         amount: amount,
                         currency_type: 1,
                         receiver_bare_uid: targetWallet.email,
