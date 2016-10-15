@@ -85,4 +85,9 @@ export default class HomeRequest extends Element {
             receiverWallet: this.receiverWallet
         });
     }
+
+    onContinueButtonClick(event: Event) {
+        this.continueButtonClicked = true;
+        this.searchWallet();
+    }
 }

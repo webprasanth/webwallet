@@ -3,8 +3,8 @@ import store from '../../../model/store';
 import SendRequestConfirmTemplate from './send-request-confirm.html!text';
 import { formatCurrency } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
-import { sendActions } from '../../../model/send/actions';
-import { SEND } from '../../../model/action-types';
+import { requestActions } from '../../../model/request/actions';
+import { REQUEST } from '../../../model/action-types';
 
 @template(SendRequestConfirmTemplate)
 export default class SendRequestConfirm extends Element {
@@ -24,6 +24,13 @@ export default class SendRequestConfirm extends Element {
         let data = state.activityData;
         let actionType = state.lastAction.type;
 
+        if (actionType === REQUEST.REQUEST_MONEY_SUCCESS) {
+            this.requestSuccess = true;
+            this.formRequestEnabled = false;
+        } else if (actionType === REQUEST.REQUEST_MONEY_FAILED) {
+            riot.mount('#error-dialog', 'error-alert', { title: '', message: state.lastAction.data });
+        }
+
         this.update();
     }
 
@@ -36,7 +43,14 @@ export default class SendRequestConfirm extends Element {
         this.formRequestEnabled = true;
         this.requestProcessing = true;
         if (this.opts.amount > 0) {
-
+            let moneyInfo = {
+                to: this.opts.uid,
+                bare_uid: this.opts.receiver_email,
+                amount: this.opts.amount,
+                currency: 1,
+                note: this.opts.sender_note
+            };
+            store.dispatch(requestActions.sendRequest(moneyInfo, this.opts.receiverWallet));
         }
     }
 }

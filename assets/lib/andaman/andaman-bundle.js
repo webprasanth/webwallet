@@ -460,12 +460,21 @@ internals.API.prototype.add_to_roster = function (pipe, request, cb) {
 	pipe.once(Event.ROS_ADD_ACK, cb);
 };
 
+internals.API.prototype.send_request = function (pipe, email, cb) {
+	var op = {
+		op: ROSTER_OP.REQUEST,
+		to: email
+	};
+	pipe.emit(Event.ROS_ADD, op);
+	pipe.once(Event.ROS_ADD_ACK, cb);
+};
+
 internals.API.prototype._on = function (pipe, ev, cb) {
 	// register for the event
 	var listener;
 	if (ev && cb) {
 		listener = function () {
-			console.log('Andaman resp received for  - ', ev, ' resp ', JSON.stringify(arguments));
+			//console.log('Andaman resp received for  - ', ev, ' resp ', JSON.stringify(arguments));
 			// remove timer
 			if (arguments.length > 0) {
 				cb.apply(this, arguments);
@@ -478,6 +487,14 @@ internals.API.prototype._on = function (pipe, ev, cb) {
 	}
 };
 
+var ROSTER_OP = {
+	REQUEST: 1,
+	APPROVE: 2,
+	REMOVE: 3,
+	BLOCK: 4,
+	UNBLOCK: 5,
+	EDIT_ALIAS: 6 // Set user alias
+}
 },{"./def/evt":2}],2:[function(require,module,exports){
 const Event = {
     //AUTH

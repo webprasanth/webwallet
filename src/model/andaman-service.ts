@@ -14,6 +14,8 @@ interface IAndaman {
     add_to_roster(pipe, params: {}, cb: (resp) => any);
     get_txn_by_id(pipe, params: {}, cb: (resp) => any);
     get_wallet_secret(pipe, params: {}, cb: (resp) => any);
+    request_money(pipe, params: {}, cb: (resp) => any);
+    send_request(pipe, params: {}, cb: (resp) => any);
 }
 
 export default class AndamanService {

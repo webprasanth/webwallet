@@ -9,8 +9,9 @@ import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
 import ErrorAlert from './modals/error-alert/error-alert';
 import SendMoneyConfirm from './modals/send-money-confirm/send-money-confirm';
+import SendRequestConfirm from './modals/send-request-confirm/send-request-confirm';
 
-export { LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm };
+export { LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm };
 
 export function initialize() {
     riot.mount('app');

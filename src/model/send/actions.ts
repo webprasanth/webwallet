@@ -53,7 +53,9 @@ export const sendActions = {
                             };
                             SendService.singleton().addToRoster(criteria).then((resp: any) => {
                                 if (resp.rc === 1) {
-
+                                    console.log('Add to roster success');
+                                } else {
+                                    console.log('Add to roster failed');
                                 }
                             });
                         }
