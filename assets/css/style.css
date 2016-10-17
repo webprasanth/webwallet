@@ -356,9 +356,18 @@ h5.title-table{
 }
 /*==============*/
 /*Send and Request*/
+.send-page span.twitter-typeahead,
+.request-page span.twitter-typeahead{
+    width: 90%;
+}
 .send-page textarea,
 .request-page textarea{
     min-height:65px;
+}
+
+.send-page .glyphicon.glyphicon-search,
+.request-page .glyphicon.glyphicon-search{
+    left: -30px;
 }
 .request-page .email-account span,
 .send-page .email-account span{
