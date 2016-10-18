@@ -1,27 +1,27 @@
-import {riot, template, Element} from '../../riot-ts';
+import { riot, template, Element } from '../../riot-ts';
 import TransactionDetailsTemplate from './transaction-details.html!text';
 import store from '../../../model/store';
-import AndamanService from '../../../model/andaman-service'; 
-import {satoshiToFlash, formatCurrency, getDisplayDateTime} from '../../../model/utils';
+import AndamanService from '../../../model/andaman-service';
+import { satoshiToFlash, formatCurrency, getDisplayDateTime } from '../../../model/utils';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
     private txnDetail = store.getState().activityData.txn_detail;
     private meta = store.getState().activityData.txn_detail.meta;
 
-    private AvartarServer = `http://${AndamanService.opts.host}:8098/profile/`;
+    private AvatarServer = AndamanService.AvatarServer;
 
     private satoshiToFlash = satoshiToFlash;
     private formatCurrency = formatCurrency;
-    
+
     constructor() {
         super();
-    }    
+    }
 
     mounted() {
         $('#txDetailDlg').modal('show');
     }
-    
+
     getDisplayDateTime = getDisplayDateTime;
 
 }

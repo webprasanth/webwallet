@@ -1,0 +1,48 @@
+<accept-money-request>
+	<div class="modal fade" id="acceptRequestDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Confirm Transaction</h4>
+				</div>
+				<div class="modal-body">
+					<div class="send-request">
+						<div class="amount-field form-group">
+							<label>Amount</label>
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Flash</span>
+								<input type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon1" value={amount}>
+							</div>
+						</div>
+						<div class="note-field form-group">
+							<label>Note</label>
+							<textarea class="form-control" type="text" id='Note' cols="50" maxlength="50"></textarea>
+							<p class="text-danger max_tx">Max Characters 50</p>
+							<div show={notEnoughBalance} class="pin-incorrect"><strong>{notEnoughBalanceMsg}</strong></div>
+						</div>
+						<div class="text-center">
+							<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+						</div>
+						<div class="info-modal">
+							<div class="avatar">
+								<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvartarServer}{sendAddr.profile_pic_url}" width="40" />
+								<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+							</div>
+							<div class="_info">
+								<div class="name">{sendAddr.display_name ? sendAddr.display_name : sendAddr.username}</div>
+								<div class="name">{sendAddr.email}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="cancel-accept-request-modal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button id="continue-accept-request-modal" type="button" class="btn btn-primary" onclick={sendRequest} disabled={RequestProcessing
+						|| notEnoughBalance}>Continue</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</accept-money-request>

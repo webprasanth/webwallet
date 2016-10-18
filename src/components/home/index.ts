@@ -1,55 +1,58 @@
-import {riot, template, Element} from '../riot-ts';
-import store, {ApplicationState} from '../../model/store';
+import { riot, template, Element } from '../riot-ts';
+import store, { ApplicationState } from '../../model/store';
 
 import HomeActivity from './activity';
 import HomeSend from './send';
 import HomeRequest from './request';
+import HomePending from './pending';
 
-import {userActions} from '../../model/users/actions';
-import {tabActions} from '../../model/tabs/actions';
+import { userActions } from '../../model/users/actions';
+import { tabActions } from '../../model/tabs/actions';
 import HomePageTemplate from './index.html!text';
 import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
 
 @template(HomePageTemplate)
-export default class HomePage extends Element{
+export default class HomePage extends Element {
     private route = riot.route.create();
     private lastView = null;
     private widgets = {
         'activity': 'home-activity',
         'send': 'home-send',
-        'request': 'home-request'
+        'request': 'home-request',
+        'pending': 'home-pending'
     };
 
-    constructor(){
+    constructor() {
         super();
 
         this.initialize();
     }
 
-    initialize(){
+    initialize() {
         this.route((action) => {
             var mainContent = document.querySelector('#main-content');
 
 
-            switch(action){
+            switch (action) {
                 case 'activity':
                 case 'send':
                 case 'request':
+                case 'pending':
                     var id = this.widgets[action];
-                    if(this.lastView && this.lastView.id != id) {
+                    if (this.lastView && this.lastView.id != id) {
                         $(this.lastView).hide();
                     }
 
                     var el = mainContent.querySelector('#' + id);
-                    if(!el){
+                    if (!el) {
                         el = document.createElement('div');
                         el.id = id;
                         mainContent.appendChild(el);
 
                         riot.mount(el, id);
                     }
-                    else{
+                    else {
                         $(el).show();
                     }
 
@@ -66,8 +69,8 @@ export default class HomePage extends Element{
 }
 
 @template(MainHeaderTemplate)
-export class MainHeader extends Element{
-    onLogoutButtonClick(event: Event){
+export class MainHeader extends Element {
+    onLogoutButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -77,26 +80,26 @@ export class MainHeader extends Element{
 }
 
 @template(MainNavBarTemplate)
-export class MainNavBar extends Element{
-    state: ApplicationState = <any>{tabData: {tabs: []}};
+export class MainNavBar extends Element {
+    state: ApplicationState = <any>{ tabData: { tabs: [] } };
 
-    constructor(){
+    constructor() {
         super();
     }
 
-    mounted(){
+    mounted() {
         this.state = store.getState();
         this.update();
 
         store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
-    onApplicationStateChanged(){
+    onApplicationStateChanged() {
         this.state = store.getState();
         this.update();
     }
 
-    onTabItemClick(event: Event){
+    onTabItemClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -104,7 +107,7 @@ export class MainNavBar extends Element{
         riot.route(tab.id);
     }
 
-    onLogoutTabItemClick(event: Event){
+    onLogoutTabItemClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -113,4 +116,4 @@ export class MainNavBar extends Element{
     }
 }
 
-export {HomeActivity, HomeSend, HomeRequest};
+export { HomeActivity, HomeSend, HomeRequest, HomePending };

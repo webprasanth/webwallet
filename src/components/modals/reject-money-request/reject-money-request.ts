@@ -1,13 +1,13 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
-import SendMoneyConfirmTemplate from './send-money-confirm.html!text';
+import RejectMoneyRequestTemplate from './reject-money-request.html!text';
 import { formatCurrency } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 
-@template(SendMoneyConfirmTemplate)
-export default class SendMoneyConfirm extends Element {
+@template(RejectMoneyRequestTemplate)
+export default class RejectMoneyRequest extends Element {
 
     private userProfile = null;
     private confirmation: boolean = true;
@@ -42,7 +42,7 @@ export default class SendMoneyConfirm extends Element {
 
     mounted() {
         this.userProfile = store.getState().userData.user;
-        $('#sendDialog').modal('show');
+        $('#rejectRequestDialog').modal('show');
     }
 
     sendDirect() {

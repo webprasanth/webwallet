@@ -16,11 +16,14 @@ interface IAndaman {
     get_wallet_secret(pipe, params: {}, cb: (resp) => any);
     request_money(pipe, params: {}, cb: (resp) => any);
     send_request(pipe, params: {}, cb: (resp) => any);
+    get_requests(pipe, params: {}, cb: (resp) => any);
+    get_wallets_by_email(pipe, params: {}, cb: (resp) => any);
+    get_balance(pipe, params: {}, cb: (resp) => any);
 }
 
 export default class AndamanService {
     private static service = Andaman;
-    public static opts = Andaman.opts;
+    public static AvatarServer = `http://${Andaman.opts.host}/profile/`;
     static ready(): Promise<{ andaman: IAndaman, pipe: any }> {
         return AndamanService.service.ready();
     }

@@ -10,8 +10,13 @@ export default class HomeActivity extends Element {
     private fromDateObject = null;
     private toDateObject = null;
     private paginationObject = null;
-    private oldActiveTabId = "";
-    private currentActiveTabId = "0";
+    /**
+     * flag for reset Pagination
+     * + equal true when change Tab or reload data
+     * + equal false when navigate to another page
+     */
+    private resetPagination = false;
+    private currentActiveTabId = 0;
 
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
@@ -19,7 +24,6 @@ export default class HomeActivity extends Element {
 
     public txns = [];
     public tabs = store.getState().activityData.tabs;
-
 
     constructor() {
         super();
@@ -30,7 +34,7 @@ export default class HomeActivity extends Element {
         this.timeZone = state.userData.user.timezone;
         store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers();
-        this.loadTxns(1, null);
+        this.loadTxns();
     }
 
     unmounted() {
@@ -41,7 +45,6 @@ export default class HomeActivity extends Element {
 
     initDatePickers() {
         var state = store.getState();
-;
         if (!this.fromDateObject) {
             this.fromDateObject = $("#fromDate").parent().datepicker({
                 format: this.DATE_PICKER_FORMAT,
@@ -72,15 +75,12 @@ export default class HomeActivity extends Element {
         this.toDateObject.on('changeDate', selectedDate => {
             this.fromDateObject.datepicker('setEndDate', selectedDate.date);
         });
-
     }
 
     buildPagination() {
         var state = store.getState();
         var {total_txns, page_size} = state.activityData;
-        
-        if (this.oldActiveTabId !== this.currentActiveTabId) {
-            this.oldActiveTabId = this.currentActiveTabId;
+        if (this.resetPagination) {
             this.paginationObject = $(() => {
                 $('.txn-pagination').pagination({
                     items: total_txns,
@@ -92,21 +92,23 @@ export default class HomeActivity extends Element {
         }
     }
 
-    loadTxns = (pageNumber = 1, event) => {
+    loadTxns = (pageNumber?, event?) => {
+        if (!pageNumber) {
+            this.resetPagination = true;
+            pageNumber = 1;
+        } else {
+            this.resetPagination = false;
+        }
         var data = store.getState().activityData;
 
         var pageSize = data.page_size;
-        var fromDate = this.fromDateObject.datepicker('getDate').toISOString();
-        var toDate = this.toDateObject.datepicker('getDate').toISOString();
-
-        var activeTab = data.tabs.filter((tab) => {
-            return tab.isActive;
-        })[0];
-        var type = activeTab ? activeTab.id : "0";
-        this.currentActiveTabId = type;
+        let fromDateTmp = this.fromDateObject.datepicker('getDate');
+        let fromDate = new Date(fromDateTmp.setHours(0, 0, 0, 0)).toISOString();
+        let toDateTmp = this.toDateObject.datepicker('getDate');
+        let toDate = new Date(toDateTmp.setHours(23, 59, 59, 999)).toISOString();
 
         var pageSettings = {
-            type: type,
+            type: this.currentActiveTabId,
             date_from: fromDate,
             date_to: toDate,
             start: (pageNumber - 1) * pageSize,
@@ -115,10 +117,6 @@ export default class HomeActivity extends Element {
         };
 
         store.dispatch(activityActions.getMoreTxns(pageSettings));
-    }
-
-    reloadTxns() {
-        this.paginationObject = null;
     }
 
     onApplicationStateChanged() {
@@ -131,7 +129,12 @@ export default class HomeActivity extends Element {
             this.txns = data.txns;
             this.tabs = data.tabs;
         } else if (type == ACTIVITIES.SET_ACTIVE_TAB) {
-            this.loadTxns(1, null);
+            let activeTab = data.tabs.filter((tab) => {
+                return tab.isActive;
+            })[0];
+            let type = activeTab ? activeTab.id : 0;
+            this.currentActiveTabId = type;
+            this.loadTxns();
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
             riot.mount('#transaction-detail', 'transaction-details');
         }
@@ -141,18 +144,17 @@ export default class HomeActivity extends Element {
     getDisplayDate = getDisplayDate;
 
     onShowButtonClick(event: Event) {
-        this.reloadTxns();
+        this.loadTxns();
     }
 
     onShowAllButtonClick(event: Event) {
         this.initDatePickers();
-        this.reloadTxns();
+        this.loadTxns();
     }
 
     onTabItemClick(event: Event1) {
         event.preventDefault();
         event.stopPropagation();
-        this.reloadTxns();
         store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
     }
 

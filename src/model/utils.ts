@@ -7,6 +7,17 @@ interface UserKey {
   publicKey: string;
 }
 
+const MOMENT_FORMAT = {
+  DATE: "MMM DD, YYYY",
+  DATE_TIME: "MMM DD, YYYY hh:mm A",
+  DATE_TIME_2: "MMM DD, YYYY hh:mm:ss A"
+}
+
+declare class Buffer extends Object {
+  constructor(arr?: any, encode?: any);
+  toString(encode?: string);
+}
+
 export function satoshiToFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(new Big(num).div(10000000).toString());
@@ -44,20 +55,14 @@ export function formatCurrency(amount) {
   return `${amount} Flash`;
 }
 
-const MOMENT_FORMAT = {
-  DATE: "MMM DD, YYYY",
-  DATE_TIME: "MMM DD, YYYY hh:mm A",
-  DATE_TIME_2: "MMM DD, YYYY hh:mm:ss A"
-}
-
 export function getDisplayDate(date, toTimeZone) {
-  if (toTimeZone)
+  if (toTimeZone && _tmp.tz.zone(toTimeZone) != null)
     return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE);
   return _tmp(date).local().format(MOMENT_FORMAT.DATE);
 }
 
 export function getDisplayDateTime(date, toTimeZone) {
-  if (toTimeZone)
+  if (toTimeZone && _tmp.tz.zone(toTimeZone) != null)
     return _tmp(date).tz(toTimeZone).format(MOMENT_FORMAT.DATE_TIME_2);
   return _tmp(date).local().format(MOMENT_FORMAT.DATE_TIME_2);
 }
@@ -109,5 +114,20 @@ export function encodeBase64(arr) {
     var i, s = [], len = arr.length;
     for (i = 0; i < len; i++) s.push(String.fromCharCode(arr[i]));
     return btoa(s.join(''));
+  }
+}
+
+/**
+ * Cut string s if s.length > n
+ */
+export function strimString(s, n) {
+  if (s) {
+    if (s.length > n) {
+      return (s.substring(0, n) + '...');
+    } else {
+      return s;
+    }
+  } else {
+    return s;
   }
 }

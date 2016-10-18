@@ -122,4 +122,17 @@ export default class UserService {
             });
         });
     }
+
+    getBalance() {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.get_balance(pipe, {}, resp => {
+                    resolve(resp);
+                });
+            });
+        });
+    }
 }

@@ -237,7 +237,7 @@ SystemJS.config({
     "querystring": "github:jspm/nodelibs-querystring@0.2.0-alpha",
     "redux": "npm:redux@3.6.0",
     "redux-thunk": "npm:redux-thunk@2.1.0",
-    "riot": "npm:riot@2.6.3",
+    "riot": "npm:riot@2.6.4",
     "riot-router": "npm:riot-router@0.8.1",
     "scss": "github:KevCJones/plugin-scss@0.2.11",
     "source-map": "npm:source-map@0.2.0",
@@ -437,18 +437,6 @@ SystemJS.config({
         "ansi-styles": "npm:ansi-styles@2.2.1"
       }
     },
-    "npm:chokidar@1.6.0": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "is-glob": "npm:is-glob@2.0.1",
-        "path-is-absolute": "npm:path-is-absolute@1.0.1",
-        "glob-parent": "npm:glob-parent@2.0.0",
-        "readdirp": "npm:readdirp@2.1.0",
-        "async-each": "npm:async-each@1.0.1",
-        "anymatch": "npm:anymatch@1.3.0",
-        "is-binary-path": "npm:is-binary-path@1.0.1"
-      }
-    },
     "npm:glob-parent@2.0.0": {
       "map": {
         "is-glob": "npm:is-glob@2.0.1"
@@ -491,12 +479,6 @@ SystemJS.config({
         "minimatch": "npm:minimatch@3.0.3",
         "readable-stream": "npm:readable-stream@2.1.5",
         "set-immediate-shim": "npm:set-immediate-shim@1.0.1"
-      }
-    },
-    "npm:inflight@1.0.5": {
-      "map": {
-        "once": "npm:once@1.4.0",
-        "wrappy": "npm:wrappy@1.0.2"
       }
     },
     "npm:anymatch@1.3.0": {
@@ -991,13 +973,13 @@ SystemJS.config({
     },
     "npm:riot-router@0.8.1": {
       "map": {
-        "riot": "npm:riot@2.6.3",
+        "riot": "npm:riot@2.6.4",
         "extend": "npm:extend@3.0.0"
       }
     },
     "npm:redux@3.6.0": {
       "map": {
-        "symbol-observable": "npm:symbol-observable@1.0.3",
+        "symbol-observable": "npm:symbol-observable@1.0.4",
         "loose-envify": "npm:loose-envify@1.2.0",
         "lodash-es": "npm:lodash-es@4.16.4",
         "lodash": "npm:lodash@4.16.4"
@@ -1165,12 +1147,7 @@ SystemJS.config({
     },
     "npm:browserslist@1.4.0": {
       "map": {
-        "caniuse-db": "npm:caniuse-db@1.0.30000554"
-      }
-    },
-    "npm:source-map-support@0.4.3": {
-      "map": {
-        "source-map": "npm:source-map@0.5.6"
+        "caniuse-db": "npm:caniuse-db@1.0.30000559"
       }
     },
     "npm:code-point-at@1.0.1": {
@@ -1185,7 +1162,7 @@ SystemJS.config({
         "path-is-absolute": "npm:path-is-absolute@1.0.1",
         "fs.realpath": "npm:fs.realpath@1.0.0",
         "minimatch": "npm:minimatch@3.0.3",
-        "inflight": "npm:inflight@1.0.5"
+        "inflight": "npm:inflight@1.0.6"
       }
     },
     "npm:pbkdf2@3.0.9": {
@@ -1243,21 +1220,10 @@ SystemJS.config({
         "moment": "npm:moment@2.15.1"
       }
     },
-    "npm:riot@2.6.3": {
-      "map": {
-        "riot-observable": "npm:riot-observable@2.5.0",
-        "riot-route": "npm:riot-route@2.5.0",
-        "simple-dom": "npm:simple-dom@0.3.0",
-        "riot-cli": "npm:riot-cli@2.6.2",
-        "riot-compiler": "npm:riot-compiler@2.5.5",
-        "riot-tmpl": "npm:riot-tmpl@2.4.1",
-        "simple-html-tokenizer": "npm:simple-html-tokenizer@0.2.5"
-      }
-    },
     "npm:riot-cli@2.6.2": {
       "map": {
         "riot-compiler": "npm:riot-compiler@2.5.5",
-        "chokidar": "npm:chokidar@1.6.0",
+        "chokidar": "npm:chokidar@1.6.1",
         "co": "npm:co@4.6.0",
         "optionator": "npm:optionator@0.8.2",
         "shelljs": "npm:shelljs@0.7.4",
@@ -1267,7 +1233,7 @@ SystemJS.config({
     },
     "npm:rollup@0.36.3": {
       "map": {
-        "source-map-support": "npm:source-map-support@0.4.3"
+        "source-map-support": "npm:source-map-support@0.4.5"
       }
     },
     "npm:autoprefixer@6.5.1": {
@@ -1276,8 +1242,42 @@ SystemJS.config({
         "browserslist": "npm:browserslist@1.4.0",
         "normalize-range": "npm:normalize-range@0.1.2",
         "num2fraction": "npm:num2fraction@1.2.2",
-        "caniuse-db": "npm:caniuse-db@1.0.30000554",
+        "caniuse-db": "npm:caniuse-db@1.0.30000559",
         "postcss-value-parser": "npm:postcss-value-parser@3.3.0"
+      }
+    },
+    "npm:riot@2.6.4": {
+      "map": {
+        "simple-html-tokenizer": "npm:simple-html-tokenizer@0.2.5",
+        "riot-cli": "npm:riot-cli@2.6.2",
+        "riot-compiler": "npm:riot-compiler@2.5.5",
+        "riot-route": "npm:riot-route@2.5.0",
+        "riot-observable": "npm:riot-observable@2.5.0",
+        "riot-tmpl": "npm:riot-tmpl@2.4.2",
+        "simple-dom": "npm:simple-dom@0.3.2"
+      }
+    },
+    "npm:chokidar@1.6.1": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3",
+        "is-binary-path": "npm:is-binary-path@1.0.1",
+        "glob-parent": "npm:glob-parent@2.0.0",
+        "path-is-absolute": "npm:path-is-absolute@1.0.1",
+        "async-each": "npm:async-each@1.0.1",
+        "readdirp": "npm:readdirp@2.1.0",
+        "is-glob": "npm:is-glob@2.0.1",
+        "anymatch": "npm:anymatch@1.3.0"
+      }
+    },
+    "npm:inflight@1.0.6": {
+      "map": {
+        "wrappy": "npm:wrappy@1.0.2",
+        "once": "npm:once@1.4.0"
+      }
+    },
+    "npm:source-map-support@0.4.5": {
+      "map": {
+        "source-map": "npm:source-map@0.5.6"
       }
     }
   }

@@ -97,6 +97,23 @@ export const userActions = {
     getMyWalletsFailed(resp) {
         return { type: USERS.GET_MY_WALLETS_FAILED, data: resp };
     },
+    getBalance() {
+        return (dispatch) => {
+            UserService.singleton().getBalance().then((resp: any) => {
+                if (resp.rc === 1) {
+                    dispatch(userActions.getBalanceSuccess(utils.satoshiToFlash(resp.balance)));
+                } else {
+                    dispatch(userActions.getBalanceFailed(resp));
+                }
+            });
+        }
+    },
+    getBalanceSuccess(balance) {
+        return { type: USERS.GET_BALANCE_SUCCESS, data: balance };
+    },
+    getBalanceFailed(resp) {
+        return { type: USERS.GET_BALANCE_FAILED, data: resp };
+    },
     rememberMe(remember) {
         return { type: USERS.REMEMBER_ME, data: remember };
     },

@@ -168,7 +168,7 @@
     "gulp-run": "^1.7.1",
     "gulp-shell": "^0.5.2",
     "jspm": "^0.17.0-beta.29",
-    "riot": "^2.6.3",
+    "riot": "^2.6.4",
     "systemjs-builder": "^0.15.32",
     "tweetnacl-util": "^0.13.3",
     "typescript": "^2.0.3"

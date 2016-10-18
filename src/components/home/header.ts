@@ -1,22 +1,30 @@
-import {template, Element} from '../riot-ts';
-import store, {ApplicationState}  from '../../model/store';
-import {userActions} from '../../model/users/actions';
+import { template, Element } from '../riot-ts';
+import store, { ApplicationState } from '../../model/store';
+import { userActions } from '../../model/users/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
+import { USERS } from '../../model/action-types';
 
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends Element {
     public userEmail: string = store.getState().userData.user.email;
-    public avatarUrl: string = `http://${AndamanService.opts.host}/profile/${store.getState().userData.user.profile_pic_url}`;
+    public avatarUrl: string = `${AndamanService.AvatarServer}${store.getState().userData.user.profile_pic_url}`;
+    private balance = 0;
 
     mounted() {
         let state = store.getState();
         store.subscribe(this.onApplicationStateChanged.bind(this));
-
+        store.dispatch(userActions.getBalance());
     }
 
     onApplicationStateChanged() {
-        var state: ApplicationState = store.getState();
+        let state: ApplicationState = store.getState();
+
+        if (state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
+            this.balance = state.lastAction.data;
+        }
+
+        this.update();
     }
 
     onLogoutButtonClick(event: Event) {
@@ -24,7 +32,6 @@ export default class HomeHeader extends Element {
         event.stopPropagation();
 
         store.dispatch(userActions.logout());
-
     }
 
 

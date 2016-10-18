@@ -12,7 +12,7 @@ export default class SendRequestConfirm extends Element {
     private requestProcessing: boolean = false;
     private requestSuccess: boolean = false;
     private formatCurrency = formatCurrency;
-    private AvartarServer = `http://${AndamanService.opts.host}:8098/profile/`;
+    private AvatarServer = AndamanService.AvatarServer;
 
     constructor() {
         super();

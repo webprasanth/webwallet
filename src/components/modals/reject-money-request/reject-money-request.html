@@ -1,0 +1,61 @@
+<reject-money-request>
+	<div class="modal fade" id="rejectRequestDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Reject request</h4>
+				</div>
+				<virtual show={FormRequest}>
+					<div class="modal-body">
+						<div class="send-request">
+							<div class="note-field form-group">
+								<label>Note</label>
+								<textarea class="form-control" type="text" id='Note' cols="50" maxlength="50"></textarea>
+								<p class="text-left text-danger max_tx">Max Characters 50</p>
+							</div>
+							<div class="text-center">
+								<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+							</div>
+							<div class="info-modal">
+								<div class="avatar">
+									<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvartarServer}{sendAddr.profile_pic_url}" width="40" />
+									<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+								</div>
+								<div class="_info">
+									<div class="name">{sendAddr.display_name ? sendAddr.display_name : sendAddr.username}</div>
+									<div class="name">{sendAddr.email}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick={sendRequest}>Send</button>
+					</div>
+				</virtual>
+				<virtual show={RequestSuccess}>
+					<div class="modal-body">
+						<div class="message-error">
+							You have rejected a request.
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" data-dismiss="modal">Close</button>
+					</div>
+				</virtual>
+				<virtual show={RequestFail}>
+					<div class="modal-body">
+						<div class="message-error">
+							Reject request fail
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" data-dismiss="modal">Close</button>
+					</div>
+				</virtual>
+			</div>
+		</div>
+	</div>
+</reject-money-request>

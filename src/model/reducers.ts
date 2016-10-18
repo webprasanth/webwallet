@@ -4,6 +4,7 @@ import commonReducer from './commons/reducers';
 import activityReducer from './activities/reducers';
 import sendReducer from './send/reducers';
 import tabReducer from './tabs/reducers';
+import pendingReducer from './pending/reducers';
 
 function lastAction(state = null, action) {
     return action;
@@ -15,6 +16,7 @@ const reducers = redux.combineReducers({
     commonData: commonReducer,
     activityData: activityReducer,
     sendData: sendReducer,
+    pendingData: pendingReducer,
     tabData: tabReducer
 });
 

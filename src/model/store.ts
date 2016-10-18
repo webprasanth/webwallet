@@ -10,11 +10,13 @@ interface IUser {
     sessionToken: string;
     profile_pic_url: string;
     created_ts: string;
+    timezone: string;
 }
 
 interface ITAB {
-    id: string;
+    id: number;
     name: string;
+    shortName?: string;
     isActive: boolean;
 }
 
@@ -24,6 +26,7 @@ export interface ApplicationState {
     commonData: { isLoading: boolean },
     activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any },
     sendData: { processing_duration: number },
+    pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] }
     tabData: { tabs: ITAB[] }
 }
 
