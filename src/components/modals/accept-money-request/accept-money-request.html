@@ -13,7 +13,7 @@
 							<label>Amount</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">Flash</span>
-								<input type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon1" value={amount}>
+								<input type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon1" value={opts.amount}>
 							</div>
 						</div>
 						<div class="note-field form-group">
@@ -27,19 +27,19 @@
 						</div>
 						<div class="info-modal">
 							<div class="avatar">
-								<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvartarServer}{sendAddr.profile_pic_url}" width="40" />
-								<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+								<img show={sendWallet.profile_pic_url} class="img-circle" src="{AvatarServer}{sendWallet.profile_pic_url}" width="40" />
+								<img show={!sendWallet.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
 							</div>
 							<div class="_info">
-								<div class="name">{sendAddr.display_name ? sendAddr.display_name : sendAddr.username}</div>
-								<div class="name">{sendAddr.email}</div>
+								<div class="name">{sendWallet.display_name ? sendWallet.display_name : sendWallet.username}</div>
+								<div class="name">{sendWallet.email}</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button id="cancel-accept-request-modal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button id="continue-accept-request-modal" type="button" class="btn btn-primary" onclick={sendRequest} disabled={RequestProcessing
+					<button id="continue-accept-request-modal" type="button" class="btn btn-primary" onclick={sendRequest} disabled={requestProcessing
 						|| notEnoughBalance}>Continue</button>
 				</div>
 			</div>

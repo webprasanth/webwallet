@@ -31,11 +31,7 @@ export const pendingActions = {
     },
     getWalletsByEmail(params) {
         return (dispatch) => {
-            dispatch(commonActions.toggleLoading(true));
-
             PendingService.singleton().getWalletsByEmail(params).then((resp: any) => {
-                dispatch(commonActions.toggleLoading(false));
-
                 if (resp.rc == 1 && resp.results.length > 0) {
                     dispatch(pendingActions.getWalletsByEmailSuccess(resp));
                 } else {
@@ -49,5 +45,47 @@ export const pendingActions = {
     },
     getWalletsByEmailFailed(resp) {
         return { type: PENDING.GET_WALLETS_BY_EMAIL_FAILED, data: resp };
+    },
+    markRejectedMoneyRequests(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            PendingService.singleton().markRejectedMoneyRequests(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc == 1) {
+                    dispatch(pendingActions.markRejectedMoneyRequestsSuccess(resp));
+                } else {
+                    dispatch(pendingActions.markRejectedMoneyRequestsFailed(resp));
+                }
+            });
+        };
+    },
+    markRejectedMoneyRequestsSuccess(resp) {
+        return { type: PENDING.MARK_REJECTED_MONEY_REQUESTS_SUCCESS, data: resp };
+    },
+    markRejectedMoneyRequestsFailed(resp) {
+        return { type: PENDING.MARK_REJECTED_MONEY_REQUESTS_FAILED, data: resp };
+    },
+    markCancelledMoneyRequests(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            PendingService.singleton().markCancelledMoneyRequests(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc == 1) {
+                    dispatch(pendingActions.markCancelledMoneyRequestsSuccess(resp));
+                } else {
+                    dispatch(pendingActions.markCancelledMoneyRequestsFailed(resp));
+                }
+            });
+        };
+    },
+    markCancelledMoneyRequestsSuccess(resp) {
+        return { type: PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS, data: resp };
+    },
+    markCancelledMoneyRequestsFailed(resp) {
+        return { type: PENDING.MARK_CANCELLED_MONEY_REQUESTS_FAILED, data: resp };
     },
 };

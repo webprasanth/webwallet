@@ -7,7 +7,7 @@
                         aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Reject request</h4>
 				</div>
-				<virtual show={FormRequest}>
+				<virtual show={formRequest}>
 					<div class="modal-body">
 						<div class="send-request">
 							<div class="note-field form-group">
@@ -20,7 +20,7 @@
 							</div>
 							<div class="info-modal">
 								<div class="avatar">
-									<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvartarServer}{sendAddr.profile_pic_url}" width="40" />
+									<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvatarServer}{sendAddr.profile_pic_url}" width="40" />
 									<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
 								</div>
 								<div class="_info">
@@ -35,7 +35,7 @@
 						<button type="button" class="btn btn-primary" onclick={sendRequest}>Send</button>
 					</div>
 				</virtual>
-				<virtual show={RequestSuccess}>
+				<virtual show={requestSuccess}>
 					<div class="modal-body">
 						<div class="message-error">
 							You have rejected a request.
@@ -45,7 +45,7 @@
 						<button class="btn btn-info" data-dismiss="modal">Close</button>
 					</div>
 				</virtual>
-				<virtual show={RequestFail}>
+				<virtual show={requestFail}>
 					<div class="modal-body">
 						<div class="message-error">
 							Reject request fail

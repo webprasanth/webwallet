@@ -1147,7 +1147,7 @@ SystemJS.config({
     },
     "npm:browserslist@1.4.0": {
       "map": {
-        "caniuse-db": "npm:caniuse-db@1.0.30000559"
+        "caniuse-db": "npm:caniuse-db@1.0.30000560"
       }
     },
     "npm:code-point-at@1.0.1": {
@@ -1242,7 +1242,7 @@ SystemJS.config({
         "browserslist": "npm:browserslist@1.4.0",
         "normalize-range": "npm:normalize-range@0.1.2",
         "num2fraction": "npm:num2fraction@1.2.2",
-        "caniuse-db": "npm:caniuse-db@1.0.30000559",
+        "caniuse-db": "npm:caniuse-db@1.0.30000560",
         "postcss-value-parser": "npm:postcss-value-parser@3.3.0"
       }
     },

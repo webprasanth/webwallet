@@ -19,6 +19,8 @@ interface IAndaman {
     get_requests(pipe, params: {}, cb: (resp) => any);
     get_wallets_by_email(pipe, params: {}, cb: (resp) => any);
     get_balance(pipe, params: {}, cb: (resp) => any);
+    mark_rejected_money_requests(pipe, params: {}, cb: (resp) => any);
+    mark_cancelled_money_requests(pipe, params: {}, cb: (resp) => any);
 }
 
 export default class AndamanService {

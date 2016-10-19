@@ -35,10 +35,11 @@ export default class SendService {
             AndamanService.ready().then(opts => {
                 let andaman = opts.andaman;
                 let pipe = opts.pipe;
-
                 andaman.add_txn(pipe, txn_info, resp => {
                     resolve(resp);
                 });
+            }).catch(reason => {
+                console.log(reason);
             });
         });
     }

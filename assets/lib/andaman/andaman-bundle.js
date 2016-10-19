@@ -494,7 +494,7 @@ var ROSTER_OP = {
 	BLOCK: 4,
 	UNBLOCK: 5,
 	EDIT_ALIAS: 6 // Set user alias
-}
+};
 },{"./def/evt":2}],2:[function(require,module,exports){
 const Event = {
     //AUTH
@@ -677,7 +677,6 @@ const Event = {
     KEYS_GET_WALLET_BY_USERNAME: 1021,
     KEYS_GET_RECV_MONEY_REQ_BY_ID: 1022,
     KEYS_UPDATE_WALLET_BALANCE: 1023,
-
 
     KEYS_GET_TXN: 1024,
     KEYS_UPDATE_TXN_LOG: 1025,
@@ -21148,7 +21147,7 @@ module.exports = {
         if (readyPromise) return readyPromise;
 
         readyPromise = new Promise(function (resolve) {
-            var buffer = new Buffer(1024);
+            var buffer = new Buffer(2048);
             var eventPipe = io({
                 host: opts.host,
                 port: opts.port,
@@ -21160,17 +21159,17 @@ module.exports = {
                 secretKey: clt_priv_p,
             });
 
-            customEventPipe.emit = function(e, payload) {
+            customEventPipe.emit = function (e, payload) {
                 payload.sessionToken = this.session_token;
                 payload.auth_version = this.auth_version;
                 eventPipe.emit(e, payload);
             };
 
-            customEventPipe.once = function(e, fn) {
+            customEventPipe.once = function (e, fn) {
                 eventPipe.once(e, fn);
             };
 
-            customEventPipe.setAuthInfo =  function(authVersion, sessionToken) {
+            customEventPipe.setAuthInfo = function (authVersion, sessionToken) {
                 this.auth_version = authVersion;
                 this.session_token = sessionToken;
             };

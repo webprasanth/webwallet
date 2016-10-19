@@ -114,6 +114,8 @@ export default class HomePending extends Element {
             let type = activeTab ? activeTab.id : 2;
             this.currentActiveTabId = type;
             this.loadData();
+        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS) {
+            this.loadData();
         }
         this.update();
     }
@@ -179,6 +181,24 @@ export default class HomePending extends Element {
                 display_name: event.item.sender_display_name,
                 username: event.item.sender,
                 email: event.item.sender_email
+            }
+        });
+    }
+
+    cancelRequest(event: Event1) {
+        riot.mount('#confirm-send', 'confirm-dialog', {
+            title: 'Cancel request',
+            message: 'Are you sure you want to cancel this request?',
+            callback: function (result) {
+
+                if (result) {
+                    let criteria = {
+                        request_id: event.item.id,
+                        receiver_bare_uid: event.item.receiver_email
+                    }
+
+                    store.dispatch(pendingActions.markCancelledMoneyRequests(criteria));
+                }
             }
         });
     }

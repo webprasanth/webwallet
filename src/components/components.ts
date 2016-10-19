@@ -12,10 +12,11 @@ import SendMoneyConfirm from './modals/send-money-confirm/send-money-confirm';
 import SendRequestConfirm from './modals/send-request-confirm/send-request-confirm';
 import AcceptMoneyRequest from './modals/accept-money-request/accept-money-request';
 import RejectMoneyRequest from './modals/reject-money-request/reject-money-request';
+import ConfirmDialog from './modals/confirm-dialog/confirm-dialog';
 
 export {
     LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm,
-    AcceptMoneyRequest, RejectMoneyRequest
+    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog
 };
 
 export function initialize() {

@@ -11,6 +11,7 @@ interface IUser {
     profile_pic_url: string;
     created_ts: string;
     timezone: string;
+    balance: number;
 }
 
 interface ITAB {

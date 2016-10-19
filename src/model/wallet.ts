@@ -1,7 +1,7 @@
 import bitcoin from 'bitcoinjs-lib';
 import bip39 from 'bip39';
 
-const network = {
+const NETWORK = {
     messagePrefix: '\x18Flashcoin Signed Message:\n',
     bip32: {
         public: 0x0488b21e,
@@ -13,7 +13,7 @@ const network = {
     dustThreshold: 546
 };
 
-const networkName = 'flashcoin';
+const NETWORK_NAME = 'flashcoin';
 
 export default class Wallet {
 
@@ -28,7 +28,7 @@ export default class Wallet {
         }
 
         let seed = bip39.mnemonicToSeedHex(mnemonic)
-        let accountZero = bitcoin.HDNode.fromSeedHex(seed, network).deriveHardened(0);
+        let accountZero = bitcoin.HDNode.fromSeedHex(seed, NETWORK).deriveHardened(0);
 
         this.accounts = {
             externalAccount: accountZero.derive(0),
@@ -40,7 +40,7 @@ export default class Wallet {
 
     signTx(rawTx) {
         let tx = bitcoin.Transaction.fromHex(rawTx);
-        let txBuilder = bitcoin.TransactionBuilder.fromTransaction(tx, network);
+        let txBuilder = bitcoin.TransactionBuilder.fromTransaction(tx, NETWORK);
         let keyPair = this.accounts.externalAccount.derive(0).keyPair;
 
         for (var i = 0; i < tx.ins.length; i++) {

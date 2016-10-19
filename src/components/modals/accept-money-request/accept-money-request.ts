@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import AcceptMoneyRequestTemplate from './accept-money-request.html!text';
-import { formatCurrency } from '../../../model/utils';
+import * as utils from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { pendingActions } from '../../../model/pending/actions';
 import { PENDING } from '../../../model/action-types';
@@ -9,7 +9,11 @@ import { PENDING } from '../../../model/action-types';
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
 
+    private AvatarServer = AndamanService.AvatarServer;
     private notEnoughBalanceMsg = null;
+    private notEnoughBalance = false;
+    private requestProcessing = false;
+    private sendWallet = null;
 
     constructor() {
         super();
@@ -39,7 +43,44 @@ export default class AcceptMoneyRequest extends Element {
     }
 
     enableForm(data) {
+        let amount = this.opts.amount;
+        let fee = utils.calcFee(amount);
+        let balance = store.getState().userData.user.balance;
+        this.notEnoughBalanceMsg = null;
+        this.sendWallet = data.results[0];
 
+        if (balance < amount + fee) {
+            if (amount <= balance) {
+                this.notEnoughBalanceMsg = 'You do not have enough fee to make this payment';
+            } else {
+                this.notEnoughBalanceMsg = 'You do not have enough funds to make this payment';
+            }
+            this.notEnoughBalance = true;
+        } else {
+            this.notEnoughBalance = false;
+        }
+        this.requestProcessing = false;
+    }
+
+    sendRequest(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        $('#acceptRequestDialog').modal('hide');
+        if (this.opts.amount > 0) {
+            if (this.sendWallet.address) {
+                this.sendWallet.memo = $('#Note').val();
+                this.sendWallet.needUpdateRequestId = true;
+                this.sendWallet.RequestId = this.opts.receive_id;
+
+                riot.mount('#confirm-send', 'send-money-confirm', {
+                    to: this.sendWallet.address,
+                    amount: this.opts.amount,
+                    fee: utils.calcFee(this.opts.amount),
+                    wallet: this.sendWallet
+                });
+            }
+        }
     }
 
 }

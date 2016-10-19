@@ -36,5 +36,31 @@ export default class PendingService {
             })
         });
     }
+
+    markRejectedMoneyRequests(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.mark_rejected_money_requests(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    markCancelledMoneyRequests(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.mark_cancelled_money_requests(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
 }
 

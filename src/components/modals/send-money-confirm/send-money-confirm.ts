@@ -47,6 +47,17 @@ export default class SendMoneyConfirm extends Element {
 
     sendDirect() {
         this.createRawTx();
+        // this.testPromise().then((rs) => {
+        //     if (rs == 10) {
+        //         this.testPromise().then((rs) => {
+        //             if (rs == 10) {
+        //                 this.testPromise().then((rs) => {
+        //                     console.log(rs);
+        //                 })
+        //             }
+        //         })
+        //     }
+        // });
     }
 
     createRawTx() {
@@ -55,4 +66,23 @@ export default class SendMoneyConfirm extends Element {
         store.dispatch(sendActions.createRawTx(this.opts.wallet, this.opts.amount, this.opts.wallet.memo));
     }
 
+    testPromise() {
+        return new Promise((resolve, reject) => {
+            this.testPromise1().then(rs => {
+                console.log('p1:', rs);
+                setTimeout(() => {
+                    resolve(10);
+                }, 1000);
+            });
+
+        })
+    }
+
+    testPromise1() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(20);
+            }, 1000);
+        })
+    }
 }
