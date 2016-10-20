@@ -268,8 +268,8 @@ internals.API.prototype.request_money = function (pipe, request, callback) {
 };
 
 internals.API.prototype.mark_sent_money_requests = function (pipe, request, cb) {
-	pipe.emit(Event.KEYS_MARK_ACCEPT_MONEY_REQ, request);
-	pipe.once(Event.KEYS_MARK_ACCEPT_MONEY_REQ_ACK, cb);
+	pipe.emit(Event.KEYS_MARK_SENT_MONEY_REQ, request);
+	pipe.once(Event.KEYS_MARK_SENT_MONEY_REQ_ACK, cb);
 };
 
 internals.API.prototype.mark_rejected_money_requests = function (pipe, criteria, cb) {

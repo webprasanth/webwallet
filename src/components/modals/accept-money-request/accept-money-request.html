@@ -27,8 +27,8 @@
 						</div>
 						<div class="info-modal">
 							<div class="avatar">
-								<img show={sendWallet.profile_pic_url} class="img-circle" src="{AvatarServer}{sendWallet.profile_pic_url}" width="40" />
-								<img show={!sendWallet.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+								<img class="img-circle" src={sendWallet.profile_pic_url ? AvatarServer + sendWallet.profile_pic_url :
+									'assets/images/pages/coin.png'} width="40" />
 							</div>
 							<div class="_info">
 								<div class="name">{sendWallet.display_name ? sendWallet.display_name : sendWallet.username}</div>

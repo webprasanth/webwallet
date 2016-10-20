@@ -66,13 +66,11 @@
 								<div show={money_requests.length>0} class="listItems col-xs-12" each="{money_requests}">
 									<div class="item col-xs-3 hidden-xs">
 										<div class="avatar">
-											<virtual show={type==1}}>
-												<img show={receiver_profile_pic_url} src="{AvatarServer}{receiver_profile_pic_url}" width="40" />
-												<img show={!receiver_profile_pic_url} src="assets/images/pages/coin.png" width="40" />
+											<virtual show={type==1}>
+												<img src={getAvatarURL(receiver_profile_pic_url)} width="40" />
 											</virtual>
 											<virtual show={type!=1}>
-												<img show={sender_profile_pic_url} src="{AvatarServer}{sender_profile_pic_url}" width="40" />
-												<img show={!sender_profile_pic_url} src="assets/images/pages/coin.png" width="40" />
+												<img src={getAvatarURL(sender_profile_pic_url)} width="40" />
 											</virtual>
 										</div>
 										<div class="username data-long">
@@ -131,7 +129,7 @@
 										<p class="text-long ">{note? strimString(note , 50): ''}</p>
 									</div>
 									<div class="hidden-xs item data-long col-xs-2 ">
-										<p class=" ">{getDisplayDate(created_ts, timeZone)}</p>
+										<p class=" ">{getDisplayDateTime(created_ts, timeZone)}</p>
 									</div>
 								</div>
 							</div>

@@ -5,6 +5,7 @@ import { formatCurrency } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
+import SendService from '../../../model/send/send-service';
 
 @template(SendMoneyConfirmTemplate)
 export default class SendMoneyConfirm extends Element {
@@ -35,6 +36,8 @@ export default class SendMoneyConfirm extends Element {
             this.success = true;
             this.processing_duration = state.sendData.processing_duration;
             this.opts.dlgTitle = 'Transaction Successful';
+        } else if (actionType == SEND.SEND_TXN_FAILED) {
+            riot.mount('#error-dialog', 'error-alert', { title: '', message: state.lastAction.data });
         }
 
         this.update();
@@ -47,42 +50,11 @@ export default class SendMoneyConfirm extends Element {
 
     sendDirect() {
         this.createRawTx();
-        // this.testPromise().then((rs) => {
-        //     if (rs == 10) {
-        //         this.testPromise().then((rs) => {
-        //             if (rs == 10) {
-        //                 this.testPromise().then((rs) => {
-        //                     console.log(rs);
-        //                 })
-        //             }
-        //         })
-        //     }
-        // });
     }
 
     createRawTx() {
         this.confirmation = true;
         this.sending = true;
         store.dispatch(sendActions.createRawTx(this.opts.wallet, this.opts.amount, this.opts.wallet.memo));
-    }
-
-    testPromise() {
-        return new Promise((resolve, reject) => {
-            this.testPromise1().then(rs => {
-                console.log('p1:', rs);
-                setTimeout(() => {
-                    resolve(10);
-                }, 1000);
-            });
-
-        })
-    }
-
-    testPromise1() {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(20);
-            }, 1000);
-        })
     }
 }

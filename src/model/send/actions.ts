@@ -1,4 +1,4 @@
-import { SEND } from '../action-types';
+import { SEND, PENDING } from '../action-types';
 import { commonActions } from '../commons/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';
@@ -33,36 +33,44 @@ export const sendActions = {
                         txn_info.status = 0;
                     }
                     SendService.singleton().addTxn(txn_info, wallet).then((resp: any) => {
-                        if (targetWallet.needUpdateRequestId) {
-                            let criteria = {
-                                request_id: targetWallet.RequestId,
-                                sender_bare_uid: targetWallet.email,
-                                note_processing: targetWallet.memo
-                            };
+                        if (resp.rc == 1) {
+                            if (targetWallet.needUpdateRequestId) {
+                                let criteria = {
+                                    request_id: targetWallet.RequestId,
+                                    sender_bare_uid: targetWallet.email,
+                                    note_processing: targetWallet.memo
+                                };
 
-                            SendService.singleton().markSentMoneyRequests(criteria).then((resp: any) => {
-                                // TODO: Reload all TXN in pending page
-                            });
+                                SendService.singleton().markSentMoneyRequests(criteria).then((resp: any) => {
+                                    // TODO: Reload all TXN in pending page
+                                    if (resp.rc == 1) {
+                                        dispatch(sendActions.markSentMoneyRequestsSuccess(resp));
+                                    } else {
+                                        console.log('markSentMoneyRequests failed');
+                                    }
+                                });
+                            } else {
+                                dispatch(sendActions.clearForm());
+                            }
+                            //Auto Approve
+                            if (targetWallet.email) {
+                                let criteria = {
+                                    bare_uid: targetWallet.email
+                                };
+                                SendService.singleton().addToRoster(criteria).then((resp: any) => {
+                                    if (resp.rc === 1) {
+                                        console.log('Add to roster success');
+                                    } else {
+                                        console.log('Add to roster failed');
+                                    }
+                                });
+                            }
+                            // TODO: dispatch action "wallet-ready"
+                            checkTx(dispatch, txn_info);
+                            dispatch(commonActions.toggleLoading(false));
                         } else {
-                            dispatch(sendActions.clearForm());
+                            dispatch(this.sendTXNFailed(resp));
                         }
-                        //Auto Approve
-                        if (targetWallet.email) {
-                            let criteria = {
-                                bare_uid: targetWallet.email
-                            };
-                            SendService.singleton().addToRoster(criteria).then((resp: any) => {
-                                if (resp.rc === 1) {
-                                    console.log('Add to roster success');
-                                } else {
-                                    console.log('Add to roster failed');
-                                }
-                            });
-                        }
-                        // TODO: dispatch action "wallet-ready"
-                        checkTx(dispatch, txn_info);
-                        var count = 0;
-                        dispatch(commonActions.toggleLoading(false));
                     });
                 }
             });
@@ -72,10 +80,17 @@ export const sendActions = {
     clearForm() {
         return ({ type: SEND.CLEAR_FORM })
     },
-
     sendTXNSuccess(processing_duration) {
         return ({ type: SEND.SEND_TXN_SUCCESSFUL, data: processing_duration })
+    },
+    sendTXNFailed(resp) {
+        let msg = (resp.rc === 499) ? "Request timed out. Please check your Internet connection." : resp.reason;
+        return { type: SEND.SEND_TXN_FAILED, data: msg }
+    },
+    markSentMoneyRequestsSuccess(resp) {
+        return { type: PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS, data: resp }
     }
+
 }
 
 let count = 0;

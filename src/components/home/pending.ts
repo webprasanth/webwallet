@@ -3,8 +3,8 @@ import store, { ApplicationState } from '../../model/store';
 import HomePendingTemplate from './pending.html!text';
 import AndamanService from '../../model/andaman-service';
 import { pendingActions } from '../../model/pending/actions';
-import { PENDING } from '../../model/action-types';
-import { getDisplayDate, strimString } from '../../model/utils';
+import { SEND, PENDING } from '../../model/action-types';
+import { getDisplayDate, getDisplayDateTime, strimString } from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 
 @template(HomePendingTemplate)
@@ -24,13 +24,14 @@ export default class HomePending extends Element {
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
     private timeZone = null;
     private getDisplayDate = getDisplayDate;
+    private getDisplayDateTime = getDisplayDateTime;
     private strimString = strimString;
     private TAB = TAB;
     private tabs = store.getState().pendingData.tabs;
     private money_requests = [];
 
     mounted() {
-        var state = store.getState();
+        let state = store.getState();
         this.timeZone = state.userData.user.timezone;
         store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers();
@@ -38,7 +39,7 @@ export default class HomePending extends Element {
     }
 
     initDatePickers() {
-        var state = store.getState();
+        let state = store.getState();
         if (!this.fromDateObject) {
             this.fromDateObject = $("#pendingFromDate").parent().datepicker({
                 format: this.DATE_PICKER_FORMAT,
@@ -98,9 +99,9 @@ export default class HomePending extends Element {
     }
 
     onApplicationStateChanged() {
-        var state = store.getState();
-        var data = state.pendingData;
-        var type = state.lastAction.type;
+        let state = store.getState();
+        let data = state.pendingData;
+        let type = state.lastAction.type;
 
         if (type == PENDING.GET_MORE_REQUEST_SUCCESS) {
             this.buildPagination();
@@ -114,7 +115,7 @@ export default class HomePending extends Element {
             let type = activeTab ? activeTab.id : 2;
             this.currentActiveTabId = type;
             this.loadData();
-        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS) {
+        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS || type == PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS) {
             this.loadData();
         }
         this.update();
@@ -201,6 +202,14 @@ export default class HomePending extends Element {
                 }
             }
         });
+    }
+
+    getAvatarURL(profilePicURL) {
+        if (profilePicURL) {
+            return this.AvatarServer + profilePicURL;
+        } else {
+            return 'assets/images/pages/coin.png';
+        }
     }
 }
 

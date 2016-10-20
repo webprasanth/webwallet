@@ -18,7 +18,7 @@ export default class HomeHeader extends Element {
 
         let user = store.getState().userData.user;
         if (user.profile_pic_url) {
-            avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url.profile_pic_url}`;
+            this.avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url}`;
         }
     }
 
