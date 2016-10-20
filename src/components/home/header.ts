@@ -8,13 +8,18 @@ import { USERS } from '../../model/action-types';
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends Element {
     public userEmail: string = store.getState().userData.user.email;
-    public avatarUrl: string = `${AndamanService.AvatarServer}${store.getState().userData.user.profile_pic_url}`;
+    public avatarUrl: string = null;
     private balance = 0;
 
     mounted() {
         let state = store.getState();
         store.subscribe(this.onApplicationStateChanged.bind(this));
         store.dispatch(userActions.getBalance());
+
+        let user = store.getState().userData.user;
+        if (user.profile_pic_url) {
+            avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url.profile_pic_url}`;
+        }
     }
 
     onApplicationStateChanged() {
