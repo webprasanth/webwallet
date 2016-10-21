@@ -10,6 +10,11 @@ var opts = {
     host: 'keys.flashcoin.io',
     proto: 'wss',
     port: 443,
+
+    // TODO babv for testing only, remove when deploy to product
+    proto: 'ws',
+    port: 8098,
+    
     server_publicKey: '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A='
 };
 

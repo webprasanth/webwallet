@@ -5,6 +5,7 @@ import HomeActivity from './activity';
 import HomeSend from './send';
 import HomeRequest from './request';
 import HomePending from './pending';
+import HomeProfile from './profile';
 
 import { userActions } from '../../model/users/actions';
 import { tabActions } from '../../model/tabs/actions';
@@ -20,6 +21,7 @@ export default class HomePage extends Element {
         'activity': 'home-activity',
         'send': 'home-send',
         'request': 'home-request',
+        'profile': 'home-profile',
         'pending': 'home-pending'
     };
 
@@ -39,6 +41,7 @@ export default class HomePage extends Element {
                 case 'send':
                 case 'request':
                 case 'pending':
+                case 'profile':
                     var id = this.widgets[action];
                     if (this.lastView && this.lastView.id != id) {
                         $(this.lastView).hide();
@@ -116,4 +119,4 @@ export class MainNavBar extends Element {
     }
 }
 
-export { HomeActivity, HomeSend, HomeRequest, HomePending };
+export { HomeActivity, HomeSend, HomeRequest, HomePending, HomeProfile };
