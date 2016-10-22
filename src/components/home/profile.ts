@@ -6,20 +6,23 @@ import { calcFee } from '../../model/utils';
 
 @template(HomeProfileTemplate)
 export default class HomeProfile extends Element {
-    
+
     private userProfile = null;
     private avartarServer: string = null;
     private isUploadingImage: boolean = false;
-    private onProfile = true;
+
+    private isProfile = true;
+    private isSetting = false;
+    private isFountain = false;
+
     private isChangingName: boolean = false;
     private isChangingPass: boolean = false;
     private isChangingTimezone: boolean = false;
+
     private timezones = [];
-    private publickey: string = null;
     private accountType = null;
     private publicKeyList = [];
     private totpTurningOn: boolean = false;
-    private showFountainTab: boolean = false;
     private fountainEnabled: boolean = false;
 
     private selectedTimeUnit = 1;
@@ -36,5 +39,22 @@ export default class HomeProfile extends Element {
     mounted() {
         this.userProfile = store.getState().userData.user;
         this.avartarServer = AndamanService.AvatarServer;
+    }
+
+    onTabSelect(tab) {
+
+        if (tab == 'profile') {
+            this.isProfile = true;
+            this.isSetting = false;
+            this.isFountain = false;
+        } else if (tab == 'setting') {
+            this.isProfile = false;
+            this.isSetting = true;
+            this.isFountain = false;
+        } else if (tab == 'fountain') {
+            this.isProfile = false;
+            this.isSetting = false;
+            this.isFountain = true;
+        } 
     }
 }
