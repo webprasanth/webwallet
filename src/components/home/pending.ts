@@ -6,6 +6,7 @@ import { pendingActions } from '../../model/pending/actions';
 import { SEND, PENDING } from '../../model/action-types';
 import { getDisplayDate, getDisplayDateTime, strimString } from '../../model/utils';
 import { TAB } from '../../model/pending/types';
+import { ExtendEvent } from '../../model/types';
 
 @template(HomePendingTemplate)
 export default class HomePending extends Element {
@@ -158,13 +159,13 @@ export default class HomePending extends Element {
         this.loadData();
     }
 
-    onTabItemClick(event: Event1) {
+    onTabItemClick(event: ExtendEvent) {
         event.preventDefault();
         event.stopPropagation();
         store.dispatch(pendingActions.setActiveTab(event.item.tabItem.id));
     }
 
-    acceptRequest(event: Event1) {
+    acceptRequest(event: ExtendEvent) {
         riot.mount('#confirm-send', 'accept-money-request', {
             uid: event.item.sender,
             amount: event.item.amount,
@@ -173,7 +174,7 @@ export default class HomePending extends Element {
         });
     }
 
-    rejectRequest(event: Event1) {
+    rejectRequest(event: ExtendEvent) {
         riot.mount('#confirm-send', 'reject-money-request', {
             request_id: event.item.id,
             sender: event.item.sender_email,
@@ -186,7 +187,7 @@ export default class HomePending extends Element {
         });
     }
 
-    cancelRequest(event: Event1) {
+    cancelRequest(event: ExtendEvent) {
         riot.mount('#confirm-send', 'confirm-dialog', {
             title: 'Cancel request',
             message: 'Are you sure you want to cancel this request?',
@@ -211,8 +212,4 @@ export default class HomePending extends Element {
             return 'assets/images/pages/coin.png';
         }
     }
-}
-
-interface Event1 extends Event {
-    item: any;
 }

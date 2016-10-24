@@ -5,13 +5,14 @@ import HomeActivity from './activity';
 import HomeSend from './send';
 import HomeRequest from './request';
 import HomePending from './pending';
+import HomeContacts from './contacts';
 import HomeProfile from './profile';
-
 import { userActions } from '../../model/users/actions';
 import { tabActions } from '../../model/tabs/actions';
 import HomePageTemplate from './index.html!text';
 import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
+import { ExtendEvent } from '../../model/types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
@@ -21,8 +22,9 @@ export default class HomePage extends Element {
         'activity': 'home-activity',
         'send': 'home-send',
         'request': 'home-request',
+        'pending': 'home-pending',
+        'contacts': 'home-contacts',
         'profile': 'home-profile',
-        'pending': 'home-pending'
     };
 
     constructor() {
@@ -33,21 +35,21 @@ export default class HomePage extends Element {
 
     initialize() {
         this.route((action) => {
-            var mainContent = document.querySelector('#main-content');
-
+            let mainContent = document.querySelector('#main-content');
 
             switch (action) {
                 case 'activity':
                 case 'send':
                 case 'request':
                 case 'pending':
+                case 'contacts':
                 case 'profile':
-                    var id = this.widgets[action];
+                    let id = this.widgets[action];
                     if (this.lastView && this.lastView.id != id) {
                         $(this.lastView).hide();
                     }
 
-                    var el = mainContent.querySelector('#' + id);
+                    let el = mainContent.querySelector('#' + id);
                     if (!el) {
                         el = document.createElement('div');
                         el.id = id;
@@ -77,7 +79,7 @@ export class MainHeader extends Element {
         event.preventDefault();
         event.stopPropagation();
 
-        var action = userActions.logout();
+        let action = userActions.logout();
         store.dispatch(action);
     }
 }
@@ -102,21 +104,22 @@ export class MainNavBar extends Element {
         this.update();
     }
 
-    onTabItemClick(event: Event) {
+    onTabItemClick(event: ExtendEvent) {
         event.preventDefault();
         event.stopPropagation();
 
-        var tab = event.item.tab;
+        let tab = event.item.tab;
         riot.route(tab.id);
     }
 
-    onLogoutTabItemClick(event: Event) {
+    onLogoutTabItemClick(event: ExtendEvent) {
         event.preventDefault();
         event.stopPropagation();
 
-        var action = userActions.logout();
+        let action = userActions.logout();
         store.dispatch(action);
     }
 }
 
-export { HomeActivity, HomeSend, HomeRequest, HomePending, HomeProfile };
+export { HomeActivity, HomeSend, HomeRequest, HomePending, HomeContacts, HomeProfile };
+

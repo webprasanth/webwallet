@@ -1,11 +1,13 @@
 import { SEND, PENDING } from '../action-types';
 import { commonActions } from '../commons/actions';
+import { contactsActions } from '../contacts/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';
 import { removeUserKey, getUserKey } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
 import { getLocation } from '../utils';
+import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const sendActions = {
     createRawTx(targetWallet, amount, message) {
@@ -25,7 +27,7 @@ export const sendActions = {
                         receiver_id: targetWallet.username,
                         transaction_id: tx.getId(),
                         transaction_hex: tx.toHex(),
-                        memo: targetWallet.memo,
+                        memo: message,
                     };
 
                     if (targetWallet.needUpdateRequestId) {
@@ -59,7 +61,15 @@ export const sendActions = {
                                 };
                                 SendService.singleton().addToRoster(criteria).then((resp: any) => {
                                     if (resp.rc === 1) {
-                                        console.log('Add to roster success');
+                                        let params = {
+                                            subs_start: 0,
+                                            subs_size: PAGE_SIZE,
+                                            sent_start: -1,
+                                            sent_size: 0,
+                                            recv_start: -1,
+                                            recv_size: 0
+                                        };
+                                        dispatch(contactsActions.getRoster(params));
                                     } else {
                                         console.log('Add to roster failed');
                                     }

@@ -1,5 +1,6 @@
 import { REQUEST } from '../action-types';
 import { commonActions } from '../commons/actions';
+import { contactsActions } from '../contacts/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';
 import { removeUserKey, getUserKey } from '../utils';
@@ -7,23 +8,32 @@ import RequestService from './request-service';
 import SendService from '../send/send-service';
 import Wallet from '../wallet';
 import { getLocation } from '../utils';
+import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const requestActions = {
-    sendRequest(moneyInfo, receiverWallet) {
+    sendRequest(moneyInfo) {
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
             RequestService.singleton().requestMoney(moneyInfo).then((resp: any) => {
                 dispatch(commonActions.toggleLoading(false));
                 if (resp.rc === 1) {
                     dispatch(this.sendRequestSuccess());
-                    RequestService.singleton().sendRequest(receiverWallet.email).then((resp: any) => {
+                    RequestService.singleton().sendRequest(moneyInfo.bare_uid).then((resp: any) => {
                         if (resp.rc === 1) {
                             let criteria = {
-                                bare_uid: receiverWallet.email
+                                bare_uid: moneyInfo.bare_uid
                             };
                             SendService.singleton().addToRoster(criteria).then((resp: any) => {
                                 if (resp.rc === 1) {
-                                    console.log('Add to roster success');
+                                    let params = {
+                                        subs_start: 0,
+                                        subs_size: PAGE_SIZE,
+                                        sent_start: -1,
+                                        sent_size: 0,
+                                        recv_start: -1,
+                                        recv_size: 0
+                                    };
+                                    dispatch(contactsActions.getRoster(params));
                                 } else {
                                     console.log('Add to roster failed');
                                 }

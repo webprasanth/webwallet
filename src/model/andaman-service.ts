@@ -21,6 +21,9 @@ interface IAndaman {
     get_balance(pipe, params: {}, cb: (resp) => any);
     mark_rejected_money_requests(pipe, params: {}, cb: (resp) => any);
     mark_cancelled_money_requests(pipe, params: {}, cb: (resp) => any);
+    get_roster(pipe, params: {}, cb: (resp) => any);
+    get_users_by_uid(pipe, params: {}, cb: (resp) => any);
+    remove_user(pipe, params: {}, cb: (resp) => any);
 }
 
 export default class AndamanService {

@@ -1,0 +1,63 @@
+<home-contacts>
+	<div class="main-container">
+		<div class="container">
+			<div class="contact-page col-xs-12">
+				<div class="title-page">
+					<h2 class="title">Contacts</h2>
+				</div>
+				<div class="col-xs-12 main-content">
+					<div class="title-header hidden-mobile col-xs-12">
+						<div class="title col-xs-5">Name</div>
+						<div class="title col-xs-4">
+							<p class="hidden-mobile">Email</p>
+						</div>
+						<div class="title col-xs-3 text-center">Delete</div>
+					</div>
+					<div class="listContacts">
+						<virtual show={contacts.length==0}>
+							<br/>
+							<br/>
+							<br/>
+							<p class="req-no-result">You don't have any contacts yet. When you have activity with other users, their contacts will be added here automatically.</p>
+						</virtual>
+						<div show={contacts.length!=0} class="listItems col-xs-12" each={contacts}>
+							<div class="item col-xs-5 hidden-xs">
+								<div class="avatar">
+									<img src={profile_pic_url ? AvatarServer + profile_pic_url : 'assets/images/pages/coin.png'} width="42" />
+								</div>
+								<div class="username data-long">
+									<p class="text-long">{display_name ? display_name : username}</p>
+									<div class="col-xs-12">
+										<a id="btn-send-form" href="javascript:void(0)" onclick={sendForm}>Send</a> /
+										<a id="btn-request-form" href="javascript:void(0)" onclick={requestForm}>Request</a>
+									</div>
+								</div>
+							</div>
+							<div class="item col-xs-7 hidden-lg hidden-sm hidden-md">
+								<div class="username data-long">
+									<p class="text-long mobile-name">{display_name ? display_name : username} </p>
+									<p class="text-long mobile-email ellipsis-email">{email}</p>
+								</div>
+							</div>
+							<div class="item col-xs-4 data-long hidden-xs">
+								<p class="hidden-mobile ellipsis-email text-long">{email}</p>
+							</div>
+							<div class="col-xs-5 hidden-lg hidden-sm hidden-md text-right btn-active">
+								<a class="icon-mobile send-payment-icon" href="javascript:void(0)" onclick={sendForm}></a>
+								<a class="icon-mobile request-payment-icon" href="javascript:void(0)" onclick={requestForm}>
+								</a>
+								<a class="icon-mobile" style="margin-right: 0;" onclick={removeContact}><span class="glyphicon glyphicon-trash"></span></a>
+							</div>
+							<div class="col-xs-3 text-center hidden-mobile">
+								<a onclick={removeContact}><span class="glyphicon glyphicon-trash"></span></a>
+							</div>
+						</div>
+					</div>
+					<nav show={contacts.length!=0} class="pagination-table col-xs-12">
+						<ul class="txn-pagination"></ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</home-contacts>

@@ -13,10 +13,12 @@ import SendRequestConfirm from './modals/send-request-confirm/send-request-confi
 import AcceptMoneyRequest from './modals/accept-money-request/accept-money-request';
 import RejectMoneyRequest from './modals/reject-money-request/reject-money-request';
 import ConfirmDialog from './modals/confirm-dialog/confirm-dialog';
+import ContactRequestMoney from './modals/contact-request-money/contact-request-money';
+import ContactSendMoney from './modals/contact-send-money/contact-send-money';
 
 export {
     LoadingIndicator, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm,
-    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog
+    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney
 };
 
 export function initialize() {

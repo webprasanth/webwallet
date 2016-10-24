@@ -464,8 +464,22 @@ internals.API.prototype.send_request = function (pipe, email, cb) {
 		op: ROSTER_OP.REQUEST,
 		to: email
 	};
-	pipe.emit(Event.ROS_ADD, op);
-	pipe.once(Event.ROS_ADD_ACK, cb);
+	pipe.emit(Event.ROS_OP, op);
+	pipe.once(Event.ROS_OP_ACK, cb);
+};
+
+internals.API.prototype.remove_user = function (pipe, email, cb) {
+	var op = {
+		op: ROSTER_OP.REMOVE,
+		to: email
+	};
+	pipe.emit(Event.ROS_OP, op);
+	pipe.once(Event.ROS_OP_ACK, cb);
+};
+
+internals.API.prototype.get_users_by_uid = function (pipe, request, cb) {
+	pipe.emit(Event.GET_USERS_BY_UID, request);
+	pipe.once(Event.GET_USERS_BY_UID_ACK, cb);
 };
 
 internals.API.prototype._on = function (pipe, ev, cb) {

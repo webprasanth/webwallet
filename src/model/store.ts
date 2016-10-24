@@ -22,13 +22,14 @@ interface ITAB {
 }
 
 export interface ApplicationState {
-    lastAction: { type: string, data: any },
-    userData: { user: IUser, wallets: any },
-    commonData: { isLoading: boolean },
-    activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any },
-    sendData: { processing_duration: number },
-    pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] }
-    tabData: { tabs: ITAB[] }
+    lastAction: { type: string, data: any };
+    userData: { user: IUser, wallets: any };
+    commonData: { isLoading: boolean };
+    activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any };
+    sendData: { processing_duration: number };
+    pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
+    contactsData: { contacts: any[], totalContacts: number, contactWallet: any };
+    tabData: { tabs: ITAB[] };
 }
 
 const logger = store => next => action => {

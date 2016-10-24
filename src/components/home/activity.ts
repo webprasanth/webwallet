@@ -4,6 +4,7 @@ import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
 import { getDisplayDate } from '../../model/utils';
+import { ExtendEvent } from '../../model/types';
 
 @template(HomeActivityTemplate)
 export default class HomeActivity extends Element {
@@ -152,21 +153,17 @@ export default class HomeActivity extends Element {
         this.loadTxns();
     }
 
-    onTabItemClick(event: Event1) {
+    onTabItemClick(event: ExtendEvent) {
         event.preventDefault();
         event.stopPropagation();
         store.dispatch(activityActions.setActiveTab(event.item.tabItem.id));
     }
 
-    showTransactionDetail(event: Event1) {
+    showTransactionDetail(event: ExtendEvent) {
         event.preventDefault();
         event.stopPropagation();
 
         let state = store.getState();
         store.dispatch(activityActions.getTransactionDetail(event.item.txn));
     }
-}
-
-interface Event1 extends Event {
-    item: any;
 }
