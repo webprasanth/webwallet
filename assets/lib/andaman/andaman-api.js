@@ -482,6 +482,17 @@ internals.API.prototype.get_users_by_uid = function (pipe, request, cb) {
 	pipe.once(Event.GET_USERS_BY_UID_ACK, cb);
 };
 
+internals.API.prototype.sso_reset_password = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_RESET_PASSWORD, request);
+	pipe.once(Event.SSO_RESET_PASSWORD_ACK, cb);
+};
+
+internals.API.prototype.sso_reset_password_mail = function (pipe, request, cb) {
+	pipe.emit(Event.SSO_RESET_PASSWORD_MAIL, request);
+	pipe.once(Event.SSO_RESET_PASSWORD_MAIL_ACK, cb);
+};
+
+
 internals.API.prototype._on = function (pipe, ev, cb) {
 	// register for the event
 	var listener;

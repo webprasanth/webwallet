@@ -24,11 +24,16 @@ interface IAndaman {
     get_roster(pipe, params: {}, cb: (resp) => any);
     get_users_by_uid(pipe, params: {}, cb: (resp) => any);
     remove_user(pipe, params: {}, cb: (resp) => any);
+    sso_reset_password_mail(pipe, params: {}, cb: (resp) => any);
+    get_recovery_keys(pipe, params: {}, cb: (resp) => any);
+    sso_reset_password(pipe, params: {}, cb: (resp) => any);
 }
 
 export default class AndamanService {
     private static service = Andaman;
-    public static AvatarServer = `http://${Andaman.opts.host}/profile/`;
+    public static readonly AvatarServer = `http://${Andaman.opts.host}/profile/`;
+    public static readonly clientHost = 'flashcoin.io';
+
     static ready(): Promise<{ andaman: IAndaman, pipe: any }> {
         return AndamanService.service.ready();
     }

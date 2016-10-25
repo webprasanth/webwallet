@@ -240,6 +240,7 @@ SystemJS.config({
     "riot": "npm:riot@2.6.4",
     "riot-router": "npm:riot-router@0.8.1",
     "scss": "github:KevCJones/plugin-scss@0.2.11",
+    "secrets.js-grempe": "npm:secrets.js-grempe@1.1.0",
     "source-map": "npm:source-map@0.2.0",
     "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
     "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",

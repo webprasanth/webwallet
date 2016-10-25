@@ -6,6 +6,7 @@ import sendReducer from './send/reducers';
 import tabReducer from './tabs/reducers';
 import pendingReducer from './pending/reducers';
 import contactsReducer from './contacts/reducers';
+import resetPassReducer from './reset-pass/reducers';
 
 function lastAction(state = null, action) {
     return action;
@@ -19,7 +20,8 @@ const reducers = redux.combineReducers({
     sendData: sendReducer,
     pendingData: pendingReducer,
     contactsData: contactsReducer,
-    tabData: tabReducer
+    tabData: tabReducer,
+    resetPassData: resetPassReducer
 });
 
 export default reducers;

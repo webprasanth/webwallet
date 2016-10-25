@@ -30,6 +30,7 @@ export interface ApplicationState {
     pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
     contactsData: { contacts: any[], totalContacts: number, contactWallet: any };
     tabData: { tabs: ITAB[] };
+    resetPassData: { keys: any, resetPassErrReason: any }
 }
 
 const logger = store => next => action => {

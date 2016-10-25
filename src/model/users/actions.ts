@@ -8,6 +8,7 @@ import Premium from 'Premium';
 import Wallet from '../wallet';
 import base64 from 'crypto-js';
 import nacl from 'tweetnacl';
+import AndamanService from '../andaman-service';
 
 export const userActions = {
     login(email, password) {
@@ -159,7 +160,9 @@ export const userActions = {
     },
     forgotPassword() {
         let clientHost = window.location.host;
-
+        if (!clientHost || clientHost.length === 0) {
+            clientHost = AndamanService.clientHost;
+        }
         riot.route("reset_password?token=");
         return { type: USERS.FORGOT_PASSWORD };
     }

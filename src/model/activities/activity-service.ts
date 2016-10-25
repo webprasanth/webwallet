@@ -1,15 +1,15 @@
 import AndamanService from '../andaman-service';
 import Big from 'big.js';
 
-export default class ActivityService{
+export default class ActivityService {
     constructor() {
     }
 
-    getTransList(pageSettings){
+    getTransList(pageSettings) {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 let {date_from, date_to, type, start, size = 10, order = 'desc'} = pageSettings;
-                
+
                 var andaman = opts.andaman;
                 var pipe = opts.pipe;
 
@@ -80,7 +80,7 @@ export default class ActivityService{
 
     private static _instance: ActivityService;
 
-    static singleton(){
+    static singleton() {
         if (!ActivityService._instance) {
             ActivityService._instance = new ActivityService();
         }

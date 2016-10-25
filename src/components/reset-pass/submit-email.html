@@ -12,11 +12,11 @@
 			<h3>FORGOT YOUR PASSWORD?</h3>
 			<p style="margin:0 0 20px 0">Please enter your email address below. You will receive a link to reset your password.</p>
 			<div class="form-group">
-				<input class="form-control" type="email" name="email" placeholder="Email address" value='{email}'>
+				<input class="form-control" id="email" type="email" name="email" placeholder="Email address">
 			</div>
 			<div class="text-right">
-				<a class="pull-left" href="javascript:void(0)" on-click={cancelResetPass}><small>« </small>Back to login</a>
-				<button class="btn btn-primary" on-click={sendEmail}>Submit</button>
+				<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
+				<button class="btn btn-primary" onclick={sendEmail}>Submit</button>
 			</div>
 		</virtual>
 		<virtual if={isVerifyEmailSent}>

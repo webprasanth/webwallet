@@ -1,0 +1,44 @@
+<security-questions>
+	<header class="header-SC bg-header">
+		<div class="container">
+			<div class="logo col-xs-4 col-xs-5">
+				<a><img src="assets/images/pages/logo.png" /></a>
+			</div>
+		</div>
+	</header>
+	<div show={showQuestionForm} class="form-common form-questions">
+		<h3>Fill your security question answer</h3>
+		<div class="form-group">
+			<p><label>{securityQuestion1}</label></p>
+			<input id="answer1" class="form-control">
+		</div>
+		<div class="form-group ">
+			<p><label>{securityQuestion2}</label></p>
+			<input id="answer2" class="form-control">
+		</div>
+		<div class="form-group">
+			<p><label>{securityQuestion3}</label></p>
+			<input id="answer3" class="form-control">
+		</div>
+		<div class="btn-answer-question text-right">
+			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
+			<button class="btn btn-primary" onclick={doneAnswer}>OK</button>
+		</div>
+	</div>
+	<!-- Change password -->
+	<div show={showPasswordForm} class="form-common form-change-password">
+		<h3>Setup new password</h3>
+		<div class="form-group">
+			<input id="new-password-id" class="form-control" type="password" name="new-password" placeholder="New password" onfocus={resetErrMessage}>
+		</div>
+		<div class="form-group">
+			<input id="confirm-password-id" class="form-control" type="password" name="confirm-password" placeholder="Confirm password"
+				onfocus={resetErrMessage}>
+		</div>
+		<p class="text-danger">{errMessage}</p>
+		<div class="text-right">
+			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
+			<button class="btn btn-primary" onclick={donePassword}>Submit</button>
+		</div>
+	</div>
+</security-questions>

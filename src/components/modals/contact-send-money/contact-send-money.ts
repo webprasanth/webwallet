@@ -5,7 +5,6 @@ import { calcFee } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
-import SendService from '../../../model/send/send-service';
 
 @template(ContactSendMoneyTemplate)
 export default class ContactSendMoney extends Element {

@@ -1,15 +1,15 @@
-import {template, Element} from '../riot-ts';
+import { riot, template, Element } from '../riot-ts';
 import store from '../../model/store';
-import {userActions} from '../../model/users/actions';
+import { userActions } from '../../model/users/actions';
 import LandingPageTemplate from './landing-page.html!text';
 
 @template(LandingPageTemplate)
-export default class LandingPage extends Element{
-    constructor(){
+export default class LandingPage extends Element {
+    constructor() {
         super();
     }
 
-    mounted(){
+    mounted() {
         store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
@@ -17,17 +17,17 @@ export default class LandingPage extends Element{
 
     }
 
-    onLoginButtonClick(event: Event){
+    onLoginButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
-        
+
         var emailField = <HTMLInputElement>this.root.querySelector('.login-email');
         var passwordField = <HTMLInputElement>this.root.querySelector('.login-password');
 
         this.doLogin(emailField.value, passwordField.value);
     }
 
-    onSignupButtonClick(event: Event){
+    onSignupButtonClick(event: Event) {
         throw new Error("Not implemented yet.");
     }
 
@@ -35,7 +35,7 @@ export default class LandingPage extends Element{
         store.dispatch(userActions.login(email, password));
     }
 
-    onRememberMeCheckBoxChange(event: Event){
+    onRememberMeCheckBoxChange(event: Event) {
         store.dispatch(userActions.rememberMe(event.target.checked));
     }
 
@@ -43,7 +43,7 @@ export default class LandingPage extends Element{
         event.preventDefault();
         event.stopPropagation();
 
-        store.dispatch(userActions.forgotPassword());
+        riot.mount('#main', 'submit-email');
     }
 }
 

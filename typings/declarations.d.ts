@@ -12,3 +12,5 @@ declare module "tweetnacl";
 
 declare module "tweetnacl-util";
 
+declare module "secrets.js-grempe";
+

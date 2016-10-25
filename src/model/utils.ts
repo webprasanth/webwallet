@@ -38,7 +38,7 @@ export function removeUserKey() {
   localStorage.removeItem('scuserkeys');
 }
 
-export function getUserKey(): UserKey {
+export function getUserKey(): UserKey | any {
   let str = localStorage.getItem('scuserkeys');
   let userKey = null;
   if (str && str.length > 0) {
@@ -130,4 +130,11 @@ export function strimString(s, n) {
   } else {
     return s;
   }
+}
+
+export function isValidEmail(email) {
+  let emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  let checkEmail = email.toLowerCase().match(emailRegex);
+  if (checkEmail === null) return false;
+  return true;
 }

@@ -19,10 +19,14 @@ import RejectMoneyRequest from './modals/reject-money-request/reject-money-reque
 import ConfirmDialog from './modals/confirm-dialog/confirm-dialog';
 import ContactRequestMoney from './modals/contact-request-money/contact-request-money';
 import ContactSendMoney from './modals/contact-send-money/contact-send-money';
+import SecurityQuestions from './reset-pass/security-questions';
+import MessageDialog from './modals/message-dialog/message-dialog';
 
 export {
-    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails, LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm,
-    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney
+    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
+    LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm,
+    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
+    SecurityQuestions, MessageDialog
 };
 
 export function initialize() {
