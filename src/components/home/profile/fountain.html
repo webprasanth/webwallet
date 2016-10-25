@@ -1,0 +1,96 @@
+<fountain-setting>
+    <div class="fountain-content box-content">
+        <div if={fountainEnabled}>
+            <div class="col-xs-12">
+                <p><label>Amount of Flash tokens given to each person per period</label></p>
+                <div class="form-group">
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}">
+                </div>
+                <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
+                <div class="form-input">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}">
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <select id="unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}'>
+                            <option value="3600" selected="{isHourUnit}">Hours</option>
+                            <option value="60" selected="{isMinuteUnit}">Minutes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Message/Transaction Note to Fountain Visitors</p>
+                <textarea class="form-control" id="memo" value="{memo}"></textarea>
+            </div>
+            <div class="form-group">
+                <p>
+                    <label>
+                        List URL's of pages allowed to host your fountain, as specific as possible to protect it from abuse, separated by comma, e.g. site1.com/web2; site3.com/web4;...
+                    </label>
+                </p>
+                <textarea class="form-control" id="domains" value="{domainStr}"></textarea>
+            </div>
+            <div class="form-group btn-fountain">
+                <button id="update-domain" class="btn btn-primary" on-click="update-domain">Update Parameters</button>
+                <button id="disable-fountain" class="btn btn-default" on-click="disable-fountain">Turn off Fountain</button>
+            </div>
+            <div class="form-group">
+                <p>
+                    <label>Please copy the following code and paste it right after the opening tag of the fountain hosting page's source code</label>
+                </p>
+                <pre>
+                    <code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://{hostname}/widgets/dist/unity-sdk.js&quot;&gt;&lt;/script&gt;</code>
+                </pre>
+            </div>
+            <div class="form-group">
+                <p>
+                    <label>Please copy the following code and paste it into the fountain hosting page's source code where you want to display the fountain</label>
+                </p>
+                <pre>
+                    <code>
+                        &lt;div fountain=&quot;{fountainId}&quot; title=&quot;FLASH Fountain&quot; sub-title=&quot;&quot; submit-button-label=&quot;&quot; register-button-label=&quot;registerLabel&quot; data-is=&quot;unity-fountain&quot; riot-tag=&quot;unity-fountain&quot;&gt;&lt;/div&gt;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        
+        <div if={!fountainEnabled}>
+            <div class="col-xs-12">
+                <p><label>Amount of Flash tokens given to each person per period</label></p>
+                <div class="form-group disabled">
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}" {disabled}>
+                </div>
+                <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
+                <div class="form-input">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}" {disabled}>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <select id="unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}' {disabled}>
+                            <option value="3600" selected="{isHourUnit}">Hours</option>
+                            <option value="60" selected="{isMinuteUnit}">Minutes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Message/Transaction Note to Fountain Visitors</p>
+                <textarea class="form-control disabled" id="memo" value="{memo}" {disabled}></textarea>
+            </div>
+            <div class="form-group">
+                <p>
+                    <label>
+                        List URL's of pages allowed to host your fountain, as specific as possible to protect it from abuse, separated by comma, e.g. site1.com/web2; site3.com/web4;...
+                    </label>
+                </p>
+                    <textarea class="form-control disabled" id="domains" value="{domainStr}" {disabled}></textarea>
+            </div>
+            <br/>
+            <br/>
+            <button id="enable-fountain" class="btn btn-primary" on-click="enable-fountain">
+                Turn on Fountain
+            </button>
+        </div>
+    </div>
+</fountain-setting>

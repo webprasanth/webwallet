@@ -1,0 +1,48 @@
+<account-setting>
+    <div class="account-content box-content">
+        <div class="items">
+            <div>
+                <p>Wallet Address</p>
+            </div>
+            <div id="qrcode"></div>
+            <br>
+            <p each={key in publicKeyList} class="form-control address-unit">{key.address}</p>
+        </div>
+        <div class="col-xs-12 form-group setting-account">
+            <div class="col-xs-3">Account Type:</div>
+            <div class="col-xs-9"><span>{accountType}</span></div>
+        </div>
+        <div class="col-xs-12 form-group setting-account">
+            <div class="col-xs-3">Two phase authentication:</div>
+            <div class="col-xs-9 switch-button">
+                <label class="switch">
+                    <input type="checkbox" checked="{userProfile.totp_enabled === 1}" on-click="toogleTFA">
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+        <div if={totpTurningOn} class="enable-google">
+            <h3>Enable Google Authenticator</h3>
+            <div class="gui-step">
+                <ol>
+                    <li> Install Google Authenticator on your mobile</li>
+                    <li> Open the Google Authenticator app</li>
+                    <li> Tab menu, then tap "Set up account", then tap "Scan a barcode"</li>
+                    <li> Your phone will now be in a "scanning" mode. When you are in this mode, scan the barcode below
+                    </li>
+                </ol>
+                <div class="barcode"></div>
+                <p>Once you have scanned the barcode, enter the 6-digit code below:</p>
+                <div id="tfa_qrcode"></div>
+                <br>
+                <div class="verification-code col-xs-12 col-sm-6">
+                    <p>Verification code</p>
+                    <input class="form-control" type="text" name="" value="{googleTFACode}">
+                    <div class="button-active m10t">
+                        <button class="btn btn-primary" on-click="confirmTFACode">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</account-setting>

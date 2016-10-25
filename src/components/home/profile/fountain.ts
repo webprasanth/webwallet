@@ -1,8 +1,8 @@
-import { riot, template, Element } from '../riot-ts';
-import store, { ApplicationState } from '../../model/store';
-import HomeProfileTemplate from './profile.html!text';
-import AndamanService from '../../model/andaman-service';
-import { calcFee } from '../../model/utils';
+import { riot, template, Element } from '../../riot-ts';
+import store, { ApplicationState } from '../../../model/store';
+import HomeProfileTemplate from './fountain.html!text';
+import AndamanService from '../../../model/andaman-service';
+import { calcFee } from '../../../model/utils';
 
 @template(HomeProfileTemplate)
 export default class HomeProfile extends Element {
@@ -36,17 +36,12 @@ export default class HomeProfile extends Element {
     private amount: number = 0;
     private duration: number = 0;
 
+    private cropper = null;
+
     mounted() {
         this.userProfile = store.getState().userData.user;
         this.avartarServer = AndamanService.AvatarServer;
-        this.mountComponents();
-    }
-
-    mountComponents() {
-        riot.mount('#profile-avatar', 'profile-avatar', {});
-        riot.mount('#user-info', 'user-info', {});
-        riot.mount('#account-setting', 'account-setting', {});
-        riot.mount('#fountain-setting', 'fountain-setting', {});
+        this.registerFileChangeEvent();
     }
 
     onTabSelect(tab) {
@@ -63,6 +58,28 @@ export default class HomeProfile extends Element {
             this.isProfile = false;
             this.isSetting = false;
             this.isFountain = true;
-        } 
+        }
+    }
+
+    registerFileChangeEvent() {
+        var self = this;
+
+        document.querySelector('#file').addEventListener('change', function() {
+            self.isUploadingImage = true;
+
+            var options = {
+                imageBox: '.imageBox',
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: 'avatar.png'
+            };
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                options.imgSrc = e.target.result;
+                self.cropper = new cropbox(options);
+                self.cropper.ratio *= 0.45;
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
     }
 }

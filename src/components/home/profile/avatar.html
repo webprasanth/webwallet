@@ -1,0 +1,43 @@
+<profile-avatar>
+    <div class="col-xs-12 col-sm-3 avatar change-avatar">
+        <div hide={isUploadingImage}>
+            <div if={userProfile.profile_pic_url}>
+                <img if={userProfile.profile_pic_url} src="{avartarServer}{userProfile.profile_pic_url}" width="100">
+                <p class="text-center form-group">
+                    <label class="btn-change-image btn btn-primary">
+                        Change Image
+                        <input type="file" id="file" accept="image/*" class="hidden"/>
+                    </label>
+                </p>
+            </div>
+            <div hide={userProfile.profile_pic_url}>
+                <img src="assets/images/avatar_default.png" alt="Safe Cash" title="Safe Cash" class="thumbnail avatar" width="100"/>
+                <p class="text-center">
+                    <label class="btn btn-primary">
+                        Choose Image
+                        <input type="file" id="file" accept="image/*" class="hidden"/>
+                    </label>
+                </p>
+            </div>
+        </div>
+        <div show={isUploadingImage}>
+            <div class="imageBox">
+                <div class="thumbBox text-center">
+                </div>
+                <div class="spinner" style="display: none">
+                    Loading...
+                </div>
+            </div>
+            <div class="action text-center">
+                <div class="col-xs-12 text-center" style="margin:15px 0;">
+                    <a id="btnZoomOut" on-click="zoom-out"><i class="glyphicon glyphicon-zoom-out"></i></a>
+                    <a id="btnZoomIn" on-click="zoom-in"><i class="glyphicon glyphicon-zoom-in"></i></a>
+                </div>
+                <button id="btnCrop" class="btn btn-primary" on-click="crop-and-save">Update Image</button>
+                <button class="btn btn-default" style="background-color: #eee;" on-click="cancel-image">Cancel</button>
+            </div>
+            <div class="cropped"></div>
+        </div>
+        <div id="up_percent" class="text-center"></div>
+    </div>
+</profile-avatar>
