@@ -42,7 +42,7 @@ SystemJS.config({
       },
       "github:frankwallis/plugin-typescript@5.2.7": {
         "map": {
-          "typescript": "npm:typescript@2.0.3"
+          "typescript": "npm:typescript@2.0.6"
         }
       }
     }
@@ -211,27 +211,27 @@ SystemJS.config({
     "core-js": "npm:core-js@2.4.1",
     "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
     "crypto-js": "npm:crypto-js@3.1.7",
-    "css": "github:systemjs/plugin-css@0.1.31",
+    "css": "github:systemjs/plugin-css@0.1.32",
     "dgram": "github:jspm/nodelibs-dgram@0.2.0-alpha",
     "dns": "github:jspm/nodelibs-dns@0.2.0-alpha",
     "ecc-jsbn": "npm:ecc-jsbn@0.1.1",
     "events": "github:jspm/nodelibs-events@0.2.0-alpha",
-    "font-awesome": "npm:font-awesome@4.6.3",
+    "font-awesome": "npm:font-awesome@4.7.0",
     "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
     "fsevents": "npm:fsevents@1.0.14",
     "http": "github:jspm/nodelibs-http@0.2.0-alpha",
-    "https": "github:jspm/nodelibs-https@0.2.0-alpha",
+    "https": "github:jspm/nodelibs-https@0.2.1",
     "jodid25519": "npm:jodid25519@1.0.2",
     "jquery": "npm:jquery@3.1.1",
     "jsbn": "npm:jsbn@0.1.0",
     "jsdom": "npm:jsdom@7.2.2",
     "machina": "npm:machina@2.0.0",
     "module": "github:jspm/nodelibs-module@0.2.0-alpha",
-    "moment": "npm:moment@2.15.1",
-    "moment-timezone": "npm:moment-timezone@0.5.6",
+    "moment": "npm:moment@2.15.2",
+    "moment-timezone": "npm:moment-timezone@0.5.7",
     "net": "github:jspm/nodelibs-net@0.2.0-alpha",
     "os": "github:jspm/nodelibs-os@0.2.0-alpha",
-    "path": "github:jspm/nodelibs-path@0.2.0-alpha",
+    "path": "github:jspm/nodelibs-path@0.2.1",
     "process": "github:jspm/nodelibs-process@0.2.0-alpha",
     "punycode": "github:jspm/nodelibs-punycode@0.2.0-alpha",
     "querystring": "github:jspm/nodelibs-querystring@0.2.0-alpha",
@@ -252,7 +252,7 @@ SystemJS.config({
     "tweetnacl-util": "npm:tweetnacl-util@0.13.3",
     "underscore": "npm:underscore@1.8.3",
     "url": "github:jspm/nodelibs-url@0.2.0-alpha",
-    "util": "github:jspm/nodelibs-util@0.2.0-alpha",
+    "util": "github:jspm/nodelibs-util@0.2.1",
     "vm": "github:jspm/nodelibs-vm@0.2.0-alpha",
     "zlib": "github:jspm/nodelibs-zlib@0.2.0-alpha"
   },
@@ -518,18 +518,6 @@ SystemJS.config({
         "fstream": "npm:fstream@1.0.10"
       }
     },
-    "npm:tar-pack@3.1.4": {
-      "map": {
-        "once": "npm:once@1.3.3",
-        "readable-stream": "npm:readable-stream@2.1.5",
-        "rimraf": "npm:rimraf@2.5.4",
-        "tar": "npm:tar@2.2.1",
-        "uid-number": "npm:uid-number@0.0.6",
-        "debug": "npm:debug@2.2.0",
-        "fstream": "npm:fstream@1.0.10",
-        "fstream-ignore": "npm:fstream-ignore@1.0.5"
-      }
-    },
     "npm:glob-base@0.3.0": {
       "map": {
         "glob-parent": "npm:glob-parent@2.0.0",
@@ -636,21 +624,6 @@ SystemJS.config({
         "minimatch": "npm:minimatch@3.0.3"
       }
     },
-    "npm:bl@1.1.2": {
-      "map": {
-        "readable-stream": "npm:readable-stream@2.0.6"
-      }
-    },
-    "npm:readable-stream@2.0.6": {
-      "map": {
-        "core-util-is": "npm:core-util-is@1.0.2",
-        "inherits": "npm:inherits@2.0.3",
-        "isarray": "npm:isarray@1.0.0",
-        "process-nextick-args": "npm:process-nextick-args@1.0.7",
-        "string_decoder": "npm:string_decoder@0.10.31",
-        "util-deprecate": "npm:util-deprecate@1.0.2"
-      }
-    },
     "npm:har-validator@2.0.6": {
       "map": {
         "chalk": "npm:chalk@1.1.3",
@@ -677,7 +650,7 @@ SystemJS.config({
         "is-number": "npm:is-number@2.1.0",
         "randomatic": "npm:randomatic@1.1.5",
         "isobject": "npm:isobject@2.1.0",
-        "repeat-string": "npm:repeat-string@1.5.4"
+        "repeat-string": "npm:repeat-string@1.6.1"
       }
     },
     "npm:for-own@0.1.4": {
@@ -827,11 +800,6 @@ SystemJS.config({
         "js-tokens": "npm:js-tokens@1.0.3"
       }
     },
-    "npm:font-awesome@4.6.3": {
-      "map": {
-        "css": "github:systemjs/plugin-css@0.1.31"
-      }
-    },
     "npm:micromatch@2.3.11": {
       "map": {
         "is-glob": "npm:is-glob@2.0.1",
@@ -863,7 +831,7 @@ SystemJS.config({
     "npm:jsdom@7.2.2": {
       "map": {
         "abab": "npm:abab@1.0.3",
-        "nwmatcher": "npm:nwmatcher@1.3.8",
+        "nwmatcher": "npm:nwmatcher@1.3.9",
         "escodegen": "npm:escodegen@1.8.1",
         "parse5": "npm:parse5@1.5.1",
         "symbol-tree": "npm:symbol-tree@3.1.4",
@@ -872,10 +840,10 @@ SystemJS.config({
         "xml-name-validator": "npm:xml-name-validator@2.0.1",
         "cssom": "npm:cssom@0.3.1",
         "webidl-conversions": "npm:webidl-conversions@2.0.1",
-        "tough-cookie": "npm:tough-cookie@2.3.1",
+        "tough-cookie": "npm:tough-cookie@2.3.2",
         "acorn": "npm:acorn@2.7.0",
         "acorn-globals": "npm:acorn-globals@1.0.9",
-        "request": "npm:request@2.75.0",
+        "request": "npm:request@2.76.0",
         "cssstyle": "npm:cssstyle@0.2.37"
       }
     },
@@ -906,7 +874,7 @@ SystemJS.config({
       "map": {
         "lodash": "npm:lodash@4.16.4",
         "sass.js": "npm:sass.js@0.9.13",
-        "postcss": "npm:postcss@5.2.4",
+        "postcss": "npm:postcss@5.2.5",
         "autoprefixer": "npm:autoprefixer@6.5.1",
         "reqwest": "github:ded/reqwest@2.0.5",
         "path": "github:jspm/nodelibs-path@0.1.0",
@@ -989,7 +957,7 @@ SystemJS.config({
     "npm:fsevents@1.0.14": {
       "map": {
         "nan": "npm:nan@2.4.0",
-        "node-pre-gyp": "npm:node-pre-gyp@0.6.30"
+        "node-pre-gyp": "npm:node-pre-gyp@0.6.31"
       }
     },
     "npm:systemjs-riot@1.4.2": {
@@ -997,54 +965,9 @@ SystemJS.config({
         "riot-compiler": "npm:riot-compiler@2.5.5"
       }
     },
-    "npm:node-pre-gyp@0.6.30": {
-      "map": {
-        "request": "npm:request@2.75.0",
-        "mkdirp": "npm:mkdirp@0.5.1",
-        "tar-pack": "npm:tar-pack@3.1.4",
-        "semver": "npm:semver@5.3.0",
-        "npmlog": "npm:npmlog@4.0.0",
-        "rc": "npm:rc@1.1.6",
-        "tar": "npm:tar@2.2.1",
-        "rimraf": "npm:rimraf@2.5.4",
-        "nopt": "npm:nopt@3.0.6"
-      }
-    },
     "npm:cssstyle@0.2.37": {
       "map": {
         "cssom": "npm:cssom@0.3.1"
-      }
-    },
-    "npm:request@2.75.0": {
-      "map": {
-        "extend": "npm:extend@3.0.0",
-        "tough-cookie": "npm:tough-cookie@2.3.1",
-        "form-data": "npm:form-data@2.0.0",
-        "node-uuid": "npm:node-uuid@1.4.7",
-        "json-stringify-safe": "npm:json-stringify-safe@5.0.1",
-        "aws-sign2": "npm:aws-sign2@0.6.0",
-        "qs": "npm:qs@6.2.1",
-        "tunnel-agent": "npm:tunnel-agent@0.4.3",
-        "har-validator": "npm:har-validator@2.0.6",
-        "stringstream": "npm:stringstream@0.0.5",
-        "hawk": "npm:hawk@3.1.3",
-        "http-signature": "npm:http-signature@1.1.1",
-        "aws4": "npm:aws4@1.5.0",
-        "is-typedarray": "npm:is-typedarray@1.0.0",
-        "caseless": "npm:caseless@0.11.0",
-        "isstream": "npm:isstream@0.1.2",
-        "forever-agent": "npm:forever-agent@0.6.1",
-        "mime-types": "npm:mime-types@2.1.12",
-        "bl": "npm:bl@1.1.2",
-        "combined-stream": "npm:combined-stream@1.0.5",
-        "oauth-sign": "npm:oauth-sign@0.8.2"
-      }
-    },
-    "npm:form-data@2.0.0": {
-      "map": {
-        "combined-stream": "npm:combined-stream@1.0.5",
-        "mime-types": "npm:mime-types@2.1.12",
-        "asynckit": "npm:asynckit@0.4.0"
       }
     },
     "npm:npmlog@4.0.0": {
@@ -1122,14 +1045,6 @@ SystemJS.config({
         "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
       }
     },
-    "npm:postcss@5.2.4": {
-      "map": {
-        "source-map": "npm:source-map@0.5.6",
-        "chalk": "npm:chalk@1.1.3",
-        "js-base64": "npm:js-base64@2.1.9",
-        "supports-color": "npm:supports-color@3.1.2"
-      }
-    },
     "npm:is-my-json-valid@2.15.0": {
       "map": {
         "xtend": "npm:xtend@4.0.1",
@@ -1148,7 +1063,7 @@ SystemJS.config({
     },
     "npm:browserslist@1.4.0": {
       "map": {
-        "caniuse-db": "npm:caniuse-db@1.0.30000560"
+        "caniuse-db": "npm:caniuse-db@1.0.30000566"
       }
     },
     "npm:code-point-at@1.0.1": {
@@ -1183,7 +1098,7 @@ SystemJS.config({
         "bs58check": "npm:bs58check@1.0.8",
         "bigi": "npm:bigi@1.4.2",
         "bip66": "npm:bip66@1.1.4",
-        "ecurve": "npm:ecurve@1.0.3",
+        "ecurve": "npm:ecurve@1.0.4",
         "typeforce": "npm:typeforce@1.8.7"
       }
     },
@@ -1198,11 +1113,6 @@ SystemJS.config({
         "bs58check": "npm:bs58check@1.0.8"
       }
     },
-    "npm:ecurve@1.0.3": {
-      "map": {
-        "bigi": "npm:bigi@1.4.2"
-      }
-    },
     "npm:typeforce@1.8.7": {
       "map": {
         "inherits": "npm:inherits@2.0.3"
@@ -1214,11 +1124,6 @@ SystemJS.config({
         "randombytes": "npm:randombytes@2.0.3",
         "pbkdf2": "npm:pbkdf2@3.0.9",
         "create-hash": "npm:create-hash@1.1.2"
-      }
-    },
-    "npm:moment-timezone@0.5.6": {
-      "map": {
-        "moment": "npm:moment@2.15.1"
       }
     },
     "npm:riot-cli@2.6.2": {
@@ -1239,11 +1144,11 @@ SystemJS.config({
     },
     "npm:autoprefixer@6.5.1": {
       "map": {
-        "postcss": "npm:postcss@5.2.4",
+        "postcss": "npm:postcss@5.2.5",
         "browserslist": "npm:browserslist@1.4.0",
         "normalize-range": "npm:normalize-range@0.1.2",
         "num2fraction": "npm:num2fraction@1.2.2",
-        "caniuse-db": "npm:caniuse-db@1.0.30000560",
+        "caniuse-db": "npm:caniuse-db@1.0.30000566",
         "postcss-value-parser": "npm:postcss-value-parser@3.3.0"
       }
     },
@@ -1279,6 +1184,90 @@ SystemJS.config({
     "npm:source-map-support@0.4.5": {
       "map": {
         "source-map": "npm:source-map@0.5.6"
+      }
+    },
+    "npm:moment-timezone@0.5.7": {
+      "map": {
+        "moment": "npm:moment@2.15.2"
+      }
+    },
+    "npm:font-awesome@4.7.0": {
+      "map": {
+        "css": "github:systemjs/plugin-css@0.1.32"
+      }
+    },
+    "npm:request@2.76.0": {
+      "map": {
+        "extend": "npm:extend@3.0.0",
+        "tough-cookie": "npm:tough-cookie@2.3.2",
+        "qs": "npm:qs@6.3.0",
+        "json-stringify-safe": "npm:json-stringify-safe@5.0.1",
+        "har-validator": "npm:har-validator@2.0.6",
+        "http-signature": "npm:http-signature@1.1.1",
+        "combined-stream": "npm:combined-stream@1.0.5",
+        "forever-agent": "npm:forever-agent@0.6.1",
+        "stringstream": "npm:stringstream@0.0.5",
+        "tunnel-agent": "npm:tunnel-agent@0.4.3",
+        "aws4": "npm:aws4@1.5.0",
+        "hawk": "npm:hawk@3.1.3",
+        "aws-sign2": "npm:aws-sign2@0.6.0",
+        "caseless": "npm:caseless@0.11.0",
+        "mime-types": "npm:mime-types@2.1.12",
+        "oauth-sign": "npm:oauth-sign@0.8.2",
+        "is-typedarray": "npm:is-typedarray@1.0.0",
+        "node-uuid": "npm:node-uuid@1.4.7",
+        "isstream": "npm:isstream@0.1.2",
+        "form-data": "npm:form-data@2.1.1"
+      }
+    },
+    "npm:ecurve@1.0.4": {
+      "map": {
+        "bigi": "npm:bigi@1.4.2"
+      }
+    },
+    "npm:node-pre-gyp@0.6.31": {
+      "map": {
+        "request": "npm:request@2.76.0",
+        "tar-pack": "npm:tar-pack@3.3.0",
+        "rimraf": "npm:rimraf@2.5.4",
+        "npmlog": "npm:npmlog@4.0.0",
+        "tar": "npm:tar@2.2.1",
+        "semver": "npm:semver@5.3.0",
+        "nopt": "npm:nopt@3.0.6",
+        "mkdirp": "npm:mkdirp@0.5.1",
+        "rc": "npm:rc@1.1.6"
+      }
+    },
+    "npm:tough-cookie@2.3.2": {
+      "map": {
+        "punycode": "npm:punycode@1.4.1"
+      }
+    },
+    "npm:tar-pack@3.3.0": {
+      "map": {
+        "rimraf": "npm:rimraf@2.5.4",
+        "tar": "npm:tar@2.2.1",
+        "debug": "npm:debug@2.2.0",
+        "fstream-ignore": "npm:fstream-ignore@1.0.5",
+        "once": "npm:once@1.3.3",
+        "uid-number": "npm:uid-number@0.0.6",
+        "fstream": "npm:fstream@1.0.10",
+        "readable-stream": "npm:readable-stream@2.1.5"
+      }
+    },
+    "npm:postcss@5.2.5": {
+      "map": {
+        "source-map": "npm:source-map@0.5.6",
+        "chalk": "npm:chalk@1.1.3",
+        "js-base64": "npm:js-base64@2.1.9",
+        "supports-color": "npm:supports-color@3.1.2"
+      }
+    },
+    "npm:form-data@2.1.1": {
+      "map": {
+        "combined-stream": "npm:combined-stream@1.0.5",
+        "mime-types": "npm:mime-types@2.1.12",
+        "asynckit": "npm:asynckit@0.4.0"
       }
     }
   }

@@ -1,6 +1,6 @@
 import * as redux from 'redux';
 import userReducer from './users/reducers';
-import commonReducer from './commons/reducers';
+import commonReducer from './common/reducers';
 import activityReducer from './activities/reducers';
 import sendReducer from './send/reducers';
 import tabReducer from './tabs/reducers';

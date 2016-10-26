@@ -96,7 +96,7 @@
       "npm:esprima@2.7.3": {
         "jspmNodeConversion": false
       },
-      "npm:font-awesome@4.6.3": {
+      "npm:font-awesome@4.7.0": {
         "main": "css/font-awesome.css!",
         "jspmNodeConversion": false,
         "registry": "jspm",
@@ -118,7 +118,7 @@
           "process": "@empty"
         }
       },
-      "npm:moment@2.15.1": {
+      "npm:moment@2.15.2": {
         "jspmNodeConversion": false
       },
       "npm:ms@0.7.1": {
@@ -150,7 +150,7 @@
           }
         }
       },
-      "npm:typescript@2.0.3": {
+      "npm:typescript@2.0.6": {
         "browser": {},
         "map": {
           "buffer": "@empty",

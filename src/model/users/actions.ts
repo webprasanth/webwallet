@@ -1,5 +1,5 @@
 import { USERS } from '../action-types';
-import { commonActions } from '../commons/actions';
+import { commonActions } from '../common/actions';
 import store from '../store';
 import UserService from './user-service';
 import { riot } from '../../components/riot-ts';

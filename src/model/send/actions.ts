@@ -1,5 +1,5 @@
 import { SEND, PENDING } from '../action-types';
-import { commonActions } from '../commons/actions';
+import { commonActions } from '../common/actions';
 import { contactsActions } from '../contacts/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';

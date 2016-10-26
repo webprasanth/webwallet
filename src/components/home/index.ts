@@ -12,7 +12,7 @@ import { tabActions } from '../../model/tabs/actions';
 import HomePageTemplate from './index.html!text';
 import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
-import { ExtendEvent } from '../../model/types';
+import { FCEvent } from '../../model/types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
@@ -104,7 +104,7 @@ export class MainNavBar extends Element {
         this.update();
     }
 
-    onTabItemClick(event: ExtendEvent) {
+    onTabItemClick(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -112,7 +112,7 @@ export class MainNavBar extends Element {
         riot.route(tab.id);
     }
 
-    onLogoutTabItemClick(event: ExtendEvent) {
+    onLogoutTabItemClick(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 

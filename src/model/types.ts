@@ -1,6 +1,6 @@
 /**
  * add item property for riot's event
  */
-export interface ExtendEvent extends Event {
+export interface FCEvent extends Event {
     item: any;
 }

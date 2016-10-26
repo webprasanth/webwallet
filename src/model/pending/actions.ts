@@ -1,5 +1,5 @@
 import { PENDING } from '../action-types';
-import { commonActions } from '../commons/actions';
+import { commonActions } from '../common/actions';
 import PendingService from './pending-service';
 
 export const pendingActions = {
@@ -28,23 +28,6 @@ export const pendingActions = {
     },
     getMoreRequestFailed(resp) {
         return { type: PENDING.GET_MORE_REQUEST_FAILED, data: resp };
-    },
-    getWalletsByEmail(params) {
-        return (dispatch) => {
-            PendingService.singleton().getWalletsByEmail(params).then((resp: any) => {
-                if (resp.rc == 1 && resp.results.length > 0) {
-                    dispatch(pendingActions.getWalletsByEmailSuccess(resp));
-                } else {
-                    dispatch(pendingActions.getWalletsByEmailFailed(resp));
-                }
-            });
-        };
-    },
-    getWalletsByEmailSuccess(resp) {
-        return { type: PENDING.GET_WALLETS_BY_EMAIL_SUCCESS, data: resp };
-    },
-    getWalletsByEmailFailed(resp) {
-        return { type: PENDING.GET_WALLETS_BY_EMAIL_FAILED, data: resp };
     },
     markRejectedMoneyRequests(params) {
         return (dispatch) => {

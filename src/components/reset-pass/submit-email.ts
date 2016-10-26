@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store from '../../model/store';
 import SubmitEmailTemplate from './submit-email.html!text';
-import { ExtendEvent } from '../../model/types';
+import { FCEvent } from '../../model/types';
 import { isValidEmail } from '../../model/utils';
 import { resetPassActions } from '../../model/reset-pass/actions';
 import { RESET_PASS } from '../../model/action-types';
@@ -28,7 +28,7 @@ export default class SubmitEmail extends Element {
         this.update();
     }
 
-    sendEmail(event: ExtendEvent) {
+    sendEmail(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -53,7 +53,7 @@ export default class SubmitEmail extends Element {
         store.dispatch(resetPassActions.ssoResetPasswordMail(params));
     }
 
-    cancelResetPass(event: ExtendEvent) {
+    cancelResetPass(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 

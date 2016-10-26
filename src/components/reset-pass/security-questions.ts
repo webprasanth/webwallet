@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store from '../../model/store';
 import SecurityQuestionsTemplate from './security-questions.html!text';
-import { ExtendEvent } from '../../model/types';
+import { FCEvent } from '../../model/types';
 import { resetPassActions } from '../../model/reset-pass/actions';
 import { RESET_PASS } from '../../model/action-types';
 import AndamanService from '../../model/andaman-service';
@@ -123,7 +123,7 @@ export default class SecurityQuestions extends Element {
         this.errMessage = '';
     }
 
-    cancelResetPass(event: ExtendEvent) {
+    cancelResetPass(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 

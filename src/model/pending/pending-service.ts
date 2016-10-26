@@ -24,19 +24,6 @@ export default class PendingService {
         });
     }
 
-    getWalletsByEmail(params) {
-        return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.get_wallets_by_email(pipe, params, resp => {
-                    resolve(resp);
-                });
-            })
-        });
-    }
-
     markRejectedMoneyRequests(params) {
         return new Promise((resolve, reject) => {
             AndamanService.ready().then(opts => {

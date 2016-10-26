@@ -1,7 +1,7 @@
 import { CONTACTS } from '../action-types';
-import { commonActions } from '../commons/actions';
+import { commonActions } from '../common/actions';
 import ContactsService from './contacts-service';
-import PendingService from '../pending/pending-service';
+import CommonService from '../common/common-service';
 
 export const contactsActions = {
     getRoster(params) {
@@ -69,7 +69,7 @@ export const contactsActions = {
     },
     getWalletsByEmail(params) {
         return (dispatch) => {
-            PendingService.singleton().getWalletsByEmail(params).then((resp: any) => {
+            CommonService.singleton().getWalletsByEmail(params).then((resp: any) => {
                 if (resp.rc == 1 && resp.results.length > 0) {
                     dispatch(contactsActions.getWalletsByEmailSuccess(resp));
                 } else {

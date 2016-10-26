@@ -5,7 +5,7 @@ import AndamanService from '../../model/andaman-service';
 import { contactsActions } from '../../model/contacts/actions';
 import { CONTACTS } from '../../model/action-types';
 import { strimString } from '../../model/utils';
-import { ExtendEvent } from '../../model/types';
+import { FCEvent } from '../../model/types';
 
 export const PAGE_SIZE = 10;
 const ACTION_SEND = 0;
@@ -111,7 +111,7 @@ export default class HomeContacts extends Element {
         store.dispatch(contactsActions.getRoster(params));
     }
 
-    removeContact(event: ExtendEvent) {
+    removeContact(event: FCEvent) {
         riot.mount('#confirm-send', 'confirm-dialog', {
             title: 'Delete contact',
             message: 'Are you sure you want to delete this contact?',
@@ -124,7 +124,7 @@ export default class HomeContacts extends Element {
         });
     }
 
-    requestForm(event: ExtendEvent) {
+    requestForm(event: FCEvent) {
         this.actionSelected = ACTION_REQUEST;
         let account = {
             email: event.item.email,
@@ -134,7 +134,7 @@ export default class HomeContacts extends Element {
         store.dispatch(contactsActions.getWalletsByEmail(account));
     }
 
-    sendForm(event: ExtendEvent) {
+    sendForm(event: FCEvent) {
         this.actionSelected = ACTION_SEND;
         let account = {
             email: event.item.email,

@@ -1,5 +1,5 @@
 import { RESET_PASS } from '../action-types';
-import { commonActions } from '../commons/actions';
+import { commonActions } from '../common/actions';
 import store from '../store';
 import ResetPassService from './reset-pass-service';
 import { riot } from '../../components/riot-ts';
