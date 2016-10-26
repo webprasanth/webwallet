@@ -150,6 +150,38 @@ internals.API.prototype.get_profile = function (pipe, request, cb) {
 /**
  *
  * @param pipe
+ * @param file: name, size, slice(),
+ * @param p_cb
+ * @param cb
+ */
+internals.API.prototype.send_profile_file = function(pipe, file, p_cb, cb) {
+	var ctx = {};
+	ctx.file_name = file.name;
+	ctx.size = file.size;
+	ctx.event = Event.UPLOAD_PROFILE_PIC;
+
+	var size = 48 * 1024;
+	pipe.sendfile(ctx, file, function(err, percent) {
+		if (err === Err.ok) {
+			console.log('xfer complete');
+			// cb(null);
+			// console.log('Sent the profile pic ');
+			// Listen in on the callback.
+			pipe.once(Event.UPLOAD_PROFILE_PIC_ACK, cb);
+		} else if (err === Err.again) {
+			console.log('continuing...');
+			p_cb(percent);
+		} else if (err) {
+			console.log('xfer error', err);
+			// cb(err);
+			pipe.once(Event.UPLOAD_PROFILE_PIC_ACK, cb);
+		}
+	}, size);
+}
+
+/**
+ *
+ * @param pipe
  * @param request: idToken
  * @param {Function} cb: function(resp){}, resp -> {rc, wallet}, wallet -> {secret}
  */
@@ -395,6 +427,49 @@ internals.API.prototype.get_txn_details = function (pipe, request, cb) {
 internals.API.prototype.get_balance = function (pipe, request, cb) {
 	pipe.emit(Event.KEYS_GET_BALANCE, request);
 	pipe.once(Event.KEYS_GET_BALANCE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: idToken
+ * @param {Function} cb: function(resp) {}, resp -> {rc, keypair}
+ */
+internals.API.prototype.sso_get_keypair = function(pipe, request, cb) {
+	pipe.emit(Event.SSO_GET_KEYPAIR, request);
+	pipe.once(Event.SSO_GET_KEYPAIR_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request: idToken, password, newPassword, newPrivateKey
+ * @param cb
+ */
+internals.API.prototype.sso_change_password = function(pipe, request, cb) {
+	pipe.emit(Event.SSO_CHANGE_PASSWORD, request);
+	pipe.once(Event.SSO_CHANGE_PASSWORD_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
+ * @param request:{sessionToken}
+ * @param cb
+ */
+internals.API.prototype.start_tfa_code = function(pipe, request, cb) {
+	pipe.emit(Event.START_TFA_CODE, request);
+	pipe.once(Event.START_TFA_CODE_ACK, cb);
+};
+
+internals.API.prototype.turn_off_tfa = function(pipe, request, cb) {
+	pipe.emit(Event.TURN_OFF_TFA, request);
+	pipe.once(Event.TURN_OFF_TFA_ACK, cb);
+};
+
+internals.API.prototype.confirm_tfa_code = function(pipe, request, cb) {
+	pipe.emit(Event.CONFIRM_TFA_CODE, request);
+	pipe.once(Event.CONFIRM_TFA_CODE_ACK, cb);
 };
 
 /**

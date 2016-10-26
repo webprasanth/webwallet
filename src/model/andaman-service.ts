@@ -24,6 +24,19 @@ interface IAndaman {
     get_roster(pipe, params: {}, cb: (resp) => any);
     get_users_by_uid(pipe, params: {}, cb: (resp) => any);
     remove_user(pipe, params: {}, cb: (resp) => any);
+
+    sso_get_keypair(pipe, params: {}, cb: (resp) => any);
+    sso_change_password(pipe, params: {}, cb: (resp) => any);
+    update_profile(pipe, params: {}, cb: (resp) => any);
+    send_profile_file(pipe, ctx, oFile, percentCb, doneCb);
+    start_tfa_code(pipe, params: {}, cb: (resp) => any);
+    turn_off_tfa(pipe, params: {}, cb: (resp) => any);
+    confirm_tfa_code(pipe, params: {}, cb: (resp) => any);
+    update_fountain(pipe, params: {}, cb: (resp) => any);
+    enable_fountain(pipe, params: {}, cb: (resp) => any);
+    disable_fountain(pipe, params: {}, cb: (resp) => any);
+    get_my_fountain(pipe, params: {}, cb: (resp) => any);
+
     sso_reset_password_mail(pipe, params: {}, cb: (resp) => any);
     get_recovery_keys(pipe, params: {}, cb: (resp) => any);
     sso_reset_password(pipe, params: {}, cb: (resp) => any);

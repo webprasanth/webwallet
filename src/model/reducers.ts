@@ -5,6 +5,7 @@ import activityReducer from './activities/reducers';
 import sendReducer from './send/reducers';
 import tabReducer from './tabs/reducers';
 import pendingReducer from './pending/reducers';
+import profileReducer from './profile/reducers';
 import contactsReducer from './contacts/reducers';
 import resetPassReducer from './reset-pass/reducers';
 
@@ -19,6 +20,7 @@ const reducers = redux.combineReducers({
     activityData: activityReducer,
     sendData: sendReducer,
     pendingData: pendingReducer,
+    profileData: profileReducer,
     contactsData: contactsReducer,
     tabData: tabReducer,
     resetPassData: resetPassReducer

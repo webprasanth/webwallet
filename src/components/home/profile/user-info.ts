@@ -15,5 +15,6 @@ export default class UserInfo extends Element {
     
     mounted() {
         this.userProfile = store.getState().userData.user;
+        this.update();
     }
 }
