@@ -14,8 +14,8 @@
 								<label>Amount</label>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">Flash</span>
-									<input id="Amount" type="text" class="form-control" placeholder='Amount' aria-describedby="basic-addon1" value={AmountValue}
-										on-blur="amount-blur" on-focus="onFocusAmout" on-keypress="filter-number-edit">
+									<input id="contact-send-amount" type="number" class="form-control" placeholder='Amount' aria-describedby="basic-addon1" value={AmountValue}
+										on-blur="amount-blur" on-keypress="filter-number-edit">
 								</div>
 								<div show={errorMessage} class="pin-incorrect"><strong>{errorMessage}</strong></div>
 							</div>
@@ -30,16 +30,16 @@
 							<div class="info-modal">
 								<div class="avatar">
 									<img class="img-circle" src={opts.sendAddr.profile_pic_url ? AvatarServer + opts.sendAddr.profile_pic_url :
-										'assets/images/pages/coin.png'} width="40 " />
+										'assets/images/pages/coin.png'} width="40" />
 								</div>
-								<div class="_info ">
-									<div class="name ">{opts.sendAddr.display_name?opts.sendAddr.display_name:opts.sendAddr.username}</div>
-									<div class="name ">{opts.sendAddr.email}</div>
+								<div class="_info">
+									<div class="name">{opts.sendAddr.display_name?opts.sendAddr.display_name:opts.sendAddr.username}</div>
+									<div class="name">{opts.sendAddr.email}</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer ">
+					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						<button type="button" class="btn btn-primary" onclick={sendMoney}>Send</button>
 					</div>

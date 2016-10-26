@@ -16,8 +16,8 @@
 									<label>Amount</label>
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1">Flash</span>
-										<input id="Amount" value={AmountValue} on-blur="amount-blur" type="text" class="form-control" placeholder='Amount' aria-describedby="basic-addon1"
-											on-focus="onFocusAmout" on-keypress="filter-number-edit">
+										<input id="contact-request-amount" value={AmountValue} on-blur="amount-blur" type="number" class=" form-control" placeholder='Amount'
+											aria-describedby="basic-addon1" on-keypress="filter-number-edit">
 									</div>
 									<div show={errorMessage} class="pin-incorrect">{errorMessage}</div>
 								</div>

@@ -42,7 +42,7 @@ export default class ContactSendMoney extends Element {
     }
 
     sendMoney() {
-        let amount = $('#Amount').val();
+        let amount = $('#contact-send-amount').val();
 
         let fee = calcFee(amount);
 

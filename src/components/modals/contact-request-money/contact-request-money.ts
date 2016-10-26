@@ -13,6 +13,7 @@ export default class ContactRequestMoney extends Element {
     private requestSuccess: boolean = false;
     private formatCurrency = formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
+    private errorMessage = null;
 
     constructor() {
         super();
@@ -39,19 +40,23 @@ export default class ContactRequestMoney extends Element {
     }
 
     sendRequestDirect() {
-        this.requestProcessing = true;
-        let amount = $('#Amount').val();
-        let note = $('#Note').val();
+        let amount = $('#contact-request-amount').val();
 
-        if (amount > 0) {
-            let moneyInfo = {
-                to: this.opts.sendAddr.username,
-                bare_uid: this.opts.sendAddr.email,
-                amount,
-                currency: 1,
-                note
-            };
-            store.dispatch(requestActions.sendRequest(moneyInfo));
+        if (amount < 1) {
+            return this.errorMessage = 'Amount must be at least 1';
         }
+
+        let note = $('#Note').val();
+        this.requestProcessing = true;
+
+        let moneyInfo = {
+            to: this.opts.sendAddr.username,
+            bare_uid: this.opts.sendAddr.email,
+            amount,
+            currency: 1,
+            note
+        };
+
+        store.dispatch(requestActions.sendRequest(moneyInfo));
     }
 }

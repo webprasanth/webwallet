@@ -27,7 +27,7 @@ export default class HomeContacts extends Element {
     /**
      * do actionSelected with contact: Send money or Request money
      */
-    private actionSelected = 0;
+    private static actionSelected = 0;
 
     mounted() {
         let state = store.getState();
@@ -67,11 +67,11 @@ export default class HomeContacts extends Element {
         } else if (type == CONTACTS.REMOVE_USER_SUCCESS) {
             this.prepareContactUids();
         } else if (type == CONTACTS.GET_WALLETS_BY_EMAIL_SUCCESS) {
-            if (this.actionSelected == ACTION_REQUEST) {
+            if (HomeContacts.actionSelected == ACTION_REQUEST) {
                 riot.mount('#confirm-send', 'contact-request-money', {
                     sendAddr: data.contactWallet
                 });
-            } else if (this.actionSelected == ACTION_SEND) {
+            } else if (HomeContacts.actionSelected == ACTION_SEND) {
                 riot.mount('#confirm-send', 'contact-send-money', {
                     sendAddr: data.contactWallet
                 });
@@ -125,7 +125,7 @@ export default class HomeContacts extends Element {
     }
 
     requestForm(event: FCEvent) {
-        this.actionSelected = ACTION_REQUEST;
+        HomeContacts.actionSelected = ACTION_REQUEST;
         let account = {
             email: event.item.email,
             start: 0,
@@ -135,7 +135,7 @@ export default class HomeContacts extends Element {
     }
 
     sendForm(event: FCEvent) {
-        this.actionSelected = ACTION_SEND;
+        HomeContacts.actionSelected = ACTION_SEND;
         let account = {
             email: event.item.email,
             start: 0,
