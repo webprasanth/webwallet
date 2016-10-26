@@ -23,4 +23,17 @@ export default class CommonService {
             })
         });
     }
+
+    searchWallet(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.search_wallet(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
 }

@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeSendTemplate from './send.html!text';
-import AndamanService from '../../model/andaman-service';
+import CommonService from '../../model/common/common-service';
 import { calcFee } from '../../model/utils';
 
 @template(HomeSendTemplate)
@@ -29,42 +29,38 @@ export default class HomeSend extends Element {
     searchWallet = (query?, syncResults?, asyncResults?) => {
         let term: string = $('#to-email-id').val();
 
-        AndamanService.ready().then(opts => {
-            let andaman = opts.andaman;
-            let pipe = opts.pipe;
+        let params = {
+            term,
+            start: 0,
+            size: 20
+        };
 
-            let params = {
-                term,
-                start: 0,
-                size: 20
-            };
-
-            andaman.search_wallet(pipe, params, (resp: any) => {
-                if (resp.rc === 1 && resp.wallets.length > 0) {
-                    if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
-                        if (this.continueButtonClicked) {
-                            this.sendWallet = resp.wallets[0];
-                            this.continueButtonClicked = false;
-                            this.checkAndShowComfirmationForm();
-                            return;
-                        }
-                    }
-
-                    let data = resp.wallets.map(item => {
-                        return item.email;
-                    });
-                    if (asyncResults) {
-                        asyncResults(data.filter(value => {
-                            return value != this.userProfile.email;
-                        }));
-                    }
-                } else {
-                    if (asyncResults) {
-                        asyncResults([]);
+        CommonService.singleton().searchWallet(params).then((resp: any) => {
+            if (resp.rc === 1 && resp.wallets.length > 0) {
+                if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
+                    if (this.continueButtonClicked) {
+                        this.sendWallet = resp.wallets[0];
+                        this.continueButtonClicked = false;
+                        this.checkAndShowComfirmationForm();
+                        return;
                     }
                 }
 
-            });
+                let data = resp.wallets.map(item => {
+                    return item.email;
+                });
+
+                if (asyncResults) {
+                    asyncResults(data.filter(value => {
+                        return value != this.userProfile.email;
+                    }));
+                }
+            } else {
+                if (asyncResults) {
+                    asyncResults([]);
+                }
+            }
+
         });
     }
 
