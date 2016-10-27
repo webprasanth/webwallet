@@ -13,6 +13,12 @@ var opts = {
     server_publicKey: '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A='
 };
 
+
+// babv test code
+// opts.proto = 'ws';
+// opts.port = 8098;
+
+
 var readyPromise = null;
 var isReady = false;
 var andamanApi = new API();
@@ -24,7 +30,8 @@ module.exports = {
         if (readyPromise) return readyPromise;
 
         readyPromise = new Promise(function (resolve) {
-            var buffer = new Buffer(2048);
+            // var buffer = new Buffer(2048);
+            var buffer = new Uint8Array(128 * 1024);
             var eventPipe = io({
                 host: opts.host,
                 port: opts.port,
@@ -49,6 +56,11 @@ module.exports = {
             customEventPipe.setAuthInfo = function (authVersion, sessionToken) {
                 this.auth_version = authVersion;
                 this.session_token = sessionToken;
+            };
+
+            customEventPipe.sendfile = function(context, file, cb, size) {
+                console.log("context", context, file, cb, size);
+                eventPipe.sendfile(context, file, cb, size);
             };
 
             eventPipe.on('connect', function () {

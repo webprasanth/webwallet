@@ -23,4 +23,23 @@ export default class ProfileService {
             })
         });
     }
+
+    updateAvatar(file) {
+        return new Promise((resolve, reject) => {
+            let percentCb = function(resp) {
+                console.log('+++++++++++++++++++ babv upload image percentCb resp: ' + JSON.stringify(resp));
+            }
+
+            let doneCb = function(resp) {
+                console.log('+++++++++++++++++++ babv upload image doneCb resp: ' + JSON.stringify(resp));
+                resolve(resp);
+            }
+
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+                andaman.upload_profile_pic(pipe, file, percentCb, doneCb);
+            })
+        });
+    }
 }

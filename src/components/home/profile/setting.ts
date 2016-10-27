@@ -25,7 +25,7 @@ export default class HomeProfile extends Element {
         if (type == PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS) {
             this.publicKeyList = [data.wallet];
             if (!document.getElementById("qrcode").hasChildNodes()) {
-                var qrCode = new QRCode("qrcode");
+                let qrCode = new QRCode("qrcode");
                 qrCode.makeCode('flashcoin:' + data.wallet.address);
             }
         }

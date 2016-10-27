@@ -28,7 +28,7 @@ interface IAndaman {
     sso_get_keypair(pipe, params: {}, cb: (resp) => any);
     sso_change_password(pipe, params: {}, cb: (resp) => any);
     update_profile(pipe, params: {}, cb: (resp) => any);
-    send_profile_file(pipe, ctx, oFile, percentCb, doneCb);
+    upload_profile_pic(pipe, file: any, percentCb:(resp)=>any, doneCb:(resp)=>any);
     start_tfa_code(pipe, params: {}, cb: (resp) => any);
     turn_off_tfa(pipe, params: {}, cb: (resp) => any);
     confirm_tfa_code(pipe, params: {}, cb: (resp) => any);
@@ -44,7 +44,7 @@ interface IAndaman {
 
 export default class AndamanService {
     private static service = Andaman;
-    public static readonly AvatarServer = `http://${Andaman.opts.host}/profile/`;
+    public static readonly AvatarServer = `https://${Andaman.opts.host}/profile/`;
     public static readonly clientHost = 'flashcoin.io';
 
     static ready(): Promise<{ andaman: IAndaman, pipe: any }> {
