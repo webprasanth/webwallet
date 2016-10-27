@@ -93,19 +93,19 @@
 
             <div class="inforItems col-xs-12" id="profile-timezone">
                 <div class="item-title col-xs-4 hidden-xs-small">Timezone</div>
-                <div if={!isChangingTimezone}>
+                <div if={!isSelectingTimezone}>
                     <div class="item-data col-xs-6">
                         <p><span class="">
                             {userProfile.timezone? userProfile.timezone:"----"}
                         </span></p>
                     </div>
                     <div class="item-control col-xs-2 text-right">
-                        <a id="on-change-timezone" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onChangeTimezone}>
+                        <a id="on-change-timezone" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onSelectTimezone}>
                         </a>
                     </div>
                 </div>
 
-                <div if={isChangingTimezone} class="item-data col-xs-8 edit-form">
+                <div if={isSelectingTimezone} class="item-data col-xs-8 edit-form">
                     <div class="col-xs-custom hidden-xs-up"><span class="">Timezone: </span></div>
                     <div class="input-group">
                         <select id="time-zone" class="form-control">
