@@ -3,6 +3,7 @@ import store, { ApplicationState } from '../../../model/store';
 import AccountSettingTemplate from './setting.html!text';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
+import QRCode from 'QRCode';
 
 @template(AccountSettingTemplate)
 export default class HomeProfile extends Element {

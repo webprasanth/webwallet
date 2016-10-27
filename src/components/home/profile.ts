@@ -15,27 +15,6 @@ export default class HomeProfile extends Element {
     private isSetting = false;
     private isFountain = false;
 
-    private isChangingName: boolean = false;
-    private isChangingPass: boolean = false;
-    private isChangingTimezone: boolean = false;
-
-    private timezones = [];
-    private accountType = null;
-    private publicKeyList = [];
-    private totpTurningOn: boolean = false;
-    private fountainEnabled: boolean = false;
-
-    private selectedTimeUnit = 1;
-    private isHourUnit: boolean = true;
-    private isMinuteUnit: boolean = false;
-    private memo: string = '';
-
-    private domainStr: string = '';
-    private hostname: string = 'babv.com';
-    private fountainId: string = 'a4444AfountainID';
-    private amount: number = 0;
-    private duration: number = 0;
-
     mounted() {
         this.userProfile = store.getState().userData.user;
         this.avartarServer = AndamanService.AvatarServer;

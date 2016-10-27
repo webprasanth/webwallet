@@ -7,6 +7,8 @@ export default function profileReducer(state = { wallet: {} }, action) {
             return Object.assign({}, state, { wallet: action.data });
         case PROFILE.UPDATE_AVATAR_SUCCESS:
             return Object.assign({}, state, { avatarToken: action.data });
+        case PROFILE.GET_SSO_KEYPAIR_SUCCESS:
+            return Object.assign({}, state, { keypair: action.data });
         default:
             return state;
     }

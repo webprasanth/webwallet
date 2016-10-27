@@ -1,9 +1,13 @@
+/**
+ * Profile avatar
+ */
 import { riot, template, Element } from '../../riot-ts';
 import store, { ApplicationState } from '../../../model/store';
 import AndamanService from '../../../model/andaman-service';
 import ProfileAvatarTemplate from './avatar.html!text';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
+import cropbox from 'cropbox';
 
 @template(ProfileAvatarTemplate)
 export default class ProfileAvatar extends Element {
@@ -94,7 +98,7 @@ export default class ProfileAvatar extends Element {
             let reader = new FileReader();
             reader.onload = function(e) {
                 options.imgSrc = e.target.result;
-                self.cropper = new cropbox(options);
+                self.cropper = cropbox(options);
                 self.cropper.ratio *= 0.45;
 
                 self.update();

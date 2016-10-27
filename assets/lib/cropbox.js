@@ -147,3 +147,5 @@ var cropbox = function(options){
 
     return obj;
 };
+
+module.exports = cropbox;

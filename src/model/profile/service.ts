@@ -27,11 +27,11 @@ export default class ProfileService {
     updateAvatar(file) {
         return new Promise((resolve, reject) => {
             let percentCb = function(resp) {
-                console.log('+++++++++++++++++++ babv upload image percentCb resp: ' + JSON.stringify(resp));
+                // TODO babv implement
             }
 
             let doneCb = function(resp) {
-                console.log('+++++++++++++++++++ babv upload image doneCb resp: ' + JSON.stringify(resp));
+                // TODO babv implement
                 resolve(resp);
             }
 
@@ -39,6 +39,32 @@ export default class ProfileService {
                 let andaman = opts.andaman;
                 let pipe = opts.pipe;
                 andaman.upload_profile_pic(pipe, file, percentCb, doneCb);
+            })
+        });
+    }
+
+    getSSOKeypair(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.sso_get_keypair(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    changePassword(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.sso_change_password(pipe, params, resp => {
+                    resolve(resp);
+                });
             })
         });
     }
