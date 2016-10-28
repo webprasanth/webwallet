@@ -32,15 +32,15 @@
                 <textarea class="form-control" id="domains" value="{domainStr}"></textarea>
             </div>
             <div class="form-group btn-fountain">
-                <button id="update-domain" class="btn btn-primary" on-click="update-domain">Update Parameters</button>
-                <button id="disable-fountain" class="btn btn-default" on-click="disable-fountain">Turn off Fountain</button>
+                <button id="update-domain" class="btn btn-primary" onclick={updateFountain}>Update Parameters</button>
+                <button id="disable-fountain" class="btn btn-default" onclick={disableFountain}>Turn off Fountain</button>
             </div>
             <div class="form-group">
                 <p>
                     <label>Please copy the following code and paste it right after the opening tag of the fountain hosting page's source code</label>
                 </p>
                 <pre>
-                    <code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://{hostname}/widgets/dist/unity-sdk.js&quot;&gt;&lt;/script&gt;</code>
+                    <code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://fountain.safe.cash/public/dist/unity-sdk.js&quot;&gt;&lt;/script&gt;</code>
                 </pre>
             </div>
             <div class="form-group">
@@ -67,7 +67,7 @@
                         <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}" {disabled}>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
-                        <select id="unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}' {disabled}>
+                        <select id="time-unit" class="compact selection dropdown form-control" {disabled}>
                             <option value="3600" selected="{isHourUnit}">Hours</option>
                             <option value="60" selected="{isMinuteUnit}">Minutes</option>
                         </select>
@@ -88,7 +88,7 @@
             </div>
             <br/>
             <br/>
-            <button id="enable-fountain" class="btn btn-primary" on-click="enable-fountain">
+            <button id="enable-fountain" class="btn btn-primary" onclick={enableFountain}>
                 Turn on Fountain
             </button>
         </div>

@@ -46,7 +46,6 @@ export const userActions = {
     getProfile() {
         return (dispatch) => {
             UserService.singleton().getProfile().then((resp: any) => {
-                console.log('+++++ get_profile resp = ' + JSON.stringify(resp));
 
                 if (resp.rc === 1) {
                     dispatch(userActions.getProfileSuccess(resp.profile));
@@ -188,6 +187,7 @@ function decryptPassphraseV1(dispatch, wallets) {
                 return new Wallet().openWallet(w);
             });
             dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
+            dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: resp.wallet.secret});
         }
     });
 }
@@ -217,4 +217,5 @@ function decryptPassphraseV2(dispatch, wallets, password) {
     });
 
     dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
+    dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password});
 }

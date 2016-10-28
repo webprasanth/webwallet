@@ -14,4 +14,11 @@ export default class BaseElement extends Element {
         }
         riot.mount('#error-dialog', 'error-alert', { title: title, message: message });
     }
+
+    showMessage(title: string, message: string) {
+        if (!title || title.length == 0) {
+            title = 'Infomation';
+        }
+        riot.mount('#error-dialog', 'message-dialog', { title: title, message: message });
+    }
 }

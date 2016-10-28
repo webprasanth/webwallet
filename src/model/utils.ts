@@ -47,10 +47,6 @@ export function getUserKey(): UserKey | any {
   return userKey;
 }
 
-export function getIdToken(): string {
-  return localStorage.getItem('access_token');
-}
-
 export function calcFee(amount) {
   return 1;
 }

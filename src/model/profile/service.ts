@@ -68,4 +68,95 @@ export default class ProfileService {
             })
         });
     }
+
+    enable2FA(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.start_tfa_code(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    disable2FA(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.turn_off_tfa(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    confirm2FACode(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.confirm_tfa_code(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    enableFountain(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.enable_fountain(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    updateFountain(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.update_fountain(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    disableFountain(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.disable_fountain(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    getFountain(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.get_my_fountain(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
 }

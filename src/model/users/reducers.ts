@@ -10,6 +10,10 @@ export default function userReducer(state = { user: null, wallets: [] }, action)
             return Object.assign({}, state, { user: action.data });
         case USERS.LOGOUT:
             return Object.assign({}, state, { user: null });
+        case PROFILE.DISABLE_2FA_SUCCESS:
+            oldProfile = state.user;
+            oldProfile.totp_enabled = 0;
+            return Object.assign({}, state, { user: oldProfile });
         case PROFILE.UPDATE_PROFILE_SUCCESS:
         case USERS.GET_PROFILE_SUCCESS:
             oldProfile = state.user;
@@ -20,6 +24,10 @@ export default function userReducer(state = { user: null, wallets: [] }, action)
         case USERS.GET_BALANCE_SUCCESS:
             oldProfile = state.user;
             oldProfile.balance = action.data;
+            return Object.assign({}, state, { user: oldProfile });
+        case USERS.STORE_FOUNTAIN_SECRET:
+            oldProfile = state.user;
+            oldProfile.fountainSecret = action.data;
             return Object.assign({}, state, { user: oldProfile });
         case USERS.REMEMBER_ME:
             return Object.assign({}, state, { rememberMe: action.data });

@@ -106,4 +106,144 @@ export const profileActions = {
     changePasswordFailed(resp) {
         return { type: PROFILE.CHANGE_PASSWORD_FAILED, data: resp };
     },
+
+    enable2FA(params) {
+        return (dispatch) => {
+            ProfileService.singleton().enable2FA(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.enable2FASuccess(resp));
+                } else {
+                    dispatch(profileActions.enable2FAFailed(resp));
+                }
+            });
+        };
+    },
+
+    enable2FASuccess(resp) {
+        return { type: PROFILE.ENABLE_2FA_SUCCESS, data: resp.info};
+    },
+
+    enable2FAFailed(resp) {
+        return { type: PROFILE.ENABLE_2FA_FAILED, data: resp };
+    },
+
+    disable2FA(params) {
+        return (dispatch) => {
+            ProfileService.singleton().disable2FA(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.disable2FASuccess(params));
+                } else {
+                    dispatch(profileActions.disable2FAFailed(resp));
+                }
+            });
+        };
+    },
+
+    disable2FASuccess(resp) {
+        return { type: PROFILE.DISABLE_2FA_SUCCESS, data: resp};
+    },
+
+    disable2FAFailed(resp) {
+        return { type: PROFILE.DISABLE_2FA_FAILED, data: resp };
+    },
+
+    confirm2FACode(params) {
+        return (dispatch) => {
+            ProfileService.singleton().confirm2FACode(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.confirm2FACodeSuccess(resp));
+                } else {
+                    dispatch(profileActions.confirm2FACodeFailed(resp));
+                }
+            });
+        };
+    },
+
+    confirm2FACodeSuccess(resp) {
+        return { type: PROFILE.CONFIRM_2FA_CODE_SUCCESS, data: resp};
+    },
+
+    confirm2FACodeFailed(resp) {
+        return { type: PROFILE.CONFIRM_2FA_CODE_FAILED, data: resp };
+    },
+
+    enableFountain(params) {
+        return (dispatch) => {
+            ProfileService.singleton().enableFountain(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.enableFountainSuccess(resp));
+                } else {
+                    dispatch(profileActions.enableFountainFailed(resp));
+                }
+            });
+        };
+    },
+
+    enableFountainSuccess(resp) {
+        return { type: PROFILE.ENABLE_FOUNTAIN_SUCCESS, data: resp};
+    },
+
+    enableFountainFailed(resp) {
+        return { type: PROFILE.ENABLE_FOUNTAIN_FAILED, data: resp };
+    },
+
+    updateFountain(params) {
+        return (dispatch) => {
+            ProfileService.singleton().updateFountain(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.updateFountainSuccess(resp));
+                } else {
+                    dispatch(profileActions.updateFountainFailed(resp));
+                }
+            });
+        };
+    },
+
+    updateFountainSuccess(resp) {
+        return { type: PROFILE.UPDATE_FOUNTAIN_SUCCESS, data: resp};
+    },
+
+    updateFountainFailed(resp) {
+        return { type: PROFILE.UPDATE_FOUNTAIN_FAILED, data: resp };
+    },
+
+    disableFountain(params) {
+        return (dispatch) => {
+            ProfileService.singleton().disableFountain(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.disableFountainSuccess(resp));
+                } else {
+                    dispatch(profileActions.disableFountainFailed(resp));
+                }
+            });
+        };
+    },
+
+    disableFountainSuccess(resp) {
+        return { type: PROFILE.DISABLE_FOUNTAIN_SUCCESS, data: resp};
+    },
+
+    disableFountainFailed(resp) {
+        return { type: PROFILE.DISABLE_FOUNTAIN_FAILED, data: resp };
+    },
+
+    getFountain(params) {
+        return (dispatch) => {
+            ProfileService.singleton().getFountain(params).then((resp: any) => {
+                if (resp.rc == 1) {
+                    dispatch(profileActions.getFountainSuccess(resp));
+                } else {
+                    dispatch(profileActions.getFountainFailed(resp));
+                }
+            });
+        };
+    },
+
+    getFountainSuccess(resp) {
+        return { type: PROFILE.GET_FOUNTAIN_SUCCESS, data: resp};
+    },
+
+    getFountainFailed(resp) {
+        return { type: PROFILE.GET_FOUNTAIN_FAILED, data: resp };
+    },
 };

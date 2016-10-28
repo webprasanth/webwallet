@@ -2,14 +2,14 @@
  * Profile user information tab
  */
 import BaseElement from '../../base-element';
-import { riot, template, Element } from '../../riot-ts';
+import { riot, template } from '../../riot-ts';
 import store, { ApplicationState } from '../../../model/store';
 import UserInfoTemplate from './user-info.html!text';
 import AndamanService from '../../../model/andaman-service';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
 import Premium from 'Premium';
-import { getUserKey, storeUserKey, getIdToken } from '../../../model/utils';
+import { getUserKey, storeUserKey } from '../../../model/utils';
 import CryptoJS from 'crypto-js';
 import moment from 'moment-timezone';
 
