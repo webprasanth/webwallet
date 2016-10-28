@@ -19,8 +19,8 @@
 							</div>
 							<div class="info-modal">
 								<div class="avatar">
-									<img class="img-circle" src="{AvatarServer}{opts.receiverWallet.profile_pic_url}" width="40" show={opts.receiverWallet.profile_pic_url}/>
-									<img class="img-circle" src="assets/images/pages/coin.png" width="40" show={!opts.receiverWallet.profile_pic_url}/>
+									<img class="img-circle" src={opts.receiverWallet.profile_pic_url ? AvatarServer + opts.receiverWallet.profile_pic_url :
+										"assets/images/pages/coin.png"} width="40" />
 								</div>
 								<div class="_info">
 									<div class="name">{opts.receiverWallet.display_name?opts.receiverWallet.display_name:opts.receiverWallet.username}</div>

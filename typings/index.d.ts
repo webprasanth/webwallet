@@ -11,4 +11,5 @@
 /// <reference path="globals/moment/index.d.ts" />
 /// <reference path="globals/redux-thunk/index.d.ts" />
 /// <reference path="globals/redux/index.d.ts" />
+/// <reference path="globals/riotjs/index.d.ts" />
 /// <reference path="globals/underscore/index.d.ts" />

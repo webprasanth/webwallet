@@ -8,6 +8,7 @@ export default class HomeRequest extends Element {
     private userProfile = null;
     private continueButtonClicked: boolean = false;
     private receiverWallet = null;
+    private isValidAddress = false;
 
     mounted() {
         this.userProfile = store.getState().userData.user;

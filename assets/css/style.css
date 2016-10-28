@@ -354,6 +354,10 @@ h5.title-table{
 .pending-page .listItems .btn-active a span.glyphicon{
     top: 8px;
 }
+.pending-table, .contact-table{
+    margin-bottom: 32px;
+}
+
 /*==============*/
 /*Send and Request*/
 .send-page span.twitter-typeahead,
@@ -367,7 +371,8 @@ h5.title-table{
 
 .send-page .glyphicon.glyphicon-search,
 .request-page .glyphicon.glyphicon-search{
-    left: -30px;
+    position: relative;
+    margin-left: -25px;
 }
 .request-page .email-account span,
 .send-page .email-account span{
@@ -376,9 +381,11 @@ h5.title-table{
     right: 9px;
     font-size: 12pt;
 }
-.send-page .email-account span.glyphicon-ok-circle,
-.request-page .email-account span.glyphicon-ok-circle{
-    right: 34px;
+
+.send-page span.glyphicon-ok-circle,
+.request-page span.glyphicon-ok-circle {
+    position: relative;
+    margin-left: 16px;
     color: #008000;
 }
 .send-page .title-page h2.title{

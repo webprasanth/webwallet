@@ -3,8 +3,8 @@ import store from '../../../model/store';
 import AcceptMoneyRequestTemplate from './accept-money-request.html!text';
 import * as utils from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
-import { pendingActions } from '../../../model/pending/actions';
-import { PENDING } from '../../../model/action-types';
+import { commonActions } from '../../../model/common/actions';
+import { COMMON } from '../../../model/action-types';
 
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
@@ -25,7 +25,7 @@ export default class AcceptMoneyRequest extends Element {
         let data = state.pendingData;
         let actionType = state.lastAction.type;
 
-        if (actionType === PENDING.GET_WALLETS_BY_EMAIL_SUCCESS) {
+        if (actionType === COMMON.GET_WALLETS_BY_EMAIL_SUCCESS) {
             this.enableForm(state.lastAction.data);
         }
 
@@ -35,7 +35,7 @@ export default class AcceptMoneyRequest extends Element {
     mounted() {
         $('#acceptRequestDialog').modal('show');
         //Get sender's wallet info
-        store.dispatch(pendingActions.getWalletsByEmail({
+        store.dispatch(commonActions.getWalletsByEmail({
             email: this.opts.sender_email,
             start: 0,
             size: 1

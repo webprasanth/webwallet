@@ -35,7 +35,7 @@ export default class LandingPage extends Element {
         store.dispatch(userActions.login(email, password));
     }
 
-    onRememberMeCheckBoxChange(event: Event) {
+    onRememberMeCheckBoxChange(event: LPEvent) {
         store.dispatch(userActions.rememberMe(event.target.checked));
     }
 
@@ -47,3 +47,10 @@ export default class LandingPage extends Element {
     }
 }
 
+interface LPEvent extends Event {
+    target: LPEventTaget;
+}
+
+interface LPEventTaget extends EventTarget {
+    checked: boolean;
+}

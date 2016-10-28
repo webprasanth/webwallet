@@ -11,8 +11,8 @@
 
 					<div class="input-search-account active">
 						<input type="text" class="form-control" placeholder="Search by email" id="rq_to_email_id">
-						<span class="glyphicon glyphicon-ok-circle" show={selected}></span>
 						<span class="glyphicon glyphicon-search"></span>
+						<span show={isValidAddress} class="glyphicon glyphicon-ok-circle"></span>
 					</div>
 
 				</div>
@@ -22,7 +22,7 @@
 
 					<div class="input-group">
 						<span class="input-group-addon">Flash</span>
-						<input class="form-control" id="requestAmount" name="requestAmount" type="number" onenter="open-send" value="{AmountValue}"
+						<input class="form-control" id="requestAmount" name="requestAmount" type="number" min="0" onenter="open-send" value="{AmountValue}"
 							on-focus="focusAmount">
 					</div>
 				</div>

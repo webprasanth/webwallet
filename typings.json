@@ -11,6 +11,7 @@
     "moment-timezone": "registry:dt/moment-timezone#0.2.5+20160329220348",
     "redux": "registry:dt/redux#3.5.2+20160703092728",
     "redux-thunk": "registry:dt/redux-thunk#2.1.0+20160703120921",
+    "riotjs": "registry:dt/riotjs#0.0.0+20160316155526",
     "underscore": "registry:dt/underscore#1.8.3+20160908111004"
   }
 }
