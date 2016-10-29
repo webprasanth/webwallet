@@ -484,6 +484,17 @@ internals.API.prototype.check_tfa_code = function(pipe, request, cb) {
 /**
  *
  * @param pipe
+ * @param account: email, name, callback_link, appId (unity or bnp), g_recaptcha_response
+ * @param cb
+ */
+internals.API.prototype.create_account_easy = function(pipe, account, cb) {
+	pipe.emit(Event.CREATE_ACCOUNT_EASY, account);
+	pipe.once(Event.CREATE_ACCOUNT_EASY_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
  * @param {Object} request: idToken, sessionToken, domains (array of allowd domain), amount (Unity unit)
  * @param {Function} cb: function(resp){}, where resp -> {rc}
  * const: KEYS_FOUNTAIN_ENABLE: 1045, KEYS_FOUNTAIN_ENABLE_ACK: 1046,

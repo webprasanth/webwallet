@@ -11,6 +11,31 @@ import nacl from 'tweetnacl';
 import AndamanService from '../andaman-service';
 
 export const userActions = {
+
+    signup(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            UserService.singleton().signup(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc === 1) {
+                        dispatch(userActions.signupSuccess(resp));
+                } else {
+                    dispatch(userActions.signupFailed(resp));
+                }
+            });
+        };
+    },
+
+    signupSuccess(resp) {
+        return { type: USERS.SIGNUP_SUCCESS, data: resp };
+    },
+
+    signupFailed(resp) {
+        return { type: USERS.SIGNUP_FAILED, data: resp };
+    },
+
     login(email, password) {
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));

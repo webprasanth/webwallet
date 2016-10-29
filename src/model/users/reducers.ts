@@ -1,11 +1,13 @@
 import { USERS, PROFILE } from '../action-types';
 
-export default function userReducer(state = { user: null, wallets: [], loginData: null}, action) {
+export default function userReducer(state = { user: null, wallets: [], loginData: null, signupData: null}, action) {
     let oldProfile = null;
     let newProfile = null;
 
     switch (action.type) {
-        case USERS.LOGIN_SUCCESS:
+        case USERS.SIGNUP_SUCCESS:
+        case USERS.SIGNUP_FAILED:
+            return Object.assign({}, state, { signupData: action.data });
         case USERS.SSO_LOGIN_SUCCESS:
             return Object.assign({}, state, { user: action.data });
         case USERS.LOGOUT:

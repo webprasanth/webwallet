@@ -16,6 +16,19 @@ export default class UserService {
         return UserService._instance;
     }
 
+    signup(params) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.create_account_easy(pipe, params, function (resp) {
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
     ssoLogin() {
         return new Promise((resolve, reject) => {
             let userKey = getUserKey();

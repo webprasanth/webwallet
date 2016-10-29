@@ -24,6 +24,7 @@ interface IAndaman {
     get_roster(pipe, params: {}, cb: (resp) => any);
     get_users_by_uid(pipe, params: {}, cb: (resp) => any);
     remove_user(pipe, params: {}, cb: (resp) => any);
+    create_account_easy(pipe, params: {}, cb: (resp) => any);
 
     sso_get_keypair(pipe, params: {}, cb: (resp) => any);
     sso_change_password(pipe, params: {}, cb: (resp) => any);

@@ -13,6 +13,8 @@ import * as utils from '../../model/utils';
 export default class LandingPage extends BaseElement {
 
     private subscribeFunc = null;
+    private captchaId: string = null;
+    private isVerifyEmailSent: boolean = false;
 
     constructor() {
         super();
@@ -22,6 +24,7 @@ export default class LandingPage extends BaseElement {
         this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.loadLazyImage();
         this.initLandingPage();
+        this.renderCaptcha();
     }
 
     unmounted() {
@@ -37,6 +40,12 @@ export default class LandingPage extends BaseElement {
         let type = state.lastAction.type;
 
         switch (type) {
+            case USERS.SIGNUP_SUCCESS:
+                this.isVerifyEmailSent = true;
+                break;
+            case USERS.SIGNUP_FAILED:
+                this.onSignupFail(data.signupData);
+                break;
             case USERS.SSO_LOGIN_SUCCESS:
                 break;
             case USERS.SSO_LOGIN_FAILED:
@@ -75,10 +84,6 @@ export default class LandingPage extends BaseElement {
 
             return false;
         }
-
-        // babv TODO remove
-        // var emailField = <HTMLInputElement>this.root.querySelector('.login-email');
-        // var passwordField = <HTMLInputElement>this.root.querySelector('.login-password');
 
         store.dispatch(userActions.login(email, password));
     }
@@ -150,7 +155,86 @@ export default class LandingPage extends BaseElement {
     }
 
     onSignupButtonClick(event: Event) {
-        throw new Error("Not implemented yet.");
+        if (!this.validateName()) {
+            return;
+        }
+
+        if (!this.validateEmail()) {
+            return;
+        }
+
+        var name: string = $('#firstname').val().trim() + ' ' + $('#lastname').val().trim();
+        let email: string = $("#email-signup").val().trim();
+        let appId: string = 'unity';
+        var clientHost = window.location.host;
+
+        var credentials = {
+            ip: utils.getLocation().info.ip,
+            name: name,
+            email: email.toLowerCase(),
+            g_recaptcha_response: grecaptcha.getResponse(this.captchaId),
+            appId: appId,
+            callback_link: "http://" + clientHost + "/?r=account_created&token="
+        };
+
+        store.dispatch(userActions.signup(credentials));
+    }
+
+    onSignupFail(resp) {
+        grecaptcha.reset(this.captchaId);
+
+        if (resp.status == 'EMAIL_IN_USED') {
+            super.showError('', 'An user with this email already exists');
+        } else if (resp.status == 'RECAPTCHA_NOT_VERIFIED') {
+            super.showError('', 'Please verify that you are not a robot');
+        } else {
+            super.showError('', resp.reason);
+        }
+    }
+
+    renderCaptcha() {
+        if (grecaptcha && !this.captchaId) {
+            this.captchaId = grecaptcha.render('gcaptcha', {
+                'sitekey': '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C'
+            });
+        }
+    }
+
+    validateEmail() {
+        let email: string = $("#email-signup").val();
+
+        if (!email || email.trim().length == 0) {
+            super.showError('', 'Email is needed for signing up!');
+            $("#email-signup").focus();
+
+            return false;
+        }
+
+        if (!utils.isValidEmail(email)) {
+            super.showError('', 'Invalid email format!');
+            $("#email-signup").focus();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    validateName() {
+        let firstName:string = $('#firstname').val();
+        let lastName:string = $('#lastname').val();
+
+        if (!firstName || firstName.trim().length == 0) {
+            super.showError('', 'Please enter your first name!');
+            return false;
+        }
+
+        if (!lastName || lastName.trim().length == 0) {
+            super.showError('', 'Please enter your last name!');
+            return false;
+        }
+
+        return true;
     }
 
     onRememberMeCheckBoxChange(event: LPEvent) {

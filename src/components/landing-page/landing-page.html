@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
-                                <a class="foget-psd" href="javascript:void(0)" on-click="forgotpassword">Forgot password?</a>
+                                <a class="foget-psd" href="javascript:void(0)" onclick={onForgotPasswordLinkClick}>Forgot password?</a>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                         </div>
                                     </div>
 
-                                    <div show={isVerifyEmailSent} class="box-signup" id="box-signup">
+                                    <div hide={isVerifyEmailSent} class="box-signup" id="box-signup">
                                         <form id="sign_up_form" class="col-xs-12">
                                             <div class="form-group col-xs-12 col-sm-6">
                                                 <input class="form-control" type="text" id="firstname" maxlength="50" name="firstname" placeholder="First name" on-focus="firstname-focus">
@@ -60,7 +60,7 @@
                                         </form>
                                         <p class="p2-line">By clicking Create Wallet, I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy.</a></p>
                                         <p class="p2-line"><span class="notify">*</span><span>Sorry, not currently available to New York residents</span></p>
-                                        <div class="btn-create-wallet form-group" on-click="submit-name-email"> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
+                                        <div class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
                                     </div>
                                 </div>
                             </div>
