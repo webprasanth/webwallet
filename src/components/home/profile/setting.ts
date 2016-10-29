@@ -84,6 +84,11 @@ export default class AccountSetting extends BaseElement {
     }
 
     toogle2FA() {
+        if (this.is2FA && !this.userProfile.totp_enabled) {
+            this.is2FA = false;
+            return;
+        }
+
         if (this.userProfile.totp_enabled) {
             this.disable2FA();
         } else {
