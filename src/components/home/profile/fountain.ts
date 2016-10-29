@@ -22,7 +22,7 @@ export default class FountainSetting extends BaseElement {
     private isMinuteUnit: boolean = false;
     private isSecondUnit: boolean = false;
     private memo: string = '';
-    private disabled: string = '';
+    private disabled: boolean = false;
 
     private domainStr: string = '';
     private hostname: string = null;
@@ -74,7 +74,7 @@ export default class FountainSetting extends BaseElement {
                     this.duration = this.settings.duration;
                 }
                 this.fountainEnabled = false;
-                this.disabled = 'disabled';
+                this.disabled = true;
                 break;
             case PROFILE.GET_FOUNTAIN_SUCCESS:
                 let saveFountain = state.profileData.savedFountain;
@@ -91,7 +91,7 @@ export default class FountainSetting extends BaseElement {
         let params = {
             fountainId: this.fountainId
         }
-        store.dispatch(profileActions.enableFountain(params));
+        store.dispatch(profileActions.disableFountain(params));
     }
 
     enableFountain() {
@@ -99,7 +99,7 @@ export default class FountainSetting extends BaseElement {
         this.settings = this._getFountainSetting();
         
         if (!this.settings) {
-            this.disabled = '';
+            this.disabled = false;
             return;
         }
 
@@ -135,7 +135,7 @@ export default class FountainSetting extends BaseElement {
             settings: this.settings
         };
 
-        store.dispatch(profileActions.enableFountain(params));
+        store.dispatch(profileActions.updateFountain(params));
     }
 
     getFountain() {

@@ -59,15 +59,15 @@
             <div class="col-xs-12">
                 <p><label>Amount of Flash tokens given to each person per period</label></p>
                 <div class="form-group disabled">
-                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}" {disabled}>
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}" disabled={this.disabled}>
                 </div>
                 <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
                 <div class="form-input">
                     <div class="form-group col-xs-12 col-sm-6">
-                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}" {disabled}>
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}" disabled={this.disabled}>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
-                        <select id="time-unit" class="compact selection dropdown form-control" {disabled}>
+                        <select id="time-unit" class="compact selection dropdown form-control" disabled={this.disabled}>
                             <option value="3600" selected="{isHourUnit}">Hours</option>
                             <option value="60" selected="{isMinuteUnit}">Minutes</option>
                         </select>
@@ -76,7 +76,7 @@
             </div>
             <div class="form-group">
                 <p>Message/Transaction Note to Fountain Visitors</p>
-                <textarea class="form-control disabled" id="memo" value="{memo}" {disabled}></textarea>
+                <textarea class="form-control disabled" id="memo" value="{memo}" disabled={this.disabled}></textarea>
             </div>
             <div class="form-group">
                 <p>
@@ -84,7 +84,7 @@
                         List URL's of pages allowed to host your fountain, as specific as possible to protect it from abuse, separated by comma, e.g. site1.com/web2; site3.com/web4;...
                     </label>
                 </p>
-                    <textarea class="form-control disabled" id="domains" value="{domainStr}" {disabled}></textarea>
+                    <textarea class="form-control disabled" id="domains" value="{domainStr}" disabled={this.disabled}></textarea>
             </div>
             <br/>
             <br/>
