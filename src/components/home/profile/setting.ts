@@ -19,6 +19,7 @@ export default class AccountSetting extends BaseElement {
 
     mounted() {
         this.userProfile = store.getState().userData.user;
+        console.log('+++++++++++++++++++++++++++ babv profile: ' + this.userProfile.totp_enabled);
         store.subscribe(this.onApplicationStateChanged.bind(this));
         this.is2FA = false;
         this.getWallet();

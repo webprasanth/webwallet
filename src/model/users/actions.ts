@@ -24,7 +24,7 @@ export const userActions = {
                         dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
                     } else {
                         dispatch(userActions.loginSuccess(resp.profile));
-                        dispatch(userActions.getProfile());
+                        dispatch(userActions.getProfile(resp.profile));
                         dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
                     }
                 } else {
@@ -48,12 +48,17 @@ export const userActions = {
     _logout() {
         return { type: USERS.LOGOUT };
     },
-    getProfile() {
+    getProfile(data) {
         return (dispatch) => {
             UserService.singleton().getProfile().then((resp: any) => {
 
                 if (resp.rc === 1) {
-                    dispatch(userActions.getProfileSuccess(resp.profile));
+                    for (var key in resp.profile) {
+                        if (!data[key]) {
+                            data[key] = resp.profile[key];
+                        }
+                    }
+                    dispatch(userActions.getProfileSuccess(data));
                 } else {
                     dispatch(userActions.getProfileFailed(resp));
                 }
@@ -150,7 +155,7 @@ export const userActions = {
                 if (resp) {
                     if (resp.rc == 1) {
                         dispatch(userActions.ssoLoginSuccess(resp.profile));
-                        dispatch(userActions.getProfile());
+                        dispatch(userActions.getProfile(resp.profile));
                         dispatch(userActions.getMyWallets(resp.profile.auth_version));;
                     } else {
                         dispatch(userActions.ssoLoginFailed(resp));

@@ -27,6 +27,7 @@ export default class LandingPage extends BaseElement {
     unmounted() {
         if (this.subscribeFunc) {
             this.subscribeFunc();
+            this.subscribeFunc = null;
         }
     }
 
