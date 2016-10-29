@@ -1,10 +1,28 @@
 /*Media Responsive*/
+@media only screen and (max-width: 1040px) {
+    #footer-bar{
+        position: static;
+    }
+}
 @media only screen and (max-width: 1024px) {
-
+    .listItems .col-status{
+        min-width: 80px;
+        padding: 0 10px;
+    }
+    .listItems .item.col-note{
+        padding: 0 15px;
+    }
 }
 
 @media only screen and (max-width: 980px) {
-    .header-SC .header-right{
+    .header-SC .hidden-tablet{
+        display: none;
+    }
+    .listItems .item {
+         padding: 0 5px;
+    }
+    .listItems .item._mobile_amount{
+        padding: 0 15px;
     }
 }
 
@@ -19,53 +37,14 @@
     .container{
         width: auto !important;
     }
-    .listItems .item{
-        max-width: auto;
-    }
     .myaccount-page .avatar #file {
         font-size: 9.5pt;
     }
-    .table-responsive table td p.ellipsis-name {
-        /*width: 135px;*/
-    }
-    .table-responsive table td p.ellipsis-email{
-        /*max-width: 175px;*/
-    }
+    .hidden-768{display: none !important;}
     .header-SC .header-right .email-account{
         max-width: 150px;
         text-overflow: ellipsis;
         overflow: hidden;
-    }
-    .slide-4 ul li h3 {
-        font-size: 15pt;
-    }
-    .slide-4 ul li p {
-        font-size: 10pt;
-    }
-    .table-responsive table td p.ellipsis-name,
-    .table-responsive table td p.ellipsis-email{
-       max-width: 90px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-    }
-
-    /*Wiki pages*/
-    ul.desktop-menu{
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 28px;
-    }
-    .navbar-default .desktop-menu.navbar-nav>li>a{
-        color: #FFF;
-        font-size: 13px;
-        padding: 10px;
-        font-weight:600;
-    }
-    .navbar-default .desktop-menu.navbar-nav>li>a:hover,
-    .navbar-default .desktop-menu.navbar-nav>li>a:focus{
-        color: #FFC922;
     }
 
 }
@@ -74,6 +53,22 @@
     .listItems{
         min-height: 60px;
     }
+    .listItems .item{
+        max-width: 100%;
+        padding: 0 0 0 10px;
+    }
+    .listItems .item .username {
+         padding-left: 0px;
+    }
+    .pending-page .listItems .item,
+    .transaction-activity .listItems .item{
+        display: block;
+        max-width: 100%;
+    }
+    .listItems .item._mobile_amount{
+        line-height: 39px;
+
+    }
     .bg-mobile{
         background: url("../images/splash2.png") no-repeat;
         background-size: 100%;
@@ -81,7 +76,6 @@
     #main{
         box-shadow: none;
       background: #f9f9f9;
-          height: 100vh;
     }
     .navbar-sc ul li a .orange-circle{
         position: static;
@@ -99,36 +93,20 @@
         border-radius: 4px;
         top: 20px;
     }
-    .table>thead>tr>th, .table>tbody>tr>th,
-     .table>tfoot>tr>th, .table>thead>tr>td,
-     .table>tbody>tr>td, .table>tfoot>tr>td {
-        padding: 8px 15px !important;
-        line-height: 25px;
-    }
-    .pending-page table td p.amount{
-        font-size: 12pt;
-        line-height: 40px;
-    }
-    .table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th{
-        background-color: #F1F1F1;
-    }
-    .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th{
-        background: #fff;
-    }
     .main-container .main-content{
         padding: 0;
         box-shadow: none;
         border: none;
-        background: #fff;
     }
-    .modal-dialog {
-        width: auto;
+    .main-container .request-page .main-content,
+    .main-container .send-page .main-content{
+        background: transparent;
     }
     .modal-body .wallet-name {
         max-width: 200px;
     }
-    #confirm-send .modal-dialog,
-    #confirm-send .modal-dialog{
+    #confirm-send-money .modal-dialog,
+    #confirm-send-money .modal-dialog{
             width: 80%;
     }
     .btn-control{
@@ -136,8 +114,36 @@
     }
     .myaccount-page .main-content{
         background: #fff;
+        margin-top: 60px;
+    }
+    .myaccount-page #btnZoomOut,
+    .myaccount-page #btnZoomIn{
+        font-size: 17pt;
+        padding: 5px 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #0e76bc;
+        background: #eee;
+        margin: 0 2px;
+        cursor: pointer;
+    }
+
+    .myaccount-page #btnZoomOut i,
+    .myaccount-page #btnZoomIn i{
+         top: 3px;
+    }
+    .transaction-detail .listItems .name-item, .pending-transaction-detail .listItems .name-item{
+        min-width: 75px;
     }
     /*============*/
+    #header-top-bar{
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
+    .title-page{
+        margin-top: 70px;
+    }
     .header-SC{
         height: 55px;
         margin: 0;
@@ -162,6 +168,9 @@
         display: -webkit-flex;     /* NEW - Chrome */
         display: flex;
     }
+    .header-SC .logo img{
+        max-width: 155px;
+    }
     .header-SC .top-balance {
         position: absolute;
         width: auto;
@@ -179,7 +188,6 @@
     }
     .navbar-sc .account{
         padding: 17px 15px 10px;
-        border-bottom: 1px solid #ccc;
         display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
         display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
         display: -ms-flexbox;      /* TWEENER - IE 10 */
@@ -194,7 +202,6 @@
         background: none;
         bottom: 0;
         background: #fff;
-        border-right: 1px solid #ccc;
         visibility: hidden;
         margin-left: -266px;
         -webkit-transition-duration: 0.5s;
@@ -220,11 +227,9 @@
     }
     .navbar-sc ul li a{
         background: #fff;
-        color: #444;
-        border-bottom: 1px solid #EDEDED;
-        padding: 15px 15px;
-        text-transform: uppercase;
-        font-size: 13px;
+        color: #555;
+        padding: 12px 15px 12px 50px;
+        letter-spacing: 1px;
     }
     .navbar-sc ul li.active a {
         /*background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #72C6FF), color-stop(1, #419EE5) );*/
@@ -241,35 +246,78 @@
         /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#72C6FF', endColorstr='#419EE5');*/
         background-color: #519EE0;
     }
+    .navbar-sc ul li a .glyphicon-refresh{
+        transform: rotate(15deg);
+        -moz-transform: rotate(15deg);
+        -webkit-transform: rotate(15deg);
+        -o-transform: rotate(15deg);
+        font-size: 12pt;
+        padding-right: 20px;
+        top: 4px;
+    }
     .navbar-sc li.logout{
         display:block;
-        border-bottom: 1px solid #ccc;        
     }
-    .table-responsive table{
-        border: none;
+    .navbar-sc li#activity a{
+        background: url("../images/pages/icon_activity.png") no-repeat 17px center;
+        background-size: 19px 22px;
     }
-    .table-responsive{
-        border: none;
-        overflow: auto;
-        background: #fff;  
-        border-bottom: 1px solid #ccc;      
+    .navbar-sc li#activity:hover a,
+    .navbar-sc li.active#activity a{
+        background: #519EE0 url("../images/pages/icon_activity_w.png") no-repeat 17px center;
+        background-size: 19px 22px;
     }
-    .myaccount-page  .table-responsive{
-        border-bottom: none;
+    .navbar-sc li#send_tab a{
+        background: url("../images/pages/icon_send.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .navbar-sc li#send_tab:hover a,
+    .navbar-sc li.active#send_tab a{
+        background: #519EE0 url("../images/pages/icon_send_w.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .navbar-sc #request_tab a{
+        background: url("../images/pages/icon_request.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .navbar-sc li#request_tab:hover a,
+    .navbar-sc li.active#request_tab a{
+        background: #519EE0 url("../images/pages/icon_request_w.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .navbar-sc #pending_tab a{
+        background: url("../images/pages/icon_pending.png") no-repeat 15px center;
+        background-size: 23px 24px;
+    }
+    .navbar-sc #pending_tab:hover a,
+    .navbar-sc li.active#pending_tab a{
+         background: #519EE0 url("../images/pages/icon_pending_w.png") no-repeat 15px center;
+        background-size: 23px 24px;
+    }
+    .navbar-sc #contact_tab a{
+        background: url("../images/pages/icon_contact.png") no-repeat 15px center;
+        background-size: 20px 20px;
+    }
+    .navbar-sc #contact_tab:hover a,
+    .navbar-sc li.active#contact_tab a{
+        background: #519EE0 url("../images/pages/icon_contact_w.png") no-repeat 15px center;
+        background-size: 20px 20px;
+    }
+    .navbar-sc #profile a{
+        background: url("../images/pages/icon_profile.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .navbar-sc #profile:hover a,
+    .navbar-sc li.active#profile a{
+        background: #519EE0 url("../images/pages/icon_profile_w.png") no-repeat 15px center;
+        background-size: 21px 21px;
+    }
+    .myaccount-page .flex-pc{
+        display: block;
     }
     .myaccount-page .fountain-content .form-input input{width: 100%}
     .myaccount-page .avatar #file {
         font-size: 10.5pt;
-    }
-    .table-responsive table td p.ellipsis-name{
-        font-weight: 600;
-    }
-    .table-responsive table td p.ellipsis-email{
-        font-size: 10pt;
-    }
-    .table-responsive table td p.ellipsis-name, .table-responsive table td p.ellipsis-email {
-        max-width: 100%;
-            line-height: 19px;
     }
     /*Wiki pages*/
     .header-SC .header-right{
@@ -286,6 +334,12 @@
         border: 1px solid #ccc;
         box-shadow: 0px 1px 9px #888;
         border-radius: 4px;
+    }
+    .form-submit-email h3,
+    .form-questions h3{
+        font-size: 15pt;
+        min-height: 35px;
+        line-height: 35px;
     }
 }
 @media only screen and (max-width: 736px) {
@@ -310,6 +364,15 @@
 }
 
 @media only screen and (max-width: 549px) {
+    .hidden-xs-small{
+        display: none;
+    }
+    .myaccount-page .hidden-xs-up{
+        float: left;
+        margin-right: 5px;
+        display: block;
+        padding-bottom: 4px;
+    }
     .title-page h2.title{
         font-size: 14pt;
     }
@@ -320,103 +383,64 @@
     .hidden-small{display: none}
     .nav-pills>li {
         width: 33.333333333333333%;
+        text-align: center;
     }
 
     .pending-page .nav-pills>li{
         width: 50%;
     }
     #profile .container{padding: 0 5px;}
-    .myaccount-page .nav-pills>li{
-        width: 25%;
-    }
     .myaccount-page .nav>li>a {
         position: relative;
         display: block;
         padding: 10px 5px;
     }
-    .transaction-detail .table>tbody>tr>td{
-        padding: 8px 4px !important;
+    .myaccount-page #tab-1,
+    .myaccount-page #tab-3{
+        width: 25%
     }
-    .modal-body textarea {
-        min-height: 80px;
-        resize: none;
+    .myaccount-page #tab-2{
+        width: 50%
     }
-   /* .nav-tabs-responsive{
-        height: 42px;
+    .myaccount-page .avatar button.btn-change-image{
+        width: 50%;
+        margin-bottom: 10px;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        max-width: 200px;
+        min-width: 200px;
+        padding: 10px;
+    }
+    .myaccount-page .inforItems .item-data{
+        width: 80%;
+    }
+    .myaccount-page #profile-name{
+        border-bottom: 1px solid #ccc;
+        height: 50px;
+        line-height: 50px;
+    }
+     .myaccount-page #profile-name .item-data{
         overflow: hidden;
-    }
-    .nav-tabs-responsive > li {
-        display: none;
-        width: 23%;
-    }
-
-    .nav-tabs-responsive > li > a {
-        max-width: 100%;
+     }
+    .myaccount-page .trans-name{
+        font-size: 20pt;
+        margin: 0;
+        color: #555;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        word-wrap: normal;
+    }
+    .myaccount-page .inforItems .edit-form{
         width: 100%;
-        text-align: center;
-        vertical-align: top;
-        font-size: 10pt;
     }
-
-    .nav-tabs-responsive > li.active {
-        width: 54%;
+    .myaccount-page .new-passcode{
+        width:100%;
     }
-
-    .nav-tabs-responsive > li.active:first-child {
-        margin-left: 23%;
+    .myaccount-page .col-xs-custom{
+        width: 100%;
+        float: left;
     }
-
-    .nav-tabs-responsive > li.active,
-    .nav-tabs-responsive > li.prev,
-    .nav-tabs-responsive > li.next {
-        display: block;
-    }
-
-    .nav-tabs-responsive > li.prev,
-    .nav-tabs-responsive > li.next {
-        -webkit-transform: scale(0.9);
-        transform: scale(0.9);
-    }
-
-    .nav-tabs-responsive > li.next > a,
-    .nav-tabs-responsive > li.prev > a {
-        -webkit-transition: none;
-        transition: none;
-    }
-    .nav-tabs-responsive > li.next > a .text,
-    .nav-tabs-responsive > li.prev > a .text {
-        display: none;
-    }
-
-    .nav-tabs-responsive > li.next > a:after {
-        content: "\e080";
-        position: relative;
-        top: 2px;
-        display: inline-block;
-        font-family: 'Glyphicons Halflings';
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    .nav-tabs-responsive > li.prev > a:after {
-        content: "\e079";
-        position: relative;
-        top: 2px;
-        display: inline-block;
-        font-family: 'Glyphicons Halflings';
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }*/
 }
 
 @media only screen and (max-width: 534px) {
@@ -424,6 +448,22 @@
 }
 
 @media only screen and (max-width: 480px) {
+
+    .wiki-page .support-page .title-note h2{
+        font-size: 20px;
+    }
+    .wiki-page .support-page button{
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .wiki-page footer{
+        position: static;
+        margin-top: 25px;
+    }
+    .listItems .btn-active a{
+        margin-right: 35px;
+    }
     .main-container{
         margin:0;
         background: #F9F9F9;
@@ -437,13 +477,8 @@
     .pending-transaction-detail .listItems .data-item .item p{
         max-width: 200px;
     }
-    .table-responsive table td p.ellipsis-name, .table-responsive table td p.ellipsis-email {
-       max-width: 200px;
-    }
     footer ul {
-        padding: 0;
-        margin: 0;
-        display: flex;
+        padding: 0 20px;
         white-space: nowrap;
     }
     footer ul li{
@@ -460,46 +495,56 @@
 @media only screen and (max-width: 400px) {
     .myaccount-page .btn-fountain button{
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
     }
     .modal-body .wallet-name {
         max-width: 140px;
     }
-    #confirm-send .modal-dialog,
-    #confirm-send .modal-dialog {
+    #confirm-send-money .modal-dialog,
+    #confirm-send-money .modal-dialog {
         width: 91%;
     }
-    .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th,
-     .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-        padding: 8px 10px !important;
+    .transaction-detail .listItems .data-item .item p,
+    .pending-transaction-detail .listItems .data-item .item p {
+        max-width: 135px;
     }
-      .table-responsive table td p.ellipsis-name, .table-responsive table td p.ellipsis-email {
-       max-width: 180px;
+    .pending-page .listItems .btn-active a.col-cancel {
+        margin-right: 0;
+    }
+    .pagination>li>a, .pagination>li>span{
+        padding: 4px 10px;
+    }
+    .listItems .item._mobile_amount{
+        padding: 0;
+    }
+    .listItems .btn-active a{
+        margin-right: 25px;
     }
 }
 
 @media only screen and (max-width: 338px) {
-
+    .listItems .item .data-long {
+        max-width: 123px;
+    }
+    .modal-dialog {
+        width: auto;
+    }
+    .transaction-detail .listItems .data-item .item p,
     .pending-transaction-detail .listItems .data-item .item p{
         max-width: 125px;
+    }
+    .pagination>li>a, .pagination>li>span{
+        padding: 4px 9px;
+    }
+    .listItems .btn-active a {
+        margin-right: 15px;
     }
 }
 
 @media only screen and (max-width: 330px) {
     .modal-body .wallet-name {
         max-width: 115px;
-    }
-    .table-responsive table td p.ellipsis-name,
-    .table-responsive table td p.ellipsis-email {
-    max-width: 113px;
-    }
-    .transaction-activity .table-responsive table td p.ellipsis-name,
-    .transaction-activity .table-responsive table td p.ellipsis-email {
-    max-width: 160px;
-    }
-    .modal-body textarea._value_id{
-        height: 100px;
-        min-height: 100%;
     }
     .notifyjs-bootstrap-base{
         white-space: normal !important;

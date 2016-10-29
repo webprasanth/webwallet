@@ -19,6 +19,7 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
+                    console.log('++++++++++++++++++ babv login resp = ' + JSON.stringify(resp));
                     dispatch(userActions.loginSuccess(resp.profile));
                     dispatch(userActions.getProfile());
                     dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
