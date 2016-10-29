@@ -473,6 +473,17 @@ internals.API.prototype.confirm_tfa_code = function (pipe, request, cb) {
 /**
  *
  * @param pipe
+ * @param request: idToken, code
+ * @param cb
+ */
+internals.API.prototype.check_tfa_code = function(pipe, request, cb) {
+	pipe.emit(Event.CHECK_TFA_CODE, request);
+	pipe.once(Event.CHECK_TFA_CODE_ACK, cb);
+};
+
+/**
+ *
+ * @param pipe
  * @param {Object} request: idToken, sessionToken, domains (array of allowd domain), amount (Unity unit)
  * @param {Function} cb: function(resp){}, where resp -> {rc}
  * const: KEYS_FOUNTAIN_ENABLE: 1045, KEYS_FOUNTAIN_ENABLE_ACK: 1046,

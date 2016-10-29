@@ -12,6 +12,7 @@ import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
 import ErrorAlert from './modals/error-alert/error-alert';
+import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
 import SendMoneyConfirm from './modals/send-money-confirm/send-money-confirm';
 import SendRequestConfirm from './modals/send-request-confirm/send-request-confirm';
 import AcceptMoneyRequest from './modals/accept-money-request/accept-money-request';
@@ -24,7 +25,7 @@ import MessageDialog from './modals/message-dialog/message-dialog';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
-    LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, SendRequestConfirm,
+    LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog
 };
@@ -32,5 +33,3 @@ export {
 export function initialize() {
     riot.mount('app');
 }
-
-

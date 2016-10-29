@@ -23,7 +23,7 @@ interface ITAB {
 
 export interface ApplicationState {
     lastAction: { type: string, data: any };
-    userData: { user: IUser, wallets: any };
+    userData: { user: IUser, wallets: any, loginData: any };
     commonData: { isLoading: boolean };
     activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any };
     sendData: { processing_duration: number };

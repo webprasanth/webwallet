@@ -19,10 +19,14 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
-                    console.log('++++++++++++++++++ babv login resp = ' + JSON.stringify(resp));
-                    dispatch(userActions.loginSuccess(resp.profile));
-                    dispatch(userActions.getProfile());
-                    dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
+                    if (resp.profile.totp_enabled === 1) {
+                        let loginData = {profile: resp.profile, password: password};
+                        dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
+                    } else {
+                        dispatch(userActions.loginSuccess(resp.profile));
+                        dispatch(userActions.getProfile());
+                        dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
+                    }
                 } else {
                     dispatch(userActions.loginFailed(resp));
                 }
@@ -61,6 +65,24 @@ export const userActions = {
     },
     getProfileFailed(resp) {
         return { type: USERS.GET_PROFILE_FAILED, data: resp };
+    },
+    check2faCode(params) {
+        return (dispatch) => {
+            UserService.singleton().check2faCode(params).then((resp: any) => {
+
+                if (resp.rc === 1) {
+                    dispatch(userActions.check2faCodeSuccess(resp));
+                } else {
+                    dispatch(userActions.check2faCodeFailed(resp));
+                }
+            });
+        };
+    },
+    check2faCodeSuccess(resp) {
+        return { type: USERS.CHECK_2FA_CODE_SUCCESS, data: resp };
+    },
+    check2faCodeFailed(resp) {
+        return { type: USERS.CHECK_2FA_CODE_FAILED, data: resp };
     },
     getMyWallets(auth_version?, password = '1111') {
         return (dispatch) => {

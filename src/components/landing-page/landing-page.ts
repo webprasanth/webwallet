@@ -11,14 +11,23 @@ import * as utils from '../../model/utils';
 
 @template(LandingPageTemplate)
 export default class LandingPage extends BaseElement {
+
+    private subscribeFunc = null;
+
     constructor() {
         super();
     }
 
     mounted() {
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.loadLazyImage();
         this.initLandingPage();
+    }
+
+    unmounted() {
+        if (this.subscribeFunc) {
+            this.subscribeFunc();
+        }
     }
 
     onApplicationStateChanged() {
@@ -30,6 +39,9 @@ export default class LandingPage extends BaseElement {
             case USERS.SSO_LOGIN_SUCCESS:
                 break;
             case USERS.SSO_LOGIN_FAILED:
+                break;
+            case USERS.NEED_VERIFY_GOOGLE_2FA:
+                riot.mount('#confirm-send', 'twofa-verification-dialog', data.loginData);
                 break;
             default:
                 break;
@@ -93,6 +105,7 @@ export default class LandingPage extends BaseElement {
     }
 
     initLandingPage() {
+
         // Handle FAQ onclick
         $('.faq-category li h4').bind('click', function () {
             let li_parent = $(this).parent('li');

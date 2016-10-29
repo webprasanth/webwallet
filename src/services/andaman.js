@@ -58,6 +58,10 @@ module.exports = {
                 this.session_token = sessionToken;
             };
 
+            customEventPipe.setSessionToken = function (sessionToken) {
+                this.session_token = sessionToken;
+            };
+
             customEventPipe.sendfile = function(context, file, cb, size) {
                 console.log("context", context, file, cb, size);
                 eventPipe.sendfile(context, file, cb, size);

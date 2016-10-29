@@ -1,6 +1,6 @@
 import { USERS, PROFILE } from '../action-types';
 
-export default function userReducer(state = { user: null, wallets: [] }, action) {
+export default function userReducer(state = { user: null, wallets: [], loginData: null}, action) {
     let oldProfile = null;
     let newProfile = null;
 
@@ -21,6 +21,8 @@ export default function userReducer(state = { user: null, wallets: [] }, action)
             return Object.assign({}, state, { user: newProfile });
         case USERS.GET_MY_WALLETS_SUCCESS:
             return Object.assign({}, state, { wallets: action.data });
+        case USERS.NEED_VERIFY_GOOGLE_2FA:
+            return Object.assign({}, state, { loginData: action.data });
         case USERS.GET_BALANCE_SUCCESS:
             oldProfile = state.user;
             oldProfile.balance = action.data;

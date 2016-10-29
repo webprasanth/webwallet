@@ -32,6 +32,7 @@ interface IAndaman {
     start_tfa_code(pipe, params: {}, cb: (resp) => any);
     turn_off_tfa(pipe, params: {}, cb: (resp) => any);
     confirm_tfa_code(pipe, params: {}, cb: (resp) => any);
+    check_tfa_code(pipe, params: {}, cb: (resp) => any);
     update_fountain(pipe, params: {}, cb: (resp) => any);
     enable_fountain(pipe, params: {}, cb: (resp) => any);
     disable_fountain(pipe, params: {}, cb: (resp) => any);

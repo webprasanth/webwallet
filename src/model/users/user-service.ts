@@ -86,6 +86,22 @@ export default class UserService {
         });
     }
 
+    check2faCode(params) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.check_tfa_code(pipe, params, function (resp) {
+                    if (resp.rc == 1) {
+                        pipe.setSessionToken(resp.profile.sessionToken);
+                    }
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
     getMyWallets() {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
