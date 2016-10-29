@@ -1,5 +1,7 @@
 import Big from 'big.js';
 import _tmp from 'moment-timezone';
+import bitcoin from 'bitcoinjs-lib';
+import { Address, NETWORK } from './wallet';
 
 interface UserKey {
   idToken: string;
@@ -137,4 +139,17 @@ export function isValidEmail(email) {
   let checkEmail = email.toLowerCase().match(emailRegex);
   if (checkEmail === null) return false;
   return true;
+}
+
+export function isValidFlashAddress(value) {
+  try {
+    let address = Address.fromBase58Check(value);
+    if (address.version === NETWORK.pubKeyHash || address.version === NETWORK.scriptHash) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
 }

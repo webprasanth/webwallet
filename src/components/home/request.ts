@@ -2,23 +2,59 @@ import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
+import { isValidFlashAddress } from '../../model/utils';
+
+let tag = null;
 
 @template(HomeRequestTemplate)
 export default class HomeRequest extends Element {
     private userProfile = null;
-    private continueButtonClicked: boolean = false;
     private receiverWallet = null;
     private isValidAddress = false;
 
     mounted() {
+        tag = this;
         this.userProfile = store.getState().userData.user;
-        $('#rq_to_email_id').typeahead({
-            highlight: true
-        },
+        $('#rq_to_email_id').typeahead(
+            {
+                highlight: true
+            },
             {
                 name: 'email-list',
                 source: this.searchWallet
-            });
+            }
+        );
+        $('#rq_to_email_id').on('propertychange change click keyup input paste', this.checkAddress);
+    }
+
+    checkAddress() {
+        let term = $('#rq_to_email_id').val();
+
+        if (term == "") return;
+
+        if (isValidFlashAddress(term)) {
+            tag.receiverWallet = {};
+            tag.receiverWallet.address = term;
+            tag.isValidAddress = true;
+            tag.update();
+            return;
+        }
+
+        let params = {
+            term,
+            start: 0,
+            size: 20
+        };
+
+        CommonService.singleton().searchWallet(params).then((resp: any) => {
+            if (resp.rc === 1 && resp.wallets.length == 1 && term == resp.wallets[0].email) {
+                tag.isValidAddress = true;
+                tag.receiverWallet = resp.wallets[0];
+            } else {
+                tag.isValidAddress = false;
+            }
+            tag.update();
+        });
     }
 
     searchWallet = (query?, syncResults?, asyncResults?) => {
@@ -32,18 +68,11 @@ export default class HomeRequest extends Element {
 
         CommonService.singleton().searchWallet(params).then((resp: any) => {
             if (resp.rc === 1 && resp.wallets.length > 0) {
-                if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
-                    if (this.continueButtonClicked) {
-                        this.receiverWallet = resp.wallets[0];
-                        this.continueButtonClicked = false;
-                        this.checkAndShowComfirmationForm();
-                        return;
-                    }
-                }
 
                 let data = resp.wallets.map(item => {
                     return item.email;
                 });
+
                 if (asyncResults) {
                     asyncResults(data.filter(value => {
                         return value != this.userProfile.email;
@@ -83,7 +112,8 @@ export default class HomeRequest extends Element {
     }
 
     onContinueButtonClick(event: Event) {
-        this.continueButtonClicked = true;
-        this.searchWallet();
+        if (tag.isValidAddress) {
+            this.checkAndShowComfirmationForm();
+        }
     }
 }

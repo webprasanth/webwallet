@@ -54,8 +54,8 @@
 							<tbody>
 								<tr each="{txn in txns}" onclick={showTransactionDetail}>
 									<td>{getDisplayDate(txn.created_ts, timeZone)}</td>
-									<td>{txn.type==2 ? txn.sender_email : txn.receiver_email}</td>
-									<td>{txn.type==2 ? sender_display_name : receiver_display_name}</td>
+									<td>{txn.type==2 ? (txn.sender_email?txn.sender_email:'Anonymous') : (txn.receiver_email?txn.receiver_email:'Anonymous')}</td>
+									<td>{txn.type==2 ? (txn.sender_display_name?txn.sender_display_name:'Anonymous') : (txn.receiver_display_name?txn.receiver_display_name:'Anonymous')}</td>
 									<td>{txn.amount}</td>
 									<td>{txn.memo}</td>
 								</tr>

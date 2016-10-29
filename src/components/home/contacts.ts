@@ -11,6 +11,8 @@ export const PAGE_SIZE = 10;
 const ACTION_SEND = 0;
 const ACTION_REQUEST = 1;
 
+let tag = null;
+
 @template(HomeContactsTemplate)
 export default class HomeContacts extends Element {
     private paginationObject = null;
@@ -27,9 +29,10 @@ export default class HomeContacts extends Element {
     /**
      * do actionSelected with contact: Send money or Request money
      */
-    private static actionSelected = 0;
+    private actionSelected = 0;
 
     mounted() {
+        tag = this;
         let state = store.getState();
         store.subscribe(this.onApplicationStateChanged.bind(this));
         this.prepareContactUids();
@@ -67,11 +70,11 @@ export default class HomeContacts extends Element {
         } else if (type == CONTACTS.REMOVE_USER_SUCCESS) {
             this.prepareContactUids();
         } else if (type == CONTACTS.GET_WALLETS_BY_EMAIL_SUCCESS) {
-            if (HomeContacts.actionSelected == ACTION_REQUEST) {
+            if (tag.actionSelected == ACTION_REQUEST) {
                 riot.mount('#confirm-send', 'contact-request-money', {
                     sendAddr: data.contactWallet
                 });
-            } else if (HomeContacts.actionSelected == ACTION_SEND) {
+            } else if (tag.actionSelected == ACTION_SEND) {
                 riot.mount('#confirm-send', 'contact-send-money', {
                     sendAddr: data.contactWallet
                 });
@@ -125,7 +128,7 @@ export default class HomeContacts extends Element {
     }
 
     requestForm(event: FCEvent) {
-        HomeContacts.actionSelected = ACTION_REQUEST;
+        tag.actionSelected = ACTION_REQUEST;
         let account = {
             email: event.item.email,
             start: 0,
@@ -135,7 +138,7 @@ export default class HomeContacts extends Element {
     }
 
     sendForm(event: FCEvent) {
-        HomeContacts.actionSelected = ACTION_SEND;
+        tag.actionSelected = ACTION_SEND;
         let account = {
             email: event.item.email,
             start: 0,

@@ -25,14 +25,14 @@
 								<div class="title">{meta.type==2 ? 'Name': 'Recipient'}: &nbsp;
 								</div>
 								<div class="data">
-									<p>{meta.type == 2 ? (meta.sender_display_name ? meta.sender_display_name : meta.sender_id) : (meta.receiver_display_name
-										? meta.receiver_display_name : meta.receiver_id)}</p>
+									<p>{meta.type == 2 ? (meta.sender_display_name ? meta.sender_display_name : meta.sender_public_address) : (meta.receiver_display_name
+										? meta.receiver_display_name : meta.receiver_public_address)}</p>
 								</div>
 							</div>
 							<div class="item">
 								<div class="title">Email:</div>
 								<div class="data">
-									<p> {meta.type == 2 ? meta.sender_email : meta.receiver_email}</p>
+									<p> {meta.type == 2 ? (meta.sender_email?meta.sender_email:'Anonymous') : (meta.receiver_email?meta.receiver_email:'Anonymous')}</p>
 								</div>
 							</div>
 						</div>

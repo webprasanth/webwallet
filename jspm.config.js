@@ -89,6 +89,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "bs58check": "npm:bs58check@1.1.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.0",
     "bcrypt-pbkdf": "npm:bcrypt-pbkdf@1.0.0",
     "big.js": "npm:big.js@3.1.3",
@@ -1010,6 +1011,12 @@ SystemJS.config({
     "npm:is-number@2.1.0": {
       "map": {
         "kind-of": "npm:kind-of@3.0.4"
+      }
+    },
+    "npm:bs58check@1.1.1": {
+      "map": {
+        "create-hash": "npm:create-hash@1.1.2",
+        "bs58": "npm:bs58@2.0.1"
       }
     }
   }

@@ -8,4 +8,6 @@ declare module "crypto-js";
 declare module "tweetnacl";
 declare module "tweetnacl-util";
 declare module "secrets.js-grempe";
+declare module "bs58check";
+
 

@@ -1,7 +1,8 @@
 import bitcoin from 'bitcoinjs-lib';
 import bip39 from 'bip39';
+import base58check from 'bs58check';
 
-const NETWORK = {
+export const NETWORK = {
     messagePrefix: '\x18Flashcoin Signed Message:\n',
     bip32: {
         public: 0x0488b21e,
@@ -50,4 +51,22 @@ export default class Wallet {
         return txBuilder.build();
     }
 
+}
+
+export class Address {
+    public hash: number;
+    public version: number;
+
+    constructor(hash, version) {
+        this.version = version;
+        this.hash = hash;
+    }
+
+    static fromBase58Check(string): Address {
+        let payload = base58check.decode(string);
+        let version = payload.readUInt8(0);
+        let hash = payload.slice(1);
+
+        return new Address(hash, version);
+    }
 }
