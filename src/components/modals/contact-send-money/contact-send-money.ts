@@ -1,13 +1,14 @@
-import { riot, template, Element } from '../../riot-ts';
+import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactSendMoneyTemplate from './contact-send-money.html!text';
 import { calcFee } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
+import BaseElement from '../../base-element';
 
 @template(ContactSendMoneyTemplate)
-export default class ContactSendMoney extends Element {
+export default class ContactSendMoney extends BaseElement {
     private AvatarServer = AndamanService.AvatarServer;
     private formEnabled: boolean = true;
     private success: boolean = false;
@@ -31,7 +32,7 @@ export default class ContactSendMoney extends Element {
             this.processing_duration = state.sendData.processing_duration;
             this.title = 'Transaction Successful';
         } else if (actionType == SEND.SEND_TXN_FAILED) {
-            riot.mount('#error-dialog', 'error-alert', { title: '', message: state.lastAction.data });
+            super.showError('', state.lastAction.data);
         }
 
         this.update();

@@ -1,4 +1,4 @@
-import { riot, template, Element } from '../../riot-ts';
+import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import SendMoneyConfirmTemplate from './send-money-confirm.html!text';
 import { formatCurrency } from '../../../model/utils';
@@ -6,9 +6,10 @@ import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 import SendService from '../../../model/send/send-service';
+import BaseElement from '../../base-element';
 
 @template(SendMoneyConfirmTemplate)
-export default class SendMoneyConfirm extends Element {
+export default class SendMoneyConfirm extends BaseElement {
 
     private userProfile = null;
     private confirmation: boolean = true;
@@ -37,7 +38,7 @@ export default class SendMoneyConfirm extends Element {
             this.processing_duration = state.sendData.processing_duration;
             this.opts.dlgTitle = 'Transaction Successful';
         } else if (actionType == SEND.SEND_TXN_FAILED) {
-            riot.mount('#error-dialog', 'error-alert', { title: '', message: state.lastAction.data });
+            super.showError('', state.lastAction.data);
         }
 
         this.update();

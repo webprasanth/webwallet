@@ -1,13 +1,14 @@
-import { riot, template, Element } from '../../riot-ts';
+import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import SendRequestConfirmTemplate from './send-request-confirm.html!text';
 import { formatCurrency } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { requestActions } from '../../../model/request/actions';
 import { REQUEST } from '../../../model/action-types';
+import BaseElement from '../../base-element';
 
 @template(SendRequestConfirmTemplate)
-export default class SendRequestConfirm extends Element {
+export default class SendRequestConfirm extends BaseElement {
     private formRequestEnabled: boolean = true;
     private requestProcessing: boolean = false;
     private requestSuccess: boolean = false;
@@ -28,7 +29,7 @@ export default class SendRequestConfirm extends Element {
             this.requestSuccess = true;
             this.formRequestEnabled = false;
         } else if (actionType === REQUEST.REQUEST_MONEY_FAILED) {
-            riot.mount('#error-dialog', 'error-alert', { title: '', message: state.lastAction.data });
+            super.showError('', state.lastAction.data);
         }
 
         this.update();

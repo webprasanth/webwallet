@@ -8,7 +8,7 @@ export default class BaseElement extends Element {
     /**
      * Show error dialog
      */
-    showError(title: string, message: string) {
+    protected showError(title: string, message: string) {
         if (!title || title.length == 0) {
             title = 'Error';
         }

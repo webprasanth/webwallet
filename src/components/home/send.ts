@@ -1,20 +1,29 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeSendTemplate from './send.html!text';
 import CommonService from '../../model/common/common-service';
 import { calcFee, isValidFlashAddress } from '../../model/utils';
+import BaseElement from '../base-element';
 
 let tag = null;
 
 @template(HomeSendTemplate)
-export default class HomeSend extends Element {
+export default class HomeSend extends BaseElement {
     private userProfile = null;
     private sendWallet: any;
     private isValidAddress = false;
+    private emailErrorMessage = '';
+    private amountErrorMessage = '';
 
     onContinueButtonClick(event: Event) {
         if (tag.isValidAddress) {
             this.checkAndShowComfirmationForm();
+        } else {
+            if (!$('#to-email-id').val()) {
+                this.emailErrorMessage = 'Please specify an user to send payment to';
+            } else {
+                this.emailErrorMessage = 'Address is invalid!'
+            }
         }
     }
 
@@ -30,13 +39,18 @@ export default class HomeSend extends Element {
             }
         );
 
-        $('#to-email-id').on('propertychange change click keyup input paste', this.checkAddress);
+        $('#to-email-id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
+        $('#continueBt').on('blur', this.resetErrorMessages);
     }
 
     checkAddress() {
         let term = $('#to-email-id').val();
 
-        if (term == "") return;
+        if (term == "") {
+            tag.isValidAddress = false;
+            tag.update();
+            return;
+        }
 
         if (isValidFlashAddress(term)) {
             tag.sendWallet = {};
@@ -94,20 +108,21 @@ export default class HomeSend extends Element {
     }
 
     checkAndShowComfirmationForm() {
-        //To email input empty
-        if (!$('#to-email-id').val()) {
+        let amount = $('#amount-input').val();
+        let fee = calcFee(amount);
+        if (!amount.match(/^\d+$/g)) {
+            this.amountErrorMessage = 'Amount must be integer value';
             return;
         }
 
-        let amount = $('#amount-input').val();
-        let fee = calcFee(amount);
-
         if (amount < 1) {
-            return riot.mount('#error-dialog', 'error-alert', { title: '', message: 'Amount must be at least 1' });
+            this.amountErrorMessage = 'Amount must be at least 1';
+            return;
         }
 
         if (this.userProfile.balance < amount + fee) {
-            return riot.mount('#error-dialog', 'error-alert', { title: '', message: 'You do not have enough funds to make this payment' });
+            super.showError('', 'You do not have enough funds to make this payment');
+            return;
         }
 
         this.sendWallet.memo = $('#payment-memo').val();
@@ -118,5 +133,19 @@ export default class HomeSend extends Element {
             fee: fee,
             wallet: this.sendWallet
         });
+    }
+
+    clearForms() {
+        $('#to-email-id').val('');
+        $('#amount-input').val('');
+        $('#payment-memo').val('');
+        tag.isValidAddress = false;
+        this.resetErrorMessages();
+    }
+
+    resetErrorMessages() {
+        tag.emailErrorMessage = '';
+        tag.amountErrorMessage = '';
+        tag.update();
     }
 }

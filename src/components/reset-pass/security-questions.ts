@@ -1,4 +1,4 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store from '../../model/store';
 import SecurityQuestionsTemplate from './security-questions.html!text';
 import { FCEvent } from '../../model/types';
@@ -8,9 +8,10 @@ import AndamanService from '../../model/andaman-service';
 import Premium from 'Premium';
 import secrets from 'secrets.js-grempe';
 import { getUserKey, storeUserKey } from '../../model/utils';
+import BaseElement from '../base-element';
 
 @template(SecurityQuestionsTemplate)
-export default class SecurityQuestions extends Element {
+export default class SecurityQuestions extends BaseElement {
     private showQuestionForm = true;
     private showPasswordForm = false;
     private securityQuestion1 = '';
@@ -63,7 +64,7 @@ export default class SecurityQuestions extends Element {
                 }
             });
         } else if (actionType === RESET_PASS.SSO_RESET_PASSWORD_FAILED) {
-            riot.mount('#error-dialog', 'error-alert', { title: '', message: JSON.stringify(data.resetPassErrReason) });
+            super.showError('', JSON.stringify(data.resetPassErrReason));
         }
 
         this.update();
@@ -89,7 +90,7 @@ export default class SecurityQuestions extends Element {
             this.showPasswordForm = true;
             this.showQuestionForm = false;
         } catch (exception) {
-            riot.mount('#error-dialog', 'error-alert', { title: '', message: 'Your answers are incorrect' });
+            super.showError('', 'Your answers are incorrect');
         }
     }
 

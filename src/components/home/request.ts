@@ -1,13 +1,14 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
 import { isValidFlashAddress } from '../../model/utils';
+import BaseElement from '../base-element';
 
 let tag = null;
 
 @template(HomeRequestTemplate)
-export default class HomeRequest extends Element {
+export default class HomeRequest extends BaseElement {
     private userProfile = null;
     private receiverWallet = null;
     private isValidAddress = false;
@@ -24,13 +25,17 @@ export default class HomeRequest extends Element {
                 source: this.searchWallet
             }
         );
-        $('#rq_to_email_id').on('propertychange change click keyup input paste', this.checkAddress);
+        $('#rq_to_email_id').on('propertychange change click keyup input paste blur', this.checkAddress);
     }
 
     checkAddress() {
         let term = $('#rq_to_email_id').val();
 
-        if (term == "") return;
+        if (term == "") {
+            tag.isValidAddress = false;
+            tag.update();
+            return;
+        }
 
         if (isValidFlashAddress(term)) {
             tag.receiverWallet = {};
@@ -91,13 +96,20 @@ export default class HomeRequest extends Element {
         let receiverEmail = $('#rq_to_email_id').val();
         //To email input empty
         if (!receiverEmail) {
+            super.showError('', 'Email or address is invalidate!');
             return;
         }
 
         let amount = $('#requestAmount').val();
 
+        if (!amount.match('^\d+$')) {
+            super.showError('', 'Amount must be integer value');
+            return;
+        }
+
         if (amount < 1) {
-            return riot.mount('#error-dialog', 'error-alert', { title: '', message: 'Amount must be at least 1' });
+            super.showError('', 'Amount must be at least 1');
+            return;
         }
 
         this.receiverWallet.memo = $('#requestPaymentMemo').val();

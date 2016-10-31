@@ -20,7 +20,7 @@
       "clean-css": "npm:clean-css@^3.4.18",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17",
       "plugin-traceur": "npm:systemjs-plugin-traceur@^0.0.2",
-      "plugin-typescript": "github:frankwallis/plugin-typescript@^5.2.7"
+      "ts": "github:frankwallis/plugin-typescript@^5.2.7"
     },
     "peerDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
