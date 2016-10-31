@@ -13,6 +13,7 @@
 						<input type="text" class="form-control" placeholder="Search by email" id="rq_to_email_id">
 						<span class="glyphicon glyphicon-search"></span>
 						<span show={isValidAddress} class="glyphicon glyphicon-ok-circle"></span>
+						<div show={emailErrorMessage} class="pin-incorrect">{emailErrorMessage}</div>
 					</div>
 
 				</div>
@@ -25,6 +26,7 @@
 						<input class="form-control" id="requestAmount" name="requestAmount" type="number" min="0" onenter="open-send" value="{AmountValue}"
 							on-focus="focusAmount">
 					</div>
+					<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
 				</div>
 				<div class="form-group col-xs-12">
 					<label>Note</label>
@@ -34,8 +36,8 @@
 				<div class="send__buttons col-xs-12">
 					<span class="_icon glyphicon glyphicon-arrow-down" show={validating}></span>
 					<virtual show={!validating}>
-						<button id="request-money" type="button" class="btn btn-primary" onclick={onContinueButtonClick}>Continue</button>
-						<button id="clear-request-form" type="button" class="btn btn-default" onclick="clear-send-form">Clear</button>
+						<button id="continue-request-bt" type="button" class="btn btn-primary" onclick={onContinueButtonClick}>Continue</button>
+						<button id="clear-request-form" type="button" class="btn btn-default" onclick={clearForms}>Clear</button>
 					</virtual>
 				</div>
 			</div>

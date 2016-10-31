@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeSendTemplate from './send.html!text';
 import CommonService from '../../model/common/common-service';
-import { calcFee, isValidFlashAddress } from '../../model/utils';
+import { calcFee, isValidFlashAddress, isValidAmountCharCode } from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -14,18 +14,6 @@ export default class HomeSend extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
-
-    onContinueButtonClick(event: Event) {
-        if (tag.isValidAddress) {
-            this.checkAndShowComfirmationForm();
-        } else {
-            if (!$('#to-email-id').val()) {
-                this.emailErrorMessage = 'Please specify an user to send payment to';
-            } else {
-                this.emailErrorMessage = 'Address is invalid!'
-            }
-        }
-    }
 
     mounted() {
         tag = this;
@@ -40,7 +28,8 @@ export default class HomeSend extends BaseElement {
         );
 
         $('#to-email-id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
-        $('#continueBt').on('blur', this.resetErrorMessages);
+        $('#continue-send-bt').on('blur', this.resetErrorMessages);
+        document.getElementById('amount-input').onkeypress = this.filterNumberEdit;
     }
 
     checkAddress() {
@@ -108,8 +97,17 @@ export default class HomeSend extends BaseElement {
     }
 
     checkAndShowComfirmationForm() {
+        if (!$('#to-email-id').val()) {
+            this.emailErrorMessage = 'Please specify an user to send payment to';
+            return;
+        } else if (!tag.isValidAddress) {
+            this.emailErrorMessage = 'Address is invalid!'
+            return;
+        }
+
         let amount = $('#amount-input').val();
         let fee = calcFee(amount);
+
         if (!amount.match(/^\d+$/g)) {
             this.amountErrorMessage = 'Amount must be integer value';
             return;
@@ -135,6 +133,10 @@ export default class HomeSend extends BaseElement {
         });
     }
 
+    onContinueButtonClick(event: Event) {
+        this.checkAndShowComfirmationForm();
+    }
+
     clearForms() {
         $('#to-email-id').val('');
         $('#amount-input').val('');
@@ -147,5 +149,13 @@ export default class HomeSend extends BaseElement {
         tag.emailErrorMessage = '';
         tag.amountErrorMessage = '';
         tag.update();
+    }
+
+    filterNumberEdit(event: Event) {
+        if (!isValidAmountCharCode(event)) {
+            event.preventDefault ? event.preventDefault() : event.returnValue = false;
+        } else {
+            event.returnValue = true;
+        }
     }
 }

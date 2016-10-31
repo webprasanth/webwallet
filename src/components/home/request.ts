@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
-import { isValidFlashAddress } from '../../model/utils';
+import { isValidFlashAddress, isValidAmountCharCode } from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -12,6 +12,8 @@ export default class HomeRequest extends BaseElement {
     private userProfile = null;
     private receiverWallet = null;
     private isValidAddress = false;
+    private emailErrorMessage = '';
+    private amountErrorMessage = '';
 
     mounted() {
         tag = this;
@@ -25,7 +27,9 @@ export default class HomeRequest extends BaseElement {
                 source: this.searchWallet
             }
         );
-        $('#rq_to_email_id').on('propertychange change click keyup input paste blur', this.checkAddress);
+        $('#rq_to_email_id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
+        $('#continue-request-bt').on('blur', this.resetErrorMessages);
+        document.getElementById('requestAmount').onkeypress = this.filterNumberEdit;
     }
 
     checkAddress() {
@@ -94,21 +98,24 @@ export default class HomeRequest extends BaseElement {
 
     checkAndShowComfirmationForm() {
         let receiverEmail = $('#rq_to_email_id').val();
-        //To email input empty
+
         if (!receiverEmail) {
-            super.showError('', 'Email or address is invalidate!');
+            this.emailErrorMessage = 'Please specify an user to send payment request to';
+            return;
+        } else if (!tag.isValidAddress) {
+            this.emailErrorMessage = 'Address is invalid!'
             return;
         }
 
         let amount = $('#requestAmount').val();
 
-        if (!amount.match('^\d+$')) {
-            super.showError('', 'Amount must be integer value');
+        if (!amount.match(/^\d+$/g)) {
+            this.amountErrorMessage = 'Amount must be integer value';
             return;
         }
 
         if (amount < 1) {
-            super.showError('', 'Amount must be at least 1');
+            this.amountErrorMessage = 'Amount must be at least 1';
             return;
         }
 
@@ -124,8 +131,28 @@ export default class HomeRequest extends BaseElement {
     }
 
     onContinueButtonClick(event: Event) {
-        if (tag.isValidAddress) {
-            this.checkAndShowComfirmationForm();
+        this.checkAndShowComfirmationForm();
+    }
+
+    clearForms() {
+        $('#rq_to_email_id').val('');
+        $('#requestAmount').val('');
+        $('#requestPaymentMemo').val('');
+        tag.isValidAddress = false;
+        this.resetErrorMessages();
+    }
+
+    resetErrorMessages() {
+        tag.emailErrorMessage = '';
+        tag.amountErrorMessage = '';
+        tag.update();
+    }
+
+    filterNumberEdit(event: Event) {
+        if (!isValidAmountCharCode(event)) {
+            event.preventDefault ? event.preventDefault() : event.returnValue = false;
+        } else {
+            event.returnValue = true;
         }
     }
 }

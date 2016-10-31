@@ -153,3 +153,10 @@ export function isValidFlashAddress(value) {
     return false;
   }
 }
+
+export function isValidAmountCharCode(event) {
+  var charCode = parseInt(event.charCode);
+  var keyCode = parseInt(event.keyCode);
+  console.log('keycode', keyCode);
+  return ((charCode >= 48 && charCode <= 57) || keyCode == 8 || keyCode == 9 || keyCode == 127);
+}
