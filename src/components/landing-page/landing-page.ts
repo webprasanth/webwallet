@@ -67,7 +67,7 @@ export default class LandingPage extends BaseElement {
         let email: string = $('#identifer').val();
         if (!email || email.trim().length == 0) {
             super.showError('', 'Email is needed to login');
-            // TODO focus to email feild 
+            // TODO focus to email feild
 
             return false;
         }
@@ -138,6 +138,7 @@ export default class LandingPage extends BaseElement {
         });
 
         // Handle click CREATE WALLET button
+
         $('#create-wallet-btn').click(function () {
             $('html, body').animate({
                 scrollTop: 0
