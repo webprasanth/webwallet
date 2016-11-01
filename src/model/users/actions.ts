@@ -299,7 +299,6 @@ export const userActions = {
 
                 if (resp) {
                     if (resp.rc == 1) {
-                        console.log('++++++++++++++++++++++++ babv sso login resp ' + JSON.stringify(resp));
                         dispatch(userActions.ssoLoginSuccess(resp.profile));
                         dispatch(userActions.getProfile(resp.profile));
                         dispatch(userActions.getMyWallets(resp.profile.auth_version));;
