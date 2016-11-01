@@ -154,9 +154,13 @@ export function isValidFlashAddress(value) {
   }
 }
 
-export function isValidAmountCharCode(event) {
-  var charCode = parseInt(event.charCode);
-  var keyCode = parseInt(event.keyCode);
-  console.log('keycode', keyCode);
-  return ((charCode >= 48 && charCode <= 57) || keyCode == 8 || keyCode == 9 || keyCode == 127);
+export function filterNumberEdit(event) {
+  let charCode = parseInt(event.charCode);
+  let keyCode = parseInt(event.keyCode);
+  let isValidAmountCharCode = ((charCode >= 48 && charCode <= 57) || keyCode == 8 || keyCode == 9 || keyCode == 127);
+  if (!isValidAmountCharCode) {
+    event.preventDefault ? event.preventDefault() : event.returnValue = false;
+  } else {
+    event.returnValue = true;
+  }
 }

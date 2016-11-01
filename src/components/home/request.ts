@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
-import { isValidFlashAddress, isValidAmountCharCode } from '../../model/utils';
+import { isValidFlashAddress, filterNumberEdit } from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -14,6 +14,7 @@ export default class HomeRequest extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
+    private filterNumberEdit = filterNumberEdit;
 
     mounted() {
         tag = this;
@@ -148,11 +149,4 @@ export default class HomeRequest extends BaseElement {
         tag.update();
     }
 
-    filterNumberEdit(event: Event) {
-        if (!isValidAmountCharCode(event)) {
-            event.preventDefault ? event.preventDefault() : event.returnValue = false;
-        } else {
-            event.returnValue = true;
-        }
-    }
 }

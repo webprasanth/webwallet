@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeSendTemplate from './send.html!text';
 import CommonService from '../../model/common/common-service';
-import { calcFee, isValidFlashAddress, isValidAmountCharCode } from '../../model/utils';
+import { calcFee, isValidFlashAddress, filterNumberEdit } from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -14,6 +14,7 @@ export default class HomeSend extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
+    private filterNumberEdit = filterNumberEdit;
 
     mounted() {
         tag = this;
@@ -29,7 +30,7 @@ export default class HomeSend extends BaseElement {
 
         $('#to-email-id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
         $('#continue-send-bt').on('blur', this.resetErrorMessages);
-        document.getElementById('amount-input').onkeypress = this.filterNumberEdit;
+        $('#amount-input').keypress(this.filterNumberEdit);
     }
 
     checkAddress() {
@@ -151,11 +152,4 @@ export default class HomeSend extends BaseElement {
         tag.update();
     }
 
-    filterNumberEdit(event: Event) {
-        if (!isValidAmountCharCode(event)) {
-            event.preventDefault ? event.preventDefault() : event.returnValue = false;
-        } else {
-            event.returnValue = true;
-        }
-    }
 }

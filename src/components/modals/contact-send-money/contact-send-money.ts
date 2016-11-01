@@ -1,11 +1,13 @@
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactSendMoneyTemplate from './contact-send-money.html!text';
-import { calcFee } from '../../../model/utils';
+import { calcFee, filterNumberEdit } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 import BaseElement from '../../base-element';
+
+let tag = null;
 
 @template(ContactSendMoneyTemplate)
 export default class ContactSendMoney extends BaseElement {
@@ -15,6 +17,7 @@ export default class ContactSendMoney extends BaseElement {
     private processing_duration: number = 2.000;
     private title = 'Send Payment';
     private errorMessage = null;
+    private filterNumberEdit = filterNumberEdit;
 
     constructor() {
         super();
@@ -39,20 +42,28 @@ export default class ContactSendMoney extends BaseElement {
     }
 
     mounted() {
+        tag = this;
         $('#sendByContact').modal('show');
+        $('#contact-send-amount').keypress(this.filterNumberEdit);
+        $('#contact-send-bt').on('blur', this.resetErrorMessages);
     }
 
     sendMoney() {
         let amount = $('#contact-send-amount').val();
 
+        if (!amount.match(/^\d+$/g)) {
+            tag.errorMessage = 'Amount must be integer value';
+            return;
+        }
+
         let fee = calcFee(amount);
 
         if (amount < 1) {
-            return this.errorMessage = 'Amount must be at least 1';
+            return tag.errorMessage = 'Amount must be at least 1';
         }
 
         if (store.getState().userData.user.balance < amount + fee) {
-            return this.errorMessage = 'You do not have enough funds to make this payment';
+            return tag.errorMessage = 'You do not have enough funds to make this payment';
         }
 
         let memo = $('#Note').val();
@@ -60,4 +71,8 @@ export default class ContactSendMoney extends BaseElement {
         store.dispatch(sendActions.createRawTx(this.opts.sendAddr, amount, memo));
     }
 
+    resetErrorMessages() {
+        tag.errorMessage = '';
+        tag.update();
+    }
 }

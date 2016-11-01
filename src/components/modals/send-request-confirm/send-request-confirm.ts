@@ -36,7 +36,6 @@ export default class SendRequestConfirm extends BaseElement {
     }
 
     mounted() {
-        //this.userProfile = store.getState().userData.user;
         $('#requestDialog').modal('show');
     }
 
