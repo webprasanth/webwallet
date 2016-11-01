@@ -121,7 +121,7 @@ SystemJS.config({
         "querystring": "npm:jspm-nodelibs-querystring@0.2.0",
         "redux": "npm:redux@3.6.0",
         "redux-thunk": "npm:redux-thunk@2.1.0",
-        "riot": "npm:riot@2.6.4",
+        "riot": "npm:riot@2.6.5",
         "secrets.js-grempe": "npm:secrets.js-grempe@1.1.0",
         "stream": "npm:jspm-nodelibs-stream@0.2.0",
         "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.0",
@@ -354,7 +354,7 @@ SystemJS.config({
                 "buffer-equals": "npm:buffer-equals@1.0.4",
                 "buffer-compare": "npm:buffer-compare@1.1.1",
                 "wif": "npm:wif@2.0.3",
-                "typeforce": "npm:typeforce@1.8.7",
+                "typeforce": "npm:typeforce@1.9.1",
                 "bip66": "npm:bip66@1.1.4",
                 "buffer-reverse": "npm:buffer-reverse@1.0.1"
             }
@@ -375,11 +375,6 @@ SystemJS.config({
                 "bs58check": "npm:bs58check@1.2.0"
             }
         },
-        "npm:typeforce@1.8.7": {
-            "map": {
-                "inherits": "npm:inherits@2.0.3"
-            }
-        },
         "npm:moment-timezone@0.5.7": {
             "map": {
                 "moment": "npm:moment@2.15.2"
@@ -387,21 +382,10 @@ SystemJS.config({
         },
         "npm:redux@3.6.0": {
             "map": {
-                "lodash-es": "npm:lodash-es@4.16.4",
+                "lodash-es": "npm:lodash-es@4.16.5",
                 "loose-envify": "npm:loose-envify@1.3.0",
-                "lodash": "npm:lodash@4.16.4",
+                "lodash": "npm:lodash@4.16.5",
                 "symbol-observable": "npm:symbol-observable@1.0.4"
-            }
-        },
-        "npm:riot@2.6.4": {
-            "map": {
-                "riot-route": "npm:riot-route@2.5.0",
-                "simple-dom": "npm:simple-dom@0.3.2",
-                "riot-observable": "npm:riot-observable@2.5.0",
-                "riot-tmpl": "npm:riot-tmpl@2.4.2",
-                "riot-compiler": "npm:riot-compiler@2.5.5",
-                "riot-cli": "npm:riot-cli@2.6.2",
-                "simple-html-tokenizer": "npm:simple-html-tokenizer@0.2.5"
             }
         },
         "npm:riot-route@2.5.0": {
@@ -1011,6 +995,22 @@ SystemJS.config({
         "npm:source-map-support@0.4.6": {
             "map": {
                 "source-map": "npm:source-map@0.5.6"
+            }
+        },
+        "npm:riot@2.6.5": {
+            "map": {
+                "simple-html-tokenizer": "npm:simple-html-tokenizer@0.2.5",
+                "riot-cli": "npm:riot-cli@2.6.2",
+                "simple-dom": "npm:simple-dom@0.3.2",
+                "riot-route": "npm:riot-route@2.5.0",
+                "riot-observable": "npm:riot-observable@2.5.0",
+                "riot-compiler": "npm:riot-compiler@2.5.5",
+                "riot-tmpl": "npm:riot-tmpl@2.4.2"
+            }
+        },
+        "npm:typeforce@1.9.1": {
+            "map": {
+                "inherits": "npm:inherits@2.0.3"
             }
         }
     }
