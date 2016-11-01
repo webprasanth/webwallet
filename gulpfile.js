@@ -2,6 +2,8 @@
 
 var gulp = require("gulp");
 var run = require('gulp-run');
+var merge = require('merge-stream');
+var rename = require('gulp-rename');
 
 gulp.task('bundle-js', function () {
     var cmd = new run.Command('jspm build src/main.js public/assets/js/build.js --minify --skip-source-maps');
@@ -13,14 +15,20 @@ gulp.task('build-debug-js', function () {
     cmd.exec();
 });
 
+gulp.task('copy-html', function () {
+    return gulp.src('index-production.html')
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('public'));
+});
+
 gulp.task('copy-css', function () {
     return gulp.src('assets/css/**/*')
         .pipe(gulp.dest('public/assets/css'));
 });
 
-gulp.task('copy-font', function () {
-    return gulp.src('assets/font/**/*')
-        .pipe(gulp.dest('public/assets/font'));
+gulp.task('copy-fonts', function () {
+    return gulp.src('assets/fonts/**/*')
+        .pipe(gulp.dest('public/assets/fonts'));
 });
 
 gulp.task('copy-images', function () {
@@ -29,11 +37,22 @@ gulp.task('copy-images', function () {
 });
 
 gulp.task('copy-lib', function () {
-    gulp.src('assets/lib/jquery/**/*')
-        .pipe(gulp.dest('public/assets/lib/jquery/'));
+    var maps = [
+        {from: 'assets/lib/jquery/**/*', to: 'public/assets/lib/jquery/'},
+        {from: 'assets/lib/bootstrap/**/*', to: 'public/assets/lib/bootstrap/'},
+        {from: 'assets/lib/bootstrap-datepicker.min.js', to: 'public/assets/lib'},
+        {from: 'assets/lib/jquery.simplePagination.js', to: 'public/assets/lib'},
+        {from: 'assets/lib/typeahead.jquery.js', to: 'public/assets/lib'}
+    ];
+
+    var tasks = maps.map((m) => {
+        return gulp.src(m.from).pipe(gulp.dest(m.to));
+    });
+
+    merge(tasks);
 });
 
-gulp.task('copy-rs', ['copy-css', 'copy-images', 'copy-lib', 'copy-font']);
+gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts']);
 
 gulp.task('andaman', function(){
     var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
