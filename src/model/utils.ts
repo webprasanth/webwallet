@@ -83,6 +83,42 @@ export function getLocation() {
   return location;
 }
 
+export function calcPasswordStreng(password: string): number {
+
+  if (!password) {
+    ;
+    return;
+  }
+
+  // Initial strength
+  let strength = 0;
+
+  // If the password length is less than 6, return message.
+  if (password.length < 6) {
+    return strength;
+  }
+
+  // length is ok, lets continue.
+
+  // If length is 8 characters or more, increase strength value
+  if (password.length > 7) strength += 1;
+
+  // If password contains both lower and uppercase characters, increase strength value
+  if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1;
+
+  // If it has numbers and characters, increase strength value
+  if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1;
+
+  // If it has one special character, increase strength value
+  if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
+
+  // If it has two special characters, increase strength value
+  if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1;
+
+  return strength;
+}
+
+// Base64 to unicode string
 export function b64DecodeUnicode(str: string) {
   return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
@@ -93,6 +129,15 @@ export function hexToBase64(str: string) {
   return btoa(String.fromCharCode.apply(null,
     str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
   );
+}
+
+export function base64ToHex(str: string) {
+  for (var i = 0, bin = atob(str.replace(/[ \r\n]+$/, "")), hex = []; i < bin.length; ++i) {
+    var tmp = bin.charCodeAt(i).toString(16);
+    if (tmp.length === 1) tmp = "0" + tmp;
+    hex[hex.length] = tmp;
+  }
+  return hex.join('');
 }
 
 export function strFromUtf8Ab(ab) {

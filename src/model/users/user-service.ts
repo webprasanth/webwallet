@@ -29,6 +29,48 @@ export default class UserService {
         });
     }
 
+    setPassword(params) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.set_password_v2(pipe, params, function (resp) {
+                    if (resp.rc == 1) {
+                        pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
+                    }
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
+    setRecoveryKeys(params) {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.set_recovery_keys(pipe, params, function (resp) {
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
+    checkSessionToken() {
+        return new Promise((resolve) => {
+            AndamanService.ready().then((opts) => {
+                var andaman = opts.andaman;
+                var pipe = opts.pipe;
+
+                andaman.check_session_token(pipe, function (resp) {
+                    resolve(resp);
+                });
+            });
+        });
+    }
+
     ssoLogin() {
         return new Promise((resolve, reject) => {
             let userKey = getUserKey();
@@ -127,12 +169,12 @@ export default class UserService {
         });
     }
 
-    createFlashWallet(sessionToken, publicKey) {
+    createFlashWallet(params) {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
                 var andaman = opts.andaman;
                 var pipe = opts.pipe;
-                andaman.get_my_wallets(pipe, {}, function (resp) {
+                andaman.create_flash_wallet(pipe, params, function (resp) {
                     resolve(resp);
                 });
             });

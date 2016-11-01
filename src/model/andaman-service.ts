@@ -25,6 +25,10 @@ interface IAndaman {
     get_users_by_uid(pipe, params: {}, cb: (resp) => any);
     remove_user(pipe, params: {}, cb: (resp) => any);
     create_account_easy(pipe, params: {}, cb: (resp) => any);
+    set_password_v2(pipe, params: {}, cb: (resp) => any);
+    set_recovery_keys(pipe, params: {}, cb: (resp) => any);
+    create_flash_wallet(pipe, params: {}, cb: (resp) => any);
+    check_session_token(pipe, cb: (resp) => any);
 
     sso_get_keypair(pipe, params: {}, cb: (resp) => any);
     sso_change_password(pipe, params: {}, cb: (resp) => any);

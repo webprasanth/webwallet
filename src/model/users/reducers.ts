@@ -10,6 +10,10 @@ export default function userReducer(state = { user: null, wallets: [], loginData
             return Object.assign({}, state, { signupData: action.data });
         case USERS.SSO_LOGIN_SUCCESS:
             return Object.assign({}, state, { user: action.data });
+        case USERS.SET_PASSWORD_SUCCESS:
+            return Object.assign({}, state, { user: action.data });
+        case USERS.SET_PASSWORD_FAILED:
+            return Object.assign({}, state, { loginData: action.data });
         case USERS.LOGOUT:
             return Object.assign({}, state, { user: null });
         case PROFILE.DISABLE_2FA_SUCCESS:

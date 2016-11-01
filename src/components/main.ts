@@ -19,25 +19,27 @@ riot.route((action) => {
     }
 
     var state = store.getState();
-    if (!state.userData.user && action != 'reset_password') {
+    if (!state.userData.user && (action != 'reset_password' && action != 'account_created')) {
         return riot.route('login');
     }
-
     switch (action) {
         case '':
         case 'home':
             return riot.mount('#main', 'home-page');
         case 'reset_password':
             return riot.mount('#main', 'security-questions');
+        case 'account_created':
+            return riot.mount('#main', 'setuppassword');
+        default:
+            break;
     }
 });
 
 store.subscribe(() => {
     var state = store.getState();
-    if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
+    if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS || state.lastAction.type == actions.USERS.SET_RECOVERY_KEY_SUCCESS) {
         riot.route('');
-    }
-    else if (!state.userData.user && currentAction !== 'reset_password') {
+    } else if (!state.userData.user && (currentAction !== 'reset_password' && currentAction != 'account_created')) {
         riot.route('login');
     }
 });

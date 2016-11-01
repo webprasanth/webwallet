@@ -7,6 +7,7 @@ import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
+import SetupPassword from './setuppassword/setuppassword';
 import ProfileAvatar from './home/profile/avatar';
 import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
@@ -25,7 +26,7 @@ import MessageDialog from './modals/message-dialog/message-dialog';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
-    LandingPage, Home, HomeHeader, App, SubmitEmail, ErrorAlert, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
+    LandingPage, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog
 };

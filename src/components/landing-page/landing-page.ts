@@ -175,7 +175,7 @@ export default class LandingPage extends BaseElement {
             email: email.toLowerCase(),
             g_recaptcha_response: grecaptcha.getResponse(this.captchaId),
             appId: appId,
-            callback_link: "http://" + clientHost + "/?r=account_created&token="
+            callback_link: `http://${clientHost}/#account_created?token=`
         };
 
         store.dispatch(userActions.signup(credentials));

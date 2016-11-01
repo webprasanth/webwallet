@@ -484,12 +484,12 @@ internals.API.prototype.check_tfa_code = function(pipe, request, cb) {
 /**
  *
  * @param pipe
- * @param account: email, name, callback_link, appId (unity or bnp), g_recaptcha_response
+ * @param request: password, token, privateKey, publicKey
  * @param cb
  */
-internals.API.prototype.create_account_easy = function(pipe, account, cb) {
-	pipe.emit(Event.CREATE_ACCOUNT_EASY, account);
-	pipe.once(Event.CREATE_ACCOUNT_EASY_ACK, cb);
+internals.API.prototype.set_password_v2 = function(pipe, request, cb) {
+	pipe.emit(Event.SSO_SET_PASSWORD_V2, request);
+	pipe.once(Event.SSO_SET_PASSWORD_V2_ACK, cb);
 };
 
 /**
@@ -544,6 +544,12 @@ internals.API.prototype.admin_get_signup_daily_stats = function (pipe, criteria,
 	pipe.once(Event.ADMIN_GET_SIGNUP_DAILY_STATS_ACK, cb);
 };
 
+/**
+ *
+ * @param pipe
+ * @param request: sessionToken, publicKey, appId
+ * @param cb
+ */
 internals.API.prototype.create_flash_wallet = function (pipe, request, cb) {
 	pipe.emit(Event.KEYS_CREATE_FLASH_WALLET, request);
 	pipe.once(Event.KEYS_CREATE_FLASH_WALLET_ACK, cb);

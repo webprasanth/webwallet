@@ -9,6 +9,7 @@ import Wallet from '../wallet';
 import base64 from 'crypto-js';
 import nacl from 'tweetnacl';
 import AndamanService from '../andaman-service';
+import secrets from 'secrets.js-grempe';
 
 export const userActions = {
 
@@ -34,6 +35,119 @@ export const userActions = {
 
     signupFailed(resp) {
         return { type: USERS.SIGNUP_FAILED, data: resp };
+    },
+
+    setPassword(token: string, password: string, questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
+        let keypair       = nacl.box.keyPair();
+        let pubKey        = keypair.publicKey;
+        let privKey       = keypair.secretKey;
+        let pubKeyBase64  = utils.encodeBase64(pubKey);
+        let privKeyBase64 = utils.encodeBase64(privKey);
+
+        let privKeyHex = utils.base64ToHex(privKeyBase64);
+        let keyByteSize = 256;
+        let encryptedPrivKey = JSON.stringify(Premium.xaesEncrypt(keyByteSize, password, privKeyHex));
+
+        let params = {
+            password: password,
+            token: token,
+            privateKey: encryptedPrivKey,
+            publicKey: pubKeyBase64
+        };
+
+        let sc        = secrets.share(privKeyHex, 3, 2);
+        let answers   = [answerA, answerB, answerC];
+
+        // May hash one more time
+        let checksum = answers.join("*");
+        let encryptedSc1 = JSON.stringify(Premium.xaesEncrypt(keyByteSize, checksum, sc[0]));
+
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            UserService.singleton().setPassword(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc === 1) {
+                        let _params = {
+                            idToken: resp.profile.idToken,
+                            sc1: encryptedSc1,
+                            sc2: sc[1],
+                            sc3: sc[2],
+                            security_question_1: questionA,
+                            security_question_2: questionB,
+                            security_question_3: questionC
+                        };
+
+                        let userKey = {
+                            idToken: resp.profile.idToken,
+                            encryptedPrivKey: encryptedPrivKey,
+                            publicKey: pubKeyBase64
+                        };
+
+                        let createWalletParams = {
+                            sessionToken: resp.profile.sessionToken,
+                            publicKey: userKey.publicKey,
+                            appId: 'flashcoin'
+                        }
+
+                        utils.storeUserKey(userKey);
+                        dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile.auth_version));
+                        dispatch(userActions.setPasswordSuccess(resp.profile));
+                } else {
+                    dispatch(userActions.setPasswordFailed(resp));
+                }
+            });
+        };
+    },
+
+    setPasswordSuccess(profile) {
+        return { type: USERS.SET_PASSWORD_SUCCESS, data: profile };
+    },
+
+    setPasswordFailed(resp) {
+        return { type: USERS.SET_PASSWORD_FAILED, data: resp };
+    },
+
+    setRecoveryKeys(params, createWalletParams, password, authVersion) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            UserService.singleton().setRecoveryKeys(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc === 1) {
+                        UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
+                            if (_resp.rc === 1) {
+                                console.log('+++++ createFlashWallet success');
+                                UserService.singleton().getMyWallets().then((__resp: any) => {
+                                    if (__resp.rc === 1) {
+                                        decryptWallets(dispatch, __resp.my_wallets, authVersion, password);
+                                    } else {
+                                        dispatch(userActions.getMyWalletsFailed(__resp));
+                                    }
+                                });
+                            } else {
+                                console.log('+++++ createFlashWallet failed, reason:', _resp);
+                            }
+                        });
+
+                        UserService.singleton().setRecoveryKeys(params).then((___resp: any) => {
+                        });
+                        dispatch(userActions.setRecoveryKeysSuccess(resp));
+                } else {
+                    dispatch(userActions.setRecoveryKeysFailed(resp));
+                }
+            });
+        };
+    },
+
+    setRecoveryKeysSuccess(resp) {
+        return { type: USERS.SET_RECOVERY_KEY_SUCCESS, data: resp };
+    },
+
+    setRecoveryKeysFailed(resp) {
+        return { type: USERS.SET_RECOVERY_KEY_FAILED, data: resp };
     },
 
     login(email, password) {
@@ -123,7 +237,13 @@ export const userActions = {
                     } else {
                         let userProfile = store.getState().userData.user;
                         let userKey = utils.getUserKey();
-                        UserService.singleton().createFlashWallet(userProfile.sessionToken, userKey.publicKey).then((resp: any) => {
+                        let params = {
+                            sessionToken: userProfile.sessionToken,
+                            publicKey: userKey.publicKey,
+                            appId: 'flashcoin'
+                        }
+
+                        UserService.singleton().createFlashWallet(params).then((resp: any) => {
                             if (resp.rc === 1) {
                                 console.log('createFlashWallet success');
                                 UserService.singleton().getMyWallets().then((resp: any) => {
@@ -179,6 +299,7 @@ export const userActions = {
 
                 if (resp) {
                     if (resp.rc == 1) {
+                        console.log('++++++++++++++++++++++++ babv sso login resp ' + JSON.stringify(resp));
                         dispatch(userActions.ssoLoginSuccess(resp.profile));
                         dispatch(userActions.getProfile(resp.profile));
                         dispatch(userActions.getMyWallets(resp.profile.auth_version));;
