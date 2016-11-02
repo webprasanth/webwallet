@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeSendTemplate from './send.html!text';
 import CommonService from '../../model/common/common-service';
-import { calcFee, isValidFlashAddress, filterNumberEdit } from '../../model/utils';
+import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -14,7 +14,6 @@ export default class HomeSend extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
-    private filterNumberEdit = filterNumberEdit;
 
     mounted() {
         tag = this;
@@ -30,7 +29,8 @@ export default class HomeSend extends BaseElement {
 
         $('#to-email-id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
         $('#continue-send-bt').on('blur', this.resetErrorMessages);
-        $('#amount-input').keypress(this.filterNumberEdit);
+        $('#amount-input').on('blur', utils.formatAmountInput);
+        $('#amount-input').keypress(utils.filterNumberEdit);
     }
 
     checkAddress() {
@@ -42,7 +42,7 @@ export default class HomeSend extends BaseElement {
             return;
         }
 
-        if (isValidFlashAddress(term)) {
+        if (utils.isValidFlashAddress(term)) {
             tag.sendWallet = {};
             tag.sendWallet.address = term;
             tag.isValidAddress = true;
@@ -107,9 +107,10 @@ export default class HomeSend extends BaseElement {
         }
 
         let amount = $('#amount-input').val();
-        let fee = calcFee(amount);
+        amount = utils.toOrginalNumber(amount);
+        let fee = utils.calcFee(amount);
 
-        if (!amount.match(/^\d+$/g)) {
+        if (!amount.toString().match(/^\d+$/g)) {
             this.amountErrorMessage = 'Amount must be integer value';
             return;
         }

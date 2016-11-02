@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
-import { isValidFlashAddress, filterNumberEdit } from '../../model/utils';
+import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
 
 let tag = null;
@@ -14,7 +14,6 @@ export default class HomeRequest extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
-    private filterNumberEdit = filterNumberEdit;
 
     mounted() {
         tag = this;
@@ -30,7 +29,8 @@ export default class HomeRequest extends BaseElement {
         );
         $('#rq_to_email_id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
         $('#continue-request-bt').on('blur', this.resetErrorMessages);
-        document.getElementById('requestAmount').onkeypress = this.filterNumberEdit;
+        $('#requestAmount').on('blur', utils.formatAmountInput);
+        $('#requestAmount').keypress(utils.filterNumberEdit);
     }
 
     checkAddress() {
@@ -42,7 +42,7 @@ export default class HomeRequest extends BaseElement {
             return;
         }
 
-        if (isValidFlashAddress(term)) {
+        if (utils.isValidFlashAddress(term)) {
             tag.receiverWallet = {};
             tag.receiverWallet.address = term;
             tag.isValidAddress = true;
@@ -109,8 +109,9 @@ export default class HomeRequest extends BaseElement {
         }
 
         let amount = $('#requestAmount').val();
+        amount = utils.toOrginalNumber(amount);
 
-        if (!amount.match(/^\d+$/g)) {
+        if (!amount.toString().match(/^\d+$/g)) {
             this.amountErrorMessage = 'Amount must be integer value';
             return;
         }

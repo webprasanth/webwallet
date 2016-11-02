@@ -23,8 +23,7 @@
 
 					<div class="input-group">
 						<span class="input-group-addon">Flash</span>
-						<input class="form-control" id="requestAmount" name="requestAmount" type="number" min="0" onenter="open-send" value="{AmountValue}"
-							on-focus="focusAmount">
+						<input class="form-control" id="requestAmount" name="requestAmount" type="text" onenter="open-send">
 					</div>
 					<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
 				</div>

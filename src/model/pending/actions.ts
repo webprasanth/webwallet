@@ -7,7 +7,7 @@ export const pendingActions = {
         return { type: PENDING.SET_ACTIVE_TAB, data: tabId };
     },
     getMoreRequest(pageSettings) {
-        let {date_from, date_to, type, start, size = 5, status = [0]} = pageSettings;
+        let {date_from, date_to, type, start, size = 10, status = [0]} = pageSettings;
 
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));

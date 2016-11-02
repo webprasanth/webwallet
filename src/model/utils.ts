@@ -19,8 +19,8 @@ const MOMENT_FORMAT = {
 }
 
 declare class Buffer extends Object {
-    constructor(arr ? : any, encode ? : any);
-    toString(encode ? : string);
+    constructor(arr?: any, encode?: any);
+    toString(encode?: string);
 }
 
 export function satoshiToFlash(num) {
@@ -88,7 +88,8 @@ export function getLocation() {
 
 export function calcPasswordStreng(password: string): number {
 
-    if (!password) {;
+    if (!password) {
+        ;
         return;
     }
 
@@ -122,7 +123,7 @@ export function calcPasswordStreng(password: string): number {
 
 // Base64 to unicode string
 export function b64DecodeUnicode(str: string) {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 }
@@ -210,5 +211,31 @@ export function filterNumberEdit(event) {
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
     } else {
         event.returnValue = true;
+    }
+}
+
+export function decimalFormat(number, n?, x?) {
+    if (typeof number == 'undefined' || number == 'undefined') return ''
+    //Converback to number format without comma
+    number = toOrginalNumber(number);
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')'
+    return toFixedFloor(parseFloat(number), Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,')
+}
+
+function toFixedFloor(x, decimal) {
+    var factor = Math.pow(10, decimal)
+    var y = parseInt(new Big(x).times(factor))
+    return (y / factor).toFixed(decimal)
+}
+
+export function toOrginalNumber(Decimalnumber) {
+    return Number(Decimalnumber.toString().replace(/,/g, ""))
+}
+
+export function formatAmountInput() {
+    let amount = (<any>this).value;
+    amount = toOrginalNumber(amount);
+    if (!isNaN(amount) && amount > 0) {
+        (<any>this).value = decimalFormat(amount);
     }
 }

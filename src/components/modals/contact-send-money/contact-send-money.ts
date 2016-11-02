@@ -1,7 +1,7 @@
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactSendMoneyTemplate from './contact-send-money.html!text';
-import { calcFee, filterNumberEdit } from '../../../model/utils';
+import * as utils from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
@@ -17,7 +17,6 @@ export default class ContactSendMoney extends BaseElement {
     private processing_duration: number = 2.000;
     private title = 'Send Payment';
     private errorMessage = null;
-    private filterNumberEdit = filterNumberEdit;
 
     constructor() {
         super();
@@ -44,19 +43,21 @@ export default class ContactSendMoney extends BaseElement {
     mounted() {
         tag = this;
         $('#sendByContact').modal('show');
-        $('#contact-send-amount').keypress(this.filterNumberEdit);
+        $('#contact-send-amount').keypress(utils.filterNumberEdit);
+        $('#contact-send-amount').blur(utils.formatAmountInput);
         $('#contact-send-bt').on('blur', this.resetErrorMessages);
     }
 
     sendMoney() {
         let amount = $('#contact-send-amount').val();
+        amount = utils.toOrginalNumber(amount);
 
-        if (!amount.match(/^\d+$/g)) {
+        if (!amount.toString().match(/^\d+$/g)) {
             tag.errorMessage = 'Amount must be integer value';
             return;
         }
 
-        let fee = calcFee(amount);
+        let fee = utils.calcFee(amount);
 
         if (amount < 1) {
             return tag.errorMessage = 'Amount must be at least 1';

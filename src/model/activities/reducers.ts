@@ -6,7 +6,7 @@ var homeTabs = [
     { id: 1, code: 'SENT', name: 'Payments Sent', isActive: false }
 ];
 
-export default function activityReducer(state = { txns: [], total_txns: 0, page_size: 5, tabs: homeTabs, txn_detail: {}, showTransactionDetail: false }, action) {
+export default function activityReducer(state = { txns: [], total_txns: 0, page_size: 10, tabs: homeTabs, txn_detail: {}, showTransactionDetail: false }, action) {
     switch (action.type) {
         case ACTIVITIES.GET_MORE_TXN_SUCCESS:
             var txns = action.data.txns || [];

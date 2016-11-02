@@ -4,12 +4,14 @@ import { userActions } from '../../model/users/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
 import { USERS } from '../../model/action-types';
+import { decimalFormat } from '../../model/utils';
 
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends Element {
     public userEmail: string = store.getState().userData.user.email;
     public avatarUrl: string = null;
     private balance = 0;
+    private decimalFormat = decimalFormat;
 
     mounted() {
         let state = store.getState();
@@ -26,7 +28,7 @@ export default class HomeHeader extends Element {
         let state: ApplicationState = store.getState();
 
         if (state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
-            this.balance = Math.round(state.lastAction.data);
+            this.balance = state.lastAction.data;
         }
 
         this.update();

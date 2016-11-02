@@ -38,10 +38,10 @@ export const userActions = {
     },
 
     setPassword(token: string, password: string, questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
-        let keypair       = nacl.box.keyPair();
-        let pubKey        = keypair.publicKey;
-        let privKey       = keypair.secretKey;
-        let pubKeyBase64  = utils.encodeBase64(pubKey);
+        let keypair = nacl.box.keyPair();
+        let pubKey = keypair.publicKey;
+        let privKey = keypair.secretKey;
+        let pubKeyBase64 = utils.encodeBase64(pubKey);
         let privKeyBase64 = utils.encodeBase64(privKey);
 
         let privKeyHex = utils.base64ToHex(privKeyBase64);
@@ -55,8 +55,8 @@ export const userActions = {
             publicKey: pubKeyBase64
         };
 
-        let sc        = secrets.share(privKeyHex, 3, 2);
-        let answers   = [answerA, answerB, answerC];
+        let sc = secrets.share(privKeyHex, 3, 2);
+        let answers = [answerA, answerB, answerC];
 
         // May hash one more time
         let checksum = answers.join("*");
@@ -69,31 +69,31 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
-                        let _params = {
-                            idToken: resp.profile.idToken,
-                            sc1: encryptedSc1,
-                            sc2: sc[1],
-                            sc3: sc[2],
-                            security_question_1: questionA,
-                            security_question_2: questionB,
-                            security_question_3: questionC
-                        };
+                    let _params = {
+                        idToken: resp.profile.idToken,
+                        sc1: encryptedSc1,
+                        sc2: sc[1],
+                        sc3: sc[2],
+                        security_question_1: questionA,
+                        security_question_2: questionB,
+                        security_question_3: questionC
+                    };
 
-                        let userKey = {
-                            idToken: resp.profile.idToken,
-                            encryptedPrivKey: encryptedPrivKey,
-                            publicKey: pubKeyBase64
-                        };
+                    let userKey = {
+                        idToken: resp.profile.idToken,
+                        encryptedPrivKey: encryptedPrivKey,
+                        publicKey: pubKeyBase64
+                    };
 
-                        let createWalletParams = {
-                            sessionToken: resp.profile.sessionToken,
-                            publicKey: userKey.publicKey,
-                            appId: 'flashcoin'
-                        }
+                    let createWalletParams = {
+                        sessionToken: resp.profile.sessionToken,
+                        publicKey: userKey.publicKey,
+                        appId: 'flashcoin'
+                    }
 
-                        utils.storeUserKey(userKey);
-                        dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile.auth_version));
-                        dispatch(userActions.setPasswordSuccess(resp.profile));
+                    utils.storeUserKey(userKey);
+                    dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile.auth_version));
+                    dispatch(userActions.setPasswordSuccess(resp.profile));
                 } else {
                     dispatch(userActions.setPasswordFailed(resp));
                 }
@@ -117,23 +117,22 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
-                        UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
-                            if (_resp.rc === 1) {
-                                UserService.singleton().getMyWallets().then((__resp: any) => {
-                                    if (__resp.rc === 1) {
-                                        decryptWallets(dispatch, __resp.my_wallets, authVersion, password);
-                                    } else {
-                                        dispatch(userActions.getMyWalletsFailed(__resp));
-                                    }
-                                });
-                            } else {
-                                console.log('+++++ createFlashWallet failed, reason:', _resp);
-                            }
-                        });
-
-                        UserService.singleton().setRecoveryKeys(params).then((___resp: any) => {
-                        });
-                        dispatch(userActions.setRecoveryKeysSuccess(resp));
+                    UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
+                        if (_resp.rc === 1) {
+                            UserService.singleton().getMyWallets().then((__resp: any) => {
+                                if (__resp.rc === 1) {
+                                    decryptWallets(dispatch, __resp.my_wallets, authVersion, password);
+                                } else {
+                                    dispatch(userActions.getMyWalletsFailed(__resp));
+                                }
+                            });
+                        } else {
+                            console.log('+++++ createFlashWallet failed, reason:', _resp);
+                        }
+                    });
+                    UserService.singleton().setRecoveryKeys(params).then((___resp: any) => {
+                    });
+                    dispatch(userActions.setRecoveryKeysSuccess(resp));
                 } else {
                     dispatch(userActions.setRecoveryKeysFailed(resp));
                 }
@@ -171,8 +170,8 @@ export const userActions = {
             });
         };
     },
-    loginFailed(error) {
-        return { type: USERS.LOGIN_FAILED, data: { error } };
+    loginFailed(resp) {
+        return { type: USERS.LOGIN_FAILED, data: resp };
     },
     loginSuccess(user) {
         return { type: USERS.LOGIN_SUCCESS, data: user };

@@ -41,11 +41,11 @@ export default class HomeContacts extends Element {
     buildPagination() {
         if (this.resetPagination) {
             let state = store.getState();
-            let {total_money_reqs} = state.pendingData;
+            let {contacts} = state.contactsData;
 
             this.paginationObject = $(() => {
-                $('.txn-pagination').pagination({
-                    items: total_money_reqs,
+                $('#contact-pagination').pagination({
+                    items: contacts.length,
                     itemsOnPage: PAGE_SIZE,
                     cssStyle: 'light-theme',
                     onPageClick: this.prepareContactUids

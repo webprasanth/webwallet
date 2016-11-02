@@ -1,7 +1,7 @@
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactRequestMoneyTemplate from './contact-request-money.html!text';
-import { formatCurrency, filterNumberEdit } from '../../../model/utils';
+import * as utils from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { requestActions } from '../../../model/request/actions';
 import { REQUEST } from '../../../model/action-types';
@@ -14,10 +14,9 @@ export default class ContactRequestMoney extends BaseElement {
     private formEnabled: boolean = true;
     private requestProcessing: boolean = false;
     private requestSuccess: boolean = false;
-    private formatCurrency = formatCurrency;
+    private formatCurrency = utils.formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
     private errorMessage = null;
-    private filterNumberEdit = filterNumberEdit;
 
     constructor() {
         super();
@@ -41,14 +40,16 @@ export default class ContactRequestMoney extends BaseElement {
 
     mounted() {
         $('#requestByContact').modal('show');
-        $('#contact-request-amount').keypress(this.filterNumberEdit);
+        $('#contact-request-amount').keypress(utils.filterNumberEdit);
+        $('#contact-request-amount').blur(utils.formatAmountInput);
         $('#contact-request-bt').on('blur', this.resetErrorMessages);
     }
 
     sendRequestDirect() {
         let amount = $('#contact-request-amount').val();
+        amount = utils.toOrginalNumber(amount);
 
-        if (!amount.match(/^\d+$/g)) {
+        if (!amount.toString().match(/^\d+$/g)) {
             tag.errorMessage = 'Amount must be integer value';
             return;
         }

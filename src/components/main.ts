@@ -6,7 +6,6 @@ import * as actions from '../model/action-types';
 import { userActions } from '../model/users/actions';
 import UserService from '../model/users/user-service';
 
-
 let currentAction = '';
 
 components.initialize();

@@ -100,7 +100,7 @@
 										</p>
 									</div>
 									<div class="item col-xs-2 text-right _mobile_amount">
-										<p class="amount">{amount}</p>
+										<p class="amount">{decimalFormat(amount)}</p>
 									</div>
 
 									<virtual show={type==1}>
@@ -136,7 +136,7 @@
 						</div>
 					</div>
 					<nav show={money_requests.length>0} class="pagination-table col-xs-12">
-						<ul class="txn-pagination"></ul>
+						<ul class="txn-pagination" id="pending-pagination"></ul>
 					</nav>
 				</div>
 			</div>

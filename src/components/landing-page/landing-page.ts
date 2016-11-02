@@ -44,11 +44,13 @@ export default class LandingPage extends BaseElement {
                 this.isVerifyEmailSent = true;
                 break;
             case USERS.SIGNUP_FAILED:
+                super.showError('Error', 'Signup failed');
                 this.onSignupFail(data.signupData);
                 break;
             case USERS.SSO_LOGIN_SUCCESS:
                 break;
-            case USERS.SSO_LOGIN_FAILED:
+            case USERS.LOGIN_FAILED:
+                super.showError('Login failed', 'Email or password is not correct');
                 break;
             case USERS.NEED_VERIFY_GOOGLE_2FA:
                 riot.mount('#confirm-send', 'twofa-verification-dialog', data.loginData);
@@ -231,8 +233,8 @@ export default class LandingPage extends BaseElement {
     }
 
     validateName() {
-        let firstName:string = $('#firstname').val();
-        let lastName:string = $('#lastname').val();
+        let firstName: string = $('#firstname').val();
+        let lastName: string = $('#lastname').val();
 
         if (!firstName || firstName.trim().length == 0) {
             super.showError('', 'Please enter your first name!');

@@ -4,7 +4,7 @@ import HomePendingTemplate from './pending.html!text';
 import AndamanService from '../../model/andaman-service';
 import { pendingActions } from '../../model/pending/actions';
 import { SEND, PENDING } from '../../model/action-types';
-import { getDisplayDate, getDisplayDateTime, strimString } from '../../model/utils';
+import * as utils from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 import { FCEvent } from '../../model/types';
 
@@ -24,9 +24,10 @@ export default class HomePending extends Element {
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
     private timeZone = null;
-    private getDisplayDate = getDisplayDate;
-    private getDisplayDateTime = getDisplayDateTime;
-    private strimString = strimString;
+    private getDisplayDate = utils.getDisplayDate;
+    private getDisplayDateTime = utils.getDisplayDateTime;
+    private strimString = utils.strimString;
+    private decimalFormat = utils.decimalFormat;
     private TAB = TAB;
     private tabs = store.getState().pendingData.tabs;
     private money_requests = [];
@@ -89,7 +90,7 @@ export default class HomePending extends Element {
             let {total_money_reqs, page_size} = state.pendingData;
 
             this.paginationObject = $(() => {
-                $('.txn-pagination').pagination({
+                $('#pending-pagination').pagination({
                     items: total_money_reqs,
                     itemsOnPage: page_size,
                     cssStyle: 'light-theme',

@@ -3,7 +3,7 @@ import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
-import { getDisplayDate } from '../../model/utils';
+import { getDisplayDate, decimalFormat } from '../../model/utils';
 import { FCEvent } from '../../model/types';
 
 @template(HomeActivityTemplate)
@@ -11,6 +11,7 @@ export default class HomeActivity extends Element {
     private fromDateObject = null;
     private toDateObject = null;
     private paginationObject = null;
+    private decimalFormat = decimalFormat;
     /**
      * flag for reset Pagination
      * + equal true when change Tab or reload data
@@ -83,7 +84,7 @@ export default class HomeActivity extends Element {
         var {total_txns, page_size} = state.activityData;
         if (this.resetPagination) {
             this.paginationObject = $(() => {
-                $('.txn-pagination').pagination({
+                $('#activity-pagination').pagination({
                     items: total_txns,
                     itemsOnPage: page_size,
                     cssStyle: 'light-theme',
