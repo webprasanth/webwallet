@@ -9,5 +9,6 @@ declare module "tweetnacl";
 declare module "tweetnacl-util";
 declare module "secrets.js-grempe";
 declare module "bs58check";
-
+declare module "big.js";
+declare module "moment-timezone";
 

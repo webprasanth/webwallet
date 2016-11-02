@@ -21,7 +21,7 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
-                        dispatch(userActions.signupSuccess(resp));
+                    dispatch(userActions.signupSuccess(resp));
                 } else {
                     dispatch(userActions.signupFailed(resp));
                 }
@@ -159,7 +159,7 @@ export const userActions = {
 
                 if (resp.rc === 1) {
                     if (resp.profile.totp_enabled === 1) {
-                        let loginData = {profile: resp.profile, password: password};
+                        let loginData = { profile: resp.profile, password: password };
                         dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
                     } else {
                         dispatch(userActions.loginSuccess(resp.profile));
@@ -228,7 +228,7 @@ export const userActions = {
     check2faCodeFailed(resp) {
         return { type: USERS.CHECK_2FA_CODE_FAILED, data: resp };
     },
-    getMyWallets(auth_version?, password = '1111') {
+    getMyWallets(auth_version, password = '1111') {
         return (dispatch) => {
             UserService.singleton().getMyWallets().then((resp: any) => {
                 if (resp.rc === 1) {
@@ -360,7 +360,7 @@ function decryptPassphraseV1(dispatch, wallets) {
                 return new Wallet().openWallet(w);
             });
             dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
-            dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: resp.wallet.secret});
+            dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: resp.wallet.secret });
         }
     });
 }
@@ -390,5 +390,5 @@ function decryptPassphraseV2(dispatch, wallets, password) {
     });
 
     dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
-    dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password});
+    dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });
 }

@@ -26,7 +26,7 @@ export default class HomeHeader extends Element {
         let state: ApplicationState = store.getState();
 
         if (state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
-            this.balance = state.lastAction.data;
+            this.balance = Math.round(state.lastAction.data);
         }
 
         this.update();
