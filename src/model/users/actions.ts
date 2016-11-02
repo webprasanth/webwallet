@@ -119,7 +119,6 @@ export const userActions = {
                 if (resp.rc === 1) {
                         UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
                             if (_resp.rc === 1) {
-                                console.log('+++++ createFlashWallet success');
                                 UserService.singleton().getMyWallets().then((__resp: any) => {
                                     if (__resp.rc === 1) {
                                         decryptWallets(dispatch, __resp.my_wallets, authVersion, password);
@@ -245,7 +244,6 @@ export const userActions = {
 
                         UserService.singleton().createFlashWallet(params).then((resp: any) => {
                             if (resp.rc === 1) {
-                                console.log('createFlashWallet success');
                                 UserService.singleton().getMyWallets().then((resp: any) => {
                                     if (resp.rc === 1) {
                                         decryptWallets(dispatch, resp.my_wallets, auth_version, password);
@@ -366,7 +364,7 @@ function decryptPassphraseV1(dispatch, wallets) {
 }
 
 function decryptPassphraseV2(dispatch, wallets, password) {
-    let userProfile = store.getState().userData.user;
+    var userProfile = store.getState().userData.user;
     let userKey = utils.getUserKey();
     let nonce = 'nnfyPFFbK7NdGtf73uGwt+CsS6mHAmAq';
     let casPubKey = 'vjPu6e8nhoxfLNxmNzNxXYr++1onlC1XuAt3VdxLISQ=';

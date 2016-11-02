@@ -60,6 +60,15 @@ export default class LandingPage extends BaseElement {
         this.update();
     }
 
+    onKeydown(event) {
+        if (event.keyCode == 13) {
+            this.onLoginButtonClick(event);
+            return false;
+         } 
+
+         return true;
+    }
+
     onLoginButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
