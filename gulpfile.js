@@ -15,6 +15,16 @@ gulp.task('build-debug-js', function () {
     cmd.exec();
 });
 
+gulp.task('uglify', function () {
+    var cmd = new run.Command('uglifyjs  public/assets/js/build.js > public/assets/js/build2.js --mangle --reserved \'Array,BigInteger,Boolean,Buffer,ECPair,Function,Number,Point\'');
+    cmd.exec();
+});
+
+gulp.task('replace', function () {
+    var cmd = new run.Command('mv public/assets/js/build2.js public/assets/js/build.js');
+    cmd.exec();
+});
+
 gulp.task('copy-html', function () {
     return gulp.src('index-production.html')
         .pipe(rename('index.html'))
