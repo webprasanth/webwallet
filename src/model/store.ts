@@ -12,6 +12,8 @@ interface IUser {
     created_ts: string;
     timezone: string;
     balance: number;
+    phone: string;
+    phone_verified: number;
 }
 
 interface ITAB {
@@ -28,7 +30,7 @@ export interface ApplicationState {
     activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any };
     sendData: { processing_duration: number };
     pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
-    profileData: { avatarToken: string, wallet: any , keypair: any, twoFAInfo: any, fountain: any, savedFountain: any};
+    profileData: { avatarToken: string, wallet: any, keypair: any, twoFAInfo: any, fountain: any, savedFountain: any };
     contactsData: { contacts: any[], totalContacts: number, contactWallet: any };
     tabData: { tabs: ITAB[] };
     resetPassData: { keys: any, resetPassErrReason: any }

@@ -17,7 +17,7 @@ SystemJS.config({
             "plugin-babel": "npm:systemjs-plugin-babel@0.0.17",
             "plugin-traceur": "npm:systemjs-plugin-traceur@0.0.2",
             "clean-css": "npm:clean-css@3.4.20",
-            "ts": "github:frankwallis/plugin-typescript@5.2.7"
+            "ts": "github:frankwallis/plugin-typescript@5.2.9"
         },
         "packages": {
             "npm:systemjs-plugin-traceur@0.0.2": {
@@ -39,12 +39,12 @@ SystemJS.config({
             },
             "npm:source-map@0.4.4": {
                 "map": {
-                    "amdefine": "npm:amdefine@1.0.0"
+                    "amdefine": "npm:amdefine@1.0.1"
                 }
             },
-            "github:frankwallis/plugin-typescript@5.2.7": {
+            "github:frankwallis/plugin-typescript@5.2.9": {
                 "map": {
-                    "typescript": "npm:typescript@2.0.6"
+                    "typescript": "npm:typescript@2.0.7"
                 }
             }
         }
@@ -107,13 +107,13 @@ SystemJS.config({
         "ecc-jsbn": "npm:ecc-jsbn@0.1.1",
         "events": "npm:jspm-nodelibs-events@0.2.0",
         "fs": "npm:jspm-nodelibs-fs@0.2.0",
-        "fsevents": "npm:fsevents@1.0.14",
+        "fsevents": "npm:fsevents@1.0.15",
         "http": "npm:jspm-nodelibs-http@0.2.0",
         "https": "npm:jspm-nodelibs-https@0.2.1",
         "jodid25519": "npm:jodid25519@1.0.2",
         "jsbn": "npm:jsbn@0.1.0",
         "module": "npm:jspm-nodelibs-module@0.2.0",
-        "moment-timezone": "npm:moment-timezone@0.5.7",
+        "moment-timezone": "npm:moment-timezone@0.5.9",
         "net": "npm:jspm-nodelibs-net@0.2.0",
         "os": "npm:jspm-nodelibs-os@0.2.0",
         "path": "npm:jspm-nodelibs-path@0.2.1",
@@ -375,16 +375,11 @@ SystemJS.config({
                 "bs58check": "npm:bs58check@1.2.0"
             }
         },
-        "npm:moment-timezone@0.5.7": {
-            "map": {
-                "moment": "npm:moment@2.15.2"
-            }
-        },
         "npm:redux@3.6.0": {
             "map": {
-                "lodash-es": "npm:lodash-es@4.16.5",
+                "lodash-es": "npm:lodash-es@4.16.6",
                 "loose-envify": "npm:loose-envify@1.3.0",
-                "lodash": "npm:lodash@4.16.5",
+                "lodash": "npm:lodash@4.16.6",
                 "symbol-observable": "npm:symbol-observable@1.0.4"
             }
         },
@@ -459,7 +454,7 @@ SystemJS.config({
         "npm:readdirp@2.1.0": {
             "map": {
                 "set-immediate-shim": "npm:set-immediate-shim@1.0.1",
-                "graceful-fs": "npm:graceful-fs@4.1.9",
+                "graceful-fs": "npm:graceful-fs@4.1.10",
                 "minimatch": "npm:minimatch@3.0.3",
                 "readable-stream": "npm:readable-stream@2.1.5"
             }
@@ -472,12 +467,6 @@ SystemJS.config({
         "npm:is-binary-path@1.0.1": {
             "map": {
                 "binary-extensions": "npm:binary-extensions@1.7.0"
-            }
-        },
-        "npm:fsevents@1.0.14": {
-            "map": {
-                "node-pre-gyp": "npm:node-pre-gyp@0.6.31",
-                "nan": "npm:nan@2.4.0"
             }
         },
         "npm:minimatch@3.0.3": {
@@ -493,7 +482,7 @@ SystemJS.config({
                 "rc": "npm:rc@1.1.6",
                 "npmlog": "npm:npmlog@4.0.0",
                 "rimraf": "npm:rimraf@2.5.4",
-                "request": "npm:request@2.76.0",
+                "request": "npm:request@2.78.0",
                 "tar-pack": "npm:tar-pack@3.3.0",
                 "tar": "npm:tar@2.2.1"
             }
@@ -548,21 +537,12 @@ SystemJS.config({
         },
         "npm:jspm-nodelibs-http@0.2.0": {
             "map": {
-                "http-browserify": "npm:stream-http@2.4.1"
+                "http-browserify": "npm:stream-http@2.5.0"
             }
         },
         "npm:nopt@3.0.6": {
             "map": {
                 "abbrev": "npm:abbrev@1.0.9"
-            }
-        },
-        "npm:stream-http@2.4.1": {
-            "map": {
-                "inherits": "npm:inherits@2.0.3",
-                "readable-stream": "npm:readable-stream@2.1.5",
-                "to-arraybuffer": "npm:to-arraybuffer@1.0.1",
-                "xtend": "npm:xtend@4.0.1",
-                "builtin-status-codes": "npm:builtin-status-codes@2.0.0"
             }
         },
         "npm:rc@1.1.6": {
@@ -576,30 +556,6 @@ SystemJS.config({
         "npm:mkdirp@0.5.1": {
             "map": {
                 "minimist": "npm:minimist@0.0.8"
-            }
-        },
-        "npm:request@2.76.0": {
-            "map": {
-                "is-typedarray": "npm:is-typedarray@1.0.0",
-                "aws4": "npm:aws4@1.5.0",
-                "aws-sign2": "npm:aws-sign2@0.6.0",
-                "stringstream": "npm:stringstream@0.0.5",
-                "http-signature": "npm:http-signature@1.1.1",
-                "oauth-sign": "npm:oauth-sign@0.8.2",
-                "isstream": "npm:isstream@0.1.2",
-                "combined-stream": "npm:combined-stream@1.0.5",
-                "caseless": "npm:caseless@0.11.0",
-                "forever-agent": "npm:forever-agent@0.6.1",
-                "form-data": "npm:form-data@2.1.1",
-                "extend": "npm:extend@3.0.0",
-                "mime-types": "npm:mime-types@2.1.12",
-                "qs": "npm:qs@6.3.0",
-                "har-validator": "npm:har-validator@2.0.6",
-                "tough-cookie": "npm:tough-cookie@2.3.2",
-                "hawk": "npm:hawk@3.1.3",
-                "json-stringify-safe": "npm:json-stringify-safe@5.0.1",
-                "tunnel-agent": "npm:tunnel-agent@0.4.3",
-                "node-uuid": "npm:node-uuid@1.4.7"
             }
         },
         "npm:npmlog@4.0.0": {
@@ -623,7 +579,7 @@ SystemJS.config({
         },
         "npm:fstream@1.0.10": {
             "map": {
-                "graceful-fs": "npm:graceful-fs@4.1.9",
+                "graceful-fs": "npm:graceful-fs@4.1.10",
                 "inherits": "npm:inherits@2.0.3",
                 "mkdirp": "npm:mkdirp@0.5.1",
                 "rimraf": "npm:rimraf@2.5.4"
@@ -837,7 +793,7 @@ SystemJS.config({
             "map": {
                 "strip-ansi": "npm:strip-ansi@3.0.1",
                 "is-fullwidth-code-point": "npm:is-fullwidth-code-point@1.0.0",
-                "code-point-at": "npm:code-point-at@1.0.1"
+                "code-point-at": "npm:code-point-at@1.1.0"
             }
         },
         "npm:boom@2.10.1": {
@@ -950,11 +906,6 @@ SystemJS.config({
                 "number-is-nan": "npm:number-is-nan@1.0.1"
             }
         },
-        "npm:code-point-at@1.0.1": {
-            "map": {
-                "number-is-nan": "npm:number-is-nan@1.0.1"
-            }
-        },
         "npm:url@0.11.0": {
             "map": {
                 "punycode": "npm:punycode@1.3.2",
@@ -1011,6 +962,50 @@ SystemJS.config({
         "npm:typeforce@1.9.1": {
             "map": {
                 "inherits": "npm:inherits@2.0.3"
+            }
+        },
+        "npm:fsevents@1.0.15": {
+            "map": {
+                "nan": "npm:nan@2.4.0",
+                "node-pre-gyp": "npm:node-pre-gyp@0.6.31"
+            }
+        },
+        "npm:moment-timezone@0.5.9": {
+            "map": {
+                "moment": "npm:moment@2.15.2"
+            }
+        },
+        "npm:stream-http@2.5.0": {
+            "map": {
+                "inherits": "npm:inherits@2.0.3",
+                "to-arraybuffer": "npm:to-arraybuffer@1.0.1",
+                "readable-stream": "npm:readable-stream@2.1.5",
+                "builtin-status-codes": "npm:builtin-status-codes@2.0.0",
+                "xtend": "npm:xtend@4.0.1"
+            }
+        },
+        "npm:request@2.78.0": {
+            "map": {
+                "aws4": "npm:aws4@1.5.0",
+                "combined-stream": "npm:combined-stream@1.0.5",
+                "extend": "npm:extend@3.0.0",
+                "isstream": "npm:isstream@0.1.2",
+                "stringstream": "npm:stringstream@0.0.5",
+                "form-data": "npm:form-data@2.1.1",
+                "tough-cookie": "npm:tough-cookie@2.3.2",
+                "is-typedarray": "npm:is-typedarray@1.0.0",
+                "json-stringify-safe": "npm:json-stringify-safe@5.0.1",
+                "qs": "npm:qs@6.3.0",
+                "http-signature": "npm:http-signature@1.1.1",
+                "har-validator": "npm:har-validator@2.0.6",
+                "forever-agent": "npm:forever-agent@0.6.1",
+                "node-uuid": "npm:node-uuid@1.4.7",
+                "oauth-sign": "npm:oauth-sign@0.8.2",
+                "aws-sign2": "npm:aws-sign2@0.6.0",
+                "hawk": "npm:hawk@3.1.3",
+                "caseless": "npm:caseless@0.11.0",
+                "mime-types": "npm:mime-types@2.1.12",
+                "tunnel-agent": "npm:tunnel-agent@0.4.3"
             }
         }
     }

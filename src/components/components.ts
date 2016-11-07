@@ -23,12 +23,13 @@ import ContactRequestMoney from './modals/contact-request-money/contact-request-
 import ContactSendMoney from './modals/contact-send-money/contact-send-money';
 import SecurityQuestions from './reset-pass/security-questions';
 import MessageDialog from './modals/message-dialog/message-dialog';
+import VerifyPhone from './modals/verify-phone/verify-phone';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
     LandingPage, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
-    SecurityQuestions, MessageDialog
+    SecurityQuestions, MessageDialog, VerifyPhone
 };
 
 export function initialize() {

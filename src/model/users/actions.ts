@@ -191,9 +191,7 @@ export const userActions = {
 
                 if (resp.rc === 1) {
                     for (var key in resp.profile) {
-                        if (!data[key]) {
-                            data[key] = resp.profile[key];
-                        }
+                        data[key] = resp.profile[key];
                     }
                     dispatch(userActions.getProfileSuccess(data));
                 } else {

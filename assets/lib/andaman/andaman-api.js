@@ -155,7 +155,7 @@ internals.API.prototype.upload_profile_pic = function (pipe, file, p_cb, cb) {
 	ctx.event = Event.UPLOAD_PROFILE_PIC;
 
 	send_file(pipe, ctx, file, p_cb, function () {
-		console.log('Sent the profile pic ');
+		//console.log('Sent the profile pic ');
 		// Listen in on the callback.
 		pipe.once(Event.UPLOAD_PROFILE_PIC_ACK, cb);
 	});
@@ -165,13 +165,13 @@ function send_file(pipe, ctx, file, p_cb, cb) {
 	var size = 48 * 1024;
 	pipe.sendfile(ctx, file, function (err, percent) {
 		if (err === Err.ok) {
-			console.log('xfer complete');
+			//console.log('xfer complete');
 			cb(null);
 		} else if (err === Err.again) {
-			console.log('continuing...');
+			//console.log('continuing...');
 			p_cb(percent)
 		} else if (err) {
-			console.log('xfer error', err);
+			//console.log('xfer error', err);
 			cb(err);
 		}
 	}, size);
@@ -464,7 +464,7 @@ internals.API.prototype.confirm_tfa_code = function (pipe, request, cb) {
  * @param request: idToken, code
  * @param cb
  */
-internals.API.prototype.check_tfa_code = function(pipe, request, cb) {
+internals.API.prototype.check_tfa_code = function (pipe, request, cb) {
 	pipe.emit(Event.CHECK_TFA_CODE, request);
 	pipe.once(Event.CHECK_TFA_CODE_ACK, cb);
 };
@@ -475,7 +475,7 @@ internals.API.prototype.check_tfa_code = function(pipe, request, cb) {
  * @param request: password, token, privateKey, publicKey
  * @param cb
  */
-internals.API.prototype.set_password_v2 = function(pipe, request, cb) {
+internals.API.prototype.set_password_v2 = function (pipe, request, cb) {
 	pipe.emit(Event.SSO_SET_PASSWORD_V2, request);
 	pipe.once(Event.SSO_SET_PASSWORD_V2_ACK, cb);
 };
@@ -581,6 +581,15 @@ internals.API.prototype.sso_reset_password_mail = function (pipe, request, cb) {
 	pipe.once(Event.SSO_RESET_PASSWORD_MAIL_ACK, cb);
 };
 
+internals.API.prototype.verify_phone = function (pipe, request, cb) {
+	pipe.emit(Event.VERIFY_PHONE, request);
+	pipe.once(Event.VERIFY_PHONE_ACK, cb);
+};
+
+internals.API.prototype.send_verification_sms = function (pipe, request, cb) {
+	pipe.emit(Event.SEND_VERIF_SMS, request);
+	pipe.once(Event.SEND_VERIF_SMS_ACK, cb);
+};
 
 internals.API.prototype._on = function (pipe, ev, cb) {
 	// register for the event

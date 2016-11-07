@@ -9,7 +9,7 @@
       "bs58check": "npm:bs58check@^1.2.0",
       "core-js": "npm:core-js@^2.4.1",
       "crypto-js": "npm:crypto-js@^3.1.8",
-      "moment-timezone": "npm:moment-timezone@^0.5.7",
+      "moment-timezone": "npm:moment-timezone@^0.5.9",
       "redux": "npm:redux@^3.6.0",
       "redux-thunk": "npm:redux-thunk@^2.1.0",
       "riot": "npm:riot@^2.6.5",
@@ -17,10 +17,10 @@
       "text": "github:systemjs/plugin-text@^0.0.9"
     },
     "devDependencies": {
-      "clean-css": "npm:clean-css@^3.4.18",
+      "clean-css": "npm:clean-css@^3.4.20",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17",
       "plugin-traceur": "npm:systemjs-plugin-traceur@^0.0.2",
-      "ts": "github:frankwallis/plugin-typescript@^5.2.7"
+      "ts": "github:frankwallis/plugin-typescript@^5.2.9"
     },
     "peerDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
@@ -88,7 +88,7 @@
           "test.js"
         ]
       },
-      "npm:lodash@4.16.5": {
+      "npm:lodash@4.16.6": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
@@ -116,7 +116,7 @@
           "stream-browserify": "^1.0.0"
         }
       },
-      "npm:typescript@2.0.6": {
+      "npm:typescript@2.0.7": {
         "browser": {},
         "map": {
           "buffer": "@empty",
@@ -140,6 +140,6 @@
     "merge-stream": "^1.0.0",
     "systemjs-builder": "^0.15.33",
     "tweetnacl-util": "^0.13.3",
-    "typescript": "^2.0.6"
+    "typescript": "^2.0.7"
   }
 }

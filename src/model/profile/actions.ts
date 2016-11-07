@@ -4,6 +4,7 @@
 import { PROFILE } from '../action-types';
 import ProfileService from './service';
 import CommonService from '../common/common-service';
+import { commonActions } from '../common/actions';
 
 export const profileActions = {
 
@@ -40,31 +41,31 @@ export const profileActions = {
     },
 
     updateAvatarSuccess(resp) {
-        return { type: PROFILE.UPDATE_AVATAR_SUCCESS, data: resp.token};
+        return { type: PROFILE.UPDATE_AVATAR_SUCCESS, data: resp.token };
     },
 
     updateAvatarFailed(resp) {
         return { type: PROFILE.UPDATE_AVATAR_FAILED, data: resp };
     },
 
-    updateProfile(params) {
+    updateProfile(dataType, params) {
         return (dispatch) => {
-            ProfileService.singleton().getUpdateProfile(params).then((resp: any) => {
+            ProfileService.singleton().updateProfile(params).then((resp: any) => {
                 if (resp.rc == 1) {
-                    dispatch(profileActions.updateProfileSuccess(params));
+                    dispatch(profileActions.updateProfileSuccess({ profile: resp.profile }));
                 } else {
-                    dispatch(profileActions.updateProfileFailed(resp));
+                    dispatch(profileActions.updateProfileFailed({ dataType, resp }));
                 }
             });
         };
     },
 
-    updateProfileSuccess(resp) {
-        return { type: PROFILE.UPDATE_PROFILE_SUCCESS, data: resp};
+    updateProfileSuccess(data) {
+        return { type: PROFILE.UPDATE_PROFILE_SUCCESS, data: data };
     },
 
-    updateProfileFailed(resp) {
-        return { type: PROFILE.UPDATE_PROFILE_FAILED, data: resp };
+    updateProfileFailed(data) {
+        return { type: PROFILE.UPDATE_PROFILE_FAILED, data: data };
     },
 
     getSSOKeypair(params) {
@@ -80,7 +81,7 @@ export const profileActions = {
     },
 
     getSSOKeypairSuccess(resp) {
-        return { type: PROFILE.GET_SSO_KEYPAIR_SUCCESS, data: resp};
+        return { type: PROFILE.GET_SSO_KEYPAIR_SUCCESS, data: resp };
     },
 
     getSSOKeypairFailed(resp) {
@@ -100,7 +101,7 @@ export const profileActions = {
     },
 
     changePasswordSuccess(resp) {
-        return { type: PROFILE.CHANGE_PASSWORD_SUCCESS, data: resp};
+        return { type: PROFILE.CHANGE_PASSWORD_SUCCESS, data: resp };
     },
 
     changePasswordFailed(resp) {
@@ -120,7 +121,7 @@ export const profileActions = {
     },
 
     enable2FASuccess(resp) {
-        return { type: PROFILE.ENABLE_2FA_SUCCESS, data: resp.info};
+        return { type: PROFILE.ENABLE_2FA_SUCCESS, data: resp.info };
     },
 
     enable2FAFailed(resp) {
@@ -140,7 +141,7 @@ export const profileActions = {
     },
 
     disable2FASuccess(resp) {
-        return { type: PROFILE.DISABLE_2FA_SUCCESS, data: resp};
+        return { type: PROFILE.DISABLE_2FA_SUCCESS, data: resp };
     },
 
     disable2FAFailed(resp) {
@@ -160,7 +161,7 @@ export const profileActions = {
     },
 
     confirm2FACodeSuccess(resp) {
-        return { type: PROFILE.CONFIRM_2FA_CODE_SUCCESS, data: resp};
+        return { type: PROFILE.CONFIRM_2FA_CODE_SUCCESS, data: resp };
     },
 
     confirm2FACodeFailed(resp) {
@@ -180,7 +181,7 @@ export const profileActions = {
     },
 
     enableFountainSuccess(resp) {
-        return { type: PROFILE.ENABLE_FOUNTAIN_SUCCESS, data: resp};
+        return { type: PROFILE.ENABLE_FOUNTAIN_SUCCESS, data: resp };
     },
 
     enableFountainFailed(resp) {
@@ -200,7 +201,7 @@ export const profileActions = {
     },
 
     updateFountainSuccess(resp) {
-        return { type: PROFILE.UPDATE_FOUNTAIN_SUCCESS, data: resp};
+        return { type: PROFILE.UPDATE_FOUNTAIN_SUCCESS, data: resp };
     },
 
     updateFountainFailed(resp) {
@@ -220,7 +221,7 @@ export const profileActions = {
     },
 
     disableFountainSuccess(resp) {
-        return { type: PROFILE.DISABLE_FOUNTAIN_SUCCESS, data: resp};
+        return { type: PROFILE.DISABLE_FOUNTAIN_SUCCESS, data: resp };
     },
 
     disableFountainFailed(resp) {
@@ -240,10 +241,52 @@ export const profileActions = {
     },
 
     getFountainSuccess(resp) {
-        return { type: PROFILE.GET_FOUNTAIN_SUCCESS, data: resp};
+        return { type: PROFILE.GET_FOUNTAIN_SUCCESS, data: resp };
     },
 
     getFountainFailed(resp) {
         return { type: PROFILE.GET_FOUNTAIN_FAILED, data: resp };
+    },
+
+    sendVerificationSms(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+            ProfileService.singleton().sendVerificationSms(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+                if (resp.rc == 1) {
+                    dispatch(profileActions.sendVerificationSmsSuccess(resp));
+                } else {
+                    dispatch(profileActions.sendVerificationSmsFailed(resp));
+                }
+            });
+        };
+    },
+    sendVerificationSmsSuccess(resp) {
+        return { type: PROFILE.SEND_VERIFICATION_SMS_SUCCESS, data: resp };
+    },
+
+    sendVerificationSmsFailed(resp) {
+        return { type: PROFILE.SEND_VERIFICATION_SMS_FAILED, data: resp };
+    },
+
+    verifyPhone(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+            ProfileService.singleton().verifyPhone(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+                if (resp.rc == 1) {
+                    dispatch(profileActions.verifyPhoneSuccess(resp));
+                } else {
+                    dispatch(profileActions.verifyPhoneFailed(resp));
+                }
+            });
+        };
+    },
+    verifyPhoneSuccess(resp) {
+        return { type: PROFILE.VERIFY_PHONE_SUCCESS, data: resp };
+    },
+
+    verifyPhoneFailed(resp) {
+        return { type: PROFILE.VERIFY_PHONE_FAILED, data: resp };
     },
 };

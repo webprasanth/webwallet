@@ -33,7 +33,7 @@ interface IAndaman {
     sso_get_keypair(pipe, params: {}, cb: (resp) => any);
     sso_change_password(pipe, params: {}, cb: (resp) => any);
     update_profile(pipe, params: {}, cb: (resp) => any);
-    upload_profile_pic(pipe, file: any, percentCb:(resp)=>any, doneCb:(resp)=>any);
+    upload_profile_pic(pipe, file: any, percentCb: (resp) => any, doneCb: (resp) => any);
     start_tfa_code(pipe, params: {}, cb: (resp) => any);
     turn_off_tfa(pipe, params: {}, cb: (resp) => any);
     confirm_tfa_code(pipe, params: {}, cb: (resp) => any);
@@ -42,6 +42,8 @@ interface IAndaman {
     enable_fountain(pipe, params: {}, cb: (resp) => any);
     disable_fountain(pipe, params: {}, cb: (resp) => any);
     get_my_fountain(pipe, params: {}, cb: (resp) => any);
+    verify_phone(pipe, params: { sms_code: string }, cb: (resp) => any);
+    send_verification_sms(pipe, params: { phone_number: string }, cb: (resp) => any);
 
     sso_reset_password_mail(pipe, params: {}, cb: (resp) => any);
     get_recovery_keys(pipe, params: {}, cb: (resp) => any);

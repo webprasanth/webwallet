@@ -12,6 +12,9 @@ import Premium from 'Premium';
 import { getUserKey, storeUserKey } from '../../../model/utils';
 import CryptoJS from 'crypto-js';
 import moment from 'moment-timezone';
+import { UPDATE_DATA_TYPE, UPDATE_DATA_FAILED } from '../../../model/profile/types';
+
+let tag = null;
 
 @template(UserInfoTemplate)
 export default class UserInfo extends BaseElement {
@@ -20,14 +23,18 @@ export default class UserInfo extends BaseElement {
     private isEditingName: boolean = false;
     private isEditingPass: boolean = false;
     private isSelectingTimezone: boolean = false;
+    private isEditingPhone: boolean = false;
     private timezones = null;
     private userKey: any = null;
     private currentPassword: string = null;
     private newPassword: string = null;
     private confirmPassword: string = null;
     private encryptedPrivateKey: string = null;
-    
+    private phone: string = null;
+    private phoneErrorMessage: string = null;
+
     mounted() {
+        tag = this;
         this.userProfile = store.getState().userData.user;
         store.subscribe(this.onApplicationStateChanged.bind(this));
 
@@ -45,6 +52,16 @@ export default class UserInfo extends BaseElement {
                 this.userProfile = state.userData.user;
                 this.onCancel();
                 break;
+            case PROFILE.UPDATE_PROFILE_FAILED:
+                if (state.lastAction.data.dataType == UPDATE_DATA_TYPE.PHONE) {
+                    if (state.lastAction.data.resp == UPDATE_DATA_FAILED.PHONE_NUMBER_IN_USED) {
+                        super.showError('Error when updating phone number', 'This phone number has already been in use by another account.');
+                    } else {
+                        super.showError('', state.lastAction.data.resp.reason);
+                    }
+                }
+                this.onCancel();
+                break;
             case PROFILE.CHANGE_PASSWORD_SUCCESS:
                 this.userKey.encryptedPrivKey = this.encryptedPrivateKey;
                 this.encryptedPrivateKey = null;
@@ -58,6 +75,15 @@ export default class UserInfo extends BaseElement {
                 this.userKey.encryptedPrivKey = data.keypair.privateKey;
                 this.checkAndChangePassword();
                 break;
+            case PROFILE.SEND_VERIFICATION_SMS_SUCCESS:
+                super.showMessage('', 'A verification code has been sent to your phone.', (result) => {
+                    if (result) {
+                        riot.mount('#general-purpose-overlay', 'verify-phone');
+                    }
+                });
+                break;
+            case PROFILE.SEND_VERIFICATION_SMS_FAILED:
+                super.showError('', 'Send verification sms failed!');
             default:
                 break;
         }
@@ -69,6 +95,7 @@ export default class UserInfo extends BaseElement {
         this.isEditingName = false;
         this.isEditingPass = false;
         this.isSelectingTimezone = false;
+        tag.isEditingPhone = false;
     }
 
     onEditName() {
@@ -83,7 +110,7 @@ export default class UserInfo extends BaseElement {
             let account = {
                 display_name: displayName
             };
-            store.dispatch(profileActions.updateProfile(account));
+            store.dispatch(profileActions.updateProfile(UPDATE_DATA_TYPE.NAME, account));
         }
     }
 
@@ -99,7 +126,7 @@ export default class UserInfo extends BaseElement {
                 timezone: selectedTimezone
             };
 
-            store.dispatch(profileActions.updateProfile(params));
+            store.dispatch(profileActions.updateProfile(UPDATE_DATA_TYPE.TIME_ZONE, params));
         }
     }
 
@@ -170,6 +197,48 @@ export default class UserInfo extends BaseElement {
         };
 
         store.dispatch(profileActions.changePassword(params));
+    }
+
+    onEditPhone() {
+        tag.isEditingPhone = true;
+        tag.update();
+        $("#phone-number").focus((event) => {
+            tag.phoneErrorMessage = null;
+            tag.update();
+        });
+        $("#phone-number").intlTelInput({ utilsScript: "assets/lib/intl-tel-input/utils.js" });
+        $("#phone-number").intlTelInput("setNumber", this.userProfile.phone);
+    }
+
+    onSavePhone() {
+        let phone = $("#phone-number").intlTelInput("getNumber");
+
+        if (phone == "" || phone == this.userProfile.phone) {
+            tag.isEditingPhone = false;
+            return;
+        }
+
+        if (!$("#phone-number").intlTelInput("isValidNumber")) {
+            tag.phoneErrorMessage = "The phone number is invalid.";
+            return;
+        }
+
+        let params = {
+            phone: phone
+        }
+
+        store.dispatch(profileActions.updateProfile(UPDATE_DATA_TYPE.PHONE, params));
+
+    }
+
+    resendSms() {
+        tag.phone = this.userProfile.phone;
+        tag.phone = tag.phone.replace(/-/g, '');
+        tag.phone = tag.phone.replace(/ /g, '');
+
+        if (tag.phone.length != 0) {
+            store.dispatch(profileActions.sendVerificationSms({ phone_number: tag.phone }));
+        }
     }
 
     initTimezone() {

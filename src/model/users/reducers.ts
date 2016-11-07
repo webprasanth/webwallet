@@ -1,6 +1,6 @@
 import { USERS, PROFILE } from '../action-types';
 
-export default function userReducer(state = { user: null, wallets: [], loginData: null, signupData: null}, action) {
+export default function userReducer(state = { user: null, wallets: [], loginData: null, signupData: null }, action) {
     let oldProfile = null;
     let newProfile = null;
 
@@ -22,6 +22,7 @@ export default function userReducer(state = { user: null, wallets: [], loginData
             oldProfile.totp_enabled = 0;
             return Object.assign({}, state, { user: oldProfile });
         case PROFILE.UPDATE_PROFILE_SUCCESS:
+            return Object.assign({}, state, { user: action.data.profile });
         case USERS.GET_PROFILE_SUCCESS:
             oldProfile = state.user;
             newProfile = Object.assign({}, oldProfile, action.data);

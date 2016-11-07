@@ -11,7 +11,7 @@ export default class ProfileService {
         return ProfileService._instance;
     }
 
-    getUpdateProfile(params) {
+    updateProfile(params) {
         return new Promise((resolve, reject) => {
             AndamanService.ready().then(opts => {
                 let andaman = opts.andaman;
@@ -26,11 +26,11 @@ export default class ProfileService {
 
     updateAvatar(file) {
         return new Promise((resolve, reject) => {
-            let percentCb = function(resp) {
+            let percentCb = function (resp) {
                 // TODO babv implement
             }
 
-            let doneCb = function(resp) {
+            let doneCb = function (resp) {
                 // TODO babv implement
                 resolve(resp);
             }
@@ -154,6 +154,32 @@ export default class ProfileService {
                 let pipe = opts.pipe;
 
                 andaman.get_my_fountain(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    verifyPhone(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.verify_phone(pipe, params, resp => {
+                    resolve(resp);
+                });
+            })
+        });
+    }
+
+    sendVerificationSms(params) {
+        return new Promise((resolve, reject) => {
+            AndamanService.ready().then(opts => {
+                let andaman = opts.andaman;
+                let pipe = opts.pipe;
+
+                andaman.send_verification_sms(pipe, params, resp => {
                     resolve(resp);
                 });
             })

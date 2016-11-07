@@ -2,6 +2,7 @@ import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import MessageDialogTemplate from './message-dialog.html!text';
 
+let tag = null;
 @template(MessageDialogTemplate)
 export default class MessageDialog extends Element {
 
@@ -19,12 +20,13 @@ export default class MessageDialog extends Element {
     }
 
     mounted() {
+        tag = this;
         $('#messageDialog').modal('show');
     }
 
     onYes(event: Event) {
-        if (this.opts.callback) {
-            this.opts.callback(1);
+        if (tag.opts.callback) {
+            tag.opts.callback(1);
         }
     }
 
