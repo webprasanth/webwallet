@@ -4,6 +4,7 @@ import { userActions } from '../../model/users/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
 import { USERS } from '../../model/action-types';
+import { COMMON } from '../../model/action-types';
 import { decimalFormat } from '../../model/utils';
 
 @template(HomeHeaderTemplate)
@@ -26,9 +27,16 @@ export default class HomeHeader extends Element {
 
     onApplicationStateChanged() {
         let state: ApplicationState = store.getState();
-
-        if (state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
-            this.balance = state.lastAction.data;
+  
+        switch (state.lastAction.type) {
+            case USERS.GET_BALANCE_SUCCESS:
+                this.balance = state.lastAction.data;
+                break;
+            case COMMON.ON_NEW_TX_ADDED:
+                store.dispatch(userActions.getBalance());
+                break;
+            default:
+                break;
         }
 
         this.update();

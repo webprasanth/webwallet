@@ -277,18 +277,6 @@ internals.API.prototype.send_verification_sms = function (pipe, request, cb) {
 	pipe.once(Event.SEND_VERIF_SMS_ACK, cb);
 };
 
-internals.API.prototype.add_session_token_listener = function (pipe, callback) {
-	pipe.removeAllListeners(Event.SESSION_TOKEN_RECV);
-	pipe.on(Event.SESSION_TOKEN_RECV, function (response) {
-		//set_session_token(response, callback);
-	});
-};
-
-internals.API.prototype.add_session_invalid_listener = function (pipe, callback) {
-	pipe.removeAllListeners(Event.SESSION_INVALID);
-	this._on(pipe, Event.SESSION_INVALID, callback);
-};
-
 /**
  * @param: to, amount, note, bare_uid
  */
@@ -610,6 +598,27 @@ internals.API.prototype._on = function (pipe, ev, cb) {
 
 		pipe.on(ev, listener);
 	}
+};
+
+// Listen to server events
+internals.API.prototype.add_session_invalid_listener = function (pipe, callback) {
+	pipe.removeAllListeners(Event.SESSION_INVALID);
+	pipe.on(Event.SESSION_INVALID, callback);
+};
+
+internals.API.prototype.add_listener_add_txn = function (pipe, callback) {
+	pipe.removeAllListeners(Event.KEYS_ADD_TXN_LOG_RECV);
+	pipe.on(Event.KEYS_ADD_TXN_LOG_RECV, callback);
+};
+
+internals.API.prototype.add_listener_request_money = function (pipe, callback) {
+	pipe.removeAllListeners(Event.KEYS_ADD_MONEY_REQ_RECV);
+	pipe.on(Event.KEYS_ADD_MONEY_REQ_RECV, callback);
+};
+
+internals.API.prototype.add_listener_mark_money_requests = function (pipe, callback) {
+	pipe.removeAllListeners(Event.KEYS_MARK_MONEY_REQ_RECV);
+	pipe.on(Event.KEYS_MARK_MONEY_REQ_RECV, callback);
 };
 
 var ROSTER_OP = {

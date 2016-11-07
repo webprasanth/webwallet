@@ -1,5 +1,6 @@
 import { COMMON } from '../action-types';
 import CommonService from './common-service';
+import store from '../../model/store';
 
 export const commonActions = {
     toggleLoading(isLoading) {
@@ -22,5 +23,28 @@ export const commonActions = {
     getWalletsByEmailFailed(resp) {
         return { type: COMMON.GET_WALLETS_BY_EMAIL_FAILED, data: resp };
     },
+
+    addListeners() {
+        CommonService.singleton().onTxAdded(commonActions.onTxAdded);
+        CommonService.singleton().onSessionExpired(commonActions.onSessionExpired);
+        CommonService.singleton().onBeRequested(commonActions.onBeRequested);
+        CommonService.singleton().onRequestStateChanged(commonActions.onRequestStateChanged);
+    },
+
+    onTxAdded(resp) {
+        store.dispatch({type: COMMON.ON_NEW_TX_ADDED, data: resp });
+    },
+
+    onSessionExpired(resp) {
+        store.dispatch({ type: COMMON.ON_SESSION_EXPIRED, data: resp });
+    },
+
+    onBeRequested(resp) {
+        store.dispatch({ type: COMMON.ON_BE_REQUESTED, data: resp });
+    },
+
+    onRequestStateChanged(resp) {
+        store.dispatch({ type: COMMON.ON_REQUEST_STATE_CHANGED, data: resp });
+    }
 
 };

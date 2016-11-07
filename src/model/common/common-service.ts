@@ -36,4 +36,41 @@ export default class CommonService {
             })
         });
     }
+
+    // New transaction added handler
+    onTxAdded(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_listener_add_txn(pipe, cb);
+        });
+    }
+
+    onSessionExpired(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_session_invalid_listener(pipe, cb);
+        });
+    }
+
+    onBeRequested(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_listener_request_money(pipe, cb);
+        });
+    }
+
+    onRequestStateChanged(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_listener_mark_money_requests(pipe, cb);
+        });
+    }
 }

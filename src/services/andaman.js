@@ -43,6 +43,14 @@ module.exports = {
                 secretKey: clt_priv_p,
             });
 
+            customEventPipe.removeAllListeners = function (e) {
+                eventPipe.removeAllListeners(e);
+            };
+
+            customEventPipe.on = function (e, fn) {
+                eventPipe.on(e, fn);
+            };
+
             customEventPipe.emit = function (e, payload) {
                 payload.sessionToken = this.session_token;
                 payload.auth_version = this.auth_version;

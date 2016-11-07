@@ -2,6 +2,7 @@ import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
+import { COMMON } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
 import { getDisplayDate, decimalFormat } from '../../model/utils';
 import { FCEvent } from '../../model/types';
@@ -139,6 +140,8 @@ export default class HomeActivity extends Element {
             this.loadTxns();
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
             riot.mount('#transaction-detail', 'transaction-details');
+        } else if (type == COMMON.ON_NEW_TX_ADDED) {
+            this.loadTxns();
         }
         this.update();
     }

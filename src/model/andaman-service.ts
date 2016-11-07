@@ -46,6 +46,12 @@ interface IAndaman {
     sso_reset_password_mail(pipe, params: {}, cb: (resp) => any);
     get_recovery_keys(pipe, params: {}, cb: (resp) => any);
     sso_reset_password(pipe, params: {}, cb: (resp) => any);
+
+    // Listen to server event
+    add_session_invalid_listener(pipe, cb: (resp) => any);
+    add_listener_add_txn(pipe, cb: (resp) => any);
+    add_listener_request_money(pipe, cb: (resp) => any);
+    add_listener_mark_money_requests(pipe, cb: (resp) => any);
 }
 
 export default class AndamanService {
