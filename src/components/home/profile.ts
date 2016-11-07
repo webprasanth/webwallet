@@ -29,7 +29,6 @@ export default class HomeProfile extends Element {
     }
 
     onTabSelect(tab) {
-
         if (tab == 'profile') {
             this.isProfile = true;
             this.isSetting = false;
@@ -42,6 +41,6 @@ export default class HomeProfile extends Element {
             this.isProfile = false;
             this.isSetting = false;
             this.isFountain = true;
-        } 
+        }
     }
 }

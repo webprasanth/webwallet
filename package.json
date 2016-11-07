@@ -12,7 +12,7 @@
       "moment-timezone": "npm:moment-timezone@^0.5.9",
       "redux": "npm:redux@^3.6.0",
       "redux-thunk": "npm:redux-thunk@^2.1.0",
-      "riot": "npm:riot@^2.6.5",
+      "riot": "npm:riot@^2.6.7",
       "secrets.js-grempe": "npm:secrets.js-grempe@^1.1.0",
       "text": "github:systemjs/plugin-text@^0.0.9"
     },

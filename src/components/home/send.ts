@@ -106,6 +106,15 @@ export default class HomeSend extends BaseElement {
             return;
         }
 
+        if (utils.isValidFlashAddress($('#to-email-id').val())) {
+            if (store.getState().userData.user.phone_verified == 0) {
+                super.showMessage('', 'You need to provide and verify your phone number.', () => {
+                    riot.route('profile');
+                });
+                return;
+            }
+        }
+
         let amount = $('#amount-input').val();
         amount = utils.toOrginalNumber(amount);
         let fee = utils.calcFee(amount);
