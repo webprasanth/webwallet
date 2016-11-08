@@ -104,7 +104,7 @@ export default class HomePending extends Element {
         let state = store.getState();
         let data = state.pendingData;
         let type = state.lastAction.type;
-
+        console.log('pending type=', type);
         if (type == PENDING.GET_MORE_REQUEST_SUCCESS) {
             this.buildPagination();
             this.money_requests = data.money_requests;

@@ -29,14 +29,12 @@ export default class HomePage extends Element {
 
     constructor() {
         super();
-
         this.initialize();
     }
 
     initialize() {
         this.route((action) => {
             let mainContent = document.querySelector('#main-content');
-
             switch (action) {
                 case 'activity':
                 case 'send':

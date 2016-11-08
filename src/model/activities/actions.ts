@@ -42,8 +42,7 @@ export const activityActions = {
                     let txData: any = ActivityService.singleton().convertToTnx(resp.transaction);
                     txData.meta = txn;
                     dispatch(activityActions.getTransactionDetailSuccess(txData));
-                }
-                else {
+                } else {
                     dispatch(activityActions.getTransactionDetailFailed(resp));
                 }
             });

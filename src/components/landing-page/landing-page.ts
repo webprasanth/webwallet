@@ -10,6 +10,7 @@ import BaseElement from '../base-element';
 import { USERS } from '../../model/action-types';
 import * as utils from '../../model/utils';
 
+let tag = null;
 @template(LandingPageTemplate)
 export default class LandingPage extends BaseElement {
 
@@ -22,6 +23,7 @@ export default class LandingPage extends BaseElement {
     }
 
     mounted() {
+        tag = this;
         this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.loadLazyImage();
         this.initLandingPage();
@@ -47,7 +49,6 @@ export default class LandingPage extends BaseElement {
                 this.isVerifyEmailSent = true;
                 break;
             case USERS.SIGNUP_FAILED:
-                super.showError('Error', 'Signup failed');
                 this.onSignupFail(data.signupData);
                 break;
             case USERS.SSO_LOGIN_SUCCESS:
@@ -69,9 +70,9 @@ export default class LandingPage extends BaseElement {
         if (event.keyCode == 13) {
             this.onLoginButtonClick(event);
             return false;
-         } 
+        }
 
-         return true;
+        return true;
     }
 
     onLoginButtonClick(event: Event) {
@@ -178,6 +179,12 @@ export default class LandingPage extends BaseElement {
             return;
         }
 
+        let location = utils.getLocation();
+        if (location.info.country_code == "US" && location.info.region_code == "NY") {
+            super.showError('', 'Sorry, not currently available to New York residents');
+            return;
+        }
+
         var name: string = $('#firstname').val().trim() + ' ' + $('#lastname').val().trim();
         let email: string = $("#email-signup").val().trim();
         let appId: string = 'unity';
@@ -199,7 +206,7 @@ export default class LandingPage extends BaseElement {
         grecaptcha.reset(this.captchaId);
 
         if (resp.status == 'EMAIL_IN_USED') {
-            super.showError('', 'An user with this email already exists');
+            super.showError('Error', 'An user with this email already exists');
         } else if (resp.status == 'RECAPTCHA_NOT_VERIFIED') {
             super.showError('', 'Please verify that you are not a robot');
         } else {
@@ -261,6 +268,10 @@ export default class LandingPage extends BaseElement {
         event.stopPropagation();
 
         riot.mount('#main', 'submit-email');
+    }
+
+    onCreateWalletBtnClick() {
+        tag.isVerifyEmailSent = false;
     }
 }
 

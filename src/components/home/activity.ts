@@ -126,7 +126,7 @@ export default class HomeActivity extends Element {
         var state = store.getState();
         var data = state.activityData;
         var type = state.lastAction.type;
-
+        console.log('activity type=', type);
         if (type == ACTIVITIES.GET_MORE_TXN_SUCCESS) {
             this.buildPagination();
             this.txns = data.txns;

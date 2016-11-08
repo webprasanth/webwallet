@@ -9,6 +9,7 @@ import BaseElement from '../base-element';
 import { USERS } from '../../model/action-types';
 import * as utils from '../../model/utils';
 
+let tag = null;
 @template(SetupPasswordTemplate)
 export default class SetupPassword extends BaseElement {
 
@@ -37,8 +38,11 @@ export default class SetupPassword extends BaseElement {
     ];
 
     mounted() {
+        tag = this;
         this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.token = riot.route.query().token;
+        $('#fcpassword').on("change keyup", this.onPasswordChanged);
+        $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged);
     }
 
     unmounted() {
@@ -48,13 +52,13 @@ export default class SetupPassword extends BaseElement {
         }
     }
 
-    checkSecureQuestion () {
-        var questionA = $('#questionA').val();
-        var questionB = $('#questionB').val();
-        var questionC = $('#questionC').val();
-        var answerA   = $('#answerA').val();
-        var answerB   = $('#answerB').val();
-        var answerC   = $('#answerC').val();
+    checkSecureQuestion() {
+        let questionA = $('#questionA').val();
+        let questionB = $('#questionB').val();
+        let questionC = $('#questionC').val();
+        let answerA = $('#answerA').val();
+        let answerB = $('#answerB').val();
+        let answerC = $('#answerC').val();
 
         if (!questionA || !questionB || !questionC || !answerA || !answerB || !answerC) {
             this.sesureMsg = 'All security question is required to recover passowd and coin in case you foget your passowd';
@@ -90,58 +94,58 @@ export default class SetupPassword extends BaseElement {
         let questionA: string = $('#questionA').val();
         let questionB: string = $('#questionB').val();
         let questionC: string = $('#questionC').val();
-        let answerA: string   = $('#answerA').val();
-        let answerB: string   = $('#answerB').val();
-        let answerC: string   = $('#answerC').val();
-        let answers   = [answerA, answerB, answerC];
+        let answerA: string = $('#answerA').val();
+        let answerB: string = $('#answerB').val();
+        let answerC: string = $('#answerC').val();
+        let answers = [answerA, answerB, answerC];
 
         store.dispatch(userActions.setPassword(this.token, password, questionA, answerA, questionB, answerB, questionC, answerC));
     }
 
     onRePasswordChanged() {
-        this.strengthMsg = null;
+        tag.strengthMsg = null;
         let password = $('#fcpassword').val();
         let newValue = $('#repeat_fcpassword').val();
 
-        if(newValue !== '' && newValue !== password) {
-            this.retypedMsg = 'Re-typed password is not correct.';
+        if (newValue !== '' && newValue !== password) {
+            tag.retypedMsg = 'Re-typed password is not correct.';
         } else {
-            this.retypedMsg = null;
+            tag.retypedMsg = null;
         }
     }
 
     onPasswordChanged() {
-        let newValue: string  = $('#fcpassword').val();
-        this.retypedMsg = null;
-        
+        let newValue: string = $('#fcpassword').val();
+        tag.retypedMsg = null;
+
         if (!newValue || newValue.length == 0) {
-            this.strengthMsg = null;
-            return;
-        }
+            tag.strengthMsg = null;
+        } else {
+            let strength: number = utils.calcPasswordStreng(newValue);
+            let msg = "Too short";
+            tag.strengthColor = 'red';
 
-        let strength: number = utils.calcPasswordStreng(newValue);
-        let msg = "Too short";
-        this.strengthColor = 'red';
+            // Now we have calculated strength value, we can return messages
+            if (strength < 1) {
+                msg = "Your password is too short";
+                tag.strengthColor = 'red';
+            }
+            else if (strength < 2) {
+                msg = "Your password is weak";
+                tag.strengthColor = 'orange';
+            }
+            else if (strength == 2) {
+                msg = "Your password is medium";
+                tag.strengthColor = 'green';
+            }
+            else {
+                msg = "Your password is strong";
+                tag.strengthColor = 'blue';
+            }
 
-        // Now we have calculated strength value, we can return messages
-        if (strength < 1) {
-            msg = "Your password is too short";
-            this.strengthColor = 'red';
+            tag.strengthMsg = msg;
         }
-        else if (strength < 2) {
-            msg = "Your password is weak";
-            this.strengthColor = 'orange';
-        }
-        else if (strength == 2) {
-            msg = "Your password is medium";
-            this.strengthColor = 'green';
-        }
-        else {
-            msg = "Your password is strong";
-            this.strengthColor = 'blue';
-        }
-
-        this.strengthMsg = msg;
+        tag.update();
     }
 
     onApplicationStateChanged() {
@@ -157,7 +161,7 @@ export default class SetupPassword extends BaseElement {
 
                 if (resp.status == 'CAS_FAILED') {
                     message = 'Failed to set password. Authentication Service returned an error. Please try again';
-                } else if (resp.status == 'INVALID_TOKEN'){
+                } else if (resp.status == 'INVALID_TOKEN') {
                     message = 'Email address verification token invalid or expired. Please sign up again from scratch';
                 } else {
                     message = 'Failed to set password. Authentication Service returned an error. Please try again';
