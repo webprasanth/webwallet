@@ -131,19 +131,19 @@
 
 			<div class="inforItems col-xs-12" id="profile-phone">
 				<div class="item-title col-xs-4 hidden-xs-small">Phone number</div>
-				<div if={!isEditingPhone}>
+				<div if={!isEditingPhone} >
 					<div class="item-data col-xs-6">
-						<p class="trans-name">{userProfile.phone?userProfile.phone:"Haven't been set up"}</p>
+						<p class="trans-phone">{userProfile.phone?userProfile.phone:"Haven't been set up"}</p>
 					</div>
-					<div class="item-control col-xs-2 text-right">
+					<div class="item-control col-xs-2 text-right icon-line">
 						<span show={userProfile.phone_verified} class="glyphicon glyphicon-ok verified_email"></span>
-						<a show="{userProfile.phone && !userProfile.phone_verified}" onclick="{resendSms}">Verify</a>
 						<a id="change-phone-icon" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditPhone}></a>
+						<a class="glyphicon glyphicon-check" show="{userProfile.phone && !userProfile.phone_verified}" onclick="{resendSms}"></a>
 					</div>
 				</div>
-				<div if={isEditingPhone} class="col-xs-8 item-data edit-form">
+				<div if={isEditingPhone} class="col-xs-8 edit-form">
 					<div class="input-group phone-number-outbox">
-						<input type="tel" id="phone-number" placeholder={userProfile.phone} onenter={onSavePhone}/>
+						<input class="_input profile-input form-control" type="tel" id="phone-number" placeholder={userProfile.phone} onenter={onSavePhone}/>
 						<div id="on-save-phone" class="input-group-addon" onclick={onSavePhone}>
 							<a class="glyphicon glyphicon-ok">
 							</a>

@@ -470,7 +470,16 @@ h5.title-table{
 .myaccount-page .profile-setting .inforItems{
     margin-bottom: 10px;
     padding: 0 10px;
-    }
+}
+.myaccount-page #profile-phone .input-group .intl-tel-input{
+    width: 100%;
+}
+.myaccount-page #profile-phone .input-group .form-control:last-child{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
 .myaccount-page .box-content{
     padding-top: 15px;
 }
@@ -514,14 +523,27 @@ h5.title-table{
 }
 .myaccount-page .fountain-content .form-input input{width: 98%}
 .myaccount-page .inforItems .item-control a.glyphicon{
-        font-size: 12pt;
-        top: 1px;
-        padding: 3px;
-        border: 1px solid #BB7600;
-        border-radius: 3px;
-        color: rgba(240, 149, 0, 0.87);
-        cursor: pointer;
-    }
+    font-size: 12pt;
+    top: 1px;
+    padding: 3px;
+    border: 1px solid #BB7600;
+    border-radius: 3px;
+    color: rgba(240, 149, 0, 0.87);
+    cursor: pointer;
+}
+.myaccount-page .inforItems .item-control a.glyphicon.glyphicon-check{
+    color: #008000;
+    border-color: #078337;
+    margin-left: 5px;
+}
+.icon-line{
+    display: flex;
+    justify-content: flex-end;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;
+}
 /*Upload Avatar*/
 .myaccount-page .imageBox {
     position: relative;
