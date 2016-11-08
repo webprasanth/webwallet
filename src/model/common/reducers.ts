@@ -8,7 +8,8 @@ export default function commonReducer(state = { isLoading: false, errorContent: 
         case COMMON.ON_SESSION_EXPIRED:
         case COMMON.ON_BE_REQUESTED:
         case COMMON.ON_REQUEST_STATE_CHANGED:
-            return action.data;
+        case COMMON.NEED_UPDATE_BALANCE:
+            return Object.assign({}, state, { notificationData: action.data });
         default:
             return state;
     }

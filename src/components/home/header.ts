@@ -27,13 +27,17 @@ export default class HomeHeader extends Element {
 
     onApplicationStateChanged() {
         let state: ApplicationState = store.getState();
+        let self = this;
   
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
                 break;
-            case COMMON.ON_NEW_TX_ADDED:
-                store.dispatch(userActions.getBalance());
+            case COMMON.NEED_UPDATE_BALANCE:
+                setTimeout(function() {
+                    store.dispatch(userActions.getBalance());
+                    self.showNotification();
+                }, 2000);
                 break;
             default:
                 break;
@@ -42,11 +46,37 @@ export default class HomeHeader extends Element {
         this.update();
     }
 
+    showNotification() {
+        let message = null;
+        let state = store.getState();
+        let note = state.commonData.notificationData;
+        let user = state.userData.user;
+
+        if (note.sender_email == store.getState().userData.user.email) {
+            if (note.transaction_type == 'like') {
+                message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward"; 
+            } else {
+                message = "One of your fountain(s) has just dispensed " + decimalFormat(note.amount) + " tokens to " + note.recipientEmail;
+            }
+        } else {
+            message = note.sender_email + " sent you " + decimalFormat(note.amount) + " Flash Coin";
+        }
+
+        $.notify(message, "success");
+
+        //Mp3 sound audio HTML5
+        var embed = '<audio id="audio"><source src="assets/sound/money.mp3" type="audio/mpeg"></audio>';
+        $("#sound").html(embed);
+        document.getElementById("audio").play();
+    }
+
     onLogoutButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
 
-        store.dispatch(userActions.logout());
+        // TODO babv need to uncomment this and find out the reason on double event
+        // store.dispatch(userActions.logout());
+        document.location.href = '/';
     }
 
 
