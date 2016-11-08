@@ -12,4 +12,10 @@ export default class ErrorAlert extends Element {
         $('#errorModal').modal('show');
     }
 
+    onOk(event: Event) {
+        if (this.opts.callback) {
+            this.opts.callback();
+        }
+    }
+
 }

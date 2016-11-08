@@ -1,4 +1,5 @@
-import { template, Element } from '../riot-ts';
+import { template } from '../riot-ts';
+import BaseElement from '../base-element';
 import store, { ApplicationState } from '../../model/store';
 import { userActions } from '../../model/users/actions';
 import HomeHeaderTemplate from './header.html!text';
@@ -8,7 +9,7 @@ import { COMMON } from '../../model/action-types';
 import { decimalFormat } from '../../model/utils';
 
 @template(HomeHeaderTemplate)
-export default class HomeHeader extends Element {
+export default class HomeHeader extends BaseElement {
     public userEmail: string = store.getState().userData.user.email;
     public avatarUrl: string = null;
     private balance = 0;
@@ -38,6 +39,10 @@ export default class HomeHeader extends Element {
                     store.dispatch(userActions.getBalance());
                     self.showNotification();
                 }, 2000);
+                break;
+            case COMMON.ON_SESSION_EXPIRED:
+                let message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
+                super.showError('', message, function() {document.location.href = '/';})
                 break;
             default:
                 break;
