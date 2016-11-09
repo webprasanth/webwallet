@@ -52,8 +52,10 @@ export default class HomeHeader extends BaseElement {
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
             case COMMON.ON_BE_REQUESTED:
-                message = note.email_sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
-                $.notify(message, "info");
+                if (note.email_sender) {
+                    message = note.email_sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                    $.notify(message, "info");
+                }
             default:
                 break;
         }
@@ -69,6 +71,7 @@ export default class HomeHeader extends BaseElement {
         switch (note.status) {
             case 1:
                 message = "One request of yours has been paid";
+                this.playImcomingSound();
                 break;
             case 2:
                 message = "One request of yours has been rejected";
@@ -91,7 +94,7 @@ export default class HomeHeader extends BaseElement {
         let note = state.commonData.notificationData;
         let user = state.userData.user;
 
-        if (!note.sender_email) {
+        if (!note || !note.sender_email) {
             // Check server side
             console.error('Notification is invalid:', note);
             return;
@@ -108,10 +111,14 @@ export default class HomeHeader extends BaseElement {
         }
 
         $.notify(message, "info");
+        this.playImcomingSound();
+    }
 
+    playImcomingSound() {
         //Mp3 sound audio HTML5
         var embed = '<audio id="audio"><source src="assets/sound/money.mp3" type="audio/mpeg"></audio>';
         $("#sound").html(embed);
+        document.getElementById("audio").play();
     }
 
     onLogoutButtonClick(event: Event) {
