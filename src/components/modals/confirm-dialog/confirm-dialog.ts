@@ -4,10 +4,10 @@ import ConfirmDialogTemplate from './confirm-dialog.html!text';
 
 @template(ConfirmDialogTemplate)
 export default class ConfirmDialog extends Element {
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -19,6 +19,8 @@ export default class ConfirmDialog extends Element {
     }
 
     mounted() {
+        if (ConfirmDialog.unsubscribe) ConfirmDialog.unsubscribe();
+        ConfirmDialog.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#confirmDialog').modal('show');
     }
 

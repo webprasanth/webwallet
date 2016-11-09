@@ -17,10 +17,10 @@ export default class ContactRequestMoney extends BaseElement {
     private formatCurrency = utils.formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
     private errorMessage = null;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -39,6 +39,8 @@ export default class ContactRequestMoney extends BaseElement {
     }
 
     mounted() {
+        if (ContactRequestMoney.unsubscribe) ContactRequestMoney.unsubscribe();
+        ContactRequestMoney.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#requestByContact').modal('show');
         $('#contact-request-amount').keypress(utils.filterNumberEdit);
         $('#contact-request-amount').blur(utils.formatAmountInput);

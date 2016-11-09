@@ -16,10 +16,12 @@ export default class AccountSetting extends BaseElement {
     private accountType = null;
     private publicKeyList = [];
     private is2FA: boolean = false;
+    private static unsubscribe = null;
 
     mounted() {
         this.userProfile = store.getState().userData.user;
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (AccountSetting.unsubscribe) AccountSetting.unsubscribe();
+        AccountSetting.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.is2FA = false;
         this.getWallet();
     }

@@ -84,6 +84,7 @@ export class MainHeader extends Element {
 
 @template(MainNavBarTemplate)
 export class MainNavBar extends Element {
+    private static unsubscribe = null;
     state: ApplicationState = <any>{ tabData: { tabs: [] } };
 
     constructor() {
@@ -94,7 +95,8 @@ export class MainNavBar extends Element {
         this.state = store.getState();
         this.update();
 
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (MainNavBar.unsubscribe) MainNavBar.unsubscribe();
+        MainNavBar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {

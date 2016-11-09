@@ -17,6 +17,7 @@ export default class LandingPage extends BaseElement {
     private subscribeFunc = null;
     private captchaId: string = null;
     private isVerifyEmailSent: boolean = false;
+    private static unsubscribe = null;
 
     constructor() {
         super();
@@ -24,19 +25,13 @@ export default class LandingPage extends BaseElement {
 
     mounted() {
         tag = this;
-        this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (LandingPage.unsubscribe) LandingPage.unsubscribe();
+        LandingPage.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.loadLazyImage();
         this.initLandingPage();
         this.renderCaptcha();
 
         commonActions.addListeners();
-    }
-
-    unmounted() {
-        if (this.subscribeFunc) {
-            this.subscribeFunc();
-            this.subscribeFunc = null;
-        }
     }
 
     onApplicationStateChanged() {

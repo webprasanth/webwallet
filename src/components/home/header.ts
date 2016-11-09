@@ -15,10 +15,12 @@ export default class HomeHeader extends BaseElement {
     public avatarUrl: string = null;
     private balance = 0;
     private decimalFormat = decimalFormat;
+    private static unsubscribe = null;
 
     mounted() {
         let state = store.getState();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (HomeHeader.unsubscribe) HomeHeader.unsubscribe();
+        HomeHeader.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         store.dispatch(userActions.getBalance());
 
         let user = store.getState().userData.user;
@@ -32,25 +34,25 @@ export default class HomeHeader extends BaseElement {
         let self = this;
         let message = '';
         let note = state.commonData.notificationData;
-  
+
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
                 break;
             case COMMON.NEED_UPDATE_BALANCE:
-                setTimeout(function() {
+                setTimeout(function () {
                     store.dispatch(userActions.getBalance());
                     self.showTxnNotification();
                 }, 2000);
                 break;
             case COMMON.ON_SESSION_EXPIRED:
                 message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
-                super.showError('', message, function() {document.location.href = '/';});
+                super.showError('', message, function () { document.location.href = '/'; });
                 break;
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
             case COMMON.ON_BE_REQUESTED:
-                message = note.sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                message = note.sender + " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
                 $.notify(message, "success");
             default:
                 break;
@@ -64,7 +66,7 @@ export default class HomeHeader extends BaseElement {
         let note = state.commonData.notificationData;
         let message = null;
 
-        switch(note.status) {
+        switch (note.status) {
             case 1:
                 message = "One request of yours has been paid";
                 break;
@@ -91,7 +93,7 @@ export default class HomeHeader extends BaseElement {
 
         if (note.sender_email == store.getState().userData.user.email) {
             if (note.transaction_type == 'like') {
-                message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward"; 
+                message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward";
             } else {
                 message = "One of your fountain(s) has just dispensed " + decimalFormat(note.amount) + " tokens to " + note.recipientEmail;
             }
@@ -104,16 +106,13 @@ export default class HomeHeader extends BaseElement {
         //Mp3 sound audio HTML5
         var embed = '<audio id="audio"><source src="assets/sound/money.mp3" type="audio/mpeg"></audio>';
         $("#sound").html(embed);
-        document.getElementById("audio").play();
     }
 
     onLogoutButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
 
-        // TODO babv need to uncomment this and find out the reason on double event
-        // store.dispatch(userActions.logout());
-        document.location.href = '/';
+        store.dispatch(userActions.logout());
     }
 
 

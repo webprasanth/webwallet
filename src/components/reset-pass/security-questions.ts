@@ -28,10 +28,12 @@ export default class SecurityQuestions extends BaseElement {
     private privKeyHex = null;
     private urlQuery = null;
     private encryptedPrivKey = '';
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (SecurityQuestions.unsubscribe) SecurityQuestions.unsubscribe();
+        SecurityQuestions.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     mounted() {

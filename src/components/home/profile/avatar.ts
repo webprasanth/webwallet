@@ -18,6 +18,7 @@ export default class ProfileAvatar extends Element {
     private avatarUrl: string = 'assets/images/avatar_default.png';
     private buttonLabel: string = 'Choose Image';
     private cropper = null;
+    private static unsubscribe = null;
 
     mounted() {
         this.userProfile = store.getState().userData.user;
@@ -29,7 +30,8 @@ export default class ProfileAvatar extends Element {
         }
 
         this.registerFileChangeEvent();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (ProfileAvatar.unsubscribe) ProfileAvatar.unsubscribe();
+        ProfileAvatar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -64,11 +66,11 @@ export default class ProfileAvatar extends Element {
         let oFile = this.cropper.getBlob();
         oFile.name = "avatar";
 
-        let percentCb = function(percent) {
+        let percentCb = function (percent) {
             console.log("percent", percent);
             $('#up_percent').html('<p> Uploading : ' + percent + ' % </p>');
         };
-        let doneCb = function(resp) {
+        let doneCb = function (resp) {
         };
 
         store.dispatch(profileActions.updateAvatar(oFile));
@@ -86,7 +88,7 @@ export default class ProfileAvatar extends Element {
     registerFileChangeEvent() {
         let self = this;
 
-        document.querySelector('#file').addEventListener('change', function() {
+        document.querySelector('#file').addEventListener('change', function () {
             self.isUploadingImage = true;
 
             let options = {
@@ -96,7 +98,7 @@ export default class ProfileAvatar extends Element {
                 imgSrc: 'avatar.png'
             };
             let reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 options.imgSrc = e.target.result;
                 self.cropper = cropbox(options);
                 self.cropper.ratio *= 0.45;

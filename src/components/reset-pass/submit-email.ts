@@ -11,10 +11,12 @@ import BaseElement from '../base-element';
 @template(SubmitEmailTemplate)
 export default class SubmitEmail extends BaseElement {
     private isVerifyEmailSent = false;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (SubmitEmail.unsubscribe) SubmitEmail.unsubscribe();
+        SubmitEmail.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {

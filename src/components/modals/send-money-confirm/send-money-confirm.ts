@@ -18,10 +18,12 @@ export default class SendMoneyConfirm extends BaseElement {
     private processing_duration: number = 2.000;
     private formatCurrency = formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (SendMoneyConfirm.unsubscribe) SendMoneyConfirm.unsubscribe();
+        SendMoneyConfirm.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.confirmation = true;
         this.sending = false;
     }

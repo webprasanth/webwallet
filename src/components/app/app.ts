@@ -6,10 +6,12 @@ import { setLocation } from '../../model/utils';
 @template(AppTemplate)
 export default class App extends Element {
     state: ApplicationState = <any>{ commonData: { isLoading: false }, activityData: { showTransactionDetail: false } };
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (App.unsubscribe) App.unsubscribe();
+        App.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         checkLocation();
     }
 

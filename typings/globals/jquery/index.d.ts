@@ -1156,6 +1156,10 @@ interface JQueryStatic {
      * @param keepScripts A Boolean indicating whether to include scripts passed in the HTML string
      */
     parseHTML(data: string, context?: Document, keepScripts?: boolean): any[];
+    /**
+     * Show notify for notify plugin
+     */
+    notify(message: string, style: string): any;
 }
 
 /**

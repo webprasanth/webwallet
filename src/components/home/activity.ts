@@ -13,6 +13,7 @@ export default class HomeActivity extends Element {
     private toDateObject = null;
     private paginationObject = null;
     private decimalFormat = decimalFormat;
+    private static unsubscribe = null;
     /**
      * flag for reset Pagination
      * + equal true when change Tab or reload data
@@ -35,7 +36,8 @@ export default class HomeActivity extends Element {
     mounted() {
         var state = store.getState();
         this.timeZone = state.userData.user.timezone;
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (HomeActivity.unsubscribe) HomeActivity.unsubscribe();
+        HomeActivity.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers();
         this.loadTxns();
     }
@@ -126,7 +128,6 @@ export default class HomeActivity extends Element {
         var state = store.getState();
         var data = state.activityData;
         var type = state.lastAction.type;
-        console.log('activity type=', type);
         if (type == ACTIVITIES.GET_MORE_TXN_SUCCESS) {
             this.buildPagination();
             this.txns = data.txns;

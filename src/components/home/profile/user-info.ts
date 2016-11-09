@@ -32,11 +32,13 @@ export default class UserInfo extends BaseElement {
     private encryptedPrivateKey: string = null;
     private phone: string = null;
     private phoneErrorMessage: string = null;
+    private static unsubscribe = null;
 
     mounted() {
         tag = this;
         this.userProfile = store.getState().userData.user;
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (UserInfo.unsubscribe) UserInfo.unsubscribe();
+        UserInfo.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
 
         this.initTimezone();
         this.update();

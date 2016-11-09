@@ -17,10 +17,10 @@ export default class ContactSendMoney extends BaseElement {
     private processing_duration: number = 2.000;
     private title = 'Send Payment';
     private errorMessage = null;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -42,6 +42,10 @@ export default class ContactSendMoney extends BaseElement {
 
     mounted() {
         tag = this;
+
+        if (ContactSendMoney.unsubscribe) ContactSendMoney.unsubscribe();
+        ContactSendMoney.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+
         $('#sendByContact').modal('show');
         $('#contact-send-amount').keypress(utils.filterNumberEdit);
         $('#contact-send-amount').blur(utils.formatAmountInput);

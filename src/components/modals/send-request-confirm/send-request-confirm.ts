@@ -14,10 +14,12 @@ export default class SendRequestConfirm extends BaseElement {
     private requestSuccess: boolean = false;
     private formatCurrency = formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (SendRequestConfirm.unsubscribe) SendRequestConfirm.unsubscribe();
+        SendRequestConfirm.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {

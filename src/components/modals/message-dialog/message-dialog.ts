@@ -5,10 +5,10 @@ import MessageDialogTemplate from './message-dialog.html!text';
 let tag = null;
 @template(MessageDialogTemplate)
 export default class MessageDialog extends Element {
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -21,6 +21,8 @@ export default class MessageDialog extends Element {
 
     mounted() {
         tag = this;
+        if (MessageDialog.unsubscribe) MessageDialog.unsubscribe();
+        MessageDialog.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#messageDialog').modal('show');
     }
 

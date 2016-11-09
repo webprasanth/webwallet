@@ -16,10 +16,12 @@ export default class VerifyPhone extends BaseElement {
     private requestProcessing = false;
     private requestSuccess = false;
     private resendSMSSuccess = false;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (VerifyPhone.unsubscribe) VerifyPhone.unsubscribe();
+        VerifyPhone.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     mounted() {

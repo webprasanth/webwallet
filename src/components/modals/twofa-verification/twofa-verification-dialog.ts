@@ -7,7 +7,7 @@ import TwoFADialogTemplate from './twofa-verification-dialog.html!text';
 
 @template(TwoFADialogTemplate)
 export default class TwoFAVerificationDialog extends Element {
-
+    private static unsubscribe = null;
     // Flag to show/hide error message
     private isIncorrectPasscode: boolean = false;
 
@@ -35,14 +35,15 @@ export default class TwoFAVerificationDialog extends Element {
 
     mounted() {
         $('#verifyPinDialog').modal('show');
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (TwoFAVerificationDialog.unsubscribe) TwoFAVerificationDialog.unsubscribe();
+        TwoFAVerificationDialog.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onVerify(event: Event) {
         let googleCode: number = $('#google-code').val();
         let userKey = getUserKey() || {};
         var params = {
-            idToken: userKey.idToken, 
+            idToken: userKey.idToken,
             code: googleCode
         };
 

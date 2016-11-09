@@ -31,10 +31,13 @@ export default class FountainSetting extends BaseElement {
     private originAmount: number = 0;
     private duration: number = 0;
 
+    private static unsubscribe = null;
+
     mounted() {
         this.userProfile = store.getState().userData.user;
         this.getFountain();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (FountainSetting.unsubscribe) FountainSetting.unsubscribe();
+        FountainSetting.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -97,7 +100,7 @@ export default class FountainSetting extends BaseElement {
     enableFountain() {
         let userKey = getUserKey();
         this.settings = this._getFountainSetting();
-        
+
         if (!this.settings) {
             this.disabled = false;
             return;
@@ -106,7 +109,7 @@ export default class FountainSetting extends BaseElement {
         let params = {
             idToken: userKey.idToken,
             settings: this.settings,
-            secret: null 
+            secret: null
         }
 
         if (this.userProfile.authVersion == 3) {
@@ -165,7 +168,7 @@ export default class FountainSetting extends BaseElement {
         }
     }
 
-   private _setTimeSetting(settings) {
+    private _setTimeSetting(settings) {
         this.amount = settings.amount;
         this.originAmount = settings.amount;
 

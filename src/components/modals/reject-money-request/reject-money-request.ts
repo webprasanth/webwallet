@@ -13,10 +13,10 @@ export default class RejectMoneyRequest extends Element {
     private formRequest = true;
     private requestSuccess = false;
     private requestFail = false;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -36,6 +36,8 @@ export default class RejectMoneyRequest extends Element {
     }
 
     mounted() {
+        if (RejectMoneyRequest.unsubscribe) RejectMoneyRequest.unsubscribe();
+        RejectMoneyRequest.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#rejectRequestDialog').modal('show');
     }
 

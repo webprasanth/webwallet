@@ -14,6 +14,7 @@ export default class HomePending extends Element {
     private toDateObject = null;
     private paginationObject = null;
     private currentActiveTabId = 2;
+    private static unsubscribe = null;
     /**
      * Flag for reset Pagination
      * + true when change Tab or reload data
@@ -35,7 +36,8 @@ export default class HomePending extends Element {
     mounted() {
         let state = store.getState();
         this.timeZone = state.userData.user.timezone;
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (HomePending.unsubscribe) HomePending.unsubscribe();
+        HomePending.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers();
         this.loadData();
     }
@@ -104,7 +106,6 @@ export default class HomePending extends Element {
         let state = store.getState();
         let data = state.pendingData;
         let type = state.lastAction.type;
-        console.log('pending type=', type);
         if (type == PENDING.GET_MORE_REQUEST_SUCCESS) {
             this.buildPagination();
             this.money_requests = data.money_requests;

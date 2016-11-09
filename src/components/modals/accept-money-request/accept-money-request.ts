@@ -14,10 +14,10 @@ export default class AcceptMoneyRequest extends Element {
     private notEnoughBalance = false;
     private requestProcessing = false;
     private sendWallet = null;
+    private static unsubscribe = null;
 
     constructor() {
         super();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {
@@ -33,6 +33,9 @@ export default class AcceptMoneyRequest extends Element {
     }
 
     mounted() {
+        if (AcceptMoneyRequest.unsubscribe) AcceptMoneyRequest.unsubscribe();
+        AcceptMoneyRequest.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+
         $('#acceptRequestDialog').modal('show');
         //Get sender's wallet info
         store.dispatch(commonActions.getWalletsByEmail({

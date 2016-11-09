@@ -16,6 +16,7 @@ let tag = null;
 @template(HomeContactsTemplate)
 export default class HomeContacts extends Element {
     private paginationObject = null;
+    private static unsubscribe = null;
     /**
      * Flag for reset Pagination
      * + true when change Tab or reload data
@@ -34,7 +35,8 @@ export default class HomeContacts extends Element {
     mounted() {
         tag = this;
         let state = store.getState();
-        store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (HomeContacts.unsubscribe) HomeContacts.unsubscribe();
+        HomeContacts.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.prepareContactUids();
     }
 

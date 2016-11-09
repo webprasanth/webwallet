@@ -19,6 +19,7 @@ export default class SetupPassword extends BaseElement {
     private strengthColor: string = null;
     private sesureMsg: string = null;
     private token: string = null;
+    private static unsubscribe = null;
     private questionsA = [
         'What is your dream job?',
         'In which city did your parents meet?',
@@ -39,17 +40,11 @@ export default class SetupPassword extends BaseElement {
 
     mounted() {
         tag = this;
-        this.subscribeFunc = store.subscribe(this.onApplicationStateChanged.bind(this));
+        if (SetupPassword.unsubscribe) SetupPassword.unsubscribe();
+        SetupPassword.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.token = riot.route.query().token;
         $('#fcpassword').on("change keyup", this.onPasswordChanged);
         $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged);
-    }
-
-    unmounted() {
-        if (this.subscribeFunc) {
-            this.subscribeFunc();
-            this.subscribeFunc = null;
-        }
     }
 
     checkSecureQuestion() {
