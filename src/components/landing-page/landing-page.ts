@@ -174,6 +174,12 @@ export default class LandingPage extends BaseElement {
             return;
         }
 
+        let captchaResp: string = grecaptcha.getResponse(this.captchaId);
+        if(!captchaResp || captchaResp.length == 0) {
+            super.showError('', 'Please verify that you are not a robot');
+            return;
+        }
+
         let location = utils.getLocation();
         if (location.info.country_code == "US" && location.info.region_code == "NY") {
             super.showError('', 'Sorry, not currently available to New York residents');
@@ -189,7 +195,7 @@ export default class LandingPage extends BaseElement {
             ip: utils.getLocation().info.ip,
             name: name,
             email: email.toLowerCase(),
-            g_recaptcha_response: grecaptcha.getResponse(this.captchaId),
+            g_recaptcha_response: captchaResp,
             appId: appId,
             callback_link: `http://${clientHost}/#account_created?token=`
         };
