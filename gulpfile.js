@@ -47,6 +47,11 @@ gulp.task('copy-fonts', function () {
         .pipe(gulp.dest('public/assets/fonts'));
 });
 
+gulp.task('copy-sound', function () {
+    return gulp.src('assets/sound/**/*')
+        .pipe(gulp.dest('public/assets/sound'));
+});
+
 gulp.task('copy-images', function () {
     return gulp.src('assets/images/**/*')
         .pipe(gulp.dest('public/assets/images'));
@@ -68,7 +73,7 @@ gulp.task('copy-lib', function () {
     merge(tasks);
 });
 
-gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-favicon']);
+gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound','copy-favicon']);
 
 gulp.task('andaman', function(){
     var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
