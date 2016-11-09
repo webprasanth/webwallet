@@ -23,6 +23,10 @@ declare class Buffer extends Object {
     toString(encode?: string);
 }
 
+export function utcDateToLocal(str) {
+  return moment(str).local().format("MMM DD YYYY hh:mm A");
+}
+
 export function satoshiToFlash(num) {
     if (num == undefined || num === '') return;
     return parseFloat(new Big(num).div(10000000).toString());

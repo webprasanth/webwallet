@@ -7,6 +7,7 @@ import AndamanService from '../../model/andaman-service';
 import { USERS } from '../../model/action-types';
 import { COMMON } from '../../model/action-types';
 import { decimalFormat } from '../../model/utils';
+import { utcDateToLocal } from '../../model/utils';
 
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends BaseElement {
@@ -29,6 +30,8 @@ export default class HomeHeader extends BaseElement {
     onApplicationStateChanged() {
         let state: ApplicationState = store.getState();
         let self = this;
+        let message = '';
+        let note = state.commonData.notificationData;
   
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
@@ -37,13 +40,18 @@ export default class HomeHeader extends BaseElement {
             case COMMON.NEED_UPDATE_BALANCE:
                 setTimeout(function() {
                     store.dispatch(userActions.getBalance());
-                    self.showNotification();
+                    self.showTxnNotification();
                 }, 2000);
                 break;
             case COMMON.ON_SESSION_EXPIRED:
-                let message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
-                super.showError('', message, function() {document.location.href = '/';})
+                message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
+                super.showError('', message, function() {document.location.href = '/';});
                 break;
+            case COMMON.ON_REQUEST_STATE_CHANGED:
+                self.showRequestNotification();
+            case COMMON.ON_BE_REQUESTED:
+                message = note.sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                $.notify(message, "success");
             default:
                 break;
         }
@@ -51,7 +59,31 @@ export default class HomeHeader extends BaseElement {
         this.update();
     }
 
-    showNotification() {
+    showRequestNotification() {
+        let state = store.getState();
+        let note = state.commonData.notificationData;
+        let message = null;
+
+        switch(note.status) {
+            case 1:
+                message = "One request of yours has been paid";
+                break;
+            case 2:
+                message = "One request of yours has been rejected";
+                break;
+            case 3:
+                message = "A request sent to you has been cancelled";
+                break;
+            default:
+                break;
+        }
+
+        if (message) {
+            $.notify(message, "success");
+        }
+    }
+
+    showTxnNotification() {
         let message = null;
         let state = store.getState();
         let note = state.commonData.notificationData;

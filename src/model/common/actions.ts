@@ -37,7 +37,6 @@ export const commonActions = {
     },
 
     onSessionExpired(resp) {
-        console.log('++++++++++++++++++++++++++ babv ON_SESSION_EXPIRED');
         store.dispatch({ type: COMMON.ON_SESSION_EXPIRED, data: resp });
     },
 
