@@ -137,8 +137,8 @@
 					</div>
 					<div class="item-control col-xs-2 text-right icon-line">
 						<span show={userProfile.phone_verified} class="glyphicon glyphicon-ok verified_email"></span>
-						<a id="change-phone-icon" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditPhone}></a>
 						<a class="glyphicon glyphicon-check" show="{userProfile.phone && !userProfile.phone_verified}" onclick="{resendSms}"></a>
+						<a id="change-phone-icon" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditPhone}></a>
 					</div>
 				</div>
 				<div if={isEditingPhone} class="col-xs-8 edit-form" id="phone-edit">

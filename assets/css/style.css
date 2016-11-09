@@ -54,6 +54,8 @@ body{
 }
 .verified_email{
     color:#008000;
+    top: 6px;
+    margin-right: 10px;
 }
 .text-danger.max_tx{
     color: #999;
@@ -552,7 +554,7 @@ h5.title-table{
 .myaccount-page .inforItems .item-control a.glyphicon.glyphicon-check{
     color: #008000;
     border-color: #078337;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 .icon-line{
     display: flex;
