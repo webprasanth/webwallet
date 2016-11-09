@@ -14,6 +14,7 @@ var opts = {
 };
 
 // babv test code
+// opts.host = 'keys.flashcoin.io';
 // opts.proto = 'ws';
 // opts.port = 8098;
 
