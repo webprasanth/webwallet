@@ -91,6 +91,12 @@ export default class HomeHeader extends BaseElement {
         let note = state.commonData.notificationData;
         let user = state.userData.user;
 
+        if (!note.sender_email) {
+            // Check server side
+            console.error('Notification is invalid:', note);
+            return;
+        }
+
         if (note.sender_email == store.getState().userData.user.email) {
             if (note.transaction_type == 'like') {
                 message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward";

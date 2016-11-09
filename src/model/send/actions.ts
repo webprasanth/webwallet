@@ -1,4 +1,4 @@
-import { SEND, PENDING } from '../action-types';
+import { SEND, PENDING, COMMON } from '../action-types';
 import { commonActions } from '../common/actions';
 import { contactsActions } from '../contacts/actions';
 import store from '../store';
@@ -78,6 +78,7 @@ export const sendActions = {
                             // TODO: dispatch action "wallet-ready"
                             checkTx(dispatch, txn_info);
                             dispatch(commonActions.toggleLoading(false));
+                            dispatch({type: COMMON.NEED_UPDATE_BALANCE, data: {} });
                         } else {
                             dispatch(this.sendTXNFailed(resp));
                         }
