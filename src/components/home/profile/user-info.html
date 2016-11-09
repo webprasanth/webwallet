@@ -141,9 +141,9 @@
 						<a class="glyphicon glyphicon-check" show="{userProfile.phone && !userProfile.phone_verified}" onclick="{resendSms}"></a>
 					</div>
 				</div>
-				<div if={isEditingPhone} class="col-xs-8 edit-form">
+				<div if={isEditingPhone} class="col-xs-8 edit-form" id="phone-edit">
 					<div class="input-group phone-number-outbox">
-						<input class="_input profile-input form-control" type="tel" id="phone-number" placeholder={userProfile.phone} onenter={onSavePhone}/>
+						<input type="tel" id="phone-number" placeholder={userProfile.phone} onenter={onSavePhone}/>
 						<div id="on-save-phone" class="input-group-addon" onclick={onSavePhone}>
 							<a class="glyphicon glyphicon-ok">
 							</a>
