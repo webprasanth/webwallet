@@ -42,10 +42,12 @@ export const commonActions = {
 
     onBeRequested(resp) {
         store.dispatch({ type: COMMON.ON_BE_REQUESTED, data: resp });
+        store.dispatch({type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp });
     },
 
     onRequestStateChanged(resp) {
         store.dispatch({ type: COMMON.ON_REQUEST_STATE_CHANGED, data: resp });
+        store.dispatch({type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp });
     }
 
 };

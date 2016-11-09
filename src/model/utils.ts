@@ -1,6 +1,8 @@
 import Big from 'big.js';
 import _tmp from 'moment-timezone';
 import bitcoin from 'bitcoinjs-lib';
+import moment from 'moment-timezone';
+
 import {
     Address,
     NETWORK

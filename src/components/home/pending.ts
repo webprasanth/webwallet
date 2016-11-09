@@ -3,7 +3,7 @@ import store, { ApplicationState } from '../../model/store';
 import HomePendingTemplate from './pending.html!text';
 import AndamanService from '../../model/andaman-service';
 import { pendingActions } from '../../model/pending/actions';
-import { SEND, PENDING } from '../../model/action-types';
+import { SEND, PENDING, COMMON } from '../../model/action-types';
 import * as utils from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 import { FCEvent } from '../../model/types';
@@ -118,7 +118,7 @@ export default class HomePending extends Element {
             let type = activeTab ? activeTab.id : 2;
             this.currentActiveTabId = type;
             this.loadData();
-        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS || type == PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS) {
+        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS || type == PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS || type == COMMON.NEED_UPDATE_PENDING_REQUEST) {
             this.loadData();
         }
         this.update();

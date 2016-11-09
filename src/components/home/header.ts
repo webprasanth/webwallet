@@ -52,8 +52,8 @@ export default class HomeHeader extends BaseElement {
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
             case COMMON.ON_BE_REQUESTED:
-                message = note.sender + " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
-                $.notify(message, "success");
+                message = note.email_sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                $.notify(message, "info");
             default:
                 break;
         }
@@ -81,7 +81,7 @@ export default class HomeHeader extends BaseElement {
         }
 
         if (message) {
-            $.notify(message, "success");
+            $.notify(message, "info");
         }
     }
 
@@ -101,7 +101,7 @@ export default class HomeHeader extends BaseElement {
             message = note.sender_email + " sent you " + decimalFormat(note.amount) + " Flash Coin";
         }
 
-        $.notify(message, "success");
+        $.notify(message, "info");
 
         //Mp3 sound audio HTML5
         var embed = '<audio id="audio"><source src="assets/sound/money.mp3" type="audio/mpeg"></audio>';
