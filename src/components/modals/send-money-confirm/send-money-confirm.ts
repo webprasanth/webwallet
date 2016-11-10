@@ -39,6 +39,9 @@ export default class SendMoneyConfirm extends BaseElement {
             this.success = true;
             this.processing_duration = state.sendData.processing_duration;
             this.opts.dlgTitle = 'Transaction Successful';
+            if (this.opts.cb) {
+                this.opts.cb();
+            }
         } else if (actionType == SEND.SEND_TXN_FAILED) {
             $('#sendDialog').modal('hide');
             super.showError('', state.lastAction.data);

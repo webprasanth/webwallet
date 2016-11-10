@@ -103,6 +103,10 @@ export default class HomeHeader extends BaseElement {
         }
 
         if (note.sender_email == store.getState().userData.user.email) {
+            if (!note.transaction_type) {
+                return;
+            }
+            
             if (note.transaction_type == 'like') {
                 message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward";
             } else {
