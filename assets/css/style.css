@@ -18,6 +18,7 @@ body{
 }
 #main-content{
     margin-bottom: 30px;
+    padding: 0;
 }
 .wiki-page .support-page textarea{
     min-height: 150px;
@@ -106,7 +107,6 @@ textarea {
 }
 /*Common page*/
 .main-container{
-    margin: 15px;
     /*background: #F6F6F6;*/
     padding: 0 0 15px 0px;
 }
@@ -373,6 +373,7 @@ h5.title-table{
 .send-page textarea,
 .request-page textarea{
     min-height:65px;
+    width: 80%;
 }
 .request-page .input-search-account span.twitter-typeahead,
 .send-page .input-search-account span.twitter-typeahead{

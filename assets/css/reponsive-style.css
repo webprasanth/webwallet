@@ -142,7 +142,7 @@
         z-index: 1;
     }
     .title-page{
-        margin-top: 70px;
+        margin-top: 30px;
     }
     .header-SC{
         height: 55px;
@@ -343,7 +343,10 @@
     }
 }
 @media only screen and (max-width: 736px) {
-
+    .send-page textarea,
+    .request-page textarea{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 640px) {
