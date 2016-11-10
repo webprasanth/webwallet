@@ -63,6 +63,7 @@ gulp.task('copy-lib', function () {
         {from: 'assets/lib/bootstrap/**/*', to: 'public/assets/lib/bootstrap/'},
         {from: 'assets/lib/bootstrap-datepicker.min.js', to: 'public/assets/lib'},
         {from: 'assets/lib/jquery.simplePagination.js', to: 'public/assets/lib'},
+        {from: 'assets/lib/notify.min.js', to: 'public/assets/lib'},
         {from: 'assets/lib/typeahead.jquery.js', to: 'public/assets/lib'}
     ];
 
