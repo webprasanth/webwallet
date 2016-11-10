@@ -12,8 +12,8 @@ import { utcDateToLocal } from '../../model/utils';
 
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends BaseElement {
-    public userEmail: string = store.getState().userData.user.email;
-    public avatarUrl: string = null;
+    private userEmail: string = store.getState().userData.user.email;
+    private avatarUrl: string = null;
     private balance = 0;
     private decimalFormat = decimalFormat;
     private static unsubscribe = null;
