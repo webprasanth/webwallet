@@ -97,7 +97,7 @@
 				<div if={!isSelectingTimezone}>
 					<div class="item-data col-xs-6">
 						<p><span class="">
-                            {userProfile.timezone? userProfile.timezone:"Haven't been set up"}
+                            {userProfile.timezone? userProfile.timezone:"-----"}
                         </span></p>
 					</div>
 					<div class="item-control col-xs-2 text-right">
@@ -133,7 +133,7 @@
 				<div class="item-title col-xs-4 hidden-xs-small">Phone number</div>
 				<div if={!isEditingPhone}>
 					<div class="item-data col-xs-6">
-						<p class="trans-phone">{userProfile.phone?userProfile.phone:"Haven't been set up"}</p>
+						<p class="trans-phone">{userProfile.phone?userProfile.phone:"-----"}</p>
 					</div>
 					<div class="item-control col-xs-2 text-right icon-line">
 						<span show={userProfile.phone_verified} class="glyphicon glyphicon-ok verified_email"></span>

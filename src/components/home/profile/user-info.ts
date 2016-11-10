@@ -37,6 +37,7 @@ export default class UserInfo extends BaseElement {
     mounted() {
         tag = this;
         this.userProfile = store.getState().userData.user;
+        this.setDefaultTimezone();
         if (UserInfo.unsubscribe) UserInfo.unsubscribe();
         UserInfo.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
 
@@ -52,6 +53,7 @@ export default class UserInfo extends BaseElement {
         switch (type) {
             case PROFILE.UPDATE_PROFILE_SUCCESS:
                 this.userProfile = state.userData.user;
+                this.setDefaultTimezone();
                 this.onCancel();
                 break;
             case PROFILE.UPDATE_PROFILE_FAILED:
@@ -91,6 +93,12 @@ export default class UserInfo extends BaseElement {
         }
 
         this.update();
+    }
+
+    setDefaultTimezone() {
+        if (!this.userProfile.timezone || this.userProfile.timezone == 'Please select your timezone') {
+            this.userProfile.timezone = moment.tz.guess();
+        };
     }
 
     onCancel() {

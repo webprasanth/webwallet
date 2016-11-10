@@ -13,7 +13,7 @@ import BaseElement from '../../base-element';
 export default class AccountSetting extends BaseElement {
 
     private userProfile = null;
-    private accountType = null;
+    private accountType = 'Consumer';
     private publicKeyList = [];
     private is2FA: boolean = false;
     private static unsubscribe = null;
