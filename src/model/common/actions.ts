@@ -38,6 +38,7 @@ export const commonActions = {
     onTxAdded(resp) {
         store.dispatch({type: COMMON.ON_NEW_TX_ADDED, data: resp });
         store.dispatch({type: COMMON.NEED_UPDATE_BALANCE, data: resp });
+        store.dispatch({type: COMMON.NEED_UPDATE_CONTACT, data: resp });
     },
 
     onSessionExpired(resp) {

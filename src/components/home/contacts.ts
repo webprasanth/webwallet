@@ -3,7 +3,7 @@ import store, { ApplicationState } from '../../model/store';
 import HomeContactsTemplate from './contacts.html!text';
 import AndamanService from '../../model/andaman-service';
 import { contactsActions } from '../../model/contacts/actions';
-import { CONTACTS } from '../../model/action-types';
+import { CONTACTS, COMMON } from '../../model/action-types';
 import { strimString } from '../../model/utils';
 import { FCEvent } from '../../model/types';
 
@@ -69,7 +69,7 @@ export default class HomeContacts extends Element {
         } else if (type == CONTACTS.GET_USERS_BY_UID_SUCCESS) {
             this.buildPagination();
             this.contacts = data.contacts;
-        } else if (type == CONTACTS.REMOVE_USER_SUCCESS) {
+        } else if (type == CONTACTS.REMOVE_USER_SUCCESS || COMMON.NEED_UPDATE_CONTACT) {
             this.prepareContactUids();
         } else if (type == CONTACTS.GET_WALLETS_BY_EMAIL_SUCCESS) {
             if (tag.actionSelected == ACTION_REQUEST) {
