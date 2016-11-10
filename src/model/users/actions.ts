@@ -66,6 +66,7 @@ export const userActions = {
             dispatch(commonActions.toggleLoading(true));
 
             UserService.singleton().setPassword(params).then((resp: any) => {
+                console.log('++++++++++++++ babv setPassword resp = ' + JSON.stringify(resp));
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
@@ -92,7 +93,9 @@ export const userActions = {
                     }
 
                     utils.storeUserKey(userKey);
-                    dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile.auth_version));
+
+                    // resp.profile.auth_version
+                    dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile));
                     dispatch(userActions.setPasswordSuccess(resp.profile));
                 } else {
                     dispatch(userActions.setPasswordFailed(resp));
@@ -109,7 +112,8 @@ export const userActions = {
         return { type: USERS.SET_PASSWORD_FAILED, data: resp };
     },
 
-    setRecoveryKeys(params, createWalletParams, password, authVersion) {
+    setRecoveryKeys(params, createWalletParams, password, profile) {
+
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
 
@@ -120,11 +124,9 @@ export const userActions = {
                     UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
                         if (_resp.rc === 1) {
                             UserService.singleton().getMyWallets().then((__resp: any) => {
-                                if (__resp.rc === 1) {
-                                    decryptWallets(dispatch, __resp.my_wallets, authVersion, password);
-                                } else {
-                                    dispatch(userActions.getMyWalletsFailed(__resp));
-                                }
+                                dispatch(userActions.loginSuccess(profile));
+                                dispatch(userActions.getProfile(profile));
+                                dispatch(userActions.getMyWallets(profile.auth_version, password));
                             });
                         } else {
                             console.log('+++++ createFlashWallet failed, reason:', _resp);
@@ -141,7 +143,7 @@ export const userActions = {
     },
 
     setRecoveryKeysSuccess(resp) {
-        return { type: USERS.SET_RECOVERY_KEY_SUCCESS, data: resp };
+        return { type: USERS.GET_PROFILE_SUCCESS, data: resp };
     },
 
     setRecoveryKeysFailed(resp) {

@@ -36,7 +36,7 @@ riot.route((action) => {
 
 store.subscribe(() => {
     var state = store.getState();
-    if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS || state.lastAction.type == actions.USERS.SET_RECOVERY_KEY_SUCCESS) {
+    if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
         riot.route('');
     } else if (!state.userData.user && (currentAction !== 'reset_password' && currentAction != 'account_created')) {
         riot.route('login');

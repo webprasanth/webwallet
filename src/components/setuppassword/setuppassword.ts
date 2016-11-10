@@ -33,7 +33,7 @@ export default class SetupPassword extends BaseElement {
     ];
 
     private questionsC = [
-        'What streed did you grow up?',
+        'Street name where you grew up?',
         'What is your pet\'s name?',
         'What was your first job?',
     ];
