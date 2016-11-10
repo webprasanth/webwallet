@@ -631,6 +631,13 @@ internals.API.prototype.add_listener_mark_money_requests = function (pipe, callb
 	pipe.on(Event.KEYS_MARK_MONEY_REQ_RECV, callback);
 };
 
+internals.API.prototype.remove_all_listeners = function (pipe) {
+	pipe.removeAllListeners(Event.SESSION_INVALID);
+	pipe.removeAllListeners(Event.KEYS_ADD_TXN_LOG_RECV);
+	pipe.removeAllListeners(Event.KEYS_ADD_MONEY_REQ_RECV);
+	pipe.removeAllListeners(Event.KEYS_MARK_MONEY_REQ_RECV);
+};
+
 var ROSTER_OP = {
 	REQUEST: 1,
 	APPROVE: 2,
@@ -19323,6 +19330,7 @@ var opts = {
 };
 
 // babv test code
+// opts.host = 'keys.flashcoin.io';
 // opts.proto = 'ws';
 // opts.port = 8098;
 

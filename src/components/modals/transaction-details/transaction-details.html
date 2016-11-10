@@ -39,11 +39,11 @@
 					</div>
 					<div class="listItems">
 						<div class="name-item">Amount</div>
-						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{formatCurrency(satoshiToFlash(txnDetail.amount.toString()))}&nbsp;</b></div>
+						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{formatCurrency(decimalFormat(satoshiToFlash(txnDetail.amount.toString())))}&nbsp;</b></div>
 					</div>
 					<div class="listItems" show={meta.type==1}>
 						<div class="name-item">Fee</div>
-						<div class="data-item">&nbsp;{formatCurrency(satoshiToFlash(txnDetail.fee))}&nbsp;</div>
+						<div class="data-item">&nbsp;{formatCurrency(decimalFormat(satoshiToFlash(txnDetail.fee)))}&nbsp;</div>
 					</div>
 					<div class="listItems">
 						<div class="name-item">Note</div>

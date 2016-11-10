@@ -38,11 +38,11 @@ export default class HomePending extends Element {
         this.timeZone = state.userData.user.timezone;
         if (HomePending.unsubscribe) HomePending.unsubscribe();
         HomePending.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-        this.initDatePickers();
+        this.initDatePickers(false);
         this.loadData();
     }
 
-    initDatePickers() {
+    initDatePickers(showAll: boolean) {
         let state = store.getState();
         if (!this.fromDateObject) {
             this.fromDateObject = $("#pendingFromDate").parent().datepicker({
@@ -57,8 +57,23 @@ export default class HomePending extends Element {
                 autoclose: true
             });
         }
+        if (showAll) {
+            this.fromDateObject.datepicker('setDate', new Date(new Date(state.userData.user.created_ts).setHours(0, 0, 0, 0)));
+        } else {
+            let s = this.getDisplayDate(new Date(state.userData.user.created_ts), state.userData.user.timezone);
+            let timeSignup = new Date(s);
 
-        this.fromDateObject.datepicker('setDate', new Date(state.userData.user.created_ts));
+            let to = new Date(this.getDisplayDate(new Date(), state.userData.user.timezone)).getTime();
+            let from = new Date(to - this.ONE_MONTH);
+
+            // Start from timeSignup.
+            if (timeSignup > from) {
+                from = timeSignup;
+            }
+
+            this.fromDateObject.datepicker('setDate', new Date(new Date(from).setHours(0, 0, 0, 0)));
+        }
+
         this.toDateObject.datepicker('setDate', '-0d');
 
         // Auto set date range validation
@@ -157,7 +172,7 @@ export default class HomePending extends Element {
     }
 
     onShowAllButtonClick(event: Event) {
-        this.initDatePickers();
+        this.initDatePickers(true);
         this.loadData();
     }
 

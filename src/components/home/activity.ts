@@ -4,9 +4,10 @@ import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
 import { COMMON } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
-import { getDisplayDate, decimalFormat } from '../../model/utils';
+import { getDisplayDate, getDisplayDateTime, decimalFormat } from '../../model/utils';
 import { FCEvent } from '../../model/types';
 
+let tag = null;
 @template(HomeActivityTemplate)
 export default class HomeActivity extends Element {
     private fromDateObject = null;
@@ -31,14 +32,15 @@ export default class HomeActivity extends Element {
 
     constructor() {
         super();
+        if (HomeActivity.unsubscribe) HomeActivity.unsubscribe();
+        HomeActivity.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     mounted() {
+        tag = this;
         var state = store.getState();
         this.timeZone = state.userData.user.timezone;
-        if (HomeActivity.unsubscribe) HomeActivity.unsubscribe();
-        HomeActivity.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-        this.initDatePickers();
+        this.initDatePickers(false);
         this.loadTxns();
     }
 
@@ -48,7 +50,10 @@ export default class HomeActivity extends Element {
         this.paginationObject = null;
     }
 
-    initDatePickers() {
+    /**
+     * Set date range for filter transactions, show all transaction if showAll = true
+     */
+    initDatePickers(showAll: boolean) {
         var state = store.getState();
         if (!this.fromDateObject) {
             this.fromDateObject = $("#fromDate").parent().datepicker({
@@ -63,8 +68,23 @@ export default class HomeActivity extends Element {
                 autoclose: true
             });
         }
+        if (showAll) {
+            this.fromDateObject.datepicker('setDate', new Date(new Date(state.userData.user.created_ts).setHours(0, 0, 0, 0)));
+        } else {
+            let s = getDisplayDate(new Date(state.userData.user.created_ts), state.userData.user.timezone);
+            let timeSignup = new Date(s);
 
-        this.fromDateObject.datepicker('setDate', new Date(state.userData.user.created_ts));
+            let to = new Date(getDisplayDate(new Date(), state.userData.user.timezone)).getTime();
+            let from = new Date(to - this.ONE_MONTH);
+
+            // Start from timeSignup.
+            if (timeSignup > from) {
+                from = timeSignup;
+            }
+
+            this.fromDateObject.datepicker('setDate', new Date(new Date(from).setHours(0, 0, 0, 0)));
+        }
+
         this.toDateObject.datepicker('setDate', '-0d');
 
         // Auto set date range validation
@@ -83,8 +103,8 @@ export default class HomeActivity extends Element {
     }
 
     buildPagination() {
-        var state = store.getState();
-        var {total_txns, page_size} = state.activityData;
+        let state = store.getState();
+        let {total_txns, page_size} = state.activityData;
         if (this.resetPagination) {
             this.paginationObject = $(() => {
                 $('#activity-pagination').pagination({
@@ -141,20 +161,21 @@ export default class HomeActivity extends Element {
             this.loadTxns();
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
             riot.mount('#transaction-detail', 'transaction-details');
+        } else if (type == ACTIVITIES.GET_TXN_DETAIL_FAILED) {
         } else if (type == COMMON.ON_NEW_TX_ADDED) {
             this.loadTxns();
         }
         this.update();
     }
 
-    getDisplayDate = getDisplayDate;
+    getDisplayDateTime = getDisplayDateTime;
 
     onShowButtonClick(event: Event) {
         this.loadTxns();
     }
 
     onShowAllButtonClick(event: Event) {
-        this.initDatePickers();
+        this.initDatePickers(true);
         this.loadTxns();
     }
 

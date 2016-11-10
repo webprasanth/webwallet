@@ -20,7 +20,8 @@ export default class HomeSend extends BaseElement {
         this.userProfile = store.getState().userData.user;
         $('#to-email-id').typeahead(
             {
-                highlight: true
+                highlight: true,
+                minLength: 3
             }, {
                 name: 'email-list',
                 source: this.searchWallet
@@ -42,7 +43,7 @@ export default class HomeSend extends BaseElement {
             return;
         }
 
-        if (utils.isValidFlashAddress(term)) {
+        if (utils.isValidFlashAddress(term) && term != store.getState().profileData.wallet.address) {
             tag.sendWallet = {};
             tag.sendWallet.address = term;
             tag.isValidAddress = true;
@@ -126,6 +127,11 @@ export default class HomeSend extends BaseElement {
 
         if (amount < 1) {
             this.amountErrorMessage = 'Amount must be at least 1';
+            return;
+        }
+
+        if (this.userProfile.balance >= amount && this.userProfile.balance < amount + fee) {
+            super.showError('', 'You do not have enough fee to make this payment');
             return;
         }
 

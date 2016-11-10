@@ -270,6 +270,10 @@ export default class LandingPage extends BaseElement {
 
     onCreateWalletBtnClick() {
         tag.isVerifyEmailSent = false;
+        tag.update();
+        $('#firstname').val("");
+        $('#lastname').val("");
+        $("#email-signup").val("");
     }
 }
 

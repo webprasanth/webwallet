@@ -41,7 +41,7 @@
 				<div class="col-xs-12">
 					<h5 class="title-table">Payments Sent from {getDisplayDate(fromDateObject.datepicker('getDate'))} to {getDisplayDate(toDateObject.datepicker('getDate'))}</h5>
 					<div class="table-responsive">
-						<table class="table table-hover table-striped">
+						<table class="table table-hover table-striped" show="{txns.length > 0}">
 							<thead>
 								<tr>
 									<th>Date/Time</th>
@@ -53,7 +53,7 @@
 							</thead>
 							<tbody>
 								<tr each="{txn in txns}" onclick={showTransactionDetail}>
-									<td>{getDisplayDate(txn.created_ts, timeZone)}</td>
+									<td>{getDisplayDateTime(txn.created_ts, timeZone)}</td>
 									<td>{txn.type==2 ? (txn.sender_email?txn.sender_email:'Anonymous') : (txn.receiver_email?txn.receiver_email:'Anonymous')}</td>
 									<td>{txn.type==2 ? (txn.sender_display_name?txn.sender_display_name:'Anonymous') : (txn.receiver_display_name?txn.receiver_display_name:'Anonymous')}</td>
 									<td style="{txn.type==2 ? 'color:#008000' : 'color:#DB2828'}">{txn.type==2 ? '' : '-'}{decimalFormat(txn.amount)}</td>
@@ -61,6 +61,11 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="col-sm-12" show="{txns.length == 0}">
+							<div class="req-no-result">
+								There is no activity in this date range.
+							</div>
+						</div>
 					</div>
 				</div>
 				<nav class="pagination-table col-xs-12">

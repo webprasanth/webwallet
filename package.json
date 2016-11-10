@@ -140,6 +140,6 @@
     "merge-stream": "^1.0.0",
     "systemjs-builder": "^0.15.33",
     "tweetnacl-util": "^0.13.3",
-    "typescript": "^2.0.7"
+    "typescript": "^2.0.8"
   }
 }

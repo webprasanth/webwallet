@@ -130,6 +130,4 @@ export default class HomeHeader extends BaseElement {
         commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
     }
-
-
 }
