@@ -61,26 +61,34 @@ export default class HomeContacts extends Element {
         let data = state.contactsData;
         let type = state.lastAction.type;
 
-        if (type == CONTACTS.GET_ROSTER_SUCCESS) {
-            this.contactUids = state.lastAction.data.roster.subs.map(item => {
-                return item.bare_uid;
-            });
-            this.loadData();
-        } else if (type == CONTACTS.GET_USERS_BY_UID_SUCCESS) {
-            this.buildPagination();
-            this.contacts = data.contacts;
-        } else if (type == CONTACTS.REMOVE_USER_SUCCESS || COMMON.NEED_UPDATE_CONTACT) {
-            this.prepareContactUids();
-        } else if (type == CONTACTS.GET_WALLETS_BY_EMAIL_SUCCESS) {
-            if (tag.actionSelected == ACTION_REQUEST) {
-                riot.mount('#confirm-send', 'contact-request-money', {
-                    sendAddr: data.contactWallet
+        switch(type) {
+            case CONTACTS.GET_ROSTER_SUCCESS:
+                this.contactUids = state.lastAction.data.roster.subs.map(item => {
+                    return item.bare_uid;
                 });
-            } else if (tag.actionSelected == ACTION_SEND) {
-                riot.mount('#confirm-send', 'contact-send-money', {
-                    sendAddr: data.contactWallet
-                });
-            }
+                this.loadData();
+                break;
+            case CONTACTS.GET_USERS_BY_UID_SUCCESS:
+                this.buildPagination();
+                this.contacts = data.contacts;
+                break;
+            case CONTACTS.REMOVE_USER_SUCCESS:
+            case COMMON.NEED_UPDATE_CONTACT:
+                this.prepareContactUids();
+                break;
+            case CONTACTS.GET_WALLETS_BY_EMAIL_SUCCESS:
+                if (tag.actionSelected == ACTION_REQUEST) {
+                    riot.mount('#confirm-send', 'contact-request-money', {
+                        sendAddr: data.contactWallet
+                    });
+                } else if (tag.actionSelected == ACTION_SEND) {
+                    riot.mount('#confirm-send', 'contact-send-money', {
+                        sendAddr: data.contactWallet
+                    });
+                }
+                break;
+            default:
+                break;
         }
 
         this.update();

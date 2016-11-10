@@ -147,7 +147,7 @@ export default class HomeSend extends BaseElement {
             amount: amount,
             fee: fee,
             wallet: this.sendWallet,
-            cb: this.clearForms
+            cb: this.clearForms.bind(this)
         });
     }
 

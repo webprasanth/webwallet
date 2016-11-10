@@ -66,7 +66,6 @@ export const userActions = {
             dispatch(commonActions.toggleLoading(true));
 
             UserService.singleton().setPassword(params).then((resp: any) => {
-                console.log('++++++++++++++ babv setPassword resp = ' + JSON.stringify(resp));
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
