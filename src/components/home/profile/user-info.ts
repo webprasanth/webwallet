@@ -217,7 +217,9 @@ export default class UserInfo extends BaseElement {
             tag.update();
         });
         $("#phone-number").intlTelInput({ utilsScript: "assets/lib/intl-tel-input/utils.js" });
-        $("#phone-number").intlTelInput("setNumber", this.userProfile.phone);
+        if (this.userProfile.phone) {
+            $("#phone-number").intlTelInput("setNumber", this.userProfile.phone);
+        }
     }
 
     onSavePhone() {
