@@ -75,8 +75,23 @@ export const sendActions = {
                                     }
                                 });
                             }
+
+                            let count = 0;
+                            let checkTx = () => {
+                                SendService.singleton().getTxnById(txn_info).then((resp: any) => {
+                                    count++;
+                                    
+                                    if (resp && resp.rc === 1 && resp.txn.status === 1) {
+                                        dispatch(sendActions.sendTXNSuccess(resp.txn.processing_duration.toFixed(3)));
+                                    } else if (count < 5) {
+                                        setTimeout(checkTx, 1000);
+                                    } else {
+                                        dispatch(sendActions.sendTXNSuccess(Number(2).toFixed(3)));
+                                    }
+                                });
+                            }
                             // TODO: dispatch action "wallet-ready"
-                            checkTx(dispatch, txn_info);
+                            checkTx();
                             dispatch(commonActions.toggleLoading(false));
                             dispatch({type: COMMON.NEED_UPDATE_BALANCE, data: {} });
                         } else {
@@ -102,17 +117,5 @@ export const sendActions = {
         return { type: PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS, data: resp }
     }
 
-}
-
-let count = 0;
-
-let checkTx = (dispatch, txInfo) => {
-    SendService.singleton().getTxnById(txInfo).then((resp: any) => {
-        if (resp && resp.rc === 1 && resp.txn.status === 1) {
-            dispatch(sendActions.sendTXNSuccess(resp.txn.processing_duration.toFixed(3)));
-        } else if (count < 5) {
-            setTimeout(checkTx, 1000);
-        }
-    });
 }
 
