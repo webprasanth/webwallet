@@ -54,6 +54,7 @@ interface IAndaman {
     add_listener_add_txn(pipe, cb: (resp) => any);
     add_listener_request_money(pipe, cb: (resp) => any);
     add_listener_mark_money_requests(pipe, cb: (resp) => any);
+    remove_all_listeners(pipe);
 }
 
 export default class AndamanService {

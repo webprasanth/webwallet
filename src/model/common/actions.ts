@@ -31,6 +31,10 @@ export const commonActions = {
         CommonService.singleton().onRequestStateChanged(commonActions.onRequestStateChanged);
     },
 
+    removeAllListeners() {
+        CommonService.singleton().removeAllListeners();
+    },
+
     onTxAdded(resp) {
         store.dispatch({type: COMMON.ON_NEW_TX_ADDED, data: resp });
         store.dispatch({type: COMMON.NEED_UPDATE_BALANCE, data: resp });

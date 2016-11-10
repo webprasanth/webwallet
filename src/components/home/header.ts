@@ -2,6 +2,7 @@ import { template } from '../riot-ts';
 import BaseElement from '../base-element';
 import store, { ApplicationState } from '../../model/store';
 import { userActions } from '../../model/users/actions';
+import { commonActions } from '../../model/common/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
 import { USERS } from '../../model/action-types';
@@ -27,6 +28,7 @@ export default class HomeHeader extends BaseElement {
         if (user.profile_pic_url) {
             this.avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url}`;
         }
+        commonActions.addListeners();
     }
 
     onApplicationStateChanged() {
@@ -125,6 +127,7 @@ export default class HomeHeader extends BaseElement {
         event.preventDefault();
         event.stopPropagation();
 
+        commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
     }
 

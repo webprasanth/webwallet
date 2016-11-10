@@ -73,4 +73,13 @@ export default class CommonService {
             andaman.add_listener_mark_money_requests(pipe, cb);
         });
     }
+
+    removeAllListeners() {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.remove_all_listeners(pipe);
+        });
+    }
 }

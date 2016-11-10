@@ -4,7 +4,6 @@
 import { riot, template } from '../riot-ts';
 import store from '../../model/store';
 import { userActions } from '../../model/users/actions';
-import { commonActions } from '../../model/common/actions';
 import LandingPageTemplate from './landing-page.html!text';
 import BaseElement from '../base-element';
 import { USERS } from '../../model/action-types';
@@ -30,8 +29,6 @@ export default class LandingPage extends BaseElement {
         this.loadLazyImage();
         this.initLandingPage();
         this.renderCaptcha();
-
-        commonActions.addListeners();
     }
 
     onApplicationStateChanged() {
