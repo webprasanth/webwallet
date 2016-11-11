@@ -4,6 +4,9 @@ import HomeRequestTemplate from './request.html!text';
 import CommonService from '../../model/common/common-service';
 import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
+import _ from 'lodash';
+import AndamanService from '../../model/andaman-service';
+import { FCEvent } from '../../model/types';
 
 let tag = null;
 
@@ -14,20 +17,18 @@ export default class HomeRequest extends BaseElement {
     private isValidAddress = false;
     private emailErrorMessage = '';
     private amountErrorMessage = '';
+    private choosingAddress = false;
+    private wallets = [];
+    private addressSelected = false;
+    private avatarServer = AndamanService.AvatarServer;
 
     mounted() {
         tag = this;
         this.userProfile = store.getState().userData.user;
-        $('#rq_to_email_id').typeahead(
-            {
-                highlight: true
-            },
-            {
-                name: 'email-list',
-                source: this.searchWallet
-            }
-        );
-        $('#rq_to_email_id').on('typeahead:select propertychange change click keyup input paste blur', this.checkAddress);
+        $('#rq_to_email_id').on('propertychange change click keyup input paste', _.debounce((e) => {
+            this.searchWallet();
+        }, 500));
+        $('#rq_to_email_id').on('propertychange change click keyup input paste', this.checkAddress);
         $('#continue-request-bt').on('blur', this.resetErrorMessages);
         $('#requestAmount').on('blur', utils.formatAmountInput);
         $('#requestAmount').keypress(utils.filterNumberEdit);
@@ -46,6 +47,8 @@ export default class HomeRequest extends BaseElement {
             tag.receiverWallet = {};
             tag.receiverWallet.address = term;
             tag.isValidAddress = true;
+            tag.addressSelected = true;
+            tag.choosingAddress = false;
             tag.update();
             return;
         }
@@ -60,14 +63,19 @@ export default class HomeRequest extends BaseElement {
             if (resp.rc === 1 && resp.wallets.length == 1 && term == resp.wallets[0].email) {
                 tag.isValidAddress = true;
                 tag.receiverWallet = resp.wallets[0];
+                tag.addressSelected = true;
+                tag.choosingAddress = false;
             } else {
                 tag.isValidAddress = false;
+                tag.addressSelected = false;
             }
             tag.update();
         });
     }
 
-    searchWallet = (query?, syncResults?, asyncResults?) => {
+    searchWallet = () => {
+        tag.choosingAddress = true;
+
         let term: string = $('#rq_to_email_id').val();
 
         let params = {
@@ -78,23 +86,28 @@ export default class HomeRequest extends BaseElement {
 
         CommonService.singleton().searchWallet(params).then((resp: any) => {
             if (resp.rc === 1 && resp.wallets.length > 0) {
-
-                let data = resp.wallets.map(item => {
-                    return item.email;
-                });
-
-                if (asyncResults) {
-                    asyncResults(data.filter(value => {
-                        return value != this.userProfile.email;
-                    }));
+                this.wallets = resp.wallets;
+                if (this.wallets.length == 1 && this.wallets[0].email == term) {
+                    tag.isValidAddress = true;
+                    tag.choosingAddress = false;
                 }
             } else {
-                if (asyncResults) {
-                    asyncResults([]);
-                }
+                this.wallets = [];
             }
-
+            this.update();
         });
+    }
+
+    chooseAddress(event: FCEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        console.log('chooseAddress');
+        $('#rq_to_email_id').val(event.item.w.email);
+        tag.isValidAddress = true;
+        tag.addressSelected = true;
+        tag.choosingAddress = false;
+        tag.update();
     }
 
     checkAndShowComfirmationForm() {

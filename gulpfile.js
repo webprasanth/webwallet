@@ -59,13 +59,12 @@ gulp.task('copy-images', function () {
 
 gulp.task('copy-lib', function () {
     var maps = [
-        {from: 'assets/lib/jquery/**/*', to: 'public/assets/lib/jquery/'},
-        {from: 'assets/lib/bootstrap/**/*', to: 'public/assets/lib/bootstrap/'},
-        {from: 'assets/lib/bootstrap-datepicker.min.js', to: 'public/assets/lib'},
-        {from: 'assets/lib/jquery.simplePagination.js', to: 'public/assets/lib'},
-        {from: 'assets/lib/notify.min.js', to: 'public/assets/lib'},
-        {from: 'assets/lib/intl-tel-input/**/*', to: 'public/assets/lib/intl-tel-input/'},
-        {from: 'assets/lib/typeahead.jquery.js', to: 'public/assets/lib'}
+        { from: 'assets/lib/jquery/**/*', to: 'public/assets/lib/jquery/' },
+        { from: 'assets/lib/bootstrap/**/*', to: 'public/assets/lib/bootstrap/' },
+        { from: 'assets/lib/bootstrap-datepicker.min.js', to: 'public/assets/lib' },
+        { from: 'assets/lib/jquery.simplePagination.js', to: 'public/assets/lib' },
+        { from: 'assets/lib/notify.min.js', to: 'public/assets/lib' },
+        { from: 'assets/lib/intl-tel-input/**/*', to: 'public/assets/lib/intl-tel-input/' }
     ];
 
     var tasks = maps.map((m) => {
@@ -75,9 +74,9 @@ gulp.task('copy-lib', function () {
     merge(tasks);
 });
 
-gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound','copy-favicon']);
+gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon']);
 
-gulp.task('andaman', function(){
+gulp.task('andaman', function () {
     var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
     cmd.exec();
 });

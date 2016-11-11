@@ -45,6 +45,6 @@ store.subscribe(() => {
 
 riot.route.start(true);
 
-// if (window.location.host == 'localhost:8000') {
-//     store.dispatch(userActions.ssoLogin());
-// }
+if (window.location.host == 'localhost:8000') {
+    store.dispatch(userActions.ssoLogin());
+}

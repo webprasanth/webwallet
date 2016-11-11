@@ -172,14 +172,14 @@ export default class LandingPage extends BaseElement {
         }
 
         let captchaResp: string = grecaptcha.getResponse(this.captchaId);
-        if(!captchaResp || captchaResp.length == 0) {
+        if (!captchaResp || captchaResp.length == 0) {
             super.showError('', 'Please verify that you are not a robot');
             return;
         }
 
         let location = utils.getLocation();
         if (location.info.country_code == "US" && location.info.region_code == "NY") {
-            super.showError('', 'Sorry, not currently available to New York residents');
+            super.showError('', 'Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io');
             return;
         }
 
