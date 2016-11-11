@@ -13,9 +13,12 @@ import HomePageTemplate from './index.html!text';
 import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
 import { FCEvent } from '../../model/types';
+import { PENDING } from '../../model/action-types';
+import { TAB } from '../../model/pending/types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
+    private static isInit = true;
     private route = riot.route.create();
     private lastView = null;
     private widgets = {
@@ -61,6 +64,17 @@ export default class HomePage extends Element {
 
                     this.lastView = el;
 
+                    // To show pending number on memu
+                    if (HomePage.isInit) {
+                        el = document.createElement('div');
+                        el.id = 'home-pending';
+                        mainContent.appendChild(el);
+                        riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', {isPreloadData: true});
+                        $(el).hide();
+
+                        HomePage.isInit = false;
+                    }
+
                     store.dispatch(tabActions.setActive(action));
                     break;
             }
@@ -85,6 +99,9 @@ export class MainHeader extends Element {
 @template(MainNavBarTemplate)
 export class MainNavBar extends Element {
     private static unsubscribe = null;
+    private outgoingReqNum = 0;
+    private incommingReqNum = 0;
+    private pendingNum = 0;
     state: ApplicationState = <any>{ tabData: { tabs: [] } };
 
     constructor() {
@@ -98,9 +115,30 @@ export class MainNavBar extends Element {
         if (MainNavBar.unsubscribe) MainNavBar.unsubscribe();
         MainNavBar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
-
+    
     onApplicationStateChanged() {
         this.state = store.getState();
+        let pendingData = this.state.pendingData;
+        let type = this.state.lastAction.type;
+
+        switch(type) {
+            case PENDING.GET_MORE_REQUEST_SUCCESS:
+                if (pendingData.total_money_reqs > 0) {
+                    if (pendingData.money_requests[0]) {
+                        if (pendingData.money_requests[0].type == TAB.INCOMING) {
+                            this.incommingReqNum = pendingData.total_money_reqs;
+                        } else {
+                            this.outgoingReqNum = pendingData.total_money_reqs;
+                        }
+
+                        this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
         this.update();
     }
 

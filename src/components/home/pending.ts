@@ -39,7 +39,22 @@ export default class HomePending extends Element {
         if (HomePending.unsubscribe) HomePending.unsubscribe();
         HomePending.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.initDatePickers(false);
+
+        // Preload data to shown pending number on menu
+        if (this.opts.isPreloadData) {
+            this.preloadData();
+        }
+    }
+
+    preloadData() {
+        let self = this;
+        this.currentActiveTabId = TAB.OUTGOING;
         this.loadData();
+
+        setTimeout(function() {
+            self.currentActiveTabId = TAB.INCOMING;
+            self.loadData();    
+        }, 2000);
     }
 
     initDatePickers(showAll: boolean) {
@@ -121,21 +136,29 @@ export default class HomePending extends Element {
         let state = store.getState();
         let data = state.pendingData;
         let type = state.lastAction.type;
-        if (type == PENDING.GET_MORE_REQUEST_SUCCESS) {
-            this.buildPagination();
-            this.money_requests = data.money_requests;
-            this.tabs = data.tabs;
-        } else if (type == PENDING.SET_ACTIVE_TAB) {
-            let activeTab = data.tabs.filter((tab) => {
-                return tab.isActive;
-            })[0];
 
-            let type = activeTab ? activeTab.id : 2;
-            this.currentActiveTabId = type;
-            this.loadData();
-        } else if (type == PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS || type == PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS || type == COMMON.NEED_UPDATE_PENDING_REQUEST) {
-            this.loadData();
+        switch(type) {
+            case PENDING.GET_MORE_REQUEST_SUCCESS:
+                this.buildPagination();
+                this.money_requests = data.money_requests;
+                this.tabs = data.tabs;
+                break;
+            case PENDING.SET_ACTIVE_TAB:
+                let activeTab = data.tabs.filter((tab) => {
+                    return tab.isActive;
+                })[0];
+
+                let type = activeTab ? activeTab.id : 2;
+                this.currentActiveTabId = type;
+                this.loadData();
+            case PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS:
+            case PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS:
+            case COMMON.NEED_UPDATE_PENDING_REQUEST:
+                this.loadData();
+            default:
+                break;
         }
+
         this.update();
     }
 

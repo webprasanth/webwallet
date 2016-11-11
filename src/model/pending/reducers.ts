@@ -18,6 +18,7 @@ export default function pendingReducer(state = { total_money_reqs: 0, money_requ
         case PENDING.GET_MORE_REQUEST_SUCCESS:
             var money_requests = action.data.money_requests || [];
             return Object.assign({}, state, { money_requests: money_requests, total_money_reqs: action.data.total_money_reqs });
+        case PENDING.NEED_UPDATE_PENDING_NUMBER:
         default:
             return state;
     }

@@ -2,7 +2,9 @@
     <div class="navbar-sc">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li each={tab in state.tabData.tabs} class={active: tab.isActive} onclick={onTabItemClick}><a href="">{tab.name}</a></li>
+                <li each={tab in state.tabData.tabs} class={active: tab.isActive} onclick={onTabItemClick}>
+                    <a href="">{tab.name}<label show={(tab.id=='pending' && (pendingNum > 0))} class="orange-circle">{pendingNum}</label></a>
+                </li>
             </ul>
         </div>
     </div>

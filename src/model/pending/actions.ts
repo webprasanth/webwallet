@@ -17,6 +17,7 @@ export const pendingActions = {
 
                 if (resp.rc == 1) {
                     dispatch(pendingActions.getMoreRequestSuccess(resp));
+                    dispatch({ type: PENDING.NEED_UPDATE_PENDING_NUMBER, data: resp });
                 } else {
                     dispatch(pendingActions.getMoreRequestFailed(resp));
                 }
