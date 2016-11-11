@@ -7,6 +7,7 @@ import BaseElement from '../base-element';
 import _ from 'lodash';
 import AndamanService from '../../model/andaman-service';
 import { FCEvent } from '../../model/types';
+import { commonActions } from '../../model/common/actions';
 
 let tag = null;
 
@@ -137,12 +138,18 @@ export default class HomeRequest extends BaseElement {
 
         this.receiverWallet.memo = $('#requestPaymentMemo').val();
 
+        let callback = function() {
+            this.clearForms();
+            store.dispatch(commonActions.needUpdatePending({}));
+        }.bind(this);
+
         return riot.mount('#confirm-send', 'send-request-confirm', {
             uid: this.receiverWallet.username,
             receiver_email: receiverEmail,
             sender_note: this.receiverWallet.memo,
             amount: amount,
-            receiverWallet: this.receiverWallet
+            receiverWallet: this.receiverWallet,
+            cb: callback
         });
     }
 

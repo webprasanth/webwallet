@@ -30,6 +30,9 @@ export default class SendRequestConfirm extends BaseElement {
         if (actionType === REQUEST.REQUEST_MONEY_SUCCESS) {
             this.requestSuccess = true;
             this.formRequestEnabled = false;
+            if (this.opts.cb) {
+                this.opts.cb();
+            }
         } else if (actionType === REQUEST.REQUEST_MONEY_FAILED) {
             super.showError('', state.lastAction.data);
         }

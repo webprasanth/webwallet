@@ -24,6 +24,10 @@ export const commonActions = {
         return { type: COMMON.GET_WALLETS_BY_EMAIL_FAILED, data: resp };
     },
 
+    needUpdatePending(resp) {
+        return {type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp };
+    },
+
     addListeners() {
         CommonService.singleton().onTxAdded(commonActions.onTxAdded);
         CommonService.singleton().onSessionExpired(commonActions.onSessionExpired);
@@ -52,7 +56,7 @@ export const commonActions = {
 
     onRequestStateChanged(resp) {
         store.dispatch({ type: COMMON.ON_REQUEST_STATE_CHANGED, data: resp });
-        store.dispatch({type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp });
+        store.dispatch(commonActions.needUpdatePending(resp));
     }
 
 };

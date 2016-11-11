@@ -42,17 +42,18 @@ export default class HomePending extends Element {
 
         // Preload data to shown pending number on menu
         if (this.opts.isPreloadData) {
-            this.preloadData();
+            this.updateAll();
         }
     }
 
-    preloadData() {
+    updateAll() {
         let self = this;
-        this.currentActiveTabId = TAB.OUTGOING;
+        let currentTab = this.currentActiveTabId; 
+        this.currentActiveTabId = currentTab == TAB.OUTGOING? TAB.INCOMING: TAB.OUTGOING;
         this.loadData();
 
         setTimeout(function() {
-            self.currentActiveTabId = TAB.INCOMING;
+            self.currentActiveTabId = currentTab;
             self.loadData();    
         }, 2000);
     }
@@ -153,8 +154,11 @@ export default class HomePending extends Element {
                 this.loadData();
             case PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS:
             case PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS:
-            case COMMON.NEED_UPDATE_PENDING_REQUEST:
                 this.loadData();
+                break;
+            case COMMON.NEED_UPDATE_PENDING_REQUEST:
+                this.updateAll();
+                break;
             default:
                 break;
         }
