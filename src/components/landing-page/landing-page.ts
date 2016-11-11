@@ -274,6 +274,11 @@ export default class LandingPage extends BaseElement {
         $('#firstname').val("");
         $('#lastname').val("");
         $("#email-signup").val("");
+
+        let captchaResp: string = grecaptcha.getResponse(this.captchaId);
+        if(!captchaResp || captchaResp.length == 0) {
+            grecaptcha.reset(this.captchaId);
+        }
     }
 }
 
