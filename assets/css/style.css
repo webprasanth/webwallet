@@ -373,43 +373,18 @@ h5.title-table{
 .send-page textarea,
 .request-page textarea{
     min-height:65px;
-    width: 80%;
 }
-.request-page .input-search-account span.twitter-typeahead,
-.send-page .input-search-account span.twitter-typeahead{
-    width: 80%;
-}
-.request-page .input-search-account span.glyphicon-search,
-.send-page .input-search-account span.glyphicon-search{
-    top: 4px;
-    right: 30px;
+.request-page .email-account span,
+.send-page .email-account span{
+       top: 10px;
+    position: absolute;
+    right: 9px;
     font-size: 12pt;
 }
-.tt-menu{
-    width: 100%;
-}
-.tt-dataset {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-color: #66afe9;
-    margin-top: -2px;
-    border-top: none;
-    box-shadow: 6px 6px 28px -17px #0e76bc;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-.tt-dataset .tt-suggestion{
-    padding:10px;
-}
-.tt-dataset .tt-cursor{
-    background: #ddd;
-}
-.send-page .input-search-account span.glyphicon-ok-circle,
-.request-page .input-search-account span.glyphicon-ok-circle{
-    right: 16px;
+.send-page .email-account span.glyphicon-ok-circle,
+.request-page .email-account span.glyphicon-ok-circle{
+    right: 34px;
     color: #008000;
-    font-size: 16px;
-    top: 3px;
 }
 .send-page .title-page h2.title{
     color: #d9534f;
@@ -418,7 +393,6 @@ h5.title-table{
     color: #008000  ;
 }
 /*==============*/
-
 /*Style list account*/
 .email-account{
     position: relative;
@@ -760,6 +734,11 @@ h5.title-table{
 }
 .transaction-detail .listItems .data-item .item .data{
     overflow: hidden;
+    width: 60%;
+    line-height: 22px;
+}
+.transaction-detail .listItems .data-item .item .data span{
+    word-wrap: break-word;
 }
 .transaction-detail .listItems .data-item .item p,
 .pending-transaction-detail .listItems .data-item .item p{
