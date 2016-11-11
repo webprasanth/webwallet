@@ -104,6 +104,7 @@ export default class HomeRequest extends BaseElement {
 
         console.log('chooseAddress');
         $('#rq_to_email_id').val(event.item.w.email);
+        tag.receiverWallet = event.item.w;
         tag.isValidAddress = true;
         tag.addressSelected = true;
         tag.choosingAddress = false;

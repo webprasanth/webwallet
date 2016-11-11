@@ -168,8 +168,6 @@ export default class HomeActivity extends Element {
         this.update();
     }
 
-    getDisplayDateTime = getDisplayDateTime;
-
     onShowButtonClick(event: Event) {
         this.loadTxns();
     }
@@ -192,4 +190,7 @@ export default class HomeActivity extends Element {
         let state = store.getState();
         store.dispatch(activityActions.getTransactionDetail(event.item.txn));
     }
+
+    getDisplayDateTime = getDisplayDateTime;
+    getDisplayDate = getDisplayDate;
 }

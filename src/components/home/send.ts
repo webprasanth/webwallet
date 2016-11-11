@@ -103,6 +103,7 @@ export default class HomeSend extends BaseElement {
         event.stopPropagation();
 
         $('#to-email-id').val(event.item.w.email);
+        tag.sendWallet = event.item.w;
         tag.isValidAddress = true;
         tag.addressSelected = true;
         tag.choosingAddress = false;
