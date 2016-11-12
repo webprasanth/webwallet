@@ -24,10 +24,10 @@ export default class RejectMoneyRequest extends Element {
         let data = state.activityData;
         let actionType = state.lastAction.type;
 
-        if (actionType === PENDING.MARK_REJECTED_MONEY_REQUESTS_SUCCESS) {
+        if (actionType === PENDING.CHANGE_REJECT_REQUEST_SUCCESS_DIALOG) {
             this.requestSuccess = true;
             this.formRequest = false;
-        } else if (actionType === PENDING.MARK_REJECTED_MONEY_REQUESTS_FAILED) {
+        } else if (actionType === PENDING.CHANGE_REJECT_REQUEST_FAILED_DIALOG) {
             this.requestFail = true;
             this.formRequest = false;
         }

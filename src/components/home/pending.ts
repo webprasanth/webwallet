@@ -48,13 +48,13 @@ export default class HomePending extends Element {
 
     updateAll() {
         let self = this;
-        let currentTab = this.currentActiveTabId; 
-        this.currentActiveTabId = currentTab == TAB.OUTGOING? TAB.INCOMING: TAB.OUTGOING;
+        let currentTab = this.currentActiveTabId;
+        this.currentActiveTabId = currentTab == TAB.OUTGOING ? TAB.INCOMING : TAB.OUTGOING;
         this.loadData();
 
-        setTimeout(function() {
+        setTimeout(function () {
             self.currentActiveTabId = currentTab;
-            self.loadData();    
+            self.loadData();
         }, 2000);
     }
 
@@ -138,7 +138,7 @@ export default class HomePending extends Element {
         let data = state.pendingData;
         let type = state.lastAction.type;
 
-        switch(type) {
+        switch (type) {
             case PENDING.GET_MORE_REQUEST_SUCCESS:
                 this.buildPagination();
                 this.money_requests = data.money_requests;
@@ -154,6 +154,7 @@ export default class HomePending extends Element {
                 this.loadData();
             case PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS:
             case PENDING.MARK_SENT_MONEY_REQUESTS_SUCCESS:
+            case PENDING.MARK_REJECTED_MONEY_REQUESTS_SUCCESS:
                 this.loadData();
                 break;
             case COMMON.NEED_UPDATE_PENDING_REQUEST:

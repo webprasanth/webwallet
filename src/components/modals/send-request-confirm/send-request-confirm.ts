@@ -1,7 +1,7 @@
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import SendRequestConfirmTemplate from './send-request-confirm.html!text';
-import { formatCurrency } from '../../../model/utils';
+import { formatCurrency, formatAmountInput } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { requestActions } from '../../../model/request/actions';
 import { REQUEST } from '../../../model/action-types';
@@ -13,6 +13,7 @@ export default class SendRequestConfirm extends BaseElement {
     private requestProcessing: boolean = false;
     private requestSuccess: boolean = false;
     private formatCurrency = formatCurrency;
+    private formatAmountInput = formatAmountInput;
     private AvatarServer = AndamanService.AvatarServer;
     private static unsubscribe = null;
 

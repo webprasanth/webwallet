@@ -39,8 +39,10 @@ export const pendingActions = {
 
                 if (resp.rc == 1) {
                     dispatch(pendingActions.markRejectedMoneyRequestsSuccess(resp));
+                    dispatch(pendingActions.changeRejectRequestSuccessDialog());
                 } else {
                     dispatch(pendingActions.markRejectedMoneyRequestsFailed(resp));
+                    dispatch(pendingActions.changeRejectRequestFailedDialog());
                 }
             });
         };
@@ -50,6 +52,12 @@ export const pendingActions = {
     },
     markRejectedMoneyRequestsFailed(resp) {
         return { type: PENDING.MARK_REJECTED_MONEY_REQUESTS_FAILED, data: resp };
+    },
+    changeRejectRequestSuccessDialog() {
+        return { type: PENDING.CHANGE_REJECT_REQUEST_SUCCESS_DIALOG };
+    },
+    changeRejectRequestFailedDialog() {
+        return { type: PENDING.CHANGE_REJECT_REQUEST_FAILED_DIALOG };
     },
     markCancelledMoneyRequests(params) {
         return (dispatch) => {

@@ -10,7 +10,7 @@
 				<virtual show={formRequestEnabled}>
 					<div class="modal-body">
 						<div class="confirm__transaction">
-							<div class="_amount text-center"><span class="_value">{formatCurrency(opts.amount)}</span> <span class="_currency"></span></div>
+							<div class="_amount text-center"><span class="_value">{formatCurrency(formatAmountInput(opts.amount))}</span> <span class="_currency"></span></div>
 							<div class="text-center">
 								<p>
 									<span class="glyphicon glyphicon-refresh spinning" show={requestProcessing}></span>
