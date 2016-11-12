@@ -21,7 +21,8 @@
             </div>
             <div class="form-group">
                 <p>Message/Transaction Note to Fountain Visitors</p>
-                <textarea class="form-control" id="memo" value="{memo}"></textarea>
+                <textarea class="form-control" id="memo" value="{memo}" maxlength="50"></textarea>
+                <p class="text-left text-danger max_tx">Max Characters 50</p>
             </div>
             <div class="form-group">
                 <p>
@@ -70,7 +71,8 @@
             </div>
             <div class="form-group">
                 <p>Message/Transaction Note to Fountain Visitors</p>
-                <textarea class="form-control disabled" id="memo" value="{memo}" disabled={this.disabled}></textarea>
+                <textarea class="form-control disabled" id="memo" value="{memo}" disabled={this.disabled} maxlength="50"></textarea>
+                <p class="text-left text-danger max_tx">Max Characters 50</p>
             </div>
             <div class="form-group">
                 <p>
