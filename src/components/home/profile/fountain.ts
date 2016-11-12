@@ -5,7 +5,7 @@ import { riot, template } from '../../riot-ts';
 import store, { ApplicationState } from '../../../model/store';
 import FountainSettingTemplate from './fountain.html!text';
 import BaseElement from '../../base-element';
-import { getUserKey, hexToBase64 } from '../../../model/utils';
+import { getUserKey, hexToBase64, filterNumberEdit } from '../../../model/utils';
 import Premium from 'Premium';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
@@ -38,6 +38,8 @@ export default class FountainSetting extends BaseElement {
         this.getFountain();
         if (FountainSetting.unsubscribe) FountainSetting.unsubscribe();
         FountainSetting.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+        $('#amount').keypress(filterNumberEdit);
+        $('#duration').keypress(filterNumberEdit);
     }
 
     onApplicationStateChanged() {
