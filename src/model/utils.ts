@@ -26,7 +26,7 @@ declare class Buffer extends Object {
 }
 
 export function utcDateToLocal(str) {
-  return moment(str).local().format("MMM DD YYYY hh:mm A");
+    return moment(str).local().format("MMM DD YYYY hh:mm A");
 }
 
 export function satoshiToFlash(num) {
@@ -238,10 +238,17 @@ export function toOrginalNumber(Decimalnumber) {
     return Number(Decimalnumber.toString().replace(/,/g, ""))
 }
 
-export function formatAmountInput() {
-    let amount = (<any>this).value;
-    amount = toOrginalNumber(amount);
-    if (!isNaN(amount) && amount > 0) {
-        (<any>this).value = decimalFormat(amount);
+export function formatAmountInput(amount?) {
+    if (isNaN(amount)) {
+        amount = this.value;
+        amount = toOrginalNumber(amount);
+        if (!isNaN(amount) && amount > 0) {
+            this.value = decimalFormat(amount);
+        }
+    } else {
+        amount = toOrginalNumber(amount);
+        if (!isNaN(amount) && amount > 0) {
+            return decimalFormat(amount);
+        }
     }
 }

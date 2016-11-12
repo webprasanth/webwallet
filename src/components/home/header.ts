@@ -5,10 +5,11 @@ import { userActions } from '../../model/users/actions';
 import { commonActions } from '../../model/common/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
-import { USERS } from '../../model/action-types';
-import { COMMON } from '../../model/action-types';
+import { USERS, COMMON, PROFILE } from '../../model/action-types';
 import { decimalFormat } from '../../model/utils';
 import { utcDateToLocal } from '../../model/utils';
+
+let tag = null;
 
 @template(HomeHeaderTemplate)
 export default class HomeHeader extends BaseElement {
@@ -19,6 +20,7 @@ export default class HomeHeader extends BaseElement {
     private static unsubscribe = null;
 
     mounted() {
+        tag = this;
         let state = store.getState();
         if (HomeHeader.unsubscribe) HomeHeader.unsubscribe();
         HomeHeader.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
@@ -55,9 +57,12 @@ export default class HomeHeader extends BaseElement {
                 self.showRequestNotification();
             case COMMON.ON_BE_REQUESTED:
                 if (note.email_sender) {
-                    message = note.email_sender +  " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                    message = note.email_sender + " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
                     $.notify(message, "info");
                 }
+            case PROFILE.UPDATE_AVATAR_SUCCESS:
+                tag.avatarUrl = `${AndamanService.AvatarServer}${store.getState().lastAction.data}`;
+                break;
             default:
                 break;
         }
@@ -106,7 +111,7 @@ export default class HomeHeader extends BaseElement {
             if (!note.transaction_type) {
                 return;
             }
-            
+
             if (note.transaction_type == 'like') {
                 message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward";
             } else {

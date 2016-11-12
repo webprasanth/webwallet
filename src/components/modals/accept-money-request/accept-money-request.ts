@@ -86,4 +86,5 @@ export default class AcceptMoneyRequest extends Element {
         }
     }
 
+    formatAmountInput = utils.formatAmountInput;
 }
