@@ -13,6 +13,7 @@ import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
 import ErrorAlert from './modals/error-alert/error-alert';
+import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
 import SendMoneyConfirm from './modals/send-money-confirm/send-money-confirm';
 import SendRequestConfirm from './modals/send-request-confirm/send-request-confirm';
@@ -27,7 +28,7 @@ import VerifyPhone from './modals/verify-phone/verify-phone';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
-    LandingPage, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
+    LandingPage, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog, VerifyPhone
 };
