@@ -39,6 +39,7 @@ export default class ContactRequestMoney extends BaseElement {
     }
 
     mounted() {
+        tag = this;
         if (ContactRequestMoney.unsubscribe) ContactRequestMoney.unsubscribe();
         ContactRequestMoney.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#requestByContact').modal('show');
