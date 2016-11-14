@@ -20,7 +20,14 @@ export default class TransactionDetails extends Element {
     }
 
     mounted() {
+        var self = this;
         $('#txDetailDlg').modal('show');
+
+        $('#txDetailDlg').on('hidden.bs.modal', function () {
+            if (self.opts.cb) {
+                self.opts.cb();
+            }
+        });
     }
 
     getDisplayDateTime = getDisplayDateTime;

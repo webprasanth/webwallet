@@ -15,6 +15,7 @@ export default class HomeActivity extends Element {
     private paginationObject = null;
     private decimalFormat = decimalFormat;
     private static unsubscribe = null;
+    private isTnxDetailOpened = false;
     /**
      * flag for reset Pagination
      * + equal true when change Tab or reload data
@@ -160,7 +161,15 @@ export default class HomeActivity extends Element {
             this.currentActiveTabId = type;
             this.loadTxns();
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
-            riot.mount('#transaction-detail', 'transaction-details');
+            let self = this;
+            let opts = {cb: function() {
+                self.isTnxDetailOpened = false;
+            }};
+
+            if (!this.isTnxDetailOpened){
+                this.isTnxDetailOpened = true;
+                riot.mount('#transaction-detail', 'transaction-details', opts);
+            }
         } else if (type == ACTIVITIES.GET_TXN_DETAIL_FAILED) {
         } else if (type == COMMON.ON_NEW_TX_ADDED) {
             this.loadTxns();
