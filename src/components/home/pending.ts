@@ -160,6 +160,11 @@ export default class HomePending extends Element {
             case COMMON.NEED_UPDATE_PENDING_REQUEST:
                 this.updateAll();
                 break;
+            case PENDING.NEED_UPDATE_PENDING_REQUESTS:
+                this.timeZone = state.userData.user.timezone;
+                this.initDatePickers(false);
+                this.updateAll();
+                break;
             default:
                 break;
         }

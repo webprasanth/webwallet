@@ -1,7 +1,7 @@
 /**
  * Profile actions
  */
-import { PROFILE } from '../action-types';
+import { PROFILE, PENDING, ACTIVITIES } from '../action-types';
 import ProfileService from './service';
 import CommonService from '../common/common-service';
 import { commonActions } from '../common/actions';
@@ -53,6 +53,12 @@ export const profileActions = {
             ProfileService.singleton().updateProfile(params).then((resp: any) => {
                 if (resp.rc == 1) {
                     dispatch(profileActions.updateProfileSuccess({ profile: resp.profile }));
+
+                    // Need to reload all transaction logs (activities) and pending if user update timezone
+                    if (params.timezone) {
+                        dispatch({ type: PENDING.NEED_UPDATE_PENDING_REQUESTS, data: null });
+                        dispatch({ type: ACTIVITIES.NEED_UPDATE_ACTIVITIES, data: null });
+                    }
                 } else {
                     dispatch(profileActions.updateProfileFailed({ dataType, resp }));
                 }

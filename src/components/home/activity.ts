@@ -149,31 +149,46 @@ export default class HomeActivity extends Element {
         var state = store.getState();
         var data = state.activityData;
         var type = state.lastAction.type;
-        if (type == ACTIVITIES.GET_MORE_TXN_SUCCESS) {
-            this.buildPagination();
-            this.txns = data.txns;
-            this.tabs = data.tabs;
-        } else if (type == ACTIVITIES.SET_ACTIVE_TAB) {
-            let activeTab = data.tabs.filter((tab) => {
-                return tab.isActive;
-            })[0];
-            let type = activeTab ? activeTab.id : 0;
-            this.currentActiveTabId = type;
-            this.loadTxns();
-        } else if (type == ACTIVITIES.GET_TXN_DETAIL_SUCCESS) {
-            let self = this;
-            let opts = {cb: function() {
-                self.isTnxDetailOpened = false;
-            }};
 
-            if (!this.isTnxDetailOpened){
-                this.isTnxDetailOpened = true;
-                riot.mount('#transaction-detail', 'transaction-details', opts);
-            }
-        } else if (type == ACTIVITIES.GET_TXN_DETAIL_FAILED) {
-        } else if (type == COMMON.ON_NEW_TX_ADDED) {
-            this.loadTxns();
+        switch(type)  {
+            case ACTIVITIES.GET_MORE_TXN_SUCCESS:
+                this.buildPagination();
+                this.txns = data.txns;
+                this.tabs = data.tabs;
+                break;
+            case ACTIVITIES.SET_ACTIVE_TAB:
+                let activeTab = data.tabs.filter((tab) => {
+                    return tab.isActive;
+                })[0];
+                let type = activeTab ? activeTab.id : 0;
+                this.currentActiveTabId = type;
+                this.loadTxns();
+                break;
+            case ACTIVITIES.GET_TXN_DETAIL_SUCCESS:
+                let self = this;
+                let opts = {cb: function() {
+                    self.isTnxDetailOpened = false;
+                }};
+
+                if (!this.isTnxDetailOpened){
+                    this.isTnxDetailOpened = true;
+                    riot.mount('#transaction-detail', 'transaction-details', opts);
+                }
+                break;
+            case COMMON.ON_NEW_TX_ADDED:
+                this.loadTxns();
+                break;
+            case ACTIVITIES.NEED_UPDATE_ACTIVITIES:
+                this.timeZone = state.userData.user.timezone;
+                this.initDatePickers(false);
+                this.loadTxns();
+                break;
+            case ACTIVITIES.GET_TXN_DETAIL_FAILED:
+                // Show error message
+            default:
+                break;
         }
+
         this.update();
     }
 
