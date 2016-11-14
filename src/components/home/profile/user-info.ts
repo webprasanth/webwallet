@@ -102,7 +102,10 @@ export default class UserInfo extends BaseElement {
     }
 
     onCancel() {
-        this.isEditingName = false;
+        if (this.isEditingName) {
+            $("#profile-name input").val("");
+            this.isEditingName = false;
+        }
         this.isEditingPass = false;
         this.isSelectingTimezone = false;
         tag.isEditingPhone = false;

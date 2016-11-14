@@ -13,7 +13,7 @@
 				</div>
 				<div if={isEditingName} class="col-xs-8 item-data edit-form">
 					<div class="input-group">
-						<input class="_input profile-input form-control" maxlength="30" placeholder="{userProfile.display_name}" onenter={onSaveName}
+						<input class="_input profile-input form-control" maxlength="30" placeholder={userProfile.display_name} onenter={onSaveName}
 							type="text" />
 						<div id="on-save-name" class="input-group-addon" onclick={onSaveName}>
 							<a class="glyphicon glyphicon-ok">

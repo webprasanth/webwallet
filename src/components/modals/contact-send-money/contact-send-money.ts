@@ -73,7 +73,17 @@ export default class ContactSendMoney extends BaseElement {
 
         let memo = $('#Note').val();
 
-        store.dispatch(sendActions.createRawTx(this.opts.sendAddr, amount, memo));
+        $('#sendByContact').modal('hide');
+
+        riot.mount('#confirm-send', 'send-money-confirm', {
+            to: this.opts.sendAddr.address,
+            amount: amount,
+            fee: fee,
+            wallet: this.opts.sendAddr,
+        });
+
+
+        //store.dispatch(sendActions.createRawTx(this.opts.sendAddr, amount, memo));
     }
 
     resetErrorMessages() {

@@ -26,4 +26,12 @@ const reducers = redux.combineReducers({
     resetPassData: resetPassReducer
 });
 
-export default reducers;
+const rootReducer = (state, action) => {
+    if (action.type === 'USERS.LOGOUT') {
+        state = undefined;
+    }
+
+    return reducers(state, action)
+}
+
+export default rootReducer;
