@@ -1,27 +1,27 @@
 <fountain-setting>
     <div class="fountain-content box-content">
-        <div if={fountainEnabled}>
+        <div if={fountain.enabled}>
             <div class="col-xs-12">
                 <p><label>Amount of Flash tokens given to each person per period</label></p>
                 <div class="form-group">
-                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}">
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" type="text" value="{settings.amount}">
                 </div>
                 <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
                 <div class="form-input">
                     <div class="form-group col-xs-12 col-sm-6">
-                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}">
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" type="text" value="{duration}">
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
-                        <select id="unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}'>
-                            <option value="3600" selected="{isHourUnit}">Hours</option>
-                            <option value="60" selected="{isMinuteUnit}">Minutes</option>
+                        <select id="time-unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}'>
+                            <option value=3600 selected="{isHourUnit}">Hours</option>
+                            <option value=60 selected="{isMinuteUnit}">Minutes</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <p>Message/Transaction Note to Fountain Visitors</p>
-                <textarea class="form-control" id="memo" value="{memo}" maxlength="50"></textarea>
+                <textarea class="form-control" id="memo" value="{settings.message}" maxlength="50"></textarea>
                 <p class="text-left text-danger max_tx">Max Characters 50</p>
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
                         List URL's of pages allowed to host your fountain, as specific as possible to protect it from abuse, separated by comma, e.g. site1.com/web2, site3.com/web4,...
                     </label>
                 </p>
-                <textarea class="form-control" id="domains" value="{domainStr}"></textarea>
+                <textarea class="form-control" id="domains" value="{settings.domainStr}"></textarea>
             </div>
             <div class="form-group btn-fountain">
                 <button id="update-domain" class="btn btn-primary" onclick={updateFountain}>Update Parameters</button>
@@ -50,28 +50,28 @@
             </div>
         </div>
         
-        <div if={!fountainEnabled}>
+        <div if={!fountain.enabled}>
             <div class="col-xs-12">
                 <p><label>Amount of Flash tokens given to each person per period</label></p>
                 <div class="form-group disabled">
-                    <input class="form-control" id="amount" on-keypress="filter-number-edit" on-blur="amount-blur" type="text" value="{amount}" disabled={this.disabled}>
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" type="text" value="{settings.amount}" disabled={this.disabled}>
                 </div>
                 <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
                 <div class="form-input">
                     <div class="form-group col-xs-12 col-sm-6">
-                        <input class="form-control" id="duration" on-keypress="filter-number-edit" on-blur="duration-blur" type="text" value="{duration}" disabled={this.disabled}>
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" type="text" value="{duration}" disabled={this.disabled}>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
                         <select id="time-unit" class="compact selection dropdown form-control" disabled={this.disabled}>
-                            <option value="3600" selected="{isHourUnit}">Hours</option>
-                            <option value="60" selected="{isMinuteUnit}">Minutes</option>
+                            <option value=3600 selected="{isHourUnit}">Hours</option>
+                            <option value=60 selected="{isMinuteUnit}">Minutes</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <p>Message/Transaction Note to Fountain Visitors</p>
-                <textarea class="form-control disabled" id="memo" value="{memo}" disabled={this.disabled} maxlength="50"></textarea>
+                <textarea class="form-control disabled" id="memo" value="{settings.message}" disabled={this.disabled} maxlength="50"></textarea>
                 <p class="text-left text-danger max_tx">Max Characters 50</p>
             </div>
             <div class="form-group">
@@ -80,7 +80,7 @@
                         List URL's of pages allowed to host your fountain, as specific as possible to protect it from abuse, separated by comma, e.g. site1.com/web2; site3.com/web4;...
                     </label>
                 </p>
-                    <textarea class="form-control disabled" id="domains" value="{domainStr}" disabled={this.disabled}></textarea>
+                    <textarea class="form-control disabled" id="domains" value="{settings.domainStr}" disabled={this.disabled}></textarea>
             </div>
             <br/>
             <br/>
