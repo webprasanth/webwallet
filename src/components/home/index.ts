@@ -18,7 +18,6 @@ import { TAB } from '../../model/pending/types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
-    private static isInit = true;
     private route = riot.route.create();
     private lastView = null;
     private widgets = {
@@ -65,14 +64,13 @@ export default class HomePage extends Element {
                     this.lastView = el;
 
                     // To show pending number on memu
-                    if (HomePage.isInit) {
+                    let state = store.getState(); 
+                    if (action == 'activity' && state.pendingData.total_money_reqs == 0) {
                         el = document.createElement('div');
                         el.id = 'home-pending';
                         mainContent.appendChild(el);
                         riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', {isPreloadData: true});
                         $(el).hide();
-
-                        HomePage.isInit = false;
                     }
 
                     store.dispatch(tabActions.setActive(action));

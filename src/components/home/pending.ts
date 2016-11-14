@@ -149,7 +149,7 @@ export default class HomePending extends Element {
                     return tab.isActive;
                 })[0];
 
-                let type = activeTab ? activeTab.id : 2;
+                let type = activeTab ? activeTab.id : TAB.INCOMING;
                 this.currentActiveTabId = type;
                 this.loadData();
             case PENDING.MARK_CANCELLED_MONEY_REQUESTS_SUCCESS:
