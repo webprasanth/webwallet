@@ -167,7 +167,7 @@ export default class LandingPage extends BaseElement {
         if (location.info.country_code == "US" && location.info.region_code == "NY") {
             let message = 'Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io';
 
-            riot.mount('#error-dialog', 'error-alert', { title: 'Error', message: message});
+            riot.mount('#error-dialog', 'location-error', { title: 'Error', message: message});
             return;
         }
 

@@ -964,6 +964,9 @@ footer p {
 .modal-dialog.message-info .modal-header{
     background-color: #5bc0de;
 }
+.modal.location-error .message-error{
+    text-align: justify;
+}
 /*===================*/
 /*Change confirm password*/
 .change-confirm-password .slide-1 h2{
