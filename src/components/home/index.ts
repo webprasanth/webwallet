@@ -38,6 +38,11 @@ export default class HomePage extends Element {
         this.route((action) => {
             let mainContent = document.querySelector('#main-content');
             let id = this.widgets[action];
+            
+            if (!id) {
+                return;
+            }
+            
             if (this.lastView && this.lastView.id != id) {
                 $(this.lastView).hide();
             }
