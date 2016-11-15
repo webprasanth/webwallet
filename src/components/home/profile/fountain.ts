@@ -50,6 +50,7 @@ export default class FountainSetting extends BaseElement {
             case PROFILE.ENABLE_FOUNTAIN_SUCCESS:
                 this._setTimeSetting(this.settings);
                 this.fountain.enabled = true;
+                this.disabled = false;
                 break;
             case PROFILE.UPDATE_FOUNTAIN_SUCCESS:
                 super.showMessage('', 'Fountain parameters have been updated');
@@ -57,6 +58,10 @@ export default class FountainSetting extends BaseElement {
             case PROFILE.DISABLE_FOUNTAIN_SUCCESS:
                 this.fountain.enabled = false;
                 this.disabled = true;
+                $('#amount').val(this.settings.amount);
+                $('#duration').val(this.duration);
+                $('#memo').val(this.settings.message);
+                $('#domains').val(this.settings.domainStr);
                 break;
             case PROFILE.GET_FOUNTAIN_SUCCESS:
                 let saveFountain = state.profileData.savedFountain;
@@ -78,7 +83,6 @@ export default class FountainSetting extends BaseElement {
 
     enableFountain() {
         let userKey = getUserKey();
-        this.settings = this._getFountainSetting();
 
         if (!this.settings) {
             this.disabled = false;
@@ -143,8 +147,10 @@ export default class FountainSetting extends BaseElement {
             this.fountain.enabled = !!savedFountain.fountain.enabled;
 
             this._setTimeSetting(this.settings);
+            this.disabled = !this.fountain.enabled;
         } else {
             this.fountain = {enabled: false};
+            this.disabled = true;
         }
     }
 
@@ -172,6 +178,7 @@ export default class FountainSetting extends BaseElement {
         let domainStr: string = $('#domains').val();
         let memo: string = $('#memo').val();
         let domains: Array<string> = [];
+        let self = this;
 
         // Validate amount
         let amount = $('#amount').val();
