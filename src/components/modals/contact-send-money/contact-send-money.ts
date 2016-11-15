@@ -67,7 +67,13 @@ export default class ContactSendMoney extends BaseElement {
             return tag.errorMessage = 'Amount must be at least 1';
         }
 
-        if (store.getState().userData.user.balance < amount + fee) {
+        let balance = store.getState().userData.user.balance;
+
+        if (balance >= amount && balance < amount + fee) {
+            return tag.errorMessage = 'You do not have enough fee to make this payment';
+        }
+
+        if (balance < amount + fee) {
             return tag.errorMessage = 'You do not have enough funds to make this payment';
         }
 
