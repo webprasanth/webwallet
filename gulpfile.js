@@ -59,12 +59,7 @@ gulp.task('copy-images', function () {
 
 gulp.task('copy-lib', function () {
     var maps = [
-        { from: 'assets/lib/jquery/**/*', to: 'public/assets/lib/jquery/' },
-        { from: 'assets/lib/bootstrap/**/*', to: 'public/assets/lib/bootstrap/' },
-        { from: 'assets/lib/bootstrap-datepicker.min.js', to: 'public/assets/lib' },
-        { from: 'assets/lib/jquery.simplePagination.js', to: 'public/assets/lib' },
-        { from: 'assets/lib/notify.min.js', to: 'public/assets/lib' },
-        { from: 'assets/lib/intl-tel-input/**/*', to: 'public/assets/lib/intl-tel-input/' }
+        { from: 'assets/lib//**/*', to: 'public/assets/lib/' }
     ];
 
     var tasks = maps.map((m) => {
