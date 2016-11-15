@@ -27,6 +27,7 @@ export default class FountainSetting extends BaseElement {
 
     private hostname: string = null;
     private duration: number = 0;
+    private formatAmountInput = utils.formatAmountInput;
 
     private static unsubscribe = null;
 
@@ -58,8 +59,8 @@ export default class FountainSetting extends BaseElement {
             case PROFILE.DISABLE_FOUNTAIN_SUCCESS:
                 this.fountain.enabled = false;
                 this.disabled = true;
-                $('#amount').val(this.settings.amount);
-                $('#duration').val(this.duration);
+                $('#amount').val(utils.formatAmountInput(this.settings.amount));
+                $('#duration').val(utils.formatAmountInput(this.duration));
                 $('#memo').val(this.settings.message);
                 $('#domains').val(this.settings.domainStr);
                 break;
@@ -84,8 +85,9 @@ export default class FountainSetting extends BaseElement {
     enableFountain() {
         let userKey = getUserKey();
 
-        if (!this.settings) {
+        if (this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0) {
             this.disabled = false;
+            this.fountain.enabled = true;
             return;
         }
 
@@ -116,6 +118,7 @@ export default class FountainSetting extends BaseElement {
             return;
         }
         this.settings = settings;
+        this._setTimeSetting(settings);
 
         let params = {
             fountainId: this.fountain.fountain_id,

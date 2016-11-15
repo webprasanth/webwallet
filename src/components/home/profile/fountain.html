@@ -3,12 +3,12 @@
             <div class="col-xs-12">
                 <p><label>Amount of Flash tokens given to each person per period</label></p>
                 <div class="form-group">
-                    <input class="form-control" id="amount" on-keypress="filter-number-edit" type="text" value="{settings.amount}" disabled={this.disabled}>
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" type="text" value="{formatAmountInput(settings.amount)}" disabled={this.disabled}>
                 </div>
                 <p><label>Period for visitor to receive reward tokens once <i>(Minimum period is 10  minutes)</i></label></p>
                 <div class="form-input">
                     <div class="form-group col-xs-12 col-sm-6">
-                        <input class="form-control" id="duration" on-keypress="filter-number-edit" type="text" value="{duration}" disabled={this.disabled}>
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" type="text" value="{formatAmountInput(duration)}" disabled={this.disabled}>
                     </div>
                     <div class="form-group col-xs-12 col-sm-6">
                         <select id="time-unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}' disabled={this.disabled}>
