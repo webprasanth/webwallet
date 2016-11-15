@@ -74,6 +74,7 @@ export default class UserInfo extends BaseElement {
                 $("#newPassword").val('');
                 $("#confirmPassword").val('');
                 this.onCancel();
+                super.showMessage('', "Your password has been changed successfully!");
                 break;
             case PROFILE.GET_SSO_KEYPAIR_SUCCESS:
                 this.userKey.encryptedPrivKey = data.keypair.privateKey;
