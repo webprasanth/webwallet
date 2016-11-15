@@ -21,6 +21,12 @@
     .listItems .item {
          padding: 0 5px;
     }
+    .listItems .item .text-long {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* white-space: nowrap; */
+        /* max-width: 100%; */
+    }
     .listItems .item._mobile_amount{
         padding: 0 15px;
     }

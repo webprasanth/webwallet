@@ -814,8 +814,6 @@ h5.title-table{
     overflow: hidden;
 }
 .listItems .item .text-long{
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%;
 }
