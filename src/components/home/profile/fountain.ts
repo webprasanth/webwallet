@@ -61,7 +61,7 @@ export default class FountainSetting extends BaseElement {
                 break;
             case PROFILE.DISABLE_FOUNTAIN_SUCCESS:
                 this.fountain.enabled = false;
-                this.disabled = true;
+                this.disabled = this.hasFountainSetting();
 
                 if (this.settings.amount) {
                     $('#amount').val(utils.formatAmountInput(this.settings.amount));
@@ -89,12 +89,21 @@ export default class FountainSetting extends BaseElement {
         store.dispatch(profileActions.disableFountain(params));
     }
 
+    hasFountainSetting() {
+        return (this.settings && this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0);
+    }
+
     enableFountain() {
         let userKey = getUserKey();
 
-        if (this.settings && this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0) {
+        if (this.hasFountainSetting()) {
             this.disabled = false;
             this.fountain.enabled = true;
+            return;
+        }
+
+        this.settings = this._getFountainSetting();
+        if (!this.settings) {
             return;
         }
 
@@ -140,7 +149,7 @@ export default class FountainSetting extends BaseElement {
     }
 
     private _setSavedFountain(savedFountain) {
-
+        
         if (savedFountain.fountain) {
             this.settings = JSON.parse(savedFountain.fountain.settings);
             this.fountain = savedFountain.fountain;
@@ -157,10 +166,10 @@ export default class FountainSetting extends BaseElement {
             this.fountain.enabled = !!savedFountain.fountain.enabled;
 
             this._setTimeSetting(this.settings);
-            this.disabled = !this.fountain.enabled;
+            this.disabled = this.hasFountainSetting();
         } else {
             this.fountain = {enabled: false};
-            this.disabled = true;
+            this.disabled = false;
         }
     }
 
