@@ -1,4 +1,4 @@
-import { REQUEST } from '../action-types';
+import { REQUEST, PENDING } from '../action-types';
 import { commonActions } from '../common/actions';
 import { contactsActions } from '../contacts/actions';
 import store from '../store';
@@ -18,6 +18,7 @@ export const requestActions = {
                 dispatch(commonActions.toggleLoading(false));
                 if (resp.rc === 1) {
                     dispatch(this.sendRequestSuccess());
+                    dispatch({ type: PENDING.NEED_UPDATE_PENDING_REQUESTS });
                     RequestService.singleton().sendRequest(moneyInfo.bare_uid).then((resp: any) => {
                         if (resp.rc === 1) {
                             let criteria = {
