@@ -38,8 +38,8 @@
                             <div class="form-group send_function">
                                 <button type="button" class="btn btn-info" onclick={verifyCode}>Verify Now</button>
                             </div>
+                            <div show={errorMessage} class="pin-incorrect">{errorMessage}</div>
                         </div>
-                        <div show={errorMessage} class="pin-incorrect">{errorMessage}</div>
                         <div show={!showPhoneNumber} class="form-group text-left">
                             <p class="text-muted">
                                 Didn't get the code? Sometimes it can take up to 15 minutes. If it takes longer than that please click
