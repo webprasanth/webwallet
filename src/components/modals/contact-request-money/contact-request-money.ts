@@ -12,36 +12,17 @@ let tag = null;
 @template(ContactRequestMoneyTemplate)
 export default class ContactRequestMoney extends BaseElement {
     private formEnabled: boolean = true;
-    private requestProcessing: boolean = false;
     private requestSuccess: boolean = false;
     private formatCurrency = utils.formatCurrency;
     private AvatarServer = AndamanService.AvatarServer;
     private errorMessage = null;
-    private static unsubscribe = null;
 
     constructor() {
         super();
     }
 
-    onApplicationStateChanged() {
-        let state = store.getState();
-        let data = state.contactsData;
-        let actionType = state.lastAction.type;
-
-        if (actionType === REQUEST.REQUEST_MONEY_SUCCESS) {
-            this.requestSuccess = true;
-            this.formEnabled = false;
-        } else if (actionType === REQUEST.REQUEST_MONEY_FAILED) {
-            super.showError('', state.lastAction.data);
-        }
-
-        this.update();
-    }
-
     mounted() {
         tag = this;
-        if (ContactRequestMoney.unsubscribe) ContactRequestMoney.unsubscribe();
-        ContactRequestMoney.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         $('#requestByContact').modal('show');
         $('#contact-request-amount').keypress(utils.filterNumberEdit);
         $('#contact-request-amount').blur(utils.formatAmountInput);
@@ -62,17 +43,17 @@ export default class ContactRequestMoney extends BaseElement {
         }
 
         let note = $('#Note').val();
-        this.requestProcessing = true;
 
-        let moneyInfo = {
-            to: this.opts.sendAddr.username,
-            bare_uid: this.opts.sendAddr.email,
+        $('#requestByContact').modal('hide');
+
+        riot.mount('#confirm-send', 'send-request-confirm', {
+            uid: this.opts.sendAddr.username,
+            receiver_email: this.opts.sendAddr.email,
+            sender_note: note,
             amount,
-            currency: 1,
-            note
-        };
+            receiverWallet: this.opts.sendAddr
+        });
 
-        store.dispatch(requestActions.sendRequest(moneyInfo));
     }
 
     resetErrorMessages() {
