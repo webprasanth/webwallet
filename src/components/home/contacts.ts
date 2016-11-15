@@ -43,11 +43,11 @@ export default class HomeContacts extends Element {
     buildPagination() {
         if (this.resetPagination) {
             let state = store.getState();
-            let {contacts} = state.contactsData;
+            let {contacts, totalContacts} = state.contactsData;
 
             this.paginationObject = $(() => {
                 $('#contact-pagination').pagination({
-                    items: contacts.length,
+                    items: totalContacts,
                     itemsOnPage: PAGE_SIZE,
                     cssStyle: 'light-theme',
                     onPageClick: this.prepareContactUids
@@ -61,7 +61,7 @@ export default class HomeContacts extends Element {
         let data = state.contactsData;
         let type = state.lastAction.type;
 
-        switch(type) {
+        switch (type) {
             case CONTACTS.GET_ROSTER_SUCCESS:
                 this.contactUids = state.lastAction.data.roster.subs.map(item => {
                     return item.bare_uid;
