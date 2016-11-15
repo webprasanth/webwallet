@@ -49,6 +49,9 @@ export default class FountainSetting extends BaseElement {
 
         switch (type) {
             case PROFILE.ENABLE_FOUNTAIN_SUCCESS:
+                if (!this.settings) {
+                    this.settings = {};
+                }
                 this._setTimeSetting(this.settings);
                 this.fountain.enabled = true;
                 this.disabled = false;
@@ -89,7 +92,7 @@ export default class FountainSetting extends BaseElement {
     enableFountain() {
         let userKey = getUserKey();
 
-        if (this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0) {
+        if (this.settings && this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0) {
             this.disabled = false;
             this.fountain.enabled = true;
             return;

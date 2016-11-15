@@ -220,7 +220,9 @@ export const profileActions = {
 
     disableFountain(params) {
         return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
             ProfileService.singleton().disableFountain(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
                 if (resp.rc == 1) {
                     dispatch(profileActions.disableFountainSuccess(resp));
                 } else {
