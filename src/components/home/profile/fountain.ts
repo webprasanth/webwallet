@@ -59,10 +59,14 @@ export default class FountainSetting extends BaseElement {
             case PROFILE.DISABLE_FOUNTAIN_SUCCESS:
                 this.fountain.enabled = false;
                 this.disabled = true;
-                $('#amount').val(utils.formatAmountInput(this.settings.amount));
-                $('#duration').val(utils.formatAmountInput(this.duration));
-                $('#memo').val(this.settings.message);
-                $('#domains').val(this.settings.domainStr);
+
+                if (this.settings.amount) {
+                    $('#amount').val(utils.formatAmountInput(this.settings.amount));
+                    $('#duration').val(utils.formatAmountInput(this.duration));
+                    $('#memo').val(this.settings.message);
+                    $('#domains').val(this.settings.domainStr);
+                }
+                
                 break;
             case PROFILE.GET_FOUNTAIN_SUCCESS:
                 let saveFountain = state.profileData.savedFountain;

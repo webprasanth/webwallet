@@ -96,7 +96,9 @@ export const profileActions = {
 
     changePassword(params) {
         return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
             ProfileService.singleton().changePassword(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
                 if (resp.rc == 1) {
                     dispatch(profileActions.changePasswordSuccess(params));
                 } else {
@@ -176,7 +178,9 @@ export const profileActions = {
 
     enableFountain(params) {
         return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
             ProfileService.singleton().enableFountain(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
                 if (resp.rc == 1) {
                     dispatch(profileActions.enableFountainSuccess(resp));
                 } else {
