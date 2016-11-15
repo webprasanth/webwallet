@@ -37,45 +37,44 @@ export default class HomePage extends Element {
     initialize() {
         this.route((action) => {
             let mainContent = document.querySelector('#main-content');
-            switch (action) {
-                case 'activity':
-                case 'send':
-                case 'request':
-                case 'pending':
-                case 'contacts':
-                case 'profile':
-                    let id = this.widgets[action];
-                    if (this.lastView && this.lastView.id != id) {
-                        $(this.lastView).hide();
-                    }
-
-                    let el = mainContent.querySelector('#' + id);
-                    if (!el) {
-                        el = document.createElement('div');
-                        el.id = id;
-                        mainContent.appendChild(el);
-
-                        riot.mount(el, id);
-                    }
-                    else {
-                        $(el).show();
-                    }
-
-                    this.lastView = el;
-
-                    // To show pending number on memu
-                    let state = store.getState(); 
-                    if (action == 'activity' && state.pendingData.total_money_reqs == 0) {
-                        el = document.createElement('div');
-                        el.id = 'home-pending';
-                        mainContent.appendChild(el);
-                        riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', {isPreloadData: true});
-                        $(el).hide();
-                    }
-
-                    store.dispatch(tabActions.setActive(action));
-                    break;
+            let id = this.widgets[action];
+            if (this.lastView && this.lastView.id != id) {
+                $(this.lastView).hide();
             }
+
+            let el = mainContent.querySelector('#' + id);
+            if (!el) {
+                el = document.createElement('div');
+                el.id = id;
+                mainContent.appendChild(el);
+
+                riot.mount(el, id);
+            }
+            else {
+                $(el).show();
+            }
+
+            this.lastView = el;
+
+            // To show pending number on memu
+            let state = store.getState(); 
+            if (action == 'activity' && state.pendingData.total_money_reqs == 0) {
+                // Preload pending
+                el = document.createElement('div');
+                el.id = 'home-pending';
+                mainContent.appendChild(el);
+                riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', {isPreloadData: true});
+                $(el).hide();
+
+                // Preload profile
+                el = document.createElement('div');
+                el.id = 'home-profile';
+                mainContent.appendChild(el);
+                riot.mount(mainContent.querySelector('#home-profile'), 'home-profile', {isPreloadData: true});
+                $(el).hide();
+            }
+
+            store.dispatch(tabActions.setActive(action));
         });
 
         //set default values.
