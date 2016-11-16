@@ -112,6 +112,8 @@ export default class HomeActivity extends Element {
                     items: total_txns,
                     itemsOnPage: page_size,
                     cssStyle: 'light-theme',
+                    displayedPages: 3,
+                    edges: 1,
                     onPageClick: this.loadTxns
                 });
             });
@@ -150,7 +152,7 @@ export default class HomeActivity extends Element {
         var data = state.activityData;
         var type = state.lastAction.type;
 
-        switch(type)  {
+        switch (type) {
             case ACTIVITIES.GET_MORE_TXN_SUCCESS:
                 this.buildPagination();
                 this.txns = data.txns;
@@ -166,11 +168,13 @@ export default class HomeActivity extends Element {
                 break;
             case ACTIVITIES.GET_TXN_DETAIL_SUCCESS:
                 let self = this;
-                let opts = {cb: function() {
-                    self.isTnxDetailOpened = false;
-                }};
+                let opts = {
+                    cb: function () {
+                        self.isTnxDetailOpened = false;
+                    }
+                };
 
-                if (!this.isTnxDetailOpened){
+                if (!this.isTnxDetailOpened) {
                     this.isTnxDetailOpened = true;
                     riot.mount('#transaction-detail', 'transaction-details', opts);
                 }
@@ -184,7 +188,7 @@ export default class HomeActivity extends Element {
                 this.loadTxns();
                 break;
             case ACTIVITIES.GET_TXN_DETAIL_FAILED:
-                // Show error message
+            // Show error message
             default:
                 break;
         }

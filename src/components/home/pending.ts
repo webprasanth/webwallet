@@ -127,6 +127,8 @@ export default class HomePending extends Element {
                     items: total_money_reqs,
                     itemsOnPage: page_size,
                     cssStyle: 'light-theme',
+                    displayedPages: 3,
+                    edges: 1,
                     onPageClick: this.loadData
                 });
             });
