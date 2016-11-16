@@ -24,7 +24,7 @@ export default class HomeHeader extends BaseElement {
         let state = store.getState();
         if (HomeHeader.unsubscribe) HomeHeader.unsubscribe();
         HomeHeader.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-        store.dispatch(userActions.getBalance());
+        this.loadBalance();
 
         let user = store.getState().userData.user;
         if (user.profile_pic_url) {
@@ -68,6 +68,12 @@ export default class HomeHeader extends BaseElement {
         }
 
         this.update();
+    }
+
+    loadBalance() {
+        setTimeout(function() {
+            store.dispatch(userActions.getBalance());
+        }, 3000);
     }
 
     showRequestNotification() {
