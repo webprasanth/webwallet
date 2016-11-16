@@ -100,7 +100,7 @@
         top: 20px;
     }
     .main-container .main-content{
-        padding: 0;
+        padding: 0 0 70px 0;
         box-shadow: none;
         border: none;
     }

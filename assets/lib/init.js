@@ -28,6 +28,24 @@ function backLogin(){
   $('.loginForm').addClass('active');
   $('.sign-upF').show();
 }
+function datePickerAcitivity() {
+  if (!$('.date-activity-btn').hasClass('active')) {
+    $('.date-activity-btn').addClass('active');
+    $('.date-activity-form').show();
+  } else {
+    $('.date-activity-btn').removeClass('active');
+    $('.date-activity-form').hide();
+  }
+}
+function datePickerPending() {
+  if (!$('.date-pending-btn').hasClass('active')) {
+    $('.date-pending-btn').addClass('active');
+    $('.date-pending-form').show();
+  } else {
+    $('.date-pending-btn').removeClass('active');
+    $('.date-pending-form').hide();
+  }
+}
 (function($) {
   'Show tabs';
   $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function(e) {

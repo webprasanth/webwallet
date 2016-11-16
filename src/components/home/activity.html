@@ -4,31 +4,35 @@
 			<div class="title-page">
 				<h2 class="title">Your Transaction Activity</h2>
 			</div>
-			<div class="date-time pull-left">
-				<form class="form-inline">
-					<div class="form-group">
-						<div class='input-group date' id='datetimepicker1'>
-							<input id="fromDate" type='text' class="form-control" />
-							<span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-							</span>
+			<div class="form-date col-xs-12" style="position:relative">
+				<div class="search-date date-activity-btn hidden-sm hidden-md hidden-lg" onclick="datePickerAcitivity()"><span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">Search by date</span>
+	                </div>
+				<div class="date-time pull-left hidden-mobile date-activity-form">
+					<form class="form-inline">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker1'>
+								<input id="fromDate" type='text' class="form-control" />
+								<span class="input-group-addon">
+	                                <span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label>To</label>
+						<div class="form-group">
+							<label>To</label>
 
-						<div class='input-group date' id='datetimepicker2'>
-							<input id="toDate" type='text' class="form-control" />
-							<span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-							</span>
+							<div class='input-group date' id='datetimepicker2'>
+								<input id="toDate" type='text' class="form-control" />
+								<span class="input-group-addon">
+	                          <span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 						</div>
-					</div>
-					<div class="form-group btn-control">
-						<button type="button" class="btn btn-primary" onclick="{onShowButtonClick}">Show</button>
-						<button type="button" class="btn btn-warning" onclick="{onShowAllButtonClick}">Show All Activity</button>
-					</div>
-				</form>
+						<div class="form-group btn-control">
+							<button type="button" class="btn btn-primary" onclick="{onShowButtonClick}">Show</button>
+							<button type="button" class="btn btn-warning" onclick="{onShowAllButtonClick}">Show All Activity</button>
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="col-xs-12 main-content">
 				<ul id="tabs-togglable" class="nav nav-pills nav-tabs-responsive" role="tablist">
