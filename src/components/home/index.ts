@@ -125,17 +125,12 @@ export class MainNavBar extends Element {
 
         switch(type) {
             case PENDING.GET_MORE_REQUEST_SUCCESS:
-                if (pendingData.total_money_reqs > 0) {
-                    if (pendingData.money_requests[0]) {
-                        if (pendingData.money_requests[0].type == TAB.INCOMING) {
-                            this.incommingReqNum = pendingData.total_money_reqs;
-                        } else {
-                            this.outgoingReqNum = pendingData.total_money_reqs;
-                        }
-
-                        this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
-                    }
+                if (pendingData.type == TAB.INCOMING) {
+                    this.incommingReqNum = pendingData.total_money_reqs;
+                } else {
+                    this.outgoingReqNum = pendingData.total_money_reqs;
                 }
+                this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
                 break;
             default:
                 break;

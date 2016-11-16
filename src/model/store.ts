@@ -29,7 +29,7 @@ export interface ApplicationState {
     commonData: { isLoading: boolean, notificationData: any };
     activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any };
     sendData: { processing_duration: number };
-    pendingData: { money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
+    pendingData: { type: number, money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
     profileData: { avatarToken: string, wallet: any, keypair: any, twoFAInfo: any, fountain: any, savedFountain: any };
     contactsData: { contacts: any[], totalContacts: number, contactWallet: any };
     tabData: { tabs: ITAB[] };
