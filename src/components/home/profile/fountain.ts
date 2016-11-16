@@ -96,12 +96,6 @@ export default class FountainSetting extends BaseElement {
     enableFountain() {
         let userKey = getUserKey();
 
-        if (this.hasFountainSetting()) {
-            this.disabled = false;
-            this.fountain.enabled = true;
-            return;
-        }
-
         this.settings = this._getFountainSetting();
         if (!this.settings) {
             return;
