@@ -17,7 +17,6 @@ export default class App extends Element {
 
     onApplicationStateChanged() {
         this.state = store.getState();
-
         this.update();
     }
 }

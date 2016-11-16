@@ -25,6 +25,21 @@ gulp.task('replace', function () {
     cmd.exec();
 });
 
+gulp.task('copy-wiki-page', function () {
+    var maps = [
+        { from: 'privacy-policy.html', to: 'public/' },
+        { from: 'contact.html', to: 'public/' },
+        { from: 'support.html', to: 'public/' },
+        { from: 'terms-of-service.html', to: 'public/' },
+    ];
+
+    var tasks = maps.map((m) => {
+        return gulp.src(m.from).pipe(gulp.dest(m.to));
+    });
+
+    merge(tasks);
+});
+
 gulp.task('copy-html', function () {
     return gulp.src('index-production.html')
         .pipe(rename('index.html'))
@@ -59,7 +74,7 @@ gulp.task('copy-images', function () {
 
 gulp.task('copy-lib', function () {
     var maps = [
-        { from: 'assets/lib//**/*', to: 'public/assets/lib/' }
+        { from: 'assets/lib/**/*', to: 'public/assets/lib/' }
     ];
 
     var tasks = maps.map((m) => {
@@ -69,7 +84,7 @@ gulp.task('copy-lib', function () {
     merge(tasks);
 });
 
-gulp.task('copy-rs', ['copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon']);
+gulp.task('copy-rs', ['copy-wiki-page', 'copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon']);
 
 gulp.task('andaman', function () {
     var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
