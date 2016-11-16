@@ -166,7 +166,8 @@ export default class FountainSetting extends BaseElement {
             this.fountain.enabled = !!savedFountain.fountain.enabled;
 
             this._setTimeSetting(this.settings);
-            this.disabled = this.hasFountainSetting();
+
+            this.disabled = !this.fountain.enabled || !this.hasFountainSetting();
         } else {
             this.fountain = {enabled: false};
             this.disabled = false;
