@@ -1,10 +1,28 @@
 <main-navbar>
     <div class="navbar-sc">
         <div class="container">
+            <div class="top-menu">
+                <div class="logo hidden-sm hidden-md hidden-lg">
+                        <a><img src="assets/images/logo.png"/></a>
+                </div>
+                <div class="account hidden-sm hidden-md hidden-lg">
+                    <!-- {{#profile_pic_url}}
+                    <div class="avatar">
+                      <img src="" width="40" class="img-circle"/>
+                    </div>
+                    {{/profile_pic_url}} -->
+                    <div class="email-account" title="">
+                        <p>Crystal</p>
+                        <p>{userEmail}</p>
+                    </div>
+                </div>
+            </div>
+
             <ul class="nav navbar-nav">
-                <li each={tab in state.tabData.tabs} class={active: tab.isActive} onclick={onTabItemClick}>
+                <li each={tab in state.tabData.tabs} class={active: tab.isActive} id="{tab.id}" onclick={onTabItemClick}>
                     <a href="">{tab.name}<label show={(tab.id=='pending' && (pendingNum > 0))} class="orange-circle">{pendingNum}</label></a>
                 </li>
+                <li class="logout"><a onclick={onLogoutButtonClick}><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
             </ul>
         </div>
     </div>

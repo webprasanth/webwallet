@@ -273,39 +273,39 @@
         background: #519EE0 url("../images/pages/icon_activity_w.png") no-repeat 17px center;
         background-size: 19px 22px;
     }
-    .navbar-sc li#send_tab a{
+    .navbar-sc li#send a{
         background: url("../images/pages/icon_send.png") no-repeat 15px center;
         background-size: 21px 21px;
     }
-    .navbar-sc li#send_tab:hover a,
-    .navbar-sc li.active#send_tab a{
+    .navbar-sc li#send:hover a,
+    .navbar-sc li.active#send a{
         background: #519EE0 url("../images/pages/icon_send_w.png") no-repeat 15px center;
         background-size: 21px 21px;
     }
-    .navbar-sc #request_tab a{
+    .navbar-sc #request a{
         background: url("../images/pages/icon_request.png") no-repeat 15px center;
         background-size: 21px 21px;
     }
-    .navbar-sc li#request_tab:hover a,
-    .navbar-sc li.active#request_tab a{
+    .navbar-sc li#request:hover a,
+    .navbar-sc li.active#request a{
         background: #519EE0 url("../images/pages/icon_request_w.png") no-repeat 15px center;
         background-size: 21px 21px;
     }
-    .navbar-sc #pending_tab a{
+    .navbar-sc #pending a{
         background: url("../images/pages/icon_pending.png") no-repeat 15px center;
         background-size: 23px 24px;
     }
-    .navbar-sc #pending_tab:hover a,
-    .navbar-sc li.active#pending_tab a{
+    .navbar-sc #pending:hover a,
+    .navbar-sc li.active#pending a{
          background: #519EE0 url("../images/pages/icon_pending_w.png") no-repeat 15px center;
         background-size: 23px 24px;
     }
-    .navbar-sc #contact_tab a{
+    .navbar-sc #contacts a{
         background: url("../images/pages/icon_contact.png") no-repeat 15px center;
         background-size: 20px 20px;
     }
-    .navbar-sc #contact_tab:hover a,
-    .navbar-sc li.active#contact_tab a{
+    .navbar-sc #contacts:hover a,
+    .navbar-sc li.active#contacts a{
         background: #519EE0 url("../images/pages/icon_contact_w.png") no-repeat 15px center;
         background-size: 20px 20px;
     }
