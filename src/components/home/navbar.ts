@@ -5,27 +5,26 @@ import { userActions } from '../../model/users/actions';
 import { commonActions } from '../../model/common/actions';
 import NavbarTemplate from './navbar.html!text';
 import AndamanService from '../../model/andaman-service';
-import { USERS, COMMON, PROFILE } from '../../model/action-types';
-import { decimalFormat, utcDateToLocal } from '../../model/utils';
+import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
-
-let tag = null;
+import { TAB } from '../../model/pending/types';
 
 @template(NavbarTemplate)
 export default class Navbar extends BaseElement {
+
+    private static unsubscribe = null;
+    
     private userEmail: string = store.getState().userData.user.email;
     private avatarUrl: string = null;
-    private balance = 0;
-    private decimalFormat = decimalFormat;
-    private static unsubscribe = null;
     private state = null;
+    private outgoingReqNum = 0;
+    private incommingReqNum = 0;
+    private pendingNum = 0;
 
     mounted() {
-        tag = this;
         this.state = store.getState();
         if (Navbar.unsubscribe) Navbar.unsubscribe();
         Navbar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-        store.dispatch(userActions.getBalance());
 
         let user = store.getState().userData.user;
         if (user.profile_pic_url) {
@@ -34,10 +33,22 @@ export default class Navbar extends BaseElement {
     }
 
     onApplicationStateChanged() {
-        let state: ApplicationState = store.getState();
-        let self = this;
-        let message = '';
-        let note = state.commonData.notificationData;
+        this.state = store.getState();
+        let pendingData = this.state.pendingData;
+        let type = this.state.lastAction.type;
+
+        switch(type) {
+            case PENDING.GET_MORE_REQUEST_SUCCESS:
+                if (pendingData.type == TAB.INCOMING) {
+                    this.incommingReqNum = pendingData.total_money_reqs;
+                } else {
+                    this.outgoingReqNum = pendingData.total_money_reqs;
+                }
+                this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
+                break;
+            default:
+                break;
+        }
 
         this.update();
     }

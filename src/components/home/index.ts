@@ -14,7 +14,6 @@ import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
 import { FCEvent } from '../../model/types';
 import { PENDING } from '../../model/action-types';
-import { TAB } from '../../model/pending/types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
@@ -90,64 +89,6 @@ export default class HomePage extends Element {
 @template(MainHeaderTemplate)
 export class MainHeader extends Element {
     onLogoutButtonClick(event: Event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        let action = userActions.logout();
-        store.dispatch(action);
-    }
-}
-
-@template(MainNavBarTemplate)
-export class MainNavBar extends Element {
-    private static unsubscribe = null;
-    private outgoingReqNum = 0;
-    private incommingReqNum = 0;
-    private pendingNum = 0;
-    state: ApplicationState = <any>{ tabData: { tabs: [] } };
-
-    constructor() {
-        super();
-    }
-
-    mounted() {
-        this.state = store.getState();
-        this.update();
-
-        if (MainNavBar.unsubscribe) MainNavBar.unsubscribe();
-        MainNavBar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-    }
-    
-    onApplicationStateChanged() {
-        this.state = store.getState();
-        let pendingData = this.state.pendingData;
-        let type = this.state.lastAction.type;
-
-        switch(type) {
-            case PENDING.GET_MORE_REQUEST_SUCCESS:
-                if (pendingData.type == TAB.INCOMING) {
-                    this.incommingReqNum = pendingData.total_money_reqs;
-                } else {
-                    this.outgoingReqNum = pendingData.total_money_reqs;
-                }
-                this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
-                break;
-            default:
-                break;
-        }
-
-        this.update();
-    }
-
-    onTabItemClick(event: FCEvent) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        let tab = event.item.tab;
-        riot.route(tab.id);
-    }
-
-    onLogoutTabItemClick(event: FCEvent) {
         event.preventDefault();
         event.stopPropagation();
 
