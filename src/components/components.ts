@@ -3,6 +3,7 @@ import { riot, template, Element } from './riot-ts';
 import LandingPage from './landing-page/landing-page';
 import Home from './home/index';
 import HomeHeader from './home/header';
+import Navbar from './home/navbar';
 import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
 import App from './app/app';
@@ -30,7 +31,7 @@ export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
     LandingPage, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
-    SecurityQuestions, MessageDialog, VerifyPhone
+    SecurityQuestions, MessageDialog, VerifyPhone, Navbar
 };
 
 export function initialize() {
