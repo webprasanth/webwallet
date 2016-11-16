@@ -122,11 +122,8 @@ export const userActions = {
                 if (resp.rc === 1) {
                     UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
                         if (_resp.rc === 1) {
-                            UserService.singleton().getMyWallets().then((__resp: any) => {
-                                dispatch(userActions.loginSuccess(profile));
-                                dispatch(userActions.getProfile(profile));
-                                dispatch(userActions.getMyWallets(profile.auth_version, password));
-                            });
+                            // To enable notification
+                            dispatch(userActions.checkSessionToken(profile, password));
                         } else {
                             console.log('+++++ createFlashWallet failed, reason:', _resp);
                         }
@@ -147,6 +144,21 @@ export const userActions = {
 
     setRecoveryKeysFailed(resp) {
         return { type: USERS.SET_RECOVERY_KEY_FAILED, data: resp };
+    },
+
+    checkSessionToken(profile, password) {
+        let params = {
+            res:'web',
+            sessionToken: profile.sessionToken
+        };
+        
+        return (dispatch) => {
+            UserService.singleton().checkSessionToken(params).then((resp: any) => {
+                dispatch(userActions.loginSuccess(profile));
+                dispatch(userActions.getProfile(profile));
+                dispatch(userActions.getMyWallets(profile.auth_version, password));
+            });
+        }
     },
 
     login(email, password) {

@@ -28,7 +28,7 @@ interface IAndaman {
     set_password_v2(pipe, params: {}, cb: (resp) => any);
     set_recovery_keys(pipe, params: {}, cb: (resp) => any);
     create_flash_wallet(pipe, params: {}, cb: (resp) => any);
-    check_session_token(pipe, cb: (resp) => any);
+    check_session_token(pipe, params: {}, cb: (resp) => any);
 
     sso_get_keypair(pipe, params: {}, cb: (resp) => any);
     sso_change_password(pipe, params: {}, cb: (resp) => any);
