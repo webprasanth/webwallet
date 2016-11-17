@@ -140,7 +140,6 @@ export default class HomeRequest extends BaseElement {
 
         let callback = function() {
             this.clearForms();
-            store.dispatch(commonActions.needUpdatePending({}));
         }.bind(this);
 
         return riot.mount('#confirm-send', 'send-request-confirm', {
