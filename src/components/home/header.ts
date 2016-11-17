@@ -51,7 +51,10 @@ export default class HomeHeader extends BaseElement {
                 break;
             case COMMON.ON_SESSION_EXPIRED:
                 message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
-                super.showError('', message, function () { document.location.href = '/'; });
+                super.showError('', message, function () {
+                    commonActions.removeAllListeners();
+                    store.dispatch(userActions.logout());
+                });
                 break;
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
@@ -71,7 +74,7 @@ export default class HomeHeader extends BaseElement {
     }
 
     loadBalance() {
-        setTimeout(function() {
+        setTimeout(function () {
             store.dispatch(userActions.getBalance());
         }, 3000);
     }
