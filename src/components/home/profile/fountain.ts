@@ -143,25 +143,29 @@ export default class FountainSetting extends BaseElement {
     }
 
     private _setSavedFountain(savedFountain) {
-        
+
         if (savedFountain.fountain) {
-            this.settings = JSON.parse(savedFountain.fountain.settings);
             this.fountain = savedFountain.fountain;
 
-            let domains = this.settings.domains;
-            let message = this.settings.message;
-            let domainStr = '';
+            if (savedFountain.fountain.settings) {
+                this.settings = JSON.parse(savedFountain.fountain.settings);
+                let domains = this.settings.domains;
+                let message = this.settings.message;
+                let domainStr = '';
 
-            if (domains) {
-                domainStr = domains.join(', ');
+                if (domains) {
+                    domainStr = domains.join(', ');
+                }
+
+                this.settings.domainStr = domainStr;
+                this.fountain.enabled = !!savedFountain.fountain.enabled;
+
+                this._setTimeSetting(this.settings);
+                this.disabled = !this.fountain.enabled || !this.hasFountainSetting();
+            } else {
+                this.disabled = false;
             }
-
-            this.settings.domainStr = domainStr;
-            this.fountain.enabled = !!savedFountain.fountain.enabled;
-
-            this._setTimeSetting(this.settings);
-
-            this.disabled = !this.fountain.enabled || !this.hasFountainSetting();
+            
         } else {
             this.fountain = {enabled: false};
             this.disabled = false;
