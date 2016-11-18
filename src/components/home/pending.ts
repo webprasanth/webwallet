@@ -264,4 +264,28 @@ export default class HomePending extends Element {
             return 'assets/images/pages/coin.png';
         }
     }
+
+    showDetail(event: FCEvent) {
+        let acceptCb = () => {
+            this.acceptRequest(event);
+        }
+
+        let rejectCb = () => {
+            this.rejectRequest(event);
+        }
+
+        let cancelCb = () => {
+            this.cancelRequest(event);
+        }
+
+        let opts = {
+            detail: event.item,
+            pendingRequestStatus: this.getPendingRequestStatus(event.item.status, event.item.type),
+            cancelCb,
+            acceptCb,
+            rejectCb
+        }
+
+        riot.mount('#transaction-detail', 'request-detail', opts);
+    }
 }

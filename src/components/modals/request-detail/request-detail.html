@@ -1,0 +1,68 @@
+<request-detail>
+    <div class="modal fade" id="requestDetailDlg" tabindex="-1" role="dialog">
+        <div class="modal-dialog pending-transaction-detail" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Request Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="listItems">
+                        <div class="name-item">
+                            <img show={opts.detail.type==1} class="img-circle" src="{opts.detail.receiver_profile_pic_url ? AvatarServer + opts.detail.receiver_profile_pic_url : 'assets/images/pages/coin.png'}"
+                                width="40" />
+                            <img show={opts.detail.type!=1} class="img-circle" src="{opts.detail.sender_profile_pic_url ? AvatarServer + opts.detail.sender_profile_pic_url : 'assets/images/pages/coin.png'}"
+                                width="40" />
+                        </div>
+                        <div class="data-item">
+                            <div class="item">
+                                <div class="title">Name</div>
+                                <div class="data">
+                                    <p>
+                                        {opts.detail.type == 1 ? strimString(opts.detail.receiver_display_name ? opts.detail.receiver_display_name : opts.detail.receiver,
+                                        20) : strimString(opts.detail.sender_display_name ? opts.detail.sender_display_name
+                                        : opts.detail.sender, 20)}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="title">Email</div>
+                                <div class="data">
+                                    <p>
+                                        {opts.detail.type==1 ? opts.detail.receiver_email : opts.detail.sender_email}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItems">
+                        <div class="name-item">Amount</div>
+                        <div class="data-item">{decimalFormat(opts.detail.amount)}</div>
+                    </div>
+                    <div class="listItems">
+                        <div class="name-item">Status</div>
+                        <div class="data-item">
+                            {opts.pendingRequestStatus}
+                        </div>
+                    </div>
+                    <div class="listItems">
+                        <div class="name-item">Note</div>
+                        <div class="data-item">
+                            <p class="_value_attr form-control">{opts.detail.note ? strimString(opts.detail.note,50): ''}</p>
+                        </div>
+                    </div>
+                    <div class="listItems">
+                        <div class="name-item">Date/Time</div>
+                        <div class="data-item">{getDisplayDateTime(opts.detail.created_ts, opts.detail.timeZone)}</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button show={opts.detail.type==1} type="button" class="btn btn-primary" onclick={cancelRequest} data-dismiss="modal">Cancel Request</button>
+                    <button show={opts.detail.type!=1} type="button" class="btn btn-primary" onclick={acceptRequest} data-dismiss="modal">Accept</button>
+                    <button show={opts.detail.type!=1} type="button" class="btn btn-default" onclick={rejectRequest} data-dismiss="modal">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</request-detail>

@@ -65,7 +65,7 @@
 								<p class="req-no-result" show={money_requests.length==0}>There is no request in this date range.</p>
 								<div show={money_requests.length>0} class="listItems col-xs-12" each="{money_requests}">
 									<div class="item col-xs-3 hidden-xs">
-										<div class="avatar">
+										<div class="avatar" onclick={showDetail}>
 											<virtual show={type==1}>
 												<img src={getAvatarURL(receiver_profile_pic_url)} width="40" />
 											</virtual>
@@ -75,11 +75,11 @@
 										</div>
 										<div class="username data-long">
 											<virtual show={type==1}>
-												<p class="ellipsis-name">{strimString(receiver_display_name ? receiver_display_name : receiver, 20)}</p>
+												<p class="ellipsis-name" onclick={showDetail}>{strimString(receiver_display_name ? receiver_display_name : receiver, 20)}</p>
 												<a show={!status} id="cancel-request" class="" href="javascript:void(0)" onclick={cancelRequest}>Cancel</a>
 											</virtual>
 											<virtual show={type!=1}>
-												<p class="ellipsis-name text-long">{strimString(sender_display_name ? sender_display_name : sender, 20)}<br/></p>
+												<p class="ellipsis-name text-long" onclick={showDetail}>{strimString(sender_display_name ? sender_display_name : sender, 20)}<br/></p>
 												<p show={!status} class="" style="white-space: nowrap;">
 													<a id="accept-request" href="javascript:void(0)" onclick={acceptRequest}>Accept</a> /
 													<a id="reject-request" href="javascript:void(0)" onclick={rejectRequest}>Reject</a>
@@ -87,44 +87,44 @@
 											</virtual>
 										</div>
 									</div>
-									<div class="item hidden-xs data-long col-xs-2">
+									<div class="item hidden-xs data-long col-xs-2" onclick={showDetail}>
 										<p class="ellipsis-email text-long">
 											{type==1 ? receiver_email : sender_email}
 										</p>
 									</div>
-									<div class="item col-xs-6 hidden-lg hidden-sm hidden-md" onclick="showDetail">
+									<div class="item col-xs-6 hidden-lg hidden-sm hidden-md" onclick={showDetail}>
 										<p show={type==1} class="ellipsis-name mobile-name text-long">{strimString(receiver_display_name ? receiver_display_name : receiver, 20)}</p>
 										<p show={type!=1} class="ellipsis-name mobile-name text-long">{strimString(sender_display_name ? sender_display_name : sender, 20)}</p>
 										<p class="ellipsis-email mobile-email text-long">
 											{type==1 ? receiver_email : sender_email}
 										</p>
 									</div>
-									<div class="item col-xs-2 text-right _mobile_amount">
+									<div class="item col-xs-2 text-right _mobile_amount" onclick={showDetail}>
 										<p class="amount">{decimalFormat(amount)}</p>
 									</div>
 
-										<div  show={type==1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active btn-cancel pull-right">
-											<a show={!status} class="col-cancel icon-mobile" href="javascript:void(0)" onclick={cancelRequest}>
-												<span class="glyphicon glyphicon-remove-circle"></span>
+									<div show={type==1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active btn-cancel pull-right">
+										<a show={!status} class="col-cancel icon-mobile" href="javascript:void(0)" onclick={cancelRequest}>
+											<span class="glyphicon glyphicon-remove-circle"></span>
+										</a>
+									</div>
+									<div show={type!=1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active">
+										<virtual show={!status}>
+											<a class="icon-mobile" style="color: #008000;" href="javascript:void(0)" onclick={acceptRequest}>
+												<span class="glyphicon glyphicon-ok-circle"></span>
 											</a>
-										</div>
-										<div  show={type!=1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active">
-											<virtual show={!status}>
-												<a class="icon-mobile" style="color: #008000;" href="javascript:void(0)" onclick={acceptRequest}>
-													<span class="glyphicon glyphicon-ok-circle"></span>
-												</a>
-												<a class="icon-mobile" href="javascript:void(0)" style="margin-right: 0; color:#DB2828" onclick={rejectRequest}>
-													<span class="glyphicon glyphicon-ban-circle"></span>
-												</a>
-											</virtual>
-										</div>
-									<div class="col-xs-1 hidden-xs col-status">
+											<a class="icon-mobile" href="javascript:void(0)" style="margin-right: 0; color:#DB2828" onclick={rejectRequest}>
+												<span class="glyphicon glyphicon-ban-circle"></span>
+											</a>
+										</virtual>
+									</div>
+									<div class="col-xs-1 hidden-xs col-status" onclick={showDetail}>
 										{getPendingRequestStatus(status, type)}
 									</div>
-									<div class="item hidden-xs col-xs-2 data-long col-note">
+									<div class="item hidden-xs col-xs-2 data-long col-note" onclick={showDetail}>
 										<p class="text-long">{note? strimString(note , 50): ''}</p>
 									</div>
-									<div class="hidden-xs item data-long col-xs-2" style="white-space: nowrap;">
+									<div class="hidden-xs item data-long col-xs-2" style="white-space: nowrap;" onclick={showDetail}>
 										<p>{getDisplayDateTime(created_ts, timeZone)}</p>
 									</div>
 								</div>
