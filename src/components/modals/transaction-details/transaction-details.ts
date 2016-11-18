@@ -11,9 +11,10 @@ export default class TransactionDetails extends Element {
 
     private AvatarServer = AndamanService.AvatarServer;
 
-    private satoshiToFlash = satoshiToFlash;
-    private formatCurrency = formatCurrency;
-    private decimalFormat = decimalFormat;
+    satoshiToFlash = satoshiToFlash;
+    formatCurrency = formatCurrency;
+    decimalFormat = decimalFormat;
+    getDisplayDateTime = getDisplayDateTime;
 
     constructor() {
         super();
@@ -30,6 +31,6 @@ export default class TransactionDetails extends Element {
         });
     }
 
-    getDisplayDateTime = getDisplayDateTime;
+
 
 }
