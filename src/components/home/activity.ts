@@ -111,7 +111,6 @@ export default class HomeActivity extends Element {
                 $('#activity-pagination').pagination({
                     items: total_txns,
                     itemsOnPage: page_size,
-                    cssStyle: 'light-theme',
                     displayedPages: 3,
                     edges: 1,
                     onPageClick: this.loadTxns

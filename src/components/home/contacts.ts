@@ -49,7 +49,6 @@ export default class HomeContacts extends Element {
                 $('#contact-pagination').pagination({
                     items: totalContacts,
                     itemsOnPage: PAGE_SIZE,
-                    cssStyle: 'light-theme',
                     displayedPages: 3,
                     edges: 1,
                     onPageClick: this.prepareContactUids
