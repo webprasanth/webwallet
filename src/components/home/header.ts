@@ -34,6 +34,39 @@ export default class HomeHeader extends BaseElement {
     }
 
     onApplicationStateChanged() {
+        // let opts = {
+        //     // whether to hide the notification on click
+        //     clickToHide: true,
+        //     // whether to auto-hide the notification
+        //     autoHide: true,
+        //     // if autoHide, hide after milliseconds
+        //     autoHideDelay: 500000,
+        //     // show the arrow pointing at the element
+        //     arrowShow: true,
+        //     // arrow size in pixels
+        //     arrowSize: 5,
+        //     // position defines the notification position though uses the defaults below
+        //     position: '...',
+        //     // default positions
+        //     elementPosition: 'bottom left',
+        //     globalPosition: 'top right',
+        //     // default style
+        //     style: 'bootstrap',
+        //     // default class (string or [string])
+        //     className: 'error',
+        //     // show animation
+        //     showAnimation: 'slideDown',
+        //     // show animation duration
+        //     showDuration: 400,
+        //     // hide animation
+        //     hideAnimation: 'slideUp',
+        //     // hide animation duration
+        //     hideDuration: 200,
+        //     // padding between element and notification
+        //     gap: 2
+        // };
+        // $.notify.defaults(opts);
+
         let state: ApplicationState = store.getState();
         let self = this;
         let message = '';
