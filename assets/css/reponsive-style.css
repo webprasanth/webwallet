@@ -528,6 +528,9 @@
 }
 
 @media only screen and (max-width: 400px) {
+    .transaction-detail .listItems .data-item .item .data{
+        width: 80%;
+    }
     .myaccount-page .btn-fountain button{
         width: 100%;
         margin-bottom: 15px;
@@ -539,10 +542,6 @@
     #confirm-send-money .modal-dialog,
     #confirm-send-money .modal-dialog {
         width: 91%;
-    }
-    .transaction-detail .listItems .data-item .item p,
-    .pending-transaction-detail .listItems .data-item .item p {
-        max-width: 135px;
     }
     .pending-page .listItems .btn-active a.col-cancel {
         margin-right: 0;
@@ -564,10 +563,6 @@
     }
     .modal-dialog {
         width: auto;
-    }
-    .transaction-detail .listItems .data-item .item p,
-    .pending-transaction-detail .listItems .data-item .item p{
-        max-width: 125px;
     }
     .pagination>li>a, .pagination>li>span{
         padding: 4px 9px;

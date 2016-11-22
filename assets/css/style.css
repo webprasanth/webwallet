@@ -733,8 +733,9 @@ h5.title-table{
     padding: 0 0 3px 0;
 }
 .transaction-detail .listItems .data-item .item .data{
-    width: 100%;
+    width: 85%;
     line-height: 22px;
+    word-break: break-all;
 }
 .transaction-detail .listItems .data-item .item .data span{
     word-wrap: break-word;
@@ -745,8 +746,8 @@ h5.title-table{
     margin: 0;
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
-    white-space: nowrap;
-    width: 90%;
+    /*white-space: nowrap;*/
+    width: 100%;
 }
 .transaction-detail .listItems .data-item .item .title,
 .pending-transaction-detail .listItems .data-item .item .title{
