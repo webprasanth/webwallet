@@ -148,10 +148,10 @@ export const userActions = {
 
     checkSessionToken(profile, password) {
         let params = {
-            res:'web',
+            res: 'web',
             sessionToken: profile.sessionToken
         };
-        
+
         return (dispatch) => {
             UserService.singleton().checkSessionToken(params).then((resp: any) => {
                 dispatch(userActions.loginSuccess(profile));
@@ -191,6 +191,7 @@ export const userActions = {
     },
     logout() {
         return (dispatch) => {
+            this.removeAccessToken();
             utils.removeUserKey();
             dispatch(userActions._logout());
         };

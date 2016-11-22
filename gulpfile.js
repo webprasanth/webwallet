@@ -16,7 +16,7 @@ gulp.task('build-debug-js', function () {
 });
 
 gulp.task('uglify', function () {
-    var cmd = new run.Command('uglifyjs  public/assets/js/build.js > public/assets/js/build2.js --mangle --reserved \'Array,BigInteger,Boolean,Buffer,ECPair,Function,Number,Point\'');
+    var cmd = new run.Command('uglifyjs public/assets/js/build.js > public/assets/js/build2.js --mangle --reserved \'Array,BigInteger,Boolean,Buffer,ECPair,Function,Number,Point\'');
     cmd.exec();
 });
 
