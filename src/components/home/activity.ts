@@ -23,6 +23,7 @@ export default class HomeActivity extends Element {
      */
     private resetPagination = false;
     private currentActiveTabId = 0;
+    private currentActiveTabName = 'All Transactions';
 
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
@@ -163,6 +164,7 @@ export default class HomeActivity extends Element {
                 })[0];
                 let type = activeTab ? activeTab.id : 0;
                 this.currentActiveTabId = type;
+                this.currentActiveTabName = activeTab.name;
                 this.loadTxns();
                 break;
             case ACTIVITIES.GET_TXN_DETAIL_SUCCESS:

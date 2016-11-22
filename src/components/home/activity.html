@@ -6,7 +6,7 @@
 			</div>
 			<div class="form-date col-xs-12" style="position:relative">
 				<div class="search-date date-activity-btn hidden-sm hidden-md hidden-lg" onclick="datePickerAcitivity()"><span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">Search by date</span>
-	                </div>
+				</div>
 				<div class="date-time pull-left hidden-mobile date-activity-form">
 					<form class="form-inline">
 						<div class="form-group">
@@ -43,7 +43,7 @@
 					</li>
 				</ul>
 				<div class="col-xs-12">
-					<h5 class="title-table">Payments Sent from {getDisplayDate(fromDateObject.datepicker('getDate'))} to {getDisplayDate(toDateObject.datepicker('getDate'))}</h5>
+					<h5 class="title-table">{currentActiveTabName} from {getDisplayDate(fromDateObject.datepicker('getDate'))} to {getDisplayDate(toDateObject.datepicker('getDate'))}</h5>
 					<div class="table-responsive">
 						<table class="table table-hover table-striped" show="{txns.length > 0}">
 							<thead>
