@@ -356,6 +356,7 @@
     }
 }
 @media only screen and (max-width: 736px) {
+    body{padding: 0;}
     .send-page textarea,
     .request-page textarea{
         width: 100%;
@@ -365,6 +366,16 @@
     }
     .notifyjs-bootstrap-base{
         white-space: normal !important;
+    }
+    .footer,
+    .create-wallet-btn{
+        display: none;
+    }
+    #main-content{
+        margin: 0;
+    }
+    .main-container .main-content{
+        padding-bottom:0;
     }
 }
 
@@ -400,6 +411,7 @@
     }
     .pagination{
         font-size: 13px;
+        display: flex;
     }
     .tab-mobile{display: block;}
     .hidden-small{display: none}
@@ -470,7 +482,9 @@
 }
 
 @media only screen and (max-width: 480px) {
-
+    .nav-pills>li>a{
+        min-height: 60px;
+    }
     .wiki-page .support-page .title-note h2{
         font-size: 20px;
     }
@@ -507,7 +521,6 @@
         margin: 1px 4px;
     }
     footer ul li a, footer ul li a:hover, footer ul li a:focus {
-        font-size: 12px;
     }
     footer p {
         font-size: 13px;

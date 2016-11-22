@@ -1072,7 +1072,7 @@ footer .container {
       float: none;
       margin: 0 auto;
       min-width: 280px;
-      margin-top: 10px;
+      margin-top: 30px;
       text-align: center;
     }
     .home-page header .btn-login{
@@ -1097,11 +1097,17 @@ footer .container {
     .slide-6 h3{
       font-size: 20pt;
     }
-    .slide-8 .bg-white,
-    .home-page footer
+    .slide-8 .bg-white
     {
       display: none;
     }
+     .home-page footer{
+       display: block;
+       position: fixed !important;
+     }
+     .home-page footer ul li{
+       margin: 1px 15px;
+     }
     .advertiser-content .content.number-5{
       margin: 25px 0;
     }
@@ -1122,6 +1128,9 @@ footer .container {
     }
     .slide-9 p strong{
       font-size: 17px;
+    }
+    .btn-backtop{
+      padding-bottom: 90px;
     }
     /*==========*/
 }
