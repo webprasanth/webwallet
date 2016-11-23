@@ -194,19 +194,26 @@
     padding: 5px 12px
 
 }
-.home-page .pre-sale{
-    position: fixed;
-    left: -5px;
-    z-index: 1000;
-    top: 90%;
+.home-safecash #sign_up_form input {
+    border-radius: 0;
+    font-size: 18px;
+    padding: 5px 12px;
+    background: transparent;
+    box-shadow: none;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    text-align: center;
+    color: #fff;
 }
-.home-page .pre-sale img{
-  width: 65%;
-  height: 80px;
+.btn-newpage p{
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #61aff8;
+    margin: 20px 20px 0;
+    font-weight: bold;
 }
-.home-page .pre-sale:hover{
-  left: 0px;
-}
+.btn-newpage p a{color: #61aff8}
 .home-safecash .btn-login button{
     color: #286fbf;
     font-size: 21px;
@@ -328,6 +335,9 @@
 .slide-1 #sign_up_form{
     padding: 20px 0 0px 0;
     color: #ffffff;
+    width: 90%;
+    margin: 0 auto;
+    float: none;
 }
 .slide-1 h2{
     font-size: 42pt;
@@ -975,6 +985,17 @@ footer .container {
   .home-safecash header{
     margin-top: 0;
   }
+  .btn-newpage{position: absolute; top: 0}
+  .btn-newpage p{
+    margin: 14px 14px 0;
+  }
+  .btn-newpage p a{font-size: 12pt !important}
+  .home-page header img{
+    max-width: 170px;
+  }
+  .form-mobile .logo img{
+    max-width: 190px;
+  }
   .home-safecash p,
   .text-last,
   .slide-4 ul li,
@@ -992,7 +1013,6 @@ footer .container {
   .home-page header img{
     margin: 0;
     padding: 15px;
-    max-width: 230px
   }
   .home-page .slide-top .top-content{
     position: static;
@@ -1043,6 +1063,7 @@ footer .container {
         width: 100%;
         height: auto;
         border-radius: 4px;
+        color: #555;
     }
     .slide-1 #box-signup input#email-create{
       text-align: left;
@@ -1135,10 +1156,6 @@ footer .container {
     /*==========*/
 }
 @media only screen and (max-width: 600px) {
-
-  .form-mobile .logo img{
-    max-width: 190px;
-  }
     .slide-1 h2 img {max-width: 110px;}
     .slide-1 p.p1-line{font-size: 13pt;}
     .slide-1 p.p2-line{font-size: 11pt;}
