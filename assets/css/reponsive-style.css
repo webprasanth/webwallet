@@ -373,9 +373,25 @@
     }
     #main-content{
         margin: 0;
+        padding: 40px 0;
     }
     .main-container .main-content{
         padding-bottom:0;
+    }
+    .contact-page#main-content{
+        padding-top: 65px;
+    }
+    .support-page .container{
+        padding: 0;
+    }
+    .forgot-pwd-page {
+        margin: 5% auto 15%;
+        float: left;
+        width: 100%;
+        margin-top: 55px;
+    }
+    .form-submit-email h3, .form-questions h3{
+        font-size: 12pt;
     }
 }
 

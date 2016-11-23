@@ -7,23 +7,25 @@
 		</div>
 	</header>
 
-	<div class="form-common form-submit-email">
-		<virtual if={!isVerifyEmailSent}>
-			<h3>FORGOT YOUR PASSWORD?</h3>
-			<p style="margin:0 0 20px 0">Please enter your email address below. You will receive a link to reset your password.</p>
-			<div class="form-group">
-				<input class="form-control" id="email" type="email" name="email" placeholder="Email address">
-			</div>
-			<div class="text-right">
-				<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
-				<button class="btn btn-primary" onclick={sendEmail}>Submit</button>
-			</div>
-		</virtual>
-		<virtual if={isVerifyEmailSent}>
-			<div class="text-center notify">
-				<p>We sent you an email with a link to reset your password</p>
-				<p>Please check your email inbox/spam folder</p>
-			</div>
-		</virtual>
+	<div class="forgot-pwd-page col-xs-12">
+		<div class="form-common form-submit-email">
+			<virtual  if={!isVerifyEmailSent}>
+				<h3>FORGOT YOUR PASSWORD?</h3>
+				<p style="margin:0 0 20px 0">Please enter your email address below. You will receive a link to reset your password.</p>
+				<div class="form-group">
+					<input class="form-control" id="email" type="email" name="email" placeholder="Email address">
+				</div>
+				<div class="text-right">
+					<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
+					<button class="btn btn-primary" onclick={sendEmail}>Submit</button>
+				</div>
+			</virtual>
+			<virtual if={isVerifyEmailSent}>
+				<div class="text-center notify">
+					<p>We sent you an email with a link to reset your password</p>
+					<p>Please check your email inbox/spam folder</p>
+				</div>
+			</virtual>
+		</div>
 	</div>
 </submit-email>

@@ -1032,7 +1032,7 @@ footer p {
 /*Submit email*/
 .form-submit-email h3,
 .form-questions h3{
-    background: url("../images/bg-icon-login.png") no-repeat 0 center;
+    background: url("../images/pages/bg-icon-login.png") no-repeat 0 center;
     padding: 3px 0 6px 45px;
     background-size: 35px;
     color: #303030;
