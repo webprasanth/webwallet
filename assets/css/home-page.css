@@ -374,6 +374,18 @@
     font-weight: bold;
 
 }
+.btn-crowdsale{
+    position: fixed;
+    background-color: #FAA116;
+    top: 60%;
+    left: 0;
+    color: #fff;
+    font-size: 21pt;
+    padding: 6px 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.btn-crowdsale:hover,
 .slide-1 .btn-create-wallet a:hover{
     background-color: #66B933;
 }
