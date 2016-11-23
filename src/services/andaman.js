@@ -7,7 +7,7 @@ var clt_pub_p = 'r4dHh2mSrijGSOK76k1DssBNcrjyGrV4LA9abowFTAk=';
 var clt_priv_p = 'Uih8sq+XRSbQO4ySOs0a0WovV8YDdw28efPf+NPt9M4=';
 
 var opts = {
-    host: 'qakeys.flashcoin.io',
+    host: 'keys.flashcoin.io',
     proto: 'wss',
     port: 443,
     server_publicKey: '5Jz3NhPHKUYP2JfU2n+xsT8Q5xC57yhhWa2Mdprva0A='
