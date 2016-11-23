@@ -77,7 +77,7 @@ export default class ContactSendMoney extends BaseElement {
             return tag.errorMessage = 'You do not have enough funds to make this payment';
         }
 
-        let memo = $('#Note').val();
+        this.opts.sendAddr.memo = $('#Note').val();
 
         $('#sendByContact').modal('hide');
 
