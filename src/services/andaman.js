@@ -23,6 +23,7 @@ var readyPromise = null;
 var isReady = false;
 var andamanApi = new API();
 var customEventPipe = {};
+var _sessionToken = null;
 
 module.exports = {
     ready: function () {
@@ -64,10 +65,12 @@ module.exports = {
             customEventPipe.setAuthInfo = function (authVersion, sessionToken) {
                 this.auth_version = authVersion;
                 this.session_token = sessionToken;
+                _sessionToken = sessionToken;
             };
 
             customEventPipe.setSessionToken = function (sessionToken) {
                 this.session_token = sessionToken;
+                _sessionToken = sessionToken;
             };
 
             customEventPipe.sendfile = function (context, file, cb, size) {
@@ -75,10 +78,13 @@ module.exports = {
             };
 
             eventPipe.on('connect', function () {
-                //console.log(eventPipe.id, 'connected with the server');
                 readyPromise = null;
                 isReady = true;
                 resolve({ andaman: andamanApi, pipe: customEventPipe });
+
+                if (_sessionToken) {
+                    andamanApi.check_session_token(customEventPipe, {sessionToken: _sessionToken, res: 'web'}, function(res) {});
+                }
             });
         });
         return readyPromise;
