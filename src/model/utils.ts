@@ -234,7 +234,7 @@ function toFixedFloor(x, decimal) {
     return (y / factor).toFixed(decimal)
 }
 
-export function toOrginalNumber(Decimalnumber) {
+export function toOrginalNumber(Decimalnumber = '') {
     return Number(Decimalnumber.toString().replace(/,/g, ""))
 }
 

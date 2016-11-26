@@ -65,4 +65,16 @@ export default class SendMoneyConfirm extends BaseElement {
         this.sending = true;
         store.dispatch(sendActions.createRawTx(this.opts.wallet, this.opts.amount, this.opts.wallet.memo));
     }
+
+    getDisplayNameInfo() {
+        if (this.opts.wallet.display_name) {
+            return this.opts.wallet.display_name;
+        } else {
+            if (!this.opts.wallet.email || this.opts.wallet.email.length == 0) {
+                return this.opts.wallet.address;
+            } else {
+                return '';
+            }
+        }
+    }
 }

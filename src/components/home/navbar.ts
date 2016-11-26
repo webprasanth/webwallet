@@ -13,16 +13,18 @@ import { TAB } from '../../model/pending/types';
 export default class Navbar extends BaseElement {
 
     private static unsubscribe = null;
-    
+
     private userEmail: string = store.getState().userData.user.email;
     private avatarUrl: string = null;
     private state = null;
     private outgoingReqNum = 0;
     private incommingReqNum = 0;
     private pendingNum = 0;
+    private tabs = null;
 
     mounted() {
         this.state = store.getState();
+        this.tabs = this.state.tabData.tabs;
         if (Navbar.unsubscribe) Navbar.unsubscribe();
         Navbar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
 
@@ -34,10 +36,11 @@ export default class Navbar extends BaseElement {
 
     onApplicationStateChanged() {
         this.state = store.getState();
+        this.tabs = this.state.tabData.tabs;
         let pendingData = this.state.pendingData;
         let type = this.state.lastAction.type;
 
-        switch(type) {
+        switch (type) {
             case PENDING.GET_MORE_REQUEST_SUCCESS:
                 if (pendingData.type == TAB.INCOMING) {
                     this.incommingReqNum = pendingData.total_money_reqs;
