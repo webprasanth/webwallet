@@ -142,5 +142,8 @@
     "systemjs-builder": "^0.15.34",
     "tweetnacl-util": "^0.13.3",
     "typescript": "^2.0.8"
+  },
+  "dependencies": {
+    "compression": "^1.6.2"
   }
 }
