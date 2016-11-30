@@ -14,7 +14,8 @@ riot.route((action) => {
     currentAction = action;
 
     if (action == 'login') {
-        return riot.mount('#main', 'landing-page');
+        // return riot.mount('#main', 'landing-page');
+        return riot.mount('#main', 'sso');
     }
 
     var state = store.getState();

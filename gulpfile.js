@@ -27,6 +27,7 @@ gulp.task('replace', function () {
 
 gulp.task('copy-wiki-page', function () {
     var maps = [
+        { from: 'home.html', to: 'public/' },
         { from: 'privacy-policy.html', to: 'public/' },
         { from: 'contact.html', to: 'public/' },
         { from: 'support.html', to: 'public/' },

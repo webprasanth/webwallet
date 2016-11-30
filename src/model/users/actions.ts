@@ -13,6 +13,10 @@ import secrets from 'secrets.js-grempe';
 
 export const userActions = {
 
+    setAuth(user) {
+        UserService.singleton().setAuthInfo(user);
+    },
+
     signup(params) {
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
@@ -183,6 +187,32 @@ export const userActions = {
             });
         };
     },
+
+    login2(resp) {
+        let password = resp.password;
+        let userKey = {
+            idToken: resp.profile.idToken,
+            encryptedPrivKey: resp.profile.privateKey,
+            publicKey: resp.profile.publicKey
+        };
+        utils.storeUserKey(userKey);
+
+        return (dispatch) => {
+            if (resp.rc === 1) {
+                if (resp.profile.totp_enabled === 1) {
+                    let loginData = { profile: resp.profile, password: password };
+                    dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
+                } else {
+                    dispatch(userActions.loginSuccess(resp.profile));
+                    dispatch(userActions.getProfile(resp.profile));
+                    dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
+                }
+            } else {
+                dispatch(userActions.loginFailed(resp));
+            }
+        };
+    },
+
     loginFailed(resp) {
         return { type: USERS.LOGIN_FAILED, data: resp };
     },

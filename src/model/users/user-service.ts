@@ -16,6 +16,13 @@ export default class UserService {
         return UserService._instance;
     }
 
+    setAuthInfo(resp) {
+        AndamanService.ready().then((opts) => {
+            var pipe = opts.pipe;
+            pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
+        });
+    }
+
     signup(params) {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {

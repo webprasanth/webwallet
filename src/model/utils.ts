@@ -78,13 +78,8 @@ export function getDisplayDateTime(date, toTimeZone) {
     return _tmp(date).local().format(MOMENT_FORMAT.DATE_TIME_2);
 }
 
-export function setLocation(location) {
-    localStorage.setItem('location', JSON.stringify(location));
-    this.location = location;
-}
-
 export function getLocation() {
-    let str = localStorage.getItem('location');
+    let str = localStorage.getItem('flc-location');
     let location = null;
     if (str && str.length > 0) {
         location = JSON.parse(str);
