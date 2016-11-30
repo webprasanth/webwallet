@@ -27,7 +27,7 @@ gulp.task('replace', function () {
 
 gulp.task('copy-wiki-page', function () {
     var maps = [
-        { from: 'home.html', to: 'public/' },
+        { from: 'index.html', to: 'public/' },
         { from: 'privacy-policy.html', to: 'public/' },
         { from: 'contact.html', to: 'public/' },
         { from: 'support.html', to: 'public/' },
@@ -43,7 +43,7 @@ gulp.task('copy-wiki-page', function () {
 
 gulp.task('copy-html', function () {
     return gulp.src('index-production.html')
-        .pipe(rename('index.html'))
+        .pipe(rename('home.html'))
         .pipe(gulp.dest('public'));
 });
 

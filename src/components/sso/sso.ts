@@ -33,9 +33,9 @@ export default class Sso extends BaseElement {
         } else {
             let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             if (isMobile) {
-                window.location.href = "home.html";
+                window.location.href = "index.html";
             } else {
-                window.location.href = "/home.html";
+                window.location.href = "/index.html";
             }
         }
     }
