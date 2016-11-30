@@ -18,6 +18,7 @@ export default class HomeHeader extends BaseElement {
     private balance = 0;
     private decimalFormat = decimalFormat;
     private static unsubscribe = null;
+    private isDisconnect = false;
 
     mounted() {
         tag = this;
@@ -71,6 +72,7 @@ export default class HomeHeader extends BaseElement {
         let self = this;
         let message = '';
         let note = state.commonData.notificationData;
+        tag.isDisconnect = state.commonData.isDisconnect;
 
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:

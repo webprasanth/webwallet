@@ -54,6 +54,11 @@ interface IAndaman {
     add_listener_add_txn(pipe, cb: (resp) => any);
     add_listener_request_money(pipe, cb: (resp) => any);
     add_listener_mark_money_requests(pipe, cb: (resp) => any);
+
+    // Listen to local event
+    add_disconnect_status_listener(pipe, cb: (resp) => any);
+    add_connect_status_listener(pipe, cb: (resp) => any);
+
     remove_all_listeners(pipe);
 }
 

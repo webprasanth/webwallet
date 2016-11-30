@@ -83,7 +83,7 @@ module.exports = {
                 resolve({ andaman: andamanApi, pipe: customEventPipe });
 
                 if (_sessionToken) {
-                    andamanApi.check_session_token(customEventPipe, {sessionToken: _sessionToken, res: 'web'}, function(res) {});
+                    andamanApi.check_session_token(customEventPipe, { sessionToken: _sessionToken, res: 'web' }, function (res) { });
                 }
             });
         });

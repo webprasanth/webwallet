@@ -637,6 +637,17 @@ internals.API.prototype.remove_all_listeners = function (pipe) {
 	pipe.removeAllListeners(Event.KEYS_MARK_MONEY_REQ_RECV);
 };
 
+//Listen to local events
+internals.API.prototype.add_disconnect_status_listener = function (pipe, callback) {
+	pipe.removeAllListeners('disconnect');
+	pipe.on('disconnect', callback);
+};
+
+internals.API.prototype.add_connect_status_listener = function (pipe, callback) {
+	pipe.removeAllListeners('connect');
+	pipe.on('connect', callback);
+};
+
 var ROSTER_OP = {
 	REQUEST: 1,
 	APPROVE: 2,

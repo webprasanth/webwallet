@@ -74,6 +74,24 @@ export default class CommonService {
         });
     }
 
+    onDisconnect(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_disconnect_status_listener(pipe, cb);
+        });
+    }
+
+    onConnect(cb) {
+        AndamanService.ready().then(opts => {
+            let andaman = opts.andaman;
+            let pipe = opts.pipe;
+
+            andaman.add_connect_status_listener(pipe, cb);
+        });
+    }
+
     removeAllListeners() {
         AndamanService.ready().then(opts => {
             let andaman = opts.andaman;

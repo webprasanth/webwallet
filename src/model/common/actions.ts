@@ -25,7 +25,7 @@ export const commonActions = {
     },
 
     needUpdatePending(resp) {
-        return {type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp };
+        return { type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp };
     },
 
     addListeners() {
@@ -33,6 +33,8 @@ export const commonActions = {
         CommonService.singleton().onSessionExpired(commonActions.onSessionExpired);
         CommonService.singleton().onBeRequested(commonActions.onBeRequested);
         CommonService.singleton().onRequestStateChanged(commonActions.onRequestStateChanged);
+        CommonService.singleton().onDisconnect(commonActions.onDisconnect);
+        CommonService.singleton().onConnect(commonActions.onConnect);
     },
 
     removeAllListeners() {
@@ -40,9 +42,9 @@ export const commonActions = {
     },
 
     onTxAdded(resp) {
-        store.dispatch({type: COMMON.ON_NEW_TX_ADDED, data: resp });
-        store.dispatch({type: COMMON.NEED_UPDATE_BALANCE, data: resp });
-        store.dispatch({type: COMMON.NEED_UPDATE_CONTACT, data: resp });
+        store.dispatch({ type: COMMON.ON_NEW_TX_ADDED, data: resp });
+        store.dispatch({ type: COMMON.NEED_UPDATE_BALANCE, data: resp });
+        store.dispatch({ type: COMMON.NEED_UPDATE_CONTACT, data: resp });
     },
 
     onSessionExpired(resp) {
@@ -51,12 +53,20 @@ export const commonActions = {
 
     onBeRequested(resp) {
         store.dispatch({ type: COMMON.ON_BE_REQUESTED, data: resp });
-        store.dispatch({type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp });
+        store.dispatch({ type: COMMON.NEED_UPDATE_PENDING_REQUEST, data: resp });
     },
 
     onRequestStateChanged(resp) {
         store.dispatch({ type: COMMON.ON_REQUEST_STATE_CHANGED, data: resp });
         store.dispatch(commonActions.needUpdatePending(resp));
+    },
+
+    onDisconnect() {
+        store.dispatch({ type: COMMON.ON_DISCONNECT });
+    },
+
+    onConnect() {
+        store.dispatch({ type: COMMON.ON_CONNECT });
     }
 
 };
