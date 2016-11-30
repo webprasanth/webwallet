@@ -16,7 +16,6 @@
 				<div class="logo col-xs-4 col-xs-5">
 					<a><img src="assets/images/pages/logo.png" /></a>
 				</div>
-				<p show={isDisconnect}>You have disconnected. Please check your internet connection and try again.</p>
 				<div class="top-balance text-center col-xs-12 color-custom">
 					<p><span class="hidden-xs">Balance:</span> {decimalFormat(balance)} Flash</p>
 				</div>
@@ -28,6 +27,7 @@
 					</div>
 				</div>
 			</nav>
+				<p class="notify-disconnect" show={isDisconnect}>You have disconnected. Please check your internet connection and try again.</p>
 		</div>
 	</header>
 </main-header>

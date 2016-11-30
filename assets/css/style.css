@@ -80,7 +80,37 @@ body{
 textarea {
    resize: none !important;
 }
-
+@-webkit-keyframes my {
+     0% { color: #F8CD0A; }
+     50% { color: #fff;  }
+     100% { color: #F8CD0A;  }
+ }
+ @-moz-keyframes my {
+     0% { color: #F8CD0A;  }
+     50% { color: #fff;  }
+     100% { color: #F8CD0A;  }
+ }
+ @-o-keyframes my {
+     0% { color: #F8CD0A; }
+     50% { color: #fff; }
+     100% { color: #F8CD0A;  }
+ }
+ @keyframes my {
+     0% { color: #F8CD0A;  }
+     50% { color: #fff;  }
+     100% { color: #F8CD0A;  }
+ }
+ .notify-disconnect {
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    right: 15px;
+    color: #fff;
+     -webkit-animation: my 700ms infinite;
+     -moz-animation: my 700ms infinite;
+     -o-animation: my 700ms infinite;
+     animation: my 700ms infinite;
+}
 .nav-pills>li>a{
     border-radius:0;
     background: linear-gradient(to bottom, #dddddd 0%,#f2f2f2 100%);
