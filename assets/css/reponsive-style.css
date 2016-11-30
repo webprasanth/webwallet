@@ -56,6 +56,28 @@
 }
 @media only screen and (max-width: 767px){
     /*Common Page*/
+
+@-webkit-keyframes my {
+     0% { color: #F8CD0A; }
+     50% { color: #555;  }
+     100% { color: #F8CD0A;  }
+ }
+ @-moz-keyframes my {
+     0% { color: #F8CD0A;  }
+     50% { color: #555;  }
+     100% { color: #F8CD0A;  }
+ }
+ @-o-keyframes my {
+     0% { color: #F8CD0A; }
+     50% { color: #555; }
+     100% { color: #F8CD0A;  }
+ }
+ @keyframes my {
+     0% { color: #F8CD0A;  }
+     50% { color: #555;  }
+     100% { color: #F8CD0A;  }
+ }
+    .notify-disconnect{top: 52px}
     .listItems{
         min-height: 60px;
     }
