@@ -19,9 +19,10 @@ riot.route((action) => {
     }
 
     var state = store.getState();
-    if (!state.userData.user && (action != 'reset_password' && action != 'account_created')) {
+    if (!state.userData.user && (action != 'reset_password' && action != 'account_created' && action != 'submit_email')) {
         return riot.route('login');
     }
+
     switch (action) {
         case '':
         case 'home':
@@ -30,6 +31,8 @@ riot.route((action) => {
             return riot.mount('#main', 'security-questions');
         case 'account_created':
             return riot.mount('#main', 'setuppassword');
+        case 'submit_email':
+            return riot.mount('#main', 'submit-email');
         default:
             break;
     }
@@ -39,7 +42,7 @@ store.subscribe(() => {
     var state = store.getState();
     if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
         riot.route('');
-    } else if (!state.userData.user && (currentAction !== 'reset_password' && currentAction != 'account_created')) {
+    } else if (!state.userData.user && (currentAction !== 'reset_password' && currentAction != 'account_created' && currentAction != 'submit_email')) {
         riot.route('login');
     }
 });

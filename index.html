@@ -88,7 +88,7 @@
         }
 
         function onForgotPassword(event) {
-            // riot.mount('#main', 'submit-email');
+            window.location.href = "home.html#submit_email";
         }
 
         function onKeydown(event) {
@@ -145,7 +145,6 @@
             });
 
             let alink = $('.slide-2 a');
-            console.log(alink);
             $(alink).click(function () {
                 $('html, body').animate({
                     scrollTop: $($(this).attr('href')).offset().top
@@ -225,7 +224,7 @@
             var email = $("#email-signup").val().trim();
             var appId = 'flashcoin';
             var clientHost = window.location.host;
-            var cbLink = 'http://clientHost/#account_created?token=';
+            var cbLink = 'http://clientHost/home.html#account_created?token=';
 
             var credentials = {
                 ip: userLocation.info.ip,
