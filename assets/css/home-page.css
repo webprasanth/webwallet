@@ -828,28 +828,6 @@ footer .container {
 }
 /*===================*/
 
-#verifyPinDialog .modal-header{
-  background: #f5f5f5;
-  color: #303030;
-  border-bottom: none;
-}
-#verifyPinDialog .modal-content{
-  background: #f5f5f5;
-}
-#verifyPinDialog .modal-body{
-  padding: 50px 15px;
-}
-#verifyPinDialog .modal-header h4{
-  font-size: 23px;
-  padding: 10px 5px;
-}
-#verifyPinDialog .modal-header img{
-  float: left;
-    width: 86px;
-    padding-right: 15px;
-    padding-bottom: 20px;
-    padding-left: 25px;
-}
 /*Confirm create wallet*/
 #notify-check{
   border: 1px solid;
@@ -993,7 +971,14 @@ footer .container {
     margin-bottom: 60px;
   }
 }
-
+@media only screen and (max-width: 767px) {
+    .create-wallet-btn{display: none}
+    .btn-crowdsale{
+      bottom: 45px;
+      font-size: 14pt;
+      top: inherit;
+    }
+}
 @media only screen and (max-width: 736px) {
   .home-safecash header{
     margin-top: 0;

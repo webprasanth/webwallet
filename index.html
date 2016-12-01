@@ -250,6 +250,8 @@
                     $('#notify-check').show();
                     $('#box-signup').hide();
                 } else {
+                    grecaptcha.reset(captchaId);
+
                     if (resp.status == 'EMAIL_IN_USED') {
                         showError('An user with this email already exists');
                     } else if (resp.status == 'RECAPTCHA_NOT_VERIFIED') {
