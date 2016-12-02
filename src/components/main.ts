@@ -7,6 +7,7 @@ import { userActions } from '../model/users/actions';
 import UserService from '../model/users/user-service';
 
 let currentAction = '';
+let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 components.initialize();
 
@@ -14,7 +15,10 @@ route((action) => {
     currentAction = action;
 
     if (action == 'login') {
-        // return riot.mount('#main', 'landing-page');
+        if (isMobile) {
+            return riot.mount('#main', 'mobile-login');
+        }
+
         return riot.mount('#main', 'sso');
     }
 

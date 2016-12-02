@@ -9,7 +9,6 @@
 	<link href="assets/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="assets/css/intlTelInput.css" type="text/css" rel="stylesheet" />
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-	<link href="assets/css/home-mobile.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="assets/css/reponsive-style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="assets/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
@@ -22,15 +21,16 @@
 	<script src="assets/lib/intl-tel-input/utils.js"></script>
 	<script src="assets/lib/init.js"></script>
 	<script src="assets/lib/route.min.js"></script>
+
+    <!--Only mobile-->
+    <link href="assets/css/home-mobile.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script src="cordova.js"></script>
 </head>
 
 <body>
 	<div data-is="app"></div>
-	<script src="jspm_packages/system.js"></script>
-	<script src="jspm.config.js"></script>
-	<script>
-        System.import("src/main.js");
-    </script>
+	<script src="assets/js/build.js"></script>
+	<script>console.log = function() {}</script>
 </body>
 
 </html>

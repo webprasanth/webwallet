@@ -1,6 +1,6 @@
 import { riot, template, Element } from './riot-ts';
 
-import LandingPage from './landing-page/landing-page';
+import MobileLogin from './mobile-login/mobile-login';
 import sso from './sso/sso';
 import Home from './home/index';
 import HomeHeader from './home/header';
@@ -31,7 +31,7 @@ import RequestDetail from './modals/request-detail/request-detail';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
-    LandingPage, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
+    MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail
 };

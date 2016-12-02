@@ -4,20 +4,19 @@
 import { riot, template } from '../riot-ts';
 import store from '../../model/store';
 import { userActions } from '../../model/users/actions';
-import LandingPageTemplate from './landing-page.html!text';
+import MobileLoginTemplate from './mobile-login.html!text';
 import BaseElement from '../base-element';
 import { USERS } from '../../model/action-types';
 import * as utils from '../../model/utils';
 
 let tag = null;
-@template(LandingPageTemplate)
-export default class LandingPage extends BaseElement {
+@template(MobileLoginTemplate)
+export default class MobileLogin extends BaseElement {
 
     private subscribeFunc = null;
     private captchaId: string = null;
     private isVerifyEmailSent: boolean = false;
     private static unsubscribe = null;
-    private isMobile = false;
 
     constructor() {
         super();
@@ -25,16 +24,9 @@ export default class LandingPage extends BaseElement {
 
     mounted() {
         tag = this;
-        this.isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        if (LandingPage.unsubscribe) LandingPage.unsubscribe();
-        LandingPage.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-
-        if (!this.isMobile) {
-            this.loadLazyImage();
-            this.initLandingPage();
-            this.renderCaptcha();
-        }
+        if (MobileLogin.unsubscribe) MobileLogin.unsubscribe();
+        MobileLogin.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
     }
 
     onApplicationStateChanged() {

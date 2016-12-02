@@ -21,25 +21,9 @@
 	<script src="assets/lib/intl-tel-input/utils.js"></script>
 	<script src="assets/lib/init.js"></script>
 	<script src="assets/lib/route.min.js"></script>
-	<script src="cordova.js"></script>
 </head>
 
 <body>
-	<div class="hidden">
-		<script type="text/javascript">
-            var images = new Array()
-            function preload() {
-                for (i = 0; i < preload.arguments.length; i++) {
-                    images[i] = new Image()
-                    images[i].src = preload.arguments[i]
-                }
-            }
-            preload(
-                "assets/images/pages/home-page/background-slide1.png"
-            )
-        </script>
-	</div>
-
 	<div data-is="app"></div>
 	<script src="assets/js/build.js"></script>
 	<script>console.log = function() {}</script>
