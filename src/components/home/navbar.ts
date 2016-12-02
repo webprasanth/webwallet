@@ -72,6 +72,6 @@ export default class Navbar extends BaseElement {
         $('.overlay-screen').hide();
 
         let tab = event.item.tab;
-        riot.route(tab.id);
+        route(tab.id);
     }
 }

@@ -374,7 +374,7 @@ export const userActions = {
         if (!clientHost || clientHost.length === 0) {
             clientHost = AndamanService.clientHost;
         }
-        riot.route("reset_password?token=");
+        route("reset_password?token=");
         return { type: USERS.FORGOT_PASSWORD };
     }
 };

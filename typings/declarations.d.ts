@@ -12,4 +12,3 @@ declare module "bs58check";
 declare module "big.js";
 declare module "moment-timezone";
 declare module "lodash";
-

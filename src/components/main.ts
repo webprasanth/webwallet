@@ -10,7 +10,7 @@ let currentAction = '';
 
 components.initialize();
 
-riot.route((action) => {
+route((action) => {
     currentAction = action;
 
     if (action == 'login') {
@@ -20,7 +20,7 @@ riot.route((action) => {
 
     var state = store.getState();
     if (!state.userData.user && (action != 'reset_password' && action != 'account_created' && action != 'submit_email')) {
-        return riot.route('login');
+        return route('login');
     }
 
     switch (action) {
@@ -41,13 +41,13 @@ riot.route((action) => {
 store.subscribe(() => {
     var state = store.getState();
     if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
-        riot.route('');
+        route('');
     } else if (!state.userData.user && (currentAction !== 'reset_password' && currentAction != 'account_created' && currentAction != 'submit_email')) {
-        riot.route('login');
+        route('login');
     }
 });
 
-riot.route.start(true);
+route.start(true);
 
 if (window.location.host == 'localhost:8000') {
     store.dispatch(userActions.ssoLogin());

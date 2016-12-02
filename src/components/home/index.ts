@@ -17,7 +17,7 @@ import { PENDING } from '../../model/action-types';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
-    private route = riot.route.create();
+    private route = route.create();
     private lastView = null;
     private widgets = {
         'activity': 'home-activity',
@@ -37,11 +37,11 @@ export default class HomePage extends Element {
         this.route((action) => {
             let mainContent = document.querySelector('#main-content');
             let id = this.widgets[action];
-            
+
             if (!id) {
                 return;
             }
-            
+
             if (this.lastView && this.lastView.id != id) {
                 $(this.lastView).hide();
             }
@@ -61,20 +61,20 @@ export default class HomePage extends Element {
             this.lastView = el;
 
             // To show pending number on memu
-            let state = store.getState(); 
+            let state = store.getState();
             if (action == 'activity' && state.pendingData.total_money_reqs == 0) {
                 // Preload pending
                 el = document.createElement('div');
                 el.id = 'home-pending';
                 mainContent.appendChild(el);
-                riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', {isPreloadData: true});
+                riot.mount(mainContent.querySelector('#home-pending'), 'home-pending', { isPreloadData: true });
                 $(el).hide();
 
                 // Preload profile
                 el = document.createElement('div');
                 el.id = 'home-profile';
                 mainContent.appendChild(el);
-                riot.mount(mainContent.querySelector('#home-profile'), 'home-profile', {isPreloadData: true});
+                riot.mount(mainContent.querySelector('#home-profile'), 'home-profile', { isPreloadData: true });
                 $(el).hide();
             }
 
@@ -82,7 +82,7 @@ export default class HomePage extends Element {
         });
 
         //set default values.
-        riot.route('activity');
+        route('activity');
     }
 }
 

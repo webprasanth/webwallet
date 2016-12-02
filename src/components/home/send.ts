@@ -21,6 +21,7 @@ export default class HomeSend extends BaseElement {
     private wallets = [];
     private addressSelected = false;
     private avatarServer = AndamanService.AvatarServer;
+    private isDesktop = utils.isDesktop();
 
     mounted() {
         tag = this;
@@ -122,7 +123,7 @@ export default class HomeSend extends BaseElement {
         if (utils.isValidFlashAddress($('#to-email-id').val())) {
             if (store.getState().userData.user.phone_verified == 0) {
                 super.showMessage('', 'You need to provide and verify your phone number.', () => {
-                    riot.route('profile');
+                    route('profile');
                 });
                 return;
             }
@@ -181,4 +182,28 @@ export default class HomeSend extends BaseElement {
         tag.update();
     }
 
+    openQRcodeScan() {
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                if (result.text.startsWith('flashcoin:')) {
+                    result.text = result.text.substring(10, result.text.length);
+                }
+                $('#to-email-id').val(result.text);
+                tag.checkAddress();
+                // alert("We got a barcode\n" +
+                //     "Result: " + result.text + "\n" +
+                //     "Format: " + result.format + "\n" +
+                //     "Cancelled: " + result.cancelled);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            }, {
+                "preferFrontCamera": false, // iOS and Android
+                "showFlipCameraButton": true, // iOS and Android
+                "prompt": "Place a barcode inside the scan area", // supported on Android only
+                "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+                "orientation": "portrait" // Android only (portrait|landscape), default unset so it rotates with the device
+            }
+        );
+    }
 }

@@ -14,9 +14,9 @@ import { PROFILE } from '../../../model/action-types';
 @template(FountainSettingTemplate)
 export default class FountainSetting extends BaseElement {
 
-    private userProfile: any = null;
-    private settings: any = null;
-    private fountain: any = null;
+    private userProfile: any = {};
+    private settings: any = {};
+    private fountain: any = {};
 
     // Disable display
     private disabled: boolean = false;
@@ -69,7 +69,7 @@ export default class FountainSetting extends BaseElement {
                     $('#memo').val(this.settings.message);
                     $('#domains').val(this.settings.domainStr);
                 }
-                
+
                 break;
             case PROFILE.GET_FOUNTAIN_SUCCESS:
                 let saveFountain = state.profileData.savedFountain;
@@ -124,7 +124,7 @@ export default class FountainSetting extends BaseElement {
     updateFountain() {
         let settings = this._getFountainSetting();
 
-        if(!settings) {
+        if (!settings) {
             return;
         }
         this.settings = settings;
@@ -165,9 +165,9 @@ export default class FountainSetting extends BaseElement {
             } else {
                 this.disabled = false;
             }
-            
+
         } else {
-            this.fountain = {enabled: false};
+            this.fountain = { enabled: false };
             this.disabled = false;
         }
     }

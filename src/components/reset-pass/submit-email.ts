@@ -60,6 +60,6 @@ export default class SubmitEmail extends BaseElement {
         event.preventDefault();
         event.stopPropagation();
 
-        riot.route('#login');
+        route('#login');
     }
 }

@@ -247,3 +247,7 @@ export function formatAmountInput(amount?) {
         }
     }
 }
+
+export function isDesktop() {
+    return window.innerWidth > 766;
+}

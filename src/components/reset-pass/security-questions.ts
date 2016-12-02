@@ -61,7 +61,7 @@ export default class SecurityQuestions extends BaseElement {
                 callback: function (result) {
 
                     if (result) {
-                        riot.route('login');
+                        route('login');
                     }
                 }
             });
@@ -73,7 +73,7 @@ export default class SecurityQuestions extends BaseElement {
     }
 
     getQuestions() {
-        this.urlQuery = riot.route.query() || {};
+        this.urlQuery = route.query() || {};
 
         let params = {
             idToken: this.urlQuery.token || ''
@@ -130,6 +130,6 @@ export default class SecurityQuestions extends BaseElement {
         event.preventDefault();
         event.stopPropagation();
 
-        riot.route('login');
+        route('login');
     }
 }

@@ -42,7 +42,7 @@ export default class SetupPassword extends BaseElement {
         tag = this;
         if (SetupPassword.unsubscribe) SetupPassword.unsubscribe();
         SetupPassword.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
-        this.token = riot.route.query().token;
+        this.token = route.query().token;
         $('#fcpassword').on("change keyup", this.onPasswordChanged);
         $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged);
     }

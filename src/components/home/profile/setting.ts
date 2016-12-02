@@ -12,7 +12,7 @@ import BaseElement from '../../base-element';
 @template(AccountSettingTemplate)
 export default class AccountSetting extends BaseElement {
 
-    private userProfile = null;
+    private userProfile = {};
     private accountType = 'Consumer';
     private publicKeyList = [];
     private is2FA: boolean = false;

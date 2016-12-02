@@ -19,7 +19,7 @@ let tag = null;
 @template(UserInfoTemplate)
 export default class UserInfo extends BaseElement {
 
-    private userProfile = null;
+    private userProfile = {};
     private isEditingName: boolean = false;
     private isEditingPass: boolean = false;
     private isSelectingTimezone: boolean = false;
