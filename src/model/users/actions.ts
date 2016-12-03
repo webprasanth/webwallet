@@ -189,7 +189,7 @@ export const userActions = {
     },
 
     login2(resp) {
-        let password = resp.password;
+        let password = resp.secretKey;
         let userKey = {
             idToken: resp.profile.idToken,
             encryptedPrivKey: resp.profile.privateKey,
@@ -280,7 +280,7 @@ export const userActions = {
     check2faCodeFailed(resp) {
         return { type: USERS.CHECK_2FA_CODE_FAILED, data: resp };
     },
-    getMyWallets(auth_version, password = '1111') {
+    getMyWallets(auth_version, password) {
         return (dispatch) => {
             UserService.singleton().getMyWallets().then((resp: any) => {
                 if (resp.rc === 1) {
