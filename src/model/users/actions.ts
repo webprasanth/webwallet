@@ -199,6 +199,8 @@ export const userActions = {
 
         return (dispatch) => {
             if (resp.rc === 1) {
+                userActions.refestSession(resp.profile.sessionToken);
+                
                 if (resp.profile.totp_enabled === 1) {
                     let loginData = { profile: resp.profile, password: password };
                     dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
@@ -211,6 +213,16 @@ export const userActions = {
                 dispatch(userActions.loginFailed(resp));
             }
         };
+    },
+
+    refestSession(sessionToken) {
+        let params = {
+            res: 'web',
+            sessionToken: sessionToken
+        };
+
+        UserService.singleton().checkSessionToken(params).then((resp: any) => {
+        });
     },
 
     loginFailed(resp) {
