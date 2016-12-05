@@ -71,7 +71,7 @@ export default class HomeHeader extends BaseElement {
         let state: ApplicationState = store.getState();
         let self = this;
         let message = '';
-        let note = state.commonData.notificationData;
+        let note = null;
         tag.isDisconnect = state.commonData.isDisconnect;
 
         switch (state.lastAction.type) {
@@ -94,6 +94,8 @@ export default class HomeHeader extends BaseElement {
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
             case COMMON.ON_BE_REQUESTED:
+                note = state.commonData.notificationData.pop();
+
                 if (note.email_sender) {
                     message = note.email_sender + " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
                     $.notify(message, "info");
@@ -116,7 +118,7 @@ export default class HomeHeader extends BaseElement {
 
     showRequestNotification() {
         let state = store.getState();
-        let note = state.commonData.notificationData;
+        let note = state.commonData.notificationData.pop();
         let message = null;
 
         switch (note.status) {
@@ -142,7 +144,7 @@ export default class HomeHeader extends BaseElement {
     showTxnNotification() {
         let message = null;
         let state = store.getState();
-        let note = state.commonData.notificationData;
+        let note = state.commonData.notificationData.pop();
         let user = state.userData.user;
 
         if (!note || !note.sender_email) {

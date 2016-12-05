@@ -13,7 +13,7 @@ export default function commonReducer(state = { isLoading: false, isDisconnect: 
         case COMMON.ON_BE_REQUESTED:
         case COMMON.ON_REQUEST_STATE_CHANGED:
         case COMMON.NEED_UPDATE_PENDING_REQUEST:
-            return Object.assign({}, state, { notificationData: action.data });
+            return Object.assign({}, state, { notificationData: [action.data] });
         case COMMON.NEED_UPDATE_BALANCE:
         case COMMON.NEED_UPDATE_CONTACT:
         default:

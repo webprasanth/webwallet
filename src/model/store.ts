@@ -26,7 +26,7 @@ interface ITAB {
 export interface ApplicationState {
     lastAction: { type: string, data: any };
     userData: { user: IUser, wallets: any, loginData: any, signupData: any };
-    commonData: { isLoading: boolean, isDisconnect: boolean, notificationData: any };
+    commonData: { isLoading: boolean, isDisconnect: boolean, notificationData: any[] };
     activityData: { txns: any[], total_txns: number, page_size: number, tabs: ITAB[], txn_detail: any };
     sendData: { processing_duration: number };
     pendingData: { type: number, money_requests: any[], total_money_reqs: number, page_size: number, tabs: ITAB[] };
