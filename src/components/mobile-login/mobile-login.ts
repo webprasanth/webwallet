@@ -56,15 +56,6 @@ export default class MobileLogin extends BaseElement {
         this.update();
     }
 
-    onKeydown(event) {
-        if (event.keyCode == 13) {
-            this.onLoginButtonClick(event);
-            return false;
-        }
-
-        return true;
-    }
-
     onLoginButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
@@ -91,73 +82,6 @@ export default class MobileLogin extends BaseElement {
         }
 
         store.dispatch(userActions.login(email, password));
-    }
-
-    loadLazyImage() {
-        let elIds = ['img-slide-3', 'img-slide-publisher', 'img-slide-advertiser', 'img-slide-merchant', 'img-slide-7'];
-        loadImage();
-
-        function loadImage() {
-            if (elIds.length == 0) {
-                return;
-            }
-
-            let id = elIds.shift();
-            let el = <HTMLInputElement>document.getElementById(id);
-            let img = new Image();
-            let src = el.getAttribute('data-src');
-
-            img.onload = function () {
-                el.src = src;
-                loadImage()
-            }
-            img.src = src;
-        }
-    }
-
-    initLandingPage() {
-
-        // Handle FAQ onclick
-        $('.faq-category li h4').bind('click', function () {
-            let li_parent = $(this).parent('li');
-            let ul_parent = li_parent.parent('ul');
-
-            if (li_parent.hasClass('active')) {
-                li_parent.removeClass('active');
-                li_parent.children('.answer-faq').slideUp();
-            } else {
-                $('.faq-category ul').removeClass('show-sub');
-                ul_parent.addClass('show-sub');
-                $('.faq-category ul.show-sub li').removeClass('active');
-                $('.faq-category ul.show-sub .answer-faq').slideUp();
-                li_parent.addClass('active');
-                li_parent.children('.answer-faq').slideDown();
-            }
-        });
-
-        // Handle click BACK TO TOP button
-        $('#back-to-top').click(function () {
-            $('html, body').animate({
-                scrollTop: 0
-            }, 500);
-        });
-
-        // Handle click CREATE WALLET button
-
-        $('#create-wallet-btn').click(function () {
-            $('html, body').animate({
-                scrollTop: 0
-            }, 500);
-        });
-
-        let alink = $('.slide-2 a');
-        console.log(alink);
-        $(alink).click(function () {
-            $('html, body').animate({
-                scrollTop: $($(this).attr('href')).offset().top
-            }, 1000);
-            return false;
-        });
     }
 
     onSignupButtonClick(event: Event) {
