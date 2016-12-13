@@ -196,7 +196,21 @@
             return true;
         }
 
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+            var params = {};
+            var tokens = null;
+            var re = /[?&]?([^=]+)=([^&]*)/g;
+
+            while (tokens = re.exec(qs)) {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+
+            return params;
+        }
+
         function onSignupButtonClick() {
+            var query = getQueryParams(document.location.search);
 
             if (userLocation.info.country_code == "US" && userLocation.info.region_code == "NY") {
                 $('#locationErrorModal').modal('show');
@@ -234,6 +248,10 @@
                 appId: appId,
                 callback_link: cbLink.replace('clientHost', clientHost)
             };
+
+            if (query && query.track_id) {
+                credentials.trackId = track_id;
+            }
 
             var url = 'https://keys.flashcoin.io/api/createEasy';
 
