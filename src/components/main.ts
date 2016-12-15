@@ -52,7 +52,3 @@ store.subscribe(() => {
 });
 
 route.start(true);
-
-if (window.location.host == 'localhost:8000') {
-    store.dispatch(userActions.ssoLogin());
-}

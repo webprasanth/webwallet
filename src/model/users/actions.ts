@@ -341,31 +341,6 @@ export const userActions = {
     rememberMe(remember) {
         return { type: USERS.REMEMBER_ME, data: remember };
     },
-    ssoLogin() {
-        return (dispatch) => {
-            dispatch(commonActions.toggleLoading(true));
-
-            UserService.singleton().ssoLogin().then((resp: any) => {
-                dispatch(commonActions.toggleLoading(false));
-
-                if (resp) {
-                    if (resp.rc == 1) {
-                        dispatch(userActions.ssoLoginSuccess(resp.profile));
-                        dispatch(userActions.getProfile(resp.profile));
-                        dispatch(userActions.getMyWallets(resp.profile.auth_version));;
-                    } else {
-                        dispatch(userActions.ssoLoginFailed(resp));
-                    }
-                }
-            });
-        };
-    },
-    ssoLoginSuccess(profile) {
-        return { type: USERS.SSO_LOGIN_SUCCESS, data: profile };
-    },
-    ssoLoginFailed(resp) {
-        return { type: USERS.SSO_LOGIN_FAILED, data: resp };
-    },
     saveAccessToken() {
         var state = store.getState();
         var user = state.userData.user;

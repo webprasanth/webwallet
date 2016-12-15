@@ -41,8 +41,6 @@ export default class MobileLogin extends BaseElement {
             case USERS.SIGNUP_FAILED:
                 this.onSignupFail(data.signupData);
                 break;
-            case USERS.SSO_LOGIN_SUCCESS:
-                break;
             case USERS.LOGIN_FAILED:
                 super.showError('Login failed', 'Email or password is not correct');
                 break;
