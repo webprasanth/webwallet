@@ -8,4 +8,5 @@ mprod:
 	gulp build-debug-mobile
 	gulp uglify
 	gulp replace
+	rm -rf public/assets/images/pages/home-page
 	
