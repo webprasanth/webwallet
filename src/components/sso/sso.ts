@@ -28,7 +28,7 @@ export default class Sso extends BaseElement {
         if (loginDataStr && loginDataStr.length > 0) {
             loginData = JSON.parse(loginDataStr);
             userActions.setAuth(loginData);
-            store.dispatch(userActions.login2(loginData));
+            store.dispatch(userActions.getUserData(loginData));
             localStorage.removeItem('flc-loginresp');
         } else {
             let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);

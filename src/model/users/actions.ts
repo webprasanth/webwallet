@@ -188,7 +188,7 @@ export const userActions = {
         };
     },
 
-    login2(resp) {
+    getUserData(resp) {
         let password = resp.secretKey;
         let userKey = {
             idToken: resp.profile.idToken,
@@ -199,7 +199,7 @@ export const userActions = {
 
         return (dispatch) => {
             if (resp.rc === 1) {
-                userActions.refestSession(resp.profile.sessionToken);
+                userActions.refreshSession(resp.profile.sessionToken);
                 
                 if (resp.profile.totp_enabled === 1) {
                     let loginData = { profile: resp.profile, password: password };
@@ -215,7 +215,7 @@ export const userActions = {
         };
     },
 
-    refestSession(sessionToken) {
+    refreshSession(sessionToken) {
         let params = {
             res: 'web',
             sessionToken: sessionToken
