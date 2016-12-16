@@ -54,31 +54,12 @@ export default class HomeSend extends BaseElement {
             return;
         }
 
-        let params = {
-            term,
-            start: 0,
-            size: 1
-        };
-
-        CommonService.singleton().searchWallet(params).then((resp: any) => {
-            if (resp.rc === 1 && resp.wallets.length == 1 && term == resp.wallets[0].email) {
-                tag.isValidAddress = true;
-                tag.sendWallet = resp.wallets[0];
-                tag.addressSelected = true;
-                tag.choosingAddress = false;
-            } else {
-                tag.isValidAddress = false;
-                tag.addressSelected = false;
-            }
-            tag.update();
-        });
     }
 
     searchWallet = () => {
         tag.choosingAddress = true;
 
         let term: string = $('#to-email-id').val();
-
         let params = {
             term,
             start: 0,
@@ -88,9 +69,14 @@ export default class HomeSend extends BaseElement {
         CommonService.singleton().searchWallet(params).then((resp: any) => {
             if (resp.rc === 1 && resp.wallets.length > 0) {
                 this.wallets = resp.wallets;
-                if (this.wallets.length == 1 && this.wallets[0].email == term) {
+                if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
                     tag.isValidAddress = true;
+                    tag.sendWallet = resp.wallets[0];
+                    tag.addressSelected = true;
                     tag.choosingAddress = false;
+                } else {
+                    tag.isValidAddress = false;
+                    tag.addressSelected = false;
                 }
             } else {
                 this.wallets = [];

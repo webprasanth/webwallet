@@ -53,25 +53,6 @@ export default class HomeRequest extends BaseElement {
             tag.update();
             return;
         }
-
-        let params = {
-            term,
-            start: 0,
-            size: 20
-        };
-
-        CommonService.singleton().searchWallet(params).then((resp: any) => {
-            if (resp.rc === 1 && resp.wallets.length == 1 && term == resp.wallets[0].email) {
-                tag.isValidAddress = true;
-                tag.receiverWallet = resp.wallets[0];
-                tag.addressSelected = true;
-                tag.choosingAddress = false;
-            } else {
-                tag.isValidAddress = false;
-                tag.addressSelected = false;
-            }
-            tag.update();
-        });
     }
 
     searchWallet = () => {
@@ -88,9 +69,14 @@ export default class HomeRequest extends BaseElement {
         CommonService.singleton().searchWallet(params).then((resp: any) => {
             if (resp.rc === 1 && resp.wallets.length > 0) {
                 this.wallets = resp.wallets;
-                if (this.wallets.length == 1 && this.wallets[0].email == term) {
+                if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
                     tag.isValidAddress = true;
+                    tag.receiverWallet = resp.wallets[0];
+                    tag.addressSelected = true;
                     tag.choosingAddress = false;
+                } else {
+                    tag.isValidAddress = false;
+                    tag.addressSelected = false;
                 }
             } else {
                 this.wallets = [];
@@ -138,7 +124,7 @@ export default class HomeRequest extends BaseElement {
 
         this.receiverWallet.memo = $('#requestPaymentMemo').val();
 
-        let callback = function() {
+        let callback = function () {
             this.clearForms();
         }.bind(this);
 
