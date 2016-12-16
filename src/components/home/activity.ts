@@ -77,7 +77,7 @@ export default class HomeActivity extends Element {
             let timeSignup = new Date(s);
 
             let to = new Date(getDisplayDate(new Date(), state.userData.user.timezone)).getTime();
-            let from = new Date(to - this.ONE_MONTH);
+            let from = new Date(to - this.ONE_MONTH + 24 * 60 * 60 * 1000);
 
             // Start from timeSignup.
             if (timeSignup > from) {
