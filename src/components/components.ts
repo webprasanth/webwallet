@@ -28,12 +28,13 @@ import SecurityQuestions from './reset-pass/security-questions';
 import MessageDialog from './modals/message-dialog/message-dialog';
 import VerifyPhone from './modals/verify-phone/verify-phone';
 import RequestDetail from './modals/request-detail/request-detail';
+import RequestPassword from './modals/request-password/request-password';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
     MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
-    SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail
+    SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail, RequestPassword
 };
 
 export function initialize() {

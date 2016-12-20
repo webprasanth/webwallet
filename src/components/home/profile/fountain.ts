@@ -14,7 +14,7 @@ import { PROFILE } from '../../../model/action-types';
 @template(FountainSettingTemplate)
 export default class FountainSetting extends BaseElement {
 
-    private userProfile: any = {};
+    private userProfile: any = null;
     private settings: any = {};
     private fountain: any = {};
 
@@ -90,7 +90,7 @@ export default class FountainSetting extends BaseElement {
     }
 
     hasFountainSetting() {
-        return (this.settings && this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0);
+        return !!(this.settings && this.settings.amount && this.settings.duration && this.settings.domainStr.length > 0);
     }
 
     enableFountain() {
@@ -110,6 +110,11 @@ export default class FountainSetting extends BaseElement {
         if (this.userProfile.authVersion == 3) {
             params.secret = this.userProfile.fountainSecret;
         } else {
+            if (!this.userProfile.fountainSecret) {
+                riot.mount('#confirm-send', 'request-password', {cb: this.enableFountain.bind(this)});
+                return;
+            }
+
             let password = this.userProfile.fountainSecret;
 
             if (userKey) {
@@ -118,6 +123,7 @@ export default class FountainSetting extends BaseElement {
                 params.secret = privKeyBase64;
             }
         }
+
         store.dispatch(profileActions.enableFountain(params));
     }
 
@@ -161,7 +167,7 @@ export default class FountainSetting extends BaseElement {
                 this.fountain.enabled = !!savedFountain.fountain.enabled;
 
                 this._setTimeSetting(this.settings);
-                this.disabled = !this.fountain.enabled || !this.hasFountainSetting();
+                this.disabled = !this.fountain.enabled && this.hasFountainSetting();
             } else {
                 this.disabled = false;
             }
