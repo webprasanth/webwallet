@@ -4,9 +4,12 @@ import SendMoneyConfirmTemplate from './send-money-confirm.html!text';
 import { formatCurrency, formatAmountInput } from '../../../model/utils';
 import AndamanService from '../../../model/andaman-service';
 import { sendActions } from '../../../model/send/actions';
+import { userActions } from '../../../model/users/actions';
 import { SEND } from '../../../model/action-types';
 import SendService from '../../../model/send/send-service';
 import BaseElement from '../../base-element';
+import * as utils from '../../../model/utils';
+import { USERS } from '../../../model/action-types';
 
 @template(SendMoneyConfirmTemplate)
 export default class SendMoneyConfirm extends BaseElement {
@@ -15,7 +18,9 @@ export default class SendMoneyConfirm extends BaseElement {
     private confirmation: boolean = true;
     private sending: boolean = false;
     private success: boolean = false;
-    private processing_duration: number = 2.000;
+    private requirePassword: boolean = false;
+    private incorrectPassword: boolean = false;
+    private processingDuration: number = 2.000;
     private formatCurrency = formatCurrency;
     private formatAmountInput = formatAmountInput;
     private AvatarServer = AndamanService.AvatarServer;
@@ -38,7 +43,7 @@ export default class SendMoneyConfirm extends BaseElement {
             this.confirmation = false;
             this.sending = false;
             this.success = true;
-            this.processing_duration = state.sendData.processing_duration;
+            this.processingDuration = state.sendData.processing_duration;
             this.opts.dlgTitle = 'Transaction Successful';
             if (this.opts.cb) {
                 this.opts.cb();
@@ -54,6 +59,32 @@ export default class SendMoneyConfirm extends BaseElement {
     mounted() {
         this.userProfile = store.getState().userData.user;
         $('#sendDialog').modal('show');
+        let wallet = store.getState().userData.wallets[0];
+
+        if (!wallet.accounts) {
+            this.requirePassword = true;
+            this.confirmation = false;
+            this.update();
+        }
+    }
+
+    confirmPassword() {
+        let password = $("#sendPassowd").val();
+        let userData = store.getState().userData;
+        let decryptedWallets = null;
+
+        if (password) {
+            try {
+                decryptedWallets = utils.decryptPassphraseV2(userData.user.email, userData.wallets, password);
+                store.dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
+                store.dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });
+                this.requirePassword = false;
+                this.confirmation = true;
+            } catch (error) {        
+            }
+        }
+
+        this.incorrectPassword = true;
     }
 
     sendDirect() {

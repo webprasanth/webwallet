@@ -173,6 +173,8 @@ export const userActions = {
                 dispatch(commonActions.toggleLoading(false));
 
                 if (resp.rc === 1) {
+                    utils.storeIdToken(resp.profile.idToken);
+
                     if (resp.profile.totp_enabled === 1) {
                         let loginData = { profile: resp.profile, password: password };
                         dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
@@ -189,6 +191,7 @@ export const userActions = {
     },
 
     getUserData(resp) {
+        utils.storeIdToken(resp.profile.idToken);
         let password = resp.secretKey;
         let userKey = {
             idToken: resp.profile.idToken,
@@ -370,10 +373,23 @@ function decryptWallets(dispatch, wallets, auth_version, password) {
     if (auth_version === 3) {
         decryptPassphraseV1(dispatch, wallets);
     } else {
-        decryptPassphraseV2(dispatch, wallets, password);
+
+        if (password) {
+            decryptPassphraseV2(dispatch, wallets, password);
+        } else {
+            // Store CAS version 2 account wallet
+            // Only decrypt wallet if user send money
+            dispatch(userActions.getMyWalletsSuccess(wallets));
+        }
     }
 }
 
+/**
+ * Decrypt CAS version 1 account wallet
+ * 
+ * 1. Get the secrete key from server
+ * 2. Using secrete key to decrypt wallet passphrase
+ */
 function decryptPassphraseV1(dispatch, wallets) {
     let userProfile = store.getState().userData.user;
     let userKey = utils.getUserKey();
@@ -391,29 +407,14 @@ function decryptPassphraseV1(dispatch, wallets) {
     });
 }
 
+/**
+ * Decrypt CAS version 2 account wallet
+ * 
+ * Using password to decrypt wallet passphrase
+ */
 function decryptPassphraseV2(dispatch, wallets, password) {
-    var userProfile = store.getState().userData.user;
-    let userKey = utils.getUserKey();
-    let nonce = 'nnfyPFFbK7NdGtf73uGwt+CsS6mHAmAq';
-    let casPubKey = 'vjPu6e8nhoxfLNxmNzNxXYr++1onlC1XuAt3VdxLISQ=';
-    let box = null;
-    let originMessage = null;
-    let privKeyHex = Premium.xaesDecrypt(password, userKey.encryptedPrivKey);
-    let privKeyBase64 = utils.hexToBase64(privKeyHex);
-
-    let keyPair = nacl.box.keyPair.fromSecretKey(utils.decodeBase64(privKeyBase64));
-
-    if (!keyPair) {
-        return;
-    }
-
-    let decryptedWallets = wallets.map(w => {
-        box = utils.decodeBase64(w.passphrase);
-        originMessage = nacl.box.open(box, utils.decodeBase64(nonce), utils.decodeBase64(casPubKey), keyPair.secretKey);
-        w.pure_passphrase = utils.strFromUtf8Ab(originMessage);
-        w.email = userProfile.email;
-        return new Wallet().openWallet(w);
-    });
+    let userProfile = store.getState().userData.user;
+    let decryptedWallets = utils.decryptPassphraseV2(userProfile.email, wallets, password);
 
     dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
     dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });

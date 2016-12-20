@@ -2,6 +2,9 @@ import Big from 'big.js';
 import _tmp from 'moment-timezone';
 import bitcoin from 'bitcoinjs-lib';
 import moment from 'moment-timezone';
+import Wallet from './wallet';
+import Premium from 'Premium';
+import nacl from 'tweetnacl';
 
 import {
     Address,
@@ -25,6 +28,32 @@ declare class Buffer extends Object {
     toString(encode?: string);
 }
 
+export function decryptPassphraseV2(email, wallets, password) {
+    let userKey = getUserKey();
+    let nonce = 'nnfyPFFbK7NdGtf73uGwt+CsS6mHAmAq';
+    let casPubKey = 'vjPu6e8nhoxfLNxmNzNxXYr++1onlC1XuAt3VdxLISQ=';
+    let box = null;
+    let originMessage = null;
+    let privKeyHex = Premium.xaesDecrypt(password, userKey.encryptedPrivKey);
+    let privKeyBase64 = hexToBase64(privKeyHex);
+
+    let keyPair = nacl.box.keyPair.fromSecretKey(decodeBase64(privKeyBase64));
+
+    if (!keyPair) {
+        return;
+    }
+
+    let decryptedWallets = wallets.map(w => {
+        box = decodeBase64(w.passphrase);
+        originMessage = nacl.box.open(box, decodeBase64(nonce), decodeBase64(casPubKey), keyPair.secretKey);
+        w.pure_passphrase = strFromUtf8Ab(originMessage);
+        w.email = email;
+        return new Wallet().openWallet(w);
+    });
+
+    return decryptedWallets;
+}
+
 export function utcDateToLocal(str) {
     return moment(str).local().format("MMM DD YYYY hh:mm A");
 }
@@ -37,6 +66,16 @@ export function satoshiToFlash(num) {
 export function flashToSatoshi(num) {
     if (num == undefined || num === '') return;
     return parseInt(new Big(num).times(10000000).toString(), 10);
+}
+
+export function storeIdToken(idToken: string) {
+    if (idToken) {
+        localStorage.setItem("fl-idtoken-2606", idToken);
+    }
+}
+
+export function removeIdToken() {
+    localStorage.removeItem("fl-idtoken-2606");
 }
 
 export function storeUserKey(userKey: UserKey) {

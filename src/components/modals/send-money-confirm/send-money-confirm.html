@@ -7,6 +7,18 @@
                         aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">{opts.dlgTitle || 'Confirm Transaction'}</h4>
 				</div>
+				<virtual show={requirePassword}>
+					<div class="modal-body">
+						<div class="confirm-success">
+							<p><b>Please enter your password to continue</b></p>
+							<p class="pin-incorrect" show={incorrectPassword}>Incorrect password</p>
+							<input id="sendPassowd" type="password" class="form-control" placeholder="Password">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" onclick="{confirmPassword}">Continue</button>
+					</div>
+				</virtual>
 				<virtual show={confirmation}>
 					<div class="modal-body">
 						<div class="confirm__transaction">
@@ -36,7 +48,7 @@
 				<virtual show={success}>
 					<div class="modal-body">
 						<div class="confirm-success">
-							<p>Processing time: {processing_duration} second(s)</p>
+							<p>Processing time: {processingDuration} second(s)</p>
 
 							<p>Your transaction will appear in your activity tab shortly.</p>
 						</div>

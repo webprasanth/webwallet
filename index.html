@@ -296,7 +296,38 @@
             });
         }
 
+        function ssoLogin() {
+            var idToken = localStorage.getItem('fl-idtoken-2606');
+
+            if (idToken) {
+                var url = 'https://keys.flashcoin.io/api/session';
+
+                if (window.location.protocol == 'http:') {
+                    url = 'http://keys.flashcoin.io:8098/api/session';
+                }
+                $("#loading-icon").show();
+
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    headers: {
+                        authorization: idToken
+                    },
+                    dataType: 'json',
+                    success: function (resp) {
+                        if (resp.rc == 1) {
+                            resp.idToken = idToken;
+                            localStorage.setItem("flc-loginresp", JSON.stringify({profile:resp, rc: 1}));
+                            window.location.href = "home.html";
+                        }
+                    }
+                });
+            }
+        }
+
         $(document).ready(function() {
+            ssoLogin();
+
             $("#btn-dologin").click(login);
             $("#identifer").keydown(onKeydown);
             $("#loginpassword").keydown(onKeydown);

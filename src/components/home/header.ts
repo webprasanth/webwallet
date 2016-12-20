@@ -6,8 +6,7 @@ import { commonActions } from '../../model/common/actions';
 import HomeHeaderTemplate from './header.html!text';
 import AndamanService from '../../model/andaman-service';
 import { USERS, COMMON, PROFILE } from '../../model/action-types';
-import { decimalFormat } from '../../model/utils';
-import { utcDateToLocal } from '../../model/utils';
+import { decimalFormat, utcDateToLocal, removeIdToken } from '../../model/utils';
 
 let tag = null;
 
@@ -181,6 +180,7 @@ export default class HomeHeader extends BaseElement {
     onLogoutButtonClick(event: Event) {
         event.preventDefault();
         event.stopPropagation();
+        removeIdToken();
 
         commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
