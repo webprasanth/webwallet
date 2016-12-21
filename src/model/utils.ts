@@ -74,6 +74,10 @@ export function storeIdToken(idToken: string) {
     }
 }
 
+export function getIdToken() {
+    return localStorage.getItem("fl-idtoken-2606");
+}
+
 export function removeIdToken() {
     localStorage.removeItem("fl-idtoken-2606");
 }

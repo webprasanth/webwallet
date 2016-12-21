@@ -27,6 +27,20 @@ export default class MobileLogin extends BaseElement {
 
         if (MobileLogin.unsubscribe) MobileLogin.unsubscribe();
         MobileLogin.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+
+        this.ssoLogin();
+    }
+
+    ssoLogin() {
+        let idToken = utils.getIdToken();
+
+        if (idToken) {
+            let params = {
+                idToken: idToken,
+                res: 'web'
+            };
+            store.dispatch(userActions.ssoLogin(params));
+        }        
     }
 
     onApplicationStateChanged() {

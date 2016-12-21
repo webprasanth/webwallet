@@ -41,6 +41,20 @@ export const userActions = {
         return { type: USERS.SIGNUP_FAILED, data: resp };
     },
 
+    ssoLogin(params) {
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            UserService.singleton().ssoLogin(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+                if (resp.rc === 1) {
+                    dispatch(userActions.getUserData(resp));
+                } else {
+                }
+            });
+        };
+    },
+
     setPassword(token: string, password: string, questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
         let keypair = nacl.box.keyPair();
         let pubKey = keypair.publicKey;
