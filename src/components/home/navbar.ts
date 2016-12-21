@@ -8,6 +8,7 @@ import AndamanService from '../../model/andaman-service';
 import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
+import { removeIdToken } from '../../model/utils';
 
 @template(NavbarTemplate)
 export default class Navbar extends BaseElement {
@@ -57,6 +58,7 @@ export default class Navbar extends BaseElement {
     }
 
     onLogoutButtonClick(event: Event) {
+        removeIdToken();
         event.preventDefault();
         event.stopPropagation();
 
