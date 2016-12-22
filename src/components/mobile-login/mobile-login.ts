@@ -17,6 +17,7 @@ export default class MobileLogin extends BaseElement {
     private captchaId: string = null;
     private isVerifyEmailSent: boolean = false;
     private static unsubscribe = null;
+    private userLocation: any = {info:{}};
 
     constructor() {
         super();
@@ -28,6 +29,7 @@ export default class MobileLogin extends BaseElement {
         if (MobileLogin.unsubscribe) MobileLogin.unsubscribe();
         MobileLogin.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
 
+        this.checkLocation();
         this.ssoLogin();
     }
 
@@ -41,6 +43,22 @@ export default class MobileLogin extends BaseElement {
             };
             store.dispatch(userActions.ssoLogin(params));
         }        
+    }
+
+    checkLocation() {
+        let url = 'https://keys.flashcoin.io/api/check-location';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data) {
+                if (data.rc == 1) {
+                    this.userLocation = data;
+                    localStorage.setItem('flc-location', JSON.stringify(data));
+                }
+            }
+        });
     }
 
     onApplicationStateChanged() {
@@ -97,8 +115,7 @@ export default class MobileLogin extends BaseElement {
     }
 
     onSignupButtonClick(event: Event) {
-        let location = utils.getLocation();
-        if (location.info.country_code == "US" && location.info.region_code == "NY") {
+        if (this.userLocation.info.country_code == "US" && this.userLocation.info.region_code == "NY") {
             let message = 'Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io';
 
             riot.mount('#error-dialog', 'location-error', { title: 'Error', message: message});
@@ -125,7 +142,7 @@ export default class MobileLogin extends BaseElement {
         var clientHost = window.location.host;
 
         var credentials = {
-            ip: utils.getLocation().info.ip,
+            ip: this.userLocation.info.ip,
             name: name,
             email: email.toLowerCase(),
             g_recaptcha_response: captchaResp,

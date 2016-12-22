@@ -123,7 +123,7 @@ export function getDisplayDateTime(date, toTimeZone) {
 
 export function getLocation() {
     let str = localStorage.getItem('flc-location');
-    let location = null;
+    let location = {};
     if (str && str.length > 0) {
         location = JSON.parse(str);
     }

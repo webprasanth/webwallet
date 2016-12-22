@@ -3,10 +3,9 @@ import { commonActions } from '../common/actions';
 import { contactsActions } from '../contacts/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';
-import { removeUserKey, getUserKey } from '../utils';
+import { removeUserKey, getUserKey, getLocation } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
-import { getLocation } from '../utils';
 import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const sendActions = {
