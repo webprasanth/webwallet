@@ -107,7 +107,7 @@ export default class FountainSetting extends BaseElement {
             secret: null
         }
 
-        if (this.userProfile.authVersion == 3) {
+        if (this.userProfile.auth_version == 3) {
             params.secret = this.userProfile.fountainSecret;
         } else {
             if (!this.userProfile.fountainSecret) {
