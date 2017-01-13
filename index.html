@@ -9,33 +9,31 @@
     <link href="assets/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="assets/css/home-page.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-
     <script src="assets/lib/jquery/jquery-3.1.1.min.js"></script>
     <script src="assets/lib/bootstrap/bootstrap.min.js"></script>
     <script src="assets/lib/init.js"></script>
-
     <style scoped>
         .outer-container {
             position: absolute;
             top: calc(50% - 40px);
             left: calc(50% - 40px);
         }
-
+        
         .inner-item {
             width: 80px;
             height: 80px;
             display: inline-block;
         }
     </style>
-
     <script>
         var captchaId = null;
         var userLocation = null;
-        var emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        var emailRegex =
+            /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-        var onloadCallback = function() {
+        var onloadCallback = function () {
             captchaId = grecaptcha.render('gcaptcha', {
-                'sitekey' : '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C'
+                'sitekey': '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C'
             });
         };
 
@@ -73,7 +71,7 @@
             }
             $("#loading-icon").show();
 
-            $.post(url, params, function(res){
+            $.post(url, params, function (res) {
                 $("#loading-icon").hide();
 
                 if (res.rc == 1) {
@@ -212,7 +210,9 @@
         function onSignupButtonClick() {
             var query = getQueryParams(document.location.search);
 
-            if (userLocation.info.country_code == "US" && userLocation.info.region_code == "NY") {
+            if (userLocation.info.country_code == "US" ||
+                (userLocation.info.country_code == "CA" && userLocation.info.region_code ==
+                    "QC")) {
                 $('#locationErrorModal').modal('show');
                 return;
             }
@@ -260,7 +260,7 @@
             }
             $("#loading-icon").show();
 
-            $.post(url, credentials, function(resp){
+            $.post(url, credentials, function (resp) {
                 $("#loading-icon").hide();
 
                 if (resp.rc == 1) {
@@ -317,7 +317,10 @@
                     success: function (resp) {
                         if (resp.rc == 1) {
                             resp.idToken = idToken;
-                            localStorage.setItem("flc-loginresp", JSON.stringify({profile:resp, rc: 1}));
+                            localStorage.setItem("flc-loginresp", JSON.stringify({
+                                profile: resp,
+                                rc: 1
+                            }));
                             window.location.href = "home.html";
                         }
                     }
@@ -325,7 +328,7 @@
             }
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             ssoLogin();
 
             $("#btn-dologin").click(login);
@@ -344,14 +347,14 @@
 <body>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
     </script>
-
     <div class="home-page home-safecash">
         <div class="slide-top" id="slide-top">
             <img id="img-bg-slide1" class="bg-slide1" src="assets/images/pages/home-page/background-slide1.png" width="100%">
             <div class="top-content">
                 <div class="btn-newpage col-xs-12">
-                    <p class="pull-right"><a href="https://explorer.flashcoin.io" target="_blank">Explorer</a> | <a href="https://charts.flashcoin.io/"
-                            target="_blank">Charts</a></p>
+                    <p class="pull-right"><a href="https://explorer.flashcoin.io" target="_blank">Explorer</a> |
+                        <a href="https://charts.flashcoin.io/" target="_blank">Charts</a>
+                    </p>
                 </div>
                 <header class="show-mobile loginForm">
                     <div class="logo-mobile">
@@ -393,7 +396,6 @@
                                             <p>Please check your email inbox/spam folder</p>
                                         </div>
                                     </div>
-
                                     <div class="box-signup" id="box-signup">
                                         <form id="sign_up_form" class="col-xs-12">
                                             <div class="form-group col-xs-12">
@@ -479,7 +481,6 @@
                             <p>FLASH members earn rewards when they participate with publishers, merchants, and advertisers.
                                 It’s easy and free to join the FLASH network by getting a FLASH wallet. </p>
                         </div>
-
                         <div class="text col-xs-12 m20t">
                             <p>As members collect FLASH coins they can use an exchange to trade them for bitcoins. Once they
                                 have bitcoins, they can convert them into cash or spend them with the over 40 million merchants
@@ -698,7 +699,6 @@
             </div>
             <div class="slide slide-8">
                 <div class="bg-white">
-
                 </div>
                 <div class="bg-blue">
                     <div class="container">
@@ -739,8 +739,16 @@
                     <h2 class="text-center"><img class="m15r" src="assets/images/pages/home-page/icon-crowdsale.png" width="70">Crowdsale</h2>
                     <h3 class="text-center">Flashcoin Crowdsale Finale announcement</h3>
                     <p>Hello everyone:</p>
-                    <p class="text-justify"> The <strong>FLASHcoin</strong> crowdsale on Bittrex was unsuccessful due to the missed target of 200 BTC that we were looking to raise. Towards the ending weeks of the crowdsale, we did secure a couple of interested parties to push the crowdsale over the finish line, as most of you who participated are aware, BTC prices have skyrocketed in the months since we have started the crowdsale, after numerous discussions with the community and the FLASHcoin team, we decided it's in the best interest of everyone who participated in the crowdsale to receive a full refund of their BTC in the form of buy wall buyback that Bittrex is working on to initiate soon.</p>
-                    <p class="text-justify">What’s next for <strong>FLASHcoin</strong>?   We made a very important decision that we think will benefit not only all of our <strong>FLASHPRE</strong> donors, but we think will also serve the community into the future.  </p>
+                    <p class="text-justify"> The <strong>FLASHcoin</strong> crowdsale on Bittrex was unsuccessful due to the missed target of 200
+                        BTC that we were looking to raise. Towards the ending weeks of the crowdsale, we did secure a couple
+                        of interested parties to push the crowdsale over the finish line, as most of you who participated
+                        are aware, BTC prices have skyrocketed in the months since we have started the crowdsale, after numerous
+                        discussions with the community and the FLASHcoin team, we decided it's in the best interest of everyone
+                        who participated in the crowdsale to receive a full refund of their BTC in the form of buy wall buyback
+                        that Bittrex is working on to initiate soon.</p>
+                    <p class="text-justify">What’s next for <strong>FLASHcoin</strong>? We made a very important decision that we think will benefit
+                        not only all of our <strong>FLASHPRE</strong> donors, but we think will also serve the community
+                        into the future. </p>
                     <p><strong>OLD plan:</strong></p>
                     <div class="table-responsive">
                         <table class="table table-bordered m0">
@@ -793,18 +801,49 @@
                         </table>
                     </div>
                     <p><strong>NEW plan:</strong></p>
-                    <h3 style="font-size:26px;">The ENTIRE SUPPLY of MEGA and FLASH coins will be distributed to the participants of this FINALE (FLASHFIN) sale and our valued FLASHPRE donors.</h3>
-                    <p>All Bittrex participants with the failed crowdsale are being refunded in full including transaction fees.  FLASHPRE will be getting a 25% bonus and whatever shows up by January 21st for the FLASHFIN will be the last and final chance to get FLASH or MEGA.</p>
-                    <p>Why are we doing this?  We watched our friends over at Monero and think they have done many things right. We’ve been very impressed with their community  Now, the difference is FLASH is not mineable, the entire supply of 900,000 Million FLASHcoins is already existing and secured by Election Consensus.  By distributing all the coins to the people who care enough to donate their hard earned BTC, we think they will be in good hands because they will be the people who help to sponsor developers and projects for FLASH.  There won’t be any excess supply overhang, since every coin that will ever exist will be out in the field with the people who count.  They will determine who gets coins and rewarded for development.  We also expect to have FLASH and MEGA up on an exchange in Canada in the very near future.</p>
-                    <p>We will give everyone an open and the only chance to  get in on the FLASH project, we will create a proxy token on Counterparty called FLASHFIN, there will be 45 billion of these and for 0.01 btc you will get 2.25 million FLASHFIN.</p>
+                    <h3 style="font-size:26px;">The ENTIRE SUPPLY of MEGA and FLASH coins will be distributed to the participants of this FINALE (FLASHFIN)
+                        sale and our valued FLASHPRE donors.</h3>
+                    <p>All Bittrex participants with the failed crowdsale are being refunded in full including transaction fees.
+                        FLASHPRE will be getting a 25% bonus and whatever shows up by January 21st for the FLASHFIN will
+                        be the last and final chance to get FLASH or MEGA.</p>
+                    <p>Why are we doing this? We watched our friends over at Monero and think they have done many things right.
+                        We’ve been very impressed with their community Now, the difference is FLASH is not mineable, the
+                        entire supply of 900,000 Million FLASHcoins is already existing and secured by Election Consensus.
+                        By distributing all the coins to the people who care enough to donate their hard earned BTC, we think
+                        they will be in good hands because they will be the people who help to sponsor developers and projects
+                        for FLASH. There won’t be any excess supply overhang, since every coin that will ever exist will
+                        be out in the field with the people who count. They will determine who gets coins and rewarded for
+                        development. We also expect to have FLASH and MEGA up on an exchange in Canada in the very near future.</p>
+                    <p>We will give everyone an open and the only chance to get in on the FLASH project, we will create a proxy
+                        token on Counterparty called FLASHFIN, there will be 45 billion of these and for 0.01 btc you will
+                        get 2.25 million FLASHFIN.</p>
                     <p><strong>Here’s how we will distribute the remaining coins (300,000 MEGA and about 850 billion FLASH), the terms will be:</strong></p>
                     <ul class="content-note">
-                        <li><p><strong>1.</strong> FLASHPRE donors will get a 25% bonus over the FLASHFIN participants as a benefit for being early.</p></li>
-                        <li><p><strong>2.</strong> The sale will begin on Saturday January 14th at NOON Montreal time and conclude on Saturday January 21st at NOON Montreal time.</p></li>
-                        <li><p><strong>3.</strong> Sorry, no US or Quebec based residents may participate, we will check IP’s.</p></li>
-                        <li><p><strong>4.</strong> BTC will be sent to the swapbot and you will receive FLASHFIN counterparty tokens.</p></li>
-                        <li><p><strong>5.</strong> Final allocation of all the MEGA and FLASH coins will be determined based on 25% bonus on the 101.22344444 btc received in the FLASHPRE sale.  Coins donated through FLASHFIN will be added to the FLASHPRE totals.   ALL REMAINING MEGA AND FLASH coins will be distributed to FLASHPRE and FLASHFIN donors within 14 days of completion of the FIN crowdsale.</p></li>
-                        <li><p><strong>6.</strong> No refunds.</p></li>
+                        <li>
+                            <p><strong>1.</strong> FLASHPRE donors will get a 25% bonus over the FLASHFIN participants as a
+                                benefit for being early.</p>
+                        </li>
+                        <li>
+                            <p><strong>2.</strong> The sale will begin on Saturday January 14th at NOON Montreal time and conclude
+                                on Saturday January 21st at NOON Montreal time.</p>
+                        </li>
+                        <li>
+                            <p><strong>3.</strong> Sorry, no US or Quebec based residents may participate, we will check IP’s.</p>
+                        </li>
+                        <li>
+                            <p><strong>4.</strong> BTC will be sent to the swapbot and you will receive FLASHFIN counterparty
+                                tokens.
+                            </p>
+                        </li>
+                        <li>
+                            <p><strong>5.</strong> Final allocation of all the MEGA and FLASH coins will be determined based
+                                on 25% bonus on the 101.22344444 btc received in the FLASHPRE sale. Coins donated through
+                                FLASHFIN will be added to the FLASHPRE totals. ALL REMAINING MEGA AND FLASH coins will be
+                                distributed to FLASHPRE and FLASHFIN donors within 14 days of completion of the FIN crowdsale.</p>
+                        </li>
+                        <li>
+                            <p><strong>6.</strong> No refunds.</p>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -999,7 +1038,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <a id="create-wallet-btn" class="btn create-wallet-btn">Create Wallet</a>
         <a id="button-crowdsale" class="btn btn-crowdsale" href="https://swapbot.tokenly.com/bot/flash/flashfin" target="_blank">Crowdsale</a>
@@ -1016,7 +1054,6 @@
             </div>
         </footer>
     </div>
-
     <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
         <div class="modal-dialog message-error" role="document">
             <div class="modal-content">
@@ -1036,7 +1073,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade location-error" id="locationErrorModal" tabindex="-1" role="dialog">
         <div class="modal-dialog message-error" role="document">
             <div class="modal-content">
@@ -1058,7 +1094,6 @@
             </div>
         </div>
     </div>
-
     <div id="loading-icon" class="outer-container" style="display:none">
         <img class="inner-item" src="assets/images/loading.svg">
     </div>
