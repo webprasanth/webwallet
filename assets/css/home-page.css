@@ -375,6 +375,9 @@
     font-weight: bold;
 
 }
+.content-note li{
+  display: block;
+}
 .btn-crowdsale{
     position: fixed;
     background-color: #FAA116;
