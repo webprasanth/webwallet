@@ -33,6 +33,7 @@
                 contentType: 'application/json',
                 dataType: 'json',
 
+<<<<<<< f144decd533b1b935bb923d692f059f6b2dc31ad
                 success: function (location) {
                     if (location.rc == 1 && location.info.country_code == "US" ||
                         (location.info.country_code == "CA" && location.info.region_code ==
@@ -43,6 +44,15 @@
                     }
                 }
             });
+=======
+                  if (location.rc == 1 && location.info && location.info.country_code == 'US') {
+                    $('#messageInformation').modal('show');
+                  } else {
+                    window.location.href = "https://swapbot.tokenly.com/bot/flash/flashfin#choose";
+                  }
+              }
+          });
+>>>>>>> Add Agree button and change crowdsale link
         }
 
         $(document).ready(function () {
@@ -245,6 +255,9 @@
                                     be formed by electronic means through the Site.</p>
                             </li>
                         </ol>
+                    </div>
+                    <div class="text-center button-presales">
+                        <button id="agreeBtn" class="btn btn-agree" data-toggle="modal">AGREE</button>
                     </div>
                 </div>
             </div>
