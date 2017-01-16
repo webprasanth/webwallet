@@ -230,7 +230,7 @@
     font-family: sans-serif;
     border-radius: 8px;
 }
-.crowdsale-finale a img{
+.crowdsale-finale img.crowdsale{
   width: 40px;
   min-width: 30px;
   margin-top: 0;
