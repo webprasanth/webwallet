@@ -224,13 +224,16 @@
   margin-top: 15px;
 }
 .crowdsale-finale a{
-    font-size: 17px;
-    color: #FAA116;
+    font-size: 20px;
+    color: #FFFFFF;
     font-weight: bold;
     font-family: sans-serif;
-    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 6px 12px;
+}
+.crowdsale-finale a img{
+  width: 40px;
+  min-width: 30px;
+  margin-top: 0;
 }
 .form-mobile{
     display: none;
