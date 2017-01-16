@@ -18,7 +18,7 @@
             top: calc(50% - 40px);
             left: calc(50% - 40px);
         }
-        
+
         .inner-item {
             width: 80px;
             height: 80px;
@@ -140,6 +140,12 @@
                 $('html, body').animate({
                     scrollTop: 0
                 }, 500);
+            });
+            $('.crowdsale-finale a').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 1000);
+                return false;
             });
 
             let alink = $('.slide-2 a');
@@ -363,6 +369,7 @@
                     <div class="container">
                         <div class="col-xs-12 col-sm-5 logo">
                             <a href="/"><img src="assets/images/pages/logo.png" /></a>
+                            <div class="crowdsale-finale"><a href="#slide-9">NEW! Crowdsale FINALE - Last Chance!!</a></div>
                         </div>
                         <div class="col-xs-12 col-sm-6 pull-right">
                             <div class="col-xs-12 login-form">

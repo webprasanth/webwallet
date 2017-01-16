@@ -220,6 +220,18 @@
     padding: 1px 10px;
     font-weight: bold;
 }
+.crowdsale-finale{
+  margin-top: 15px;
+}
+.crowdsale-finale a{
+    font-size: 17px;
+    color: #FAA116;
+    font-weight: bold;
+    font-family: sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
 .form-mobile{
     display: none;
 }
