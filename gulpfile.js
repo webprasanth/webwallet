@@ -31,6 +31,7 @@ gulp.task('copy-wiki-page', function () {
         { from: 'contact.html', to: 'public/' },
         { from: 'support.html', to: 'public/' },
         { from: 'terms-of-service.html', to: 'public/' },
+        { from: 'crowdsale.html', to: 'public/' }
     ];
 
     var tasks = maps.map((m) => {
