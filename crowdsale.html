@@ -4,19 +4,17 @@
 <head>
     <title>Crowdsale</title>
     <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="assets/images/favicon.ico">
-    <!-- <link rel="apple-touch-icon" href="assets/img/apple-touch-icon-precomposed.png" sizes="152x152"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1 user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="stylesheet" href="assets/css/application.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/home-page.css">
     <link rel="stylesheet" href="assets/css/reponsive-style.css">
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="assets/scripts/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function checkLocation() {
             var url = 'https://keys.flashcoin.io/api/check-location';
@@ -30,10 +28,8 @@
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (location) {
-                    if (location.rc == 1 && (location.info.country_code == "US" ||
-                        (location.info.country_code == "CA" && location.info.region_code ==
-                            "QC"))) {
-                        $('#locationErrorModal').modal('show');
+                    if (location.rc == 1 && location.info.country_code == "US" || (location.info.country_code == "CA" && location.info.region_code == "QC")) {
+                        $('#messageInformation').modal('show');
                     } else {
                         window.location.href = "https://swapbot.tokenly.com/bot/flash/flashfin";
                     }
@@ -223,28 +219,28 @@
                 </div>
             </div>
         </div>
-        <div id="messageInformation" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" on-click='ok-clicked'>&times;</button>
-                        <h4 class="modal-title">Warning</h4>
+    </div>
+    <div id="messageInformation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" on-click='ok-clicked'>&times;</button>
+                    <h4 class="modal-title">Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Hello! We noticed that you are coming from a "U.S. or Quebec based IP address. We’re very sorry, but we can’t
+                        currently serve people in the U.S. or Quebec due to excessive regulations. We hope to be able to serve
+                        you in the future, so please stay tuned. If you are a non-U.S. or Quebec resident and received this message
+                        in error, please notify <strong>support@flashcoin.io</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <!-- <label class="control control--checkbox" style="font-weight:normal">
+                          <input id="skipCheckIp" class="" style="vertical-align: top;" type="checkbox">
+                          Do not show this message again
+                      </label> -->
                     </div>
-                    <div class="modal-body">
-                        <p>Hello! We noticed that you are coming from a "U.S. or Quebec based IP address. We’re very sorry, but we can’t
-                            currently serve people in the U.S. or Quebec due to excessive regulations. We hope to be able to serve
-                            you in the future, so please stay tuned. If you are a non-U.S. or Quebec resident and received this message
-                            in error, please notify <strong>support@flashcoin.io</strong></p>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="pull-left">
-                            <!-- <label class="control control--checkbox" style="font-weight:normal">
-                              <input id="skipCheckIp" class="" style="vertical-align: top;" type="checkbox">
-                              Do not show this message again
-                          </label> -->
-                        </div>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" on-click='ok-clicked'>OK</button>
-                    </div>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" on-click='ok-clicked'>OK</button>
                 </div>
             </div>
         </div>
