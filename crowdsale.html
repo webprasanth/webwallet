@@ -30,9 +30,9 @@
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (location) {
-                    if (location.rc == 1 && location.info.country_code == "US" ||
+                    if (location.rc == 1 && (location.info.country_code == "US" ||
                         (location.info.country_code == "CA" && location.info.region_code ==
-                            "QC")) {
+                            "QC"))) {
                         $('#locationErrorModal').modal('show');
                     } else {
                         window.location.href = "https://swapbot.tokenly.com/bot/flash/flashfin";
