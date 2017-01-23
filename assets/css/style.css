@@ -1004,7 +1004,7 @@ h5.title-table{
     overflow: hidden;
 }
 .listItems .item .text-long{
-    white-space: nowrap;
+    word-break: break-all;
     max-width: 100%;
 }
 .contact-page .listItems .btn-active{
