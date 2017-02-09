@@ -216,12 +216,12 @@
         function onSignupButtonClick() {
             var query = getQueryParams(document.location.search);
 
-            if (userLocation.info.country_code == "US" ||
-                (userLocation.info.country_code == "CA" && userLocation.info.region_code ==
-                    "QC")) {
-                $('#locationErrorModal').modal('show');
-                return;
-            }
+            // if (userLocation.info.country_code == "US" ||
+            //     (userLocation.info.country_code == "CA" && userLocation.info.region_code ==
+            //         "QC")) {
+            //     $('#locationErrorModal').modal('show');
+            //     return;
+            // }
 
             if (!validateName()) {
                 return;
