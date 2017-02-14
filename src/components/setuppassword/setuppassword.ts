@@ -20,23 +20,10 @@ export default class SetupPassword extends BaseElement {
     private sesureMsg: string = null;
     private token: string = null;
     private static unsubscribe = null;
-    private questionsA = [
-        'What is your dream job?',
-        'In which city did your parents meet?',
-        'What was the name of your elementary school?',
-    ];
 
-    private questionsB = [
-        'What is the first name of your favourite uncle?',
-        'Where did you meet your spouse?',
-        'What is your eldest cousin\'s name?',
-    ];
-
-    private questionsC = [
-        'Street name where you grew up?',
-        'What is your pet\'s name?',
-        'What was your first job?',
-    ];
+    private questionsA = utils.getSecurityQuestion().A;
+    private questionsB = utils.getSecurityQuestion().B;
+    private questionsC = utils.getSecurityQuestion().C;
 
     mounted() {
         tag = this;

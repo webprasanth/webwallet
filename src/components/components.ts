@@ -14,6 +14,7 @@ import ProfileAvatar from './home/profile/avatar';
 import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
+import ProfileSecurityQuestions from './home/profile/question';
 import ErrorAlert from './modals/error-alert/error-alert';
 import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
@@ -31,7 +32,7 @@ import RequestDetail from './modals/request-detail/request-detail';
 import RequestPassword from './modals/request-password/request-password';
 
 export {
-    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, TransactionDetails,
+    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, ProfileSecurityQuestions, TransactionDetails,
     MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail, RequestPassword

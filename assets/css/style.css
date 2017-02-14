@@ -1202,6 +1202,9 @@ footer p {
     float: none;
     margin: 0 auto;
 }
+#security-question .security-question{
+  float:left;
+}
 /*============*/
 .notifyjs-corner {
     top: 10% !important;

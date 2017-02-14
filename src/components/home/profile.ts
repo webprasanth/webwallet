@@ -14,6 +14,7 @@ export default class HomeProfile extends Element {
     private isProfile = true;
     private isSetting = false;
     private isFountain = false;
+    private isQuestioning = false;
 
     mounted() {
         this.userProfile = store.getState().userData.user;
@@ -26,6 +27,7 @@ export default class HomeProfile extends Element {
         riot.mount('#user-info', 'user-info', {});
         riot.mount('#account-setting', 'account-setting', {});
         riot.mount('#fountain-setting', 'fountain-setting', {});
+        riot.mount('#security-question', 'security-question', {});
     }
 
     onTabSelect(tab) {
@@ -33,14 +35,22 @@ export default class HomeProfile extends Element {
             this.isProfile = true;
             this.isSetting = false;
             this.isFountain = false;
+            this.isQuestioning = false;
         } else if (tab == 'setting') {
             this.isProfile = false;
             this.isSetting = true;
             this.isFountain = false;
+            this.isQuestioning = false;
         } else if (tab == 'fountain') {
             this.isProfile = false;
             this.isSetting = false;
             this.isFountain = true;
+            this.isQuestioning = false;
+        }  else if (tab == 'securityquestion') {
+            this.isProfile = false;
+            this.isSetting = false;
+            this.isFountain = false;
+            this.isQuestioning = true;
         }
     }
 }

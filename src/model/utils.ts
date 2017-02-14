@@ -294,3 +294,23 @@ export function formatAmountInput(amount?) {
 export function isDesktop() {
     return window.innerWidth > 766;
 }
+
+export function getSecurityQuestion() {
+    return {
+        A: [
+            'What is your dream job?',
+            'In which city did your parents meet?',
+            'What was the name of your elementary school?',
+        ],
+        B: [
+            'What is the first name of your favourite uncle?',
+            'Where did you meet your spouse?',
+            'What is your eldest cousin\'s name?',
+        ],
+        C: [
+            'Street name where you grew up?',
+            'What is your pet\'s name?',
+            'What was your first job?',
+        ]
+    }
+}

@@ -55,6 +55,51 @@ export const userActions = {
         };
     },
 
+    updateRecoveryKeys(questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
+
+        let keypair = nacl.box.keyPair();
+        let pubKey = keypair.publicKey;
+        let privKey = keypair.secretKey;
+        let pubKeyBase64 = utils.encodeBase64(pubKey);
+        let privKeyBase64 = utils.encodeBase64(privKey);
+
+        let privKeyHex = utils.base64ToHex(privKeyBase64);
+        let keyByteSize = 256;
+
+        let sc = secrets.share(privKeyHex, 3, 2);
+        let answers = [answerA, answerB, answerC];
+
+        // May hash one more time
+        let checksum = answers.join("*");
+        let encryptedSc1 = JSON.stringify(Premium.xaesEncrypt(keyByteSize, checksum, sc[0]));
+        var state = store.getState();
+        let user = state.userData.user;
+
+        let params = {
+            idToken: user.idToken,
+            sc1: encryptedSc1,
+            sc2: sc[1],
+            sc3: sc[2],
+            security_question_1: questionA,
+            security_question_2: questionB,
+            security_question_3: questionC
+        };
+
+        return (dispatch) => {
+            dispatch(commonActions.toggleLoading(true));
+
+            UserService.singleton().setRecoveryKeys(params).then((resp: any) => {
+                dispatch(commonActions.toggleLoading(false));
+
+                if (resp.rc === 1) {
+                    dispatch({ type: USERS.UPDATE_SECURITY_QUESTIONS_SUCCESS, data: {} });
+                } else {
+                    dispatch({ type: USERS.UPDATE_SECURITY_QUESTIONS_FAIL, data: {} });
+                }
+            });
+        }
+    },
+
     setPassword(token: string, password: string, questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
         let keypair = nacl.box.keyPair();
         let pubKey = keypair.publicKey;
