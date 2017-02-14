@@ -57,6 +57,15 @@ export default class SecurityQuestion extends BaseElement {
         store.dispatch(userActions.updateRecoveryKeys(questionA, answerA, questionB, answerB, questionC, answerC));
     }
 
+    clearField() {
+        $('#questionA').val('');
+        $('#questionB').val('');
+        $('#questionC').val('');
+        $('#answerA').val('');
+        $('#answerB').val('');
+        $('#answerC').val('');
+    }
+
     onApplicationStateChanged() {
         let state = store.getState();
         let data = state.userData;
@@ -69,7 +78,7 @@ export default class SecurityQuestion extends BaseElement {
                 break;
             case USERS.UPDATE_SECURITY_QUESTIONS_SUCCESS:
                 $('#btn-submit').button('reset');
-                super.showMessage('', 'Update security questions successfully');
+                super.showMessage('', 'Update security questions successfully', this.clearField);
                 break;
             default:
                 break;
