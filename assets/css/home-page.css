@@ -185,7 +185,7 @@
     font-family: 'Roboto-condensed', sans-serif;
 }
 .home-safecash p{
-    font-size: 23px;
+    font-size: 21px;
     font-family: 'Sanspro-light', sans-serif;
 }
 .home-safecash input{
@@ -484,74 +484,6 @@
 }
 /*============*/
 
-/* Publisher slide */
-.publisher-content{
-  padding: 130px 0;
-  color: #313131;
-}
-.publisher-content .content span{
-  background: #075588;
-  color: #fff;
-  padding: 1px 3px 0px 10px;
-  font-weight: bold;
-    margin-right: 10px;
-}
-.publisher-content [class*="col-"]{
-  padding: 0 15px;
-}
-.publisher-content .content li{
-}
-
-/*===================*/
-/* advertiser slide */
-.merchant-content,
-.advertiser-content {
-  padding: 100px 0;
-}
-  .slide-advertiser{
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    padding: 30px 0;
-  }
-  .advertiser-content h3{
-    font-size: 25px;
-    font-family: 'Open Sans', sans-serif;
-    color: #737373;
-    margin: 0;
-    line-height: 35px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .advertiser-content .set-position{
-    padding-left: 50px;
-  }
-  .advertiser-content ul li{
-    line-height: 23px;
-  }
-   .advertiser-content .content.number p{
-    font-size: 26px;
-   }
-   .advertiser-content .content.number{
-      padding: 21px 0 21px 110px;
-   }
-  .advertiser-content .content.number-1{
-   background: url("../images/pages/home-page/number1.png") no-repeat left center;
-  }
-  .advertiser-content .content.number-2{
-   background: url("../images/pages/home-page/number2.png") no-repeat left center;
-  }
-  .advertiser-content .content.number-3{
-   background: url("../images/pages/home-page/number3.png") no-repeat left center;
-       margin-top: 35px;
-  }
-  .advertiser-content .content.number-4{
-   background: url("../images/pages/home-page/number4.png") no-repeat left center;
-   margin-top: 25px;
-  }
-  .advertiser-content .content.number-5{
-   background: url("../images/pages/home-page/number5.png") no-repeat left center;
-      margin: 25px 0;
-  }
 /*====================*/
 /* Slide 8 */
 .slide-8 .bg-white{
@@ -582,46 +514,7 @@
     margin-top: 35px;
 }
 /*============*/
-/* Slide 9 */
-.slide-9{
-  background-color: #eaeaea;
-  border-bottom: 1px solid #303030;
-  padding: 60px 0;
-}
-.slide-9 h2{
-    color: #303030;
-    font-size:60px;
-    padding: 40px 0 30px;
-}
-.slide-9 p{
-    color: #303030;
-    margin: 23px auto;
-}
 
-.slide-9 .table-responsive{
-    font-size: 23px;
-    color: #303030;
-    width: 950px;
-    margin: 115px auto 100px;
-    background: #fff;
-}
-.slide-9 .table-bordered>thead>tr>th,
- .table-bordered>tbody>tr>th,
-  .table-bordered>tfoot>tr>th,
-   .table-bordered>thead>tr>td,
-    .table-bordered>tbody>tr>td,
-     .table-bordered>tfoot>tr>td{
-      border:1px solid #303030;
-}
-.slide-9 .table-responsive thead tr{
-  background-color: #084175;
-  color: #fff;
-}
-.slide-9 .table-responsive tbody tr.last{
-  background-color: #c5c8cb;
-  font-weight: bold;
-}
-/*============*/
 /* Slide 10 */
 .slide-10{
   background-color: #eaeaea;
@@ -688,7 +581,7 @@
 }
 .slide-11 .faq-category ul li h4 {
     color: rgb(70, 70, 70);
-    font-size: 23px;
+    font-size: 21px;
     cursor: pointer;
     background: url("../images/pages/home-page/icon-point.png"), url("../images/pages/home-page/img1-faq.png");
     background-size: 10px, 17px;
@@ -726,18 +619,16 @@
 .slide-11 .note p{
   color: #faa115;
   font-family: 'Open Sans', sans-serif;
-}
-.slide-11 h3{
-  width: 980px;
-  margin: 90px auto 25px;
+  font-size: 25px;
 }
 .slide-11 h3 p{
- font-size: 25px;
+ font-size: 19px;
   font-family: 'Open Sans', sans-serif;
   color: #949494;
   margin: 0;
   line-height: 32px;
   font-weight: bold;
+  text-align: center
 }
 .slide-11 ul.number-reasons{
   width: 850px;
@@ -907,11 +798,8 @@ footer .container {
 /*========*/
 @media only screen and (max-width: 1440px) {
   .home-page .container,
-  .slide-4 .text p.spec,
-  .slide-4 .max-width-col,
   .slide-9 .table-responsive,
   .slide-8 .bg-blue .container,
-  .slide-11 h3,
   .slide-9 p,
   .slide-11 ul.number-reasons{
     width: auto;
@@ -919,12 +807,6 @@ footer .container {
   .slide-9 .table-responsive,
   .slide-4 .max-width-col{
     max-width: 950px;
-  }
-  .slide-11 h3{
-    max-width: 980px;
-  }
-  .slide-11 ul.number-reasons{
-    max-width: 850px;
   }
   .home-page .container{
     max-width: 1180px;
@@ -1150,7 +1032,7 @@ footer .container {
     }
     .advertiser-content .content.number{
       margin:0;
-      padding: 42px 0 21px 0;
+      padding: 42px 0 187 0;
     }
     .advertiser-content .content.number ul{
       padding: 0;
