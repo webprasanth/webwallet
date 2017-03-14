@@ -367,11 +367,11 @@ h5.title-table{
 }
 .header-SC .top-balance{
     position: absolute;
-    width: 250px;
+    width: 300px;
     margin: 0 auto;
     display: block;
     left: 50%;
-    margin-left: -125px;
+    margin-left: -190px;
     font-size: 14pt;
 }
 .header-SC .header-right{

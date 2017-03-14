@@ -75,7 +75,8 @@ export default class HomeHeader extends BaseElement {
 
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
-                this.balance = state.lastAction.data;
+                // this.balance = state.lastAction.data;
+                this.balance = 76829151695;
                 break;
             case COMMON.NEED_UPDATE_BALANCE:
                 setTimeout(function () {

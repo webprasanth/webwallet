@@ -28,6 +28,7 @@ export default class HomeActivity extends Element {
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
     private timeZone = null;
+    private 
 
     public txns = [];
     public tabs = store.getState().activityData.tabs;
