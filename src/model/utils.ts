@@ -28,6 +28,16 @@ declare class Buffer extends Object {
     toString(encode?: string);
 }
 
+export function getUrlParam(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+
+    if (results == null) {
+        return null;
+    } else {
+        return results[1] || 0;
+    }
+}
+
 export function decryptPassphraseV2(email, wallets, password) {
     let userKey = getUserKey();
     let nonce = 'nnfyPFFbK7NdGtf73uGwt+CsS6mHAmAq';

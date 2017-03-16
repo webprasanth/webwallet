@@ -14,6 +14,7 @@ interface IUser {
     balance: number;
     phone: string;
     phone_verified: number;
+    totp_enabled: number;
 }
 
 interface ITAB {

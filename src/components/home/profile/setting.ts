@@ -63,7 +63,7 @@ export default class AccountSetting extends BaseElement {
                 // TODO This is hack. The correct way is call to users/reducer and upate user profile
                 this.userProfile.totp_enabled = 1;
                 this.is2FA = false;
-                super.showMessage('', 'Setup Two phase authentication successfully. You need to enter Google authenticator code every time you log in to your account.');
+                super.showMessage('', 'Two Phase Authentication has been successfully setup. You will now need to enter the Google authenticator code every time you login.');
                 break;
             case PROFILE.CONFIRM_2FA_CODE_FAILED:
                 super.showError('', 'Confirm code fail');

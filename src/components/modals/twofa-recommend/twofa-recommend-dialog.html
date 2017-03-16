@@ -1,17 +1,20 @@
 <twofa-recommend-dialog>
-	<div class="modal fade" id="verifyPinDialog" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="twoFARecommendDialog" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title"><strong>2-step Verification</strong></h4>
-					<div>
-						<img src="assets/images/pages/img-barcode.png">
-						<p><strong>Your account doesn’t have additional phone security yet, we highly recommend you add it.  To add this feature, click here</strong></p>
-					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">2-step Verification</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-xs-12"><button type="button" class="col-xs-12 btn btn-primary" style="padding: 6px 12px;" onclick={onOk}>OK</button></div>
-					<label><input type="checkbox" value="">Don't show this dialog again22</label>
+					<div class="message message-success">
+						<p class="msg">Your account doesn’t have additional phone security yet, we highly recommend you add it.  To add this feature, click <a href="#" data-dismiss="modal" onclick={gotoProfile}>here</a></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input id="disable2FARecommend" type="checkbox" style="margin-right:5px;">Don't show this dialog again</input>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick={onOk} style="margin-left:10px">OK</button>
 				</div>
 			</div>
 		</div>

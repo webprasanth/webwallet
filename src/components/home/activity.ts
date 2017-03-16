@@ -45,12 +45,22 @@ export default class HomeActivity extends Element {
         this.timeZone = state.userData.user.timezone;
         this.initDatePickers(false);
         this.loadTxns();
+        this.check2FA();
     }
 
     unmounted() {
         this.fromDateObject = null;
         this.toDateObject = null;
         this.paginationObject = null;
+    }
+
+    check2FA() {
+        if (!store.getState().userData.user.totp_enabled) {
+            if (!localStorage.getItem('disable-suggest-2fa')) {
+                riot.mount('#error-dialog', 'twofa-recommend-dialog', {});
+                // riot.mount('#error-dialog', 'twofa-verification-dialog', {});
+            }
+        }
     }
 
     /**

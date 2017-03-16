@@ -2,14 +2,16 @@ import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeProfileTemplate from './profile.html!text';
 import AndamanService from '../../model/andaman-service';
-import { calcFee } from '../../model/utils';
+import { getUrlParam } from '../../model/utils';
+import { TABS, PROFILE } from '../../model/action-types';
 
 @template(HomeProfileTemplate)
 export default class HomeProfile extends Element {
 
+    private static unsubscribe = null;
+
     private userProfile = null;
     private avartarServer: string = null;
-    private isUploadingImage: boolean = false;
 
     private isProfile = true;
     private isSetting = false;
@@ -17,9 +19,27 @@ export default class HomeProfile extends Element {
     private isQuestioning = false;
 
     mounted() {
+        if (HomeProfile.unsubscribe) HomeProfile.unsubscribe();
+        HomeProfile.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+
         this.userProfile = store.getState().userData.user;
         this.avartarServer = AndamanService.AvatarServer;
         this.mountComponents();
+    }
+
+    onApplicationStateChanged() {
+        let state = store.getState();
+        let data = state.profileData;
+        let type = state.lastAction.type;
+
+
+        if (type == TABS.SET_ACTIVE) {
+            $('#tab-1').removeClass('active');
+            $('#tab-2').addClass('active');
+            this.onTabSelect('setting');
+        }
+
+        this.update();
     }
 
     mountComponents() {
