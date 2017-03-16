@@ -32,8 +32,7 @@ export default class HomeProfile extends Element {
         let data = state.profileData;
         let type = state.lastAction.type;
 
-
-        if (type == TABS.SET_ACTIVE) {
+        if (type == PROFILE.SHOW_ACCOUNT_SETTING) {
             $('#tab-1').removeClass('active');
             $('#tab-2').addClass('active');
             this.onTabSelect('setting');
