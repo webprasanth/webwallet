@@ -70,12 +70,12 @@ export function utcDateToLocal(str) {
 
 export function satoshiToFlash(num) {
     if (num == undefined || num === '') return;
-    return parseFloat(new Big(num).div(10000000).toString());
+    return parseFloat(new Big(num).div(10000000000).toString());
 }
 
 export function flashToSatoshi(num) {
     if (num == undefined || num === '') return;
-    return parseInt(new Big(num).times(10000000).toString(), 10);
+    return parseInt(new Big(num).times(10000000000).toString(), 10);
 }
 
 export function storeIdToken(idToken: string) {
