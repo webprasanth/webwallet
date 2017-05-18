@@ -472,6 +472,7 @@
 }
 .slide-4 ul li,
 .slide-4 .text p{
+    display: block;
     color: #616060;
     font-size: 23px;
     font-weight: normal;
@@ -567,7 +568,6 @@
     max-width: 640px
 }
 .slide-11 .faq-category ul {
-    float: left;
     margin-bottom: 0px;
     padding: 0px;
 }
@@ -648,8 +648,26 @@
       font-size: 40px;
     line-height: 30px;
 }
-
-
+.download-flash{
+  padding: 0 0 70px 0;
+  border-top: 1px solid #ddd;
+}
+.download-flash .col-box{
+    margin-top: 50px;
+}
+.download-flash .col-box a{
+      font-size: 18px;
+      font-weight: bold;
+    background-color: #0e76bc;
+      width: 85%;
+    text-align: left
+}
+.download-flash .col-box a img{
+  margin-right:10px; 
+}
+.home-safecash .download-flash .container{
+  width: 1260px;
+}
 /* Slide 12*/
 .slide-12 {
   background: #eaf4f6;
@@ -658,7 +676,8 @@
 .slide-12 .container{
   width: 1600px;
 }
-.slide-12 h3.title{
+.slide-12 h3.title,
+.download-flash h3.title{
     font-size: 60px;
     color: #303030;
     margin-top: 60px;
