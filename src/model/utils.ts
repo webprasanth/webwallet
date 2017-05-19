@@ -70,7 +70,7 @@ export function utcDateToLocal(str) {
 
 export function satoshiToFlash(num) {
     if (num == undefined || num === '') return;
-    return parseFloat(new Big(num).div(10000000000).toString());
+    return parseFloat(new Big(num).div(10000000000).toString()).toLocaleString('en',{maximumFractionDigits:8});
 }
 
 export function flashToSatoshi(num) {

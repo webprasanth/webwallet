@@ -76,6 +76,7 @@ export default class HomeHeader extends BaseElement {
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
+                $.notify('Updated Balance: '+this.balance, "info");
                 break;
             case COMMON.NEED_UPDATE_BALANCE:
                 setTimeout(function () {
@@ -184,5 +185,8 @@ export default class HomeHeader extends BaseElement {
 
         commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
+    }
+    onLoadBalanceButtonClick(event: Event) {
+        store.dispatch(userActions.getBalance());
     }
 }
