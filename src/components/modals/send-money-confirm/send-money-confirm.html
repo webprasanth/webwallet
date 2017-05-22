@@ -24,7 +24,7 @@
 						<div class="confirm__transaction">
 							<div class="_amount text-center"><span class="_value">{formatCurrency(formatAmountInput(opts.amount))}</span> <span class="_currency"></span></div>
 							<div class="text-center">
-								<p><span class="_fee">+ {formatCurrency(formatAmountInput(opts.fee))} transaction fee</span></p>
+								<p><span class="_fee">+ {opts.fee} FLC transaction fee</span></p>
 								<div class="refresh-data text-center" show={sending}><span class="_icon glyphicon glyphicon-refresh spinning"></span></div>
 								<p show={!sending}><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
 							</div>

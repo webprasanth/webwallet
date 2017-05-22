@@ -112,7 +112,7 @@ export function getUserKey(): UserKey | any {
 }
 
 export function calcFee(amount) {
-    return 1;
+    return 0.001; // default fee for web-wallet transaction
 }
 
 export function formatCurrency(amount) {
