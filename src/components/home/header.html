@@ -17,7 +17,10 @@
 					<a><img src="assets/images/pages/logo.png" /></a>
 				</div>
 				<div class="top-balance text-center col-xs-12 color-custom">
-					<p onclick={onLoadBalanceButtonClick}><span class="hidden-xs">Balance:</span> {balance} Flash</p>
+					<p onclick={onLoadBalanceButtonClick} title="Click to refresh balance">
+						<img src={refreshIconUrl} height="20px" />
+						<span class="hidden-xs" >Balance:</span> {balance} FLC
+					</p>
 				</div>
 				<div class="header-right col-xs-12 col-sm-5 hidden-xs">
 					<div class="avatar" if={avatarUrl}><img src={avatarUrl} /></div>

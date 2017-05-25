@@ -14,6 +14,7 @@ let tag = null;
 export default class HomeHeader extends BaseElement {
     private userEmail: string = store.getState().userData.user.email;
     private avatarUrl: string = null;
+    private refreshIconUrl: string = "assets/images/refresh_icon_white.png";
     private balance = 0;
     private decimalFormat = decimalFormat;
     private static unsubscribe = null;
@@ -76,6 +77,7 @@ export default class HomeHeader extends BaseElement {
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
+                this.refreshIconUrl = "assets/images/refresh_icon_white.png";
                 $.notify('Updated Balance: '+this.balance, "info");
                 break;
             case COMMON.NEED_UPDATE_BALANCE:
@@ -187,6 +189,7 @@ export default class HomeHeader extends BaseElement {
         store.dispatch(userActions.logout());
     }
     onLoadBalanceButtonClick(event: Event) {
+        this.refreshIconUrl = "assets/images/reload.svg";
         store.dispatch(userActions.getBalance());
     }
 }
