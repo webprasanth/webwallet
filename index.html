@@ -58,12 +58,11 @@
                 return;
             }
 
-            //var url = 'https://keys.flashcoin.io/api/login';
-            var url = 'http://keys.flashcoin.io:8098/api/login';
+            var url = 'https://keys.flashcoin.io/api/login';
 
-            // if (window.location.protocol == 'http:') {
-            //     url = 'http://keys.flashcoin.io:8098/api/login';
-            // }
+            if (window.location.protocol == 'http:') {
+                url = 'http://keys.flashcoin.io:8098/api/login';
+            }
 
             var params = {
                 email: email,
@@ -261,12 +260,11 @@
                 credentials.trackId = query.track_id;
             }
 
-            //var url = 'https://keys.flashcoin.io/api/createEasy';
-            var url = 'http://keys.flashcoin.io:8098/api/createEasy';
+            var url = 'https://keys.flashcoin.io/api/createEasy';
 
-            // if (window.location.protocol == 'http:') {
-            //     url = 'http://keys.flashcoin.io:8098/api/createEasy';
-            // }
+            if (window.location.protocol == 'http:') {
+                url = 'http://keys.flashcoin.io:8098/api/createEasy';
+            }
             $("#loading-icon").show();
 
             $.post(url, credentials, function (resp) {
@@ -309,12 +307,11 @@
             var idToken = localStorage.getItem('fl-idtoken-2606');
 
             if (idToken) {
-                //var url = 'https://keys.flashcoin.io/api/session';
-                var url = 'http://keys.flashcoin.io:8098/api/session';
+                var url = 'https://keys.flashcoin.io/api/session';
 
-                // if (window.location.protocol == 'http:') {
-                //     url = 'http://keys.flashcoin.io:8098/api/session';
-                // }
+                if (window.location.protocol == 'http:') {
+                    url = 'http://keys.flashcoin.io:8098/api/session';
+                }
                 $("#loading-icon").show();
 
                 $.ajax({
@@ -557,20 +554,20 @@
                 </div>
             </div>
             <div class="download-flash" id="download-flash">
-                <div class="container">
-                    <h3 class="title text-center">Download FLASH QT wallets</h3>
-                    <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 64 exe File</a></p></div>
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux Arm Zip File</a></p></div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 32 exe File</a></p></div>
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux 64 Zip File</a></p></div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-Qt.dmg" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Mac Zip File</a></p></div>
-                    </div>
-                </div>
+              <div class="container">
+                  <h3 class="title text-center">Download FLASH QT wallets</h3>
+                  <div class="col-xs-12">
+                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 64 exe File</a></p></div>
+                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux Arm Zip File</a></p></div>
+                  </div>
+                  <div class="col-xs-12">
+                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 32 exe File</a></p></div>
+                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux 64 Zip File</a></p></div>
+                  </div>
+                  <div class="col-xs-12">
+                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-Qt.dmg" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Mac Zip File</a></p></div>
+                  </div>
+              </div>
             </div>
             <div class="slide-12" id="slide-12">
                 <div class="container">
