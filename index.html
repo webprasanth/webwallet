@@ -58,11 +58,12 @@
                 return;
             }
 
-            var url = 'https://keys.flashcoin.io/api/login';
+            //var url = 'https://keys.flashcoin.io/api/login';
+            var url = 'http://keys.flashcoin.io:8098/api/login';
 
-            if (window.location.protocol == 'http:') {
-                url = 'http://keys.flashcoin.io:8098/api/login';
-            }
+            // if (window.location.protocol == 'http:') {
+            //     url = 'http://keys.flashcoin.io:8098/api/login';
+            // }
 
             var params = {
                 email: email,
@@ -260,11 +261,12 @@
                 credentials.trackId = query.track_id;
             }
 
-            var url = 'https://keys.flashcoin.io/api/createEasy';
+            //var url = 'https://keys.flashcoin.io/api/createEasy';
+            var url = 'http://keys.flashcoin.io:8098/api/createEasy';
 
-            if (window.location.protocol == 'http:') {
-                url = 'http://keys.flashcoin.io:8098/api/createEasy';
-            }
+            // if (window.location.protocol == 'http:') {
+            //     url = 'http://keys.flashcoin.io:8098/api/createEasy';
+            // }
             $("#loading-icon").show();
 
             $.post(url, credentials, function (resp) {
@@ -307,11 +309,12 @@
             var idToken = localStorage.getItem('fl-idtoken-2606');
 
             if (idToken) {
-                var url = 'https://keys.flashcoin.io/api/session';
+                //var url = 'https://keys.flashcoin.io/api/session';
+                var url = 'http://keys.flashcoin.io:8098/api/session';
 
-                if (window.location.protocol == 'http:') {
-                    url = 'http://keys.flashcoin.io:8098/api/session';
-                }
+                // if (window.location.protocol == 'http:') {
+                //     url = 'http://keys.flashcoin.io:8098/api/session';
+                // }
                 $("#loading-icon").show();
 
                 $.ajax({
@@ -472,7 +475,7 @@
                         <p>Important differences with FLASH:</p>
                         <ul>
                             <li><p><strong>1. There is zero inflation.</strong>  All 900 million coins have been issued via a crowdsale.</p></li>
-                            <li><p><strong>2. Coins were given to donors who participated in the presale donation process.</strong>  There were only 1 million free coins used for testing and distributed to approximately 60,000 wallets.  No free coins were given to developers.</p></li>                        
+                            <li><p><strong>2. Coins were given to donors who participated in the presale donation process.</strong>  There were only 1 million free coins used for testing and distributed to approximately 60,000 wallets.  No free coins were given to developers.</p></li>
                             <li><p><strong>3. There is no developer slush fund.</strong>  Just like Bitcoin, people will develop if they see a return on their time.  Developers can use split payments to charge for their apps, right at the point of transaction.</p></li>
                             <li><p><strong>4. No special “inside deals”.</strong>  Because all coins were distributed via publicly announced presale donations, everyone had the same chance to participate.  What individuals decide to do with their private property coins afterwards are up to them entirely.</p></li>
                             <li><p><strong>5. Very low transaction fees.</strong>  This is a low tax zone.  Transaction fees add up and as a coin appreciates in value, the fees become onerous.</p></li>
@@ -522,7 +525,7 @@
                     <h2 class="text-center">FAQ</h2>
                     <div class="note text-center">
                         <p class="m0">FLASH has a finite and already issued supply of 900 million coins</p>
-                    </div>            
+                    </div>
                     <div class="faq-category">
                         <div class="box-left col-xs-12 col-sm-6">
                             <ul class="first">
@@ -557,15 +560,15 @@
                 <div class="container">
                     <h3 class="title text-center">Download FLASH QT wallets</h3>
                     <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://www.dropbox.com/s/d97twtsvqwlzkqb/flashcoin-0.10.3.0-win64-setup.exe?dl=0" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 64 exe File</a></p></div>
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://www.dropbox.com/s/xc272y6i6d4jnp5/flashcoin-0.10.3.0-win32-setup.exe?dl=0" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 32 exe File</a></p></div>                        
+                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 64 exe File</a></p></div>
+                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux Arm Zip File</a></p></div>
                     </div>
                     <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://www.dropbox.com/s/6si7g1bprb7hkfl/Flashcoin-x86_64-unknown-linux-gnu.tar.gz?dl=0" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux 64 Zip File</a></p></div>
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://www.dropbox.com/s/xciotjaazwolp81/Flashcoin-arm-linux-gnueabihf.tar.gz?dl=0" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux Arm Zip File</a></p></div>      
+                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 32 exe File</a></p></div>
+                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux 64 Zip File</a></p></div>
                     </div>
                     <div class="col-xs-12">
-                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://www.dropbox.com/s/vdjcjy4m46ydzi8/Flashcoin-x86_64-apple-darwin11.tar.gz?dl=0" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Mac Zip File</a></p></div>
+                        <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-x86_64-apple-darwin11.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Mac Zip File</a></p></div>
                     </div>
                 </div>
             </div>
