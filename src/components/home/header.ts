@@ -99,7 +99,7 @@ export default class HomeHeader extends BaseElement {
                 note = state.commonData.notificationData.pop();
 
                 if (note.email_sender) {
-                    message = note.email_sender + " sent you a request for " + decimalFormat(note.amount) + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                    message = note.email_sender + " sent you a request for " + note.amount + " Flash Coin at " + utcDateToLocal(note.created_ts);
                     $.notify(message, "info");
                 }
             case PROFILE.UPDATE_AVATAR_SUCCESS:
@@ -161,12 +161,12 @@ export default class HomeHeader extends BaseElement {
             }
 
             if (note.transaction_type == 'like') {
-                message = "You have just liked and sent " + note.recipientEmail + " " + decimalFormat(note.amount) + " tokens as a reward";
+                message = "You have just liked and sent " + note.recipientEmail + " " + note.amount + " tokens as a reward";
             } else {
-                message = "One of your fountain(s) has just dispensed " + decimalFormat(note.amount) + " tokens to " + note.recipientEmail;
+                message = "One of your fountain(s) has just dispensed " + note.amount + " tokens to " + note.recipientEmail;
             }
         } else {
-            message = note.sender_email + " sent you " + decimalFormat(note.amount) + " Flash Coin";
+            message = note.sender_email + " sent you " + note.amount + " Flash Coin";
         }
 
         $.notify(message, "info");
