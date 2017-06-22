@@ -367,7 +367,7 @@ h5.title-table{
 }
 .header-SC .top-balance{
     position: absolute;
-    width: 300px;
+    width: auto;
     margin: 0 auto;
     display: block;
     left: 50%;
