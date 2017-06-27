@@ -100,7 +100,8 @@ export const userActions = {
         }
     },
 
-    setPassword(token: string, password: string) {
+    //setPassword(token: string, password: string) {
+    setPassword(token: string, password: string, questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
         let keypair = nacl.box.keyPair();
         let pubKey = keypair.publicKey;
         let privKey = keypair.secretKey;
@@ -119,6 +120,11 @@ export const userActions = {
         };
 
         let sc = secrets.share(privKeyHex, 3, 2);
+        let answers = [answerA, answerB, answerC];
+
+        // May hash one more time
+        let checksum = answers.join("*");
+        let encryptedSc1 = JSON.stringify(Premium.xaesEncrypt(keyByteSize, checksum, sc[0]));
 
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
@@ -128,13 +134,24 @@ export const userActions = {
 
                 if (resp.rc === 1) {
 
+                    let _params = {
+                        idToken: resp.profile.idToken,
+                        sc1: encryptedSc1,
+                        sc2: sc[1],
+                        sc3: sc[2],
+                        security_question_1: questionA,
+                        security_question_2: questionB,
+                        security_question_3: questionC
+                    };
+
                     let userKey = {
                         idToken: resp.profile.idToken,
                         encryptedPrivKey: encryptedPrivKey,
                         publicKey: pubKeyBase64
                     };
 
-                    let _params = {
+                    //let _params = {
+                    let createWalletParams = {
                         sessionToken: resp.profile.sessionToken,
                         publicKey: userKey.publicKey,
                         appId: 'flashcoin'
@@ -143,7 +160,8 @@ export const userActions = {
                     utils.storeUserKey(userKey);
 
                     // resp.profile.auth_version
-                    dispatch(userActions.createWallet(_params, password, resp.profile));
+                    //dispatch(userActions.createWallet(_params, password, resp.profile));
+                    dispatch(userActions.setRecoveryKeys(_params, createWalletParams, password, resp.profile));
                     dispatch(userActions.setPasswordSuccess(resp.profile));
                 } else {
                     dispatch(userActions.setPasswordFailed(resp));
@@ -160,21 +178,43 @@ export const userActions = {
         return { type: USERS.SET_PASSWORD_FAILED, data: resp };
     },
 
-    createWallet(params, password, profile) {
+    //createWallet(params, password, profile) {
+    setRecoveryKeys(params, createWalletParams, password, profile) {
 
         return (dispatch) => {
             dispatch(commonActions.toggleLoading(true));
 
-            UserService.singleton().createFlashWallet(params).then((_resp: any) => {
+            //UserService.singleton().createFlashWallet(params).then((_resp: any) => {
+            UserService.singleton().setRecoveryKeys(params).then((resp: any) => {
                 dispatch(commonActions.toggleLoading(false));
-                if (_resp.rc === 1) {
-                    // To enable notification
-                    dispatch(userActions.checkSessionToken(profile, password));
-                } else {
-                    console.log('+++++ createFlashWallet failed, reason:', _resp);
+                if (resp.rc === 1) {
+                    UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
+                        if (_resp.rc === 1) {
+                            // To enable notification
+                            dispatch(userActions.checkSessionToken(profile, password));
+                        } else {
+                            console.log('+++++ createFlashWallet failed, reason:', _resp);
+                        }
+                    });
+                    UserService.singleton().setRecoveryKeys(params).then((___resp: any) => {
+                    });
+                   dispatch(userActions.setRecoveryKeysSuccess(resp));
+                // if (_resp.rc === 1) {
+                //     // To enable notification
+                //     dispatch(userActions.checkSessionToken(profile, password));
+            } else {
+                    dispatch(userActions.setRecoveryKeysFailed(resp));
+                    //console.log('+++++ createFlashWallet failed, reason:', _resp);
                 }
             });
         };
+    },
+
+    setRecoveryKeysSuccess(resp) {
+        return { type: USERS.GET_PROFILE_SUCCESS, data: resp };
+    },
+    setRecoveryKeysFailed(resp) {
+        return { type: USERS.SET_RECOVERY_KEY_FAILED, data: resp };
     },
 
     checkSessionToken(profile, password) {
@@ -355,8 +395,11 @@ export const userActions = {
         return (dispatch) => {
             UserService.singleton().getBalance().then((resp: any) => {
                 if (resp.rc === 1) {
+                    console.log('get Balance()', resp.balance);
+                    console.log('get Balance() utils.satoshiToFlash(resp.balance)', utils.satoshiToFlash(resp.balance));
                     dispatch(userActions.getBalanceSuccess(utils.satoshiToFlash(resp.balance)));
                 } else {
+                    console.log('get getBalanceFailed()');
                     dispatch(userActions.getBalanceFailed(resp));
                 }
             });

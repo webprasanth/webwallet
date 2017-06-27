@@ -21,6 +21,10 @@ export default class SetupPassword extends BaseElement {
     private token: string = null;
     private static unsubscribe = null;
 
+    private questionsA = utils.getSecurityQuestion().A;
+    private questionsB = utils.getSecurityQuestion().B;
+    private questionsC = utils.getSecurityQuestion().C;
+
     mounted() {
         tag = this;
         if (SetupPassword.unsubscribe) SetupPassword.unsubscribe();
@@ -28,6 +32,23 @@ export default class SetupPassword extends BaseElement {
         this.token = route.query().token;
         $('#fcpassword').on("change keyup", this.onPasswordChanged);
         $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged);
+    }
+
+    checkSecureQuestion() {
+        let questionA = $('#questionA').val();
+        let questionB = $('#questionB').val();
+        let questionC = $('#questionC').val();
+        let answerA = $('#answerA').val();
+        let answerB = $('#answerB').val();
+        let answerC = $('#answerC').val();
+
+        if (!questionA || !questionB || !questionC || !answerA || !answerB || !answerC) {
+            this.sesureMsg = 'All security question is required to recover passowd and coin in case you foget your passowd';
+            return false;
+        }
+
+        this.sesureMsg = null;
+        return true;
     }
 
     createAccount() {
@@ -47,6 +68,10 @@ export default class SetupPassword extends BaseElement {
             return;
         }
 
+        if (!this.checkSecureQuestion()) {
+           return;
+        }
+
         $('#btn-create-account').button('loading');
 
         let questionA: string = $('#questionA').val();
@@ -57,7 +82,8 @@ export default class SetupPassword extends BaseElement {
         let answerC: string = $('#answerC').val();
         let answers = [answerA, answerB, answerC];
 
-        store.dispatch(userActions.setPassword(this.token, password));
+        //store.dispatch(userActions.setPassword(this.token, password));
+        store.dispatch(userActions.setPassword(this.token, password, questionA, answerA, questionB, answerB, questionC, answerC));
     }
 
     onRePasswordChanged() {
