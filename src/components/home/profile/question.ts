@@ -74,11 +74,11 @@ export default class SecurityQuestion extends BaseElement {
         switch (type) {
             case USERS.UPDATE_SECURITY_QUESTIONS_FAIL:
                 $('#btn-submit').button('reset');
-                super.showError('', 'Update security questions failed');
+                super.showError('', 'Security questions updated failed');
                 break;
             case USERS.UPDATE_SECURITY_QUESTIONS_SUCCESS:
                 $('#btn-submit').button('reset');
-                super.showMessage('', 'Update security questions successfully', this.clearField);
+                super.showMessage('', 'Security questions have been updated successfully', this.clearField);
                 break;
             default:
                 break;
