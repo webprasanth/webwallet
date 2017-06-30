@@ -27,7 +27,7 @@ export default class RequestPassword extends BaseElement {
                 store.dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });
 
                 if (this.opts.cb) {
-                    this.opts.cb();
+                    this.opts.cb(password);
                 }
                 $('#sendDialog').modal('hide');
                 

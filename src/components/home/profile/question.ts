@@ -43,7 +43,7 @@ export default class SecurityQuestion extends BaseElement {
         riot.mount('#confirm-send', 'request-password', {cb: this.setSecurityQuestion});
     }
 
-    setSecurityQuestion() {
+    setSecurityQuestion(password) {
         $('#btn-submit').button('loading');
 
         let questionA: string = $('#questionA').val();
@@ -54,7 +54,7 @@ export default class SecurityQuestion extends BaseElement {
         let answerC: string = $('#answerC').val();
         let answers = [answerA, answerB, answerC];
 
-        store.dispatch(userActions.updateRecoveryKeys(questionA, answerA, questionB, answerB, questionC, answerC));
+        store.dispatch(userActions.updateRecoveryKeys(questionA, answerA, questionB, answerB, questionC, answerC, password));
     }
 
     clearField() {

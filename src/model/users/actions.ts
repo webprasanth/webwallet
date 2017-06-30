@@ -55,15 +55,9 @@ export const userActions = {
         };
     },
 
-    updateRecoveryKeys(questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string) {
-
-        let keypair = nacl.box.keyPair();
-        let pubKey = keypair.publicKey;
-        let privKey = keypair.secretKey;
-        let pubKeyBase64 = utils.encodeBase64(pubKey);
-        let privKeyBase64 = utils.encodeBase64(privKey);
-
-        let privKeyHex = utils.base64ToHex(privKeyBase64);
+    updateRecoveryKeys(questionA: string, answerA: string, questionB: string, answerB: string, questionC: string, answerC: string, password) {
+        let userKey = utils.getUserKey();
+        let privKeyHex = Premium.xaesDecrypt(password, userKey.encryptedPrivKey);
         let keyByteSize = 256;
 
         let sc = secrets.share(privKeyHex, 3, 2);
