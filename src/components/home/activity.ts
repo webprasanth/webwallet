@@ -231,6 +231,10 @@ export default class HomeActivity extends Element {
         store.dispatch(activityActions.getTransactionDetail(event.item.txn));
     }
 
+    formatDecimalAmount(amount){
+        return parseFloat(amount).toLocaleString('en',{maximumFractionDigits:8});
+    }
+
     getDisplayDateTime = getDisplayDateTime;
     getDisplayDate = getDisplayDate;
 }

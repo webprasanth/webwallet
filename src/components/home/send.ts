@@ -107,12 +107,13 @@ export default class HomeSend extends BaseElement {
         }
 
         if (utils.isValidFlashAddress($('#to-email-id').val())) {
-            if (store.getState().userData.user.phone_verified == 0) {
-                super.showMessage('', 'You need to provide and verify your phone number.', () => {
-                    route('profile');
-                });
-                return;
-            }
+            // # disable checking phone verification to do withdraw
+            // if (store.getState().userData.user.phone_verified == 0) {
+            //     super.showMessage('', 'You need to provide and verify your phone number.', () => {
+            //         route('profile');
+            //     });
+            //     return;
+            // }
         }
 
         let amount = $('#amount-input').val();
