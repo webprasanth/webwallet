@@ -131,7 +131,7 @@ export default class HomeSend extends BaseElement {
         }
 
         if (this.userProfile.balance >= amount && this.userProfile.balance < amount + fee) {
-            super.showError('', 'You do not have enough fee to make this payment');
+            super.showError('', 'You do not have enough coins to make this payment');
             return;
         }
 

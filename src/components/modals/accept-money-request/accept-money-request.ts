@@ -54,7 +54,7 @@ export default class AcceptMoneyRequest extends Element {
 
         if (balance < amount + fee) {
             if (amount <= balance) {
-                this.notEnoughBalanceMsg = 'You do not have enough fee to make this payment';
+                this.notEnoughBalanceMsg = 'You do not have enough coins to make this payment';
             } else {
                 this.notEnoughBalanceMsg = 'You do not have enough funds to make this payment';
             }
