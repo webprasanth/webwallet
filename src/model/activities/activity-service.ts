@@ -1,47 +1,44 @@
 import AndamanService from '../andaman-service';
 import Big from 'big.js';
+import AppService from '../app-service'
 
 export default class ActivityService {
+    
+    private static _instance: ActivityService;
     constructor() {
+    }
+    static singleton() {
+        if (!ActivityService._instance) {
+            ActivityService._instance = new ActivityService();
+        }
+
+        return ActivityService._instance;
     }
 
     getTransList(pageSettings) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                let {date_from, date_to, type, start, size = 10, order = 'desc'} = pageSettings;
-
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                var credentials = {
-                    date_from: date_from,
-                    date_to: date_to,
-                    type: type,
-                    start: start,
-                    size: size,
-                    order: order
-                };
-
-                andaman.get_txns(pipe, credentials, (resp) => {
-                    resolve(resp);
-                });
+            let {date_from, date_to, type, start, size = 10, order = 'desc'} = pageSettings;
+            var credentials = {
+                date_from: date_from,
+                date_to: date_to,
+                type: type,
+                start: start,
+                size: size,
+                order: order
+            };
+            AppService.getInstance().getTransactions(credentials,  (resp) => {
+                resolve(resp);
             });
         });
     }
 
     getTransactionDetail(transactionId) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                let params = {
-                    transaction_id: transactionId
-                };
-
-                andaman.get_txn_details(pipe, params, (resp) => {
-                    resolve(resp);
-                });
+            let params = {
+                transaction_id: transactionId
+            };
+            AppService.getInstance().getTransactionDetail(params, (resp) => {
+                resolve(resp);
             });
         });
     }
@@ -76,15 +73,5 @@ export default class ActivityService {
         }
 
         return tran;
-    }
-
-    private static _instance: ActivityService;
-
-    static singleton() {
-        if (!ActivityService._instance) {
-            ActivityService._instance = new ActivityService();
-        }
-
-        return ActivityService._instance;
     }
 }
