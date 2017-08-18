@@ -172,7 +172,6 @@ export const userActions = {
         return { type: USERS.SET_PASSWORD_FAILED, data: resp };
     },
 
-    //createWallet(params, password, profile) {
     setRecoveryKeys(params, createWalletParams, password, profile) {
 
         return (dispatch) => {
@@ -184,8 +183,9 @@ export const userActions = {
                 if (resp.rc === 1) {
                     UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
                         if (_resp.rc === 1) {
-                            // To enable notification
-                            dispatch(userActions.checkSessionToken(profile, password));
+                            dispatch(userActions.loginSuccess(profile));
+                            dispatch(userActions.getProfile(profile));
+                            dispatch(userActions.getMyWallets(profile.auth_version, password));
                         } else {
                             console.log('+++++ createFlashWallet failed, reason:', _resp);
                         }
@@ -193,12 +193,8 @@ export const userActions = {
                     UserService.singleton().setRecoveryKeys(params).then((___resp: any) => {
                     });
                    dispatch(userActions.setRecoveryKeysSuccess(resp));
-                // if (_resp.rc === 1) {
-                //     // To enable notification
-                //     dispatch(userActions.checkSessionToken(profile, password));
             } else {
                     dispatch(userActions.setRecoveryKeysFailed(resp));
-                    //console.log('+++++ createFlashWallet failed, reason:', _resp);
                 }
             });
         };
@@ -209,21 +205,6 @@ export const userActions = {
     },
     setRecoveryKeysFailed(resp) {
         return { type: USERS.SET_RECOVERY_KEY_FAILED, data: resp };
-    },
-
-    checkSessionToken(profile, password) {
-        let params = {
-            res: 'web',
-            sessionToken: profile.sessionToken
-        };
-
-        return (dispatch) => {
-            UserService.singleton().checkSessionToken(params).then((resp: any) => {
-                dispatch(userActions.loginSuccess(profile));
-                dispatch(userActions.getProfile(profile));
-                dispatch(userActions.getMyWallets(profile.auth_version, password));
-            });
-        }
     },
 
     login(email, password) {
@@ -262,9 +243,7 @@ export const userActions = {
         utils.storeUserKey(userKey);
 
         return (dispatch) => {
-            if (resp.rc === 1) {
-                userActions.refreshSession(resp.profile.sessionToken);
-                
+            if (resp.rc === 1) {                
                 if (resp.profile.totp_enabled === 1) {
                     let loginData = { profile: resp.profile, password: password };
                     dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
@@ -277,16 +256,6 @@ export const userActions = {
                 dispatch(userActions.loginFailed(resp));
             }
         };
-    },
-
-    refreshSession(sessionToken) {
-        let params = {
-            res: 'web',
-            sessionToken: sessionToken
-        };
-
-        UserService.singleton().checkSessionToken(params).then((resp: any) => {
-        });
     },
 
     loginFailed(resp) {

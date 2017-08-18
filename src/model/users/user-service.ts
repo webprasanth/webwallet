@@ -52,20 +52,6 @@ export default class UserService {
         });
     }
 
-    // babv remove
-    checkSessionToken(params) {
-        return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.check_session_token(pipe, params, function (resp) {
-                    resolve(resp);
-                });
-            });
-        });
-    }
-
     ssoLogin(params) {
         return new Promise((resolve, reject) => {
             AppService.getInstance().session(params, resp => {
