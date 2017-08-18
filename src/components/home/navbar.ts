@@ -61,8 +61,6 @@ export default class Navbar extends BaseElement {
         removeIdToken();
         event.preventDefault();
         event.stopPropagation();
-
-        commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
     }
 

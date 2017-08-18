@@ -31,7 +31,6 @@ export default class HomeHeader extends BaseElement {
         if (user.profile_pic_url) {
             this.avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url}`;
         }
-        commonActions.addListeners();
     }
 
     onApplicationStateChanged() {
@@ -89,7 +88,6 @@ export default class HomeHeader extends BaseElement {
             case COMMON.ON_SESSION_EXPIRED:
                 message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
                 super.showError('', message, function () {
-                    commonActions.removeAllListeners();
                     store.dispatch(userActions.logout());
                 });
                 break;
@@ -184,10 +182,9 @@ export default class HomeHeader extends BaseElement {
         event.preventDefault();
         event.stopPropagation();
         removeIdToken();
-
-        commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
     }
+
     onLoadBalanceButtonClick(event: Event) {
         this.refreshIconUrl = "assets/images/reload.svg";
         store.dispatch(userActions.getBalance());

@@ -18,6 +18,16 @@ export default class AppService {
         return AppService._instance;
     }
 
+    searchWallet(params, cb) {
+        let options = this.makeRequestOption('api/search-wallet', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    getWalletsByEmail(params, cb) {
+        let options = this.makeRequestOption('api/get-wallets-by-email', params, 'post', cb)
+        $.ajax(options);
+    }
+
     balance(params, cb) {
         let options = this.makeRequestOption('api/balance', params, 'get', cb)
         $.ajax(options);
