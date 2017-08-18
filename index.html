@@ -136,11 +136,11 @@
 
             // Handle click CREATE WALLET button
 
-            $('#create-wallet-btn').click(function () {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 500);
-            });
+//            $('#create-wallet-btn').click(function () {
+//                $('html, body').animate({
+//                    scrollTop: 0
+//                }, 500);
+//            });
             let alink_download = $('.slide-1 a.download-flash-link');
             $(alink_download).click(function () {
                 $('html, body').animate({
@@ -342,7 +342,7 @@
             $("#btn-dologin").click(login);
             $("#identifer").keydown(onKeydown);
             $("#loginpassword").keydown(onKeydown);
-            $("#create-wallet-btn").click(gotoTop);
+//            $("#create-wallet-btn").click(gotoTop);
             $("#forgot-pwd-btn").click(onForgotPassword);
             $("#create-account-btn").click(onSignupButtonClick);
 
@@ -360,8 +360,8 @@
             <img id="img-bg-slide1" class="bg-slide1" src="assets/images/pages/home-page/background-slide1.png" width="100%">
             <div class="top-content">
                 <div class="btn-newpage col-xs-12">
-                    <p class="pull-right"><a href="https://explorer.flashcoin.io" target="_blank">Explorer</a> |
-                        <a href="https://charts.flashcoin.io/" target="_blank">Charts</a>
+                    <p class="pull-right">
+                        <a href="wallet.html" target="_blank" class="btn btn-warning btn-flash-wallet">FLASH Web Wallet</a>
                     </p>
                 </div>
                 <header class="show-mobile loginForm">
@@ -572,7 +572,7 @@
                 </div>
             </div>
         </div>
-        <a id="create-wallet-btn" class="btn create-wallet-btn">Get an Account Now with Free Coins</a>
+        <!--<a id="create-wallet-btn" class="btn create-wallet-btn">Get an Account Now with Free Coins</a>-->
         <footer class="footer col-xs-12">
             <div class="container text-center">
                 <ul>

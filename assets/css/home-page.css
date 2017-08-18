@@ -414,6 +414,16 @@
     font-weight: bold;
     vertical-align: text-top;
 }
+.btn-flash-wallet{
+    position: fixed;
+    right: 15px;
+    color: #fff !important;
+    font-size: 20px;
+    padding: 4px 20px;
+    bottom: 2px;
+    background-color: #fbb116;
+    cursor: pointer;
+}
 /*===========*/
 /*Slide 2*/
 .slide-2{
@@ -593,7 +603,7 @@
      font-family: 'Sanspro-lightRegular', sans-serif;
 }
 .slide-11 .faq-category ul li.active h4 {
-    background: url("../images/pages/home-page/icon-point.png"), url("../images/pages/home-page/img2-faq.png");
+    background: url("../images/home-page/icon-point.png"), url("../images/pages/home-page/img2-faq.png");
     background-size: 10px, 17px;
     background-repeat: no-repeat;
     background-position: left 10px, right 6px;
