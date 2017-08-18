@@ -30,46 +30,29 @@ export default class UserService {
 
     signup(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.create_account_easy(pipe, params, function (resp) {
-                    resolve(resp);
-                });
+            AppService.getInstance().createEasy(params, (resp) => {
+                resolve(resp);
             });
         });
     }
 
     setPassword(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.set_password_v2(pipe, params, function (resp) {
-                    if (resp.rc == 1) {
-                        pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
-                    }
-                    resolve(resp);
-                });
+            AppService.getInstance().setPassword(params, (resp) => {
+                resolve(resp);
             });
         });
     }
 
     setRecoveryKeys(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.set_recovery_keys(pipe, params, function (resp) {
-                    resolve(resp);
-                });
+            AppService.getInstance().setRecoveryKeys(params, (resp) => {
+                resolve(resp);
             });
         });
     }
 
+    // babv remove
     checkSessionToken(params) {
         return new Promise((resolve) => {
             AndamanService.ready().then((opts) => {
@@ -85,125 +68,71 @@ export default class UserService {
 
     ssoLogin(params) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then((opts) => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.get_session_token(pipe, params, function (resp) {
-                    if (resp.rc == 1) {
-                        pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
-                    }
-
-                    resolve(resp);
-                });
+            AppService.getInstance().session(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     login(email, password) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
+            var credentials = {
+                email: email,
+                password: password,
+                res: 'web',
+            };
 
-                var credentials = {
-                    email: email,
-                    password: password,
-                    res: 'web',
-                };
-
-                andaman.sso_login_v2(pipe, credentials, function (resp) {
-                    if (resp.rc == 1) {
-                        pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
-                        let userKey = {
-                            idToken: resp.profile.idToken,
-                            encryptedPrivKey: resp.profile.privateKey,
-                            publicKey: resp.profile.publicKey
-                        };
-                        storeUserKey(userKey);
-                    }
-
-                    resolve(resp);
-                });
+            AppService.getInstance().login(credentials, function (resp) {
+                resolve(resp);
             });
         });
     }
 
     getProfile() {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.get_profile(pipe, {}, function (resp) {
-                    resolve(resp);
-                });
+            let params = {}
+            AppService.getInstance().profile(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     check2faCode(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.check_tfa_code(pipe, params, function (resp) {
-                    if (resp.rc == 1) {
-                        pipe.setSessionToken(resp.profile.sessionToken);
-                    }
-                    resolve(resp);
-                });
+            AppService.getInstance().check2faCode(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     getMyWallets() {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-                andaman.get_my_wallets(pipe, {}, function (resp) {
-                    resolve(resp);
-                });
+            AppService.getInstance().myWallets({}, resp => {
+                resolve(resp);
             });
         });
     }
 
     createFlashWallet(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-                andaman.create_flash_wallet(pipe, params, function (resp) {
-                    resolve(resp);
-                });
+            AppService.getInstance().createFlashWallet(params, (resp) => {
+                resolve(resp);
             });
         });
     }
 
     getWalletSecret(idToken) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.get_wallet_secret(pipe, { idToken: idToken }, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().walletSecret(idToken, resp => {
+                resolve(resp);
             });
         });
     }
 
     getBalance() {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.get_balance(pipe, {}, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().balance({}, resp => {
+                resolve(resp);
             });
         });
     }

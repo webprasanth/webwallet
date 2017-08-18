@@ -1,5 +1,5 @@
-import AndamanService from '../andaman-service';
 import store from '../store';
+import AppService from '../app-service'
 
 export default class ResetPassService {
     constructor() { }
@@ -16,39 +16,24 @@ export default class ResetPassService {
 
     ssoResetPasswordMail(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.sso_reset_password_mail(pipe, params, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().resetPasswordMail(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     getRecoveryKeys(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.get_recovery_keys(pipe, params, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().getRecoveryKeys(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     ssoResetPassword(params) {
         return new Promise((resolve) => {
-            AndamanService.ready().then((opts) => {
-                var andaman = opts.andaman;
-                var pipe = opts.pipe;
-
-                andaman.sso_reset_password(pipe, params, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().resetPassword(params, resp => {
+                resolve(resp);
             });
         });
     }
