@@ -29,7 +29,7 @@ export default class ContactsService {
 
     removeUser(email) {
         return new Promise((resolve, reject) => {
-            AppService.getInstance().rosterRemove(email, resp => {
+            AppService.getInstance().rosterRemove({email: email}, resp => {
                 resolve(resp);
             });
         });
