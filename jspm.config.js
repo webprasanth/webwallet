@@ -9,8 +9,7 @@ SystemJS.config({
     map: {
         "Premium": "./assets/lib/Premium/build.js",
         "cropbox": "./assets/lib/cropbox.js",
-        "QRCode": "./assets/lib/qrcode.min.js",
-        "Andaman": "./assets/lib/andaman/andaman-bundle.js"
+        "QRCode": "./assets/lib/qrcode.min.js"
     },
     devConfig: {
         "map": {

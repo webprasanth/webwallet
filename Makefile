@@ -1,6 +1,3 @@
-andaman:
-	gulp andaman
-	cp  assets/lib/andaman/andaman-bundle.js ../flashcoin-mobile/src/js/andaman.js 
 qa:
 	gulp build-debug
 prod:

@@ -1,4 +1,4 @@
-import AndamanService from '../andaman-service';
+
 import store from '../store';
 import * as actions from './actions';
 import { storeUserKey, getUserKey } from '../utils';
@@ -19,13 +19,6 @@ export default class UserService {
 
     setAuthInfo(resp) {
         AppService.getInstance().setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
-
-        // babv remove
-        AndamanService.ready().then((opts) => {
-            var pipe = opts.pipe;
-            pipe.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
-        });
-        // end remove
     }
 
     signup(params) {

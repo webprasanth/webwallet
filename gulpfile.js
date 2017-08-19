@@ -112,11 +112,6 @@ gulp.task('copy-rs-mobile', ['copy-wiki-page', 'copy-html-mobile', 'copy-css', '
 
 gulp.task('copy-rs', ['copy-wiki-page', 'copy-index', 'copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon', 'copy-docs']);
 
-gulp.task('andaman', function () {
-    var cmd = new run.Command('browserify src/services/andaman.js -o assets/lib/andaman/andaman-bundle.js --standalone AndamanService');
-    cmd.exec();
-});
-
 gulp.task('build-debug-mobile', ['copy-rs-mobile', 'build-debug-js']);
 gulp.task('build-debug', ['copy-rs', 'build-debug-js']);
 gulp.task('default', ['copy-rs', 'bundle-js']);

@@ -279,15 +279,24 @@ export default class AppService {
         return {
             url: HOST_URL + url,
             type: method,
-            data: params,
+            data: this.encodeParam(params, method),
             headers: {
                 'authorization': this.sessionToken,
                 'fl_auth_version': this.authVersion
             },
             dataType: 'json',
+            contentType:"application/json; charset=utf-8",
             success: function (resp) {
                 cb(resp)
             }
         }
+    }
+
+    private encodeParam(params, method) {
+        if (method == 'post') {
+            return JSON.stringify(params);
+        }
+
+        return params;
     }
 }
