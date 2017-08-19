@@ -1,4 +1,4 @@
-import AndamanService from '../andaman-service';
+import AppService from '../app-service';
 
 export default class SendService {
     private static _instance: SendService;
@@ -13,72 +13,46 @@ export default class SendService {
 
     createRawTx(to, amount, message) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then((opts) => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
+            let params = {
+                publicAddress: to,
+                amount: amount,
+                message: message
+            };
 
-                let params = {
-                    to_address: to,
-                    amount: amount,
-                    message: message
-                };
-
-                andaman.create_unsigned_raw_txn(pipe, params, (resp) => {
-                    resolve(resp);
-                });
+            AppService.getInstance().rawTransaction(params, (resp) => {
+                resolve(resp);
             });
         });
     }
 
-    addTxn(txn_info, wallet) {
+    addTxn(params, wallet) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-                andaman.add_txn(pipe, txn_info, resp => {
-                    resolve(resp);
-                });
-            }).catch(reason => {
-                console.log(reason);
+            AppService.getInstance().addTransaction(params, resp => {
+                resolve(resp);
             });
         });
     }
 
     markSentMoneyRequests(params) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.mark_sent_money_requests(pipe, params, resp => {
-                    resolve(resp);
-                });
-            })
+            AppService.getInstance().markSentMoneyRequests(params, resp => {
+                resolve(resp);
+            });
         });
     }
 
     addToRoster(params) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.add_to_roster(pipe, params, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().rosterAdd(params, resp => {
+                resolve(resp);
             });
         })
     }
 
     getTxnById(txn_info) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.get_txn_by_id(pipe, txn_info, resp => {
-                    resolve(resp);
-                });
+            AppService.getInstance().transactionById(txn_info, resp => {
+                resolve(resp);
             });
         })
     }

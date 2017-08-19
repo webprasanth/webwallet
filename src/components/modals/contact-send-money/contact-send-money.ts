@@ -2,7 +2,7 @@ import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactSendMoneyTemplate from './contact-send-money.html!text';
 import * as utils from '../../../model/utils';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 import BaseElement from '../../base-element';
@@ -11,7 +11,7 @@ let tag = null;
 
 @template(ContactSendMoneyTemplate)
 export default class ContactSendMoney extends BaseElement {
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private formEnabled: boolean = true;
     private success: boolean = false;
     private processing_duration: number = 2.000;

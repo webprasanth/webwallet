@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeContactsTemplate from './contacts.html!text';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { contactsActions } from '../../model/contacts/actions';
 import { CONTACTS, COMMON } from '../../model/action-types';
 import { strimString } from '../../model/utils';
@@ -23,7 +23,7 @@ export default class HomeContacts extends Element {
      * + false when navigate to another page
      */
     private resetPagination = false;
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private contacts = [];
     private contactUids = [];
     private currentPage = 1;

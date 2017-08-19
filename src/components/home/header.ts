@@ -4,7 +4,7 @@ import store, { ApplicationState } from '../../model/store';
 import { userActions } from '../../model/users/actions';
 import { commonActions } from '../../model/common/actions';
 import HomeHeaderTemplate from './header.html!text';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE } from '../../model/action-types';
 import { decimalFormat, utcDateToLocal, removeIdToken } from '../../model/utils';
 
@@ -29,7 +29,7 @@ export default class HomeHeader extends BaseElement {
 
         let user = store.getState().userData.user;
         if (user.profile_pic_url) {
-            this.avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url}`;
+            this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
         }
     }
 
@@ -101,7 +101,7 @@ export default class HomeHeader extends BaseElement {
                     $.notify(message, "info");
                 }
             case PROFILE.UPDATE_AVATAR_SUCCESS:
-                tag.avatarUrl = `${AndamanService.AvatarServer}${store.getState().lastAction.data}`;
+                tag.avatarUrl = `${Constants.AvatarServer}${store.getState().lastAction.data}`;
                 break;
             default:
                 break;

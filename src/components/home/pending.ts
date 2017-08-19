@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomePendingTemplate from './pending.html!text';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { pendingActions } from '../../model/pending/actions';
 import { SEND, PENDING, COMMON } from '../../model/action-types';
 import * as utils from '../../model/utils';
@@ -21,7 +21,7 @@ export default class HomePending extends Element {
      * + false when navigate to another page
      */
     private resetPagination = false;
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
     private timeZone = null;

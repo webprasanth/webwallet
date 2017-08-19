@@ -5,7 +5,7 @@ import CommonService from '../../model/common/common-service';
 import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
 import _ from 'lodash';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 
 let tag = null;
@@ -20,7 +20,7 @@ export default class HomeSend extends BaseElement {
     private choosingAddress = false;
     private wallets = [];
     private addressSelected = false;
-    private avatarServer = AndamanService.AvatarServer;
+    private avatarServer = Constants.AvatarServer;
     private isDesktop = utils.isDesktop();
 
     mounted() {

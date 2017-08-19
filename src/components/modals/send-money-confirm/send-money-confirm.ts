@@ -2,7 +2,7 @@ import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import SendMoneyConfirmTemplate from './send-money-confirm.html!text';
 import { formatCurrency, formatAmountInput } from '../../../model/utils';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import { sendActions } from '../../../model/send/actions';
 import { userActions } from '../../../model/users/actions';
 import { SEND } from '../../../model/action-types';
@@ -23,7 +23,7 @@ export default class SendMoneyConfirm extends BaseElement {
     private processingDuration: number = 2.000;
     private formatCurrency = formatCurrency;
     private formatAmountInput = formatAmountInput;
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private static unsubscribe = null;
 
     constructor() {

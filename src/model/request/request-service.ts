@@ -1,4 +1,4 @@
-import AndamanService from '../andaman-service';
+import AppService from '../app-service';
 
 export default class RequestService {
     private static _instance: RequestService;
@@ -13,27 +13,17 @@ export default class RequestService {
 
     requestMoney(params) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.request_money(pipe, params, resp => {
-                    resolve(resp);
-                });
-            })
+            AppService.getInstance().addMoneyRequest(params, resp => {
+                resolve(resp);
+            });
         });
     }
 
-    sendRequest(email) {
+    rosterOperation(params) {
         return new Promise((resolve, reject) => {
-            AndamanService.ready().then(opts => {
-                let andaman = opts.andaman;
-                let pipe = opts.pipe;
-
-                andaman.send_request(pipe, email, resp => {
-                    resolve(resp);
-                });
-            })
+            AppService.getInstance().rosterOperation(params, resp => {
+                resolve(resp);
+            });
         });
     }
 }

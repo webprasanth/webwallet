@@ -6,6 +6,7 @@ import { riot } from '../../components/riot-ts';
 import { removeUserKey, getUserKey } from '../utils';
 import RequestService from './request-service';
 import SendService from '../send/send-service';
+import Constants from '../constants'
 import Wallet from '../wallet';
 import { getLocation } from '../utils';
 import { PAGE_SIZE } from '../../components/home/contacts';
@@ -19,7 +20,9 @@ export const requestActions = {
                 if (resp.rc === 1) {
                     dispatch(this.sendRequestSuccess());
                     dispatch({ type: PENDING.NEED_UPDATE_PENDING_REQUESTS });
-                    RequestService.singleton().sendRequest(moneyInfo.bare_uid).then((resp: any) => {
+                    let reqParams = {to: moneyInfo.bare_uid, op: Constants.ROSTER_OPERATION.REQUEST}
+
+                    RequestService.singleton().rosterOperation(reqParams).then((resp: any) => {
                         if (resp.rc === 1) {
                             let criteria = {
                                 bare_uid: moneyInfo.bare_uid

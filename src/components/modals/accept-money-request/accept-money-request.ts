@@ -2,14 +2,14 @@ import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import AcceptMoneyRequestTemplate from './accept-money-request.html!text';
 import * as utils from '../../../model/utils';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import { commonActions } from '../../../model/common/actions';
 import { COMMON } from '../../../model/action-types';
 
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
 
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private notEnoughBalanceMsg = null;
     private notEnoughBalance = false;
     private requestProcessing = false;

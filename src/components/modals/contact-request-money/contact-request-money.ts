@@ -2,7 +2,7 @@ import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import ContactRequestMoneyTemplate from './contact-request-money.html!text';
 import * as utils from '../../../model/utils';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import { requestActions } from '../../../model/request/actions';
 import { REQUEST } from '../../../model/action-types';
 import BaseElement from '../../base-element';
@@ -14,7 +14,7 @@ export default class ContactRequestMoney extends BaseElement {
     private formEnabled: boolean = true;
     private requestSuccess: boolean = false;
     private formatCurrency = utils.formatCurrency;
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private errorMessage = null;
 
     constructor() {

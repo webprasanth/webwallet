@@ -8,7 +8,6 @@ import Premium from 'Premium';
 import Wallet from '../wallet';
 import base64 from 'crypto-js';
 import nacl from 'tweetnacl';
-import AndamanService from '../andaman-service';
 
 export const resetPassActions = {
     ssoResetPasswordMail(params) {

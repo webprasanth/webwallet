@@ -3,7 +3,7 @@
  */
 import { riot, template, Element } from '../../riot-ts';
 import store, { ApplicationState } from '../../../model/store';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import ProfileAvatarTemplate from './avatar.html!text';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
@@ -22,10 +22,10 @@ export default class ProfileAvatar extends Element {
 
     mounted() {
         this.userProfile = store.getState().userData.user;
-        this.avartarServer = AndamanService.AvatarServer;
+        this.avartarServer = Constants.AvatarServer;
 
         if (this.userProfile.profile_pic_url) {
-            this.avatarUrl = `${AndamanService.AvatarServer}${this.userProfile.profile_pic_url}`;
+            this.avatarUrl = `${Constants.AvatarServer}${this.userProfile.profile_pic_url}`;
             this.buttonLabel = 'Change Image';
         }
 
@@ -41,7 +41,7 @@ export default class ProfileAvatar extends Element {
 
         if (type == PROFILE.UPDATE_AVATAR_SUCCESS) {
             this.userProfile.profile_pic_url = data.avatarToken;
-            this.avatarUrl = `${AndamanService.AvatarServer}${this.userProfile.profile_pic_url}`;
+            this.avatarUrl = `${Constants.AvatarServer}${this.userProfile.profile_pic_url}`;
             this.buttonLabel = 'Change Image';
             this.showAvatar();
         }

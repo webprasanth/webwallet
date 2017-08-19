@@ -1,6 +1,6 @@
 
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = "https://keys.flashcoin.io/"
+const HOST_URL = 'https://keys.flashcoin.io/'
 
 export default class AppService {
 
@@ -16,6 +16,139 @@ export default class AppService {
         }
 
         return AppService._instance;
+    }
+
+    transactionById(params, cb) {
+        let options = this.makeRequestOption('api/transaction-by-id', params, 'get', cb);
+        $.ajax(options);
+    }
+
+    rosterAdd(params, cb) {
+        let options = this.makeRequestOption('api/roster-add', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    markSentMoneyRequests(params, cb) {
+        let options = this.makeRequestOption('api/mark-sent-money-requests', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    addTransaction(params, cb) {
+        let options = this.makeRequestOption('api/add-transaction', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    rawTransaction(params, cb) {
+        let options = this.makeRequestOption('api/raw-transaction', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    rosterOperation(params, cb) {
+        let options = this.makeRequestOption('api/roster-operation', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    addMoneyRequest(params, cb) {
+        let options = this.makeRequestOption('api/add-money-request', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    sendVerificationSms(params, cb) {
+        let options = this.makeRequestOption('api/send-verification-sms', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    verifyPhone(params, cb) {
+        let options = this.makeRequestOption('api/verify-phone', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    myFountain(params, cb) {
+        let options = this.makeRequestOption('api/my-fountain', params, 'get', cb);
+        $.ajax(options);
+    }
+
+    disableFountain(params, cb) {
+        let options = this.makeRequestOption('api/disable-fountain', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    updateFountain(params, cb) {
+        let options = this.makeRequestOption('api/update-fountain', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    enableFountain(params, cb) {
+        let options = this.makeRequestOption('api/enable-fountain', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    confirm2faCode(params, cb) {
+        let options = this.makeRequestOption('api/confirm-2fa-code', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    turnOff2fa(params, cb) {
+        let options = this.makeRequestOption('api/turn-off-2fa', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    start2faCode(params, cb) {
+        let options = this.makeRequestOption('api/start-2fa-code', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    changePassword(params, cb) {
+        let options = this.makeRequestOption('api/change-password', params, 'post', cb);
+        options.headers.authorization = params.idToken
+        params.idToken = ''
+        $.ajax(options);
+    }
+
+    getKeypair(params, cb) {
+        let options = this.makeRequestOption('api/get-keypair', {}, 'get', cb);
+        options.headers.authorization = params.idToken
+        $.ajax(options);
+    }
+
+    uploadProfileImage(params, percentCb, doneCb) {
+        let options = this.makeRequestOption('api/upload-profile-image', params, 'post', doneCb);
+        $.ajax(options);
+    }
+
+    updateProfile(params, cb) {
+        let options = this.makeRequestOption('api/update-profile', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    markCancelledMoneyRequests(params, cb) {
+        let options = this.makeRequestOption('api/mark-cancelled-money-requests', params, 'post', cb);
+        $.ajax(options);
+    }
+    
+    markRejectedMoneyRequests(params, cb) {
+        let options = this.makeRequestOption('api/mark-rejected-money-requests', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    getRequests(params, cb) {
+        let options = this.makeRequestOption('api/get-requests', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    rosterRemove(params, cb) {
+        let options = this.makeRequestOption('api/roster-remove', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    getUsersByUid(params, cb) {
+        let options = this.makeRequestOption('api/get-users-by-uid', params, 'post', cb);
+        $.ajax(options);
+    }
+
+    getRoster(params, cb) {
+        let options = this.makeRequestOption('api/get-roster', params, 'post', cb);
+        $.ajax(options);
     }
 
     searchWallet(params, cb) {
@@ -80,7 +213,8 @@ export default class AppService {
     }
 
     session(params, cb) {
-        let options = this.makeRequestOption('api/session', params, 'post', cb)
+        let options = this.makeRequestOption('api/session', {}, 'post', cb)
+        options.headers.authorization = params.idToken
         $.ajax(options);
     }
 

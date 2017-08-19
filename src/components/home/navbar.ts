@@ -4,7 +4,7 @@ import store, { ApplicationState } from '../../model/store';
 import { userActions } from '../../model/users/actions';
 import { commonActions } from '../../model/common/actions';
 import NavbarTemplate from './navbar.html!text';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
@@ -31,7 +31,7 @@ export default class Navbar extends BaseElement {
 
         let user = store.getState().userData.user;
         if (user.profile_pic_url) {
-            this.avatarUrl = `${AndamanService.AvatarServer}${user.profile_pic_url}`;
+            this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
         }
     }
 

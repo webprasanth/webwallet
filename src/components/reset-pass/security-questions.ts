@@ -4,7 +4,6 @@ import SecurityQuestionsTemplate from './security-questions.html!text';
 import { FCEvent } from '../../model/types';
 import { resetPassActions } from '../../model/reset-pass/actions';
 import { RESET_PASS } from '../../model/action-types';
-import AndamanService from '../../model/andaman-service';
 import Premium from 'Premium';
 import secrets from 'secrets.js-grempe';
 import { getUserKey, storeUserKey } from '../../model/utils';

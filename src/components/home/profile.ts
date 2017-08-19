@@ -1,7 +1,7 @@
 import { riot, template, Element } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeProfileTemplate from './profile.html!text';
-import AndamanService from '../../model/andaman-service';
+import Constants from '../../model/constants';
 import { getUrlParam } from '../../model/utils';
 import { TABS, PROFILE } from '../../model/action-types';
 
@@ -23,7 +23,7 @@ export default class HomeProfile extends Element {
         HomeProfile.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
 
         this.userProfile = store.getState().userData.user;
-        this.avartarServer = AndamanService.AvatarServer;
+        this.avartarServer = Constants.AvatarServer;
         this.mountComponents();
     }
 

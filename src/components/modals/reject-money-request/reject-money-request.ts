@@ -2,14 +2,14 @@ import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import RejectMoneyRequestTemplate from './reject-money-request.html!text';
 import { formatCurrency } from '../../../model/utils';
-import AndamanService from '../../../model/andaman-service';
+import Constants from '../../../model/constants';
 import { pendingActions } from '../../../model/pending/actions';
 import { PENDING } from '../../../model/action-types';
 
 @template(RejectMoneyRequestTemplate)
 export default class RejectMoneyRequest extends Element {
 
-    private AvatarServer = AndamanService.AvatarServer;
+    private AvatarServer = Constants.AvatarServer;
     private formRequest = true;
     private requestSuccess = false;
     private requestFail = false;
