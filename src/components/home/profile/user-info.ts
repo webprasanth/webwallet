@@ -9,7 +9,6 @@ import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
 import Premium from 'Premium';
 import { getUserKey, storeUserKey } from '../../../model/utils';
-import CryptoJS from 'crypto-js';
 import moment from 'moment-timezone';
 import { UPDATE_DATA_TYPE, UPDATE_DATA_FAILED } from '../../../model/profile/types';
 
@@ -204,8 +203,8 @@ export default class UserInfo extends BaseElement {
 
         let params = {
             idToken: this.userKey.idToken,
-            password: CryptoJS.MD5(this.currentPassword).toString(),
-            newPassword: CryptoJS.MD5(this.newPassword).toString(),
+            password: this.currentPassword,
+            newPassword: this.newPassword,
             newPrivateKey: this.encryptedPrivateKey
         };
 

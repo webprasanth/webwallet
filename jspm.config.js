@@ -100,7 +100,6 @@ SystemJS.config({
         "constants": "npm:jspm-nodelibs-constants@0.2.0",
         "core-js": "npm:core-js@2.4.1",
         "crypto": "npm:jspm-nodelibs-crypto@0.2.0",
-        "crypto-js": "npm:crypto-js@3.1.8",
         "dgram": "npm:jspm-nodelibs-dgram@0.2.0",
         "dns": "npm:jspm-nodelibs-dns@0.2.0",
         "ecc-jsbn": "npm:ecc-jsbn@0.1.1",
