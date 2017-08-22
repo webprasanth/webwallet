@@ -18,6 +18,11 @@ export default class AppService {
         return AppService._instance;
     }
 
+    getMessages(params, cb) {
+        let options = this.makeRequestOption('api/get-messages', params, 'post', cb);
+        $.ajax(options);
+    }
+
     transactionById(params, cb) {
         let options = this.makeRequestOption('api/transaction-by-id', params, 'get', cb);
         $.ajax(options);
@@ -240,6 +245,7 @@ export default class AppService {
 
     setRecoveryKeys(params, cb) {
         let options = this.makeRequestOption('api/setRecoveryKeys', params, 'post', cb)
+        options.headers.authorization = params.idToken
         $.ajax(options);
     }
 
