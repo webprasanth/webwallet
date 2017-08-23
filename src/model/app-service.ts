@@ -234,7 +234,8 @@ export default class AppService {
     }
 
     getRecoveryKeys(params, cb) {
-        let options = this.makeRequestOption('api/getRecoveryKeys', params, 'post', cb)
+        let options = this.makeRequestOption('api/getRecoveryKeys', params, 'get', cb)
+        options.headers.authorization = params.idToken
         $.ajax(options);
     }
 

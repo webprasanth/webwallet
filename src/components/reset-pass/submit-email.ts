@@ -50,7 +50,7 @@ export default class SubmitEmail extends BaseElement {
 
         let params = {
             email: email,
-            callback_url: `http://${clientHost}/home.html#reset_password?token=`
+            callbackUrl: `http://${clientHost}/home.html#reset_password?token=`
         };
         //riot.route("reset_password?token=");
         store.dispatch(resetPassActions.ssoResetPasswordMail(params));
