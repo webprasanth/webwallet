@@ -95,6 +95,7 @@ export default class HomeHeader extends BaseElement {
                 break;
             case COMMON.ON_REQUEST_STATE_CHANGED:
                 self.showRequestNotification();
+                break;
             case COMMON.ON_BE_REQUESTED:
                 note = state.commonData.notificationData.pop();
 
@@ -102,6 +103,7 @@ export default class HomeHeader extends BaseElement {
                     message = note.email_sender + " sent you a request for " + note.amount + " Flash Coin at " + utcDateToLocal(note.created_ts);
                     $.notify(message, "info");
                 }
+                break;
             case PROFILE.UPDATE_AVATAR_SUCCESS:
                 tag.avatarUrl = `${Constants.AvatarServer}${store.getState().lastAction.data}`;
                 break;
