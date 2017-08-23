@@ -18,6 +18,11 @@ export default class AppService {
         return AppService._instance;
     }
 
+    uploadProfileImage(file, cb) {
+        let options = this.makeUploadOption('profile/upload', file, cb);
+        $.ajax(options);
+    }
+
     getMessages(params, cb) {
         let options = this.makeRequestOption('api/get-messages', params, 'post', cb);
         $.ajax(options);
@@ -113,11 +118,6 @@ export default class AppService {
     getKeypair(params, cb) {
         let options = this.makeRequestOption('api/get-keypair', {}, 'get', cb);
         options.headers.authorization = params.idToken
-        $.ajax(options);
-    }
-
-    uploadProfileImage(params, percentCb, doneCb) {
-        let options = this.makeRequestOption('api/upload-profile-image', params, 'post', doneCb);
         $.ajax(options);
     }
 
@@ -292,9 +292,7 @@ export default class AppService {
             },
             dataType: 'json',
             contentType:"application/json; charset=utf-8",
-            success: function (resp) {
-                cb(resp)
-            }
+            success: cb
         }
     }
 
@@ -304,5 +302,24 @@ export default class AppService {
         }
 
         return params;
+    }
+
+    private makeUploadOption(url, file, cb) {
+        let formData = new FormData();
+        formData.append('avatar', file);
+
+        return {
+            url: HOST_URL + url,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            dataType : 'json',
+            data: formData,
+            headers: {
+                'authorization': this.sessionToken,
+                'fl_auth_version': this.authVersion
+            },
+            success: cb
+        };
     }
 }

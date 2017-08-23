@@ -21,16 +21,9 @@ export default class ProfileService {
 
     updateAvatar(file) {
         return new Promise((resolve, reject) => {
-            let percentCb = function (resp) {
-                // TODO babv implement
-            }
-
-            let doneCb = function (resp) {
-                // TODO babv implement
+            AppService.getInstance().uploadProfileImage(file, resp => {
                 resolve(resp);
-            }
-
-            AppService.getInstance().uploadProfileImage(file, percentCb, doneCb);
+            });
         });
     }
 
