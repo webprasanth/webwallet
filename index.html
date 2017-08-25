@@ -59,11 +59,6 @@
             }
 
             var url = 'https://keys.flashcoin.io/api/login';
-
-            if (window.location.protocol == 'http:') {
-                url = 'http://keys.flashcoin.io:8098/api/login';
-            }
-
             var params = {
                 email: email,
                 password: password,
@@ -261,10 +256,6 @@
             }
 
             var url = 'https://keys.flashcoin.io/api/createEasy';
-
-            if (window.location.protocol == 'http:') {
-                url = 'http://keys.flashcoin.io:8098/api/createEasy';
-            }
             $("#loading-icon").show();
 
             $.post(url, credentials, function (resp) {
@@ -308,10 +299,6 @@
 
             if (idToken) {
                 var url = 'https://keys.flashcoin.io/api/session';
-
-                if (window.location.protocol == 'http:') {
-                    url = 'http://keys.flashcoin.io:8098/api/session';
-                }
                 $("#loading-icon").show();
 
                 $.ajax({

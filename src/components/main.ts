@@ -15,9 +15,9 @@ route((action) => {
     currentAction = action;
 
     if (action == 'login') {
-        if (isMobile) {
-            return riot.mount('#main', 'mobile-login');
-        }
+        // if (isMobile) {
+        //     return riot.mount('#main', 'mobile-login');
+        // }
 
         return riot.mount('#main', 'sso');
     }
