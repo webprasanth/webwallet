@@ -2,12 +2,12 @@
 	<div class="container">
 		<div class="request-page col-xs-12 col-sm-10">
 			<div class="title-page">
-				<h2 class="title">Request Payment</h2>
-				<p>Enter the information below to request a payment.</p>
+				<h2 class="title">{getText('request_page_title')}</h2>
+				<p>{getText('request_page_desc')}</p>
 			</div>
 			<div class="col-xs-12 main-content">
 				<div class="form-group email-account">
-					<label>Email</label>
+					<label>{getText('common_label_email')}</label>
 
 					<div class="input-search-account active">
 						<input type="text" class="form-control" placeholder="Search by email" id="rq_to_email_id">
@@ -30,24 +30,24 @@
 						<div show={emailErrorMessage} class="pin-incorrect">{emailErrorMessage}</div>
 				</div>
 				<div class="form-group amount-field col-xs-6 col-sm-4">
-					<label>Amount</label>
+					<label>{getText('common_amount_label')}</label>
 
 					<div class="input-group">
-						<span class="input-group-addon">Flash</span>
+						<span class="input-group-addon">{getText('common_label_cash_unit')}</span>
 						<input class="form-control" id="requestAmount" name="requestAmount" type="text" onenter="open-send">
 					</div>
 					<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
 				</div>
 				<div class="form-group col-xs-12">
-					<label>Note</label>
+					<label>{getText('common_note_label')}</label>
 					<textarea class="form-control" placeholder="" id="requestPaymentMemo" maxlength="50" on-focus="focusMemo"></textarea>
-					<p class="text-left text-danger max_tx">Max Characters 50</p>
+					<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
 				</div>
 				<div class="send__buttons col-xs-12">
 					<span class="_icon glyphicon glyphicon-arrow-down" show={validating}></span>
 					<virtual show={!validating}>
-						<button id="continue-request-bt" type="button" class="btn btn-primary" onclick={onContinueButtonClick}>Continue</button>
-						<button id="clear-request-form" type="button" class="btn btn-default" onclick={clearForms}>Clear</button>
+						<button id="continue-request-bt" type="button" class="btn btn-primary" onclick={onContinueButtonClick}>{getText('common_continue_label')}</button>
+						<button id="clear-request-form" type="button" class="btn btn-default" onclick={clearForms}>{getText('common_clear_label')}</button>
 					</virtual>
 				</div>
 			</div>

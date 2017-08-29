@@ -35,7 +35,7 @@ export default class SecurityQuestion extends BaseElement {
         let answerC = $('#answerC').val();
 
         if (!questionA || !questionB || !questionC || !answerA || !answerB || !answerC) {
-            this.sesureMsg = 'All security question is required to recover passowd and coin in case you foget your passowd';
+            this.sesureMsg = this.getText('sc_question_required_msg');
             return;
         }
 
@@ -74,11 +74,11 @@ export default class SecurityQuestion extends BaseElement {
         switch (type) {
             case USERS.UPDATE_SECURITY_QUESTIONS_FAIL:
                 $('#btn-submit').button('reset');
-                super.showError('', 'Security questions updated failed');
+                super.showError('', this.getText('sc_question_update_fail'));
                 break;
             case USERS.UPDATE_SECURITY_QUESTIONS_SUCCESS:
                 $('#btn-submit').button('reset');
-                super.showMessage('', 'Security questions have been updated successfully', this.clearField);
+                super.showMessage('', this.getText('sc_question_update_ok'), this.clearField);
                 break;
             default:
                 break;

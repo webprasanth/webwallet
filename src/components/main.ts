@@ -1,6 +1,6 @@
 import { riot } from './riot-ts';
 import * as components from './components';
-
+import * as localise from './localise';
 import store from '../model/store';
 import * as actions from '../model/action-types';
 import { userActions } from '../model/users/actions';
@@ -10,6 +10,7 @@ let currentAction = '';
 let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 components.initialize();
+localise.init()
 
 route((action) => {
     currentAction = action;

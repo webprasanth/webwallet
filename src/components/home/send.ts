@@ -99,10 +99,10 @@ export default class HomeSend extends BaseElement {
 
     checkAndShowComfirmationForm() {
         if (!$('#to-email-id').val()) {
-            this.emailErrorMessage = 'Please specify an user to send payment to';
+            this.emailErrorMessage = this.getText('invalid_send_receiver_error');
             return;
         } else if (!tag.isValidAddress) {
-            this.emailErrorMessage = 'Address is invalid!'
+            this.emailErrorMessage = this.getText('invalid_receiver_address_error');
             return;
         }
 
@@ -121,22 +121,22 @@ export default class HomeSend extends BaseElement {
         let fee = utils.calcFee(amount);
 
         if (!amount.toString().match(/^\d+$/g)) {
-            this.amountErrorMessage = 'Amount must be integer value';
+            this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }
 
         if (amount < 1) {
-            this.amountErrorMessage = 'Amount must be at least 1';
+            this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
             return;
         }
 
         if (this.userProfile.balance >= amount && this.userProfile.balance < amount + fee) {
-            super.showError('', 'You do not have enough coins to make this payment');
+            super.showError('', this.getText('send_not_enough_fund_error'));
             return;
         }
 
         if (this.userProfile.balance < amount + fee) {
-            super.showError('', 'You do not have enough funds to make this payment');
+            super.showError('', this.getText('send_not_enough_fee_error'));
             return;
         }
 

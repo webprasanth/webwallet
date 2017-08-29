@@ -102,10 +102,10 @@ export default class HomeRequest extends BaseElement {
         let receiverEmail = $('#rq_to_email_id').val();
 
         if (!receiverEmail) {
-            this.emailErrorMessage = 'Please specify an user to send payment request to';
+            this.emailErrorMessage = this.getText('invalid_request_receiver_error');
             return;
         } else if (!tag.isValidAddress) {
-            this.emailErrorMessage = 'Address is invalid!'
+            this.emailErrorMessage = this.getText('invalid_receiver_address_error');
             return;
         }
 
@@ -113,12 +113,12 @@ export default class HomeRequest extends BaseElement {
         amount = utils.toOrginalNumber(amount);
 
         if (!amount.toString().match(/^\d+$/g)) {
-            this.amountErrorMessage = 'Amount must be integer value';
+            this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }
 
         if (amount < 1) {
-            this.amountErrorMessage = 'Amount must be at least 1';
+            this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
             return;
         }
 

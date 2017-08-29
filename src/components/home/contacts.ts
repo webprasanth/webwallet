@@ -1,4 +1,4 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomeContactsTemplate from './contacts.html!text';
 import Constants from '../../model/constants';
@@ -6,6 +6,7 @@ import { contactsActions } from '../../model/contacts/actions';
 import { CONTACTS, COMMON } from '../../model/action-types';
 import { strimString } from '../../model/utils';
 import { FCEvent } from '../../model/types';
+import BaseElement from '../base-element';
 
 export const PAGE_SIZE = 10;
 const ACTION_SEND = 0;
@@ -14,7 +15,7 @@ const ACTION_REQUEST = 1;
 let tag = null;
 
 @template(HomeContactsTemplate)
-export default class HomeContacts extends Element {
+export default class HomeContacts extends BaseElement {
     private paginationObject = null;
     private static unsubscribe = null;
     /**
@@ -127,8 +128,8 @@ export default class HomeContacts extends Element {
 
     removeContact(event: FCEvent) {
         riot.mount('#confirm-send', 'confirm-dialog', {
-            title: 'Delete contact',
-            message: 'Are you sure you want to delete this contact?',
+            title: this.getText('delete_contact_label'),
+            message: this.getText('contact_msg_confirm_delete'),
             callback: function (result) {
 
                 if (result) {

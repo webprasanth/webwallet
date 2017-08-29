@@ -49,24 +49,24 @@ export default class AccountSetting extends BaseElement {
                 }
                 break;
             case PROFILE.ENABLE_2FA_FAILED:
-                super.showError('', 'Failed to get otpUri from server');
+                super.showError('', this.getText('profile_twofa_otp_fail'));
                 break;
             case PROFILE.DISABLE_2FA_SUCCESS:
                 this.userProfile.totp_enabled = 0;
                 this.is2FA = false;
-                super.showMessage('', 'Two phase authentication has been turn off successfully');
+                super.showMessage('', this.getText('profile_twofa_on_ok'));
                 break;
             case PROFILE.DISABLE_2FA_FAILED:
-                super.showError('', 'Turn off Two phase authentication failed');
+                super.showError('', this.getText('profile_twofa_off_fail'));
                 break;
             case PROFILE.CONFIRM_2FA_CODE_SUCCESS:
                 // TODO This is hack. The correct way is call to users/reducer and upate user profile
                 this.userProfile.totp_enabled = 1;
                 this.is2FA = false;
-                super.showMessage('', 'Two Phase Authentication has been successfully setup. You will now need to enter the Google authenticator code every time you login.');
+                super.showMessage('', this.getText('profile_twofa_setup_ok'));
                 break;
             case PROFILE.CONFIRM_2FA_CODE_FAILED:
-                super.showError('', 'Confirm code fail');
+                super.showError('', this.getText('profile_twofa_confirm_code_fail'));
                 break;
             default:
                 break;
@@ -111,7 +111,7 @@ export default class AccountSetting extends BaseElement {
     confirm2FACode() {
         let code: string = $("#google-2fa-code").val();
         if (code.length == 0) {
-            super.showError('', 'Invalid code');
+            super.showError('', this.getText('profile_twofa_invalid_code'));
             return;
         }
 

@@ -5,6 +5,7 @@ import moment from 'moment-timezone';
 import Wallet from './wallet';
 import Premium from 'Premium';
 import nacl from 'tweetnacl';
+import {getText} from '../components/localise';
 
 import {
     Address,
@@ -308,19 +309,19 @@ export function isDesktop() {
 export function getSecurityQuestion() {
     return {
         A: [
-            'What is your dream job?',
-            'In which city did your parents meet?',
-            'What was the name of your elementary school?',
+            getText('sc_question_a1'),
+            getText('sc_question_a2'),
+            getText('sc_question_a3')
         ],
         B: [
-            'What is the first name of your favourite uncle?',
-            'Where did you meet your spouse?',
-            'What is your eldest cousin\'s name?',
+            getText('sc_question_b1'),
+            getText('sc_question_b2'),
+            getText('sc_question_b3')
         ],
         C: [
-            'Street name where you grew up?',
-            'What is your pet\'s name?',
-            'What was your first job?',
+            getText('sc_question_c1'),
+            getText('sc_question_c2'),
+            getText('sc_question_c3')
         ]
     }
 }

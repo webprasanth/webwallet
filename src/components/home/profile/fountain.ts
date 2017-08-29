@@ -57,7 +57,7 @@ export default class FountainSetting extends BaseElement {
                 this.disabled = false;
                 break;
             case PROFILE.UPDATE_FOUNTAIN_SUCCESS:
-                super.showMessage('', 'Fountain parameters have been updated');
+                super.showMessage('', this.getText('fountain_paramsupdated_message'));
                 break;
             case PROFILE.DISABLE_FOUNTAIN_SUCCESS:
                 this.fountain.enabled = false;
@@ -209,7 +209,7 @@ export default class FountainSetting extends BaseElement {
         amount = utils.toOrginalNumber(amount);
 
         if (amount <= 0) {
-            super.showError('', 'Please enter an amount');
+            super.showError('', this.getText('fountain_amount_required_msg'));
             return null;
         }
 
@@ -218,13 +218,13 @@ export default class FountainSetting extends BaseElement {
         duration = utils.toOrginalNumber(duration);
 
         if (duration <= 0) {
-            super.showError('', 'Please enter period');
+            super.showError('', this.getText('fountain_period_required_msg'));
             return null;
         }
 
         let selectedTimeUnit: number = $('#time-unit').val();
         if (selectedTimeUnit == 60 && duration < 10) {
-            super.showError('', 'Minimum period is 10 minutes');
+            super.showError('', this.getText('fountain_minperiod_msg'));
             return null;
         }
 
@@ -232,7 +232,7 @@ export default class FountainSetting extends BaseElement {
         if (domainStr) {
             domains = domainStr.split(',');
         } else {
-            super.showError('', 'Please list URL\'s allowed to host your fountain or it will possibly be abused');
+            super.showError('', this.getText('fountain_url_required_msg'));
             return null;
         }
 
@@ -243,10 +243,9 @@ export default class FountainSetting extends BaseElement {
                 domains[i] = domains[i].trim();
 
                 if (!domains[i].match(domainReg)) {
-                    super.showError('', domains[i] + ' is not a domain');
+                    super.showError('', domains[i] + this.getText('fountain_invalid_domain_msg'));
                     return null;
                 }
-
             }
 
             let settings = {

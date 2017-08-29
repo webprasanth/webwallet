@@ -8,6 +8,7 @@ import ProfileAvatarTemplate from './avatar.html!text';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
 import cropbox from 'cropbox';
+import {getText} from '../../localise';
 
 @template(ProfileAvatarTemplate)
 export default class ProfileAvatar extends Element {
@@ -18,6 +19,7 @@ export default class ProfileAvatar extends Element {
     private avatarUrl: string = 'assets/images/avatar_default.png';
     private buttonLabel: string = 'Choose Image';
     private cropper = null;
+    private getText = getText;
     private static unsubscribe = null;
 
     mounted() {
@@ -26,7 +28,7 @@ export default class ProfileAvatar extends Element {
 
         if (this.userProfile.profile_pic_url) {
             this.avatarUrl = `${Constants.AvatarServer}${this.userProfile.profile_pic_url}`;
-            this.buttonLabel = 'Change Image';
+            this.buttonLabel = this.getText('profile_label_changeimage');
         }
 
         this.registerFileChangeEvent();
@@ -42,7 +44,7 @@ export default class ProfileAvatar extends Element {
         if (type == PROFILE.UPDATE_AVATAR_SUCCESS) {
             this.userProfile.profile_pic_url = data.avatarToken;
             this.avatarUrl = `${Constants.AvatarServer}${this.userProfile.profile_pic_url}`;
-            this.buttonLabel = 'Change Image';
+            this.buttonLabel = this.getText('profile_label_changeimage');
             this.showAvatar();
         }
 
@@ -65,14 +67,6 @@ export default class ProfileAvatar extends Element {
         let img = this.cropper.getDataURL();
         let oFile = this.cropper.getBlob();
         oFile.name = "avatar";
-
-        let percentCb = function (percent) {
-            console.log("percent", percent);
-            $('#up_percent').html('<p> Uploading : ' + percent + ' % </p>');
-        };
-        let doneCb = function (resp) {
-        };
-
         store.dispatch(profileActions.updateAvatar(oFile));
     }
 

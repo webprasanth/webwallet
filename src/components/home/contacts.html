@@ -3,19 +3,19 @@
 		<div class="container">
 			<div class="contact-page col-xs-12">
 				<div class="title-page">
-					<h2 class="title">Contacts</h2>
+					<h2 class="title">{getText('contact_page_title')}</h2>
 				</div>
 				<div class="col-xs-12 main-content">
 					<div class="title-header hidden-mobile col-xs-12">
-						<div class="title col-xs-5">Name</div>
+						<div class="title col-xs-5">{getText('contact_table_header_name')}</div>
 						<div class="title col-xs-4">
-							<p class="hidden-mobile">Email</p>
+							<p class="hidden-mobile">{getText('common_label_email')}</p>
 						</div>
-						<div class="title col-xs-3 text-center">Delete</div>
+						<div class="title col-xs-3 text-center">{getText('delete_contact_label')}</div>
 					</div>
 					<div class="col-xs-12 contact-table">
 						<virtual show={contacts.length==0}>
-							<p class="req-no-result">You don't have any contacts yet. When you have activity with other users, their contacts will be added here automatically.</p>
+							<p class="req-no-result">{getText('contact_msg_no_result')}</p>
 						</virtual>
 						<div show={contacts.length!=0} class="listItems col-xs-12" each={contacts}>
 							<div class="item col-xs-5 hidden-xs">

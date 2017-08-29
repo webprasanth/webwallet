@@ -2,7 +2,7 @@
 	<div class="profile-content box-content">
 		<div class="profile-setting">
 			<div class="inforItems col-xs-12" id="profile-name">
-				<div class="item-title col-xs-4 hidden-xs-small">Full name</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('login_fullname_label')}</div>
 				<div if={!isEditingName}>
 					<div class="item-data col-xs-6">
 						<p class="trans-name">{userProfile.display_name}</p>
@@ -27,17 +27,17 @@
 				</div>
 			</div>
 			<div class="inforItems col-xs-12" id="profile-email">
-				<div class="item-title col-xs-4 hidden-xs-small">Email</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('common_label_email')}</div>
 				<div class="item-data col-xs-6">
-					<p class="long-text"><span class="hidden-xs-up">Email: </span>{userProfile.email}</p>
+					<p class="long-text"><span class="hidden-xs-up">{getText('common_label_email')}: </span>{userProfile.email}</p>
 				</div>
 				<div class="item-control col-xs-2 text-right"><span class="glyphicon glyphicon-ok verified_email"></span></div>
 			</div>
 
 			<div if={isEditingPass} class="inforItems col-xs-12" id="profile-cur-password">
-				<div class="item-title col-xs-4 hidden-xs-small">Current Password</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_current_pass_label')}</div>
 				<div class="item-data col-xs-8 edit-form">
-					<div class="col-xs-custom hidden-xs-up"><span>Current Password: </span></div>
+					<div class="col-xs-custom hidden-xs-up"><span>{getText('profile_current_pass_label')}: </span></div>
 					<div class="input-group">
 						<input id="currentPassword" class="_input profile-input form-control" type="password" value="{currentPassword}" />
 						<div id="on-cancel-password" class="input-group-addon" onclick={onCancel}>
@@ -50,9 +50,9 @@
 
 			<div class="inforItems col-xs-12" id="profile-password">
 				<div if={!isEditingPass}>
-					<div class="item-title col-xs-4 hidden-xs-small">Password</div>
+					<div class="item-title col-xs-4 hidden-xs-small">{getText('common_continue_password')}</div>
 					<div class="item-data col-xs-6">
-						<p class=""><span class="hidden-xs-up">Password: </span>
+						<p class=""><span class="hidden-xs-up">{getText('common_continue_password')}: </span>
 							<span class="" style="vertical-align: sub;">
                                 ******
                             </span>
@@ -65,9 +65,9 @@
 				</div>
 
 				<div if={isEditingPass}>
-					<div class="item-title col-xs-4 hidden-xs-small">New Password</div>
+					<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_new_pass_label')}</div>
 					<div class="item-data col-xs-8 edit-form">
-						<div class="col-xs-custom hidden-xs-up"><span class="">New Password: </span></div>
+						<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_new_pass_label')}: </span></div>
 						<div class="input-group new-passcode">
 							<input id="newPassword" class="_input profile-input form-control" type="password" value="{newPassword}" />
 							<div id="on-cancel-password" class="input-group-addon" onclick={onCancel}>
@@ -79,9 +79,9 @@
 			</div>
 
 			<div if={isEditingPass} class="inforItems col-xs-12" id="profile-cfrm-password">
-				<div class="item-title col-xs-4 hidden-xs-small">Confirm New Password</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_confirm_new_pass_label')}</div>
 				<div class="item-data col-xs-8 edit-form">
-					<div class="col-xs-custom hidden-xs-up"><span class="">Confirm New Password: </span></div>
+					<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_confirm_new_pass_label')}: </span></div>
 					<div class="input-group">
 						<input id="confirmPassword" class="_input profile-input form-control" type="password" value="{confirmPassword}" />
 						<div id="on-save-password" class="input-group-addon" onclick={onSavePass}>
@@ -93,7 +93,7 @@
 			</div>
 
 			<div class="inforItems col-xs-12" id="profile-timezone">
-				<div class="item-title col-xs-4 hidden-xs-small">Timezone</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_timezone_label')}</div>
 				<div if={!isSelectingTimezone}>
 					<div class="item-data col-xs-6">
 						<p><span class="">
@@ -107,11 +107,11 @@
 				</div>
 
 				<div if={isSelectingTimezone} class="item-data col-xs-8 edit-form">
-					<div class="col-xs-custom hidden-xs-up"><span class="">Timezone: </span></div>
+					<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_timezone_label')}: </span></div>
 					<div class="input-group">
 						<select id="time-zone" class="form-control">
                             <option selected="{userProfile.timezone? true:false}">
-                                Please select your timezone
+								{getText('profile_label_default_timezone')}
                             </option>
                             <option each={tz in timezones} selected="{userProfile.timezone == tz}" value="{tz}">
                                 {tz}
@@ -130,7 +130,7 @@
 			</div>
 
 			<div class="inforItems col-xs-12" id="profile-phone">
-				<div class="item-title col-xs-4 hidden-xs-small">Phone number</div>
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_phone_number_label')}</div>
 				<div if={!isEditingPhone}>
 					<div class="item-data col-xs-6">
 						<p class="trans-phone">{userProfile.phone?userProfile.phone:"-----"}</p>

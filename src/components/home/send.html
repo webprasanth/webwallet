@@ -2,13 +2,13 @@
 	<div class="container">
 		<div class="send-page col-xs-12 col-sm-10">
 			<div class="title-page">
-				<h2 class="title">Send Payment</h2>
-				<p>Enter the information below to initiate a secure payment.</p>
+				<h2 class="title">{getText('send_payment_message')}</h2>
+				<p>{getText('send_payment_desc')}</p>
 			</div>
 			<div class="col-xs-12 main-content">
 				<div class="col-xs-12">
 					<div class="form-group email-account">
-						<label>Email/Public address</label>
+						<label>{getText('activity_table_header_email_pubic_address')}</label>
 						<div show={!isDesktop} class="col-xs-1 openQRcode" onclick={openQRcodeScan}>
 							<span class="glyphicon glyphicon-qrcode"></span>
 						</div>
@@ -34,9 +34,9 @@
 					</div>
 				</div>
 				<div class="form-group amount-field col-xs-6 col-sm-4">
-					<label>Amount</label>
+					<label>{getText('common_amount_label')}</label>
 					<div class="input-group">
-						<span class="input-group-addon">Flash</span>
+						<span class="input-group-addon">{getText('common_label_cash_unit')}</span>
 						<input type="text" id="amount-input" min="0" step="1" class="form-control">
 					</div>
 					<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
@@ -44,12 +44,12 @@
 				<div class="form-group col-xs-12">
 					<label>Note</label>
 					<textarea type="text" class="form-control" id="payment-memo" placeholder="" maxlength="50"></textarea>
-					<p class="text-left text-danger max_tx">Max Characters 50</p>
+					<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
 				</div>
 				<div class="send__buttons form-group col-xs-12">
-					<button type="button" class="btn btn-primary" id="continue-send-bt" data-toggle="modal" data-target="#myModal1" onclick={onContinueButtonClick}>Continue
+					<button type="button" class="btn btn-primary" id="continue-send-bt" data-toggle="modal" data-target="#myModal1" onclick={onContinueButtonClick}>{getText('common_continue_label')}
                     </button>
-					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" onclick={clearForms}>Clear</button>
+					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" onclick={clearForms}>{getText('common_clear_label')}</button>
 				</div>
 			</div>
 		</div>

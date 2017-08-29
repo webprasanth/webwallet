@@ -3,11 +3,11 @@
 		<div class="container">
 			<div class="pending-page">
 				<div class="title-page">
-					<h2 class="title">Your Pending Requests</h2>
+					<h2 class="title">{getText('pending_page_title')}</h2>
 				</div>
 				<div class="form-date col-xs-12" style="position:relative">
 					<div class="search-date date-pending-btn hidden-sm hidden-md hidden-lg" onclick="datePickerPending()">
-						<span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">Search by date</span>
+						<span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">{getText('common_search_title')}</span>
 					</div>
 					<div class="date-time pull-left hidden-mobile date-pending-form">
 						<div class="form-inline">
@@ -29,8 +29,8 @@
 								</div>
 							</div>
 							<div class="form-group btn-control">
-								<button id="btn-filter-request" type="" class="btn btn-primary" onclick={onShowButtonClick}>Show</button>
-								<button id="btn-filter-all-request" type="submit" class="btn btn-warning" onclick={onShowAllButtonClick}>Show All Requests</button>
+								<button id="btn-filter-request" type="" class="btn btn-primary" onclick={onShowButtonClick}>{getText('pending_button_filter')}</button>
+								<button id="btn-filter-all-request" type="submit" class="btn btn-warning" onclick={onShowAllButtonClick}>{getText('pending_button_show_all')}</button>
 							</div>
 						</div>
 					</div>
@@ -47,22 +47,21 @@
 					<div class="col-xs-12 pending-table">
 						<div class="tab-pane fade in active" role="tabpane2" id="incoming-request" aria-labelledby="incoming-tab">
 							<h5 class="title-table">
-								{currentActiveTabId == TAB.OUTGOING ? 'Outgoing Requests': 'Incoming Requests'} from {fromDateObject ? getDisplayDate(fromDateObject.datepicker('getDate'))
+								{currentActiveTabId == TAB.OUTGOING ? getText('pending_tab_outgoing_request'): getText('pending_tab_incoming_request')} from {fromDateObject ? getDisplayDate(fromDateObject.datepicker('getDate'))
 								: ''} to {toDateObject ? getDisplayDate(toDateObject.datepicker('getDate')) : ''}
 							</h5>
 							<div class="title-header hidden-xs col-xs-12">
-								<div class="title col-xs-3">Name</div>
+								<div class="title col-xs-3">{getText('pending_table_header_name')}</div>
 								<div class="title col-xs-2">
-									<p class="hidden-mobile">Email
-										<p>
+									<p class="hidden-mobile">{getText('pending_table_header_email')}<p>
 								</div>
-								<div class="title col-xs-2 text-right">Amount (Flash)</div>
-								<div class="title col-xs-1">Status</div>
-								<div class="title col-xs-2">Note</div>
-								<div class="title col-xs-2">Date/Time</div>
+								<div class="title col-xs-2 text-right">{getText('pending_table_header_amount')}</div>
+								<div class="title col-xs-1">{getText('pending_table_header_status')}</div>
+								<div class="title col-xs-2">{getText('pending_table_header_note')}</div>
+								<div class="title col-xs-2">{getText('pending_table_header_date')}</div>
 							</div>
 							<div class="listRequests">
-								<p class="req-no-result" show={money_requests.length==0}>There is no request in this date range.</p>
+								<p class="req-no-result" show={money_requests.length==0}>{getText('pending_filter_no_result')}</p>
 								<div show={money_requests.length>0} class="listItems col-xs-12" each="{money_requests}">
 									<div class="item col-xs-3 hidden-xs">
 										<div class="avatar" onclick={showDetail}>
@@ -81,8 +80,8 @@
 											<virtual show={type!=1}>
 												<p class="ellipsis-name text-long" onclick={showDetail}>{strimString(sender_display_name ? sender_display_name : sender, 20)}<br/></p>
 												<p show={!status} class="" style="white-space: nowrap;">
-													<a id="accept-request" href="javascript:void(0)" onclick={acceptRequest}>Accept</a> /
-													<a id="reject-request" href="javascript:void(0)" onclick={rejectRequest}>Reject</a>
+													<a id="accept-request" href="javascript:void(0)" onclick={acceptRequest}>{getText('pending_table_button_accept')}</a> /
+													<a id="reject-request" href="javascript:void(0)" onclick={rejectRequest}>{getText('pending_table_button_reject')}</a>
 												</p>
 											</virtual>
 										</div>

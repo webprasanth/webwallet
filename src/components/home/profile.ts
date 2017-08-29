@@ -4,6 +4,7 @@ import HomeProfileTemplate from './profile.html!text';
 import Constants from '../../model/constants';
 import { getUrlParam } from '../../model/utils';
 import { TABS, PROFILE } from '../../model/action-types';
+import {getText} from '../localise';
 
 @template(HomeProfileTemplate)
 export default class HomeProfile extends Element {
@@ -12,7 +13,7 @@ export default class HomeProfile extends Element {
 
     private userProfile = null;
     private avartarServer: string = null;
-
+    private getText = getText;
     private isProfile = true;
     private isSetting = false;
     private isFountain = false;

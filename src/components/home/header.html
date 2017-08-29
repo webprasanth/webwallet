@@ -6,7 +6,7 @@
 				<div class="mobile-header ">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="" aria-expanded="false" onclick="showMenu()">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only">{getText('menu_label_togglenav')}</span>
                         <span class="icon-bar color-custom"></span>
                         <span class="icon-bar color-custom"></span>
                         <span class="icon-bar color-custom"></span>
@@ -19,18 +19,18 @@
 				<div class="top-balance text-center col-xs-12 color-custom">
 					<p onclick={onLoadBalanceButtonClick} title="Click to refresh balance">
 						<img src={refreshIconUrl} height="20px" />
-						<span class="hidden-xs" >Balance:</span> {balance} FLASH
+						<span class="hidden-xs" >{getText('common_balance_label')}:</span> {balance} {getText('common_label_cash_unit_upcase')}
 					</p>
 				</div>
 				<div class="header-right col-xs-12 col-sm-5 hidden-xs">
 					<div class="avatar" if={avatarUrl}><img src={avatarUrl} /></div>
 					<div class="email-account color-custom">{userEmail}</div>
 					<div class="btn-logout">
-						<button class="btn btn-primary" onclick={onLogoutButtonClick}>Logout</button>
+						<button class="btn btn-primary" onclick={onLogoutButtonClick}>{getText('common_logout_label')}</button>
 					</div>
 				</div>
 			</nav>
-				<p class="notify-disconnect" show={isDisconnect}>There is no Internet connection</p>
+				<p class="notify-disconnect" show={isDisconnect}>{getText('common_label_noconnection')}</p>
 		</div>
 	</header>
 </main-header>

@@ -1,4 +1,4 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import HomePendingTemplate from './pending.html!text';
 import Constants from '../../model/constants';
@@ -7,9 +7,10 @@ import { SEND, PENDING, COMMON } from '../../model/action-types';
 import * as utils from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 import { FCEvent } from '../../model/types';
+import BaseElement from '../base-element';
 
 @template(HomePendingTemplate)
-export default class HomePending extends Element {
+export default class HomePending extends BaseElement {
     private fromDateObject = null;
     private toDateObject = null;
     private paginationObject = null;
@@ -109,10 +110,10 @@ export default class HomePending extends Element {
 
     getPendingRequestStatus(status, type): string {
         switch (status) {
-            case 0: return (type == 1 ? 'Awaiting Acceptance' : 'Pending');
-            case 1: return 'Paid';
-            case 2: return 'Denied';
-            case 3: return 'Cancelled';
+            case 0: return (type == 1 ? this.getText('pending_request_status_waiting') : this.getText('pending_request_status_pending'));
+            case 1: return this.getText('pending_request_status_paid');
+            case 2: return this.getText('pending_request_status_denied');
+            case 3: return this.getText('pending_request_status_cancelled');
             default: return '';
         }
     }

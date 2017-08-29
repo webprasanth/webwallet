@@ -2,8 +2,11 @@
  * Base Element
  */
 import { riot, template, Element } from './riot-ts';
+import {getText} from './localise';
 
 export default class BaseElement extends Element {
+
+    protected getText = getText;
 
     /**
      * Show error dialog

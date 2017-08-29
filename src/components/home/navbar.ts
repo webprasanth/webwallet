@@ -9,12 +9,13 @@ import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
 import { removeIdToken } from '../../model/utils';
+import {getText} from '../localise';
 
 @template(NavbarTemplate)
 export default class Navbar extends BaseElement {
 
     private static unsubscribe = null;
-
+    private getText = getText;
     private userEmail: string = store.getState().userData.user.email;
     private avatarUrl: string = null;
     private state = null;

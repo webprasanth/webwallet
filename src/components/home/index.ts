@@ -14,9 +14,11 @@ import MainHeaderTemplate from './header.html!text';
 import MainNavBarTemplate from './navbar.html!text';
 import { FCEvent } from '../../model/types';
 import { PENDING } from '../../model/action-types';
+import {getText} from '../localise';
 
 @template(HomePageTemplate)
 export default class HomePage extends Element {
+    private getText = getText;
     private route = route.create();
     private lastView = null;
     private widgets = {

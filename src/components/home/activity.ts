@@ -1,4 +1,4 @@
-import { riot, template, Element } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
@@ -6,10 +6,11 @@ import { COMMON } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
 import { getDisplayDate, getDisplayDateTime, decimalFormat } from '../../model/utils';
 import { FCEvent } from '../../model/types';
+import BaseElement from '../base-element';
 
 let tag = null;
 @template(HomeActivityTemplate)
-export default class HomeActivity extends Element {
+export default class HomeActivity extends BaseElement {
     private fromDateObject = null;
     private toDateObject = null;
     private paginationObject = null;
@@ -23,12 +24,11 @@ export default class HomeActivity extends Element {
      */
     private resetPagination = false;
     private currentActiveTabId = 0;
-    private currentActiveTabName = 'All Transactions';
+    private currentActiveTabName = this.getText('activity_tab_all_transaction');
 
     private DATE_PICKER_FORMAT: string = "M dd, yyyy";
     private ONE_MONTH: number = 30 * 24 * 60 * 60 * 1000;
     private timeZone = null;
-    private 
 
     public txns = [];
     public tabs = store.getState().activityData.tabs;
