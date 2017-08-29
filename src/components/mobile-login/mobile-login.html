@@ -17,23 +17,23 @@
                                     <input id="loginpassword" type="password" class="form-control" placeholder="password" onkeydown={onKeydown}>
                                 </div>
                                 <div class="btn-login form-group">
-                                    <button id="btn-dologin" class="btn btn-default" onclick={onLoginButtonClick}>Login</button>
+                                    <button id="btn-dologin" class="btn btn-default" onclick={onLoginButtonClick}>{getText('common_login_label')}</button>
                                 </div>
                             </div>
                             <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
-                                <a class="foget-psd" href="javascript:void(0)" onclick={onForgotPasswordLinkClick}>Forgot password?</a>
+                                <a class="foget-psd" href="javascript:void(0)" onclick={onForgotPasswordLinkClick}>{getText('common_continue_forgotpassword')}</a>
                             </div>
                         </div>
                     </div>
                 </header>
             </div>
         </div>
-    <a id="button-crowdsale" class="btn btn-crowdsale" href="https://bittrex.com/crowdfund/Mega" target="_blank">Crowdsale</a>
+    <a id="button-crowdsale" class="btn btn-crowdsale" href="https://bittrex.com/crowdfund/Mega" target="_blank">{getText('button_crowdsale_label')}</a>
     <footer class="footer home-footer col-xs-12">
         <div class="container text-center">
             <ul>
-                <li><a href="support.html" target="_blank">Support</a></li>
-                <li><a href="contact.html" target="_blank">Contact</a></li>
+                <li><a href="support.html" target="_blank">{getText('footer_label_support')}</a></li>
+                <li><a href="contact.html" target="_blank">{getText('footer_label_contact')}</a></li>
             </ul>
         </div>
     </footer>

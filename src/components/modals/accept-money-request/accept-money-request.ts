@@ -5,6 +5,7 @@ import * as utils from '../../../model/utils';
 import Constants from '../../../model/constants';
 import { commonActions } from '../../../model/common/actions';
 import { COMMON } from '../../../model/action-types';
+import {getText} from '../../localise';
 
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
@@ -15,6 +16,7 @@ export default class AcceptMoneyRequest extends Element {
     private requestProcessing = false;
     private sendWallet = null;
     private static unsubscribe = null;
+    private getText = getText;
 
     constructor() {
         super();
@@ -54,9 +56,9 @@ export default class AcceptMoneyRequest extends Element {
 
         if (balance < amount + fee) {
             if (amount <= balance) {
-                this.notEnoughBalanceMsg = 'You do not have enough coins to make this payment';
+                this.notEnoughBalanceMsg = this.getText('send_not_enough_fee_error');
             } else {
-                this.notEnoughBalanceMsg = 'You do not have enough funds to make this payment';
+                this.notEnoughBalanceMsg = this.getText('send_not_enough_fund_error');
             }
             this.notEnoughBalance = true;
         } else {

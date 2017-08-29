@@ -34,12 +34,12 @@ export default class ContactRequestMoney extends BaseElement {
         amount = utils.toOrginalNumber(amount);
 
         if (!amount.toString().match(/^\d+$/g)) {
-            tag.errorMessage = 'Amount must be integer value';
+            tag.errorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }
 
         if (amount < 1) {
-            return tag.errorMessage = 'Amount must be at least 1';
+            return tag.errorMessage = this.getText('common_alert_minimum_cash_unit');
         }
 
         let note = $('#Note').val();

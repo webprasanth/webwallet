@@ -22,14 +22,21 @@
     "footer_label_support"                     : "Support",
     "footer_label_copyright"                   : "Copyright (c) 2016 Flashnet Tech, Inc. Montreal, Canada.  All Rights Reserved.  Flash is a trademark of Flashnet Tech, Inc.",
 
+    "login_invalid_email_msg"                  :"Invalid email format!",
+    "login_email_reuired_msg"                  :"Email is needed to login",
+    "login_password_reuired_msg"               :"Password is needed to login",
     "login_fullname_label"                     : "Full name",
     "login_signup_label"                       : "Sign Up",
     "login_create_wallet_label"                : "Create Wallet",
     "login_need_migrate_account_msg"           : "Yours is an old Flashcoin account. Please upgrade it to %(currencyName)s by signing up for a new account",
     "login_incorrect_usernamepassword_msg"     : "Email or password is not correct",
-    "login_cas_login_fail_err"                 : "Login failed. Authentication Service returned an error. Please try again",
+    "login_cas_login_fail_err"                 : "Login failed",
     "login_get_sessiontoken_err"               : "Sorry, something went wrong. Please login again",
     "login_keep_me_login_label"                : "Keep me logged in",
+    "login_usa_limitted_msg"                   : "Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io",
+
+
+
     "account_not_exist_label"                  : "** Do you want to create a Flashcoin walllet?",
     "ask_fullname_label"                       : "** Enter your full name",
     "button_crowdsale_label"                   : "Crowdsale",
@@ -284,9 +291,14 @@
 
     "change_password_label"                    : "Change password",
     "enter_oldpassword_label"                  : "Enter your old password",
+    "reset_password_oldpassword_required"      : "Please enter your password to continue",
+    "reset_password_incorrect_oldpass"         :"Incorrect password",
 
     "signup_username_length_error"             : "Username must be between 3 and 31 characters long.",
     "signup_email_already_exist"               : "An user with this email already exists",
+    "signup_email_required_msg"                : "Email is needed for signing up!",
+    "signup_first_name_required_msg"           : "Please enter your first name!",
+    "signup_last_name_required_msg"            : "Please enter your last name!",
     "signup_invalid_captcha"                   : "Please verify that you are not a robot",
     "signup_setuppasswoed_cas_fail"            : "Failed to set password. Authentication Service returned an error. Please try again",
     "signup_setuppasswoed_invalid_token"       : "Email address verification token invalid or expired. Please sign up again from scratch",
@@ -298,7 +310,7 @@
     "send_payment_desc"                        : "Enter the information below to initiate a secure payment.",
     "send_transactionsent_message"             : "Your transaction has been sent!",
     "send_transactionprocessing_message"       : "Your transaction are processing!",
-    "send_transactionfee_label"                : "transaction fee",
+    "send_transactionfee_label"                : "FLASH transaction fee",
     "send_transactionfail_error"               : "Transaction Fail",
     "send_processtime_message"                 : "Processing time: %(processing_duration)s second(s)",
     "send_success_message2"                    : "Your transaction will appear in your activity tab shortly.",

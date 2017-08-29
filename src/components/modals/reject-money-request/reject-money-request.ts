@@ -5,11 +5,13 @@ import { formatCurrency } from '../../../model/utils';
 import Constants from '../../../model/constants';
 import { pendingActions } from '../../../model/pending/actions';
 import { PENDING } from '../../../model/action-types';
+import {getText} from '../../localise';
 
 @template(RejectMoneyRequestTemplate)
 export default class RejectMoneyRequest extends Element {
 
     private AvatarServer = Constants.AvatarServer;
+    private getText = getText;
     private formRequest = true;
     private requestSuccess = false;
     private requestFail = false;

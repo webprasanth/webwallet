@@ -74,7 +74,7 @@ export default class MobileLogin extends BaseElement {
                 this.onSignupFail(data.signupData);
                 break;
             case USERS.LOGIN_FAILED:
-                super.showError('Login failed', 'Email or password is not correct');
+                super.showError(this.getText('login_cas_login_fail_err'), this.getText('login_incorrect_usernamepassword_msg'));
                 break;
             case USERS.NEED_VERIFY_GOOGLE_2FA:
                 riot.mount('#confirm-send', 'twofa-verification-dialog', data.loginData);
@@ -92,20 +92,19 @@ export default class MobileLogin extends BaseElement {
 
         let email: string = $('#identifer').val();
         if (!email || email.trim().length == 0) {
-            super.showError('', 'Email is needed to login');
-            // TODO focus to email feild
+            super.showError('', this.getText('login_email_reuired_msg'));
 
             return false;
         }
 
         if (!utils.isValidEmail(email)) {
-            super.showError('', 'Invalid email format');
+            super.showError('', this.getText('login_invalid_email_msg'));
             return false;
         }
 
         let password: string = $('#loginpassword').val();
         if (!password || password.trim().length == 0) {
-            super.showError('', 'Password is needed to login');
+            super.showError('', this.getText('login_password_reuired_msg'));
             // TODO focus to email
 
             return false;
@@ -116,8 +115,7 @@ export default class MobileLogin extends BaseElement {
 
     onSignupButtonClick(event: Event) {
         if (this.userLocation.info.country_code == "US" && this.userLocation.info.region_code == "NY") {
-            let message = 'Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io';
-
+            let message = this.getText('login_usa_limitted_msg');
             riot.mount('#error-dialog', 'location-error', { title: 'Error', message: message});
             return;
         }
@@ -132,7 +130,7 @@ export default class MobileLogin extends BaseElement {
 
         let captchaResp: string = grecaptcha.getResponse(this.captchaId);
         if (!captchaResp || captchaResp.length == 0) {
-            super.showError('', 'Please verify that you are not a robot');
+            super.showError('', this.getText('signup_invalid_captcha'));
             return;
         }
 
@@ -157,9 +155,9 @@ export default class MobileLogin extends BaseElement {
         grecaptcha.reset(this.captchaId);
 
         if (resp.status == 'EMAIL_IN_USED') {
-            super.showError('Error', 'An user with this email already exists');
+            super.showError(this.getText('common_label_error_title'), this.getText('signup_email_already_exist'));
         } else if (resp.status == 'RECAPTCHA_NOT_VERIFIED') {
-            super.showError('', 'Please verify that you are not a robot');
+            super.showError('', this.getText('signup_invalid_captcha'));
         } else {
             super.showError('', resp.reason);
         }
@@ -177,14 +175,14 @@ export default class MobileLogin extends BaseElement {
         let email: string = $("#email-signup").val();
 
         if (!email || email.trim().length == 0) {
-            super.showError('', 'Email is needed for signing up!');
+            super.showError('', this.getText('signup_email_required_msg'));
             $("#email-signup").focus();
 
             return false;
         }
 
         if (!utils.isValidEmail(email)) {
-            super.showError('', 'Invalid email format!');
+            super.showError('', this.getText('login_invalid_email_msg'));
             $("#email-signup").focus();
 
             return false;
@@ -198,12 +196,12 @@ export default class MobileLogin extends BaseElement {
         let lastName: string = $('#lastname').val();
 
         if (!firstName || firstName.trim().length == 0) {
-            super.showError('', 'Please enter your first name!');
+            super.showError('', this.getText('signup_first_name_required_msg'));
             return false;
         }
 
         if (!lastName || lastName.trim().length == 0) {
-            super.showError('', 'Please enter your last name!');
+            super.showError('', this.getText('signup_last_name_required_msg'));
             return false;
         }
 

@@ -5,7 +5,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Request Details</h4>
+                    <h4 class="modal-title">{getText('pending_requestdetail_label')}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="listItems">
@@ -17,7 +17,7 @@
                         </div>
                         <div class="data-item">
                             <div class="item">
-                                <div class="title">Name</div>
+                                <div class="title">{getText('contact_table_header_name')}</div>
                                 <div class="data">
                                     <p>
                                         {opts.detail.type == 1 ? strimString(opts.detail.receiver_display_name ? opts.detail.receiver_display_name : opts.detail.receiver,
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="item">
-                                <div class="title">Email</div>
+                                <div class="title">{getText('common_label_email')}</div>
                                 <div class="data">
                                     <p>
                                         {opts.detail.type==1 ? opts.detail.receiver_email : opts.detail.sender_email}
@@ -37,30 +37,30 @@
                         </div>
                     </div>
                     <div class="listItems">
-                        <div class="name-item">Amount</div>
+                        <div class="name-item">{getText('common_amount_label')}</div>
                         <div class="data-item">{decimalFormat(opts.detail.amount)}</div>
                     </div>
                     <div class="listItems">
-                        <div class="name-item">Status</div>
+                        <div class="name-item">{getText('pending_table_header_status')}</div>
                         <div class="data-item">
                             {opts.pendingRequestStatus}
                         </div>
                     </div>
                     <div class="listItems">
-                        <div class="name-item">Note</div>
+                        <div class="name-item">{getText('common_note_label')}</div>
                         <div class="data-item">
                             <p class="_value_attr form-control">{opts.detail.note ? strimString(opts.detail.note,50): ''}</p>
                         </div>
                     </div>
                     <div class="listItems">
-                        <div class="name-item">Date/Time</div>
+                        <div class="name-item">{getText('activity_table_header_date')}</div>
                         <div class="data-item">{getDisplayDateTime(opts.detail.created_ts, opts.detail.timeZone)}</div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button show={opts.detail.type==1} type="button" class="btn btn-primary" onclick={cancelRequest} data-dismiss="modal">Cancel Request</button>
-                    <button show={opts.detail.type!=1} type="button" class="btn btn-primary" onclick={acceptRequest} data-dismiss="modal">Accept</button>
-                    <button show={opts.detail.type!=1} type="button" class="btn btn-default" onclick={rejectRequest} data-dismiss="modal">Reject</button>
+                    <button show={opts.detail.type==1} type="button" class="btn btn-primary" onclick={cancelRequest} data-dismiss="modal">{getText('pending_cancelrequest_label')}</button>
+                    <button show={opts.detail.type!=1} type="button" class="btn btn-primary" onclick={acceptRequest} data-dismiss="modal">{getText('pending_table_button_accept')}</button>
+                    <button show={opts.detail.type!=1} type="button" class="btn btn-default" onclick={rejectRequest} data-dismiss="modal">{getText('pending_table_button_reject')}</button>
                 </div>
             </div>
         </div>

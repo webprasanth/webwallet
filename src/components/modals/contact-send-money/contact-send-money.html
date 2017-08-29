@@ -11,17 +11,17 @@
 					<div class="modal-body">
 						<div class="send-request">
 							<div class="amount-field form-group">
-								<label>Amount</label>
+								<label>{getText('common_amount_label')}</label>
 								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">Flash</span>
-									<input id="contact-send-amount" type="text" class="form-control" placeholder='Amount' aria-describedby="basic-addon1">
+									<span class="input-group-addon" id="basic-addon1">{getText('common_label_cash_unit')}</span>
+									<input id="contact-send-amount" type="text" class="form-control" placeholder='{getText("common_amount_label")}' aria-describedby="basic-addon1">
 								</div>
 								<div show={errorMessage} class="pin-incorrect"><strong>{errorMessage}</strong></div>
 							</div>
 							<div class="note-field form-group">
-								<label>Note</label>
+								<label>{getText('common_note_label')}</label>
 								<textarea id="Note" class="form-control" type="text" cols="50" maxlength="50"></textarea>
-								<p class="text-left text-danger max_tx">Max Characters 50</p>
+								<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
 							</div>
 							<div class="text-center">
 								<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
@@ -39,20 +39,19 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						<button id="contact-send-bt" type="button" class="btn btn-primary" onclick={sendMoney}>Send</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button id="contact-send-bt" type="button" class="btn btn-primary" onclick={sendMoney}>{getText('common_send_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={success}>
 					<div class="modal-body">
 						<div class="confirm-success">
-							<p>Processing time: {processing_duration} second(s)</p>
-
-							<p>Your transaction will appear in your activity tab shortly.</p>
+							<p>{getText('send_processtime_message', {processing_duration})}</p>
+							<p>{getText('send_success_message2')}</p>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
 					</div>
 				</virtual>
 			</div>

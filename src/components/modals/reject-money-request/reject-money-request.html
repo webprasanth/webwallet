@@ -5,15 +5,15 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Reject request</h4>
+					<h4 class="modal-title">{getText('reject_request_label')}</h4>
 				</div>
 				<virtual show={formRequest}>
 					<div class="modal-body">
 						<div class="send-request">
 							<div class="note-field form-group">
-								<label>Note</label>
+								<label>{getText('common_note_label')}</label>
 								<textarea class="form-control" type="text" id='Note' cols="50" maxlength="50"></textarea>
-								<p class="text-left text-danger max_tx">Max Characters 50</p>
+								<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
 							</div>
 							<div class="text-center">
 								<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
@@ -31,28 +31,28 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary" onclick={sendRequest}>Send</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button type="button" class="btn btn-primary" onclick={sendRequest}>{getText('common_send_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={requestSuccess}>
 					<div class="modal-body">
 						<div class="message-error">
-							You have rejected a request.
+							{getText('reject_request_done')}
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-info" data-dismiss="modal">Close</button>
+						<button class="btn btn-info" data-dismiss="modal">{getText('common_close_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={requestFail}>
 					<div class="modal-body">
 						<div class="message-error">
-							Reject request fail
+							{getText('reject_request_fail')}
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-info" data-dismiss="modal">Close</button>
+						<button class="btn btn-info" data-dismiss="modal">{getText('common_close_label')}</button>
 					</div>
 				</virtual>
 			</div>

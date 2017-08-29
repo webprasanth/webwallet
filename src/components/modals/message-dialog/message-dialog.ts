@@ -1,11 +1,13 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import MessageDialogTemplate from './message-dialog.html!text';
+import {getText} from '../../localise';
 
 let tag = null;
 @template(MessageDialogTemplate)
 export default class MessageDialog extends Element {
     private static unsubscribe = null;
+    private getText = getText;
 
     constructor() {
         super();

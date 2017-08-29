@@ -5,18 +5,18 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">{opts.dlgTitle || 'Confirm Transaction'}</h4>
+					<h4 class="modal-title">{opts.dlgTitle || getText('send_confirmtransaction_message')}</h4>
 				</div>
 				<virtual show={requirePassword}>
 					<div class="modal-body">
 						<div class="confirm-success">
-							<p><b>Please enter your password to continue</b></p>
-							<p class="pin-incorrect" show={incorrectPassword}>Incorrect password</p>
+							<p><b>{getText('reset_password_oldpassword_required')}</b></p>
+							<p class="pin-incorrect" show={incorrectPassword}>{getText('reset_password_incorrect_oldpass')}</p>
 							<input id="sendPassowd" type="password" class="form-control" placeholder="Password">
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" onclick="{confirmPassword}">Continue</button>
+						<button type="button" class="btn btn-primary" onclick="{confirmPassword}">{getText('common_continue_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={confirmation}>
@@ -24,7 +24,7 @@
 						<div class="confirm__transaction">
 							<div class="_amount text-center"><span class="_value">{formatCurrency(formatAmountInput(opts.amount))}</span> <span class="_currency"></span></div>
 							<div class="text-center">
-								<p><span class="_fee">+ {opts.fee} FLASH transaction fee</span></p>
+								<p><span class="_fee">+ {opts.fee} {getText('send_transactionfee_label')}</span></p>
 								<div class="refresh-data text-center" show={sending}><span class="_icon glyphicon glyphicon-refresh spinning"></span></div>
 								<p show={!sending}><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
 							</div>
@@ -41,20 +41,19 @@
 						</div>
 					</div>
 					<div class="modal-footer" show={!sending}>
-						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">Cancel</button>
-						<button id="send-direct" class="btn btn-primary" onclick={sendDirect}>Send</button>
+						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button id="send-direct" class="btn btn-primary" onclick={sendDirect}>{getText('common_send_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={success}>
 					<div class="modal-body">
 						<div class="confirm-success">
-							<p>Processing time: {processingDuration} second(s)</p>
-
-							<p>Your transaction will appear in your activity tab shortly.</p>
+							<p>{getText('send_processtime_message', {'processing_duration': processing_duration})}</p>
+							<p>{getText('send_success_message2')}</p>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
 					</div>
 				</virtual>
 			</div>

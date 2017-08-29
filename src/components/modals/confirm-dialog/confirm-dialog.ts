@@ -1,10 +1,12 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
 import ConfirmDialogTemplate from './confirm-dialog.html!text';
+import {getText} from '../../localise';
 
 @template(ConfirmDialogTemplate)
 export default class ConfirmDialog extends Element {
     private static unsubscribe = null;
+    private getText = getText;
 
     constructor() {
         super();

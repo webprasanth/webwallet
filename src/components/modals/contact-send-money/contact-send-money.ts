@@ -15,7 +15,7 @@ export default class ContactSendMoney extends BaseElement {
     private formEnabled: boolean = true;
     private success: boolean = false;
     private processing_duration: number = 2.000;
-    private title = 'Send Payment';
+    private title = this.getText('send_payment_message');
     private errorMessage = null;
     private static unsubscribe = null;
 
@@ -32,7 +32,7 @@ export default class ContactSendMoney extends BaseElement {
             this.formEnabled = false;
             this.success = true;
             this.processing_duration = state.sendData.processing_duration;
-            this.title = 'Transaction Successful';
+            this.title = this.getText('send_success_message');
         } else if (actionType == SEND.SEND_TXN_FAILED) {
             super.showError('', state.lastAction.data);
         }
@@ -57,24 +57,24 @@ export default class ContactSendMoney extends BaseElement {
         amount = utils.toOrginalNumber(amount);
 
         if (!amount.toString().match(/^\d+$/g)) {
-            tag.errorMessage = 'Amount must be integer value';
+            tag.errorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }
 
         let fee = utils.calcFee(amount);
 
         if (amount < 1) {
-            return tag.errorMessage = 'Amount must be at least 1';
+            return tag.errorMessage = this.getText('common_alert_minimum_cash_unit');
         }
 
         let balance = store.getState().userData.user.balance;
 
         if (balance >= amount && balance < amount + fee) {
-            return tag.errorMessage = 'You do not have enough fee to make this payment';
+            return tag.errorMessage = this.getText('send_not_enough_fee_error');
         }
 
         if (balance < amount + fee) {
-            return tag.errorMessage = 'You do not have enough funds to make this payment';
+            return tag.errorMessage = this.getText('send_not_enough_fund_error');
         }
 
         this.opts.sendAddr.memo = $('#Note').val();
@@ -87,8 +87,6 @@ export default class ContactSendMoney extends BaseElement {
             fee: fee,
             wallet: this.opts.sendAddr,
         });
-
-
         //store.dispatch(sendActions.createRawTx(this.opts.sendAddr, amount, memo));
     }
 

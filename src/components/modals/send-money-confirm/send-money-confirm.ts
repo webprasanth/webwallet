@@ -20,7 +20,7 @@ export default class SendMoneyConfirm extends BaseElement {
     private success: boolean = false;
     private requirePassword: boolean = false;
     private incorrectPassword: boolean = false;
-    private processingDuration: number = 2.000;
+    private processing_duration: number = 2.000;
     private formatCurrency = formatCurrency;
     private formatAmountInput = formatAmountInput;
     private AvatarServer = Constants.AvatarServer;
@@ -43,8 +43,8 @@ export default class SendMoneyConfirm extends BaseElement {
             this.confirmation = false;
             this.sending = false;
             this.success = true;
-            this.processingDuration = state.sendData.processing_duration;
-            this.opts.dlgTitle = 'Transaction Successful';
+            this.processing_duration = state.sendData.processing_duration;
+            this.opts.dlgTitle = this.getText('send_success_message');
             if (this.opts.cb) {
                 this.opts.cb();
             }
