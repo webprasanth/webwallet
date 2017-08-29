@@ -5,7 +5,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Confirm Payment Request</h4>
+					<h4 class="modal-title">{getText('common_sendmoney_label')}</h4>
 				</div>
 				<virtual show={formRequestEnabled}>
 					<div class="modal-body">
@@ -30,18 +30,18 @@
 						</div>
 					</div>
 					<div class="modal-footer" show={!requestProcessing}>
-						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">Cancel</button>
-						<button id="send-request-direct" class="btn btn-primary" onclick={sendRequestDirect}>Send</button>
+						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button id="send-request-direct" class="btn btn-primary" onclick={sendRequestDirect}>{getText('common_send_label')}</button>
 					</div>
 				</virtual>
 				<virtual show={requestSuccess}>
 					<div class="modal-body">
 						<div class="info-modal">
-							Request sent successfully
+							{getText('common_requestsuccess_label')}
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button id="close-modal" class="btn btn-primary" data-dismiss="modal">Close</button>
+						<button id="close-modal" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
 					</div>
 				</virtual>
 			</div>

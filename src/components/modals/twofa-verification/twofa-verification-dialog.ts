@@ -4,12 +4,14 @@ import { getUserKey } from '../../../model/utils';
 import { userActions } from '../../../model/users/actions';
 import { USERS } from '../../../model/action-types';
 import TwoFADialogTemplate from './twofa-verification-dialog.html!text';
+import {getText} from '../../localise';
 
 @template(TwoFADialogTemplate)
 export default class TwoFAVerificationDialog extends Element {
     private static unsubscribe = null;
     // Flag to show/hide error message
     private isIncorrectPasscode: boolean = false;
+    private getText = getText;
 
     onApplicationStateChanged() {
         let state = store.getState();

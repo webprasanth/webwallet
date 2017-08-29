@@ -3,12 +3,13 @@ import TransactionDetailsTemplate from './transaction-details.html!text';
 import store from '../../../model/store';
 import Constants from '../../../model/constants';
 import { decimalFormat, satoshiToFlash, formatCurrency, getDisplayDateTime } from '../../../model/utils';
+import {getText} from '../../localise';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
     private txnDetail = store.getState().activityData.txn_detail;
     private meta = store.getState().activityData.txn_detail.meta;
-
+    private getText = getText;
     private AvatarServer = Constants.AvatarServer;
 
     satoshiToFlash = satoshiToFlash;

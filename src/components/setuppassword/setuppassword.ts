@@ -30,8 +30,8 @@ export default class SetupPassword extends BaseElement {
         if (SetupPassword.unsubscribe) SetupPassword.unsubscribe();
         SetupPassword.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
         this.token = route.query().token;
-        $('#fcpassword').on("change keyup", this.onPasswordChanged);
-        $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged);
+        $('#fcpassword').on("change keyup", this.onPasswordChanged.bind(this));
+        $('#repeat_fcpassword').on("change keyup", this.onRePasswordChanged.bind(this));
     }
 
     checkSecureQuestion() {
@@ -43,7 +43,7 @@ export default class SetupPassword extends BaseElement {
         let answerC = $('#answerC').val();
 
         if (!questionA || !questionB || !questionC || !answerA || !answerB || !answerC) {
-            this.sesureMsg = 'All security question is required to recover passowd and coin in case you foget your passowd';
+            this.sesureMsg = this.getText('sc_question_required_msg');
             return false;
         }
 
@@ -59,12 +59,12 @@ export default class SetupPassword extends BaseElement {
         let repeatPassword = $('#repeat_fcpassword').val();
 
         if (!password || password.length == 0) {
-            this.strengthMsg = 'Password cannot be empty.';
+            this.strengthMsg = this.getText('profile_error_password_empy');
             return;
         }
 
         if (password !== repeatPassword) {
-            this.retypedMsg = 'Re-typed password is not correct.';
+            this.retypedMsg = this.getText('profile_error_incorrect_confirm_pass');
             return;
         }
 
@@ -92,7 +92,7 @@ export default class SetupPassword extends BaseElement {
         let newValue = $('#repeat_fcpassword').val();
 
         if (newValue !== '' && newValue !== password) {
-            tag.retypedMsg = 'Re-typed password is not correct.';
+            tag.retypedMsg = this.getText('profile_error_incorrect_confirm_pass');
         } else {
             tag.retypedMsg = null;
         }
@@ -106,24 +106,24 @@ export default class SetupPassword extends BaseElement {
             tag.strengthMsg = null;
         } else {
             let strength: number = utils.calcPasswordStreng(newValue);
-            let msg = "Too short";
+            let msg = this.getText('password_too_short_title');
             tag.strengthColor = 'red';
 
             // Now we have calculated strength value, we can return messages
             if (strength < 1) {
-                msg = "Your password is too short";
+                msg = this.getText('password_too_short_desc');
                 tag.strengthColor = 'red';
             }
             else if (strength < 2) {
-                msg = "Your password is weak";
+                msg = this.getText('password_too_wesk_desc');
                 tag.strengthColor = 'orange';
             }
             else if (strength == 2) {
-                msg = "Your password is medium";
+                msg = this.getText('password_medium_desc');
                 tag.strengthColor = 'green';
             }
             else {
-                msg = "Your password is strong";
+                msg = this.getText('password_strong_desc');
                 tag.strengthColor = 'blue';
             }
 
@@ -144,11 +144,11 @@ export default class SetupPassword extends BaseElement {
                 let message = null;
 
                 if (resp.status == 'CAS_FAILED') {
-                    message = 'Failed to set password. Authentication Service returned an error. Please try again';
+                    message = this.getText('signup_setuppasswoed_cas_fail');
                 } else if (resp.status == 'INVALID_TOKEN') {
-                    message = 'Email address verification token invalid or expired. Please sign up again from scratch';
+                    message = this.getText('signup_setuppasswoed_invalid_token');
                 } else {
-                    message = 'Failed to set password. Authentication Service returned an error. Please try again';
+                    message = this.getText('signup_setuppasswoed_cas_fail');
                 }
 
                 super.showError('', message);

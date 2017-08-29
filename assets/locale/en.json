@@ -34,6 +34,9 @@
     "login_get_sessiontoken_err"               : "Sorry, something went wrong. Please login again",
     "login_keep_me_login_label"                : "Keep me logged in",
     "login_usa_limitted_msg"                   : "Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io",
+    "login_suggess_two_fa_1"                   : "Your account doesn’t have additional phone security yet, we highly recommend you add it.  To add this feature, click ",
+    "login_suggess_two_fa_2"                   : "here",
+    "login_dont_show_dlg_label"                : "Don't show this dialog again",
 
 
 
@@ -202,6 +205,16 @@
     "sc_question_c2"                           :"What is your pet's name?",
     "sc_question_c3"                           :"What was your first job?",
 
+    "phone_verify_title"                       :"Phone Number Verification",
+    "phone_verify_send_code_title"             :"Send Code",
+    "phone_verify_not_get_code_title"          :"Didn't get the code? Sometimes it can take up to 15 minutes.<br/> If it takes longer than that please click <a on-click=\"resend-code\"><strong>here</strong></a> to resend a code to your mobile phone.",
+    "phone_verify_guide"                       :"Please enter your mobile phone number and click Send Code",
+    "phone_verify_proccessing_msg"             :"We are verifying your phone number...",
+    "phone_verify_proccess_done"              :"Your phone number has been verified!",
+    "phone_verify_guide_2"                     :"Please enter the code in the SMS message that we just sent you:",
+    "phone_verify_send_code_btn"               :"Verify Now",
+    "phone_verify_invalid_code"                :"Verification code is not valid!",
+
     "contact_page_title"                       : "Contacts",
     "contact_table_header_name"                : "Name",
     "contact_label_send"                       : "Send",
@@ -211,6 +224,7 @@
     "contact_msg_no_result"                    : "You don't have any contacts yet. When you have activity with other users, their contacts will be added here automatically.",
     "contact_msg_verify_condition"             : "We need to verify your email address and phone number before you can send and request money. Without these verifications, you can only receive money from others. Do you want to verify them now?",
 
+    "common_anonymous_label"                   : "Anonymous",
     "common_search_title"                      : "Search by date",
     "common_label_noconnection"                : "There is no Internet connection",
     "common_label_cash_unit"                   : "Flash",
@@ -276,7 +290,19 @@
     "common_service_unavailable_error"         : "Service is unavailable",
 
     "request_page_title"                       : "Request Payment",
-    "request_page_desc"                       : "Enter the information below to request a payment.",
+    "request_page_desc"                        : "Enter the information below to request a payment.",
+
+    "reset_password_title"                     : "Reset Password",
+    "reset_password_done"                      : "Reset password successfully",
+    "reset_password_back_to_login"             : "Back to login",
+    "reset_password_set_new_one"               :"Setup new password",
+    "reset_password_incorrect_answer"          :"Your answers are incorrect",
+
+    "password_too_short_title"                 :"Too short",
+    "password_too_short_desc"                  :"Your password is too short",
+    "password_too_wesk_desc"                   :"Your password is weak",
+    "password_medium_desc"                     :"Your password is medium",
+    "password_strong_desc"                     :"Your password is strong",
 
     "delete_contact_label"                     : "Delete",
     "money_request_fail"                       : "Send Request Failed",
@@ -294,6 +320,13 @@
     "reset_password_oldpassword_required"      : "Please enter your password to continue",
     "reset_password_incorrect_oldpass"         :"Incorrect password",
 
+    "signup_sc_answer_required"                :"Please answer the security questions. These are required for you to recover your password.",
+    "signup_create_account"                    :"Create My Account",
+    "signup_user_answer"                       :"Your Answer",
+    "signup_confirm_password"                  :"Confirm password",
+    "signup_choose_password"                   :"Choose a password",
+    "signup_email_verified"                    :"Congratulations! Your email address has been verified.",
+    "signup_last_step"                         :"One last step...",
     "signup_username_length_error"             : "Username must be between 3 and 31 characters long.",
     "signup_email_already_exist"               : "An user with this email already exists",
     "signup_email_required_msg"                : "Email is needed for signing up!",

@@ -69,7 +69,7 @@ export default class VerifyPhone extends BaseElement {
         let checkCode = code.match(codeRegex);
 
         if (checkCode == null) {
-            tag.errorMessage = "Verification code is not valid!";
+            tag.errorMessage = this.getText('phone_verify_invalid_code');
         } else {
             let request = {
                 sms_code: code

@@ -21,24 +21,24 @@
 			<input id="answer3" class="form-control">
 		</div>
 		<div class="btn-answer-question text-right">
-			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
-			<button class="btn btn-primary" onclick={doneAnswer}>OK</button>
+			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>{getText('reset_password_back_to_login')}</a>
+			<button class="btn btn-primary" onclick={doneAnswer}>{getText('common_ok_label')}</button>
 		</div>
 	</div>
 	<!-- Change password -->
 	<div show={showPasswordForm} class="form-common form-change-password">
-		<h3>Setup new password</h3>
+		<h3>{getText('reset_password_set_new_one')}</h3>
 		<div class="form-group">
-			<input id="new-password-id" class="form-control" type="password" name="new-password" placeholder="New password" onfocus={resetErrMessage}>
+			<input id="new-password-id" class="form-control" type="password" name="new-password" placeholder="{getText('profile_new_pass_label')}" onfocus={resetErrMessage}>
 		</div>
 		<div class="form-group">
-			<input id="confirm-password-id" class="form-control" type="password" name="confirm-password" placeholder="Confirm password"
+			<input id="confirm-password-id" class="form-control" type="password" name="confirm-password" placeholder="{getText('profile_confirm_new_pass_label')}"
 				onfocus={resetErrMessage}>
 		</div>
 		<p class="text-danger">{errMessage}</p>
 		<div class="text-right">
-			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>Back to login</a>
-			<button class="btn btn-primary" onclick={donePassword}>Submit</button>
+			<a class="pull-left" href="javascript:void(0)" onclick={cancelResetPass}><small>« </small>{getText('reset_password_back_to_login')}</a>
+			<button class="btn btn-primary" onclick={donePassword}>{getText('sc_question_submit_label')}</button>
 		</div>
 	</div>
 </security-questions>

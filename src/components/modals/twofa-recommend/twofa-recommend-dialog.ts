@@ -3,9 +3,11 @@ import store from '../../../model/store';
 import { tabActions } from '../../../model/tabs/actions';
 import { PROFILE } from '../../../model/action-types';
 import TwoFARecommendTemplate from './twofa-recommend-dialog.html!text';
+import {getText} from '../../localise';
 
 @template(TwoFARecommendTemplate)
 export default class TwoFARecommendDialog extends Element {
+    private getText = getText;
 
     mounted() {
         $('#twoFARecommendDialog').modal('show');

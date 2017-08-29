@@ -1,9 +1,10 @@
 
 let texts = null;
 
-export function init() {
+export function init(cb) {
     $.getJSON("assets/locale/en.json", function(json) {
         texts = json;
+        cb()
     });
 }
 

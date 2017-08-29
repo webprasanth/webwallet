@@ -4,11 +4,11 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Transaction Details</h4>
+					<h4 class="modal-title">{getText('common_tx_detail_label')}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="listItems">
-						<div class="name-item">Date/Time</div>
+						<div class="name-item">{getText('activity_table_header_date')}</div>
 						<div class="data-item"> {getDisplayDateTime(meta.created_ts)}</div>
 					</div>
 					<div class="listItems">
@@ -22,7 +22,7 @@
 						</div>
 						<div class="data-item">
 							<div class="item">
-								<div class="title">{meta.type==2 ? 'Name': 'Recipient'}: &nbsp;
+								<div class="title">{meta.type==2 ? getText('contact_table_header_name'): getText('common_tx_recipient_label')}: &nbsp;
 								</div>
 								<div class="data">
 									<span>{meta.type == 2 ? (meta.sender_display_name ? meta.sender_display_name : meta.sender_public_address) : (meta.receiver_display_name
@@ -30,36 +30,36 @@
 								</div>
 							</div>
 							<div class="item">
-								<div class="title">Email:</div>
+								<div class="title">{getText('common_label_email')}:</div>
 								<div class="data">
-									<p> {meta.type == 2 ? (meta.sender_email?meta.sender_email:'Anonymous') : (meta.receiver_email?meta.receiver_email:'Anonymous')}</p>
+									<p> {meta.type == 2 ? (meta.sender_email?meta.sender_email:getText('common_anonymous_label')) : (meta.receiver_email?meta.receiver_email:getText('common_anonymous_label'))}</p>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="listItems">
-						<div class="name-item">Amount</div>
-						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{satoshiToFlash(txnDetail.amount.toString())}&nbsp;FLASH</b></div>
+						<div class="name-item">{getText('common_amount_label')}</div>
+						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{satoshiToFlash(txnDetail.amount.toString())}&nbsp;{getText('common_label_cash_unit_upcase')}</b></div>
 					</div>
 					<div class="listItems" show={meta.type==1}>
-						<div class="name-item">Fee</div>
-						<div class="data-item">&nbsp;{satoshiToFlash(txnDetail.fee)}&nbsp;FLASH</div>
+						<div class="name-item">{getText('common_tx_fee_label')}</div>
+						<div class="data-item">&nbsp;{satoshiToFlash(txnDetail.fee)}&nbsp;{getText('common_label_cash_unit_upcase')}</div>
 					</div>
 					<div class="listItems">
-						<div class="name-item">Note</div>
+						<div class="name-item">{getText('common_note_label')}</div>
 						<div class="data-item">
 							<p class="_value_attr form-control">{meta.memo}</p>
 						</div>
 					</div>
 					<div class="listItems">
-						<div class="name-item">ID</div>
+						<div class="name-item">{getText('common_tx_id_label')}</div>
 						<div class="data-item">
 							<p class="_value_attr form-control">{meta.transaction_id}</p>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
 				</div>
 			</div>
 		</div>

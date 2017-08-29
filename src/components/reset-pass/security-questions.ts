@@ -55,8 +55,8 @@ export default class SecurityQuestions extends BaseElement {
             userKey.encryptedPrivKey = this.encryptedPrivKey;
             storeUserKey(userKey);
             riot.mount('#confirm-send', 'message-dialog', {
-                title: 'Reset Password',
-                message: 'Reset password successfully',
+                title: this.getText('reset_password_title'),
+                message: this.getText('reset_password_done'),
                 callback: function (result) {
 
                     if (result) {
@@ -91,7 +91,7 @@ export default class SecurityQuestions extends BaseElement {
             this.showPasswordForm = true;
             this.showQuestionForm = false;
         } catch (exception) {
-            super.showError('', 'Your answers are incorrect');
+            super.showError('', this.getText('reset_password_incorrect_answer'));
         }
     }
 
@@ -100,12 +100,12 @@ export default class SecurityQuestions extends BaseElement {
         let confirmPassword = $('#confirm-password-id').val();
 
         if (!password || password.length === 0) {
-            this.errMessage = 'Password cannot be empty.';
+            this.errMessage = this.getText('profile_error_password_empy');
             return;
         }
 
         if (password !== confirmPassword) {
-            this.errMessage = 'Re-typed password is not correct.';
+            this.errMessage = this.getText('profile_error_incorrect_confirm_pass');
             return;
         }
 

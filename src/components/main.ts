@@ -9,8 +9,10 @@ import UserService from '../model/users/user-service';
 let currentAction = '';
 let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-components.initialize();
-localise.init()
+localise.init(function() {
+    components.initialize();
+    route.start(true);
+});
 
 route((action) => {
     currentAction = action;
@@ -52,4 +54,4 @@ store.subscribe(() => {
     }
 });
 
-route.start(true);
+
