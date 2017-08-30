@@ -242,7 +242,7 @@
     "common_text_request_money_rejected"       : "One request of yours has been rejected",
     "common_text_request_money_cancelled"      : "A request sent to you has been cancelled",
     "common_text_request_money_accepted"       : "One request of yours has been paid",
-    "common_got_money_request_alert"           : "%(sender)s sent you a request for %(amount)s at %(time)s",
+    "common_got_money_request_alert"           : "%(sender)s sent you a request for %(amount)s",
     "common_label_error_title"                 : "Error",
     "common_error_duplicated_login"            : "Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.",
     "common_verify_email_success_1"            : "We have verified your email address successfully. Please",
@@ -319,6 +319,8 @@
     "enter_oldpassword_label"                  : "Enter your old password",
     "reset_password_oldpassword_required"      : "Please enter your password to continue",
     "reset_password_incorrect_oldpass"         :"Incorrect password",
+
+    "notify_balance_updated"                   : "Updated Balance: %(balance)s",
 
     "signup_sc_answer_required"                :"Please answer the security questions. These are required for you to recover your password.",
     "signup_create_account"                    :"Create My Account",

@@ -78,7 +78,8 @@ export default class HomeHeader extends BaseElement {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
                 this.refreshIconUrl = "assets/images/refresh_icon_white.png";
-                $.notify('Updated Balance: '+this.balance, "info");
+                let msg = this.getText('notify_balance_updated', {balance: this.balance});
+                $.notify(msg, "info");
                 break;
             case COMMON.NEED_UPDATE_BALANCE:
                 setTimeout(function () {
@@ -87,7 +88,7 @@ export default class HomeHeader extends BaseElement {
                 }, 2000);
                 break;
             case COMMON.ON_SESSION_EXPIRED:
-                message = 'Flashcoin terminated this session because you logged in from another place. We do not allow concurrent sessions for your own sake.';
+                message = this.getText('common_error_duplicated_login');
                 super.showError('', message, function () {
                     commonActions.removeAllListeners();
                     store.dispatch(userActions.logout());
@@ -100,7 +101,8 @@ export default class HomeHeader extends BaseElement {
                 note = state.commonData.notificationData.pop();
 
                 if (note && note.email_sender) {
-                    message = note.email_sender + " sent you a request for " + note.amount + " Flash Coin at " + utcDateToLocal(note.created_ts);
+                    let params = {sender: note.email_sender, amount: note.amount, time: utcDateToLocal(note.created_ts)};
+                    message = this.getText('common_got_money_request_alert', params);
                     $.notify(message, "info");
                 }
                 break;
@@ -127,14 +129,14 @@ export default class HomeHeader extends BaseElement {
 
         switch (note.status) {
             case 1:
-                message = "One request of yours has been paid";
+                message = this.getText('common_text_request_money_accepted');
                 this.playImcomingSound();
                 break;
             case 2:
-                message = "One request of yours has been rejected";
+                message = this.getText('common_text_request_money_rejected');
                 break;
             case 3:
-                message = "A request sent to you has been cancelled";
+                message = this.getText('common_text_request_money_cancelled');
                 break;
             default:
                 break;
@@ -153,7 +155,6 @@ export default class HomeHeader extends BaseElement {
 
         if (!note || !note.sender_email) {
             // Check server side
-            console.error('Notification is invalid:', note);
             return;
         }
 
@@ -163,12 +164,15 @@ export default class HomeHeader extends BaseElement {
             }
 
             if (note.transaction_type == 'like') {
-                message = "You have just liked and sent " + note.recipientEmail + " " + note.amount + " tokens as a reward";
+                let params = {recipient_email: note.recipientEmail, amount: note.amount};
+                message = this.getText('common_like_sent_money_alert', params);
             } else {
-                message = "One of your fountain(s) has just dispensed " + note.amount + " tokens to " + note.recipientEmail;
+                let params = {amount: note.amount, recipient_email: note.recipientEmail};
+                message = this.getText('common_fountain_sent_money_alert', params);
             }
         } else {
-            message = note.sender_email + " sent you " + note.amount + " Flash Coin";
+            let params = {sender: note.sender_email, amount: note.amount};
+            message = this.getText('common_got_money_request_alert', params);
         }
 
         $.notify(message, "info");
