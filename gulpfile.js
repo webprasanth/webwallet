@@ -96,6 +96,11 @@ gulp.task('copy-images', function () {
         .pipe(gulp.dest('public/assets/images'));
 });
 
+gulp.task('copy-locale', function () {
+    return gulp.src('assets/locale/**/*')
+        .pipe(gulp.dest('public/assets/locale'));
+});
+
 gulp.task('copy-lib', function () {
     var maps = [
         { from: 'assets/lib/**/*', to: 'public/assets/lib/' }
@@ -108,9 +113,9 @@ gulp.task('copy-lib', function () {
     merge(tasks);
 });
 
-gulp.task('copy-rs-mobile', ['copy-wiki-page', 'copy-html-mobile', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon', 'copy-docs']);
+gulp.task('copy-rs-mobile', ['copy-wiki-page', 'copy-html-mobile', 'copy-css', 'copy-images', 'copy-locale', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon', 'copy-docs']);
 
-gulp.task('copy-rs', ['copy-wiki-page', 'copy-index', 'copy-html', 'copy-css', 'copy-images', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon', 'copy-docs']);
+gulp.task('copy-rs', ['copy-wiki-page', 'copy-index', 'copy-html', 'copy-css', 'copy-images', 'copy-locale', 'copy-lib', 'copy-fonts', 'copy-sound', 'copy-favicon', 'copy-docs']);
 
 gulp.task('build-debug-mobile', ['copy-rs-mobile', 'build-debug-js']);
 gulp.task('build-debug', ['copy-rs', 'build-debug-js']);
