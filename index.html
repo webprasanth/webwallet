@@ -129,13 +129,6 @@
                 }, 500);
             });
 
-            // Handle click CREATE WALLET button
-
-//            $('#create-wallet-btn').click(function () {
-//                $('html, body').animate({
-//                    scrollTop: 0
-//                }, 500);
-//            });
             let alink_download = $('.slide-1 a.download-flash-link');
             $(alink_download).click(function () {
                 $('html, body').animate({
@@ -340,77 +333,75 @@
 </head>
 
 <body>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
-    </script>
-    <div class="home-page home-safecash">
-        <div class="slide-top" id="slide-top">
-            <img id="img-bg-slide1" class="bg-slide1" src="assets/images/pages/home-page/background-slide1.png" width="100%">
-            <div class="top-content">
-                <div class="btn-newpage col-xs-12">
-                    <p class="pull-right">
-                        <a href="wallet.html" target="_blank" class="btn btn-warning btn-flash-wallet">FLASH Web Wallet</a>
-                    </p>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+</script>
+<div class="home-page home-safecash flash-wallet">
+    <div class="slide-top" id="slide-top">
+        <div class="top-content">
+            <!--<div class="btn-newpage col-xs-12">-->
+                <!--<p class="pull-right">-->
+                    <!--<a href="wallet.html" target="_blank" class="btn btn-warning btn-flash-wallet">FLASH Web Wallet</a>-->
+                <!--</p>-->
+            <!--</div>-->
+            <header class="show-mobile loginForm">
+                <div class="logo-mobile">
+                    <a href="/"><img src="assets/images/pages/logo.png" /></a>
                 </div>
-                <header class="show-mobile loginForm">
-                    <div class="logo-mobile">
+                <div class="container">
+                    <div class="col-xs-12 col-sm-5 logo">
                         <a href="/"><img src="assets/images/pages/logo.png" /></a>
                     </div>
-                    <div class="container">
-                        <div class="col-xs-12 col-sm-5 logo">
-                            <a href="/"><img src="assets/images/pages/logo.png" /></a>
+                    <div class="col-xs-12 col-sm-6 pull-right">
+                        <div class="col-xs-12 login-form">
+                            <div class="col-xs-12 col-sm-6">
+                                <input id="identifer" type="text" class="validate form-control" placeholder="e-mail address">
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <input id="loginpassword" type="password" class="form-control" placeholder="password">
+                            </div>
+                            <div class="btn-login form-group">
+                                <button id="btn-dologin" class="btn btn-default">Login</button>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 pull-right">
-                            <div class="col-xs-12 login-form">
-                                <div class="col-xs-12 col-sm-6">
-                                    <input id="identifer" type="text" class="validate form-control" placeholder="e-mail address">
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <input id="loginpassword" type="password" class="form-control" placeholder="password">
-                                </div>
-                                <div class="btn-login form-group">
-                                    <button id="btn-dologin" class="btn btn-default">Login</button>
-                                </div>
-                            </div>
-                            <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
-                                <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)">Forgot password?</a>
-                            </div>
+                        <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
+                            <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)">Forgot password?</a>
                         </div>
                     </div>
-                </header>
-                <div class="slide-1 signUpForm hidden-xs">
-                    <div class="container form-active">
-                        <div class="content-su row">
-                            <div class="col-xs-12 col-sm-5 text-center" id="content-slide1">
-                                <div class="signup-content">
-                                    <h2 class="">Get a Web Wallet</h2>
-                                    <p class="p1-line">Earn and Spend</p>
-                                    <p class="p1-line">Share with Friends</p>
-                                    <div id="notify-check" style="display:none">
-                                        <div class="ui center aligned segment">
-                                            <p>We sent you an email with a link to activate your account</p>
-                                            <p>Please check your email inbox/spam folder</p>
+                </div>
+            </header>
+            <div class="slide-1 signUpForm hidden-xs">
+                <div class="container form-active">
+                    <div class="content-su row">
+                        <div class="col-xs-12 col-sm-5 text-center pull-right" id="content-slide1">
+                            <div class="signup-content">
+                                <h2 class="">Get a Web Wallet</h2>
+                                <p class="p1-line">Earn and Spend</p>
+                                <p class="p1-line">Share with Friends</p>
+                                <div id="notify-check" style="display:none">
+                                    <div class="ui center aligned segment">
+                                        <p>We sent you an email with a link to activate your account</p>
+                                        <p>Please check your email inbox/spam folder</p>
+                                    </div>
+                                </div>
+                                <div class="box-signup" id="box-signup">
+                                    <form id="sign_up_form" class="col-xs-12">
+                                        <div class="form-group col-xs-12">
+                                            <input class="form-control" type="text" id="firstname" maxlength="50" name="firstname" placeholder="First name" on-focus="firstname-focus">
+                                            <span id="usernameValidationText" style="display:none;"></span>
                                         </div>
-                                    </div>
-                                    <div class="box-signup" id="box-signup">
-                                        <form id="sign_up_form" class="col-xs-12">
-                                            <div class="form-group col-xs-12">
-                                                <input class="form-control" type="text" id="firstname" maxlength="50" name="firstname" placeholder="First name" on-focus="firstname-focus">
-                                                <span id="usernameValidationText" style="display:none;"></span>
-                                            </div>
-                                            <div class="form-group col-xs-12">
-                                                <input class="form-control" type="text" id="lastname" maxlength="50" name="lastname" placeholder="Last name">
-                                            </div>
-                                            <div class="form-group col-xs-12">
-                                                <input class="form-control text-center" type="email" id="email-signup" placeholder="Email address">
-                                            </div>
-                                            <div class="form-group col-xs-12">
-                                                <div id="gcaptcha"></div>
-                                            </div>
-                                        </form>
-                                        <p class="p2-line">By clicking Create Wallet, I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a>                                            and <a href="/privacy-policy.html" target="_blank">Privacy Policy.</a></p>
-                                        <div id="create-account-btn" class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
-                                        <a href="#download-flash" class="download-flash-link" style="font-size: 18px; color: #8ac9f3;">Download FLASH QT wallets</a>
-                                    </div>
+                                        <div class="form-group col-xs-12">
+                                            <input class="form-control" type="text" id="lastname" maxlength="50" name="lastname" placeholder="Last name">
+                                        </div>
+                                        <div class="form-group col-xs-12">
+                                            <input class="form-control text-center" type="email" id="email-signup" placeholder="Email address">
+                                        </div>
+                                        <div class="form-group col-xs-12">
+                                            <div id="gcaptcha"></div>
+                                        </div>
+                                    </form>
+                                    <p class="p2-line">By clicking Create Wallet, I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a>                                            and <a href="/privacy-policy.html" target="_blank">Privacy Policy.</a></p>
+                                    <div id="create-account-btn" class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
+                                    <a href="#download-flash" class="download-flash-link" style="font-size: 18px; color: #8ac9f3;">Download FLASH QT wallets</a>
                                 </div>
                             </div>
                         </div>
@@ -418,185 +409,159 @@
                 </div>
             </div>
         </div>
-        <div class="main-content hidden-xs">
-            <div class="slide-2">
-                <div class="container content-slide2">
-                    <div class="content col-xs-12">
-                        <div class="set-center">
-                            <div class="col col-xs-12 col-sm-6 text-center">
-                                <a href="assets/docs/FLASHWhitepaper.pdf"><img src="assets/images/pages/home-page/icon-whitepaper.png" width="140"></a>
-                                <h2><a href="#slide-10">Whitepaper</a></h2>
-                            </div>
-                            <div class="col col-xs-12 col-sm-6 text-center">
-                                <a href="#slide-11"><img src="assets/images/pages/home-page/faq.png" width="140"></a>
-                                <h2><a href="#slide-11">FAQ</a></h2>
-                            </div>
-                        </div>
+    </div>
+    <div class="main-content hidden-xs">
+        <div class="slide-2 social-icons">
+            <div class="container content-slide2">
+                <div class="content col-xs-12">
+                    <div class="col text-center">
+                        <a title="BTC" href="https://discord.gg/SANek5d" target="_blank"><i class="fa"><img src="assets/images/pages/home-page/discord_icon.png"></i></a>
+                        <h2><a target="_blank" href="https://discord.gg/SANek5d">Discord</a></h2>
+                    </div>
+                    <div class="col text-center">
+                        <a title="Facebook" href="https://www.facebook.com/FlashCoin-1800026016723751" target="_blank">
+                            <i class="fa">
+                                <img src="assets/images/pages/home-page/facebook.png">
+                            </i>
+                        </a>
+                        <h2><a target="_blank" href="https://www.facebook.com/FlashCoin-1800026016723751">Facebook</a></h2>
+                    </div>
+                    <div class="col text-center">
+                        <a title="Twitter" href="https://twitter.com/FlashCoins" target="_blank"><i class="fa">
+                            <img src="assets/images/pages/home-page/twitter.png">
+                        </i></a>
+                        <h2><a target="_blank" href="https://twitter.com/FlashCoins">Twitter</a></h2>
+                    </div>
+                    <div class="col text-center">
+                        <a title="Google Plus" href="https://plus.google.com/u/0/b/110236490072104998071/110236490072104998071" target="_blank">
+                            <i class="fa"><img src="assets/images/pages/home-page/google-plus.png"></i></a>
+                        <h2><a target="_blank" href="https://plus.google.com/u/0/b/110236490072104998071/110236490072104998071">Google Plus</a></h2>
+                    </div>
+                    <div class="col text-center">
+                        <a class="slack" title="Slack" href="https://flashcoin.slack.com/messages/@slackbot/" target="_blank"><i class="fa"><img src="assets/images/pages/home-page/slack_logo_240.png"></i></a>
+                        <h2><a target="_blank" href="https://join.slack.com/t/flashcoin/shared_invite/MjI4NTAxNzQxODQ1LTE1MDMwMzM0MDMtMTA2OGJjY2Y5NA">Join FLASHcoin Slack</a></h2>
+                    </div>
+                    <div class="col text-center">
+                        <a title="BTC" href="https://bitcointalk.org/index.php?topic=1605453.0" target="_blank"><i class="fa"><img src="assets/images/pages/home-page/bitcoin.png"></i></a>
+                        <h2><a target="_blank" href="https://bitcointalk.org/index.php?topic=1605453.0">Bitcointalk</a></h2>
                     </div>
                 </div>
-            </div>
-            <div class="slide slide-3" id="slide-3">
-                <img id="img-slide-3" src="assets/images/pages/home-page/bg-slide3.png" width="100%">
-            </div>
-            <div class="slide-4 p100b">
-                <div class="container">
-                    <div class="group-content col-xs-12">
-                        <div class="text col-xs-12">
-                            <h3>FLASH is a new altcoin that offers fast and low cost transactions on a distributed blockchain optimized for secure registration, loyalty, messaging, and validating offers to trade digital assets</h3>
-                            <img class="pull-left" src="assets/images/pages/home-page/id-computer.png" style="padding-right: 20px;">
-                            <p>FLASH has an easy to use online wallet designed for the mass consumer market.  If you can make online payments, you already know how to use FLASH!  We also support industry standard QT wallets for Windows, Mac and Linux.</p>
-                        </div>
-                        <div class="text col-xs-12 m20t">
-                            <p>FLASH is designed for  low cost transactions at a rapid rate, while retaining much of it’s BTC/LTC heritage to retain compatibility with third party services.  We believe efficiency will be the key to enable many types of transactions including in app reward and accounting functions as well as small and tiny payments.  It’s even more efficient than Litecoin;  benchmarks on our blockchain have shown that up to 25,000 transactions per second can be processed by an inexpensive computer consuming less than 80 watts of power.  That makes FLASH very eco-friendly.</p>
-                            <p>Here’s how it works.  Get a QT or web wallet account, then get some FLASH.  If you get a web wallet, a donor from our community has kindly provided you with 2 FLASH coins to get started.  You can also acquire some FLASH on the <a href="https://bittrex.com">Bittrex Exchange</a> </p>
-                            <p>With the web wallet, you can use an email address for sending and receiving coins and your public address is supported, as well.</p>
-                        </div>
-                    </div>
-                    <div class="group-content col-xs-12">
-                        <h3>The FLASH Governance Model</h3>
-                        <p>Because there is no mining to speak of processing costs are minimized and there are no miners to decide governing matters.</p>
-                        <p>FLASH will be governed by 101 GovNodes and the votes of FLASH coin holders who commit their coins to a GovNode.  This is independent of the blockchain and GovNodes, along with the coinholders, are entirely responsible for delegating the mining, the appropriate fees to charge and the distribution of any fees in excess of the </p>
-                        <p>Important differences with FLASH:</p>
-                        <ul>
-                            <li><p><strong>1. There is zero inflation.</strong>  All 900 million coins have been issued via a crowdsale.</p></li>
-                            <li><p><strong>2. Coins were given to donors who participated in the presale donation process.</strong>  There were only 1 million free coins used for testing and distributed to approximately 60,000 wallets.  No free coins were given to developers.</p></li>
-                            <li><p><strong>3. There is no developer slush fund.</strong>  Just like Bitcoin, people will develop if they see a return on their time.  Developers can use split payments to charge for their apps, right at the point of transaction.</p></li>
-                            <li><p><strong>4. No special “inside deals”.</strong>  Because all coins were distributed via publicly announced presale donations, everyone had the same chance to participate.  What individuals decide to do with their private property coins afterwards are up to them entirely.</p></li>
-                            <li><p><strong>5. Very low transaction fees.</strong>  This is a low tax zone.  Transaction fees add up and as a coin appreciates in value, the fees become onerous.</p></li>
-                            <li><p><strong>6. Fast processing time.</strong>  We centralized the mining to make the performance very fast using a delegated PoW model.</p></li>
-                            <li><p><strong>7. High throughput.</strong>  The blockchain has been benchmarked to 25,000 transactions per second, running on a standard i7 processor “cube” computer.</p></li>
-                        </ul>
-                        <div class="text col-xs-12 m20t">
-                            <p>FLASH is an attractive place to put your crypto business.  Our community runs a very efficient blockchain so you can focus on developing and marketing your application.</p>
-                        </div>
-                    </div>
+                <div class="content col-xs-12"><p>FLASH is designed for small payments, due to its low transaction fees, high speed, and throughput, all while retaining its BTC/LTC heritage and functionality.  This makes FLASH ideal for loyalty, registration and messaging applications, and is perfect for customers and businesses using small payments.  We know efficiency is essential for most transactions, so we benchmarked FLASH up to 25,000 txn/sec on a $700 i7 computer consuming less than 80 watts of power.  Because of this, FLASH is eco-friendly and easy on your pocketbook.</p></div>
+                <div class="col-xs-12">
+                    <ul>
+                        <li><p>The number of coins is fixed and completely issued.</p></li>
+                        <li><p>There is zero inflation.</p></li>
+                        <li><p>Processing is optimized and tested for efficiency and high volume.</p></li>
+                        <li><p>There is no developer “slush fund”.</p></li>
+                        <li><p>Projects can be developed by anyone and donations for the developers solicited from the community.</p></li>
+                    </ul>
                 </div>
             </div>
-            <div class="slide slide-8">
-                <div class="bg-white">
-                </div>
-                <div class="bg-blue">
-                    <div class="container">
-                        <ul>
-                            <li class="col-xs-12 col-sm-4 text-center">
-                                <img src="assets/images/pages/home-page/img1-slide8.png" width="140">
-                                <p>FLASH is a high performance blockchain secured with delegated Electoral Consensus designed for use for private sectors in accounting, loyalty, and many other applications. Legally compliant.</p>
-                            </li>
-                            <li class="col-xs-12 col-sm-4  text-center">
-                                <img src="assets/images/pages/home-page/img2-slide8.png" width="140">
-                                <p>Transact with low fees and confirms in seconds.</p>
-                                <p><a style="color:#F5F5F5;word-break: break-all;" class="size-22" href="https://github.com/flashcoin-io/">https://github.com/flashcoin-io/</a></p>
-                            </li>
-                            <li class="col-xs-12 col-sm-4 text-center">
-                                <img src="assets/images/pages/home-page/img3-slide8.png" width="140">
-                                <p>
-                                     We welcome developers to try out our system via our web API's to build powerful robust apps today.
-                                </p>
-                                <p><a style="color:#F5F5F5" class="size-22" href="assets/docs/FLASHWhitepaper.pdf">Check out our Whitepaper with more information on our API.</a></p>
-                            </li>
-                        </ul>
+        </div>
+        <div class="slide-4">
+            <div class="container">
+                <div class="group-content">
+                    <h2>Wallets</h2>
+                    <div class="text col-xs-12">
+                        <p>FLASH supports a number of online wallets including Coinomi, Coin Payments, QT (Window, Mac, Linux) and an easy to use online wallet designed for the mass consumer market. If you can make online payments, you already know how to use FLASH.</p>
                     </div>
-                </div>
-            </div>
-            <div class="slide-11" id="slide-11">
-                <div class="container">
-                    <h2 class="text-center">FAQ</h2>
-                    <div class="note text-center">
-                        <p class="m0">FLASH has a finite and already issued supply of 900 million coins</p>
-                    </div>
-                    <div class="faq-category">
-                        <div class="box-left col-xs-12 col-sm-6">
-                            <ul class="first">
-                                <li>
-                                    <h4 class="tu">HOW CAN I GET SOME FLASH?</h4>
-                                    <div class="answer-faq">
-                                        <p>Receive 10 FLASH by creating a new web wallet (above).</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h4 class="tu">HOW MUCH IS THE TRANSACTION FEE?</h4>
-                                    <div class="answer-faq">
-                                        <p>The transaction fee will be very low, about 0.0001 FLASH to start.  In the future, you will be able to add 40 bytes of data in a transaction and there will be higher fees to cover those costs.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div>
+                        <div class="col-xs-6 text-center">
+                            <a href="https://coinomi.com/"><img src="assets/images/pages/home-page/coinomi.jpg"></a>
                         </div>
-                        <div class="box-right col-xs-12 col-sm-6">
-                            <ul class="last">
-                                <li>
-                                    <h4 class="tu">WHERE CAN I TRADE FLASH FOR BTC or BTC FOR FLASH?</h4>
-                                    <div class="answer-faq">
-                                        <p>FLASH is listed on Cryptopia, an exchange in New Zealand (https://www.cryptopia.co.nz).  We expect other exchanges to carry FLASH in the near future.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="col-xs-6 text-center">
+                            <a href="https://www.coinpayments.net/"><img src="assets/images/pages/home-page/ITEySazs.png"></a>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="download-flash" id="download-flash">
-              <div class="container">
-                  <h3 class="title text-center">Download FLASH QT wallets</h3>
-                  <div class="col-xs-12">
-                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 64 exe File</a></p></div>
-                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux Arm Zip File</a></p></div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Windows 32 exe File</a></p></div>
-                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Linux 64 Zip File</a></p></div>
-                  </div>
-                  <div class="col-xs-12">
-                      <div class="col-xs-12 col-sm-6 col-box"><p><a href="https://flashcoin.io/download/Flashcoin-Qt.dmg" target="_blank" class="btn btn-primary"><img src="assets/images/pages/coin.png">Download FLASH QT wallet for Mac Zip File</a></p></div>
-                  </div>
-              </div>
-            </div>
-            <div class="slide-12" id="slide-12">
-                <div class="container">                    
-                    <div class="btn-backtop text-center">
-                        <a id="back-to-top"><img src="assets/images/pages/home-page/arrowup.png" width="45px"></a>
-                        <p class="m10t">BACK TO TOP</p>
                     </div>
                 </div>
             </div>
         </div>
-        <!--<a id="create-wallet-btn" class="btn create-wallet-btn">Get an Account Now with Free Coins</a>-->
-        <footer class="footer col-xs-12">
-            <div class="container text-center">
-                <ul>
-                    <li class="hidden-xs"><a href="terms-of-service.html" target="_blank">Terms of Service</a></li>
-                    <li class="hidden-xs"><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li>
-                    <li><a href="support.html" target="_blank">Support</a></li>
-                    <li><a href="contact.html" target="_blank">Contact</a></li>
-                </ul>
-                <p class="hidden-xs"><img src="assets/images/flag-footer.png" width="" class="m15r" />Copyright (c) 2016 Flashnet Tech, Inc. Montreal,
-                    Canada. All Rights Reserved. Flash is a trademark of Flashnet Tech, Inc.</p>
-            </div>
-        </footer>
-    </div>
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog message-error" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Error</h4>
+        <div class="download-flash" id="download-flash">
+            <div class="container" style="padding: 0">
+                <div class="col-xs-12 col-sm-4">
+                    <a class="for-desktop hidden-xs" href="https://wallet.flashcoin.io/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a>
+                    <h2 class="mobile"><a class="for-mobile hidden-sm hidden-md hidden-lg" href="/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a> Web Wallets</h2>
+                    <p>With the web wallet, you can use an email address or your public address for sending and receiving coins.</p>
+                    <p>The web wallet supports most browsers and mobile devices. There's nothing to download or install for maximum convenience.</p>
                 </div>
-                <div class="modal-body">
-                    <div id="errorMessage" class="message-error">
-                        Please enter name, email, subject and content
+                <div class="col-xs-12 col-sm-8 text-center" style="border-left: 2px dotted #999;">
+                    <h2 class="title text-center">Download FLASH QT wallets</h2>
+                    <div class="box-center">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win64-setup.exe" target="_blank">Windows 64 exe File</a></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-arm-linux-gnueabihf.tar.gz" target="_blank">Linux Arm Zip File</a></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/flashcoin-0.10.3.0-win32-setup.exe" target="_blank">Windows 32 exe File</a></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-x86_64-unknown-linux-gnu.tar.gz" target="_blank">Linux 64 Zip File</a></p></div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt.dmg" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt.dmg" target="_blank">Mac Zip File</a></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-12.04-amd64.deb" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-12.04-amd64.deb" target="_blank">Ubuntu 12.04 amd64 Deb File</a></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-14.04-amd64.deb" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-14.04-amd64.deb" target="_blank">Ubuntu 14.04 amd64 Deb File</a></p></div>
+                            <div class="col-xs-12 col-sm-4 col-box">
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-16.04-amd64.deb" target="_blank"><img src="assets/images/pages/home-page/qt-wallet.png" ></a></p>
+                                <p><a href="https://flashcoin.io/download/Flashcoin-Qt-Ubuntu-16.04-amd64.deb" target="_blank">Ubuntu 16.04 amd64 Deb File</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+        <div class="slide-12" id="slide-12">
+            <div class="container">
+                <div class="btn-backtop text-center">
+                    <a id="back-to-top"><img src="assets/images/pages/home-page/arrowup.png" width="45px"></a>
+                    <p class="m10t">BACK TO TOP</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade location-error" id="locationErrorModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog message-error" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+    <footer class="footer col-xs-12">
+        <div class="container text-center">
+            <p class="hidden-xs"><img src="assets/images/flag-footer.png" width="" class="m15r" />Flashcoin.io is provided by the Flashcoin Foundation, Liechtenstein. Supported by the FLASH community.</p>
+        </div>
+    </footer>
+</div>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog message-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <div id="errorMessage" class="message-error">
+                    Please enter name, email, subject and content
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade location-error" id="locationErrorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog message-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Error</h4>
                 </div>

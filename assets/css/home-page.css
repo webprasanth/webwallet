@@ -168,6 +168,19 @@
 .tu {
   text-transform: uppercase; }
 /* End style common */
+.social-icons i.fa img{
+    border: 1px solid #ffb629;
+    border-radius: 100%;
+    line-height: 120px;
+    width: 100%;
+    max-width: 50px;
+}
+.social-icons .slack img{
+    padding: 10px;
+}
+.social-icons i.fa-btc{
+    color: #FFB629;
+}
 .home-safecash{
     position: relative;
     float: left;
@@ -190,13 +203,13 @@
 }
 .home-safecash input{
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 15px;
     padding: 5px 12px
 
 }
 .home-safecash #sign_up_form input {
     border-radius: 0;
-    font-size: 18px;
+    font-size: 17px;
     padding: 5px 12px;
     background: transparent;
     box-shadow: none;
@@ -229,11 +242,6 @@
     font-weight: bold;
     font-family: sans-serif;
     border-radius: 8px;
-}
-.crowdsale-finale img.crowdsale{
-  width: 40px;
-  min-width: 30px;
-  margin-top: 0;
 }
 .form-mobile{
     display: none;
@@ -287,23 +295,26 @@
 /*==========*/
 [class*="col-"]{padding: 0}
 .home-page .slide-top{
+    background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+    mso-line-height-rule: exactly;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    background-color: #55505a;
+    background-image: url(/assets/images/pages/home-page/bg-header.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-top: 5px solid #fad705;
+    border-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 100px;
     color: #fff;
-}
-.home-page .slide-top .top-content{
-    position: absolute;
-    top:0;
-    width: 100%;
-}
-.top-content #content-slide1{
-    position: absolute;
-    right: 10%;
-    margin-top: 2%;
 }
 .home-page header img{
     width: 100%;
     min-width: 140px;
-    max-width: 300px;
-    margin-top: 24px;
+    max-width: 250px;
+    margin-top: 0;
 }
 .home-page header .login-form{
     display: flex;
@@ -322,7 +333,7 @@
 .home-page header .foget-psd{
     color: #fff;
     font-weight: normal;
-    font-size: 17px;
+    font-size: 14px;
     vertical-align: top;
 }
 .home-page .content-slide1 [class*="col-"]{
@@ -355,7 +366,7 @@
     float: none;
 }
 .slide-1 h2{
-    font-size: 42pt;
+    font-size: 40px;
     color: #ffffff;
     margin-bottom: 10px;
     font-family: 'Roboto-condensedBold', sans-serif;
@@ -384,9 +395,9 @@
 }
 .slide-1 .btn-create-wallet a{
     background-color: #74c543;
-    padding: 10px 40px;
+    padding: 0px 40px;
     border-color: #55A226;
-     font-size: 35px;
+     font-size: 30px;
     font-weight: bold;
 
 }
@@ -423,32 +434,35 @@
     bottom: 2px;
     background-color: #fbb116;
     cursor: pointer;
+    z-index: 10;
 }
 /*===========*/
 /*Slide 2*/
-.slide-2{
+/*Slide 2*/
+.flash-wallet .slide-2{
     position: relative;
+    padding: 2% 0;
 }
-.slide-2 #img-slide-2{
-  width: 80%;
-  display: block;
-  margin: 0 auto;
+.flash-wallet .slide-2 #img-slide-2{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
 }
-.slide-2 .set-center{
+.flash-wallet .slide-2 .set-center{
     max-width: 1180px;
     width: 100%;
     margin: 0 auto;
 }
-.home-page .container.content-slide2{
-  padding: 200px 0 100px 0;
+.flash-wallet .slide-2 .col{
+    margin-bottom: 3%;
+    width: 16.5%;
+    float: left;
 }
-.slide-2 .col{
-    padding-bottom: 10%;
-}
-.slide-2 .col h2 a{
+.flash-wallet .slide-2 h2 {margin: 0}
+.flash-wallet .slide-2 h2 a{
     font-weight: normal;
     color: #303030;
-    font-size: 32px;
+    font-size: 20px;
 }
 /*============*/
 /*Slide 3*/
@@ -458,10 +472,17 @@
     color: #fff;
     margin-top: 10%;
 }
+.flash-wallet .slide-4 img{
+    width: 100%;
+    max-width: 250px;
+}
 /*============*/
 /* Slide 4 */
-.slide-4{
-  padding-top: 100px;
+.slide-4 h2{
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #116bb6;
+    text-align: center;
 }
 .slide-4 h3{
     font-size: 25px;
@@ -476,13 +497,12 @@
     text-align: justify;
 }
 .slide-4 .max-width-col{
-  width: 950px;
+    width: 950px;
     margin: 0 auto;
     float: none;
 }
 .slide-4 ul li,
 .slide-4 .text p{
-    display: block;
     color: #616060;
     font-size: 23px;
     font-weight: normal;
@@ -506,10 +526,9 @@
     padding-bottom: 125px;
 }
 .slide-8 .bg-blue .container{
-  width: 1441px;
 }
 .slide-8 ul {
-  padding: 0;
+    padding: 0;
 }
 .slide-8 ul li{
     display: block;
@@ -525,20 +544,31 @@
     margin-top: 35px;
 }
 /*============*/
-
+.exchanges-section{
+    padding: 2% 0;
+    border-top: 1px solid #ddd;
+    color: #116bb6;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5%;
+}
+.exchanges-section img{
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px;
+}
 /* Slide 10 */
 .slide-10{
-  background-color: #eaeaea;
-  padding: 75px 0 140px;
+    background-color: #eaeaea;
+    padding: 2% 0 12%;
 }
 .slide-10 h2,
 .slide-11 h2{
-  font-size: 60px;
-  color: #303030;
-  padding: 20px 0;
+    font-size: 60px;
+    color: #303030;
+    padding: 20px 0;
 }
 .slide-10 button{
-  border-radius: 45px;
+    border-radius: 45px;
     border: 2px solid #303030;
     font-size: 17px;
     text-transform: uppercase;
@@ -549,10 +579,36 @@
     margin-top: 40px;
 }
 .slide-10 button:hover{
-  background-color: #72c6ff;
+    background-color: #72c6ff;
 }
 .slide-10 .text-justify{
-  padding: 0 15px;
+    padding: 0 15px;
+}
+.download-flash{
+    padding: 30px 0 70px 0;
+    border-top: 1px solid #ddd;
+    background-color: #eaeaea;
+}
+.download-flash .box-center{
+    margin: 0 auto;
+    float: none;
+}
+.download-flash h3{
+    font-weight: normal;
+    padding-top: 10%;
+    line-height: 32px;
+}
+.download-flash .col-box{
+    margin-top: 1%;
+}
+.download-flash .col-box a{
+    font-size: 23px;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+.download-flash .col-box img{
+    margin-right:10px;
+    width: 70px;
 }
 /* Slide 11 */
 .slide-11 {
@@ -658,33 +714,10 @@
       font-size: 40px;
     line-height: 30px;
 }
-.download-flash{
-  padding: 0 0 70px 0;
-  border-top: 1px solid #ddd;
-}
-.download-flash .col-box{
-    margin-top: 50px;
-}
-.download-flash .col-box a{
-      font-size: 18px;
-      font-weight: bold;
-    background-color: #0e76bc;
-      width: 85%;
-    text-align: left
-}
-.download-flash .col-box a img{
-  margin-right:10px; 
-}
-.home-safecash .download-flash .container{
-  width: 1260px;
-}
 /* Slide 12*/
 .slide-12 {
   background: #eaf4f6;
-  padding: 60px 0;
-}
-.slide-12 .container{
-  width: 1600px;
+    padding: 2% 0;
 }
 .slide-12 h3.title,
 .download-flash h3.title{
@@ -712,7 +745,6 @@
 /* End slide 12*/
 .btn-backtop{
   background: #EAF4F6;
-  padding-bottom: 75px;
 }
 .btn-backtop a img{
   cursor: pointer;
@@ -750,6 +782,7 @@ footer .container {
 
 .home-page footer {
     background: #000;
+    position: static !important;
 }
 .home-page footer a{
   color: #f5f5f5;
@@ -972,9 +1005,9 @@ footer .container {
     max-width: 140px;
     min-width: 120px;
     }
-  .home-page header .foget-psd{
+    .home-page header .foget-psd{
     color: #0E76BC;
-    font-size: 15px;
+    font-size: 14px;
   }
     .logo-mobile{
         display: block;
