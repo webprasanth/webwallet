@@ -189,10 +189,7 @@
     background: #fff;
 }
 .home-safecash .container{
-    width: 1180px;
-}
-.home-safecash header{
-   margin-top: 20px;
+    max-width: 1180px;
 }
 .home-safecash h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: 'Roboto-condensed', sans-serif;
