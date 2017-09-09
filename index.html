@@ -344,15 +344,12 @@
                     <!--<a href="wallet.html" target="_blank" class="btn btn-warning btn-flash-wallet">FLASH Web Wallet</a>-->
                 <!--</p>-->
             <!--</div>-->
-            <header class="show-mobile loginForm">
-                <div class="logo-mobile">
-                    <a href="/"><img src="assets/images/pages/logo.png" /></a>
-                </div>
+            <header class="loginForm">
                 <div class="container">
                     <div class="col-xs-12 col-sm-5 logo">
                         <a href="/"><img src="assets/images/pages/logo.png" /></a>
                     </div>
-                    <div class="col-xs-12 col-sm-6 pull-right">
+                    <div class="col-xs-12 col-sm-6 pull-right show-mobile">
                         <div class="col-xs-12 login-form">
                             <div class="col-xs-12 col-sm-6">
                                 <input id="identifer" type="text" class="validate form-control" placeholder="e-mail address">
@@ -367,10 +364,11 @@
                         <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
                             <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)">Forgot password?</a>
                         </div>
+                        <p class="text-center create-an-account" style="font-size: 15px;">Don't have an account? <a href="#" onclick="showSignUp()" class="btn-move-signup">Create one</a></p>
                     </div>
                 </div>
             </header>
-            <div class="slide-1 signUpForm hidden-xs">
+            <div class="slide-1 signUpForm">
                 <div class="container form-active">
                     <div class="content-su row">
                         <div class="col-xs-12 col-sm-5 text-center pull-right" id="content-slide1">
@@ -403,6 +401,7 @@
                                     <p class="p2-line">By clicking Create Wallet, I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a>                                            and <a href="/privacy-policy.html" target="_blank">Privacy Policy.</a></p>
                                     <div id="create-account-btn" class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
                                     <a href="#download-flash" class="download-flash-link" style="font-size: 18px; color: #8ac9f3;">Download FLASH QT wallets</a>
+                                    <p class="back-login" style="border-top: 1px solid #ddd;margin-top: 20px;width: 80%;margin: 20px auto 50px;"><a href="#" onclick="backLogin()" style="color: #ffffff; font-size: 14px;"><img style="width: 8px;margin-right: 5px;margin-top: -3px;" src="assets/images/pages/back.png">Back to Login</a></p>
                                 </div>
                             </div>
                         </div>
@@ -478,7 +477,7 @@
             </div>
         </div>
         <div class="download-flash" id="download-flash">
-            <div class="container" style="padding: 0">
+            <div class="container">
                 <div class="col-xs-12 col-sm-4">
                     <a class="for-desktop hidden-xs" href="https://wallet.flashcoin.io/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a>
                     <h2 class="mobile"><a class="for-mobile hidden-sm hidden-md hidden-lg" href="/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a> Web Wallets</h2>

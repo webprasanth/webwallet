@@ -12,21 +12,19 @@ function showFormLogin(){
   $('.sign-upF').show();
   $('.loginF').hide();
 }
-function showFormSignup(){
-  $('.signUpForm').addClass('active');
-  $('.btn-choose').hide();
-  $('.sign-upF').hide();
-  $('.loginF').show();
-}
-function backSignUp(){
-  $('.signUpForm').addClass('active');
-  $('.loginForm').removeClass('active');
-  $('.loginF').show();
+function showSignUp(){
+    $('.slide-top').addClass('add-background');
+    $('.show-mobile').addClass('hidden-screen');
+    $('.signUpForm').addClass('show-screen');
+    $('.signUpForm').removeClass('hidden-screen');
+    $('.show-mobile').removeClass('show-screen');
 }
 function backLogin(){
-  $('.signUpForm').removeClass('active');
-  $('.loginForm').addClass('active');
-  $('.sign-upF').show();
+    $('.slide-top').removeClass('add-background');
+  $('.signUpForm').addClass('hidden-screen');
+  $('.show-mobile').addClass('show-screen');
+    ('.show-mobile').removeClass('hidden-screen');
+    $('.signUpForm').removeClass('show-screen');
 }
 function datePickerAcitivity() {
   if (!$('.date-activity-btn').hasClass('active')) {
@@ -46,6 +44,7 @@ function datePickerPending() {
     $('.date-pending-form').hide();
   }
 }
+
 (function($) {
   'Show tabs';
   $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function(e) {
@@ -67,4 +66,5 @@ function datePickerPending() {
     updateDropdownMenu( $current, 'center' );
     updateDropdownMenu( $next, 'right' );
   });
+
 })(jQuery);

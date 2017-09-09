@@ -313,14 +313,8 @@
     max-width: 250px;
     margin-top: 0;
 }
-.home-page header .login-form{
-    display: flex;
-    justify-content: flex-end;
-    margin: 25px 0 -10px;
-    float: right;
-}
 .home-page header .login-form .col-sm-6{
-    margin-right: 10px;
+    padding:0 5px;
 }
 .home-page header .login-form input{
     margin-bottom: 5px;
@@ -854,6 +848,22 @@ footer .container {
     padding: 6px 20px;
     border: 1px solid;
 }
+.back-login{display: none}
+.create-an-account {
+    display:none;
+    font-size: 15px;
+    position: fixed;
+    bottom: 20px;
+    text-align: center;
+    width: 92%;
+    padding: 10px 0 0;
+}
+.slide-top p.link-top a, p.back-login a{color:#86cfff !important;}
+.home-page header .login-form{
+    display: flex;
+    justify-content: flex-end;
+    margin: 25px 0 -10px;
+}
 /*========*/
 @media only screen and (max-width: 1440px) {
   .home-page .container,
@@ -937,11 +947,55 @@ footer .container {
       font-size: 14pt;
       top: inherit;
     }
+    .top-content #content-slide1{
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 736px) and (max-width: 890px) {
+    .top-content #content-slide1{width: 80%; margin: 0 auto; float: none !important;}
 }
 @media only screen and (max-width: 736px) {
+    body{
+        background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+        mso-line-height-rule: exactly;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        background-color: #55505a;
+        background-image: url(/assets/images/pages/home-page/bg-header.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .home-page .slide-top{
+        background: none;
+        background-image: none;
+        padding-bottom:0;
+        border-top:none;
+    }
+    .home-page .slide-top.add-background{
+        background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+        mso-line-height-rule: exactly;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        background-color: #55505a;
+        background-image: url(/assets/images/pages/home-page/bg-header.png);
+    }
+    .home-safecash{background-color: transparent}
   .home-safecash header{
     margin-top: 0;
   }
+    .home-page header .logo{margin-bottom: 0}
+    .home-page header .login-form{margin-top: 20px}
+    .create-an-account,
+    .back-login{display: block}
+    .signUpForm {
+        display: none;
+        top:0;
+    }
+    .signUpForm.show-screen{display: block}
+    .show-mobile.hidden-screen{display: none}
+    .signUpForm.hidden-screen{display: none}
+    .show-mobile.show-screen{display: block}
   .btn-newpage{position: absolute; top: 0}
   .btn-newpage p{
     margin: 14px 14px 0;
@@ -952,13 +1006,6 @@ footer .container {
   }
   .form-mobile .logo img{
     max-width: 190px;
-  }
-  .home-safecash p,
-  .text-last,
-  .slide-4 ul li,
-  .slide-4 h3,
-  .advertiser-content h3{
-    font-size: 20px !important;
   }
   .slide-11 ul.number-reasons,
   .slide-11 ul li.space p{
@@ -973,10 +1020,8 @@ footer .container {
   }
   .home-page .slide-top .top-content{
     position: static;
-    background: #f8f8f8;
   }
-  .bg-slide1,
-  .home-page header .logo{
+  .bg-slide1{
     display: none;
   }
   .slide-1 .btn-create-wallet a{
@@ -986,14 +1031,8 @@ footer .container {
   .top-content #content-slide1{
         right: 0%;
     width: 100%;
-    margin: 0 auto 50px;
+    margin: 0 auto;
   }
-  .slide-1 p.p2-line,
-  .slide-1 p.p1-line,
-  .home-page header label{
-        color: #555;
-        font-size: 14pt;
-    }
     .slide-2 .col{
       padding-bottom:3%;
     }
@@ -1008,13 +1047,6 @@ footer .container {
   }
     .logo-mobile{
         display: block;
-    }
-    .forgot-pwd{
-      margin-bottom: 20px;
-      padding-left: 0 !important;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px !important;
-      margin-bottom: 20px !important;
     }
     .slide-1 #box-signup input {
         width: 100%;
@@ -1034,10 +1066,6 @@ footer .container {
         font-size: 20px;
         min-width: 200px;
     }
-    .slide-1 h2 {
-        font-size: 18pt;
-        color: #555;
-    }
     .slide-1 #sign_up_form .form-group{
       padding: 0;
       margin-bottom: 10px;
@@ -1050,7 +1078,6 @@ footer .container {
       float: none;
       margin: 0 auto;
       min-width: 280px;
-      margin-top: 30px;
       text-align: center;
     }
     .home-page header .btn-login{
@@ -1116,6 +1143,7 @@ footer .container {
     .slide-1 h2 img {max-width: 110px;}
     .slide-1 p.p1-line{font-size: 13pt;}
     .slide-1 p.p2-line{font-size: 11pt;}
+    .home-page header .login-form{width: 100%}
 }
 
 @media only screen and (max-width: 480px) {
@@ -1133,5 +1161,11 @@ footer .container {
     }
     .slide-1 .btn-sign-up a {
         font-size: 18px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    #gcaptcha{
+        position: relative;
+        left: -25px;
     }
 }
