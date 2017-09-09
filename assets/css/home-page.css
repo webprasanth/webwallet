@@ -292,12 +292,12 @@
 /*==========*/
 [class*="col-"]{padding: 0}
 .home-page .slide-top{
-    background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+    background: #55505a url(/assets/images/pages/home-page/bg-header.jpg) no-repeat center/cover;
     mso-line-height-rule: exactly;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     background-color: #55505a;
-    background-image: url(/assets/images/pages/home-page/bg-header.png);
+    background-image: url(/assets/images/pages/home-page/bg-header.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -956,12 +956,12 @@ footer .container {
 }
 @media only screen and (max-width: 736px) {
     body{
-        background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+        background: #55505a url(/assets/images/pages/home-page/bg-header.jpg) no-repeat center/cover;
         mso-line-height-rule: exactly;
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
         background-color: #55505a;
-        background-image: url(/assets/images/pages/home-page/bg-header.png);
+        background-image: url(/assets/images/pages/home-page/bg-header.jpg);
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -973,19 +973,18 @@ footer .container {
         border-top:none;
     }
     .home-page .slide-top.add-background{
-        background: #55505a url(/assets/images/pages/home-page/bg-header.png) no-repeat center/cover;
+        background: #55505a url(/assets/images/pages/home-page/bg-header.jpg) no-repeat center/cover;
         mso-line-height-rule: exactly;
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
         background-color: #55505a;
-        background-image: url(/assets/images/pages/home-page/bg-header.png);
+        background-image: url(/assets/images/pages/home-page/bg-header.jpg);
     }
     .home-safecash{background-color: transparent}
   .home-safecash header{
     margin-top: 0;
   }
-    .home-page header .logo{margin-bottom: 0}
-    .home-page header .login-form{margin-top: 20px}
+
     .create-an-account,
     .back-login{display: block}
     .signUpForm {
@@ -1080,6 +1079,8 @@ footer .container {
       min-width: 280px;
       text-align: center;
     }
+    .home-page header .logo{margin-bottom: 0}
+    .home-page header .login-form{margin-top: 20px}
     .home-page header .btn-login{
         text-align: center;
         padding: 0 8px;
