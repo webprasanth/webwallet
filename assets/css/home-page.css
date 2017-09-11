@@ -167,6 +167,13 @@
 
 .tu {
   text-transform: uppercase; }
+.select-language{
+    color: #eee;
+    font-size: 17px;
+    margin-left: 5px;
+    background-color: transparent;
+    border: 1px solid #eee;
+}
 /* End style common */
 .social-icons i.fa img{
     border: 1px solid #ffb629;
