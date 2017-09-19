@@ -171,8 +171,8 @@
     color: #eee;
     font-size: 17px;
     margin-left: 5px;
-    background-color: transparent;
-    border: 1px solid #eee;
+    background-color: #082b51;
+    border: 1px solid #cacaca;
 }
 /* End style common */
 .social-icons i.fa img{
