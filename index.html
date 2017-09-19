@@ -102,8 +102,13 @@
             grecaptcha.reset(captchaId);
         }
 
-        function initLandingPage() {
+        function setLanguage(sl) {
+            if(!sl.value) sl.value = 'en';
+            localStorage.setItem('id_lang', sl.value);
+        }
 
+        function initLandingPage() {
+            localStorage.setItem('id_lang', 'en');
             // Handle FAQ onclick
             $('.faq-category li h4').bind('click', function () {
                 let li_parent = $(this).parent('li');
@@ -339,10 +344,10 @@
     <div class="slide-top" id="slide-top">
         <p class="link-top text-right container" style="margin-top: 7px;font-size: 17px;">
             <a href="https://explorer.flashcoin.io/">Explorer</a> | <a href="https://charts.flashcoin.io/">Chart</a>
-            <select class="select-language">
-                <option>English</option>
-                <option>Espanol</option>
-                <option>Vietnam</option>
+            <select class="select-language" id="select-language" onchange="setLanguage(this);">
+                <option value='en'>English</option>
+                <option value='es'>Español</option>
+                <!--<option value='vn'>Vietnam</option>-->
             </select>
         </p>
         <div class="top-content">

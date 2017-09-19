@@ -2,7 +2,12 @@
 let texts = null;
 
 export function init(cb) {
-    $.getJSON("assets/locale/en.json", function(json) {
+    let id_lang = localStorage.getItem('id_lang');
+    if(!id_lang) {
+      id_lang = 'en';
+    }
+    let lang_file = "assets/locale/" + id_lang +".json";
+    $.getJSON(lang_file, function(json) {
         texts = json;
         cb()
     });
@@ -12,7 +17,7 @@ export function getText(key, params = {}): string {
     if (!texts[key]) {
         return key;
     }
-    
+
     let str = texts[key];
 
     for (let p in params) {
