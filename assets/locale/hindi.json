@@ -320,7 +320,7 @@
     "reset_password_oldpassword_required"      : "कृपया सुरू ठेवण्यासाठी आपला संकेतशब्द प्रविष्ट करा",
     "reset_password_incorrect_oldpass"         : "अयोग्य संकेतशब्द",
 
-    "notify_balance_updated"                   : "अद्यतनित शिल्लक: %(balance) च",
+    "notify_balance_updated"                   : "अद्यतनित शिल्लक: %(balance)s",
 
     "signup_sc_answer_required"                : "कृपया सुरक्षा प्रश्नांची उत्तरे द्या. आपला संकेतशब्द पुनर्प्राप्त करण्यासाठी हे आवश्यक आहे.",
     "signup_create_account"                    : "माझे खाते तयार करा",
