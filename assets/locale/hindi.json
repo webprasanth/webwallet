@@ -63,7 +63,7 @@
     "profile_label_google_auth_step1"          : "आपल्या मोबाईल वर Google प्रमाणकर्ता स्थापित करा ",
     "profile_label_google_auth_step2"          :"Google प्रमाणकर्ता अनुप्रयोग उघडा",
     "profile_label_google_auth_step3"          : "टॅब मेनू, नंतर टॅप करा \"खाते सेट अप करा\", नंतर टॅप करा \"बारकोड स्कॅन करा\"",
-    "profile_label_google_auth_step4"          : "आपला फोन आता \ "स्कॅनिंग \" मोडमध्ये असेल.आपण या मोडमध्ये असताना, खालील बारकोड स्कॅन करा",
+    "profile_label_google_auth_step4"          : "आपला फोन आता \"स्कॅनिंग \" मोडमध्ये असेल.आपण या मोडमध्ये असताना, खालील बारकोड स्कॅन करा",
     "profile_label_google_auth_submit"         : "एकदा आपण बारकोड स्कॅन केल्यानंतर, खालील 6-अंकी कोड प्रविष्ट करा",
     "profile_label_verify_code"                : "सत्यापन कोड",
     "profile_twofa_otp_fail"                   : "सर्व्हरवरून otpUri प्राप्त करण्यात अयशस्वी",
@@ -226,7 +226,7 @@
 
     "common_anonymous_label"                   : "अनामिक",
     "common_search_title"                      : "तारखेनुसार शोधा",
-    "common_label_noconnection"                : "कोणतेही इंटरनेट कनेक्शन नाही
+    "common_label_noconnection"                : "कोणतेही इंटरनेट कनेक्शन नाही",
     "common_label_cash_unit"                   : "फ्लॅश",
     "common_label_cash_unit_upcase"            : "फ्लॅश",
     "common_label_email"                       : "ईमेल",
@@ -320,8 +320,7 @@
     "reset_password_oldpassword_required"      : "कृपया सुरू ठेवण्यासाठी आपला संकेतशब्द प्रविष्ट करा",
     "reset_password_incorrect_oldpass"         : "अयोग्य संकेतशब्द",
 
-    "notify_balance_updated"                   : "अद्यतनित शिल्लक:
-% (शिल्लक) चे",
+    "notify_balance_updated"                   : "अद्यतनित शिल्लक: % (शिल्लक) च",
 
     "signup_sc_answer_required"                : "कृपया सुरक्षा प्रश्नांची उत्तरे द्या. आपला संकेतशब्द पुनर्प्राप्त करण्यासाठी हे आवश्यक आहे.",
     "signup_create_account"                    : "माझे खाते तयार करा",
