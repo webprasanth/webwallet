@@ -8,6 +8,7 @@ import UserService from '../model/users/user-service';
 
 let currentAction = '';
 let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+let isMounted = false
 
 localise.init(function() {
     components.initialize();
@@ -33,7 +34,11 @@ route((action) => {
     switch (action) {
         case '':
         case 'home':
-            return riot.mount('#main', 'home-page');
+            if (!isMounted) {
+                isMounted = true                
+                return riot.mount('#main', 'home-page');
+            }
+            break;
         case 'reset_password':
             return riot.mount('#main', 'security-questions');
         case 'account_created':
