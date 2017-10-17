@@ -112,7 +112,7 @@ export default class HomeRequest extends BaseElement {
         let amount = $('#requestAmount').val();
         amount = utils.toOrginalNumber(amount);
 
-        if (!amount.toString().match(/^\d+$/g)) {
+        if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
             this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }

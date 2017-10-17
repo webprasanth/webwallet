@@ -56,7 +56,7 @@ export default class ContactSendMoney extends BaseElement {
         let amount = $('#contact-send-amount').val();
         amount = utils.toOrginalNumber(amount);
 
-        if (!amount.toString().match(/^\d+$/g)) {
+        if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
             tag.errorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }

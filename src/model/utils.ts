@@ -261,7 +261,7 @@ export function isValidFlashAddress(value) {
 export function filterNumberEdit(event) {
     let charCode = parseInt(event.charCode);
     let keyCode = parseInt(event.keyCode);
-    let isValidAmountCharCode = ((charCode >= 48 && charCode <= 57) || keyCode == 8 || keyCode == 9 || keyCode == 127);
+    let isValidAmountCharCode = ((charCode >= 48 && charCode <= 57) || keyCode == 8 || keyCode == 9 || keyCode == 46 || keyCode == 127);
     if (!isValidAmountCharCode) {
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
     } else {
@@ -274,7 +274,7 @@ export function decimalFormat(number, n?, x?) {
     //Converback to number format without comma
     number = toOrginalNumber(number);
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')'
-    return toFixedFloor(parseFloat(number), Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,')
+    return toFixedFloor(parseFloat(number), Math.max(2, ~~n)).replace(new RegExp(re, 'g'), '$&,')
 }
 
 function toFixedFloor(x, decimal) {

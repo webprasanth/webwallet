@@ -120,7 +120,7 @@ export default class HomeSend extends BaseElement {
         amount = utils.toOrginalNumber(amount);
         let fee = utils.calcFee(amount);
 
-        if (!amount.toString().match(/^\d+$/g)) {
+        if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
             this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
             return;
         }
