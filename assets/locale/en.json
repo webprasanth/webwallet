@@ -20,7 +20,7 @@
     "footer_label_legal"                       : "Legal",
     "footer_label_contact"                     : "Contact",
     "footer_label_support"                     : "Support",
-    "footer_label_copyright"                   : "Copyright (c) 2016 Flashnet Tech, Inc. Montreal, Canada.  All Rights Reserved.  Flash is a trademark of Flashnet Tech, Inc.",
+    "footer_label_copyright"                   : "Flashcoin.io is provided by the Third Millennium Foundation for Economics and Culture, Liechtenstein. Supported by the FLASH community.",
 
     "login_invalid_email_msg"                  :"Invalid email format!",
     "login_email_reuired_msg"                  :"Email is needed to login",
