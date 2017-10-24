@@ -20,7 +20,7 @@
     "footer_label_legal"                       : "Legal",
     "footer_label_contact"                     : "Contato",
     "footer_label_support"                     : "Suporte",
-    "footer_label_copyright"                   : "Flashcoin.io é fornecido pela Fundação Flashcoin, Liechtenstein. Apoiado pela comunidade FLASH.",
+    "footer_label_copyright"                   : "Flashcoin.io é fornecido pela Third Millennium Foundation for Economics and Culture, Liechtenstein. Apoiado pela comunidade FLASH.",
 
     "login_invalid_email_msg"                  : "Formato de e-mail inválido!",
     "login_email_reuired_msg"                  : "E-mail é necessário para login",
@@ -41,7 +41,7 @@
     "login_Earn_and_spend"		       		   : "Ganhar e gastar",
     "login_Share_friends"					   : "Compartilhar com amigos",
     "login_Download_flash_QT_wallet"           : "Baixar carteiras QT FLASH",
-    "login_Flash_is_designed_for_small_payments": "FLASH é projetado para pequenos pagamentos, devido às suas baixas taxas de transação e alta velocidade e performance, mantendo o legado e funcionalidade do BTC/LTC. Isso torna o FLASH ideal para aplicativos de fidelidade, cadastro e mensagens, e perfeito para clientes e empresas que usam pequenos pagamentos. Sabemos que a eficiência é essencial para a maioria das transações, então nós cunhamos o FLASH para até 25.000 txn/seg em computador de US$ 700 i7 consumindo menos de 80 watts de energia. Por isso, o FLASH é ecológico e prático no seu bolso.",
+    "login_Flash_is_designed_for_small_payments": "FLASH é projetado para pequenos pagamentos, devido às suas baixas taxas de transação e alta velocidade e performance, mantendo o legado e funcionalidade do BTC/LTC. Isso torna o FLASH ideal para aplicativos de fidelidade, cadastro e mensagens, e perfeito para clientes e empresas que usam pequenos pagamentos. Sabemos que a eficiência é essencial para a maioria das transações, então nós cunhamos o FLASH para até 25.000 txns/seg em computador de US$ 700 i7 consumindo menos de 80 watts de energia. Por isso, o FLASH é ecológico e prático no seu bolso.",
 
     "login_The_number_of_coins"		           : "O número de moedas é fixo e completamente emitido.",
     "login_Zero_inflation"	                   : "Tem inflação zero",
@@ -56,7 +56,7 @@
     "login_bottom_web_wallets_label"	       : "Carteiras web",
     "login_With_the_web_wallet"		       	   : "Com a carteira web, você pode usar um endereço de e-mail ou seu endereço público para enviar e receber moedas. As carteiras web são compatíveis com a maioria dos navegadores e dispositivos portáteis. Não é preciso baixar nem instalar nada, para a máxima conveniência.",
 
-    "login_flashcoin_provided_by"	       	   : "Flashcoin.io é fornecido pela Fundação Flashcoin, Liechtenstein. Apoiado pela comunidade FLASH.",
+    "login_flashcoin_provided_by"	       	   : "Flashcoin.io é fornecido pela Third Millennium Foundation for Economics and Culture, Liechtenstein. Apoiado pela comunidade FLASH.",
     "login_by_clicking_create_wallet"	       : "Ao clicar em 'Criar Carteira', eu aceito os termos de serviço e a política de privacidade.",
     "login_Forgot_password"		       		   : "Esqueceu a senha?",
 
