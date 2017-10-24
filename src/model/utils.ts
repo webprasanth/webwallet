@@ -273,8 +273,15 @@ export function decimalFormat(number, n?, x?) {
     if (typeof number == 'undefined' || number == 'undefined') return ''
     //Converback to number format without comma
     number = toOrginalNumber(number);
+
+    let arr = number.toString().split(".")
+    let max = 8
+    if (arr.length > 1 && arr[1].length < max) {
+        max = arr[1].length
+    }
+
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')'
-    return toFixedFloor(parseFloat(number), Math.max(2, ~~n)).replace(new RegExp(re, 'g'), '$&,')
+    return toFixedFloor(parseFloat(number), Math.max(max, ~~n)).replace(new RegExp(re, 'g'), '$&,')
 }
 
 function toFixedFloor(x, decimal) {
@@ -292,12 +299,12 @@ export function formatAmountInput(amount?) {
         amount = this.value;
         amount = toOrginalNumber(amount);
         if (!isNaN(amount) && amount > 0) {
-            this.value = decimalFormat(amount);
+            this.value = decimalFormat(amount, 1);
         }
     } else {
         amount = toOrginalNumber(amount);
         if (!isNaN(amount) && amount > 0) {
-            return decimalFormat(amount);
+            return decimalFormat(amount, 1);
         }
     }
 }
