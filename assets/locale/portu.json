@@ -42,16 +42,15 @@
     "login_Share_friends"					   : "Compartilhar com amigos",
     "login_Download_flash_QT_wallet"           : "Baixar carteiras QT FLASH",
     "login_Flash_is_designed_for_small_payments": "FLASH é projetado para pequenos pagamentos, devido às suas baixas taxas de transação e alta velocidade e performance, mantendo o legado e funcionalidade do BTC/LTC. Isso torna o FLASH ideal para aplicativos de fidelidade, cadastro e mensagens, e perfeito para clientes e empresas que usam pequenos pagamentos. Sabemos que a eficiência é essencial para a maioria das transações, então nós cunhamos o FLASH para até 25.000 txns/seg em computador de US$ 700 i7 consumindo menos de 80 watts de energia. Por isso, o FLASH é ecológico e prático no seu bolso.",
-
     "login_The_number_of_coins"		           : "O número de moedas é fixo e completamente emitido.",
     "login_Zero_inflation"	                   : "Tem inflação zero",
     "login_Processing_is_optimized"	           : "O processamento é otimizado e testado para eficiência e alto volume.",
     "login_No_developer_slush_fund"	           : "Não tem desenvolvedor \"malandro\".",
     "login_Project_can_be_developed_by_anyone" : "Projetos podem ser desenvolvidos por qualquer um e doações para desenvolvedores solicitadas à comunidade.",
-    "login_wallet_label"		               : "CARTEIRAS",
+    "login_wallet_label"		                   : "CARTEIRAS",
     "login_flash_supports"	               	   : "FLASH suporta uma gama de carteiras on-line, incluindo Coinomi, CoinPayments, QT (Windows, Mac, Linux) e uma carteira on-line fácil de usar projetada para o mercado de consumo em massa. Se você faz pagamentos on-line, você já sabe como usar FLASH.",
 
-    "login_coinomi_label"		      		   : "Coinomi",
+    "login_coinomi_label"		      		       : "Coinomi",
     "login_coin_payment_label"		       	   : "CoinPayments",
     "login_bottom_web_wallets_label"	       : "Carteiras web",
     "login_With_the_web_wallet"		       	   : "Com a carteira web, você pode usar um endereço de e-mail ou seu endereço público para enviar e receber moedas. As carteiras web são compatíveis com a maioria dos navegadores e dispositivos portáteis. Não é preciso baixar nem instalar nada, para a máxima conveniência.",
