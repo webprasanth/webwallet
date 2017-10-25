@@ -273,6 +273,7 @@ export function decimalFormat(number, n?, x?) {
     if (typeof number == 'undefined' || number == 'undefined') return ''
     //Converback to number format without comma
     number = toOrginalNumber(number);
+    n = n || 1
 
     let arr = number.toString().split(".")
     let max = 8
