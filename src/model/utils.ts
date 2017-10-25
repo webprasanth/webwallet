@@ -277,7 +277,7 @@ export function decimalFormat(number, n?, x?) {
 
     let arr = number.toString().split(".")
     let max = 2
-    if (arr.length > 1 && arr[1].length < max) {
+    if (arr.length > 1 && arr[1].length > max) {
         max = arr[1].length
 
         if (max > 8) {
