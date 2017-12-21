@@ -7,11 +7,8 @@
 			</div>
 			<div class="col-xs-12 main-content">
 				<div class="col-xs-12">
-					<div class="form-group email-account">
-						<label>{getText('activity_table_header_email_pubic_address')}</label>
-						<div show={!isDesktop} class="col-xs-1 openQRcode" onclick={openQRcodeScan}>
-							<span class="glyphicon glyphicon-qrcode"></span>
-						</div>
+					<div class="col-xs-8 form-group email-account">
+						<label>{getText('activity_table_header_email_pubic_address')} </label>
 						<div class="input-search-account active">
 							<input type="text" class="form-control" id="to-email-id" placeholder="Search by email">
 							<span class="glyphicon glyphicon-search"></span>
@@ -31,6 +28,12 @@
 							</div>
 						</div>
 						<div show={emailErrorMessage} class="pin-incorrect">{emailErrorMessage}</div>
+					</div>
+					<div class="col-xs-4 form-group openQRcode_container">
+						<label>{getText('or_scan_qr_code')} </label>
+						<div class="openQRcode" onclick={openQRcodeScan}>
+							<span class="glyphicon glyphicon-qrcode"></span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group amount-field col-xs-6 col-sm-4">

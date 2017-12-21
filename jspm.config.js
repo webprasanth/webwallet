@@ -104,6 +104,7 @@ SystemJS.config({
         "dns": "npm:jspm-nodelibs-dns@0.2.0",
         "ecc-jsbn": "npm:ecc-jsbn@0.1.1",
         "events": "npm:jspm-nodelibs-events@0.2.0",
+        "felipenmoura/qr-code-scanner": "github:felipenmoura/qr-code-scanner@master",
         "fs": "npm:jspm-nodelibs-fs@0.2.0",
         "fsevents": "npm:fsevents@1.0.15",
         "http": "npm:jspm-nodelibs-http@0.2.0",
