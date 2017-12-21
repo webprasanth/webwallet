@@ -6,7 +6,6 @@ function initIndexLocal(cb) {
       id_lang = 'en';
     }
     var lang_file = "assets/locale/" + id_lang +".json";
-	console.log(lang_file);
     /*$.getJSON(lang_file, function(json) {
         textsIndex = json;
     });*/
