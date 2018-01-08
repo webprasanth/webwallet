@@ -1,0 +1,50 @@
+<send-request-confirm>
+	<div class="modal fade" id="requestDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{getText('common_sendmoney_label')}</h4>
+				</div>
+				<virtual show={formRequestEnabled}>
+					<div class="modal-body">
+						<div class="confirm__transaction">
+							<div class="_amount text-center"><span class="_value">{formatCurrency(formatAmountInput(opts.amount))}</span> <span class="_currency"></span></div>
+							<div class="text-center">
+								<p>
+									<span class="glyphicon glyphicon-refresh spinning" show={requestProcessing}></span>
+									<span class="_icon glyphicon glyphicon-arrow-down" show={!requestProcessing}></span>
+								</p>
+							</div>
+							<div class="info-modal">
+								<div class="avatar">
+									<img class="img-circle" src={opts.receiverWallet.profile_pic_url ? AvatarServer + opts.receiverWallet.profile_pic_url :
+										"assets/images/pages/coin.png"} width="40" />
+								</div>
+								<div class="_info">
+									<div class="name">{opts.receiverWallet.display_name?opts.receiverWallet.display_name:opts.receiverWallet.address}</div>
+									<div class="name">{opts.receiverWallet.email}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" show={!requestProcessing}>
+						<button class="btn btn-default" id="send-cancel" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button id="send-request-direct" class="btn btn-primary" onclick={sendRequestDirect}>{getText('common_send_label')}</button>
+					</div>
+				</virtual>
+				<virtual show={requestSuccess}>
+					<div class="modal-body">
+						<div class="info-modal">
+							{getText('common_requestsuccess_label')}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="close-modal" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
+					</div>
+				</virtual>
+			</div>
+		</div>
+	</div>
+</send-request-confirm>

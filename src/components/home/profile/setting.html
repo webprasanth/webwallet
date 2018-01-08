@@ -1,0 +1,47 @@
+<account-setting>
+    <div class="account-content box-content">
+        <div class="items">
+            <div>
+                <p>{getText('profile_label_wallet_adress')}</p>
+            </div>
+            <div id="qrcode"></div>
+            <br>
+            <p each={key in publicKeyList} class="form-control address-unit">{key.address}</p>
+        </div>
+        <div class="col-xs-12 form-group setting-account">
+            <div class="col-xs-3">{getText('profile_label_acc_type')}</div>
+            <div class="col-xs-9"><span>{accountType}</span></div>
+        </div>
+        <div class="col-xs-12 form-group setting-account">
+            <div class="col-xs-3">{getText('profile_label_two_fa')}:</div>
+            <div class="col-xs-9 switch-button">
+                <label class="switch">
+                    <input type="checkbox" checked="{!!userProfile.totp_enabled}" onclick={toogle2FA}>
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+        <div show={is2FA} class="enable-google">
+            <h3>{getText('profile_label_enable_google_auth')}</h3>
+            <div class="gui-step">
+                <ol>
+                    <li> {getText('profile_label_google_auth_step1')}</li>
+                    <li> {getText('profile_label_google_auth_step2')}</li>
+                    <li> {getText('profile_label_google_auth_step3')}</li>
+                    <li> {getText('profile_label_google_auth_step4')}</li>
+                </ol>
+                <div class="barcode"></div>
+                <p>{getText('profile_label_google_auth_submit')}:</p>
+                <div id="tfa_qrcode"></div>
+                <br>
+                <div class="verification-code col-xs-12 col-sm-6">
+                    <p>{getText('profile_label_verify_code')}</p>
+                    <input id="google-2fa-code" class="form-control" type="text">
+                    <div class="button-active m10t">
+                        <button class="btn btn-primary" onclick={confirm2FACode}>{getText('sc_question_submit_label')}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</account-setting>

@@ -1,0 +1,251 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,400italic);
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@font-face {
+    font-family: 'Sanspro-light';
+    src: url('../fonts/SOURCESANSPRO-LIGHT.OTF');
+}
+@font-face {
+    font-family: 'Sanspro-extralight';
+    src: url('../fonts/SOURCESANSPRO-EXTRALIGHTIT.OTF');
+}
+@font-face {
+    font-family: 'Sanspro-bold';
+    src: url('../fonts/SOURCESANSPRO-BOLD.OTF');
+}
+
+@font-face {
+    font-family: 'Sanspro-lightRegular';
+    src: url('../fonts/SOURCESANSPRO-REGULAR.OTF');
+}
+@font-face {
+    font-family: 'Roboto-condensed';
+    src: url('../fonts/ROBOTO-CONDENSED.TTF');
+}
+@font-face {
+    font-family: 'Roboto-condensedBold';
+    src: url('../fonts/ROBOTO-BOLDCONDENSED.TTF');
+}
+/*Common*/
+
+/* Style common */
+.text-uppercase{ text-transform: uppercase;}
+
+#page-wrap {
+    font-size: 16px;
+     src: url('../fonts/SOURCESANSPRO-LIGHT.OTF');
+     text-align: justify;
+}
+.home-safecash{
+    position: relative;
+    float: left;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: #fff;
+}
+.home-safecash header{
+   margin-top: 0px;
+}
+.home-safecash h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+    font-family: 'Roboto-condensed', sans-serif;
+}
+.home-safecash input{
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 5px 12px
+
+}
+.btn-newpage p{
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #61aff8;
+    margin: 20px 20px 0;
+    font-weight: bold;
+}
+.btn-newpage p a{color: #61aff8}
+.home-safecash .btn-login button{
+    color: #286fbf;
+    font-size: 21px;
+    padding: 1px 10px;
+    font-weight: bold;
+}
+/*==========*/
+[class*="col-"]{padding: 0}
+.home-page .slide-top{
+    color: #fff;
+}
+.home-page .slide-top .top-content{
+    position: static;
+    background: #f8f8f8;
+    width: 100%;
+}
+.home-page header img{
+    width: 100%;
+    min-width: 140px;
+    max-width: 300px;
+    margin-top: 24px;
+}
+.home-page header label,
+.home-page header .foget-psd{
+     color: #0E76BC;
+    font-size: 15px;
+    font-weight: normal;
+    vertical-align: top;
+}
+.btn-crowdsale{
+    position: fixed;
+    background-color: #FAA116;
+    left: 0;
+    color: #fff;
+    font-size: 21pt;
+    padding: 6px 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    bottom: 45px;
+      font-size: 14pt;
+      top: inherit;
+}
+.btn-crowdsale:hover{
+    background-color: #66B933;
+}
+/*===========*/
+footer .container {
+    padding: 0 15px;
+}
+.home-page footer{
+    display: block;
+    position: fixed !important;
+    background: #000;
+}
+.home-page footer ul li{
+    margin: 1px 15px;
+}
+.home-page footer a{
+  color: #f5f5f5;
+  font-size: 18px;
+  font-family: 'Sanspro-light', sans-serif;
+}
+.home-page footer p {
+    padding: 0 15px;
+    color: #f5f5f5;
+    font-size: 20px;
+}
+.home-page footer ul li a, .home-page footer ul li a:hover, .home-page footer ul li a:focus{
+  color: #f8f8f8;
+}
+/*===================*/
+
+/*Confirm create wallet*/
+#notify-check{
+  border: 1px solid;
+  padding: 20px;
+  background: rgba(48, 48, 48, 0.56);
+  border-radius: 5px;
+  margin-top: 20px;
+  color: #53FF56;
+}
+#notify-check p{
+  margin-bottom: 0;
+}
+/*Common*/
+.logo-mobile{
+  background: url("../images/pages/bg-flash-mobile.png") left 0 no-repeat;
+  background-size: 100%;
+  margin-bottom: 20px;
+
+}
+.img-slide img{width: 100%}
+
+/* Message dialog */
+#warningDialog,
+#messageInformation{
+  font-family: 'Roboto-condensedBold', sans-serif;
+}
+#messageInformation .modal-content,
+#warningDialog .modal-content{
+  border: 2px solid #f99c33;
+}
+#messageInformation .modal-header,
+#warningDialog .modal-header{
+  background: #fff;
+    padding: 15px 15px 0px 15px;
+    border-bottom: none;
+    color: #f99c33;
+    text-transform: uppercase;
+}
+#messageInformation .modal-body,
+#warningDialog .modal-body{
+  font-family: 'Sanspro-lightRegular', sans-serif;
+}
+#messageInformation .modal-footer,
+#warningDialog .modal-footer{
+  background: url("../images/pages/verification-bg.png") left 0 no-repeat;
+  padding: 35px;
+  text-align: center;
+}
+#messageInformation .modal-footer button,
+#warningDialog .modal-footer button{
+      background-color: transparent;
+    font-size: 15px;
+    padding: 6px 20px;
+    border: 1px solid;
+}
+/*========*/
+  .btn-newpage{position: absolute; top: 0}
+  .btn-newpage p{
+    margin: 14px 14px 0;
+  }
+  .btn-newpage p a{font-size: 12pt !important}
+  .home-page header img{
+    max-width: 170px;
+  }
+  .home-safecash p,
+  .text-last{
+    font-size: 20px !important;
+    font-family: 'Sanspro-light', sans-serif;
+  }
+  .home-safecash p.m110t{
+    margin: 0;
+  }
+  .home-page header img{
+    margin: 0;
+    padding: 15px;
+  }
+  .home-page header label{
+        color: #555;
+        font-size: 14pt;
+    }
+    .forgot-pwd{
+      margin-bottom: 20px;
+      padding-left: 0 !important;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px !important;
+      margin-bottom: 20px !important;
+    }
+    .home-page header .login-form,
+    .forgot-pwd{
+      display: block;
+      width: 80%;
+      float: none;
+      margin: 0 auto;
+      min-width: 280px;
+      margin-top: 30px;
+      text-align: center;
+    }
+    .home-page header .btn-login{
+        text-align: center;
+        padding: 0 8px;
+    }
+    .home-page header .btn-login button{
+        width: 30%;
+        background: #428BCA;
+        color: #fff;
+        font-size: 20px;
+        min-width: 200px;
+        padding: 6px 12px;
+    }
+    .home-page header .login-form input{
+      height: auto;
+      margin-bottom: 15px;
+    border-radius: 4px;
+    }
+    /*==========*/

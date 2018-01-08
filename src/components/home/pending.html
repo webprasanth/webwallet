@@ -1,0 +1,140 @@
+<home-pending>
+	<div class="">
+		<div class="container">
+			<div class="pending-page">
+				<div class="title-page">
+					<h2 class="title">{getText('pending_page_title')}</h2>
+				</div>
+				<div class="form-date col-xs-12" style="position:relative">
+					<div class="search-date date-pending-btn hidden-sm hidden-md hidden-lg" onclick="datePickerPending()">
+						<span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">{getText('common_search_title')}</span>
+					</div>
+					<div class="date-time pull-left hidden-mobile date-pending-form">
+						<div class="form-inline">
+							<div class="form-group">
+								<div class='input-group date' id='datetimepicker1'>
+									<input type='text' class="form-control" id="pendingFromDate" readonly="readonly" />
+									<span class="input-group-addon">
+                              			<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>To</label>
+								<div class='input-group date' id='datetimepicker2'>
+									<input type='text' class="form-control" id="pendingToDate" readonly="readonly" />
+									<span class="input-group-addon">
+                              			<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group btn-control">
+								<button id="btn-filter-request" type="" class="btn btn-primary" onclick={onShowButtonClick}>{getText('pending_button_filter')}</button>
+								<button id="btn-filter-all-request" type="submit" class="btn btn-warning" onclick={onShowAllButtonClick}>{getText('pending_button_show_all')}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 main-content">
+					<ul id="tabs-togglable" class="nav nav-pills nav-tabs-responsive" role="tablist">
+						<li role="presentation" class="{active: tabItem.isActive}" each="{tabItem in tabs}">
+							<a href="" role="tab" data-toggle="tab" onclick="{onTabItemClick}">
+								<span class="text hidden-small">{tabItem.name}</span>
+								<span class="text tab-mobile">{tabItem.shortName}</span>
+							</a>
+						</li>
+					</ul>
+					<div class="col-xs-12 pending-table">
+						<div class="tab-pane fade in active" role="tabpane2" id="incoming-request" aria-labelledby="incoming-tab">
+							<h5 class="title-table">
+								{currentActiveTabId == TAB.OUTGOING ? getText('pending_tab_outgoing_request'): getText('pending_tab_incoming_request')} from {fromDateObject ? getDisplayDate(fromDateObject.datepicker('getDate'))
+								: ''} to {toDateObject ? getDisplayDate(toDateObject.datepicker('getDate')) : ''}
+							</h5>
+							<div class="title-header hidden-xs col-xs-12">
+								<div class="title col-xs-3">{getText('pending_table_header_name')}</div>
+								<div class="title col-xs-2">
+									<p class="hidden-mobile">{getText('pending_table_header_email')}<p>
+								</div>
+								<div class="title col-xs-2 text-right">{getText('pending_table_header_amount')}</div>
+								<div class="title col-xs-1">{getText('pending_table_header_status')}</div>
+								<div class="title col-xs-2">{getText('pending_table_header_note')}</div>
+								<div class="title col-xs-2">{getText('pending_table_header_date')}</div>
+							</div>
+							<div class="listRequests">
+								<p class="req-no-result" show={money_requests.length==0}>{getText('pending_filter_no_result')}</p>
+								<div show={money_requests.length>0} class="listItems col-xs-12" each="{money_requests}">
+									<div class="item col-xs-3 hidden-xs">
+										<div class="avatar" onclick={showDetail}>
+											<virtual show={type==1}>
+												<img src={getAvatarURL(receiver_profile_pic_url)} width="40" />
+											</virtual>
+											<virtual show={type!=1}>
+												<img src={getAvatarURL(sender_profile_pic_url)} width="40" />
+											</virtual>
+										</div>
+										<div class="username data-long">
+											<virtual show={type==1}>
+												<p class="ellipsis-name" onclick={showDetail}>{strimString(receiver_display_name ? receiver_display_name : receiver, 20)}</p>
+												<a show={!status} id="cancel-request" class="" href="javascript:void(0)" onclick={cancelRequest}>Cancel</a>
+											</virtual>
+											<virtual show={type!=1}>
+												<p class="ellipsis-name text-long" onclick={showDetail}>{strimString(sender_display_name ? sender_display_name : sender, 20)}<br/></p>
+												<p show={!status} class="" style="white-space: nowrap;">
+													<a id="accept-request" href="javascript:void(0)" onclick={acceptRequest}>{getText('pending_table_button_accept')}</a> /
+													<a id="reject-request" href="javascript:void(0)" onclick={rejectRequest}>{getText('pending_table_button_reject')}</a>
+												</p>
+											</virtual>
+										</div>
+									</div>
+									<div class="item hidden-xs data-long col-xs-2" onclick={showDetail}>
+										<p class="ellipsis-email text-long">
+											{type==1 ? receiver_email : sender_email}
+										</p>
+									</div>
+									<div class="item col-xs-6 hidden-lg hidden-sm hidden-md" onclick={showDetail}>
+										<p show={type==1} class="ellipsis-name mobile-name text-long">{strimString(receiver_display_name ? receiver_display_name : receiver, 20)}</p>
+										<p show={type!=1} class="ellipsis-name mobile-name text-long">{strimString(sender_display_name ? sender_display_name : sender, 20)}</p>
+										<p class="ellipsis-email mobile-email text-long">
+											{type==1 ? receiver_email : sender_email}
+										</p>
+									</div>
+									<div class="item col-xs-2 text-right _mobile_amount" onclick={showDetail}>
+										<p class="amount">{decimalFormat(amount)}</p>
+									</div>
+
+									<div show={type==1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active btn-cancel pull-right">
+										<a show={!status} class="col-cancel icon-mobile" href="javascript:void(0)" onclick={cancelRequest}>
+											<span class="glyphicon glyphicon-remove-circle"></span>
+										</a>
+									</div>
+									<div show={type!=1} class="col-xs-4 hidden-lg hidden-sm hidden-md text-right btn-active">
+										<virtual show={!status}>
+											<a class="icon-mobile" style="color: #008000;" href="javascript:void(0)" onclick={acceptRequest}>
+												<span class="glyphicon glyphicon-ok-circle"></span>
+											</a>
+											<a class="icon-mobile" href="javascript:void(0)" style="margin-right: 0; color:#DB2828" onclick={rejectRequest}>
+												<span class="glyphicon glyphicon-ban-circle"></span>
+											</a>
+										</virtual>
+									</div>
+									<div class="col-xs-1 hidden-xs col-status" onclick={showDetail}>
+										{getPendingRequestStatus(status, type)}
+									</div>
+									<div class="item hidden-xs col-xs-2 data-long col-note" onclick={showDetail}>
+										<p class="text-long">{note? strimString(note , 50): ''}</p>
+									</div>
+									<div class="hidden-xs item data-long col-xs-2" style="white-space: nowrap;" onclick={showDetail}>
+										<p>{getDisplayDateTime(created_ts, timeZone)}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<nav show={money_requests.length>0} class="pagination-table col-xs-12">
+						<ul class="pagination txn-pagination" id="pending-pagination"></ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</home-pending>

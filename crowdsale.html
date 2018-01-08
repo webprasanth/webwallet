@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Crowdsale</title>
+    <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="assets/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1 user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/home-page.css">
+    <link rel="stylesheet" href="assets/css/reponsive-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function checkLocation() {
+            var url = 'https://keys.flashcoin.io/api/check-location';
+
+            if (window.location.protocol == 'http:') {
+                url = 'https://keys.flashcoin.io/api/check-location';
+            }
+            $.ajax({
+                url: url,
+                type: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (location) {
+                    if (location.rc == 1 && location.info.country_code == "US" || (location.info.country_code == "CA" && location.info.region_code == "QC")) {
+                        $('#messageInformation').modal('show');
+                    } else {
+                        window.location.href = "https://swapbot.tokenly.com/bot/flash/flashfin";
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#agreeBtn").click(checkLocation);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="presale-page">
+        <div class="banner-presale">
+            <img class="bg-img" src="assets/images/pages/banner-crowdsale.png" width="100%">
+            <div class="slide">
+                <a href="/"><img class="logo" src="assets/images/pages/logo.png" width="220px"></a>
+                <div class="container">
+                    <h2 class="text-center">Welcome to the Flash Finale crowdsale</h2>
+                    <p class="text-center">To help support the development of the Flash coin project, we are asking for your donations in our final FINALE crowdsale. In return, along with the FLASHPRE participants, you’ll receive all of the FLASH and MEGAFLASH coins.Here are the rules:</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-presales">
+            <div class="container">
+                <div class="content">
+                    <ul>
+                        <li>Limited to 200 btc, FINALE ends January 21st or when 200 btc have been received</li>
+                        <li>Bitcoin will be used to support Flash developers (see agreement) and operating costs</li>
+                        <li>All remaining FLASH tokens (~850 billion) and MEGAFLASH tokens (300,000) will be distributed at the end of the pre-sale to all FLASHPRE and FINALE donors.  FLASHPRE donors will get a 25% bonus for being early and then all tokens will be distributed PRO-RATA, based on the number of BTC donated.</li>
+                        <li>MEGAFLASH is a counterparty token and it will be distributed directly to your counterparty wallet.</li>
+                    </ul>
+                    <!-- <div class="thank-for">
+                        <p>The crowdsale will begin as soon as we have the dashboard and all reporting operating, several ad
+                            units functioning that can be placed standalone or into an existing ad network and several advertisers
+                            and publishers to prove the concept.</p>
+                    </div> -->
+                    <div class="text-center" style="margin-top:70px;">
+                        <p>To participate, you’ll need some Bitcoins and a FLASH wallet, which you get at <a href="flashcoin.io">flashcoin.io</a>.
+                            Agree to the legal stuff below and you’ll be taken to the Swapbot site where you send in your
+                            bitcoin donation. Flashcoins will be distributed at the end of the pre-sale.</p>
+                        <h3>Best to you,</h3>
+                    </div>
+                    <!-- <div class="col-xs-12 col-sm-10"> -->
+                    <div class="crowdfunding-terms">
+                        <h2 class="page-title text-center">Flashcoin Crowdfunding Terms</h2>
+                        <br/>
+                        <p>This Flashcoin crowdfunding agreement (the Agreement) is entered into as of the date on which it
+                            is accepted by you (Donor) (the Effective Date) between Flashnet Tech Inc., a company incorporated
+                            under the laws of Canada and Donor. This is a legally binding Agreement, so please read it carefully.</p>
+                        <p><strong>WHEREAS</strong> Company has a license to use a proprietary closed-loop, cryptographic blockchain
+                            (
+                            <strong>the Technology</strong>) that serves as a ledger of accounts of non-monetary tokens (
+                            <strong>Flashcoin</strong>);</p>
+                        <p><strong>WHEREAS</strong> Flashcoin has no monetary value;</p>
+                        <p><strong>WHEREAS</strong> Company requires funds to assist in programming services related to the
+                            commercialization of systems that use the Technology pursuant to the terms hereof;</p>
+                        <p><strong>WHEREAS</strong> Donor wishes to donate to the Company the amount of Bitcoin (each a Donation)
+                            indicated at <a href="/"> https://flashcoin.io </a> (<strong>the Site</strong>) acceptance of
+                            this Agreement;</p>
+                        <p><strong>WHEREAS</strong> in light of the Donation, the Company wishes to allocate to Donor the amount
+                            of Flashcoin indicated on the Site at the time of acceptance hereof;</p>
+                        <p><strong>The parties therefore agree as follows:</strong></p>
+                        <ol type="1">
+                            <li>
+                                <p><strong>Donation.</strong> Donor hereby makes the Donation to Company. No single Donor may
+                                    donate more than 4 Bitcoin to Company per day. No single Donor may make Donations in
+                                    excess of 12 Bitcoin without passing enhanced due-diligence, including providing government-issued
+                                    photo-ID and such other information as Company may require.</p>
+                            </li>
+                            <li>
+                                <p><strong>Flashcoin.</strong> Company shall allocate the amount of Flashcoin to Donor indicated
+                                    on the Site at the time of acceptance of this Agreement by Donor. Company reserves the
+                                    right to rescind the offer made in this Agreement and cease accepting Donations pursuant
+                                    to this Agreement provided that it shall not revoke the Flashcoin allocated to Donor.</p>
+                            </li>
+                            <li>
+                                <p><strong>Flashcoin Terms.</strong> The use of Flashcoin is governed pursuant to a separate
+                                    set of terms of use between Company and Donor posted at the Site (<strong>the Flashcoin Terms of Use</strong>).</p>
+                            </li>
+                            <li>
+                                <p><strong>No Cash Exchanged.</strong> Neither party to this Agreement has any monetary obligation
+                                    to the other. Each Donation shall be in Bitcoin and each allocation of Flashcoin shall
+                                    be in Flashcoin, neither of which are real currencies having any specific dollar value.</p>
+                            </li>
+                            <li>
+                                <p><strong>Prohibited Donors.</strong> No Donor is permitted to accept this Agreement if they
+                                    are: (i) under 18 years of age; (ii) residing or located in the United States; (iii)
+                                    a Listed Entity, within the meaning of Canadian Anti-Terrorism Act; (iv) a Specially
+                                    Designated National by the U.S. Department of the Treasury, Office of Foreign Asset Control
+                                    (
+                                    <strong>OFAC</strong>); or (iv) in breach of this Agreement or the Flashcoin Terms of
+                                    Use.
+                                </p>
+                            </li>
+                            <li>
+                                <p><strong>Use of Donation.</strong> Company agrees that the Donation shall be used to defray
+                                    expenses of Company in relation to the development and commercialization of tools related
+                                    to Flashcoin.</p>
+                            </li>
+                            <li>
+                                <p><strong>Representations.</strong> Company represents that it has the right to sell Flashcoin
+                                    to Donor pursuant to the terms hereof. Company makes no representations whatsoever as
+                                    to actual or potential value of Flashcoin. Donor acknowledges that Flashcoin has no real
+                                    money value and that Company has not made any representations or promises as to the actual
+                                    or future value of Flashcoin for the Donor. Flashcoins are not a financial incentive
+                                    nor a security. Flashcoin shall not entitle the holder thereof to exercise any control
+                                    over Company. Flashcoin is not traded on virtual currency exchanges like Bitcoin and
+                                    other virtual currencies. The Company intends to give away approximately 900,000,000,000
+                                    Flashcoin to third parties over the year following the date hereof. Company reserves
+                                    the right to create more Flashcoin, give it away or accept consideration for Flashcoin
+                                    at its sole and absolute discretion. </p>
+                            </li>
+                            <li>
+                                <p><strong>Indemnification.</strong> Each party hereto shall indemnify and hold the others harmless
+                                    from and against any and all third party claims, liabilities or other losses arising
+                                    from a breach hereof by the party.</p>
+                            </li>
+                            <li>
+                                <p>Limitation of Liability. Under no circumstances shall the liability of Company under this
+                                    Agreement to any individual Donor exceed $10.00. No Donor shall be liable for the acts
+                                    or omissions of another.</p>
+                            </li>
+                            <li>
+                                <p><strong>Confidentiality.</strong> Each party acknowledges that it may directly or indirectly
+                                    disclose Confidential Information to other parties in the course of negotiation of and
+                                    performance of this Agreement. All such Confidential Information disclosed hereunder
+                                    shall remain the sole property of the disclosing party (or other third party), and the
+                                    receiving party shall have no interest in, or rights with respect thereto, except as
+                                    set forth herein. Each party agrees to treat such Confidential Information with the same
+                                    degree of care and security as it treats its most confidential information. Each party
+                                    may disclose such Confidential Information to employees and agents who require such knowledge
+                                    to perform services under this Agreement. Except as otherwise contemplated by this Agreement,
+                                    no party shall disclose the Confidential Information of another other party to any third
+                                    party without the prior written consent of the disclosing party, and the duty of confidentiality
+                                    created by this section shall survive any termination of the Agreement. </p>
+                                <p>For the purposes of this Agreement, “<strong>Confidential Information</strong>” means all
+                                    proprietary, secret or confidential information or data relating to either party and
+                                    its affiliates, operations, employees, products or services, clients, customers or potential
+                                    customers. Confidential Information shall include customer lists, virtual currency wallet
+                                    account numbers, pricing information, computer access codes, instruction and/or procedural
+                                    manuals, and the terms and conditions of this Agreement. Information shall not be considered
+                                    Confidential Information to the extent, but only to the extent, that such information
+                                    is: (i) already known to the receiving party free of any restriction at the time it is
+                                    obtained; (ii) subsequently learned from an independent third party free of any restriction
+                                    and without breach of this Agreement; (iii) or becomes publicly available through no
+                                    wrongful act of the receiving party; (iv) independently developed by the receiving party
+                                    without reference to any Confidential Information of the other; or (v) required to be
+                                    disclosed by law.</p>
+                            </li>
+                            <li>
+                                <p><strong>Personal Information.  Notwithstanding the foregoing, by accepting this Agreement, Donor agrees that Company can use their contact and other information provided to Company to solicit Donor or to allow third parties to solicit Donor for products and services of Company or third parties.</strong></p>
+                            </li>
+                            <li>
+                                <p>Notices. Notices by Company to Donor shall be via email to the email provided to Company
+                                    through the Site. Notices by Donor to Company shall be in writing to the address of Company,
+                                    which is Flashnet Tech Inc. c/o 5585 Monkland Ave Suite 150, Montreal, QC, Canada H4A1E1.</p>
+                            </li>
+                            <li>
+                                <p><strong>Governing Law.</strong> This Amendment shall be governed pursuant to the laws of
+                                    the Province of Quebec whose courts in the District of Montreal, shall have exclusive
+                                    jurisdiction over disputes arising hereunder.</p>
+                            </li>
+                            <li>
+                                <p><strong>Language.</strong> The parties hereto agree that this agreement is drafted and executed
+                                    in the English language. Les parties aux présentes s'entendent pour que la présente convention
+                                    soit rédigée en langue anglaise.</p>
+                            </li>
+                            <li>
+                                <p><strong>Whole Agreement.</strong> This Agreement constitutes the entire agreement between
+                                    the parties and supersedes any prior written or oral agreement or understanding with
+                                    respect to the subject matter hereof. Company reserves the right to resiliate this Agreement
+                                    whereupon the Donation would be returned to the Donor and Donor would have to return
+                                    their Flashcoin to Company.</p>
+                            </li>
+                            <li>
+                                <p><strong>Electronic Acceptance.</strong> The parties hereto agree that this Agreement can
+                                    be formed by electronic means through the Site.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="text-center button-presales">
+                        <button id="agreeBtn" class="btn btn-agree" data-toggle="modal">AGREE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="messageInformation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" on-click='ok-clicked'>&times;</button>
+                    <h4 class="modal-title">Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Hello! We noticed that you are coming from a "U.S. or Quebec based IP address. We’re very sorry, but we can’t
+                        currently serve people in the U.S. or Quebec due to excessive regulations. We hope to be able to serve
+                        you in the future, so please stay tuned. If you are a non-U.S. or Quebec resident and received this message
+                        in error, please notify <strong>support@flashcoin.io</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <!-- <label class="control control--checkbox" style="font-weight:normal">
+                          <input id="skipCheckIp" class="" style="vertical-align: top;" type="checkbox">
+                          Do not show this message again
+                      </label> -->
+                    </div>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" on-click='ok-clicked'>OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
