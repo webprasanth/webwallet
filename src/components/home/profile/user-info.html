@@ -1,0 +1,162 @@
+<user-info>
+	<div class="profile-content box-content">
+		<div class="profile-setting">
+			<div class="inforItems col-xs-12" id="profile-name">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('login_fullname_label')}</div>
+				<div if={!isEditingName}>
+					<div class="item-data col-xs-6">
+						<p class="trans-name">{userProfile.display_name}</p>
+					</div>
+					<div class="item-control col-xs-2 text-right">
+						<a id="on-change-name" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditName}></a>
+					</div>
+				</div>
+				<div if={isEditingName} class="col-xs-8 item-data edit-form">
+					<div class="input-group">
+						<input class="_input profile-input form-control" maxlength="30" placeholder={userProfile.display_name} onenter={onSaveName}
+							type="text" />
+						<div id="on-save-name" class="input-group-addon" onclick={onSaveName}>
+							<a class="glyphicon glyphicon-ok">
+							</a>
+						</div>
+						<div id="on-calcel-name" class="input-group-addon" onclick={onCancel}>
+							<a class="glyphicon glyphicon-remove">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="inforItems col-xs-12" id="profile-email">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('common_label_email')}</div>
+				<div class="item-data col-xs-6">
+					<p class="long-text"><span class="hidden-xs-up">{getText('common_label_email')}: </span>{userProfile.email}</p>
+				</div>
+				<div class="item-control col-xs-2 text-right"><span class="glyphicon glyphicon-ok verified_email"></span></div>
+			</div>
+
+			<div if={isEditingPass} class="inforItems col-xs-12" id="profile-cur-password">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_current_pass_label')}</div>
+				<div class="item-data col-xs-8 edit-form">
+					<div class="col-xs-custom hidden-xs-up"><span>{getText('profile_current_pass_label')}: </span></div>
+					<div class="input-group">
+						<input id="currentPassword" class="_input profile-input form-control" type="password" value="{currentPassword}" />
+						<div id="on-cancel-password" class="input-group-addon" onclick={onCancel}>
+							<a class="glyphicon glyphicon-remove">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inforItems col-xs-12" id="profile-password">
+				<div if={!isEditingPass}>
+					<div class="item-title col-xs-4 hidden-xs-small">{getText('common_continue_password')}</div>
+					<div class="item-data col-xs-6">
+						<p class=""><span class="hidden-xs-up">{getText('common_continue_password')}: </span>
+							<span class="" style="vertical-align: sub;">
+                                ******
+                            </span>
+						</p>
+					</div>
+					<div class="item-control col-xs-2 text-right">
+						<a id="on-change-password" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditPass}>
+						</a>
+					</div>
+				</div>
+
+				<div if={isEditingPass}>
+					<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_new_pass_label')}</div>
+					<div class="item-data col-xs-8 edit-form">
+						<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_new_pass_label')}: </span></div>
+						<div class="input-group new-passcode">
+							<input id="newPassword" class="_input profile-input form-control" type="password" value="{newPassword}" />
+							<div id="on-cancel-password" class="input-group-addon" onclick={onCancel}>
+								<a class="glyphicon glyphicon-remove"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div if={isEditingPass} class="inforItems col-xs-12" id="profile-cfrm-password">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_confirm_new_pass_label')}</div>
+				<div class="item-data col-xs-8 edit-form">
+					<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_confirm_new_pass_label')}: </span></div>
+					<div class="input-group">
+						<input id="confirmPassword" class="_input profile-input form-control" type="password" value="{confirmPassword}" />
+						<div id="on-save-password" class="input-group-addon" onclick={onSavePass}>
+							<a class="glyphicon glyphicon-ok">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inforItems col-xs-12" id="profile-timezone">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_timezone_label')}</div>
+				<div if={!isSelectingTimezone}>
+					<div class="item-data col-xs-6">
+						<p><span class="">
+                            {userProfile.timezone? userProfile.timezone:"-----"}
+                        </span></p>
+					</div>
+					<div class="item-control col-xs-2 text-right">
+						<a id="on-change-timezone" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onSelectTimezone}>
+						</a>
+					</div>
+				</div>
+
+				<div if={isSelectingTimezone} class="item-data col-xs-8 edit-form">
+					<div class="col-xs-custom hidden-xs-up"><span class="">{getText('profile_timezone_label')}: </span></div>
+					<div class="input-group">
+						<select id="time-zone" class="form-control">
+                            <option selected="{userProfile.timezone? true:false}">
+								{getText('profile_label_default_timezone')}
+                            </option>
+                            <option each={tz in timezones} selected="{userProfile.timezone == tz}" value="{tz}">
+                                {tz}
+                            </option>
+                        </select>
+						<div id="on-save-timezone" class="input-group-addon" onclick={onSaveTimezone}>
+							<a class="glyphicon glyphicon-ok">
+							</a>
+						</div>
+						<div id="on-cancel-timezone" class="input-group-addon" onclick={onCancel}>
+							<a class="glyphicon glyphicon-remove">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inforItems col-xs-12" id="profile-phone">
+				<div class="item-title col-xs-4 hidden-xs-small">{getText('profile_phone_number_label')}</div>
+				<div if={!isEditingPhone}>
+					<div class="item-data col-xs-6">
+						<p class="trans-phone">{userProfile.phone?userProfile.phone:"-----"}</p>
+					</div>
+					<div class="item-control col-xs-2 text-right icon-line">
+						<span show={userProfile.phone_verified} class="glyphicon glyphicon-ok verified_email"></span>
+						<a class="glyphicon glyphicon-check" show="{userProfile.phone && !userProfile.phone_verified}" onclick="{resendSms}"></a>
+						<a id="change-phone-icon" class="glyphicon glyphicon-edit" aria-hidden="true" onclick={onEditPhone}></a>
+					</div>
+				</div>
+				<div if={isEditingPhone} class="col-xs-8 edit-form" id="phone-edit">
+					<div class="input-group phone-number-outbox">
+						<input type="tel" id="phone-number" placeholder={userProfile.phone} onenter={onSavePhone}/>
+						<div id="on-save-phone" class="input-group-addon" onclick={onSavePhone}>
+							<a class="glyphicon glyphicon-ok">
+							</a>
+						</div>
+						<div id="on-cancel-phone" class="input-group-addon" onclick={onCancel}>
+							<a class="glyphicon glyphicon-remove">
+							</a>
+						</div>
+					</div>
+					<div show={phoneErrorMessage} class="pin-incorrect">{phoneErrorMessage}</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</user-info>

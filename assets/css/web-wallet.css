@@ -1,0 +1,292 @@
+*,*:before,*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,400italic);
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@font-face {
+    font-family: 'Sanspro-light';
+    src: url('../fonts/SOURCESANSPRO-LIGHT.OTF');
+}
+@font-face {
+    font-family: 'Sanspro-extralight';
+    src: url('../fonts/SOURCESANSPRO-EXTRALIGHTIT.OTF');
+}
+@font-face {
+    font-family: 'Sanspro-bold';
+    src: url('../fonts/SOURCESANSPRO-BOLD.OTF');
+}
+
+@font-face {
+    font-family: 'Sanspro-lightRegular';
+    src: url('../fonts/SOURCESANSPRO-REGULAR.OTF');
+}
+@font-face {
+    font-family: 'Roboto-condensed';
+    src: url('../fonts/ROBOTO-CONDENSED.TTF');
+}
+@font-face {
+    font-family: 'Roboto-condensedBold';
+    src: url('../fonts/ROBOTO-BOLDCONDENSED.TTF');
+}
+html {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    font-size: 100%;
+}
+.pad0{padding: 0}
+.slide-top{
+    background: #55505a url(../images/wallets/bg11.png) no-repeat center/cover;
+    mso-line-height-rule: exactly;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    background-color: #55505a;
+    background-image: url(../images/wallets/bg11.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-top: 5px solid #fad705;
+    border-bottom: 0;
+    padding-top: 45px;
+    padding-bottom: 100px;
+}
+.slide-flash{
+    width: 60%;
+    float: right;
+}
+.social-icons i.fa img{
+    border: 1px solid #ffb629;
+    border-radius: 100%;
+    line-height: 120px;
+    width: 100%;
+    max-width: 50px;
+}
+.social-icons .slack img{
+    padding: 10px;
+}
+.social-icons i.fa-btc{
+    color: #FFB629;
+}
+.flash-wallet{
+    position: relative;
+    float: left;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: #fff;
+}
+.flash-wallet header{
+    margin-top: 20px;
+}
+.flash-wallet h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+    font-family: 'Roboto-condensed', sans-serif;
+}
+.flash-wallet p{
+    font-size: 21px;
+    font-family: 'Sanspro-light', sans-serif;
+}
+.flash-wallet input{
+    font-size: 15px;
+    padding: 5px 12px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid;
+    border-radius: inherit;
+    text-align: center;
+    color: #b5b5b5;
+}
+.flash-wallet .input-group-addon{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.flash-wallet h4{
+    font-size: 22px;
+    margin-top: 25px;
+}
+.btn-sign-up.btn-primary{
+    background-color: #fbb116;
+    border-color: #f7ef22;
+}
+.btn-sign-up.btn-primary:hover{
+    background-color: #f9b82f;
+}
+/*==========*/
+[class*="col-"]{padding: 0}
+.top-content #content-slide1, .top-content #content-slide1 h2{
+    color: #fff;
+}
+.home-page header img{
+    width: 100%;
+    min-width: 140px;
+    max-width: 200px;
+    margin-top: -30px;
+}
+.home-page header .login-form{
+    display: flex;
+    justify-content: flex-end;
+    margin: 25px 0 -10px;
+    float: right;
+}
+.home-page header .login-form .col-sm-6{
+    margin-right: 10px;
+}
+.home-page header .login-form input{
+    margin-bottom: 5px;
+    background: #faffbd;
+}
+.home-page header label,
+.home-page header .foget-psd{
+    color: #fff;
+    font-weight: normal;
+    font-size: 17px;
+    vertical-align: top;
+}
+.home-page .content-slide1 [class*="col-"]{
+    padding: 0 15px;
+}
+/*Main content*/
+.main-content{
+    padding: 3% 0 5%;
+}
+.main-content .slide-1{
+    position: relative;
+    background: ghostwhite;
+}
+.main-content .slide-1 .form-active{
+    position: absolute;
+    right: 10%;
+    top: 10%;
+}
+.main-content .slide-1 #content-slide1{
+    float: right;
+}
+.slide-1 .img-slide1{
+    width: 100%;
+}
+.slide-1 #sign_up_form{
+    padding: 20px 0 0px 0;
+    color: #ffffff;
+    width: 90%;
+    margin: 0 auto;
+    float: none;
+}
+.slide-1 h2{
+    font-size: 42pt;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-family: 'Roboto-condensedBold', sans-serif;
+}
+.slide-1 p.p1-line{
+    font-size: 19pt;
+    margin: 0;
+    font-family: 'Roboto-condensed', sans-serif;
+}
+.slide-1 p.p2-line{
+    font-size: 13pt;
+    margin: 0;
+    padding: 0 15px;
+    line-height: 23px;
+    color: #bebaba;
+    clear: both;
+}
+.slide-1 p.p2-line a{
+    color: #61aff8;
+}
+.slide-1 .btn-create-wallet{
+    margin-top: 5%;
+}
+.slide-1 #sign_up_form .form-group{
+    padding: 0 8px;
+}
+.slide-1 .btn-create-wallet a{
+    background-color: #74c543;
+    padding: 10px 40px;
+    border-color: #55A226;
+    font-size: 35px;
+    font-weight: bold;
+
+}
+.content-note li{
+    display: block;
+}
+/*===========*/
+/*Slide 2*/
+.slide-2{
+    position: relative;
+}
+.slide-2 #img-slide-2{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+.slide-2 .set-center{
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+}
+.home-page .container.content-slide2{
+    padding: 60px 0 20px 0;
+    max-width: 800px;
+}
+.slide-2 .col{
+    margin-bottom: 3%;
+    width: 19.5%;
+    float: left;
+}
+.slide-2 h2 {margin: 0}
+.slide-2 h2 a{
+    font-weight: normal;
+    color: #303030;
+    font-size: 20px;
+}
+/*============*/
+/*Slide 3*/
+.slide-4 img{
+    width: 100%;
+    max-width: 250px;
+}
+/*============*/
+@media all and (max-width: 415px) {
+    .slide-2 .col{
+        width: 100%;
+    }
+    .flash-wallet a, .flash-wallet p, .flash-wallet  h3{
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+/*Footer site*/
+footer .container {
+    padding: 2% 0 1%;
+}
+
+.flash-wallet footer {
+    background: #000;
+}
+footer ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.flash-wallet footer ul li{
+    display: block;
+    float: left;
+    margin: 1px 5px;
+}
+.flash-wallet footer a{
+    color: #f5f5f5;
+    font-size: 18px;
+    font-family: 'Sanspro-light', sans-serif;
+}
+.flash-wallet footer p {
+    padding: 0 15px;
+    color: #f5f5f5;
+    font-size: 20px;
+}
+.flash-wallet footer ul li a, .flash-wallet footer ul li a:hover, .flash-wallet footer ul li a:focus{
+    color: #f8f8f8;
+}
+/*===================*/

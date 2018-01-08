@@ -1,0 +1,60 @@
+<fountain-setting>
+    <div class="fountain-content box-content">
+            <div class="col-xs-12">
+                <p><label>{getText('fountain_amount_desc')}</label></p>
+                <div class="form-group">
+                    <input class="form-control" id="amount" on-keypress="filter-number-edit" type="text" value="{formatAmountInput(settings.amount)}" disabled={this.disabled}>
+                </div>
+                <p><label>{getText('fountain_period_desc')} <i>{getText('fountain_period_desc2')}</i></label></p>
+                <div class="form-input">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <input class="form-control" id="duration" on-keypress="filter-number-edit" type="text" value="{formatAmountInput(duration)}" disabled={this.disabled}>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <select id="time-unit" class="compact selection dropdown form-control" value='{selectedTimeUnit}' disabled={this.disabled}>
+                            <option value=3600 selected="{isHourUnit}">{getText('fountain_hours_label')}</option>
+                            <option value=60 selected="{isMinuteUnit}">{getText('fountain_minutes_label')}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>{getText('fountain_tx_note_desc')}</p>
+                <textarea class="form-control" id="memo" value="{settings.message}" maxlength="50" disabled={this.disabled}></textarea>
+                <p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
+            </div>
+            <div class="form-group">
+                <p>
+                    <label>
+                        {getText('fountain_url_list_desc')}
+                    </label>
+                </p>
+                <textarea class="form-control" id="domains" value="{settings.domainStr}" disabled={this.disabled}></textarea>
+            </div>
+
+            <div if={fountain.enabled}>
+                <div class="form-group btn-fountain">
+                    <button id="update-domain" class="btn btn-primary" onclick={updateFountain}>{getText('fountain_update_param_label')}</button>
+                    <button id="disable-fountain" class="btn btn-default" onclick={disableFountain}>{getText('fountain_turn_off_label')}</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <label>{getText('fountain_guide_msg')}</label>
+                    </p>
+                    <pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://fountain.safe.cash/public/dist/unity-sdk.js&quot;&gt;&lt;/script&gt;</code></pre>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <label>{getText('fountain_guide_msg2')}</label>
+                    </p>
+                    <pre><code>&lt;div fountain=&quot;{fountain.fountain_id}&quot; title=&quot;FLASH Fountain&quot; sub-title=&quot;&quot; submit-button-label=&quot;&quot; register-button-label=&quot;registerLabel&quot; data-is=&quot;unity-fountain&quot; riot-tag=&quot;unity-fountain&quot;&gt;&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+            <div if={!fountain.enabled}>
+                <button id="enable-fountain" class="btn btn-primary" onclick={enableFountain}>
+                    {getText('fountain_turn_on_label')}
+                </button>
+            </div>
+        </div>
+    </div>
+</fountain-setting>

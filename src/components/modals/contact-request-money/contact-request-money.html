@@ -1,0 +1,61 @@
+<contact-request-money>
+	<div class="modal fade" id="requestByContact" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{getText('contact_label_sendrequest')}</h4>
+				</div>
+				<virtual show={formEnabled}>
+					<div class="modal-body">
+						<div class="send-request">
+							<virtual show={!requestProcessing}>
+								<div class="amount-field form-group">
+									<label>{getText('common_amount_label')}</label>
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">{getText('common_label_cash_unit')}</span>
+										<input id="contact-request-amount" type="text" class="form-control" placeholder='{getText("common_amount_label")}' aria-describedby="basic-addon1">
+									</div>
+									<div show={errorMessage} class="pin-incorrect">{errorMessage}</div>
+								</div>
+								<div class="note-field form-group">
+									<label>{getText('common_note_label')}</label>
+									<textarea class="form-control" type="text" id="Note" cols="50" maxlength="50"></textarea>
+									<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
+								</div>
+							</virtual>
+							<div class="text-center">
+								<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+							</div>
+							<div class="info-modal">
+								<div class="avatar">
+									<img class="img-circle" src={opts.sendAddr.profile_pic_url? AvatarServer + opts.sendAddr.profile_pic_url :
+										'assets/images/pages/coin.png'} width="40" />
+								</div>
+								<div class="_info">
+									<div class="name">{opts.sendAddr.display_name ? opts.sendAddr.display_name : opts.sendAddr.username}</div>
+									<div class="name">{opts.sendAddr.email}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button id="contact-request-bt" show={!requestProcessing} type="button" class="btn btn-primary" onclick={sendRequestDirect}>{getText('common_send_label')}</button>
+					</div>
+				</virtual>
+				<virtual show={requestSuccess||requestFail}>
+					<div class="modal-body">
+						<div class="message-error">
+							{requestSuccess? getText('common_requestsuccess_label') :getText('money_request_fail')}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
+					</div>
+				</virtual>
+			</div>
+		</div>
+	</div>
+</contact-request-money>

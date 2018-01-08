@@ -1,0 +1,22 @@
+<twofa-recommend-dialog>
+	<div class="modal fade" id="twoFARecommendDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{getText('common_ask_verivication_title')}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="message message-success">
+						<p class="msg">{getText('login_suggess_two_fa_1')}<a href="#" data-dismiss="modal" onclick={gotoProfile}>{getText('login_suggess_two_fa_2')}</a></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input id="disable2FARecommend" type="checkbox" style="margin-right:5px;">{getText('login_dont_show_dlg_label')}</input>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick={onOk} style="margin-left:10px">{getText('common_ok_label')}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</twofa-recommend-dialog>

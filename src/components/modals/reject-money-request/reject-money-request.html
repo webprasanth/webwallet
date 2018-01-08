@@ -1,0 +1,61 @@
+<reject-money-request>
+	<div class="modal fade" id="rejectRequestDialog" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{getText('reject_request_label')}</h4>
+				</div>
+				<virtual show={formRequest}>
+					<div class="modal-body">
+						<div class="send-request">
+							<div class="note-field form-group">
+								<label>{getText('common_note_label')}</label>
+								<textarea class="form-control" type="text" id='Note' cols="50" maxlength="50"></textarea>
+								<p class="text-left text-danger max_tx">{getText('common_max_tx_note_character')}</p>
+							</div>
+							<div class="text-center">
+								<p><span class="_icon glyphicon glyphicon-arrow-down"></span></p>
+							</div>
+							<div class="info-modal">
+								<div class="avatar">
+									<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvatarServer}{sendAddr.profile_pic_url}" width="40" />
+									<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+								</div>
+								<div class="_info">
+									<div class="name">{opts.sendAddr.display_name ? opts.sendAddr.display_name : opts.sendAddr.username}</div>
+									<div class="name">{opts.sendAddr.email}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">{getText('common_cancel_label')}</button>
+						<button type="button" class="btn btn-primary" onclick={sendRequest}>{getText('common_send_label')}</button>
+					</div>
+				</virtual>
+				<virtual show={requestSuccess}>
+					<div class="modal-body">
+						<div class="message-error">
+							{getText('reject_request_done')}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" data-dismiss="modal">{getText('common_close_label')}</button>
+					</div>
+				</virtual>
+				<virtual show={requestFail}>
+					<div class="modal-body">
+						<div class="message-error">
+							{getText('reject_request_fail')}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" data-dismiss="modal">{getText('common_close_label')}</button>
+					</div>
+				</virtual>
+			</div>
+		</div>
+	</div>
+</reject-money-request>
