@@ -1,0 +1,36 @@
+<main-header>
+	<!-- Header-->
+	<header class="header-SC bg-header">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="mobile-header ">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="" aria-expanded="false" onclick="showMenu()">
+                        <span class="sr-only">{getText('menu_label_togglenav')}</span>
+                        <span class="icon-bar color-custom"></span>
+                        <span class="icon-bar color-custom"></span>
+                        <span class="icon-bar color-custom"></span>
+                    </button>
+					</div>
+				</div>
+				<div class="logo col-xs-4 col-xs-5 hidden-xs">
+					<a><img src="assets/images/pages/logo.png" /></a>
+				</div>
+				<div class="top-balance text-center col-xs-12 color-custom">
+					<p onclick={onLoadBalanceButtonClick} title="Click to refresh balance">
+						<img src={refreshIconUrl} height="20px" />
+						<span class="hidden-xs" >{getText('common_balance_label')}:</span> {balance} {getText('common_label_cash_unit_upcase')}
+					</p>
+				</div>
+				<div class="header-right col-xs-12 col-sm-5 hidden-xs">
+					<div class="avatar" if={avatarUrl}><img src={avatarUrl} /></div>
+					<div class="email-account color-custom">{userEmail}</div>
+					<div class="btn-logout">
+						<button class="btn btn-primary" onclick={onLogoutButtonClick}>{getText('common_logout_label')}</button>
+					</div>
+				</div>
+			</nav>
+				<p class="notify-disconnect" show={isDisconnect}>{getText('common_label_noconnection')}</p>
+		</div>
+	</header>
+</main-header>

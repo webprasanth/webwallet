@@ -1,0 +1,82 @@
+<home-activity>
+	<div class="container">
+		<div class="transaction-activity">
+			<div class="title-page">
+				<h2 class="title">{getText('activity_page_title')}</h2>
+			</div>
+			<div class="form-date col-xs-12" style="position:relative">
+				<div class="search-date date-activity-btn hidden-sm hidden-md hidden-lg" onclick="datePickerAcitivity()"><span class="glyphicon glyphicon-chevron-right"></span><span style="padding-left: 8px;">{getText('common_search_title')}</span>
+				</div>
+				<div class="date-time pull-left hidden-mobile date-activity-form">
+					<form class="form-inline">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker1'>
+								<input id="fromDate" type='text' class="form-control" />
+								<span class="input-group-addon">
+	                                <span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>To</label>
+
+							<div class='input-group date' id='datetimepicker2'>
+								<input id="toDate" type='text' class="form-control" />
+								<span class="input-group-addon">
+	                          <span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group btn-control">
+							<button type="button" class="btn btn-primary" onclick="{onShowButtonClick}">{getText('activity_button_filter')}</button>
+							<button type="button" class="btn btn-warning" onclick="{onShowAllButtonClick}">{getText('activity_button_show_all')}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-xs-12 main-content">
+				<ul id="tabs-togglable" class="nav nav-pills nav-tabs-responsive" role="tablist">
+					<li role="presentation" each="{tabItem in tabs}" class="{active: tabItem.isActive}">
+						<a href="" role="tab" data-toggle="tab" onclick="{onTabItemClick}">
+							<span class="text">{tabItem.name}</span>
+						</a>
+					</li>
+				</ul>
+				<div class="col-xs-12">
+					<h5 class="title-table">{currentActiveTabName} from {fromDateObject ? getDisplayDate(fromDateObject.datepicker('getDate')) : ''} to {toDateObject
+						? getDisplayDate(toDateObject.datepicker('getDate')) : ''}</h5>
+					<div class="table-responsive">
+						<table class="table table-hover table-striped" show="{txns.length > 0}">
+							<thead>
+								<tr>
+									<th>{getText('activity_table_header_date')}</th>
+									<th>{getText('activity_table_header_email')}</th>
+									<th>{getText('activity_table_header_name')}</th>
+									<th>{getText('activity_table_header_amount')}</th>
+									<th>{getText('activity_table_header_note')}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr each="{txn in txns}" onclick={showTransactionDetail}>
+									<td>{getDisplayDateTime(txn.created_ts, timeZone)}</td>
+									<td>{txn.type==2 ? (txn.sender_email?txn.sender_email:'Anonymous') : (txn.receiver_email?txn.receiver_email:'Anonymous')}</td>
+									<td>{txn.type==2 ? (txn.sender_display_name?txn.sender_display_name:'Anonymous') : (txn.receiver_display_name?txn.receiver_display_name:'Anonymous')}</td>
+									<td style="{txn.type==2 ? 'color:#008000' : 'color:#DB2828'}">{txn.type==2 ? '' : '-'}{formatDecimalAmount(txn.amount)}</td>
+									<td>{txn.memo}</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-sm-12" show="{txns.length == 0}">
+							<div class="req-no-result">
+								{getText('activity_filter_no_result')}
+							</div>
+						</div>
+					</div>
+				</div>
+				<nav class="pagination-table col-xs-12">
+					<ul class="pagination txn-pagination" id="activity-pagination"></ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</home-activity>

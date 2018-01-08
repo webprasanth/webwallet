@@ -1,0 +1,28 @@
+<main-navbar>
+    <div class="overlay-screen" onclick="closeOverlay()" id="mobile-overlay"></div>
+    <div class="navbar-sc" id="mobile-menu-bar">
+        <div class="container">
+            <div class="top-menu">
+                <div class="logo hidden-sm hidden-md hidden-lg">
+                    <a><img src="assets/images/logo.png" /></a>
+                </div>
+                <div class="account hidden-sm hidden-md hidden-lg">
+                    <div show={avatarUrl} class="avatar">
+                        <img src={avatarUrl} alt="avatar" width="40" class="img-circle" />
+                    </div>
+                    <div class="email-account" title="">
+                        <p>{userName}</p>
+                        <p>{userEmail}</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li each="{tab in tabs}" class={active: tab.isActive} id={tab.id} onclick={onTabItemClick}>
+                    <a href="">{tab.name}<label show="{(tab.id=='pending' && (pendingNum > 0))}" class="orange-circle">{pendingNum}</label></a>
+                </li>
+                <li class="logout"><a onclick={onLogoutButtonClick}><span class="glyphicon glyphicon-log-out"></span>{getText('common_logout_label')}</a></li>
+            </ul>
+        </div>
+    </div>
+</main-navbar>

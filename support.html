@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Support</title>
+  <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="assets/images/pages/coin.png">
+  <!-- <link rel="apple-touch-icon" href="assets/img/apple-touch-icon-precomposed.png" sizes="152x152"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1 user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!--<link rel="stylesheet" href="assets/css/application.css">-->
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/home-page.css">
+  <link rel="stylesheet" href="assets/css/reponsive-style.css">
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/scripts/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+      var captchaId = null;
+
+      function requestSupport() {
+        var subject = $("#subject").val().trim();
+        var email = $("#email").val().trim();
+        var name = $("#name").val().trim();
+        var content = $("#content").val().trim();
+        var capttraRes = grecaptcha.getResponse(captchaId);
+
+        if (!name) {
+          $('#errorMessage').html('Please enter your name');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        if (!email) {
+          $('#errorMessage').html('Please enter your email');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        var emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+        var checkEmail = email.toLowerCase().match(emailRegex);
+
+        if (checkEmail === null) {
+          $('#errorMessage').html('Invalid email format');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        if (!subject) {
+          $('#errorMessage').html('Please enter subject');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        if (!content) {
+          $('#errorMessage').html('Please enter content');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        if (!capttraRes) {
+          $('#errorMessage').html('Please verify that you are not a robot');
+          $('#errorModal').modal('show');
+          return;
+        }
+
+        var url = 'https://keys.flashcoin.io/api/request-support';
+
+        if (window.location.protocol == 'http:') {
+              url = 'http://keys.flashcoin.io:8098/api/request-support';
+        }
+
+        var params = {
+          email: email,
+          name: name,
+          subject: subject,
+          body: content,
+          g_recaptcha_response: capttraRes
+        }
+
+        $.post(url, params, function(res){
+            $('#messageDialog').modal('show');
+              $("#subject").val("");
+              $("#email").val("");
+              $("#name").val("");
+              $("#content").val("");
+              grecaptcha.reset(captchaId);
+        });
+      }
+
+      $(document).ready(function() {
+        $("#submitBtn").click(requestSupport);
+      });
+
+      var onloadCallback = function() {
+        captchaId = grecaptcha.render('gcaptcha', {
+          'sitekey' : '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C'
+        });
+      };
+    </script>
+</head>
+
+<body class="wiki-page">
+  <header class="header-SC bg-header">
+    <div class="container">
+      <nav class="navbar navbar-default ">
+        <div class="logo col-xs-4 col-xs-5">
+          <a href="/"><img src="assets/images/logo.png" /></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="support-page" id="main-content">
+    <div class="container">
+      <div class="title-note text-center">
+        <h2><img class="m15r" src="assets/images/pages/icon-support.png" width="40px" />NEED SOME HELP RIGHT NOW</h2>
+        <p style="font-size:18px">You can submit a support request here</p>
+      </div>
+      <div>
+
+        <div class="col-xs-12">
+          <div class="form-group col-xs-12 col-sm-6 p15">
+            <input id="name" class="form-control" type="text" name="name" placeholder="Name">
+          </div>
+          <div class="form-group col-xs-12 col-sm-6 p15">
+            <input id="email" class="form-control" type="text" name="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 p15">
+          <input id="subject" class="form-control" type="text" name="title" placeholder="Subject">
+        </div>
+        <div class="form-group col-xs-12 p15">
+          <textarea id="content" class="form-control" placeholder="Content" type="text"></textarea>
+        </div>
+        <div class="col-xs-12 col-sm-6 p15">
+          <div id="gcaptcha"></div>
+        </div>
+
+        <div class="btn-submit col-xs-12 col-sm-6 text-right p15">
+          <button id="submitBtn" class="btn btn-warning text-right">Submit</button>
+        </div>
+        <div class="col-xs-12 hidden-lg hidden-sm hidden-md" style="padding: 0 15px; margin-top:10px;"><a href="/#login"><small>« </small>Back Login</a></div>
+      </div>
+
+      <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+        </script>
+      <footer class="footer">
+        <div class="container text-center">
+          <ul>
+            <li><a href="terms-of-service.html" target="_blank">Terms of Service</a></li>
+            <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li>
+            <li><a href="support.html" target="_blank">Support</a></li>
+            <li><a href="contact.html" target="_blank">Contact</a></li>
+          </ul>
+          <p>Flashcoin.io is provided by the Third Millennium Foundation for Economics and Culture, Liechtenstein. Supported by the FLASH community.</p>
+        </div>
+      </footer>
+    </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog message-error" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+            <div id="errorMessage" class="message-error">
+              Please enter name, email, subject and content
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="messageDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                              aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Information</h4>
+          </div>
+          <div class="modal-body">
+            <div class="message message-success">
+              <p class="msg">Your request has been sent to support team.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" on-click="on-yes">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

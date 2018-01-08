@@ -1,0 +1,32 @@
+<profile-avatar>
+    <div class="col-xs-12 col-sm-3 avatar change-avatar">
+        <div hide={isUploadingImage}>
+            <img src="{avatarUrl}" alt="Flash Coin" title="Flash Coin" class="thumbnail avatar" width="100"/>
+            <p class="text-center">
+                <label class="btn btn-primary">
+                    {buttonLabel}
+                    <input type="file" id="file" accept="image/*" class="hidden"/>
+                </label>
+            </p>
+        </div>
+        <div show={isUploadingImage}>
+            <div class="imageBox">
+                <div class="thumbBox text-center">
+                </div>
+                <div class="spinner" style="display: none">
+                    {getText('profile_label_loading')}
+                </div>
+            </div>
+            <div class="action text-center">
+                <div class="col-xs-12 text-center" style="margin:15px 0;">
+                    <a id="btnZoomOut" onclick={zoomOut}><i class="glyphicon glyphicon-zoom-out"></i></a>
+                    <a id="btnZoomIn" onclick={zoomIn}><i class="glyphicon glyphicon-zoom-in"></i></a>
+                </div>
+                <button id="btnCrop" class="btn btn-primary" onclick={updateAvatar}>{getText('profile_label_updateimage')}</button>
+                <button class="btn btn-default" style="background-color: #eee;" onclick={showAvatar}>{getText('common_cancel_label')}</button>
+            </div>
+            <div class="cropped"></div>
+        </div>
+        <div id="up_percent" class="text-center"></div>
+    </div>
+</profile-avatar>

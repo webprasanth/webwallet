@@ -1,0 +1,52 @@
+<security-question>
+	<div class="change-confirm-password">
+		<div class="slide-top">
+			<div class="form-active container">
+				<div class="col-xs-12 content-slide right" id="content-slide1">
+					<h2 class="">{getText('sc_question_page_title')}</h2>
+					<div class="box-change-password">
+						<div class="col-xs-12">
+							<div class="col-xs-12 col-sm-6 security-question">
+								<div id="sesure-msg" class="pointing basic label" style="color:red" show={sesureMsg}>
+									<span>{sesureMsg}</span>
+								</div>
+								<div class="col-xs-12 form-group">
+									<select class="form-control" id="questionA">
+                                        <option value="">{getText('sc_question_1')}</option>
+                                        <option each="{question in questionsA}" value="{question}">{question}</option>
+                                    </select>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="answerA" placeholder="Your Answer">
+								</div>
+								<div class="col-xs-12 form-group">
+									<select class="form-control" id="questionB">
+                                        <option value="">{getText('sc_question_2')}</option>
+                                        <option each="{question in questionsB}" value="{question}">{question}</option>
+                                    </select>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="answerB" placeholder="Your Answer">
+								</div>
+								<div class="col-xs-12 form-group">
+									<select class="form-control" id="questionC">
+                                        <option value="">{getText('sc_question_3')}</option>
+                                        <option each="{question in questionsC}" value="{question}">{question}</option>
+                                    </select>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="answerC" placeholder="Your Answer">
+								</div>
+								<div class="create-account form-group text-center">
+									<button id="btn-submit" data-loading-text="{getText('sc_question_proccess_msg')}" class="btn-create-account" type="submit" onclick={checkSecureQuestion}>{getText('sc_question_submit_label')}</button>
+								</div>
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</security-question>

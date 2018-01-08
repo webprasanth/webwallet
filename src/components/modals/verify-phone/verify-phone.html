@@ -1,0 +1,65 @@
+<verify-phone>
+    <div class="modal fade" id="verify-phone-body" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{getText('phone_verify_title')}</h4>
+                </div>
+                <div show={showForm} class="modal-body">
+                    <form class="form-inline" role="form" on-submit="verify-code">
+                        <virtual show={showPhoneNumber}>
+                            <div class="form-group">
+                                <label class="control-label text-left" for="phone_number">{getText('phone_verify_guide')}</label>
+                                <div class="text-left">
+                                    <input class="form-control" on-keydown="keydown" type="tel" name="phone_number" id="phone_number" />
+                                    <button type="button" class="btn btn-warning" on-click="resend-code">{getText('phone_verify_send_code_title')}</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted">
+                                    {getText('phone_verify_not_get_code_title')}
+                                </p>
+                            </div>
+                        </virtual>
+                        <div class="form-group">
+                            <label class="control-label" for="Code">
+                        {getText('phone_verify_guide_2')}
+                    </label>
+                        </div>
+                        <div  style="margin:10px 0">
+                            <div class="form-group">
+                                <input on-blur="hideMess" on-keydown="keydown" class="form-control" name="Code" id="code-input" placeholder="Enter the code here"
+                                    type="text">
+                            </div>
+                            <div class="form-group send_function">
+                                <button type="button" class="btn btn-info" onclick={verifyCode}>{getText('phone_verify_send_code_btn')}</button>
+                            </div>
+                            <div show={errorMessage} class="pin-incorrteect">{errorMessage}</div>
+                        </div>
+                        <div show={!showPhoneNumber} class="form-group text-left">
+                            <p class="text-muted">
+                                {getText('phone_verify_not_get_code_title')}
+                            </p>
+                        </div>
+                        <br/>
+                    </form>
+                </div>
+                <div show={requestProcessing} class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">{getText('phone_verify_proccessing_msg')}</label>
+                    </div>
+                </div>
+                <virtual show={requestSuccess}>
+                    <div class="modal-body">
+                        <div class="form-group"><label class="col-sm-12 control-label">{getText('phone_verify_proccess_done')}</label></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_ok_label')}</button>
+                    </div>
+                </virtual>
+            </div>
+        </div>
+    </div>
+</verify-phone>
