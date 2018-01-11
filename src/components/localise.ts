@@ -4,8 +4,8 @@ let texts_default = null;
 
 export function init(cb) {
     let id_lang = localStorage.getItem('id_lang');
-    if(!id_lang) {
-      id_lang = 'en';
+    if(!id_lang || id_lang == 'en') {
+      id_lang = 'en-v1.1';
     }
 	
 	//load english file default, if some localization is not available, we will use English words
