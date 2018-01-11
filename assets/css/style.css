@@ -494,6 +494,9 @@ h5.title-table{
     color: #DA332F;
 }
 /*Transaction Acitivity*/
+.transaction-activity .transaction-activity-table tr {
+    cursor: pointer;
+}
 .contact-page .title-page h2.title,
 .pending-page .title-page h2.title,
 .transaction-activity .title-page h2.title{
