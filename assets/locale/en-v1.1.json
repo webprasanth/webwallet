@@ -20,7 +20,7 @@
     "footer_label_legal"                       : "Legal",
     "footer_label_contact"                     : "Contact",
     "footer_label_support"                     : "Support",
-    "footer_label_copyright"                   : "Copyright (c) 2016 Flashnet Tech, Inc. Montreal, Canada.  All Rights Reserved.  Flash is a trademark of Flashnet Tech, Inc.",
+    "footer_label_copyright"                   : "Flashcoin.io is provided by the Third Millennium Foundation for Economics and Culture, Liechtenstein. Supported by the FLASH community.",
 
     "login_invalid_email_msg"                  : "Invalid email format!",
     "login_email_reuired_msg"                  : "Email is needed to login",
@@ -34,7 +34,7 @@
     "login_get_sessiontoken_err"               : "Sorry, something went wrong. Please login again",
     "login_keep_me_login_label"                : "Keep me logged in",
     "login_usa_limitted_msg"                   : "Hello! We noticed that you are coming from a New York, USA based IP address. We’re very sorry, but we can’t currently serve people in New York. We hope to be able to serve you in the future, so please stay tuned. If you are not visiting us from New York and you received this message in error, please notify support@flashcoin.io",
-    "login_suggess_two_fa_1"                   : "Your account doesnâ€™t have additional phone security yet, we highly recommend you add it.  To add this feature, click ",
+    "login_suggess_two_fa_1"                   : "Your account doesn't have additional phone security yet, we highly recommend you add it.  To add this feature, click ",
     "login_suggess_two_fa_2"                   : "here",
     "login_dont_show_dlg_label"                : "Don't show this dialog again",
     "login_Get_web_wallet"					   : "Get a Web Wallet",
@@ -44,20 +44,20 @@
     "login_Flash_is_designed_for_small_payments": "FLASH is designed for small payments, due to its low transaction fees, high speed, and throughput, all while retaining its BTC/LTC heritage and functionality. This makes FLASH ideal for loyalty, registration and messaging applications, and is perfect for customers and businesses using small payments. We know efficiency is essential for most transactions, so we benchmarked FLASH up to 25,000 txn/sec on a $700 i7 computer consuming less than 80 watts of power. Because of this, FLASH is eco-friendly and easy on your pocketbook.",
 
     "login_The_number_of_coins"		           : "The number of coins is fixed and completely issued.",
-    "login_Zero_inflation"	                   : "There is Zero inflation",
+    "login_Zero_inflation"	                   : "There is zero inflation",
     "login_Processing_is_optimized"	           : "Processing is optimized and tested for efficiency and high volume.",
     "login_No_developer_slush_fund"	           : "There is no developer \"slush fund\".",
-    "login_Project_can_be_developed_by_anyone" : "Projects can be developed by anyone and Donations for the developers solicited from the community.",
+    "login_Project_can_be_developed_by_anyone" : "Projects can be developed by anyone and donations for the developers solicited from the community.",
     "login_wallet_label"		               : "WALLETS",
-    "login_flash_supports"	               	   : "Flash supports number of online wallets including Coinomi,Coin Payments,QT(windows,Mac,Linux) and an easy to use online wallet designed for mass consumer market. If you can make online payments, you already know how to use FLASH.",
+    "login_flash_supports"	               	   : "FLASH supports a number of online wallets including Coinomi, Coin Payments, QT (windows, Mac, Linux) and an easy to use online wallet designed for mass consumer market. If you can make online payments, you already know how to use FLASH.",
 
     "login_coinomi_label"		      		   : "Coinomi",
     "login_coin_payment_label"		       	   : "CoinPayments",
-    "login_bottom_web_wallets_label"	       : "Web wallets",
-    "login_With_the_web_wallet"		       	   : "with the web wallet, you can use an email address or your public address for sending and receiving coins.The web wallets supports most browsers and mobile devices.There nothing to download or install for maximum convenience",
+    "login_bottom_web_wallets_label"	       : "Web Wallets",
+    "login_With_the_web_wallet"		       	   : "With the web wallet, you can use an email address or your public address for sending and receiving coins. <br><br>The web wallet supports most browsers and mobile devices. There's nothing to download or install for maximum convenience.",
 
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io is provided by the Flashcoin Foundation,Liechtenstein.Supported by the FLASH community.",
-    "login_by_clicking_create_wallet"	       : "By clicking Create Wallet ,I agree to the <a href=\"/terms-of-service.html\" target=\"_blank\">Terms of Service</a> and <a href=\"/privacy-policy.html\" target=\"_blank\">Privacy Policy.</a>",
+    "login_by_clicking_create_wallet"	       : "By clicking Create Wallet, I agree to the <a href=\"/terms-of-service.html\" target=\"_blank\">Terms of Service</a> and <a href=\"/privacy-policy.html\" target=\"_blank\">Privacy Policy.</a>",
     "login_Forgot_password"		       		   : "Forgot Password?",
 
 
@@ -257,7 +257,7 @@
     "common_label_verify_email"                : "Please verify your email address",
     "common_label_verify_phone"                : "Please verify your phone number",
     "common_alert_minimum_cash_unit"           : "Amount must be at least 1",
-    "common_alert_int_cash_unit"               : "Amount must be integer value",
+    "common_alert_int_cash_unit"               : "Amount must be a number",
     "common_receive_money_alert"               : "%(sender_email)s sent you %(amount)s",
     "common_like_sent_money_alert"             : "You have just liked and sent %(recipient_email)s %(amount)s tokens as a reward",
     "common_fountain_sent_money_alert"         : "One of your fountain(s) has just dispensed %(amount)s tokens to %(recipient_email)s",

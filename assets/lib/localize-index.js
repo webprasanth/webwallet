@@ -2,8 +2,8 @@ var textsIndex = null;
 
 function initIndexLocal(cb) {
     var id_lang = localStorage.getItem('id_lang');
-    if(!id_lang) {
-      id_lang = 'en';
+    if(!id_lang || id_lang == 'en') {
+      id_lang = 'en-v1.1';
     }
     var lang_file = "assets/locale/" + id_lang +".json";
     /*$.getJSON(lang_file, function(json) {

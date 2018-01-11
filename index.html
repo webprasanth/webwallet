@@ -27,7 +27,7 @@
         }
     </style>
     <script>
-		if (localStorage.getItem("id_lang") === null) {
+		if (localStorage.getItem("id_lang") === null || localStorage.getItem("id_lang") == 'en') {
 		  localStorage.setItem('id_lang', 'en-v1.1');
 		}
 		
