@@ -583,7 +583,7 @@
 
 	"reset_password_incorrect_oldpass": "密码错误",
 
-	"notify_balance_updated": "更新余额：xx（余额）",
+	"notify_balance_updated": "更新余额：%(balance)s",
 
 	"signup_sc_answer_required": "请回答安全问题，这些要求都是为您恢复密码的。",
 
@@ -633,7 +633,7 @@
 
 	"send_transactionfail_error": "交易失败",
 
-	"send_processtime_message": "处理时间：xx（ 处理时间  ）秒",
+	"send_processtime_message": "处理时间：%(processing_duration)s 秒",
 
 	"send_success_message2": "您的交易很快就会出现在您的活动标签中",
 

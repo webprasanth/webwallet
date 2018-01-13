@@ -343,7 +343,7 @@
     "reset_password_oldpassword_required"      : " برائے مہربانی جاری رکھنے كے لئے اپنا پاس ورڈ درج كريں",
     "reset_password_incorrect_oldpass"         : " غلط پاس ورڈ",
 
-    "notify_balance_updated"                   : " بیلنس كو اپڈيٹ كريں: ٪ (بيلنس)",
+    "notify_balance_updated"                   : " بیلنس كو اپڈيٹ كريں: %(balance)s",
 
     "signup_sc_answer_required"                : " براہ مہربانی حفاظتی سوالات کا جواب دیں. یہ آپ کے پاس ورڈ كو دوبارہ حاصل کرنے کے لئے ضروری ہے.",
     "signup_create_account"                    : " میرا کھاتہ کھولیں",
@@ -370,7 +370,7 @@
     "send_transactionprocessing_message"       : " آپ کا ٹرانزیکشن پروسیس ہورہا ہے!",
     "send_transactionfee_label"                : " فلیش ٹرانزیکشن فیس ",
     "send_transactionfail_error"               : " ٹرانزیکشن ناکام ہوگيا",
-    "send_processtime_message"                 : " پروسیسنگ وقت: ٪ (پروسیسنگ _ مدت) سیکنڈ ",
+    "send_processtime_message"                 : "پروسیسنگ کا وقت:٪(processing_duration)s second(s)",
     "send_success_message2"                    : " آپ کا ٹرانزیکشن جلد ہی آپ کی سرگرمی ٹیب میں دکھائى دے گا.",
     "send_success_message"                     : " ٹرانزیکشن کامیاب  رہا",
 	

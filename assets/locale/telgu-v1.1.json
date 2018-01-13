@@ -320,7 +320,7 @@
     "reset_password_oldpassword_required"      : "కొనసాగించడానికి మీ పాస్వర్డ్ను ప్రవేశపెట్టండి",
     "reset_password_incorrect_oldpass"         : "పాస్వర్డ్ సరైనది కాదు",
 
-    "notify_balance_updated"                   : "మారిన నగదు మొత్తం: %(మిగిలిన నగదు)",
+    "notify_balance_updated"                   : "మారిన నగదు మొత్తం: %(balance)s",
 
     "signup_sc_answer_required"                : "దయచేసి భద్రతా ప్రశ్నలకు జవాబివ్వండి. మీ పాస్వర్డ్ను తిరిగి పొందడానికి ఇవి మీకు అవసరం.",
     "signup_create_account"                    : "నా ఖాతాను ఏర్పాటు చేయండి",
@@ -347,7 +347,7 @@
     "send_transactionprocessing_message"       : "మీ లావాదేవీ ప్రక్రియ జరుగుతోంది!",
     "send_transactionfee_label"                : "ఫ్లాష్ లావాదేవీ రుసుం",
     "send_transactionfail_error"               : "లావాదేవీ విఫలమైంది",
-    "send_processtime_message"                 : "ప్రక్రియ సమయం: %(లావాదేవీ జరిగిన సమయం) సెకండ్లు",
+    "send_processtime_message"                 : "ప్రక్రియ సమయం: %(processing_duration)sసెకండ్లు",
     "send_success_message2"                    	: "మీ కార్యకలాపాల ట్యాబ్లో మీ లావాదేవీ త్వరలో ప్రత్యక్షమవుతుంది.",
     "send_success_message"                     : "లావాదేవీ విజయవంతమైంది",
 	"login_flashcoin_provided_by" : "లిక్స్టన్స్టీన్, ఎకనామిక్స్ అండ్ కల్చర్ ఫర్ థర్డ్ మిలీనియం ఫౌండేషన్ ద్వారా Flashcoin.io అందించబడింది. దీనికి FLASH community సహాయమందిస్తోంది."

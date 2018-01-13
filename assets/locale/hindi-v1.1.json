@@ -343,7 +343,7 @@
     "reset_password_oldpassword_required"      : "जारी रखने के लिए कृपया अपना कूटशब्द दर्ज करें",
     "reset_password_incorrect_oldpass"         : "गलत पासवर्ड",
 
-    "notify_balance_updated"                   : "अपडेट की गई शेष राशि:% (शेष) एस",
+    "notify_balance_updated"                   : "अपडेट की गई शेष राशि: %(balance)s",
 
     "signup_sc_answer_required"                : "कृपया सुरक्षा प्रश्नों का उत्तर दें आपके पासवर्ड को पुनर्प्राप्त करने के लिए ये आवश्यक हैं।",
     "signup_create_account"                    : "मेरा खाता बनाओ",
@@ -370,7 +370,7 @@
     "send_transactionprocessing_message"       : "आपका लेनदेन प्रसंस्करण है!",
     "send_transactionfee_label"                : "फ्लैश लेनदेन शुल्क",
     "send_transactionfail_error"               : "लेनदेन असफल",
-    "send_processtime_message"                 : "संस्करण समय:% (प्रोसेस_अदाज़) सेकंड्स सेकेंड",
+    "send_processtime_message"                 : "संस्करण समय: %(processing_duration)s सेकेंड",
     "send_success_message2"                    : "आपका लेन-देन जल्द ही आपकी गतिविधि टैब में दिखाई देगा।",
     "send_success_message"                     : "लेनदेन सफल",
 	

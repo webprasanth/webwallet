@@ -341,7 +341,7 @@
     "reset_password_oldpassword_required"      : "തുടരുന്നതിനായി താങ്കളുടെ പഴയ പാസ്സ്വെര്‍ഡ് എന്‍റര്‍ചെയ്യുക",
     "reset_password_incorrect_oldpass"         :"തെറ്റായ പാസ്സ്വേര്‍ഡ്",
 
-    "notify_balance_updated"                   : "അപ്ഡേറ്റ് ചെയ്ത ബാലന്‍സ്: % (ബാലന്‍സ്) s",
+    "notify_balance_updated"                   : "അപ്ഡേറ്റ് ചെയ്ത ബാലന്‍സ്: %(balance)s",
 
     "signup_sc_answer_required"                :"ദയവായി സുരക്ഷാ ചോദ്യങ്ങള്‍ക്ക് ഉത്തരം നല്കുക. താങ്കളുടെ പാസ്സ്വേര്‍ഡ് വീണ്ടെടുക്കുന്നതിന് ഇവ ആവശ്യമാണ്.",
     "signup_create_account"                    :"എന്‍റെ അക്കൗണ്ട് സൃഷ്ടിക്കുക",
@@ -368,7 +368,7 @@
     "send_transactionprocessing_message"       : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍പ്രോസസ്സ് ചെയ്യുന്നു!",
     "send_transactionfee_label"                : "ഫ്ളാഷ് ട്രാന്‍സാക്ഷന്‍ഫീ",
     "send_transactionfail_error"               : "ട്രാന്‍സാക്ഷന്‍പരാജയം",
-    "send_processtime_message"                 : "പ്രോസസ്സിംഗ് സമയം: % (പ്രോസസ്സിംഗ് ദൈര്‍ഘ്യം) s സെക്കന്‍ഡുകള്‍",
+    "send_processtime_message"                 : "പ്രോസസ്സിംഗ് സമയം: %(processing_duration)s സെക്കന്‍ഡുകള്‍",
     "send_success_message2"                    : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍താങ്കളുടെ ആക്ടിവിറ്റി ടാബില്‍താമസിയാകെ പ്രത്യക്ഷപ്പെടുന്നതാണ്.",
     "send_success_message"                     : "ട്രാന്‍സാക്ഷന്‍വിജയകരം",
 	

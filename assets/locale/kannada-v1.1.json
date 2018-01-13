@@ -330,7 +330,7 @@
     "enter_oldpassword_label"                  : "ಹಳೆಯ ಪಾಸ್ ವರ್ಡ್ ದಾಖಲಿಸಿ",
     "reset_password_oldpassword_required"      : "ಮುಂದುವರೆಯಲು ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪಾಸ್ ವರ್ಡ್ ದಾಖಲಿಸಿ",
     "reset_password_incorrect_oldpass"         : " ತಪ್ಪಾದ ಪಾಸ್ ವರ್ಡ್",
-    "notify_balance_updated"                   : "ಬದಲಿಸಿದ ಬಾಕಿ %(ಬಾಕಿ)",
+    "notify_balance_updated"                   : "ಬದಲಿಸಿದ ಬಾಕಿ %(balance)s",
     "signup_sc_answer_required"                : "ದಯವಿಟ್ಟು ಭದ್ರತಾ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ. ನಿಮ್ಮ ಪಾಸ್ ವರ್ಡ್ ಪುನಃ ಪಡೆಯಲು ಇವು ಅವಶ್ಯಕ.",
     "signup_create_account"                    : "ನನ್ನ ಖಾತೆಯನ್ನು ಸೃಷ್ಟಿಸಿ",
     "signup_user_answer"                       : "ನಿಮ್ಮ ಉತ್ತರ",
@@ -356,7 +356,7 @@
     "send_transactionprocessing_message"       : ", ನಿಮ್ಮ ವ್ಯವಹಾರಗಳು ಪ್ರಗತಿಯಲ್ಲಿವೆ!.",
     "send_transactionfee_label"                : "ಫ್ಲಾಶ್ ವ್ಯವಹಾರ ಶುಲ್ಕ",
     "send_transactionfail_error"               : "ವ್ಯವಹಾರ ಸಾಧ್ಯವಾಗಿಲ್ಲ",
-    "send_processtime_message"                 : "ಪ್ರಕ್ರಿಯೆಯ ಸಮಯ %(ಪ್ರಕ್ರಿಯೆ ಸಮಯ) ಸೆಕೆಂಡುಗಳು",
+    "send_processtime_message"                 : "ಪ್ರಕ್ರಿಯೆಯ ಸಮಯ %(processing_duration)s ಸೆಕೆಂಡುಗಳು",
     "send_success_message2"                    : "ನಿಮ್ಮ ವ್ಯವಹಾರವು ಚಟುವಟಿಕೆ ಭಾಗದಲ್ಲಿ ಸಧ್ಯದಲ್ಲಿಯೇ ಕಂಡುಬರಲಿದೆ",
     "send_success_message"                     : "ವ್ಯವಹಾರ ಯಶಸ್ವಿಯಾಗಿದೆ",
 	
