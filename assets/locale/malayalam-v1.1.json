@@ -115,6 +115,8 @@
     "profile_msg_email_verified"               : "താങ്കളുടെ ഇമെയില്‍വിലാസം പരിശോധിച്ചു. ",
     "profile_msg_phone_verify_remind"          : "താങ്കള്‍ക്ക് പണം അയയ്ക്കാനും അഭ്യര്‍ത്ഥിക്കാനും സാധിക്കുന്നതിനു മുമ്പ് ഞങ്ങള്‍ക്ക് താങ്കളുടെ ഫോണ്‍നമ്പര്‍പരിശോധിക്കേണ്ടത് ആവശ്യമാണ്.",
     "profile_error_password_empy"              : "പാസ്സ്വേഡ് ശൂന്യമായിരിക്കാനാവില്ല",
+    "profile_error_password_min_length"        : "പാസ്വേഡിൽ കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ ഉണ്ടായിരിക്കണം",
+    "profile_error_password_alphanum"          : "പാസ്വേഡിൽ ഒരു സംഖ്യയെങ്കിലും ഉണ്ടായിരിക്കണം, 1 വലിയക്ഷരം, ഒരു ചെറിയക്ഷര പ്രതീകം",
     "profile_error_incorrect_current_pass"     : "നിലവിലുള്ള പാസ്സ്വേര്‍ഡ് ശരിയല്ല!",
     "profile_error_incorrect_confirm_pass"     : "സ്ഥിരീകരിച്ച പാസ്സ്വേര്‍ഡ് ശരിയല്ല!",
     "profile_title_password_changed"           : "പാസ്സ്വേര്‍ഡ് വ്യത്യാസപ്പെടുത്തിയിരിക്കുന്നു",

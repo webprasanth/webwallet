@@ -114,6 +114,8 @@
     "profile_msg_email_verified"               : "Seu endereço de e-mail foi verificado.",
     "profile_msg_phone_verify_remind"          : "Nós também precisamos verificar seu número de telefone antes de você poder enviar e cobrar dinheiro.",
     "profile_error_password_empy"              : "O campo 'Senha' não pode estar vazio",
+    "profile_error_password_min_length"        : "A senha deve ter pelo menos 8 caracteres",
+    "profile_error_password_alphanum"          : "A senha deve conter pelo menos 1 dígito, 1 maiúsculo e 1 caractere em minúscula",
     "profile_error_incorrect_current_pass"     : "A senha atual não está correta!",
     "profile_error_incorrect_confirm_pass"     : "A confirmação da senha não está correta!",
     "profile_title_password_changed"           : "A senha foi alterada",
