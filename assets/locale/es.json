@@ -94,6 +94,8 @@
     "profile_msg_email_verified"               : "Tu dirección de email ha sido verificada. ",
     "profile_msg_phone_verify_remind"          : "Necesitamos verificar su número de teléfono antes de que pueda enviar y solicitar dinero.",
     "profile_error_password_empy"              : "La contraseña no puede estar vacía",
+    "profile_error_password_min_length"        : "La contraseña debe tener al menos 8 caracteres",
+    "profile_error_password_alphanum"          : "La contraseña debe contener al menos 1 dígito, 1 letra mayúscula y 1 letra pequeña",
     "profile_error_incorrect_current_pass"     : "¡La contraseña actual no es correcta!",
     "profile_error_incorrect_confirm_pass"     : "¡La contraseña confirmada no es correcta!",
     "profile_title_password_changed"           : "La contraseña ha sido cambiada",

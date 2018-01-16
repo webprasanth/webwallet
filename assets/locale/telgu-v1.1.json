@@ -94,6 +94,8 @@
     "profile_msg_email_verified"               : "మీ ఈమెయిల్ ఖాతా ధ్రువీకరించబడింది.",
     "profile_msg_phone_verify_remind"          : "మీరు డబ్బును పంపే లేదా ముందు మీ ఫోన్ నంబరును ధ్రువీకరించుకోవాలి.",
     "profile_error_password_empy"              : "పాస్వర్డ్ ఖాళీగా ఉండకూడదు.",
+    "profile_error_password_min_length"        : "పాస్వర్డ్ తప్పనిసరిగా కనీసం 8 అక్షరాలను కలిగి ఉండాలి",
+    "profile_error_password_alphanum"          : "పాస్వర్డ్లో కనీసం 1 అంకె, 1 పెద్దబడి మరియు 1 చిన్న అక్షరం ఉండాలి",
     "profile_error_incorrect_current_pass"     : "ఇప్పుడు మీరు ప్రవేశపెట్టిన పాస్వర్డ్ సరైనది కాదు!",
     "profile_error_incorrect_confirm_pass"     : "మీరు ధ్రువీకరించిన పాస్వర్డ్ సరైనది కాదు!",
     "profile_title_password_changed"           : "పాస్వర్డ్  మార్చబడింది.",

@@ -93,6 +93,8 @@
     "profile_msg_email_verified"               : "আপনার ইমেল এড্রেসের যাচাইকরাণ সম্পূর্ণ হয়েছে। ",
     "profile_msg_phone_verify_remind"          : "আপনি টাকা পাঠানো এবং টাকার অনুরোধ করার আগে আমাদের আপনার ফোন নম্বর যাচাইকরণ করতে হবে।",
     "profile_error_password_empy"              : "পাসওয়ার্ড ফাঁকা রাখা যাবে না",
+    "profile_error_password_min_length"        : "পাসওয়ার্ডে কমপক্ষে 8 টি অক্ষর থাকা আবশ্যক",
+    "profile_error_password_alphanum"          : "পাসওয়ার্ডটিতে কমপক্ষে 1 টি অঙ্ক, 1 টি বড় অক্ষর এবং 1 টি ছোট ছোট অক্ষর থাকতে হবে",
     "profile_error_incorrect_current_pass"     : "বর্তমান পাসওয়ার্ডটি সঠিক নয়!",
     "profile_error_incorrect_confirm_pass"     : "নিশ্চিত করা পাসওয়ার্ডটি সঠিক নয়!",
     "profile_title_password_changed"           : "পাসওয়ার্ডটি পরিবর্তিত হয়েছে",
