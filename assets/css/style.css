@@ -165,6 +165,13 @@ body{
     font-size: 18px;
     text-transform: uppercase;
 }
+.wiki-page .support-page #loading-indicator {
+  position: absolute;
+  top: 100px;
+  text-align: center;
+  display: none;
+}
+
 /*Custom bootstrap*/
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: transparent;
@@ -494,6 +501,9 @@ h5.title-table{
     color: #DA332F;
 }
 /*Transaction Acitivity*/
+.transaction-activity .transaction-activity-table tr {
+    cursor: pointer;
+}
 .contact-page .title-page h2.title,
 .pending-page .title-page h2.title,
 .transaction-activity .title-page h2.title{

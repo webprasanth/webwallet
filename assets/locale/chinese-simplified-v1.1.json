@@ -1,0 +1,641 @@
+﻿{
+	"home_link_merchants": "商家",
+	"home_link_banks": "银行",
+	"home_link_developers": "开发商",
+	"home_link_support": "支持",
+	"home_link_contact": "联系",
+
+	"menu_label_togglenav": "切换导航",
+	"menu_label_activity": "活动",
+	"menu_label_send": "发送",
+	"menu_label_request": "请求",
+	"menu_label_pending": "挂起",
+	"menu_label_contact": "联系",
+	"menu_label_profile": "我的帐户",
+	"menu_label_notification": "通知",
+	"footer_label_about": "关于",
+	"footer_label_service": "服务条款",
+	"footer_label_use": "使用条款",
+	"footer_label_policy": "隐私政策",
+	"footer_label_legal": "法律",
+	"footer_label_contact": "联系",
+	"footer_label_support": "支持",
+	"footer_label_copyright": "Flashcoin.io由列支敦士登Flashcoin基金会提供，由FLASH社区支持。",
+
+	"login_invalid_email_msg": "电子邮件无效 format!",
+	"login_email_reuired_msg": "电子邮件是需要的 login ",
+	"login_password_reuired_msg": "需要密码to login",
+	"login_fullname_label": "Full name",
+	"login_signup_label": "姓名",
+	"login_create_wallet_label": "创建钱包",
+	"login_need_migrate_account_msg": "您的帐户是旧的，请注册新帐户，然后升级到xx（货币名称）",
+	"login_incorrect_usernamepassword_msg": "电子邮件或密码不正确",
+	"login_cas_login_fail_err": "登录失败",
+	"login_get_sessiontoken_err": "抱歉，出错了，请重新登录",
+	"login_keep_me_login_label": "让我保持登陆状态",
+	"login_usa_limitted_msg": "你好！我们注意到你的是来自美国纽约的IP地址， 非常抱歉，目前我们不能为纽约服务，我们希望在未来能为你服务， 所以敬请关注，如果您并是从纽约的，而您错误地收到了此消息，请通知support@flashcoin.io",
+	"login_suggess_two_fa_1": "您的帐户没有额外的电话安全性，我们强烈建议您添加它。要添加此功能，请单击",
+	"login_suggess_two_fa_2": "这里",
+	"login_dont_show_dlg_label": "赚取和消费",
+	"login_Get_web_wallet": "获取Web钱包",
+	"login_Earn_and_spend": "赚取和消费",
+	"login_Share_friends": "和朋友分享",
+	"login_Download_flash_QT_wallet": "下载FLASH QT钱包",
+	"login_Flash_is_designed_for_small_payments": "由于低交易费用，高速度和吞吐量，FLASH专为小额支付而设计，同时保留了BTC / LTC的传统和功能。 这使FLASH非常适合忠诚度，注册和消息应用程序，并且非常适合使用小额支付的客户和企业。 我们知道效率对于大多数交易是必不可少的，所以我们在功耗低于80瓦的700美元的i7计算机上以FLASH高达25000 txn / sec为基准。 正因为如此，FLASH在您的钱袋上是环保且容易的。.",
+
+	"login_The_number_of_coins": "硬币的数量是固定的，已完全发出。",
+	"login_Zero_inflation": "通货膨胀为零",
+	"login_Processing_is_optimized": "处理被优化和效率和高容量测试。",
+	"login_No_developer_slush_fund": "没有开发商\"贿赂基金\".",
+	"login_Project_can_be_developed_by_anyone": "项目可以由任何人，资助开发商发展从社会征求。.",
+	"login_wallet_label": "钱包",
+	"login_flash_supports": "Flash支持包括Coinomi，CoinPayments，QT（windows，Mac，Linux）在内的众多网络钱包，以及为大众消费者市场设计的易于使用的网络钱包。如果您可以进行在线支付，您已经知道如何使用FLASH。.",
+
+	"login_coinomi_label": "Coinomi",
+	"login_coin_payment_label": "硬币付款",
+	"login_bottom_web_wallets_label": "网上钱包",
+	"login_With_the_web_wallet": "使用网络钱包，您可以使用电子邮件地址或公共地址发送和接收硬币。网络钱包支持大多数浏览器和移动设备。最大便利是无需下载或安装",
+
+	"login_flashcoin_provided_by": "Flashcoin.io由FlashcoinFoundation提供，列支敦士登由FLASH社区提供支持。.",
+	"login_by_clicking_create_wallet": "通过点击创建电子钱包，我同意服务条款和隐私政策。.",
+	"login_Forgot_password": "忘记密码？",
+
+	"account_not_exist_label": "**你想创建一个Flash钱包吗？",
+
+	"ask_fullname_label": "** 输入您的全名",
+
+	"button_crowdsale_label": "群体销售",
+
+	"profile_tab_profile": "个人资料",
+
+	"profile_tab_account_settings": "帐号设定",
+
+	"profile_tab_settings": "设置",
+
+	"profile_tab_fountain": "喷泉",
+
+	"profile_tab_questions": "安全问题",
+
+	"profile_tab_like": "喜欢",
+
+	"profile_tab_phone_verify": "电话验证",
+
+	"profile_label_mobile": "手机",
+
+	"profile_label_country": "国家",
+
+	"profile_label_state": "州",
+
+	"profile_label_city": "城市",
+
+	"profile_label_adress": "地址",
+
+	"profile_label_wallet_adress": "钱包地址",
+
+	"profile_label_acc_type": "帐户类型:",
+
+	"profile_label_two_fa": "两个阶段认证",
+
+	"profile_label_enable_google_auth": "启用谷歌身份验证",
+
+	"profile_label_google_auth_step1": "您的手机上安装谷歌验证器",
+
+	"profile_label_google_auth_step2": "打开谷歌身份验证器应用",
+
+	"profile_label_google_auth_step3": "标签菜单， 然后点击 \"设置帐户\"， 然后点击 \"扫描条码\"",
+
+	"profile_label_google_auth_step4": "您的手机现在将处于”扫描“模式，当您处于此模式时，请扫描下方的条码",
+
+	"profile_label_google_auth_submit": "扫描完条码后，输入下面的6位数字",
+
+	"profile_label_verify_code": "扫描完条码后，输入下面的6位数字",
+
+	"profile_twofa_otp_fail": "无法从服务器获得otpUri",
+
+	"profile_twofa_on_ok": "两相认证已关闭成功",
+
+	"profile_twofa_off_fail": "关闭两相认证失败",
+
+	"profile_twofa_setup_ok": "两相身份验证已成功设置，您每次登录时都需要输入谷歌身份验证码。",
+
+	"profile_twofa_confirm_code_fail": "确认代码失败",
+
+	"profile_twofa_invalid_code": "代码无效",
+
+	"profile_current_pass_label": "当前密码",
+
+	"profile_new_pass_label": "新密码",
+
+	"profile_confirm_new_pass_label": "确认新密码",
+
+	"profile_timezone_label": "时区",
+
+	"profile_phone_number_label": "电话号码",
+
+	"profile_label_changeimage": "更改图片",
+
+	"profile_error_title_duplicated_email": "更新电子邮件地址时出错",
+
+	"profile_error_msg_duplicated_email": "这个电子邮件地址已被其他帐户使用",
+
+	"profile_title_verify_email_sent": "验证电子邮件已发送到XX（电子邮件）",
+
+	"profile_msg_verify_email_sent": "如果您的收件箱中没有收到我们的电子邮件，请检查您的垃圾邮件文件夹，因为您的电子邮件服务器可能将其过滤为垃圾邮件。",
+
+	"profile_error_title_duplicated_phone": "更新电话号码时出错",
+
+	"profile_error_msg_duplicated_phone": "这个电话号码已被另一个帐户使用",
+
+	"profile_error_empty_pin": "请输入您的密码",
+
+	"profile_error_incorrect_pin": "您输入的当前密码不正确，请重试。",
+
+	"profile_error_empty_new_pin": "新密码不能为空.",
+
+	"profile_error_msg_short_pin": "新密码必须是6位数字",
+
+	"profile_error_msg_not_match_pin": "重新输入密码不正确，请重试。",
+
+
+	"profile_msg_phone_verify_remind": "我们还需要验证您的电话号码，然后才能您可以发送和要求付款。",
+
+	"profile_error_password_empy": "密码不能为空",
+
+	"profile_error_incorrect_current_pass": "当前密码不正确！",
+
+	"profile_error_incorrect_confirm_pass": "确认密码不正确！",
+
+	"profile_title_password_changed": "密码已被更改",
+
+	"profile_msg_password_changed": "你密码已 成功更改！",
+
+	"profile_label_default_timezone": "请选择您的时区",
+
+	"profile_label_phoneverification": "电话号码验证",
+
+	"profile_label_phoneverification_2": "请输入 我们刚刚发送的短信中代码: ",
+
+	"profile_error_invalid_image_type": "无效的文件类型，只允许使用jpg / jpeg，gif和png 的类型文件.",
+
+	"profile_error_image_file_too_big": "文件太大，文件 必须小于5兆字节.",
+
+	"profile_fountain_amount_label": "xx（货币名称）令牌给每个人每个周期的金额",
+
+	"profile_label_loading": "加载中...",
+
+	"profile_label_updateimage": "更新图片",
+
+	"profile_lable_choose_image": "选择图片",
+
+	"activity_page_title": "您的交易活动",
+
+	"activity_filter_label_from": "自",
+
+	"activity_filter_label_to": "至",
+
+	"activity_button_filter": "显示",
+
+	"activity_button_show_all": "显示所有活动",
+
+	"activity_button_more": "更多",
+
+	"activity_tab_all_transaction": "所有交易",
+
+	"activity_tab_received_transaction": "付款已收到",
+
+	"activity_tab_sent_transaction": "付款已发送",
+
+	"activity_description_date_range": "从xx（从日期）到xx（到日期）",
+
+	"activity_filter_no_result": "您在此日期范围之前还有其他交易，请点击显示查看所有活动以。",
+
+	"activity_table_header_name": "名称",
+
+	"activity_table_header_email": "电子邮件",
+
+	"activity_table_header_email_pubic_address": "电子邮件/电话/公共地址",
+
+	"activity_table_header_note": "交易记录",
+
+	"activity_table_header_amount": "金额",
+
+	"activity_table_header_date": "日期/时间",
+
+	"activity_error_title_missing_signup_time": "缺少注册时间",
+
+	"activity_error_msg_missing_signup_time": "由于我们的数据库问题，您帐户的注册时间是空的，所以我们将显示今年的所有活动。",
+
+	"activity_error_title_loading_tx_fail": "加载事务时出错",
+
+	"activity_error_msg_loading_tx_fail": "我们无法完成所有的活动，请检查您的互联网连接。",
+
+	"pending_page_title": "您的待处理请求",
+
+	"pending_filter_label_from": "从",
+
+	"pending_filter_label_to": "至",
+
+	"pending_button_filter": "显示",
+
+	"pending_button_show_all": "显示所有活动",
+
+	"pending_button_more": "更多",
+
+	"pending_tab_outgoing_request": "外出的请求",
+
+	"pending_tab_incoming_request": "传入的请求",
+
+	"pending_description_date_range": "从xx（从日期）到xx（到日期）",
+
+	"pending_filter_no_result": "这个日期范围内没有请求。",
+
+	"pending_table_header_avatar": "Avatar",
+
+	"pending_table_header_name": "名称",
+
+	"pending_table_header_email": "电子邮件",
+
+	"pending_table_header_amount": "金额（Flash）",
+
+	"pending_table_header_status": "状态",
+
+	"pending_table_header_note": "注意",
+
+	"pending_table_header_date": "日期/时间",
+
+	"pending_table_header_cancel": "取消",
+
+	"pending_table_button_accept": "接受",
+
+	"pending_table_button_reject": "拒绝",
+
+	"pending_table_button_cancel": "取消",
+
+	"pending_request_status_waiting": "等待接受",
+
+	"pending_request_status_pending": "待定",
+
+	"pending_request_status_paid": "已付费",
+
+	"pending_request_status_denied": "否认",
+
+	"pending_request_status_cancelled": "已取消",
+
+	"pending_error_title_missing_signup_time": "缺少注册时间",
+
+	"pending_error_msg_missing_signup_time": "由于我们的数据库问题，您帐户的注册时间是空的，所以我们将显示今年的所有活动。",
+
+	"pending_error_title_loading_request_fail": "加载事务时出错",
+
+	"pending_error_msg_loading_request_fail": "我们无法完成所有的活动，请检查您的互联网连接。",
+
+	"pending_requestdetail_label": "请求详细信息",
+
+	"pending_cancelrequest_label": "取消请求",
+
+
+	"error_logging_in_server_failed": "由于错误导致交易失败。 余额没有变化。 您可以再次安全地执行交易",
+
+	"request_msg_confirm_cancel": "你确定要取消这个请求吗？",
+
+	"cancel_request_title": "取消请求",
+
+	"fountain_paramsupdated_message": "喷泉已更新参数",
+
+	"fountain_amount_required_msg": "请输入金额",
+
+	"fountain_period_required_msg": "请输入期限",
+	"fountain_url_required_msg": "请列出允许您的喷泉主机的网址，否则可能会被滥用",
+
+	"fountain_minperiod_msg": "最短时间10分钟",
+
+	"fountain_invalid_domain_msg": "xx不是域",
+
+	"fountain_amount_desc": "每个人每个时段给予的闪存令牌量",
+
+	"fountain_period_desc": "期间访客获得奖励代币一次s",
+
+	"fountain_period_desc2": "（最短时间10分钟）",
+
+	"fountain_hours_label": "小时",
+
+	"fountain_minutes_label": "分钟",
+
+	"fountain_tx_note_desc": "喷泉访客留言/交易记录",
+
+	"fountain_url_list_desc": "列出允许您的喷泉托管的页面的URL，尽可能具体以免滥用，用逗号分隔，例如，site1.com/web2, site3.com/web4,...",
+
+	"fountain_update_param_label": "更新参数",
+
+	"fountain_turn_off_label": "关闭喷泉",
+
+	"fountain_turn_on_label": "打开喷泉",
+	"fountain_guide_msg": "请复制下面的代码并将其粘贴到喷泉托管页面的源代码的开始标记之后",
+
+	"fountain_guide_msg2": "请复制下面的代码，并将其粘贴到你想显示 喷泉的托管页面的源代码上",
+
+
+	"sc_question_required_msg": "如果您忘记密码，则需要所有安全问题才能恢复密码和硬币",
+
+	"sc_question_update_fail": "安全问题更新失败",
+
+	"sc_question_update_ok": "安全问题已经成功更新",
+
+	"sc_question_page_title": "设置您的安全问题/答案",
+
+	"sc_question_1": "安全问题 1",
+
+	"sc_question_2": "安全问题 2",
+
+	"sc_question_3": "安全问题 3",
+
+	"sc_question_proccess_msg": "正在处理中...",
+
+	"sc_question_submit_label": "提交",
+
+
+	"sc_question_a1": "你理想的工作是什么？",
+
+	"sc_question_a2": "你父母在哪个城市认识的？",
+
+	"sc_question_a3": "你小学的名字是什么？",
+
+	"sc_question_b1": "你最喜欢的叔叔的名字是什么？",
+
+	"sc_question_b2": "你在哪里认识你的配偶？",
+
+	"sc_question_b3": "你 的大堂兄的名字是什么？",
+
+	"sc_question_c1": "你长大时候的街名？",
+
+	"sc_question_c2": " 你的宠物的名字？",
+
+	"sc_question_c3": "你的第一份工作是什么？",
+
+	"phone_verify_title": "电话号码验证",
+
+	"phone_verify_send_code_title": "发送代码",
+
+	"phone_verify_not_get_code_title": "没有得到代码？有时可能需要15分钟。<br/>如果需要比这更长的时间，请点击<a on-click=\"resend-code\"><strong>这里</strong></a> 重新发送一个代码到您的手机.",
+
+	"phone_verify_guide": "请输入您的手机号码，然后点击发送代码",
+
+	"phone_verify_proccessing_msg": "我们正在验证您的电话号码...",
+
+	"phone_verify_proccess_done": "您的电话号码已经过验证！",
+
+	"phone_verify_guide_2": "请在我们刚刚发送的短信中输入代码：",
+
+	"phone_verify_send_code_btn": "立即验证",
+
+	"phone_verify_invalid_code": "验证码无效！",
+
+
+	"contact_page_title": "联系",
+
+	"contact_table_header_name": "名称",
+
+	"contact_label_send": "发送",
+
+	"contact_label_request": "请求",
+
+	"contact_label_sendrequest": "发送请求",
+
+	"contact_msg_confirm_delete": "你确定要删除这个联系人？",
+
+	"contact_msg_no_result": "您还没有任何联系人，当您与其他用户有活动时，他们的联系 将自动添加到这里。",
+
+	"contact_msg_verify_condition": "我们需要验证你的电子邮件地址和电话号码，然后才能发送和请求要钱，如果没有这些验证，你只能接受 钱，你现在想要核实一下吗？",
+
+
+	"common_anonymous_label": "匿名",
+
+	"common_search_title": "按日期搜索",
+
+	"common_label_noconnection": "没有互联网连接",
+
+	"common_label_cash_unit_upcase": "FLASH",
+
+	"common_label_email": "电子邮件",
+
+	"common_label_verify": "验证",
+
+	"common_label_verify_email_and_phone": "我们需要验证您的电子邮件地址和电话号码",
+
+	"common_label_verify_email": "请确认您的电子邮件地址",
+
+	"common_label_verify_phone": "请确认您的电话号码",
+
+	"common_alert_minimum_cash_unit": "金额必须至少为 1",
+
+	"common_alert_int_cash_unit": "金额必须是整数值",
+
+	"common_receive_money_alert": "xx（发件人电邮）发给你xx（金额）",
+
+	"common_like_sent_money_alert": "您刚刚喜欢并发送xx（recipient_email）xx（金额）令牌作为奖励",
+
+	"common_fountain_sent_money_alert": "你的一个喷泉刚把 xx（金额）令牌分配给 xx（收件人电子邮件）",
+
+	"common_text_request_money_rejected": "你的一个请求已被拒绝",
+
+	"common_text_request_money_cancelled": "发送给您的请求已被取消",
+
+	"common_text_request_money_accepted": "你的一个要求已经付清 ",
+
+	"common_got_money_request_alert": "xx（发件人）向您发送了xx（金额）的请求",
+
+	"common_label_error_title": "错误",
+
+	"common_error_duplicated_login": "因为你从另一个地方登录，Flashcoin 终止了这个会话，为了你自己我们不允许 同时进行两个会话。",
+
+	"common_verify_email_success_1": "我们已经验证了您的电子邮件地址。",
+
+	"common_verify_email_success_2": "完成您的个人资料",
+
+	"common_verify_email_success_3": "让他人 更容易找到你.",
+
+	"common_link_back_to_root_text": "返回 ",
+
+	"common_app_name_text": "Flashcoin",
+
+	"common_unlock_screen_message": "屏幕由于不活动而被锁定，请输入您的PIN码以解锁。",
+
+	"common_browser_not_compatible": "您的浏览器对于FlashCoin来说太旧了，请升级到最新版本。",
+
+	"common_ask_verivication_number": "输入验证码",
+
+	"common_ask_verivication_title": "两步验证",
+
+	"common_ask_verivication": "输入您 手机应用程序生成的验证码.",
+
+	"common_ask_email": "输入你的电子邮箱",
+
+	"common_ok_label": "OK",
+
+	"common_information_label": "信息",
+
+	"common_cancel_label": "取消",
+
+	"common_continue_label": "继续",
+
+	"common_clear_label": "清除",
+
+	"common_login_label": "登录",
+
+	"common_logout_label": "登出",
+
+	"common_balance_label": "结余",
+
+	"common_new_user_label": "新来的？",
+
+	"common_continue_password": "密码",
+
+	"common_continue_forgotpassword": "忘记密码？",
+
+	"common_continue_changepassword": "更改密码",
+
+	"common_continue_login": "登录",
+
+	"common_sendmoney_label": "确认付款申请",
+
+	"common_requestsuccess_label": "请求发送成功",
+
+	"common_close_label": "关闭",
+
+	"common_send_label": "发送",
+
+	"common_amount_label": "金额",
+
+	"common_note_label": "注意",
+
+	"common_incorrect_passcode_error": "密码错误",
+
+	"common_incorrect_tfacode_error": "不正确的代码，请重试。",
+
+	"common_create_account_failed": "创建帐户失败",
+
+	"common_max_tx_note_character": "最多字符数为 50",
+
+	"common_tx_detail_label": "交易详情",
+
+	"common_tx_sender_label": "发件人",
+
+	"common_tx_recipient_label": "收件人",
+
+	"common_tx_fee_label": "费用",
+
+	"common_tx_id_label": "ID",
+
+	"common_yes_label": "是",
+
+	"common_no_label": "否",
+
+	"common_update_label": "更新",
+
+	"common_service_unavailable_error": "服务不可用",
+
+	"request_page_title": "请求付款",
+
+	"request_page_desc": "输入下面的信息请求付款。",
+
+	"reset_password_title": "重设密码",
+
+	"reset_password_done": "重置密码成功",
+
+	"reset_password_back_to_login": "返回登录",
+
+	"reset_password_set_new_one": "设置新密码",
+
+	"reset_password_incorrect_answer": "您的答案 不正确的",
+
+	"password_too_short_title": "太短",
+
+	"password_too_short_desc": "您的密码太短",
+
+	"password_too_wesk_desc": "你的密码很弱",
+
+	"password_medium_desc": "你的密码中等",
+
+	"password_strong_desc": "你的密码很安全",
+
+	"delete_contact_label": "删除",
+
+	"money_request_fail": "发送请求失败",
+
+	"reject_request_label": "拒绝请求",
+
+	"reject_request_done": "你拒绝了一个请求。",
+	"reject_request_fail": "拒绝请求失败",
+	"send_money_to_himself_error": "你不能付款给你自己",
+
+	"request_money_to_himself_error": "您不能向您自己发送付款申请",
+
+	"invalid_send_receiver_error": "拒绝请求失败",
+	"invalid_request_receiver_error": "请指定一个用户发送支付请求",
+
+	"invalid_receiver_address_error": "地址无效！",
+
+	"change_password_label": "更改密码",
+
+	"enter_oldpassword_label": "输入 旧密码",
+
+	"reset_password_oldpassword_required": "请输入 密码以继续",
+
+	"reset_password_incorrect_oldpass": "密码错误",
+
+	"notify_balance_updated": "更新余额：%(balance)s",
+
+	"signup_sc_answer_required": "请回答安全问题，这些要求都是为您恢复密码的。",
+
+	"signup_create_account": "创建我的账户",
+
+	"signup_user_answer": "你的答案是",
+
+	"signup_confirm_password": "确认密码",
+
+	"signup_choose_password": "选择一个密码",
+
+	"signup_email_verified": "恭喜！你的邮箱地址已经过验证。",
+
+	"signup_last_step": "最后一步...",
+
+	"signup_username_length_error": "用户名必须在3到31个字符之间。",
+
+	"signup_email_already_exist": "此电子邮件的用户已经存在",
+
+	"signup_email_required_msg": "需要电子邮件注册！",
+
+	"signup_first_name_required_msg": "请输入您的名字！",
+
+	"signup_last_name_required_msg": "请输入您的姓氏！",
+
+	"signup_invalid_captcha": "请确认你不是机器人",
+
+	"signup_setuppasswoed_cas_fail": "无法设置密码，验证服务返回错误，请重试",
+
+	"signup_setuppasswoed_invalid_token": "电子邮件地址验证标记无效或过期，请重新注册",
+
+	"send_not_enough_fund_error": "你没有足够的硬币来支付这笔款项",
+
+	"send_not_enough_fee_error": "你没有足够的硬币来支付这笔款项",
+
+	"send_confirmtransaction_message": "确认交易",
+
+	"send_payment_message": "付款",
+
+	"send_payment_desc": "输入以下信息以启动安全付款。",
+
+	"send_transactionsent_message": "您的交易已经发送！",
+
+	"send_transactionprocessing_message": "正在处理您的交易！",
+
+	"send_transactionfee_label": "FLASH交易费",
+
+	"send_transactionfail_error": "交易失败",
+
+	"send_processtime_message": "处理时间：%(processing_duration)s 秒",
+
+	"send_success_message2": "您的交易很快就会出现在您的活动标签中",
+
+	"send_success_message": "交易成功"
+}

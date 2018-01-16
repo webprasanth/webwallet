@@ -2,7 +2,7 @@ import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
 import { ACTIVITIES } from '../../model/action-types';
-import { COMMON } from '../../model/action-types';
+import { COMMON, TABS } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
 import { getDisplayDate, getDisplayDateTime, decimalFormat } from '../../model/utils';
 import { FCEvent } from '../../model/types';
@@ -201,6 +201,17 @@ export default class HomeActivity extends BaseElement {
                 break;
             case ACTIVITIES.GET_TXN_DETAIL_FAILED:
             // Show error message
+                break;
+            case TABS.SET_ACTIVE:
+                //load transactions when user clicks activity tab.
+                //get active main nav tab
+                let activeNavTab = store.getState().tabData.tabs.filter((tab) => {
+                    return tab.isActive;
+                })[0];
+                
+                if(activeNavTab.id == 'activity')
+                    this.loadTxns();
+                break;
             default:
                 break;
         }

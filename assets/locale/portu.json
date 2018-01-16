@@ -1,4 +1,4 @@
-{
+﻿{
     "home_link_merchants"                      : "COMERCIANTES",
     "home_link_banks"                          : "BANCOS",
     "home_link_developers"                     : "DESENVOLVEDORES",
@@ -56,7 +56,7 @@
     "login_With_the_web_wallet"		       	   : "Com a carteira web, você pode usar um endereço de e-mail ou seu endereço público para enviar e receber moedas. As carteiras web são compatíveis com a maioria dos navegadores e dispositivos portáteis. Não é preciso baixar nem instalar nada, para a máxima conveniência.",
 
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io é fornecido pela Third Millennium Foundation for Economics and Culture, Liechtenstein. Apoiado pela comunidade FLASH.",
-    "login_by_clicking_create_wallet"	       : "Ao clicar em 'Criar Carteira', eu aceito os termos de serviço e a política de privacidade.",
+    "login_by_clicking_create_wallet"	       : "Ao clicar em 'Criar Carteira', eu aceito os <a  href=\"/terms-of-service.html\" target=\"_blank\">termos de serviço</a> e a <a href=\"/privacy-policy.html\" target=\"_blank\">política de privacidade.</a>",
     "login_Forgot_password"		       		   : "Esqueceu a senha?",
 
 
@@ -370,5 +370,9 @@
   "send_transactionfail_error"               : "Falha na transação",
   "send_processtime_message"                 : "Tempo de processamento: %(processing_duration)s segundo(s)",
   "send_success_message2"                    : "Sua transação aparecerá em seu registro de atividades em breve.",
-  "send_success_message"                     : "Transação bem sucedida"
+  "send_success_message"                     : "Transação bem sucedida",
+  
+  "common_firstname"						   : "Primeiro nome",
+	"common_lastname"						   : "Último nome",
+	"common_emailaddress"					   : "endereço de e-mail"
 }
