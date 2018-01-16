@@ -12,6 +12,7 @@
     <script src="assets/lib/jquery/jquery-3.1.1.min.js"></script>
     <script src="assets/lib/bootstrap/bootstrap.min.js"></script>
     <script src="assets/lib/init.js"></script>
+	<script src="assets/lib/localize-index.js"></script>
     <style scoped>
         .outer-container {
             position: absolute;
@@ -26,6 +27,13 @@
         }
     </style>
     <script>
+		if (localStorage.getItem("id_lang") === null || localStorage.getItem("id_lang") == 'en') {
+		  localStorage.setItem('id_lang', 'en-v1.1');
+		}
+		
+		initIndexLocal(function () {});
+			
+			
         var captchaId = null;
         var userLocation = null;
         var emailRegex =
@@ -42,19 +50,19 @@
             var password = $("#loginpassword").val();
 
             if (!email || email.trim().length == 0) {
-                showError('Email is needed to login');
+                showError(writeTextIndexLocale('login_email_reuired_msg', {}, true));
 
                 return;
             }
             var checkEmail = email.toLowerCase().match(emailRegex);
 
             if (checkEmail === null) {
-                showError('Invalid email format');
+                showError(writeTextIndexLocale('login_invalid_email_msg', {}, true));
                 return;
             }
 
             if (!password || password.trim().length == 0) {
-                showError('Password is needed to login');
+                showError(writeTextIndexLocale('login_password_reuired_msg', {}, true));
                 return;
             }
 
@@ -75,7 +83,7 @@
                     localStorage.setItem("flc-loginresp", JSON.stringify(res));
                     window.location.href = "home.html";
                 } else {
-                    showError('Email or password is not correct');
+                    showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
                 }
             });
         }
@@ -103,52 +111,53 @@
         }
 
         function setLanguage(sl) {
-            if(!sl.value) sl.value = 'en';
+            if(!sl.value) sl.value = 'en-v1.1';
             localStorage.setItem('id_lang', sl.value);
+			location.reload();
         }
 
         function initLandingPage() {
-            localStorage.setItem('id_lang', 'en');
-            // Handle FAQ onclick
-            $('.faq-category li h4').bind('click', function () {
-                let li_parent = $(this).parent('li');
-                let ul_parent = li_parent.parent('ul');
+			$('#select-language').val(localStorage.getItem('id_lang'));
+			// Handle FAQ onclick
+			$('.faq-category li h4').bind('click', function () {
+				let li_parent = $(this).parent('li');
+				let ul_parent = li_parent.parent('ul');
 
-                if (li_parent.hasClass('active')) {
-                    li_parent.removeClass('active');
-                    li_parent.children('.answer-faq').slideUp();
-                } else {
-                    $('.faq-category ul').removeClass('show-sub');
-                    ul_parent.addClass('show-sub');
-                    $('.faq-category ul.show-sub li').removeClass('active');
-                    $('.faq-category ul.show-sub .answer-faq').slideUp();
-                    li_parent.addClass('active');
-                    li_parent.children('.answer-faq').slideDown();
-                }
-            });
+				if (li_parent.hasClass('active')) {
+					li_parent.removeClass('active');
+					li_parent.children('.answer-faq').slideUp();
+				} else {
+					$('.faq-category ul').removeClass('show-sub');
+					ul_parent.addClass('show-sub');
+					$('.faq-category ul.show-sub li').removeClass('active');
+					$('.faq-category ul.show-sub .answer-faq').slideUp();
+					li_parent.addClass('active');
+					li_parent.children('.answer-faq').slideDown();
+				}
+			});
 
-            // Handle click BACK TO TOP button
-            $('#back-to-top').click(function () {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 500);
-            });
+			// Handle click BACK TO TOP button
+			$('#back-to-top').click(function () {
+				$('html, body').animate({
+					scrollTop: 0
+				}, 500);
+			});
 
-            let alink_download = $('.slide-1 a.download-flash-link');
-            $(alink_download).click(function () {
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000);
-                return false;
-            });
+			let alink_download = $('.slide-1 a.download-flash-link');
+			$(alink_download).click(function () {
+				$('html, body').animate({
+					scrollTop: $($(this).attr('href')).offset().top
+				}, 1000);
+				return false;
+			});
 
-            let alink = $('.slide-2 a');
-            $(alink).click(function () {
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000);
-                return false;
-            });
+			let alink = $('.slide-2 a');
+			$(alink).click(function () {
+				$('html, body').animate({
+					scrollTop: $($(this).attr('href')).offset().top
+				}, 1000);
+				return false;
+			});
         }
 
         function showError(message) {
@@ -160,7 +169,7 @@
             var email = $("#email-signup").val();
 
             if (!email || email.trim().length == 0) {
-                showError('Email is needed for signing up!');
+                showError(writeTextIndexLocale('signup_email_required_msg', {}, true));
 
                 $("#email-signup").focus();
 
@@ -169,7 +178,7 @@
             var checkEmail = email.toLowerCase().match(emailRegex);
 
             if (checkEmail === null) {
-                showError('Invalid email format');
+                showError(writeTextIndexLocale('login_invalid_email_msg', {}, true));
                 $("#email-signup").focus();
                 return false;
             }
@@ -182,12 +191,12 @@
             var lastName = $('#lastname').val();
 
             if (!firstName || firstName.trim().length == 0) {
-                showError('Please enter your first name!');
+                showError(writeTextIndexLocale('signup_first_name_required_msg', {}, true));
                 return false;
             }
 
             if (!lastName || lastName.trim().length == 0) {
-                showError('Please enter your last name!');
+                showError(writeTextIndexLocale('signup_last_name_required_msg', {}, true));
                 return false;
             }
 
@@ -227,7 +236,7 @@
 
             var captchaResp = grecaptcha.getResponse(captchaId);
             if (!captchaResp || captchaResp.length == 0) {
-                showError('Please verify that you are not a robot');
+                showError(writeTextIndexLocale('signup_invalid_captcha', {}, true));
                 return;
             }
 
@@ -266,9 +275,9 @@
                     grecaptcha.reset(captchaId);
 
                     if (resp.status == 'EMAIL_IN_USED') {
-                        showError('An user with this email already exists');
+                        showError(writeTextIndexLocale('signup_email_already_exist', {}, true));
                     } else if (resp.status == 'RECAPTCHA_NOT_VERIFIED') {
-                        showError('Please verify that you are not a robot');
+                        showError(writeTextIndexLocale('signup_invalid_captcha', {}, true));
                     } else {
                         showError(resp.reason);
                     }
@@ -319,6 +328,15 @@
                 });
             }
         }
+		
+		function setLocalePlaceholders()
+		{
+			$('#firstname').attr('placeholder', writeTextIndexLocale('common_firstname', {}, true));
+			$('#lastname').attr('placeholder', writeTextIndexLocale('common_lastname', {}, true));
+			$('#email-signup').attr('placeholder', writeTextIndexLocale('common_emailaddress', {}, true));
+			$('#identifer').attr('placeholder', writeTextIndexLocale('common_emailaddress', {}, true));
+			$('#loginpassword').attr('placeholder', writeTextIndexLocale('common_continue_password', {}, true));
+		}
 
         $(document).ready(function () {
             // babv need be commented
@@ -332,6 +350,7 @@
             $("#create-account-btn").click(onSignupButtonClick);
 
             initLandingPage();
+			setLocalePlaceholders();
             checkLocation();
         });
     </script>
@@ -345,9 +364,10 @@
         <p class="link-top text-right container" style="margin-top: 7px;font-size: 17px;">
             <a href="https://explorer.flashcoin.io/">Explorer</a> | <a href="https://charts.flashcoin.io/">Charts</a>
             <select class="select-language" id="select-language" onchange="setLanguage(this);">
-                <option value='en'>English</option>
+                <option value='en-v1.1'>English</option>
                 <option value='es'>Español</option>
                 <option value='portu'>Portugues</option>
+				<option value='chinese-simplified-v1.1'>简体中文）</option>
                 <option value='marathi-v1.1'>मराठी</option>
                 <option value='tamil-v1.1'>தமிழ்</option>
                 <option value='bengali-v1.1'>বাঙালি</option>
@@ -373,11 +393,11 @@
                                 <input id="loginpassword" type="password" class="form-control" placeholder="password">
                             </div>
                             <div class="btn-login form-group">
-                                <button id="btn-dologin" class="btn btn-default">Login</button>
+                                <button id="btn-dologin" class="btn btn-default"><script>writeTextIndexLocale('common_login_label')</script></button>
                             </div>
                         </div>
                         <div class="forgot-pwd col-xs-12" style="padding-left: 13px;">
-                            <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)">Forgot password?</a>
+                            <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)"><script>writeTextIndexLocale('common_continue_forgotpassword')</script></a>
                         </div>
                         <p class="text-center create-an-account" style="font-size: 15px;">Don't have an account? <a href="#" onclick="showSignUp()" class="btn-move-signup">Create one</a></p>
                     </div>
@@ -388,9 +408,9 @@
                     <div class="content-su row">
                         <div class="col-xs-12 col-sm-5 text-center pull-right" id="content-slide1">
                             <div class="signup-content">
-                                <h2 class="">Get a Web Wallet</h2>
-                                <p class="p1-line">Earn and Spend</p>
-                                <p class="p1-line">Share with Friends</p>
+                                <h2 class=""><script>writeTextIndexLocale('login_Get_web_wallet')</script></h2>
+                                <p class="p1-line"><script>writeTextIndexLocale('login_Earn_and_spend')</script></p>
+                                <p class="p1-line"><script>writeTextIndexLocale('login_Share_friends')</script></p>
                                 <div id="notify-check" style="display:none">
                                     <div class="ui center aligned segment">
                                         <p>We sent you an email with a link to activate your account</p>
@@ -413,9 +433,9 @@
                                             <div id="gcaptcha"></div>
                                         </div>
                                     </form>
-                                    <p class="p2-line">By clicking Create Wallet, I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a>                                            and <a href="/privacy-policy.html" target="_blank">Privacy Policy.</a></p>
-                                    <div id="create-account-btn" class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary">Create Wallet</a></div>
-                                    <a href="#download-flash" class="download-flash-link" style="font-size: 18px; color: #8ac9f3;">Download FLASH QT wallets</a>
+                                    <p class="p2-line"><script>writeTextIndexLocale('login_by_clicking_create_wallet')</script></p>
+                                    <div id="create-account-btn" class="btn-create-wallet form-group" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn btn-primary"><script>writeTextIndexLocale('login_create_wallet_label')</script></a></div>
+                                    <a href="#download-flash" class="download-flash-link" style="font-size: 18px; color: #8ac9f3;"><script>writeTextIndexLocale('login_Download_flash_QT_wallet')</script></a>
                                     <p class="back-login" style="border-top: 1px solid #ddd;margin-top: 20px;width: 80%;margin: 20px auto 50px;"><a href="#" onclick="backLogin()" style="color: #ffffff; font-size: 14px;"><img style="width: 8px;margin-right: 5px;margin-top: -3px;" src="assets/images/pages/back.png">Back to Login</a></p>
                                 </div>
                             </div>
@@ -452,23 +472,25 @@
                             <i class="fa"><img src="assets/images/pages/home-page/google-plus.png"></i></a>
                         <h2><a target="_blank" href="https://plus.google.com/u/0/b/110236490072104998071/110236490072104998071">Google Plus</a></h2>
                     </div>
+					<!--
                     <div class="col text-center">
                         <a class="slack" title="Slack" href="https://flashcoin.slack.com/messages/@slackbot/" target="_blank"><i class="fa"><img src="assets/images/pages/home-page/slack_logo_240.png"></i></a>
                         <h2><a target="_blank" href="https://join.slack.com/t/flashcoin/shared_invite/MjI4NTAxNzQxODQ1LTE1MDMwMzM0MDMtMTA2OGJjY2Y5NA">Join FLASHcoin Slack</a></h2>
                     </div>
+					-->
                     <div class="col text-center">
                         <a title="BTC" href="https://bitcointalk.org/index.php?topic=1605453.0" target="_blank"><i class="fa"><img src="assets/images/pages/home-page/bitcoin.png"></i></a>
                         <h2><a target="_blank" href="https://bitcointalk.org/index.php?topic=1605453.0">Bitcointalk</a></h2>
                     </div>
                 </div>
-                <div class="content col-xs-12"><p>FLASH is designed for small payments, due to its low transaction fees, high speed, and throughput, all while retaining its BTC/LTC heritage and functionality.  This makes FLASH ideal for loyalty, registration and messaging applications, and is perfect for customers and businesses using small payments.  We know efficiency is essential for most transactions, so we benchmarked FLASH up to 25,000 txn/sec on a $700 i7 computer consuming less than 80 watts of power.  Because of this, FLASH is eco-friendly and easy on your pocketbook.</p></div>
+                <div class="content col-xs-12"><p><script>writeTextIndexLocale('login_Flash_is_designed_for_small_payments')</script></p></div>
                 <div class="col-xs-12">
                     <ul>
-                        <li><p>The number of coins is fixed and completely issued.</p></li>
-                        <li><p>There is zero inflation.</p></li>
-                        <li><p>Processing is optimized and tested for efficiency and high volume.</p></li>
-                        <li><p>There is no developer “slush fund”.</p></li>
-                        <li><p>Projects can be developed by anyone and donations for the developers solicited from the community.</p></li>
+                        <li><p><script>writeTextIndexLocale('login_The_number_of_coins')</script></p></li>
+                        <li><p><script>writeTextIndexLocale('login_Zero_inflation')</script></p></li>
+                        <li><p><script>writeTextIndexLocale('login_Processing_is_optimized')</script></p></li>
+                        <li><p><script>writeTextIndexLocale('login_No_developer_slush_fund')</script></p></li>
+                        <li><p><script>writeTextIndexLocale('login_Project_can_be_developed_by_anyone')</script></p></li>
                     </ul>
                 </div>
             </div>
@@ -476,9 +498,9 @@
         <div class="slide-4">
             <div class="container">
                 <div class="group-content">
-                    <h2>Wallets</h2>
+                    <h2><script>writeTextIndexLocale('login_wallet_label')</script></h2>
                     <div class="text col-xs-12">
-                        <p>FLASH supports a number of online wallets including Coinomi, Coin Payments, QT (Window, Mac, Linux) and an easy to use online wallet designed for the mass consumer market. If you can make online payments, you already know how to use FLASH.</p>
+                        <p><script>writeTextIndexLocale('login_flash_supports')</script></p>
                     </div>
                     <div>
                         <div class="col-xs-6 text-center">
@@ -495,9 +517,8 @@
             <div class="container">
                 <div class="col-xs-12 col-sm-4">
                     <a class="for-desktop hidden-xs" href="https://wallet.flashcoin.io/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a>
-                    <h2 class="mobile"><a class="for-mobile hidden-sm hidden-md hidden-lg" href="/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a> Web Wallets</h2>
-                    <p>With the web wallet, you can use an email address or your public address for sending and receiving coins.</p>
-                    <p>The web wallet supports most browsers and mobile devices. There's nothing to download or install for maximum convenience.</p>
+                    <h2 class="mobile"><a class="for-mobile hidden-sm hidden-md hidden-lg" href="/"><img src="assets/images/pages/home-page/flash-icon.png" width="170"/></a><script>writeTextIndexLocale('login_bottom_web_wallets_label')</script></h2>
+                    <p><script>writeTextIndexLocale('login_With_the_web_wallet')</script></p>
                 </div>
                 <div class="col-xs-12 col-sm-8 text-center" style="border-left: 2px dotted #999;">
                     <h2 class="title text-center">Download FLASH QT wallets</h2>
@@ -549,7 +570,7 @@
     </div>
     <footer class="footer col-xs-12">
         <div class="container text-center">
-            <p class="hidden-xs">Flashcoin.io is provided by the Third Millennium Foundation for Economics and Culture, Liechtenstein. Supported by the FLASH community.</p>
+            <p class="hidden-xs"><script>writeTextIndexLocale('login_flashcoin_provided_by')</script></p>
         </div>
     </footer>
 </div>

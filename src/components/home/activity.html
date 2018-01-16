@@ -46,7 +46,7 @@
 					<h5 class="title-table">{currentActiveTabName} from {fromDateObject ? getDisplayDate(fromDateObject.datepicker('getDate')) : ''} to {toDateObject
 						? getDisplayDate(toDateObject.datepicker('getDate')) : ''}</h5>
 					<div class="table-responsive">
-						<table class="table table-hover table-striped" show="{txns.length > 0}">
+						<table class="table table-hover table-striped transaction-activity-table" show="{txns.length > 0}">
 							<thead>
 								<tr>
 									<th>{getText('activity_table_header_date')}</th>
@@ -54,6 +54,7 @@
 									<th>{getText('activity_table_header_name')}</th>
 									<th>{getText('activity_table_header_amount')}</th>
 									<th>{getText('activity_table_header_note')}</th>
+									<!--<th>{getText('pending_table_header_status')}</th>-->
 								</tr>
 							</thead>
 							<tbody>
@@ -63,6 +64,7 @@
 									<td>{txn.type==2 ? (txn.sender_display_name?txn.sender_display_name:'Anonymous') : (txn.receiver_display_name?txn.receiver_display_name:'Anonymous')}</td>
 									<td style="{txn.type==2 ? 'color:#008000' : 'color:#DB2828'}">{txn.type==2 ? '' : '-'}{formatDecimalAmount(txn.amount)}</td>
 									<td>{txn.memo}</td>
+									<!--<td>{txn.status}</td>-->
 								</tr>
 							</tbody>
 						</table>

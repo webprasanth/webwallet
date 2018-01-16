@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/css/reponsive-style.css">
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="assets/scripts/bootstrap.min.js"></script>
+  <script src="assets/lib/bootstrap/bootstrap.min.js"></script>
 
   <script type="text/javascript">
       var captchaId = null;
@@ -82,7 +82,7 @@
           body: content,
           g_recaptcha_response: capttraRes
         }
-
+        $('#loading-indicator').show();
         $.post(url, params, function(res){
             $('#messageDialog').modal('show');
               $("#subject").val("");
@@ -90,6 +90,11 @@
               $("#name").val("");
               $("#content").val("");
               grecaptcha.reset(captchaId);
+        }).fail(function() {
+          $('#errorMessage').html("We couldn't process your request, Please try again OR Write us at support@flashcoin.in");
+          $('#errorModal').modal('show');
+        }).always(function() {
+          $('#loading-indicator').hide();
         });
       }
 
@@ -121,8 +126,7 @@
         <h2><img class="m15r" src="assets/images/pages/icon-support.png" width="40px" />NEED SOME HELP RIGHT NOW</h2>
         <p style="font-size:18px">You can submit a support request here</p>
       </div>
-      <div>
-
+      <div style="position: relative;">
         <div class="col-xs-12">
           <div class="form-group col-xs-12 col-sm-6 p15">
             <input id="name" class="form-control" type="text" name="name" placeholder="Name">
@@ -140,7 +144,9 @@
         <div class="col-xs-12 col-sm-6 p15">
           <div id="gcaptcha"></div>
         </div>
-
+        <div class="col-xs-12" id="loading-indicator">
+          <img src="/assets/images/loading.svg"  />
+        </div>
         <div class="btn-submit col-xs-12 col-sm-6 text-right p15">
           <button id="submitBtn" class="btn btn-warning text-right">Submit</button>
         </div>
