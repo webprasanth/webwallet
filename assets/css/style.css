@@ -586,10 +586,12 @@ h5.title-table{
 .request-page .title-page h2.title{
     color: #008000  ;
 }
+.send-page .openQRcode_container{
+	padding-left: 30px;
+}
 .send-page .openQRcode span{
-    font-size: 15pt;
-    top: 0px;
-    right: 2px;
+    font-size: 26pt;
+	cursor: pointer;
 }
 /*==============*/
 /*Style list account*/
