@@ -47,13 +47,22 @@ export default class AccountSetting extends BaseElement {
                     var qrCode = new QRCode("tfa_qrcode");
                     qrCode.makeCode(decodeURIComponent(otpUri));
                 }
+				
+                var str = document.getElementById("tfa_qrcode").title;
+                var res = str.split("secret=");
+                var totp_key = res[1].substring(0,16);
+                $("#2fa_recovery_key").text(totp_key);
                 break;
             case PROFILE.ENABLE_2FA_FAILED:
                 super.showError('', this.getText('profile_twofa_otp_fail'));
                 break;
             case PROFILE.DISABLE_2FA_SUCCESS:
                 this.userProfile.totp_enabled = 0;
-                this.is2FA = false;
+                this.is2FA = false;	
+                var list = document.getElementById("tfa_qrcode");
+                while(list.hasChildNodes()){
+                	list.removeChild(list.childNodes[0]);
+                }
                 super.showMessage('', this.getText('profile_twofa_on_ok'));
                 break;
             case PROFILE.DISABLE_2FA_FAILED:
@@ -88,6 +97,10 @@ export default class AccountSetting extends BaseElement {
     toogle2FA() {
         if (this.is2FA && !this.userProfile.totp_enabled) {
             this.is2FA = false;
+            var list = document.getElementById("tfa_qrcode");
+            while(list.hasChildNodes()){
+            	list.removeChild(list.childNodes[0]);
+            }		
             return;
         }
 
