@@ -8,6 +8,7 @@
       "bitcoinjs-lib": "npm:bitcoinjs-lib@^2.3.0",
       "bs58check": "npm:bs58check@^1.2.0",
       "core-js": "npm:core-js@^2.4.1",
+      "felipenmoura/qr-code-scanner": "github:felipenmoura/qr-code-scanner@master",
       "lodash": "npm:lodash@^4.16.6",
       "moment-timezone": "npm:moment-timezone@^0.5.9",
       "redux": "npm:redux@^3.6.0",

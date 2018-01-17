@@ -377,5 +377,9 @@
 	
 	"common_firstname"						   : "First name",
 	"common_lastname"						   : "Last name",
-	"common_emailaddress"					   : "Email address"
+	"common_emailaddress"					   : "Email address",
+	
+	"or_scan_qr_code"                          : "OR Scan QR",
+    "error_in_scan_qr"                         : "We couldn't scan QR code, please try again",
+    "timeout_in_scan_qr"                       : "Time out while scanning QR code, please try again"
 }
