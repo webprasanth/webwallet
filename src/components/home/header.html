@@ -17,7 +17,8 @@
 					<a><img src="assets/images/pages/logo.png" /></a>
 				</div>
 				<div class="top-balance text-center col-xs-12 color-custom">
-					<p onclick={onLoadBalanceButtonClick} title="Click to refresh balance">
+					<div class="header-qr-desktop" onclick={onShowWalletAddressClick}><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span></div>
+					<p class="top-balance-text" onclick={onLoadBalanceButtonClick} title="Click to refresh balance">
 						<img src={refreshIconUrl} height="20px" />
 						<span class="hidden-xs" >{getText('common_balance_label')}:</span> {balance} {getText('common_label_cash_unit_upcase')}
 					</p>

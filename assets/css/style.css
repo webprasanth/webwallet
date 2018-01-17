@@ -372,6 +372,16 @@ h5.title-table{
     left: 50%;
     margin-left: -150px;
     font-size: 14pt;
+    cursor: pointer;
+}
+.header-SC .top-balance .top-balance-text{
+    float: right;
+}
+.header-SC .top-balance .header-qr-desktop{
+    font-size: 30px;
+    padding: 2px 10px 0;
+    cursor: pointer;
+    float: right;
 }
 .header-SC .header-right{
     float: right;
@@ -388,6 +398,12 @@ h5.title-table{
     border-radius: 50%;
     height:35px;
     width:35px;
+}
+.wallet-address-popup #header-qrcode-desktop {
+    text-align: center;
+}
+.wallet-address-popup #header-qrcode-desktop img{
+    display: inline !important;
 }
 .header-SC .header-right .email-account{
     font-size: 14px;

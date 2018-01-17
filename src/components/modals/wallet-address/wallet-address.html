@@ -1,0 +1,22 @@
+<wallet-address>
+	<div class="modal fade" id="walletAddressDlg" tabindex="-1" role="dialog">
+		<div class="modal-dialog wallet-address-popup" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{getText('profile_label_wallet_adress')}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="items">
+			        	<div id="header-qrcode-desktop"></div>
+			            <br>
+			            <p each={key in publicKeyList} class="form-control address-unit">{key.address}</p>
+			        </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</wallet-address>
