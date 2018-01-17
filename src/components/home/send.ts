@@ -142,13 +142,24 @@ export default class HomeSend extends BaseElement {
 
         this.sendWallet.memo = $('#payment-memo').val();
 
-        return riot.mount('#confirm-send', 'send-money-confirm', {
-            to: this.sendWallet.address,
-            amount: amount,
-            fee: fee,
-            wallet: this.sendWallet,
-            cb: this.clearForms.bind(this)
-        });
+        if (!store.getState().userData.user.totp_enabled) {
+            return riot.mount('#confirm-send', 'send-money-confirm', {
+            	to: this.sendWallet.address,
+            	amount: amount,
+            	fee: fee,
+            	wallet: this.sendWallet,
+            	cb: this.clearForms.bind(this)
+            });
+        }
+        else {
+            riot.mount('#confirm-send', 'twofa-verification-sendtxn',{
+                    to: this.sendWallet.address,
+                    amount: amount,
+                    fee: fee,
+                    wallet: this.sendWallet,
+                    cb: this.clearForms.bind(this)
+                });
+            }
     }
 
     onContinueButtonClick(event: Event) {

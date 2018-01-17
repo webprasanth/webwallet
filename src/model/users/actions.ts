@@ -313,6 +313,23 @@ export const userActions = {
     check2faCodeFailed(resp) {
         return { type: USERS.CHECK_2FA_CODE_FAILED, data: resp };
     },
+	check2faCodeSendtxn(params) {
+        return (dispatch) => {
+            UserService.singleton().check2faCodeSendtxn(params).then((resp: any) => {
+                if (resp.rc === 1) {
+                    dispatch(userActions.check2faCodeSuccessSendtxn(resp));
+                } else {
+                    dispatch(userActions.check2faCodeFailedSendtxn(resp));
+                }
+            });
+        };
+    },
+    check2faCodeSuccessSendtxn(resp) {
+        return { type: USERS.CHECK_2FA_CODE_SUCCESS_TXN, data: resp };
+    },
+    check2faCodeFailedSendtxn(resp) {
+        return { type: USERS.CHECK_2FA_CODE_FAILED_TXN, data: resp };
+    },
     getMyWallets(auth_version, password) {
         return (dispatch) => {
             UserService.singleton().getMyWallets().then((resp: any) => {

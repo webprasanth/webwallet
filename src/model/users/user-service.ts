@@ -83,6 +83,13 @@ export default class UserService {
             });
         });
     }
+	check2faCodeSendtxn(params) {
+        return new Promise((resolve) => {
+            AppService.getInstance().check2faCodeSendtxn(params, resp => {
+                resolve(resp);
+            });
+        });
+    }
 
     getMyWallets() {
         return new Promise((resolve) => {
