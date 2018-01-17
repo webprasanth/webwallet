@@ -116,6 +116,8 @@
     "profile_msg_email_verified"               : "आपला ईमेल पत्ता सत्यापित केला गेला आहे. ",
     "profile_msg_phone_verify_remind"          : "आपण पैसे पाठवण्यासाठी आणि पैसे पाठविण्यापूर्वी आम्हाला आपला फोन नंबर सत्यापित करण्याचीही गरज आहे.",
     "profile_error_password_empy"              : "संकेतशब्द रिक्त असू शकत नाही",
+    "profile_error_password_min_length"        : "संकेतशब्दामध्ये किमान 8 वर्ण असणे आवश्यक आहे",
+    "profile_error_password_alphanum"          : "संकेतशब्दामध्ये किमान 1 अंक, 1 अप्परकेस आणि 1 लोअरकेस वर्ण असणे आवश्यक आहे",
     "profile_error_incorrect_current_pass"     : "वर्तमान संकेतशब्द योग्य नाही!",
     "profile_error_incorrect_confirm_pass"     : "पुष्टी केलेला संकेतशब्द बरोबर नाही!",
     "profile_title_password_changed"           : "संकेतशब्द बदलला गेला आहे",

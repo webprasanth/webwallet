@@ -115,6 +115,8 @@
     "profile_msg_email_verified"               : "Your email address has been verified. ",
     "profile_msg_phone_verify_remind"          : "We also need to verify your phone number before you can send and request money.",
     "profile_error_password_empy"              : "Password cannot be empty",
+    "profile_error_password_min_length"        : "Password must have at least 8 characters",
+    "profile_error_password_alphanum"          : "Password must contain at least 1 digit, 1 uppercase and 1 lowercase character",
     "profile_error_incorrect_current_pass"     : "Current password is not correct!",
     "profile_error_incorrect_confirm_pass"     : "Confirmed password is not correct!",
     "profile_title_password_changed"           : "Password has been changed",
