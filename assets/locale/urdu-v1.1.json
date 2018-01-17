@@ -116,6 +116,8 @@
     "profile_msg_email_verified"               : " آپ کے ای میل پتہ كى تصدیق کی جاچكى ہے.",
     "profile_msg_phone_verify_remind"          : " رقم کے بھیجنے اور درخواست دینے سے قبل ہمیں آپ کے فون نمبر کی بھی توثیق کرنے کی ضرورت ہے.",
     "profile_error_password_empy"              : " پاس ورڈ خالی نہیں ہوسکتا",
+    "profile_error_password_min_length"	       : "پاس ورڈ میں کم از کم 8 حروف ہونا ضروری ہے",
+    "profile_error_password_alphanum"	       : "پاس ورڈ میں کم سے کم 1 عددی، 1 بڑا اور 1 چھوٹا لفظ ہونا لازمی ہے",
     "profile_error_incorrect_current_pass"     : " موجودہ پاس ورڈ درست نہیں ہے!",
     "profile_error_incorrect_confirm_pass"     : " توثیقی شده پاس ورڈ صحیح نہیں ہے!",
     "profile_title_password_changed"           : " پاس ورڈ بدل گیا ہے",

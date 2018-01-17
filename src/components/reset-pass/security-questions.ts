@@ -103,7 +103,17 @@ export default class SecurityQuestions extends BaseElement {
             this.errMessage = this.getText('profile_error_password_empy');
             return;
         }
-
+		
+        if (password.length <8) {
+            this.errMessage = this.getText('profile_error_password_min_length');
+            return;
+        }
+			
+        if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)){
+            this.errMessage = this.getText('profile_error_password_alphanum');
+            return;
+        }
+		
         if (password !== confirmPassword) {
             this.errMessage = this.getText('profile_error_incorrect_confirm_pass');
             return;

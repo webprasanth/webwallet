@@ -118,6 +118,8 @@
     "profile_msg_email_verified"               : "आपका ईमेल पता सत्यापित कर दिया गया है। ",
     "profile_msg_phone_verify_remind"          : "पैसे भेजने और भेजने से पहले हमें अपने फोन नंबर को भी सत्यापित करना होगा।",
     "profile_error_password_empy"              : "पासवर्ड रिक्त नहीं हो सकता",
+    "profile_error_password_min_length"        : "पासवर्ड में कम से कम 8 वर्ण होने चाहिए",
+    "profile_error_password_alphanum"          : "पासवर्ड में कम से कम 1 अंक, 1 अपरकेस और 1 लोअरकेस वर्ण होना चाहिए",
     "profile_error_incorrect_current_pass"     : "वर्तमान पासवर्ड सही नहीं है!",
     "profile_error_incorrect_confirm_pass"     : "पुष्टि की गई पासवर्ड सही नहीं है!",
     "profile_title_password_changed"           : "पासवर्ड बदला जा चुका है",
