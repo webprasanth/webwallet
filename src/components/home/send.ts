@@ -5,7 +5,7 @@ import CommonService from '../../model/common/common-service';
 import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
 import _ from 'lodash';
-import qrCodeScanner from 'felipenmoura/qr-code-scanner';
+import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 
@@ -178,8 +178,13 @@ export default class HomeSend extends BaseElement {
 						if (containsColumn >= 0) {
 							result = result.substring((containsColumn + 1), result.length);
 						}
-						$('#to-email-id').val(result);
-						this.checkAddress();
+                        if(result.length != 34)
+                            QRcodeScanError();
+                        else
+                        {
+                            $('#to-email-id').val(result);
+                            this.checkAddress();
+                        }
 					},
 			onError: (err) => this.QRcodeScanError(err),
 			onTimeout: () => this.QRcodeScanTimeout()
