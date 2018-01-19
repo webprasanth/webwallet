@@ -28,6 +28,9 @@ export default class HomeHeader extends BaseElement {
         this.loadBalance();
 
         let user = store.getState().userData.user;
+        if (user.balance) {
+            this.balance = user.balance;
+        }
         if (user.profile_pic_url) {
             this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
         }
