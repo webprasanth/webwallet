@@ -364,6 +364,7 @@
     "send_confirmtransaction_message"          : "பரிவர்த்தனை உறுதிபடுத்தவும்",
     "send_payment_message"                     : "பணம் அனுப்பு",
     "send_payment_desc"                        : "பாதுகாப்பான கட்டணத்தைத் தொடங்க கீழே உள்ள தகவலை உள்ளிடவும்.",
+	"send_payment_email_placeholder"           : "மின்னஞ்சல் அல்லது பொது முகவரி உள்ளிடவும்",
     "send_transactionsent_message"             : "உங்கள் பரிவர்த்தனை அனுப்பப்பட்டது!",
     "send_transactionprocessing_message"       : "உங்கள் பரிவர்த்தனை செயலாக்கப்படுகின்றன!",
     "send_transactionfee_label"                : "FLASH பரிவர்த்தனை கட்டணம்",

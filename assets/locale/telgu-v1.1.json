@@ -345,6 +345,7 @@
     "send_confirmtransaction_message"          : "లావాదేవీని ధ్రువీకరించండి",
     "send_payment_message"                     : "నగదు పంపండి",
     "send_payment_desc"                        : "సురక్షితమైన చెల్లింపును ప్రారంభించడానికి దిగువన సమాచారాన్ని ఇవ్వండి.",
+	"send_payment_email_placeholder"           : "ఇమెయిల్ లేదా పబ్లిక్ చిరునామాను నమోదు చేయండి",
     "send_transactionsent_message"             : "మీ చెల్లింపు పంపించబడింది!",
     "send_transactionprocessing_message"       : "మీ లావాదేవీ ప్రక్రియ జరుగుతోంది!",
     "send_transactionfee_label"                : "ఫ్లాష్ లావాదేవీ రుసుం",

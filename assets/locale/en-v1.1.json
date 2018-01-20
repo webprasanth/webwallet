@@ -367,6 +367,7 @@
     "send_confirmtransaction_message"          : "Confirm Transaction",
     "send_payment_message"                     : "Send Payment",
     "send_payment_desc"                        : "Enter the information below to initiate a secure payment.",
+	"send_payment_email_placeholder"           : "Enter email or public address",
     "send_transactionsent_message"             : "Your transaction has been sent!",
     "send_transactionprocessing_message"       : "Your transaction are processing!",
     "send_transactionfee_label"                : "FLASH transaction fee",

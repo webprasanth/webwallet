@@ -362,6 +362,7 @@
 "send_confirmtransaction_message":"거래 확인",
 "send_payment_message":"전송 지급",
 "send_payment_desc":"보안 지급을 시작하려면 아래 정보를 입력하십시오.",
+"send_payment_email_placeholder"           : "Enter email or public address",
 "send_transactionsent_message":"당신의 트랜잭션이 전송되었습니다!",
 "send_transactionprocessing_message":"당신의 트랜잭션은 처리 중입니다!",
 "send_transactionfee_label":"FLASH거래 수수료",
