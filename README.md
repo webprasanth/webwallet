@@ -1,3 +1,7 @@
+[![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
+
+
+
 The project use JSPM(v0.17 beta) to manage packages and use local-web-server to host local web pages.
 
 Let run steps in below:
