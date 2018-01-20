@@ -354,6 +354,7 @@
     "send_confirmtransaction_message"          : "ವ್ಯವಹಾರ ಖಾತ್ರಿಪಡಿಸಿ",
     "send_payment_message"                     : "ಪಾವತಿ ಕಳುಹಿಸಿ",
     "send_payment_desc"                        : "ಸುರಕ್ಷಿತ ಪಾವತಿಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಕೆಳಗಿನ ವಿವರಗಳನ್ನು ದಾಖಲಿಸಿ",
+	"send_payment_email_placeholder"           : "ಇಮೇಲ್ ಅಥವಾ ಸಾರ್ವಜನಿಕ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
     "send_transactionsent_message"             : " ನಿಮ್ಮ ವ್ಯವಹಾರವನ್ನು ಕಳುಹಿಸಿ!",
     "send_transactionprocessing_message"       : ", ನಿಮ್ಮ ವ್ಯವಹಾರಗಳು ಪ್ರಗತಿಯಲ್ಲಿವೆ!.",
     "send_transactionfee_label"                : "ಫ್ಲಾಶ್ ವ್ಯವಹಾರ ಶುಲ್ಕ",
