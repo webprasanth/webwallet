@@ -380,6 +380,7 @@ h5.title-table{
     margin-left: -150px;
     font-size: 14pt;
     cursor: pointer;
+    z-index: 100;
 }
 .header-SC .top-balance .top-balance-text{
     float: right;
