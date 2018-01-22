@@ -1,4 +1,5 @@
-[![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
+
+[![build status](https://travis-ci.com/maxeverest/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master)](https://travis-ci.com/maxeverest/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master) [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
 
 # Flash Webwallet
 
