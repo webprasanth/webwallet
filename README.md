@@ -1,25 +1,47 @@
 [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
 
+# Flash Webwallet
+
+A wallet for Flashcoin.
+
+## About the project 
+
+This project uses JSPM (v0.17 beta)
+
+## Usage
+
+To run the application locally :
 
 
-The project use JSPM(v0.17 beta) to manage packages and use local-web-server to host local web pages.
-
-Let run steps in below:
-
-1. $ npm install
-  - This command will install relevant packages, including jspm package version(v0.17-beta)
-2. $ jspm install
-  - JSPM will install all packages that are defined in the config file.
-3. $ npm install -g local-web-server
-  - This command will install a simple web server to host local web pages.
+* `npm install` - This command will install relevant packages, including jspm package version (v0.17-beta).
+* `jspm install` - JSPM will install all packages that are defined in the config file.
+* `npm install -g local-web-server` - This command will install a simple web server to host local web pages.
 
 To run dev mode:
 
-4. $ ws
-  - Start local web server at default port(8000)
-  - Open link http://localhost:8000 to test.
+*  `ws` 
 
 To run deploy mode:
 
-4. $ gulp
-5. public$ ws
+* `gulp`
+* `public $ ws` 
+
+
+## Known Issues
+
+
+## Reporting Bugs
+
+
+## Contributing
+
+
+## Help Wanted!
+
+If you're familiar with TypeScript, and you'd like to see this project progress, please consider contributing.
+
+
+## License
+
+Webwallet is licensed under a MIT license.
+
