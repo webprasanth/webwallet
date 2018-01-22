@@ -7,6 +7,7 @@ import HomeHeader from './home/header';
 import Navbar from './home/navbar';
 import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
+import WalletAddress from './modals/wallet-address/wallet-address';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
 import SetupPassword from './setuppassword/setuppassword';
@@ -34,7 +35,7 @@ import RequestDetail from './modals/request-detail/request-detail';
 import RequestPassword from './modals/request-password/request-password';
 
 export {
-    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, ProfileSecurityQuestions, TransactionDetails,
+    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, ProfileSecurityQuestions, TransactionDetails, WalletAddress,
     MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, TwoFAVerificationSendTxn, TwoFARecommend, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail, RequestPassword

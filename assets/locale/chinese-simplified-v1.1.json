@@ -162,6 +162,9 @@
 	"profile_msg_phone_verify_remind": "我们还需要验证您的电话号码，然后才能您可以发送和要求付款。",
 
 	"profile_error_password_empy": "密码不能为空",
+	
+	"profile_error_password_min_length"        : "密码必须至少有8个字符",
+	"profile_error_password_alphanum"          : "密码必须至少包含1个数字，1个大写字母和1个小写字符",
 
 	"profile_error_incorrect_current_pass": "当前密码不正确！",
 
@@ -626,6 +629,7 @@
 	"send_payment_message": "付款",
 
 	"send_payment_desc": "输入以下信息以启动安全付款。",
+	"send_payment_email_placeholder"           : "输入电子邮件或公共地址",
 
 	"send_transactionsent_message": "您的交易已经发送！",
 

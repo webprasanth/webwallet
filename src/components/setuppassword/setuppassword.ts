@@ -62,7 +62,19 @@ export default class SetupPassword extends BaseElement {
             this.strengthMsg = this.getText('profile_error_password_empy');
             return;
         }
-
+		
+        if (password.length <8) {
+            tag.strengthColor = 'red';
+            this.strengthMsg = this.getText('profile_error_password_min_length');
+            return;
+        }
+			
+        if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)){
+            tag.strengthColor = 'red';
+            this.strengthMsg = this.getText('profile_error_password_alphanum');
+            return;
+        }
+		
         if (password !== repeatPassword) {
             this.retypedMsg = this.getText('profile_error_incorrect_confirm_pass');
             return;
