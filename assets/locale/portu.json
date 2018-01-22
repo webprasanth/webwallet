@@ -366,6 +366,7 @@
   "send_confirmtransaction_message"          : "Confirmar transação",
   "send_payment_message"                     : "Enviar pagamento",
   "send_payment_desc"                        : "Insira as informações necessárias abaixo para iniciar um pagamento seguro.",
+  "send_payment_email_placeholder"           : "Digite e-mail ou endereço público",
   "send_transactionsent_message"             : "Sua transação foi efetuada!",
   "send_transactionprocessing_message"       : "Sua transação está sendo processada!",
   "send_transactionfee_label"                : "Taxa de transação FLASH",

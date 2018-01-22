@@ -367,6 +367,7 @@
     "send_confirmtransaction_message"          : "ट्रान्झॅक्शनची पुष्टी करा",
     "send_payment_message"                     : "देयक पाठवा",
     "send_payment_desc"                        : "सुरक्षित देयक आरंभ करण्यासाठी खालील माहिती प्रविष्ट करा",
+	"send_payment_email_placeholder"           : "ईमेल किंवा सार्वजनिक पत्ता प्रविष्ट करा",
     "send_transactionsent_message"             : "आपला व्यवहार पाठविला गेला आहे!",
     "send_transactionprocessing_message"       : "आपल्या व्यवहारावर प्रक्रिया करीत आहे!",
     "send_transactionfee_label"                : "फ्लॅश व्यवहार शुल्क",

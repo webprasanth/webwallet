@@ -627,6 +627,7 @@
 	"send_payment_message": "付款",
 
 	"send_payment_desc": "输入以下信息以启动安全付款。",
+	"send_payment_email_placeholder"           : "输入电子邮件或公共地址",
 
 	"send_transactionsent_message": "您的交易已经发送！",
 
