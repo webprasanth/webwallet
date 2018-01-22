@@ -5,6 +5,7 @@ import CommonService from '../../model/common/common-service';
 import * as utils from '../../model/utils';
 import BaseElement from '../base-element';
 import _ from 'lodash';
+import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 
@@ -170,27 +171,32 @@ export default class HomeSend extends BaseElement {
     }
 
     openQRcodeScan() {
-        cordova.plugins.barcodeScanner.scan(
-            function (result) {
-                if (result.text.startsWith('flashcoin:')) {
-                    result.text = result.text.substring(10, result.text.length);
-                }
-                $('#to-email-id').val(result.text);
-                tag.checkAddress();
-                // alert("We got a barcode\n" +
-                //     "Result: " + result.text + "\n" +
-                //     "Format: " + result.format + "\n" +
-                //     "Cancelled: " + result.cancelled);
-            },
-            function (error) {
-                alert("Scanning failed: " + error);
-            }, {
-                "preferFrontCamera": false, // iOS and Android
-                "showFlipCameraButton": true, // iOS and Android
-                "prompt": "Place a barcode inside the scan area", // supported on Android only
-                "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                "orientation": "portrait" // Android only (portrait|landscape), default unset so it rotates with the device
-            }
-        );
+		this.resetErrorMessages();
+		qrCodeScanner.initiate({
+			onResult: (result) => { 
+						let containsColumn = result.indexOf(':');
+						if (containsColumn >= 0) {
+							result = result.substring((containsColumn + 1), result.length);
+						}
+                        if(result.length != 34)
+                            QRcodeScanError();
+                        else
+                        {
+                            $('#to-email-id').val(result);
+                            this.checkAddress();
+                        }
+					},
+			onError: (err) => this.QRcodeScanError(err),
+			onTimeout: () => this.QRcodeScanTimeout()
+		});
     }
+	
+	QRcodeScanError(err) {
+		this.emailErrorMessage = this.getText('error_in_scan_qr');
+	}
+	
+	QRcodeScanTimeout = () => {
+		this.emailErrorMessage = this.getText('timeout_in_scan_qr');
+		this.update();
+	}
 }

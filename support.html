@@ -91,7 +91,7 @@
               $("#content").val("");
               grecaptcha.reset(captchaId);
         }).fail(function() {
-          $('#errorMessage').html("We couldn't process your request, Please try again OR Write us at support@flashcoin.in");
+          $('#errorMessage').html("Unfortunately, we couldn't process your request. Please try again OR write to us at support@flashcoin.io");
           $('#errorModal').modal('show');
         }).always(function() {
           $('#loading-indicator').hide();

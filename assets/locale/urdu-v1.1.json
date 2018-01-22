@@ -368,6 +368,7 @@
     "send_confirmtransaction_message"          : " ٹرانزیکشن کی توثیق کریں ",
     "send_payment_message"                     : " ادائیگی بھیجیں",
     "send_payment_desc"                        : " محفوظ ادائیگی شروع کرنے کے لئے ذیل میں معلومات درج کریں.",
+	"send_payment_email_placeholder"           : "ای میل یا عوامی پتہ درج کریں",
     "send_transactionsent_message"             : " آپ کا ٹرانزیکشن بھیجا گیا ہے!",
     "send_transactionprocessing_message"       : " آپ کا ٹرانزیکشن پروسیس ہورہا ہے!",
     "send_transactionfee_label"                : " فلیش ٹرانزیکشن فیس ",

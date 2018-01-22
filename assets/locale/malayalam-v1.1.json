@@ -366,6 +366,7 @@
     "send_confirmtransaction_message"          : "ട്രാന്‍സാക്ഷന്‍സ്ഥിരീകരിക്കുക",
     "send_payment_message"                     : "പേയ്മെന്‍റ് അയയ്ക്കുക",
     "send_payment_desc"                        : "ഒരു സുരക്ഷിത പേയ്മെന്‍റിന് തുടക്കം കുറിക്കുന്നതിനായി ചുവടെയുള്ള വിവരം എന്‍റര്‍ചെയ്യുക.",
+	"send_payment_email_placeholder"           : "ഇമെയിൽ അല്ലെങ്കിൽ പൊതുവിലാസം നൽകുക",
     "send_transactionsent_message"             : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍അയച്ചിട്ടുണ്ട്!",
     "send_transactionprocessing_message"       : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍പ്രോസസ്സ് ചെയ്യുന്നു!",
     "send_transactionfee_label"                : "ഫ്ളാഷ് ട്രാന്‍സാക്ഷന്‍ഫീ",

@@ -111,6 +111,7 @@ SystemJS.config({
         "jodid25519": "npm:jodid25519@1.0.2",
         "jsbn": "npm:jsbn@0.1.0",
         "lodash": "npm:lodash@4.16.6",
+        "maulikvora/qr-code-scanner": "github:maulikvora/qr-code-scanner@master",
         "module": "npm:jspm-nodelibs-module@0.2.0",
         "moment-timezone": "npm:moment-timezone@0.5.9",
         "net": "npm:jspm-nodelibs-net@0.2.0",

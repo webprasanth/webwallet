@@ -368,6 +368,7 @@
     "send_confirmtransaction_message"          : "取引を確認する",
     "send_payment_message"                     : "支払いを送る",
     "send_payment_desc":"以下の情報を入力して、安全な支払いを開始してください.",
+	"send_payment_email_placeholder"           : "Enter email or public address",
     "send_transactionsent_message"        :"あなたの取引は送信されました!",
     "send_transactionprocessing_message"     :"あなたの取引は処理中です!",
     "send_transactionfee_label"                : "フラッシュ取引手数料",
