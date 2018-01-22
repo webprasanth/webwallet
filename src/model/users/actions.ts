@@ -184,6 +184,7 @@ export const userActions = {
                     UserService.singleton().createFlashWallet(createWalletParams).then((_resp: any) => {
                         if (_resp.rc === 1) {
                             dispatch(userActions.loginSuccess(profile));
+                            dispatch(userActions.getBalance());
                             dispatch(userActions.getProfile(profile));
                             dispatch(userActions.getMyWallets(profile.auth_version, password));
                         } else {
@@ -222,6 +223,7 @@ export const userActions = {
                         dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
                     } else {
                         dispatch(userActions.loginSuccess(resp.profile));
+                        dispatch(userActions.getBalance());
                         dispatch(userActions.getProfile(resp.profile));
                         dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
                     }
@@ -249,6 +251,7 @@ export const userActions = {
                     dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
                 } else {
                     dispatch(userActions.loginSuccess(resp.profile));
+                    dispatch(userActions.getBalance());
                     dispatch(userActions.getProfile(resp.profile));
                     dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
                 }

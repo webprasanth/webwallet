@@ -9,6 +9,7 @@
       "bs58check": "npm:bs58check@^1.2.0",
       "core-js": "npm:core-js@^2.4.1",
       "lodash": "npm:lodash@^4.16.6",
+      "maulikvora/qr-code-scanner": "github:maulikvora/qr-code-scanner@master",
       "moment-timezone": "npm:moment-timezone@^0.5.9",
       "redux": "npm:redux@^3.6.0",
       "redux-thunk": "npm:redux-thunk@^2.1.0",

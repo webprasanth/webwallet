@@ -185,6 +185,16 @@ export default class UserInfo extends BaseElement {
             super.showError('', 'Password cannot be empty');
             return;
         }
+		
+        if (this.newPassword.length <8) {
+            super.showError('', this.getText('profile_error_password_min_length'));
+            return;
+        }
+			
+        if (!this.newPassword.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)){
+            super.showError('', this.getText('profile_error_password_alphanum'));
+            return;
+        }
 
         if (this.newPassword != this.confirmPassword) {
             super.showError('', 'Confirmed password is not correct!');

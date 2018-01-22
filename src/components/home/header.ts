@@ -1,4 +1,4 @@
-import { template } from '../riot-ts';
+import { riot, template } from '../riot-ts';
 import BaseElement from '../base-element';
 import store, { ApplicationState } from '../../model/store';
 import { userActions } from '../../model/users/actions';
@@ -28,6 +28,9 @@ export default class HomeHeader extends BaseElement {
         this.loadBalance();
 
         let user = store.getState().userData.user;
+        if (user.balance) {
+            this.balance = user.balance;
+        }
         if (user.profile_pic_url) {
             this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
         }
@@ -108,6 +111,9 @@ export default class HomeHeader extends BaseElement {
                 break;
             case PROFILE.UPDATE_AVATAR_SUCCESS:
                 tag.avatarUrl = `${Constants.AvatarServer}${store.getState().lastAction.data}`;
+                break;
+            case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
+                riot.mount('#wallet-address', 'wallet-address');
                 break;
             default:
                 break;
@@ -192,6 +198,12 @@ export default class HomeHeader extends BaseElement {
         removeIdToken();
         commonActions.removeAllListeners();
         store.dispatch(userActions.logout());
+    }
+
+    onShowWalletAddressClick(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $('#walletAddressDlg').modal('show');
     }
 
     onLoadBalanceButtonClick(event: Event) {
