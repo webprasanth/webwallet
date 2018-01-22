@@ -8,21 +8,17 @@ A wallet for Flashcoin.
 
 This project uses JSPM (v0.17 beta)
 
-## Usage
+## Local Installation and Usage
 
 To run the application locally :
-
-
 * `npm install` - This command will install relevant packages, including jspm package version (v0.17-beta).
 * `jspm install` - JSPM will install all packages that are defined in the config file.
 * `npm install -g local-web-server` - This command will install a simple web server to host local web pages.
 
 To run dev mode:
-
 *  `ws` 
 
 To run deploy mode:
-
 * `gulp`
 * `public $ ws` 
 
