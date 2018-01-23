@@ -19,6 +19,7 @@ import ProfileSecurityQuestions from './home/profile/question';
 import ErrorAlert from './modals/error-alert/error-alert';
 import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
+import TwoFAVerificationSendTxn from './modals/twofa-verification-sendtxn/twofa-verification-sendtxn';
 import TwoFARecommend from './modals/twofa-recommend/twofa-recommend-dialog';
 import SendMoneyConfirm from './modals/send-money-confirm/send-money-confirm';
 import SendRequestConfirm from './modals/send-request-confirm/send-request-confirm';
@@ -35,7 +36,7 @@ import RequestPassword from './modals/request-password/request-password';
 
 export {
     LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, ProfileSecurityQuestions, TransactionDetails, WalletAddress,
-    MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, TwoFARecommend, SendRequestConfirm,
+    MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, TwoFAVerificationSendTxn, TwoFARecommend, SendRequestConfirm,
     AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
     SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail, RequestPassword
 };

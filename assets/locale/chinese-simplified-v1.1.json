@@ -105,7 +105,9 @@
 	"profile_label_google_auth_step3": "标签菜单， 然后点击 \"设置帐户\"， 然后点击 \"扫描条码\"",
 
 	"profile_label_google_auth_step4": "您的手机现在将处于”扫描“模式，当您处于此模式时，请扫描下方的条码",
-
+        "profile_label_google_auth_step5"          : "还请写下或打印下面给出的恢复密钥。 它会帮助你，当你丢失或改变你的手机。",
+        "profile_label_google_auth_step6"          : "恢复密钥 :- ",
+        "profile_label_important"                  : "重要 !! ",
 	"profile_label_google_auth_submit": "扫描完条码后，输入下面的6位数字",
 
 	"profile_label_verify_code": "扫描完条码后，输入下面的6位数字",

@@ -150,6 +150,28 @@ export default class HomeSend extends BaseElement {
             wallet: this.sendWallet,
             cb: this.clearForms.bind(this)
         });
+		
+        /* Below code is commented as 2fa while transaction is not required as of now. 
+           when needed above riot.mount call should be removed and just uncomment the below if else code 23-01-2018 : Ashwini */
+		   
+       /* if (!store.getState().userData.user.totp_enabled) {
+            return riot.mount('#confirm-send', 'send-money-confirm', {
+            	to: this.sendWallet.address,
+            	amount: amount,
+            	fee: fee,
+            	wallet: this.sendWallet,
+            	cb: this.clearForms.bind(this)
+            });
+        }
+        else {
+            riot.mount('#confirm-send', 'twofa-verification-sendtxn',{
+                    to: this.sendWallet.address,
+                    amount: amount,
+                    fee: fee,
+                    wallet: this.sendWallet,
+                    cb: this.clearForms.bind(this)
+                });
+            } */
     }
 
     onContinueButtonClick(event: Event) {
