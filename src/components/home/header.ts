@@ -177,8 +177,8 @@ export default class HomeHeader extends BaseElement {
                 message = this.getText('common_fountain_sent_money_alert', params);
             }
         } else {
-            let params = {sender: note.sender_email, amount: note.amount};
-            message = this.getText('common_got_money_request_alert', params);
+            let params = {sender_email: note.sender_email, amount: note.amount};
+            message = this.getText('common_receive_money_alert', params);
         }
 
         $.notify(message, "info");

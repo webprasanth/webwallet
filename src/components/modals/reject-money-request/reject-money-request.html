@@ -20,8 +20,8 @@
 							</div>
 							<div class="info-modal">
 								<div class="avatar">
-									<img show={sendAddr.profile_pic_url} class="img-circle" src="{AvatarServer}{sendAddr.profile_pic_url}" width="40" />
-									<img show={!sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
+									<img show={opts.sendAddr.profile_pic_url} class="img-circle" src="{AvatarServer}{opts.sendAddr.profile_pic_url}" width="40" />
+									<img show={!opts.sendAddr.profile_pic_url} class="img-circle" src="assets/images/pages/coin.png" width="40" />
 								</div>
 								<div class="_info">
 									<div class="name">{opts.sendAddr.display_name ? opts.sendAddr.display_name : opts.sendAddr.username}</div>
