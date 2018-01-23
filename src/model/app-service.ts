@@ -194,6 +194,17 @@ export default class AppService {
         $.ajax(options);
     }
 
+    check2faCodeSendtxn(params, cb) {
+        let self = this
+        let _cb = function(resp) {
+            if (resp.rc == 1) {
+                self.sessionToken = resp.profile.sessionToken
+            }
+            cb(resp);
+        }
+        let options = this.makeRequestOption('api/check-2fa-code', params, 'post', _cb)
+        $.ajax(options);
+    }
     profile(params, cb) {
         let options = this.makeRequestOption('api/profile', params, 'get', cb)
         $.ajax(options);
