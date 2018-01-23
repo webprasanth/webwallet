@@ -6,7 +6,7 @@ import { commonActions } from '../../model/common/actions';
 import HomeHeaderTemplate from './header.html!text';
 import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE } from '../../model/action-types';
-import { decimalFormat, utcDateToLocal, removeIdToken } from '../../model/utils';
+import { decimalFormat, utcDateToLocal, removeIdToken, flashNFormatter, localizeFlash } from '../../model/utils';
 
 let tag = null;
 
@@ -16,6 +16,7 @@ export default class HomeHeader extends BaseElement {
     private avatarUrl: string = null;
     private refreshIconUrl: string = "assets/images/refresh_icon_white.png";
     private balance = 0;
+    private formattedBalance = '0';
     private decimalFormat = decimalFormat;
     private static unsubscribe = null;
     private isDisconnect = false;
@@ -30,6 +31,7 @@ export default class HomeHeader extends BaseElement {
         let user = store.getState().userData.user;
         if (user.balance) {
             this.balance = user.balance;
+            this.formattedBalance = flashNFormatter(this.balance, 2);
         }
         if (user.profile_pic_url) {
             this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
@@ -80,6 +82,7 @@ export default class HomeHeader extends BaseElement {
         switch (state.lastAction.type) {
             case USERS.GET_BALANCE_SUCCESS:
                 this.balance = state.lastAction.data;
+                this.formattedBalance = flashNFormatter(this.balance, 2);
                 this.refreshIconUrl = "assets/images/refresh_icon_white.png";
                 let msg = this.getText('notify_balance_updated', {balance: this.balance});
                 $.notify(msg, "info");
@@ -113,7 +116,8 @@ export default class HomeHeader extends BaseElement {
                 tag.avatarUrl = `${Constants.AvatarServer}${store.getState().lastAction.data}`;
                 break;
             case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
-                riot.mount('#wallet-address', 'wallet-address');
+                if(!(($('#walletAddressDlg').data('bs.modal') || {}).isShown))
+                    riot.mount('#wallet-address', 'wallet-address');
                 break;
             default:
                 break;
@@ -209,5 +213,21 @@ export default class HomeHeader extends BaseElement {
     onLoadBalanceButtonClick(event: Event) {
         this.refreshIconUrl = "assets/images/reload.svg";
         store.dispatch(userActions.getBalance());
+    }
+
+    onLoadBalanceButtonHoverIn(event: Event) {
+        if(this.refreshIconUrl != 'assets/images/reload.svg')
+            this.refreshIconUrl = "assets/images/refresh_icon_orange.png";
+    }
+
+    onLoadBalanceButtonHoverOut(event: Event) {
+        if(this.refreshIconUrl != 'assets/images/reload.svg')
+            this.refreshIconUrl = "assets/images/refresh_icon_white.png";
+    }
+
+    onShowBalanceButtonClick(event: Event) {
+        riot.mount('#confirm-send', 'full-balance', {
+            balance: localizeFlash(this.balance) + ' ' + this.getText('common_label_cash_unit_upcase')
+        });
     }
 }
