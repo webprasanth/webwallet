@@ -2,7 +2,7 @@ import { riot, template, Element } from '../../riot-ts';
 import TransactionDetailsTemplate from './transaction-details.html!text';
 import store from '../../../model/store';
 import Constants from '../../../model/constants';
-import { decimalFormat, satoshiToFlash, formatCurrency, getDisplayDateTime } from '../../../model/utils';
+import { decimalFormat, satoshiToFlash, formatCurrency, getDisplayDateTime, localizeFlash } from '../../../model/utils';
 import {getText} from '../../localise';
 
 @template(TransactionDetailsTemplate)
@@ -16,6 +16,7 @@ export default class TransactionDetails extends Element {
     formatCurrency = formatCurrency;
     decimalFormat = decimalFormat;
     getDisplayDateTime = getDisplayDateTime;
+    localizeFlash = localizeFlash;
 
     constructor() {
         super();
