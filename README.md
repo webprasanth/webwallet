@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.com/flash-coin/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master)](https://travis-ci.com/flash-coin/webwallet) [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
+[![Build Status](https://travis-ci.com/flash-coin/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master)](https://travis-ci.com/flash-coin/webwallet) [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 
 # Flash Webwallet
 

@@ -1,5 +1,3 @@
 export interface TransactionDetail {
-    type: number;
-    
-
+  type: number;
 }
