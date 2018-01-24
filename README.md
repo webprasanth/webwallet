@@ -26,8 +26,9 @@ To run deploy mode:
 ## Known Issues
 
 
-## Reporting Bugs
+## Reporting Issues
 
+[Bugs | New Features](https://github.com/flash-coin/webwallet/issues)
 
 ## Contributing
 
