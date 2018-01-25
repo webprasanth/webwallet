@@ -1,5 +1,4 @@
-
-[![Build Status](https://travis-ci.com/Flashcoin-Community/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master)](https://travis-ci.com/Flashcoin-Community/webwallet) [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
+[![Build Status](https://travis-ci.com/flash-coin/webwallet.svg?token=bmdR7pSx6iBkVZhq26eG&branch=master)](https://travis-ci.com/flash-coin/webwallet) [![DeepScan Grade](https://deepscan.io/api/projects/1683/branches/6920/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1683&bid=6920)
 
 # Flash Webwallet
 
@@ -27,8 +26,9 @@ To run deploy mode:
 ## Known Issues
 
 
-## Reporting Bugs
+## Reporting Issues
 
+[Bugs | New Features](https://github.com/flash-coin/webwallet/issues)
 
 ## Contributing
 
@@ -40,5 +40,5 @@ If you're familiar with TypeScript, and you'd like to see this project progress,
 
 ## License
 
-Webwallet is licensed under a MIT license.
+FLASH webwallet is released under the terms of the MIT license. See COPYING for more information or see http://opensource.org/licenses/MIT.
 
