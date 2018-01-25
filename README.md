@@ -32,6 +32,10 @@ To run deploy mode:
 [Bugs | New Features](https://github.com/flash-coin/webwallet/issues)
 
 ## Contributing
+Check the issues and pull requests to see if it is already present. If you don't see it, do one of the following:
+
+* If it is a small change, just fork the project and create a pull request.
+* If it is major, start by opening an issue.
 
 
 ## Help Wanted!
