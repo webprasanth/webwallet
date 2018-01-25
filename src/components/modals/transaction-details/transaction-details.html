@@ -39,7 +39,7 @@
 					</div>
 					<div class="listItems">
 						<div class="name-item">{getText('common_amount_label')}</div>
-						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{satoshiToFlash(txnDetail.amount.toString())}&nbsp;{getText('common_label_cash_unit_upcase')}</b></div>
+						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{localizeFlash(meta.amount.toString())}&nbsp;{getText('common_label_cash_unit_upcase')}</b></div>
 					</div>
 					<div class="listItems" show={meta.type==1}>
 						<div class="name-item">{getText('common_tx_fee_label')}</div>

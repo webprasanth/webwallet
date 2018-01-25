@@ -77,10 +77,35 @@ export function utcDateToLocal(str) {
 
 export function satoshiToFlash(num) {
   if (num == undefined || num === '') return;
-  return parseFloat(new Big(num).div(10000000000).toString()).toLocaleString(
-    'en',
-    { maximumFractionDigits: 8 }
-  );
+  return parseFloat(new Big(num).div(10000000000).toString());
+}
+
+export function localizeFlash(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(num).toLocaleString('en',{maximumFractionDigits:8});
+}
+export function flashNFormatter(num, digits) {
+  if (num == undefined || num === '') return 0.00;
+  num = parseFloat(num);
+  if(num <= 10000)
+    return num.toLocaleString('en',{maximumFractionDigits:8});
+  var si = [
+    { value: 1, symbol: "" },
+    { value: 1E3, symbol: "K" },
+    { value: 1E6, symbol: "M" },
+    { value: 1E9, symbol: "G" },
+    { value: 1E12, symbol: "T" },
+    { value: 1E15, symbol: "P" },
+    { value: 1E18, symbol: "E" }
+  ];
+  var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+  var i;
+  for (i = si.length - 1; i > 0; i--) {
+    if (num >= si[i].value) {
+      break;
+    }
+  }
+  return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
 }
 
 export function flashToSatoshi(num) {

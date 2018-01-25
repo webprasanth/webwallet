@@ -8,6 +8,7 @@ import Navbar from './home/navbar';
 import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
 import WalletAddress from './modals/wallet-address/wallet-address';
+import FullBalance from './modals/full-balance/full-balance';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
 import SetupPassword from './setuppassword/setuppassword';
@@ -43,6 +44,7 @@ export {
   ProfileSecurityQuestions,
   TransactionDetails,
   WalletAddress,
+  FullBalance,
   MobileLogin,
   sso,
   Home,

@@ -13,7 +13,7 @@ export default class AcceptMoneyRequest extends Element {
   private notEnoughBalanceMsg = null;
   private notEnoughBalance = false;
   private requestProcessing = false;
-  private sendWallet = null;
+  private sendWallet = {};
   private static unsubscribe = null;
   private getText = getText;
 

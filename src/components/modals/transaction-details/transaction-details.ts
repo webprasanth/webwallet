@@ -7,7 +7,9 @@ import {
   satoshiToFlash,
   formatCurrency,
   getDisplayDateTime,
+  localizeFlash,
 } from '../../../model/utils';
+
 import { getText } from '../../localise';
 
 @template(TransactionDetailsTemplate)
@@ -21,6 +23,7 @@ export default class TransactionDetails extends Element {
   formatCurrency = formatCurrency;
   decimalFormat = decimalFormat;
   getDisplayDateTime = getDisplayDateTime;
+  localizeFlash = localizeFlash;
 
   constructor() {
     super();
