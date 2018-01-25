@@ -40,5 +40,5 @@ If you're familiar with TypeScript, and you'd like to see this project progress,
 
 ## License
 
-Webwallet is licensed under a MIT license.
+FLASH webwallet is released under the terms of the MIT license. See COPYING for more information or see http://opensource.org/licenses/MIT.
 
