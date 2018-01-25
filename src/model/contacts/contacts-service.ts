@@ -1,38 +1,37 @@
-import AppService from '../app-service'
+import AppService from '../app-service';
 
 export default class ContactsService {
-    private static _instance: ContactsService;
+  private static _instance: ContactsService;
 
-    static singleton() {
-        if (!ContactsService._instance) {
-            ContactsService._instance = new ContactsService();
-        }
-
-        return ContactsService._instance;
+  static singleton() {
+    if (!ContactsService._instance) {
+      ContactsService._instance = new ContactsService();
     }
 
-    getRoster(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().getRoster(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+    return ContactsService._instance;
+  }
 
-    getUsersByUid(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().getUsersByUid(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+  getRoster(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getRoster(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 
-    removeUser(email) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().rosterRemove({email: email}, resp => {
-                resolve(resp);
-            });
-        });
-    }
+  getUsersByUid(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getUsersByUid(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  removeUser(email) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().rosterRemove({ email: email }, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
-

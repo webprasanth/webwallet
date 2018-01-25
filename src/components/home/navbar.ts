@@ -9,71 +9,72 @@ import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
 import { removeIdToken } from '../../model/utils';
-import {getText} from '../localise';
+import { getText } from '../localise';
 
 @template(NavbarTemplate)
 export default class Navbar extends BaseElement {
+  private static unsubscribe = null;
+  private getText = getText;
+  private userEmail: string = store.getState().userData.user.email;
+  private avatarUrl: string = null;
+  private state = null;
+  private outgoingReqNum = 0;
+  private incommingReqNum = 0;
+  private pendingNum = 0;
+  private tabs = null;
 
-    private static unsubscribe = null;
-    private getText = getText;
-    private userEmail: string = store.getState().userData.user.email;
-    private avatarUrl: string = null;
-    private state = null;
-    private outgoingReqNum = 0;
-    private incommingReqNum = 0;
-    private pendingNum = 0;
-    private tabs = null;
+  mounted() {
+    this.state = store.getState();
+    this.tabs = this.state.tabData.tabs;
+    if (Navbar.unsubscribe) Navbar.unsubscribe();
+    Navbar.unsubscribe = store.subscribe(
+      this.onApplicationStateChanged.bind(this)
+    );
 
-    mounted() {
-        this.state = store.getState();
-        this.tabs = this.state.tabData.tabs;
-        if (Navbar.unsubscribe) Navbar.unsubscribe();
-        Navbar.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+    let user = store.getState().userData.user;
+    if (user.profile_pic_url) {
+      this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
+    }
+  }
 
-        let user = store.getState().userData.user;
-        if (user.profile_pic_url) {
-            this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
+  onApplicationStateChanged() {
+    this.state = store.getState();
+    this.tabs = this.state.tabData.tabs;
+    let pendingData = this.state.pendingData;
+    let type = this.state.lastAction.type;
+
+    switch (type) {
+      case PENDING.GET_MORE_REQUEST_SUCCESS:
+        if (pendingData.type == TAB.INCOMING) {
+          this.incommingReqNum = pendingData.total_money_reqs;
+        } else {
+          this.outgoingReqNum = pendingData.total_money_reqs;
         }
+        this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
+        break;
+      default:
+        break;
     }
 
-    onApplicationStateChanged() {
-        this.state = store.getState();
-        this.tabs = this.state.tabData.tabs;
-        let pendingData = this.state.pendingData;
-        let type = this.state.lastAction.type;
+    this.update();
+  }
 
-        switch (type) {
-            case PENDING.GET_MORE_REQUEST_SUCCESS:
-                if (pendingData.type == TAB.INCOMING) {
-                    this.incommingReqNum = pendingData.total_money_reqs;
-                } else {
-                    this.outgoingReqNum = pendingData.total_money_reqs;
-                }
-                this.pendingNum = this.incommingReqNum + this.outgoingReqNum;
-                break;
-            default:
-                break;
-        }
+  onLogoutButtonClick(event: Event) {
+    removeIdToken();
+    event.preventDefault();
+    event.stopPropagation();
+    commonActions.removeAllListeners();
+    store.dispatch(userActions.logout());
+  }
 
-        this.update();
-    }
+  onTabItemClick(event: FCEvent) {
+    event.preventDefault();
+    event.stopPropagation();
 
-    onLogoutButtonClick(event: Event) {
-        removeIdToken();
-        event.preventDefault();
-        event.stopPropagation();
-        commonActions.removeAllListeners();
-        store.dispatch(userActions.logout());
-    }
+    $('.navbar-sc').removeClass('active');
+    $('.overlay-screen').hide();
 
-    onTabItemClick(event: FCEvent) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        $(".navbar-sc").removeClass('active');
-        $('.overlay-screen').hide();
-
-        let tab = event.item.tab;
-        route(tab.id);
-    }
+    let tab = event.item.tab;
+    route(tab.id);
+  }
 }

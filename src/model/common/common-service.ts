@@ -1,49 +1,48 @@
-
-import AppService from '../app-service'
+import AppService from '../app-service';
 
 export default class CommonService {
-    private static _instance: CommonService;
-    private getMessageIntervalId;
-    private static messageHandler;
+  private static _instance: CommonService;
+  private getMessageIntervalId;
+  private static messageHandler;
 
-    static singleton() {
-        if (!CommonService._instance) {
-            CommonService._instance = new CommonService();
-        }
-
-        return CommonService._instance;
+  static singleton() {
+    if (!CommonService._instance) {
+      CommonService._instance = new CommonService();
     }
 
-    getWalletsByEmail(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().getWalletsByEmail(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+    return CommonService._instance;
+  }
 
-    searchWallet(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().searchWallet(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+  getWalletsByEmail(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getWalletsByEmail(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 
-    addListeners(handler) {
-        if (this.getMessageIntervalId != 0) {
-            CommonService.messageHandler = handler
-            this.getMessageIntervalId = setInterval(this.getMessage, 60000);
-        }
-    }
+  searchWallet(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().searchWallet(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 
-    removeAllListeners() {
-        clearInterval(this.getMessageIntervalId);
-        this.getMessageIntervalId = 0
+  addListeners(handler) {
+    if (this.getMessageIntervalId != 0) {
+      CommonService.messageHandler = handler;
+      this.getMessageIntervalId = setInterval(this.getMessage, 60000);
     }
+  }
 
-    getMessage() {
-        let params = {offset: 0, size: 5, date_from: 0}
-        AppService.getInstance().getMessages(params, CommonService.messageHandler)
-    }
+  removeAllListeners() {
+    clearInterval(this.getMessageIntervalId);
+    this.getMessageIntervalId = 0;
+  }
+
+  getMessage() {
+    let params = { offset: 0, size: 5, date_from: 0 };
+    AppService.getInstance().getMessages(params, CommonService.messageHandler);
+  }
 }
