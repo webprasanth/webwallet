@@ -36,12 +36,42 @@ import RequestDetail from './modals/request-detail/request-detail';
 import RequestPassword from './modals/request-password/request-password';
 
 export {
-    LoadingIndicator, ProfileAvatar, UserInfo, AccountSetting, FountainSetting, ProfileSecurityQuestions, TransactionDetails, WalletAddress, FullBalance,
-    MobileLogin, sso, Home, HomeHeader, App, SubmitEmail, SetupPassword, ErrorAlert, LocationError, SendMoneyConfirm, TwoFAVerification, TwoFAVerificationSendTxn, TwoFARecommend, SendRequestConfirm,
-    AcceptMoneyRequest, RejectMoneyRequest, ConfirmDialog, ContactRequestMoney, ContactSendMoney,
-    SecurityQuestions, MessageDialog, VerifyPhone, Navbar, RequestDetail, RequestPassword
+  LoadingIndicator,
+  ProfileAvatar,
+  UserInfo,
+  AccountSetting,
+  FountainSetting,
+  ProfileSecurityQuestions,
+  TransactionDetails,
+  WalletAddress,
+  FullBalance,
+  MobileLogin,
+  sso,
+  Home,
+  HomeHeader,
+  App,
+  SubmitEmail,
+  SetupPassword,
+  ErrorAlert,
+  LocationError,
+  SendMoneyConfirm,
+  TwoFAVerification,
+  TwoFAVerificationSendTxn,
+  TwoFARecommend,
+  SendRequestConfirm,
+  AcceptMoneyRequest,
+  RejectMoneyRequest,
+  ConfirmDialog,
+  ContactRequestMoney,
+  ContactSendMoney,
+  SecurityQuestions,
+  MessageDialog,
+  VerifyPhone,
+  Navbar,
+  RequestDetail,
+  RequestPassword,
 };
 
 export function initialize() {
-    riot.mount('app');
+  riot.mount('app');
 }

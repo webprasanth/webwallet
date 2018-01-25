@@ -9,34 +9,31 @@ import Premium from 'Premium';
 
 @template(RequestPasswordTemplate)
 export default class RequestPassword extends BaseElement {
+  private incorrectPassword = false;
 
-    private incorrectPassword = false;
+  mounted() {
+    $('#sendDialog').modal('show');
+  }
 
-    mounted() {
-        $('#sendDialog').modal('show');
-    }
+  confirmPassword() {
+    let password: string = $('#user-passowd').val();
+    let userKey = utils.getUserKey();
+    let privKeyHex = null;
 
-    confirmPassword() {
-        let password: string = $('#user-passowd').val();
-        let userKey = utils.getUserKey();
-        let privKeyHex = null;
+    if (userKey) {
+      try {
+        privKeyHex = Premium.xaesDecrypt(password, userKey.encryptedPrivKey);
+        store.dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });
 
-        if (userKey) {
-            try {
-                privKeyHex = Premium.xaesDecrypt(password, userKey.encryptedPrivKey);
-                store.dispatch({ type: USERS.STORE_FOUNTAIN_SECRET, data: password });
-
-                if (this.opts.cb) {
-                    this.opts.cb(password);
-                }
-                $('#sendDialog').modal('hide');
-                
-                return;
-            } catch (error) {
-                
-            }
+        if (this.opts.cb) {
+          this.opts.cb(password);
         }
+        $('#sendDialog').modal('hide');
 
-        this.incorrectPassword = true;
+        return;
+      } catch (error) {}
     }
+
+    this.incorrectPassword = true;
+  }
 }

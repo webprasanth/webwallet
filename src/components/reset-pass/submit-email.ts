@@ -10,56 +10,58 @@ import BaseElement from '../base-element';
 
 @template(SubmitEmailTemplate)
 export default class SubmitEmail extends BaseElement {
-    private isVerifyEmailSent = false;
-    private static unsubscribe = null;
+  private isVerifyEmailSent = false;
+  private static unsubscribe = null;
 
-    constructor() {
-        super();
-        if (SubmitEmail.unsubscribe) SubmitEmail.unsubscribe();
-        SubmitEmail.unsubscribe = store.subscribe(this.onApplicationStateChanged.bind(this));
+  constructor() {
+    super();
+    if (SubmitEmail.unsubscribe) SubmitEmail.unsubscribe();
+    SubmitEmail.unsubscribe = store.subscribe(
+      this.onApplicationStateChanged.bind(this)
+    );
+  }
+
+  onApplicationStateChanged() {
+    let state = store.getState();
+    let data = state.pendingData;
+    let actionType = state.lastAction.type;
+
+    if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_SUCCESS) {
+      this.isVerifyEmailSent = true;
     }
 
-    onApplicationStateChanged() {
-        let state = store.getState();
-        let data = state.pendingData;
-        let actionType = state.lastAction.type;
+    this.update();
+  }
 
-        if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_SUCCESS) {
-            this.isVerifyEmailSent = true;
-        }
+  sendEmail(event: FCEvent) {
+    event.preventDefault();
+    event.stopPropagation();
 
-        this.update();
+    let email = $('#email').val();
+
+    if (!isValidEmail(email)) {
+      super.showError('', 'Invalid email format!');
+      return;
     }
 
-    sendEmail(event: FCEvent) {
-        event.preventDefault();
-        event.stopPropagation();
+    let clientHost = window.location.host;
 
-        let email = $('#email').val();
-
-        if (!isValidEmail(email)) {
-            super.showError('', 'Invalid email format!');
-            return;
-        }
-
-        let clientHost = window.location.host;
-
-        if (!clientHost || clientHost.length === 0) {
-            clientHost = Constants.clientHost;
-        }
-
-        let params = {
-            email: email,
-            callbackUrl: `http://${clientHost}/home.html#reset_password?token=`
-        };
-        //riot.route("reset_password?token=");
-        store.dispatch(resetPassActions.ssoResetPasswordMail(params));
+    if (!clientHost || clientHost.length === 0) {
+      clientHost = Constants.clientHost;
     }
 
-    cancelResetPass(event: FCEvent) {
-        event.preventDefault();
-        event.stopPropagation();
+    let params = {
+      email: email,
+      callbackUrl: `http://${clientHost}/home.html#reset_password?token=`,
+    };
+    //riot.route("reset_password?token=");
+    store.dispatch(resetPassActions.ssoResetPasswordMail(params));
+  }
 
-        route('#login');
-    }
+  cancelResetPass(event: FCEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    route('#login');
+  }
 }

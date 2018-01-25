@@ -1,30 +1,29 @@
 import AppService from '../app-service';
 
 export default class RequestService {
-    private static _instance: RequestService;
+  private static _instance: RequestService;
 
-    static singleton() {
-        if (!RequestService._instance) {
-            RequestService._instance = new RequestService();
-        }
-
-        return RequestService._instance;
+  static singleton() {
+    if (!RequestService._instance) {
+      RequestService._instance = new RequestService();
     }
 
-    requestMoney(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().addMoneyRequest(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+    return RequestService._instance;
+  }
 
-    rosterOperation(params) {
-        return new Promise((resolve, reject) => {
-            AppService.getInstance().rosterOperation(params, resp => {
-                resolve(resp);
-            });
-        });
-    }
+  requestMoney(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addMoneyRequest(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  rosterOperation(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().rosterOperation(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
-
