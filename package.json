@@ -137,8 +137,10 @@
     "gulp-run": "^1.7.1",
     "gulp-shell": "^0.5.2",
     "jspm": "^0.17.0-beta.32",
+    "lint-staged": "^6.1.0",
     "machina": "^2.0.0",
     "merge-stream": "^1.0.1",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.10.2",
     "systemjs-builder": "^0.15.34",
     "tweetnacl-util": "^0.13.3",
@@ -146,5 +148,17 @@
   },
   "dependencies": {
     "compression": "^1.6.2"
+  },
+  "scripts": {
+    "pre-commit": "lint-staged"
+  },
+  "pre-commit": [
+    "pre-commit"
+  ],
+  "lint-staged": {
+    "*.+(js|ts)": [
+      "prettier --single-quote --trailing-comma es5 --write",
+      "git add"
+    ]
   }
 }
