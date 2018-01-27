@@ -2,3 +2,7 @@ public
 node_modules
 jspm_packages
 .vscode
+webwallet.iml
+.idea
+*.log
+package-lock.json

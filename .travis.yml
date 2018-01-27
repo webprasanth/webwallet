@@ -6,6 +6,12 @@ branches:
     only:
     - master
 
-# Run npm test always
+install:
+  - npm install
+  - jspm install
+  - npm install -g local-web-server
+
 script:
-    - "echo 'Hello, World'"
+    - "ws > /dev/null &"
+    - sleep 3
+    - "curl -If http://127.0.0.1:8000"
