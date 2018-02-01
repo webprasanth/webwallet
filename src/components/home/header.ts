@@ -123,7 +123,7 @@ export default class HomeHeader extends BaseElement {
             amount: note.amount,
             time: utcDateToLocal(note.created_ts),
           };
-          message = this.getText('common_got_money_request_alert', params);
+          message = this.getText('common_got_money_request_alert', params) + ' ' + this.getText('common_label_cash_unit_upcase');
           $.notify(message, 'info');
         }
         break;
@@ -205,7 +205,7 @@ export default class HomeHeader extends BaseElement {
       }
     } else {
       let params = { sender_email: note.sender_email, amount: note.amount };
-      message = this.getText('common_receive_money_alert', params);
+      message = this.getText('common_receive_money_alert', params) + ' ' + this.getText('common_label_cash_unit_upcase');
     }
 
     $.notify(message, 'info');

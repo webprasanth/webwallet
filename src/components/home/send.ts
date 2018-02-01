@@ -19,7 +19,6 @@ export default class HomeSend extends BaseElement {
   private emailErrorMessage = '';
   private amountErrorMessage = '';
   private choosingAddress = false;
-  private wallets = [];
   private addressSelected = false;
   private avatarServer = Constants.AvatarServer;
   private isDesktop = utils.isDesktop();
@@ -28,13 +27,13 @@ export default class HomeSend extends BaseElement {
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
-      'propertychange change click keyup input paste',
+      'propertychange change click  paste',
       _.debounce(e => {
         this.searchWallet();
       }, 500)
     );
     $('#to-email-id').on(
-      'propertychange change click keyup input paste',
+      'propertychange change click  paste',
       this.checkAddress
     );
     $('#continue-send-bt').on('blur', this.resetErrorMessages);
@@ -72,14 +71,13 @@ export default class HomeSend extends BaseElement {
     let params = {
       term,
       start: 0,
-      size: 10,
+      size: 1,
     };
 
     CommonService.singleton()
       .searchWallet(params)
       .then((resp: any) => {
         if (resp.rc === 1 && resp.wallets.length > 0) {
-          this.wallets = resp.wallets;
           if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
             tag.isValidAddress = true;
             tag.sendWallet = resp.wallets[0];
@@ -89,8 +87,6 @@ export default class HomeSend extends BaseElement {
             tag.isValidAddress = false;
             tag.addressSelected = false;
           }
-        } else {
-          this.wallets = [];
         }
         this.update();
       });

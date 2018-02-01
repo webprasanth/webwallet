@@ -19,7 +19,6 @@ export default class HomeRequest extends BaseElement {
   private emailErrorMessage = '';
   private amountErrorMessage = '';
   private choosingAddress = false;
-  private wallets = [];
   private addressSelected = false;
   private avatarServer = Constants.AvatarServer;
 
@@ -27,13 +26,13 @@ export default class HomeRequest extends BaseElement {
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#rq_to_email_id').on(
-      'propertychange change click keyup input paste',
+      'propertychange change click  paste',
       _.debounce(e => {
         this.searchWallet();
       }, 500)
     );
     $('#rq_to_email_id').on(
-      'propertychange change click keyup input paste',
+      'propertychange change click  paste',
       this.checkAddress
     );
     $('#continue-request-bt').on('blur', this.resetErrorMessages);
@@ -69,14 +68,13 @@ export default class HomeRequest extends BaseElement {
     let params = {
       term,
       start: 0,
-      size: 20,
+      size: 1,
     };
 
     CommonService.singleton()
       .searchWallet(params)
       .then((resp: any) => {
         if (resp.rc === 1 && resp.wallets.length > 0) {
-          this.wallets = resp.wallets;
           if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
             tag.isValidAddress = true;
             tag.receiverWallet = resp.wallets[0];
@@ -86,8 +84,6 @@ export default class HomeRequest extends BaseElement {
             tag.isValidAddress = false;
             tag.addressSelected = false;
           }
-        } else {
-          this.wallets = [];
         }
         this.update();
       });
