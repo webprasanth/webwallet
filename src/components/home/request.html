@@ -13,19 +13,6 @@
 						<input type="text" class="form-control" placeholder="Search by email" id="rq_to_email_id">
 						<span class="glyphicon glyphicon-search"></span>
 						<span show={isValidAddress} class="glyphicon glyphicon-ok-circle"></span>
-						<div class="menu transition visible" id="list-transactions" tabindex="-1">
-							<virtual show={choosingAddress}>
-								<div each="{w in wallets}" class="item" onclick={chooseAddress}>
-									<div class="avatar">
-										<img class="ui avatar image" alt="avatar" src="{w.profile_pic_url ? avatarServer + w.profile_pic_url : 'assets/images/pages/coin.png'}">
-									</div>
-									<div class="email result-search">
-										<p class="long-text">{w.email}</p>
-										<p class="long-text">{w.display_name}</p>
-									</div>
-								</div>
-							</virtual>
-						</div>
 					</div>
 						<div show={emailErrorMessage} class="pin-incorrect">{emailErrorMessage}</div>
 				</div>
