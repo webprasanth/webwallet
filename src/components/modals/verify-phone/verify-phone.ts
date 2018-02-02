@@ -77,7 +77,7 @@ export default class VerifyPhone extends BaseElement {
       tag.errorMessage = this.getText('phone_verify_invalid_code');
     } else {
       let request = {
-        sms_code: code,
+        smsCode: code,
       };
 
       tag.requestProcessing = true;
@@ -95,7 +95,7 @@ export default class VerifyPhone extends BaseElement {
 
     if (phone.length != 0) {
       store.dispatch(
-        profileActions.sendVerificationSms({ phone_number: phone })
+        profileActions.sendVerificationSms({ phoneNumber: phone })
       );
     }
   }
