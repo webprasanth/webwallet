@@ -6,6 +6,7 @@ import HomeSend from './send';
 import HomeRequest from './request';
 import HomePending from './pending';
 import HomeContacts from './contacts';
+import HomeMerchantTools from './merchant-tools';
 import HomeProfile from './profile';
 import { userActions } from '../../model/users/actions';
 import { tabActions } from '../../model/tabs/actions';
@@ -27,6 +28,7 @@ export default class HomePage extends Element {
     request: 'home-request',
     pending: 'home-pending',
     contacts: 'home-contacts',
+    'merchant-tools': 'home-merchant-tools',
     profile: 'home-profile',
   };
 
@@ -108,5 +110,6 @@ export {
   HomeRequest,
   HomePending,
   HomeContacts,
+  HomeMerchantTools,
   HomeProfile,
 };

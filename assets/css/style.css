@@ -634,6 +634,60 @@ h5.title-table{
 	cursor: pointer;
 }
 /*==============*/
+/*Merchant and Tools*/
+.merchant-tools-page .generate-merchant-qr-section{
+  padding-right: 15px;
+}
+.merchant-tools-page .merchant-qr-section{
+  padding-left: 15px;
+}
+.merchant-tools-page #dowload_merchant_qr{
+  text-align: center;
+  padding: 8%;
+  background: #FFFFFF;
+  width: 2400px;
+}
+.merchant-tools-page .dmq-logo-header{
+  width: 63%;
+  padding-top: 5%;
+}
+
+.merchant-tools-page .dmq-merchant-name{
+  border: none;
+  display: block;
+  border-bottom: 2px solid #0E76BC;
+  margin: 0 auto;
+  padding: 5% 0px 0px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 90px;
+  width: 53%;
+  height: 241px;
+}
+.merchant-tools-page .dmq-scan-flash-title{
+  padding: 3% 0 1% 0;
+  width: 30%;
+}
+.merchant-tools-page .merchant-qr-section #dmq-merchant-qr{
+  text-align: center;
+  padding-top: 4%;
+}
+.merchant-tools-page #dmq-merchant-qr img{
+  display: inline !important;
+  width: 57%;
+}
+.merchant-tools-page .dmq-footer{
+  font-size: 36px;
+  margin: 4% auto;
+  padding: 1%;
+  background-color: #0E76BC;
+  color: white;
+  width: 70%
+}
+.merchant-tools-page #dmq-download-print-image {
+  width: 100%;
+}
+/*==============*/
 /*Style list account*/
 .email-account{
     position: relative;
