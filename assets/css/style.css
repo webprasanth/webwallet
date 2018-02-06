@@ -635,28 +635,69 @@ h5.title-table{
 }
 /*==============*/
 /*Merchant and Tools*/
+.merchant-tools-page .box-content{
+  padding-top: 15px;
+}
 .merchant-tools-page .generate-merchant-qr-section{
   padding-right: 15px;
 }
 .merchant-tools-page .merchant-qr-section{
   padding-left: 15px;
 }
-.merchant-tools-page #dowload_merchant_qr{
+.merchant-tools-page #download_merchant_qr, .merchant-tools-page  #download_merchant_stickers_1, .merchant-tools-page  #download_merchant_stickers_2 {
+  width: 2400px;
+}
+.merchant-tools-page  #download_merchant_stickers_3 {
+  width: 1300px;
+}
+.merchant-tools-page #download_merchant_qr, .merchant-tools-page  .download_merchant_tools_media{
   text-align: center;
   padding: 8%;
   background: #FFFFFF;
-  width: 2400px;
+  margin-top: 500px;
+}
+.merchant-tools-page .download_merchant_stickers_1_header{
+  height: 725px;
+  border-bottom: 1px solid;
+}
+.merchant-tools-page .download_merchant_stickers_2_header{
+  overflow: auto;
+  float: left;
+  padding-right: 60px;
+  border-right: 1px solid;
+}
+.merchant-tools-page .dmq-header-we-accept{
+  font-size: 275px;
+  line-height: 275px;
+  font-weight: bold;
 }
 .merchant-tools-page .dmq-logo-header{
   width: 63%;
   padding-top: 5%;
+}
+.merchant-tools-page .download_merchant_stickers_1_logo_header{
+  float: left;
+  width: 1440px;
+}
+.merchant-tools-page .download_merchant_stickers_2_logo_header{
+  float: left;
+  width: 1040px;
+  padding-left: 83px;
+}
+.merchant-tools-page .dmq-logo-flash-icon{
+  width: 500px;
+  padding-top: 6%;
+}
+.merchant-tools-page .dmq-logo-flash-text{
+  width: 1000px;
+  padding-top: 8%;
 }
 
 .merchant-tools-page .dmq-merchant-name{
   border: none;
   display: block;
   border-bottom: 2px solid #0E76BC;
-  margin: 0 auto;
+  margin: 0 auto 5%;
   padding: 5% 0px 0px;
   text-align: center;
   font-weight: bold;
@@ -664,28 +705,66 @@ h5.title-table{
   width: 53%;
   height: 241px;
 }
-.merchant-tools-page .dmq-scan-flash-title{
-  padding: 3% 0 1% 0;
-  width: 30%;
-}
-.merchant-tools-page .merchant-qr-section #dmq-merchant-qr{
+.merchant-tools-page #dmq-merchant-qr{
   text-align: center;
   padding-top: 4%;
+}
+.merchant-tools-page #dmq_merchant_stickers_1{
+  float: left;
+  width: 35%;
+}
+.merchant-tools-page #dmq_merchant_stickers_2{
+  float: left;
+}
+.merchant-tools-page #dmq_merchant_stickers_3{
+  padding-top: 8%;
+}
+.merchant-tools-page #dmq_merchant_stickers_3 img{
+  display: inline !important;
 }
 .merchant-tools-page #dmq-merchant-qr img{
   display: inline !important;
   width: 57%;
 }
+.merchant-tools-page .dmq-visa-master-square{
+  width: 635px;
+  padding-left: 15px;
+}
+.merchant-tools-page .dmq-visa-master-horizontal{
+  width: 100%;
+  padding-top: 4%;
+}
 .merchant-tools-page .dmq-footer{
-  font-size: 36px;
+  font-size: 48px;
   margin: 4% auto;
   padding: 1%;
-  background-color: #0E76BC;
-  color: white;
+  color: black;
   width: 70%
 }
 .merchant-tools-page #dmq-download-print-image {
   width: 100%;
+}
+.merchant-tools-page #download_merchant_stickers_1-image{
+  width: 100%;
+  border: 1px solid;
+  border-radius: 20px;
+}
+.merchant-tools-page #download_merchant_stickers_2-image{
+  width: 100%;
+  border: 1px solid;
+  border-radius: 20px;
+}
+.merchant-tools-page #download_merchant_stickers_3-image{
+  width: 325px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+.merchant-tools-page .send__buttons{
+  padding-top: 10px;
+}
+.merchant-tools-page #regenerate-qr-bt{
+  margin-top: 24px;
+  margin-left: 15px;
 }
 /*==============*/
 /*Style list account*/

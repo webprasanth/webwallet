@@ -1,0 +1,34 @@
+<merchant-stickers>
+    <div class="merchant-stickers-content box-content">
+        <div class="col-xs-12">
+            <div class="form-group wallet-address-field col-xs-6">
+                <label>{getText('merchant_tools_receiving_address_label')}</label>
+                <input class="form-control" id="walletAddress_sticker" name="walletAddress_sticker" type="text" disabled="">
+            </div>
+            <div class="form-group wallet-address-field col-xs-6">
+                <button type="button" class="btn btn-primary" id="regenerate-qr-bt" onclick={onGenerateButtonClick}>{getText('common_generate_label')}</button>
+            </div>
+            <div class="col-xs-12 col-sm-12 merchant-qr-section">
+                <img id="download_merchant_stickers_2-image" src="" />
+                <div class="send__buttons form-group col-xs-12 text-center">
+                    <button type="button" class="btn btn-primary" onclick={onDownloadStickersClick.bind(this, 'stickers_2')}>{getText('common_download_label')}</button>
+                    <button type="button" class="btn btn-primary" onclick={onPrintStickersClick.bind(this, 'stickers_2')}>{getText('common_print_label')}</button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 merchant-qr-section text-center">
+                <img id="download_merchant_stickers_1-image" src="" />
+                <div class="send__buttons form-group col-xs-12 text-center">
+                    <button type="button" class="btn btn-primary" onclick={onDownloadStickersClick.bind(this, 'stickers_1')}>{getText('common_download_label')}</button>
+                    <button type="button" class="btn btn-primary" onclick={onPrintStickersClick.bind(this, 'stickers_1')}>{getText('common_print_label')}</button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 merchant-qr-section text-center">
+                <img id="download_merchant_stickers_3-image" src="" />
+                <div class="send__buttons form-group col-xs-12 text-center">
+                    <button type="button" class="btn btn-primary" onclick={onDownloadStickersClick.bind(this, 'stickers_3')}>{getText('common_download_label')}</button>
+                    <button type="button" class="btn btn-primary" onclick={onPrintStickersClick.bind(this, 'stickers_3')}>{getText('common_print_label')}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</merchant-stickers>
