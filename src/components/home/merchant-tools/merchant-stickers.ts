@@ -25,7 +25,7 @@ export default class MerchantStickers extends Element {
     let data = state.profileData;
     this.walletAddress = data.wallet.address;
 
-    let qrCode = new QRCode('dmq_merchant_stickers_1', {width: 600 , height: 600});
+    let qrCode = new QRCode('dmq_merchant_stickers_1', {width: 650 , height: 650});
     qrCode.makeCode('flashcoin:' + this.walletAddress);
 
     let qrCode2 = new QRCode('dmq_merchant_stickers_2', {width: 400 , height: 400});
@@ -49,8 +49,8 @@ export default class MerchantStickers extends Element {
   }
 
   onGenerateButtonClick() {
-    this.generateImage('download_merchant_stickers_1', 2400, 1420);
-    this.generateImage('download_merchant_stickers_2', 2400, 590);
+    this.generateImage('download_merchant_stickers_1', 2400, 1765);
+    this.generateImage('download_merchant_stickers_2', 2400, 594);
     this.generateImage('download_merchant_stickers_3', 1300, 2400);
   }
 
@@ -60,25 +60,22 @@ export default class MerchantStickers extends Element {
     switch (templateid) {  
       case 'download_merchant_stickers_1':
       case 'download_merchant_stickers_2':
-        options.x = 600;
+        options.x = 625;
         break;
       case 'download_merchant_stickers_3':
-        options.x = 85;
+        options.x = 80;
         break;
     }
     if (this.isMobile()) {
       switch (templateid) {  
         case 'download_merchant_stickers_1':
-          options.x = 600;
-          options.y = 1950;
+          options.y = 1949;
           break;
         case 'download_merchant_stickers_2':
-          options.x = 600;
-          options.y = 3950;
+          options.y = 4213;
           break;
         case 'download_merchant_stickers_3':
-          options.x = 85;
-          options.y = 5050;
+          options.y = 5305;
           break;
       }
     }
