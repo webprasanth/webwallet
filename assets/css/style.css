@@ -647,6 +647,9 @@ h5.title-table{
 .merchant-tools-page #download_merchant_qr, .merchant-tools-page  #download_merchant_stickers_1, .merchant-tools-page  #download_merchant_stickers_2 {
   width: 2400px;
 }
+.merchant-tools-page  #download_merchant_stickers_3 {
+  width: 1300px;
+}
 .merchant-tools-page #download_merchant_qr, .merchant-tools-page  .download_merchant_tools_media{
   text-align: center;
   padding: 8%;
@@ -663,6 +666,11 @@ h5.title-table{
   padding-right: 60px;
   border-right: 1px solid;
 }
+.merchant-tools-page .dmq-header-we-accept{
+  font-size: 275px;
+  line-height: 275px;
+  font-weight: bold;
+}
 .merchant-tools-page .dmq-logo-header{
   width: 63%;
   padding-top: 5%;
@@ -675,6 +683,14 @@ h5.title-table{
   float: left;
   width: 1040px;
   padding-left: 83px;
+}
+.merchant-tools-page .dmq-logo-flash-icon{
+  width: 500px;
+  padding-top: 6%;
+}
+.merchant-tools-page .dmq-logo-flash-text{
+  width: 1000px;
+  padding-top: 8%;
 }
 
 .merchant-tools-page .dmq-merchant-name{
@@ -700,6 +716,12 @@ h5.title-table{
 .merchant-tools-page #dmq_merchant_stickers_2{
   float: left;
 }
+.merchant-tools-page #dmq_merchant_stickers_3{
+  padding-top: 8%;
+}
+.merchant-tools-page #dmq_merchant_stickers_3 img{
+  display: inline !important;
+}
 .merchant-tools-page #dmq-merchant-qr img{
   display: inline !important;
   width: 57%;
@@ -723,12 +745,17 @@ h5.title-table{
   width: 100%;
 }
 .merchant-tools-page #download_merchant_stickers_1-image{
-  width: 50%;
+  width: 100%;
   border: 1px solid;
   border-radius: 20px;
 }
 .merchant-tools-page #download_merchant_stickers_2-image{
   width: 100%;
+  border: 1px solid;
+  border-radius: 20px;
+}
+.merchant-tools-page #download_merchant_stickers_3-image{
+  width: 325px;
   border: 1px solid;
   border-radius: 20px;
 }
