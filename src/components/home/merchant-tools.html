@@ -5,37 +5,55 @@
 				<h2 class="title">{getText('merchant_tools_page_title')}</h2>
 			</div>
 			<div class="col-xs-12 main-content">
-				<div class="col-xs-12 col-sm-6 generate-merchant-qr-section">
-					<h4 class="title">{getText('merchant_tools_generate_qr_form_title')}</h4>
-					<div class="form-group wallet-address-field col-xs-12">
-						<label>{getText('merchant_tools_receiving_address_label')}</label>
-						<input class="form-control" id="walletAddress" name="walletAddress" type="text" disabled="">
-					</div>
-					<div class="form-group wallet-address-field col-xs-12">
-						<label>{getText('merchant_tools_merchant_name_label')}</label>
-						<input class="form-control" id="displayText" name="displayText" type="text">
-					</div>
-					<div class="send__buttons form-group col-xs-12">
-						<button type="button" class="btn btn-primary" id="generate-qr-bt" onclick={onGenerateButtonClick}>{getText('common_update_label')}</button>
-						<button type="button" class="btn btn-default" onclick={clearForms}>{getText('common_clear_label')}</button>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 merchant-qr-section">
-					
-					<img id="dmq-download-print-image" src="" />
-					<div class="send__buttons form-group col-xs-12 text-center">
-						<button type="button" class="btn btn-primary" onclick={onDownloadButtonClick}>{getText('common_download_label')}</button>
-						<button type="button" class="btn btn-primary" onclick={onPrintButtonClick}>{getText('common_print_label')}</button>
-					</div>
-				</div>
+				<div class="bs-action bs-action-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="tabs-togglable" class="nav nav-pills nav-tabs-responsive" role="tablist">
+                        <li id="tab-1" role="presentation" class="active" onclick={onTabSelect.bind(this, 'merchantStand')}>
+                            <a href="#merchantStand" id="merchantStand-tab" role="tab" data-toggle="tab" aria-controls="merchantStand" aria-expanded="true">
+                                <span class="text">{getText('merchant_tools_tab_stand')}</span>
+                            </a>
+                        </li>
+                        <li  id="tab-2" role="presentation" class="next" onclick={onTabSelect.bind(this, 'merchantStickers')}>
+                            <a href="#merchantStickers" role="tab" id="merchantStickers-tab" data-toggle="tab" aria-controls="merchantStickers">
+                                <span class="text">{getText('merchant_tools_tab_stickers')}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-12 flex-pc">
+                    <div class="col-xs-12 col-sm-12" style="padding: 0 10px;">
+                        <div show={isMerchantStand} id="merchant-stand"></div>
+                        <div show={isMerchantStickers} id="merchant-stickers"></div>
+                    </div>
+                </div>
 			</div>
 			<div class="clearfix"></div>
-			<div id="dowload_merchant_qr" style="display: none;" class="col-xs-12">
+			<div id="download_merchant_qr" style="display: none;" class="col-xs-12 download_merchant_tools_media">
 				<img class="dmq-logo-header" src="assets/images/logo_merchant_qr.png">
 				<div class="dmq-merchant-name"></div>
-				<img class="dmq-scan-flash-title" src="assets/images/dmq-scan-flash-code-text.png">
 				<div id="dmq-merchant-qr"></div>
-				<div class="dmq-footer">{getText('footer_label_copyright')}</div>
+				<div class="dmq-footer" id="wallet_address_footer"></div>
+			</div>
+			<div id="download_merchant_stickers_1" class="col-xs-12 download_merchant_tools_media">
+				<div class="download_merchant_stickers_1_header">
+					<div id="dmq_merchant_stickers_1"></div>
+					<img class="download_merchant_stickers_1_logo_header" src="assets/images/flash_dark.png">
+				</div>
+				<img class="dmq-visa-master-horizontal" src="assets/images/visa-mastercard-horizontal.png">
+			</div>
+			<div id="download_merchant_stickers_2" class="col-xs-12 download_merchant_tools_media">
+				<div class="download_merchant_stickers_2_header">
+					<div id="dmq_merchant_stickers_2"></div>
+					<img class="download_merchant_stickers_2_logo_header" src="assets/images/flash_dark.png">
+				</div>
+				<img class="dmq-visa-master-square" src="assets/images/visa-mastercard-square.png">
+			</div>
+			<div id="download_merchant_stickers_3" style="display: none;" class="col-xs-12 download_merchant_tools_media">
+				<div class="download_merchant_stickers_3_header">
+					<div id="dmq_merchant_stickers_3"></div>
+					<img class="download_merchant_stickers_3_logo_header" src="assets/images/flash_dark.png">
+				</div>
+				<img class="dmq-visa-master-horizontal" src="assets/images/visa-mastercard-horizontal.png">
 			</div>
 		</div>
 	</div>
