@@ -45,7 +45,7 @@ export default class MerchantStand extends Element {
 
   generateImage() {
 
-    var options = {useCORS: true, width:2400, height: 3000, windowWidth: 2400, widnowHeight: 3000, scale:1, logging:false};
+    var options = {useCORS: true, async: false, width:2400, height: 3000, windowWidth: 2400, widnowHeight: 3000, scale:1, logging:false};
     if (!this.isMobile()) {
       options.x = 600;
     }

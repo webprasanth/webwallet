@@ -56,7 +56,7 @@ export default class MerchantStickers extends Element {
 
   generateImage(templateid, width=2400, height=3000) {
 
-    var options = {useCORS: true, width:width, height: height, windowWidth: width, widnowHeight: height, scale:1, logging:false};
+    var options = {useCORS: true, async: false, width:width, height: height, windowWidth: width, widnowHeight: height, scale:1, logging:false};
     switch (templateid) {  
       case 'download_merchant_stickers_1':
       case 'download_merchant_stickers_2':
@@ -85,8 +85,8 @@ export default class MerchantStickers extends Element {
       try {
         //document.body.appendChild(canvas);
         $('#'+templateid).hide();
-       var b64Data = canvas.toDataURL("image/png");
-       $('#'+templateid+'-image').attr('src', b64Data);
+        var b64Data = canvas.toDataURL("image/png");
+        $('#'+templateid+'-image').attr('src', b64Data);
       }
       catch (err) {
         $('#'+templateid).hide();
