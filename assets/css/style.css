@@ -788,6 +788,16 @@ h5.title-table{
   margin-top: 24px;
   margin-left: 15px;
 }
+
+.merchant-tools-page .merchant-widgets-content [class*="col-"]{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.merchant-tools-page #donate_widget_container, .merchant-tools-page #accept_widget_container{
+  padding-bottom: 15px;
+}
 /*==============*/
 /*Style list account*/
 .email-account{
