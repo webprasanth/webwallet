@@ -14,6 +14,7 @@ export default class HomeMerchantTools extends BaseElement {
 
   private isMerchantStand = true;
   private isMerchantStickers = false;
+  private isMerchantWidgets = false;
 
   mounted() {
     this.mountComponents();
@@ -22,15 +23,22 @@ export default class HomeMerchantTools extends BaseElement {
   mountComponents() {
     riot.mount('#merchant-stand', 'merchant-stand', {});
     riot.mount('#merchant-stickers', 'merchant-stickers', {});
+    riot.mount('#merchant-widgets', 'merchant-widgets', {});
   }
 
   onTabSelect(tab) {
     if (tab == 'merchantStand') {
       this.isMerchantStand = true;
       this.isMerchantStickers = false;
+      this.isMerchantWidgets = false;
     } else if (tab == 'merchantStickers') {
       this.isMerchantStand = false;
       this.isMerchantStickers = true;
+      this.isMerchantWidgets = false;
+    } else if (tab == 'merchantWidgets') {
+      this.isMerchantStand = false;
+      this.isMerchantStickers = false;
+      this.isMerchantWidgets = true;
     }
   }
 }
