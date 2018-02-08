@@ -255,7 +255,13 @@
 	"merchant_tools_page_title"				   : "Merchant Tools",
     "merchant_tools_tab_stand"                 : "Stand",
     "merchant_tools_tab_stickers"                 : "Stickers",
+	"merchant_tools_tab_widgets"                 : "Widgets",
 	"merchant_tools_generate_stand_form_title" : "Generate Merchant QR Stand",
+	"merchant_tools_donate_form_title" 		   : "Donate FLASH",
+	"merchant_tools_accept_form_title" 		   : "Accept FLASH",
+	"merchant_tools_popup_title_label"		   : "Popup Title",
+	"merchant_tools_button_width_label"		   : "Button Width",
+	"merchant_tools_widget_code_label"		   : "Widget Code",
 	"merchant_tools_receiving_address_label"   : "Your Receiving Address",
 	"merchant_tools_merchant_name_label"	   : "Merchant Name (Optional)",
 
