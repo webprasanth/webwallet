@@ -27,6 +27,8 @@ export default class VerifyPhone extends BaseElement {
 
   mounted() {
     tag = this;
+    $('#verify-phone-body #not_get_code_text').html(this.getText('phone_verify_not_get_code_title'));
+    $('#verify-phone-body #not_get_code_text a').bind('click', this.resendCode);
     $('#verify-phone-body').modal('show');
     $('#code-input').focus(() => {
       tag.errorMessage = null;
@@ -94,6 +96,7 @@ export default class VerifyPhone extends BaseElement {
     phone = phone.replace(/ /g, '');
 
     if (phone.length != 0) {
+      $('#verify-phone-body').modal('hide');
       store.dispatch(
         profileActions.sendVerificationSms({ phoneNumber: phone })
       );
