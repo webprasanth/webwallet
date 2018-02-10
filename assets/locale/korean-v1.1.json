@@ -10,6 +10,7 @@
 "menu_label_request":"요청",
 "menu_label_pending":"현안",
 "menu_label_contact":"연락처",
+"menu_label_merchant_tools"                : "판매자 도구",
 "menu_label_profile":"내 계정",
 "menu_label_notification":"알림",
 "footer_label_avout":"정보",
@@ -243,6 +244,19 @@
 "contact_msg_no_result":"아직 아무런 연락처도 없습니다. 다른 사용자와 작업하는 경우에는 연락처가 여기에 자동으로 추가됩니다.",
 "contact_msg_verify_condition":"보내기 전에 이메일 주소와 전화 번호를 확인하고 돈을 요청하면 됩니다. 다른 사용자가 확인하지 않고",
 
+"merchant_tools_page_title"				   : "판매자 도구",
+    "merchant_tools_tab_stand"                 : "스탠드",
+    "merchant_tools_tab_stickers"                 : "스티커",
+	"merchant_tools_tab_widgets"                 : "위젯",
+	"merchant_tools_generate_stand_form_title" : "판매자 QR 스탠드 생성",
+	"merchant_tools_donate_form_title" 		   : "FLASH 기부",
+	"merchant_tools_accept_form_title" 		   : "FLASH 허용",
+	"merchant_tools_popup_title_label"		   : "팝업 제목",
+	"merchant_tools_button_width_label"		   : "버튼 너비",
+	"merchant_tools_widget_code_label"		   : "위젯 코드",
+	"merchant_tools_receiving_address_label"   : "귀하의 수신 주소",
+	"merchant_tools_merchant_name_label"	   : "판매자 이름 (선택 사항)",
+
 "common_anonymous_label":"익명인",
 "common_search_title":"날짜별 검색",
 
@@ -310,6 +324,9 @@
 "common_no_label":"아니요.",
 "common_update_label":"갱신하다",
 "common_service_unavailable_error":"서비스를 사용할 수 없습니다.",
+"common_download_label"         		   : "다운로드",
+	"common_print_label"         		       : "인쇄",
+    "common_generate_label"                       : "일으키다",
 
 "request_page_title":"요청 지급",
 "request_page_desc":"지급을 요청하려면 아래 정보를 입력하십시오.",
