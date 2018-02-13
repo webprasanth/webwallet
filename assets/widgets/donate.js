@@ -46,9 +46,9 @@
     }
    
 
-    function preparflashHTML(address, text, width, number, type) {
+    function preparflashHTML(address, text, width, number, type, language) {
         var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-        var k = '<div><img flash-data-popup-open="flash-popup-'+number+'" style="width:'+width+'px;cursor:pointer" src="'+domain+'/assets/images/'+type+'_now.png" /></div>';
+        var k = '<div><img flash-data-popup-open="flash-popup-'+number+'" style="width:'+width+'px;cursor:pointer" src="'+domain+'/assets/images/widgets/'+type+'_now_'+language+'.png" /></div>';
         k += '<div class="flash-popup" style="width:100%;height:100%;display:none;position:fixed;top:0px;left:0px;background:rgba(0,0,0,0.75);z-index:1" flash-data-popup="flash-popup-'+number+'">';
         k += '<div class="flash-popup-inner" style="max-width:700px;padding:20px;text-align:center;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);box-shadow:0px 2px 6px rgba(0,0,0,1);border-radius:3px;background:#fff;"><h2>'+text+'</h2><p><h4>'+address+'</h4><div id="flash-qr-image-'+number+'"></div>';
         k += '<a class="flash-popup-close" style="width:30px;height:30px;padding-top:4px;display:inline-block;position:absolute;top:0px;right:0px;transition:ease 0.25s all;-webkit-transform:translate(50%, -50%);transform:translate(50%, -50%);border-radius:1000px;background:rgba(0,0,0,0.8);font-family:Arial, Sans-Serif;font-size:20px;text-align:center;line-height:100%;color:#fff;" flash-data-popup-close="flash-popup-'+number+'" href="#">x</a></div></div>';
@@ -60,10 +60,11 @@ function flashmain() {
         jQuery(".flash-donate-widget").each(function() {
             var number = Math.floor((Math.random() * 100) + 1);
             var address = jQuery(this).attr("data-wallet") ? jQuery(this).attr("data-wallet") : '';
+            var language = jQuery(this).attr("data-language") ? jQuery(this).attr("data-language") : 'en';
             var type = jQuery(this).attr("data-type") ? jQuery(this).attr("data-type") : 'donate';
             var text = jQuery(this).attr("data-text") ? jQuery(this).attr("data-text") : ( (type == 'accept') ? 'Send FLASH' : 'Donate FLASH');
             var width = jQuery(this).attr("data-width") ? jQuery(this).attr("data-width") : 300;
-            var content = preparflashHTML(address, text, width, number, type);
+            var content = preparflashHTML(address, text, width, number, type, language);
             jQuery(this).html(content);
             jQuery(this).find("a").css({
                 "text-decoration": "none",

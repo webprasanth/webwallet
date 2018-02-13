@@ -51,7 +51,7 @@ export default class MerchantStickers extends Element {
   onGenerateButtonClick() {
     this.generateImage('download_merchant_stickers_1', 2400, 1765);
     this.generateImage('download_merchant_stickers_2', 2400, 594);
-    this.generateImage('download_merchant_stickers_3', 1300, 3000);
+    this.generateImage('download_merchant_stickers_3', 1300, 2600);
   }
 
   generateImage(templateid, width=2400, height=3000) {
@@ -69,13 +69,13 @@ export default class MerchantStickers extends Element {
     if (this.isMobile()) {
       switch (templateid) {  
         case 'download_merchant_stickers_1':
-          options.y = 2099;
+          options.y = 1999;
           break;
         case 'download_merchant_stickers_2':
-          options.y = 4363;
+          options.y = 4263;
           break;
         case 'download_merchant_stickers_3':
-          options.y = 5457;
+          options.y = 5357;
           break;
       }
     }

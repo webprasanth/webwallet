@@ -31,12 +31,45 @@ export default class MerchantWidgets extends Element {
 
   initializeWidgetCode(type) {
     var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-    var code = '<script type="text/javascript" src="'+domain+'/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="'+this.walletAddress+'"></div>';
+    var code = '<script type="text/javascript" src="'+domain+'/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-language="{language}" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="'+this.walletAddress+'"></div>';
     
+    var lang = this.getLanguage();
+    code = code.replace('{language}', lang);
+
     if(type == 'donate')
         this.initializeDonateCode(code);
     else
         this.initializeAcceptCode(code);
+  }
+
+  getLanguage()
+  {
+    var language = localStorage.getItem('id_lang');
+    switch (language) {
+      case 'chinese-simplified-v1.1':
+        language = 'chinese';
+        break;
+      case 'japanese-v1.1':
+        language = 'japanese';
+        break;
+      case 'korean-v1.1':
+        language = 'korean';
+        break;
+      case 'portugese-v1.1':
+        language = 'portugese';
+        break;
+      case 'spanish-v1.1':
+        language = 'spanish';
+        break;
+      case 'urdu-v1.1':
+        language = 'urdu';
+        break;
+      case 'en-v1.1':
+      default:
+        language = 'en';
+        break;
+    }
+    return language;
   }
 
   initializeDonateCode(code) {
