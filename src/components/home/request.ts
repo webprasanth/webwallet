@@ -62,13 +62,14 @@ export default class HomeRequest extends BaseElement {
 
   searchWallet = () => {
     tag.choosingAddress = true;
-
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     let term: string = $('#rq_to_email_id').val();
 
     let params = {
       term,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
 
     CommonService.singleton()

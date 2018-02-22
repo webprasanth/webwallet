@@ -42,7 +42,13 @@ export default class CommonService {
   }
 
   getMessage() {
-    let params = { offset: 0, size: 5, date_from: 0 };
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    let params = {
+      offset: 0,
+      size: 5,
+      date_from: 0,
+      currency_type: userSelectedCurrency,
+    };
     AppService.getInstance().getMessages(params, CommonService.messageHandler);
   }
 }

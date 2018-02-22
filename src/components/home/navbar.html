@@ -18,6 +18,12 @@
             </div>
 
             <ul class="nav navbar-nav">
+                <li>
+                <select class="select-currency" id="select-currency" onchange={onCurrencySelection}>
+                    <option value='flashcoin'>Flash</option>
+                    <option value='bitcoin'>BitCoin</option>
+                </select>
+                </li>
                 <li each="{tab in tabs}" class={active: tab.isActive} id={tab.id} onclick={onTabItemClick}>
                     <a href="">{tab.name}<label show="{(tab.id=='pending' && (pendingNum > 0))}" class="orange-circle">{pendingNum}</label></a>
                 </li>

@@ -47,11 +47,12 @@ export default class RejectMoneyRequest extends Element {
   sendRequest(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     let criteria = {
       request_id: this.opts.request_id,
       sender_bare_uid: this.opts.sender,
       note_processing: $('#Note').val(),
+      currency_type: userSelectedCurrency,
     };
 
     store.dispatch(pendingActions.markRejectedMoneyRequests(criteria));

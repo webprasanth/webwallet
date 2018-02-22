@@ -1,5 +1,5 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keys.flashcoin.io/';
+const HOST_URL = 'http://dev02keys.flashcoin.io/';
 
 export default class AppService {
   private authVersion = 4;
@@ -285,6 +285,7 @@ export default class AppService {
   }
 
   balance(params, cb) {
+    //alert('in app balance API services params is ' + params.currency_type);
     let options = this.makeRequestOption('api/balance', params, 'get', cb);
     $.ajax(options);
   }
@@ -396,6 +397,16 @@ export default class AppService {
   createFlashWallet(params, cb) {
     let options = this.makeRequestOption(
       'api/createFlashWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  createBTCWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createBTCWallet',
       params,
       'post',
       cb

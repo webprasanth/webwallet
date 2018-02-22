@@ -141,21 +141,25 @@ export default class HomeContacts extends BaseElement {
   }
 
   requestForm(event: FCEvent) {
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     tag.actionSelected = ACTION_REQUEST;
     let account = {
       email: event.item.email,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
     store.dispatch(contactsActions.getWalletsByEmail(account));
   }
 
   sendForm(event: FCEvent) {
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     tag.actionSelected = ACTION_SEND;
     let account = {
       email: event.item.email,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
     store.dispatch(contactsActions.getWalletsByEmail(account));
   }

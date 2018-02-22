@@ -12,6 +12,7 @@ export const sendActions = {
   createRawTx(targetWallet, amount, message) {
     let tx = null;
     let wallet = store.getState().userData.wallets[0];
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
       SendService.singleton()
@@ -22,7 +23,7 @@ export const sendActions = {
             let txn_info: any = {
               ip: getLocation().info.ip,
               amount: amount,
-              currency_type: 1,
+              currency_type: userSelectedCurrency,
               receiver_bare_uid: targetWallet.email,
               receiver_public_address: targetWallet.address,
               receiver_id: targetWallet.username,
@@ -44,6 +45,7 @@ export const sendActions = {
                       request_id: targetWallet.RequestId,
                       sender_bare_uid: targetWallet.email,
                       note_processing: targetWallet.memo,
+                      currency_type: userSelectedCurrency,
                     };
 
                     SendService.singleton()

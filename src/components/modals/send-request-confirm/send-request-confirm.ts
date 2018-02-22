@@ -50,12 +50,13 @@ export default class SendRequestConfirm extends BaseElement {
   sendRequestDirect() {
     this.formRequestEnabled = true;
     this.requestProcessing = true;
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
     if (this.opts.amount > 0) {
       let moneyInfo = {
         to: this.opts.uid,
         bare_uid: this.opts.receiver_email,
         amount: this.opts.amount,
-        currency: 1,
+        currency_type: userSelectedCurrency,
         note: this.opts.sender_note,
       };
       store.dispatch(requestActions.sendRequest(moneyInfo));

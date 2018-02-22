@@ -8,6 +8,7 @@ import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
+import { CURRENCY_TYPE } from '../../model/currency';
 import { removeIdToken } from '../../model/utils';
 import { getText } from '../localise';
 
@@ -56,6 +57,25 @@ export default class Navbar extends BaseElement {
         break;
     }
 
+    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    /*if(userSelectedCurrency == CURRENCY_TYPE.BTC)
+		alert('onchange of btc' + type + pendingData.type);
+		else 
+		alert('onchange of flash' + type + pendingData.type);
+		*/
+
+    switch (userSelectedCurrency) {
+      case CURRENCY_TYPE.FLASH:
+        this.performFlashSpecificOperation();
+        break;
+      case CURRENCY_TYPE.BTC:
+        this.performBitcoinSpecificOperation();
+        break;
+      default:
+        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
+        break;
+    }
+
     this.update();
   }
 
@@ -76,5 +96,56 @@ export default class Navbar extends BaseElement {
 
     let tab = event.item.tab;
     route(tab.id);
+  }
+
+  onCurrencySelection(event: Event) {
+    var DropdownList = document.getElementById(
+      'select-currency'
+    ) as HTMLSelectElement;
+
+    //Adding 1 here as index of select is 0 for FLASH and KeyServer is using 1 for FLASH.
+    var currencyIndex = DropdownList.selectedIndex + 1;
+
+    switch (currencyIndex) {
+      case CURRENCY_TYPE.FLASH:
+        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH);
+        //this.performFlashSpecificOperation();
+        this.onApplicationStateChanged();
+        break;
+      case CURRENCY_TYPE.BTC:
+        localStorage.setItem('curreny_type', CURRENCY_TYPE.BTC);
+        //this.performBitcoinSpecificOperation();
+        this.onApplicationStateChanged();
+        break;
+      default:
+        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
+        break;
+    }
+
+    //alert("selected currency is " + localStorage.getItem('curreny_type'));
+  }
+
+  performFlashSpecificOperation() {
+    alert(
+      'perform flash related stuffs' + localStorage.getItem('curreny_type')
+    );
+  }
+
+  performBitcoinSpecificOperation() {
+    alert(
+      'perform BitCoin related stuffs' + localStorage.getItem('curreny_type')
+    );
+    store.dispatch(userActions.getBalance());
+    store.dispatch(userActions.getProfile(this.opts.profile));
+    store.dispatch(
+      userActions.getMyWallets(
+        this.opts.profile.auth_version,
+        this.opts.password
+      )
+    );
+    //window.location.href = "home.html";
+    alert(
+      'perform BitCoin related stuffs' + localStorage.getItem('curreny_type')
+    );
   }
 }

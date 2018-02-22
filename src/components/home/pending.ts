@@ -279,9 +279,11 @@ export default class HomePending extends BaseElement {
       message: 'Are you sure you want to cancel this request?',
       callback: function(result) {
         if (result) {
+          var userSelectedCurrency = localStorage.getItem('curreny_type');
           let criteria = {
             request_id: event.item.id,
             receiver_bare_uid: event.item.receiver_email,
+            currency_type: userSelectedCurrency,
           };
 
           store.dispatch(pendingActions.markCancelledMoneyRequests(criteria));
