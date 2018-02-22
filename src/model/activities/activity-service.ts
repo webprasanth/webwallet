@@ -22,7 +22,7 @@ export default class ActivityService {
         size = 10,
         order = 'desc',
       } = pageSettings;
-      var userSelectedCurrency = localStorage.getItem('curreny_type');
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       var credentials = {
         date_from: date_from,
         date_to: date_to,
@@ -40,7 +40,7 @@ export default class ActivityService {
 
   getTransactionDetail(transactionId) {
     return new Promise(resolve => {
-      var userSelectedCurrency = localStorage.getItem('curreny_type');
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       let params = {
         transaction_id: transactionId,
         currency_type: userSelectedCurrency,

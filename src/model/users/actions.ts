@@ -423,7 +423,7 @@ export const userActions = {
                 appId: 'flashcoin',
               };
 
-              var userSelectedCurrency = localStorage.getItem('curreny_type');
+              var userSelectedCurrency = localStorage.getItem('currency_type');
               if (userSelectedCurrency == CURRENCY_TYPE.FLASH) {
                 UserService.singleton()
                   .createFlashWallet(params)
@@ -447,7 +447,7 @@ export const userActions = {
                       console.log('createFlashWallet failed, reason:', resp);
                     }
                   });
-              } else {
+              } else if (userSelectedCurrency == CURRENCY_TYPE.BTC) {
                 UserService.singleton()
                   .createBTCWallet(params)
                   .then((resp: any) => {
@@ -486,7 +486,7 @@ export const userActions = {
   },
   getBalance() {
     return dispatch => {
-      var userSelectedCurrency = localStorage.getItem('curreny_type');
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       let params = { currency_type: userSelectedCurrency };
       UserService.singleton()
         .getBalance(params)

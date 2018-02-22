@@ -42,7 +42,7 @@ export default class CommonService {
   }
 
   getMessage() {
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let params = {
       offset: 0,
       size: 5,

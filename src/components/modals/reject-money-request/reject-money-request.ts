@@ -47,7 +47,7 @@ export default class RejectMoneyRequest extends Element {
   sendRequest(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let criteria = {
       request_id: this.opts.request_id,
       sender_bare_uid: this.opts.sender,

@@ -40,7 +40,7 @@ export default class AcceptMoneyRequest extends Element {
     );
 
     $('#acceptRequestDialog').modal('show');
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     //Get sender's wallet info
     store.dispatch(
       commonActions.getWalletsByEmail({

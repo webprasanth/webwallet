@@ -1,5 +1,5 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'http://dev02keys.flashcoin.io/';
+const HOST_URL = 'http://dev03keys.flashcoin.io/';
 
 export default class AppService {
   private authVersion = 4;
@@ -406,7 +406,7 @@ export default class AppService {
 
   createBTCWallet(params, cb) {
     let options = this.makeRequestOption(
-      'api/createBTCWallet',
+      'api/createBtcWallet',
       params,
       'post',
       cb

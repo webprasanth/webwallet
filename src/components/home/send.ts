@@ -66,7 +66,7 @@ export default class HomeSend extends BaseElement {
 
   searchWallet = () => {
     tag.choosingAddress = true;
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let term: string = $('#to-email-id').val();
     let params = {
       term,

@@ -57,7 +57,7 @@ export default class Navbar extends BaseElement {
         break;
     }
 
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     /*if(userSelectedCurrency == CURRENCY_TYPE.BTC)
 		alert('onchange of btc' + type + pendingData.type);
 		else 
@@ -72,7 +72,7 @@ export default class Navbar extends BaseElement {
         this.performBitcoinSpecificOperation();
         break;
       default:
-        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
+        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
         break;
     }
 
@@ -108,32 +108,32 @@ export default class Navbar extends BaseElement {
 
     switch (currencyIndex) {
       case CURRENCY_TYPE.FLASH:
-        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH);
+        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH);
         //this.performFlashSpecificOperation();
         this.onApplicationStateChanged();
         break;
       case CURRENCY_TYPE.BTC:
-        localStorage.setItem('curreny_type', CURRENCY_TYPE.BTC);
+        localStorage.setItem('currency_type', CURRENCY_TYPE.BTC);
         //this.performBitcoinSpecificOperation();
         this.onApplicationStateChanged();
         break;
       default:
-        localStorage.setItem('curreny_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
+        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
         break;
     }
 
-    //alert("selected currency is " + localStorage.getItem('curreny_type'));
+    //alert("selected currency is " + localStorage.getItem('currency_type'));
   }
 
   performFlashSpecificOperation() {
     alert(
-      'perform flash related stuffs' + localStorage.getItem('curreny_type')
+      'perform flash related stuffs' + localStorage.getItem('currency_type')
     );
   }
 
   performBitcoinSpecificOperation() {
     alert(
-      'perform BitCoin related stuffs' + localStorage.getItem('curreny_type')
+      'perform BitCoin related stuffs' + localStorage.getItem('currency_type')
     );
     store.dispatch(userActions.getBalance());
     store.dispatch(userActions.getProfile(this.opts.profile));
@@ -145,7 +145,7 @@ export default class Navbar extends BaseElement {
     );
     //window.location.href = "home.html";
     alert(
-      'perform BitCoin related stuffs' + localStorage.getItem('curreny_type')
+      'perform BitCoin related stuffs' + localStorage.getItem('currency_type')
     );
   }
 }

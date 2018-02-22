@@ -62,7 +62,7 @@ export default class HomeRequest extends BaseElement {
 
   searchWallet = () => {
     tag.choosingAddress = true;
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let term: string = $('#rq_to_email_id').val();
 
     let params = {

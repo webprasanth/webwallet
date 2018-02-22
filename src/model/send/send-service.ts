@@ -13,7 +13,7 @@ export default class SendService {
 
   createRawTx(to, amount, message) {
     return new Promise((resolve, reject) => {
-      var userSelectedCurrency = localStorage.getItem('curreny_type');
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       let params = {
         publicAddress: to,
         amount: amount,

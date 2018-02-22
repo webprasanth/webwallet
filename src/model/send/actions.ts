@@ -12,7 +12,7 @@ export const sendActions = {
   createRawTx(targetWallet, amount, message) {
     let tx = null;
     let wallet = store.getState().userData.wallets[0];
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
       SendService.singleton()

@@ -141,7 +141,7 @@ export default class HomeContacts extends BaseElement {
   }
 
   requestForm(event: FCEvent) {
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     tag.actionSelected = ACTION_REQUEST;
     let account = {
       email: event.item.email,
@@ -153,7 +153,7 @@ export default class HomeContacts extends BaseElement {
   }
 
   sendForm(event: FCEvent) {
-    var userSelectedCurrency = localStorage.getItem('curreny_type');
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     tag.actionSelected = ACTION_SEND;
     let account = {
       email: event.item.email,
