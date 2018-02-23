@@ -6,7 +6,7 @@ import store, { ApplicationState } from '../../../model/store';
 import Constants from '../../../model/constants';
 import MerchantStandTemplate from './merchant-stand.html!text';
 import QRCode from 'QRCode';
-import { isMobile } from '../../../model/utils';
+import { isMobile, isAndroid } from '../../../model/utils';
 import html2canvas from 'html2canvas';
 import { getText } from '../../localise';
 
@@ -16,6 +16,7 @@ export default class MerchantStand extends Element {
   
   private walletAddress = '';
   isMobile = isMobile;
+  isAndroid = isAndroid;
   private getText = getText;
 
   mounted() {
@@ -46,7 +47,7 @@ export default class MerchantStand extends Element {
   generateImage() {
 
     var options = {useCORS: true, async: false, width:2400, height: 3000, windowWidth: 2400, widnowHeight: 3000, scale:1, logging:false};
-    if (!this.isMobile()) {
+    if (!this.isMobile() || this.isAndroid()) {
       options.x = 600;
     }
     
@@ -82,10 +83,9 @@ export default class MerchantStand extends Element {
   }
 
   onDownloadButtonClick() {
-    var link = document.createElement('a');
-    link.download = 'merchant_image.png';
-    link.href = $('#dmq-download-print-image').attr('src');
-    link.target = '_blank';
+    var link = document.getElementById('dmq-download-a-link');
+    link.setAttribute('download', 'merchant_image.png');
+    link.setAttribute('href', $('#dmq-download-print-image').attr('src'));
     link.click();
   }
 

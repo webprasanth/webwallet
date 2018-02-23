@@ -397,6 +397,13 @@ export function isMobile() {
   return isMobile;
 }
 
+export function isAndroid() {
+  let isAndroid = /Android.+Mobile/i.test(
+    navigator.userAgent
+  );
+  return isAndroid;
+}
+
 export function getSecurityQuestion() {
   return {
     A: [

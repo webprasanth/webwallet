@@ -116,10 +116,9 @@ export default class MerchantStickers extends Element {
   }
 
   onDownloadStickersClick(stickerid) {
-    var link = document.createElement('a');
-    link.download = 'merchant_image.png';
-    link.href = $('#download_merchant_'+stickerid+'-image').attr('src');
-    link.target = '_blank';
+    var link = document.getElementById('dmq-download-a-link');
+    link.setAttribute('download', 'merchant_image.png');
+    link.setAttribute('href', $('#download_merchant_'+stickerid+'-image').attr('src'));
     link.click();
   }
 

@@ -31,7 +31,7 @@ export default class MerchantWidgets extends Element {
 
   initializeWidgetCode(type) {
     var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-    var code = '<script type="text/javascript" src="'+domain+'/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-language="{language}" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="'+this.walletAddress+'"></div>';
+    var code = '<script id="flashWidgetScript" type="text/javascript" src="'+domain+'/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-language="{language}" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="'+this.walletAddress+'"></div>';
     
     var lang = this.getLanguage();
     code = code.replace('{language}', lang);
