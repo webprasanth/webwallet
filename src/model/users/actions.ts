@@ -497,9 +497,20 @@ export const userActions = {
               'get Balance() utils.satoshiToFlash(resp.balance)',
               utils.satoshiToFlash(resp.balance)
             );
-            dispatch(
-              userActions.getBalanceSuccess(utils.satoshiToFlash(resp.balance))
-            );
+            if(userSelectedCurrency == CURRENCY_TYPE.FLASH)
+            {
+              dispatch(
+                userActions.getBalanceSuccess(utils.satoshiToFlash(resp.balance))
+              );
+            }
+            else
+            {
+              dispatch(
+                userActions.getBalanceSuccess(resp.balance)
+              );
+            }
+
+            
           } else {
             console.log('get getBalanceFailed()');
             dispatch(userActions.getBalanceFailed(resp));

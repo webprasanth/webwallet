@@ -1,5 +1,5 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'http://dev03keys.flashcoin.io/';
+const HOST_URL = 'https://dev03keys.flashcoin.io/';
 
 export default class AppService {
   private authVersion = 4;

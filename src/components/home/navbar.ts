@@ -57,25 +57,6 @@ export default class Navbar extends BaseElement {
         break;
     }
 
-    var userSelectedCurrency = localStorage.getItem('currency_type');
-    /*if(userSelectedCurrency == CURRENCY_TYPE.BTC)
-		alert('onchange of btc' + type + pendingData.type);
-		else 
-		alert('onchange of flash' + type + pendingData.type);
-		*/
-
-    switch (userSelectedCurrency) {
-      case CURRENCY_TYPE.FLASH:
-        this.performFlashSpecificOperation();
-        break;
-      case CURRENCY_TYPE.BTC:
-        this.performBitcoinSpecificOperation();
-        break;
-      default:
-        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
-        break;
-    }
-
     this.update();
   }
 
@@ -110,42 +91,29 @@ export default class Navbar extends BaseElement {
       case CURRENCY_TYPE.FLASH:
         localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH);
         //this.performFlashSpecificOperation();
-        this.onApplicationStateChanged();
+        //this.onApplicationStateChanged();
         break;
       case CURRENCY_TYPE.BTC:
         localStorage.setItem('currency_type', CURRENCY_TYPE.BTC);
         //this.performBitcoinSpecificOperation();
-        this.onApplicationStateChanged();
+        //this.onApplicationStateChanged();
         break;
       default:
         localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
         break;
     }
+    this.performCurrencyChangeOperation();
 
-    //alert("selected currency is " + localStorage.getItem('currency_type'));
   }
 
-  performFlashSpecificOperation() {
-    alert(
-      'perform flash related stuffs' + localStorage.getItem('currency_type')
-    );
-  }
-
-  performBitcoinSpecificOperation() {
-    alert(
-      'perform BitCoin related stuffs' + localStorage.getItem('currency_type')
-    );
+  performCurrencyChangeOperation() {
+    let user = store.getState().userData.user;
     store.dispatch(userActions.getBalance());
     store.dispatch(userActions.getProfile(this.opts.profile));
-    store.dispatch(
-      userActions.getMyWallets(
-        this.opts.profile.auth_version,
-        this.opts.password
-      )
-    );
-    //window.location.href = "home.html";
-    alert(
-      'perform BitCoin related stuffs' + localStorage.getItem('currency_type')
-    );
+    store.dispatch(userActions.getMyWallets(user.auth_version, 'Enter your password'));
+    riot.mount('home-activity');
+    riot.mount('home-contacts');
+    riot.mount('home-profile');
+    //home activity, contacts, header, profile, fountain, User info, 
   }
 }
