@@ -540,6 +540,17 @@ h5.title-table{
     top: 2px;
     color: #DA332F;
 }
+
+.navbar-sc ul li .select-currency{
+	margin-top: 10px;
+	background: bottom;
+	color : #fff;
+	font-size : 15pt;
+	}
+
+.navbar-sc ul li .select-currency option{
+	background : bottom;
+}
 /*Transaction Acitivity*/
 .transaction-activity .transaction-activity-table tr {
     cursor: pointer;

@@ -103,17 +103,17 @@ export default class Navbar extends BaseElement {
         break;
     }
     this.performCurrencyChangeOperation();
-
   }
 
   performCurrencyChangeOperation() {
     let user = store.getState().userData.user;
     store.dispatch(userActions.getBalance());
-    store.dispatch(userActions.getProfile(this.opts.profile));
-    store.dispatch(userActions.getMyWallets(user.auth_version, 'Enter your password'));
+    store.dispatch(userActions.getProfile(user));
+    /*TODO in below call instead of false we can send password to decrpt wallet */
+    store.dispatch(userActions.getMyWallets(user.auth_version, false));
     riot.mount('home-activity');
     riot.mount('home-contacts');
     riot.mount('home-profile');
-    //home activity, contacts, header, profile, fountain, User info, 
+    //home activity, contacts, header, profile, fountain, User info,
   }
 }
