@@ -251,7 +251,7 @@ export default class HomeHeader extends BaseElement {
 
   onShowBalanceButtonClick(event: Event) {
     riot.mount('#confirm-send', 'full-balance', {
-      balance: localizeFlash(this.balance) + ' ' + this.getText('common_label_cash_unit_upcase')
+      balance: localizeFlash(this.balance) + ' ' + this.getCurrencyUnitUpcase()
     });
   }
 

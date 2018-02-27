@@ -6,6 +6,7 @@ import Constants from '../../../model/constants';
 import { commonActions } from '../../../model/common/actions';
 import { COMMON } from '../../../model/action-types';
 import { getText } from '../../localise';
+import { getCurrencyUnit } from '../../../model/currency';
 
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
@@ -16,6 +17,7 @@ export default class AcceptMoneyRequest extends Element {
   private sendWallet = {};
   private static unsubscribe = null;
   private getText = getText;
+  private getCurrencyUnit = getCurrencyUnit;
 
   constructor() {
     super();

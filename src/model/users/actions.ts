@@ -412,7 +412,7 @@ export const userActions = {
         .getMyWallets()
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if (resp.my_wallets.length > 0) {
+            if (resp.my_wallets.length > 1) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
             } else {
               let userProfile = store.getState().userData.user;
@@ -422,9 +422,8 @@ export const userActions = {
                 publicKey: userKey.publicKey,
                 appId: 'flashcoin',
               };
-
-              var userSelectedCurrency = localStorage.getItem('currency_type');
-              if (userSelectedCurrency == CURRENCY_TYPE.FLASH) {
+              //if no FLASH wallet
+              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.FLASH).length == 0) {
                 UserService.singleton()
                   .createFlashWallet(params)
                   .then((resp: any) => {
@@ -447,7 +446,9 @@ export const userActions = {
                       console.log('createFlashWallet failed, reason:', resp);
                     }
                   });
-              } else if (userSelectedCurrency == CURRENCY_TYPE.BTC) {
+              }
+              //if no BTC wallet
+              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0) {
                 UserService.singleton()
                   .createBTCWallet(params)
                   .then((resp: any) => {
@@ -483,6 +484,15 @@ export const userActions = {
   },
   getMyWalletsFailed(resp) {
     return { type: USERS.GET_MY_WALLETS_FAILED, data: resp };
+  },
+  getCurrencyWallet(wallets, currency_type) {
+    if(!wallets)  return [];
+    return wallets.filter(function(wallet) {
+      if(parseInt(wallet.currency_type) == currency_type)
+        return true;
+      else
+        return false;
+    });
   },
   getBalance() {
     return dispatch => {

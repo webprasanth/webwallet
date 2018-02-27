@@ -44,10 +44,11 @@ const NETWORK_NAME = 'flashcoin';
 
 export default class Wallet {
   private accounts = null;
+  currency_type = null;
 
-  getCryptoNetwork() {
+  getCryptoNetwork(currency_type) {
       let network;
-      var currency_type = parseInt(localStorage.getItem('currency_type'));
+      var currency_type = parseInt(currency_type);
       switch (currency_type) {
         case CURRENCY_TYPE.BTC:
           if(APP_MODE == 'PROD')
@@ -72,7 +73,7 @@ export default class Wallet {
     }
 
     let seed = bip39.mnemonicToSeedHex(mnemonic);
-    let accountZero = bitcoin.HDNode.fromSeedHex(seed, this.getCryptoNetwork()).deriveHardened(
+    let accountZero = bitcoin.HDNode.fromSeedHex(seed, this.getCryptoNetwork(wdata.currency_type)).deriveHardened(
       0
     );
 
@@ -80,13 +81,14 @@ export default class Wallet {
       externalAccount: accountZero.derive(0),
       internalAccount: accountZero.derive(1),
     };
+    this.currency_type = wdata.currency_type;
 
     return this;
   }
 
   signTx(rawTx) {
     let tx = bitcoin.Transaction.fromHex(rawTx);
-    let txBuilder = bitcoin.TransactionBuilder.fromTransaction(tx, this.getCryptoNetwork());
+    let txBuilder = bitcoin.TransactionBuilder.fromTransaction(tx, this.getCryptoNetwork(this.currency_type));
     let keyPair = this.accounts.externalAccount.derive(0).keyPair;
 
     for (var i = 0; i < tx.ins.length; i++) {

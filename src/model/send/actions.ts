@@ -6,12 +6,13 @@ import { riot } from '../../components/riot-ts';
 import { removeUserKey, getUserKey, getLocation } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
+import { CURRENCY_TYPE } from '../currency';
 import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const sendActions = {
   createRawTx(targetWallet, amount, message) {
     let tx = null;
-    let wallet = store.getState().userData.wallets[0];
+    let wallet = sendActions.getActiveWallet();
     var userSelectedCurrency = localStorage.getItem('currency_type');
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
@@ -124,6 +125,17 @@ export const sendActions = {
 
   clearForm() {
     return { type: SEND.CLEAR_FORM };
+  },
+  getActiveWallet() {
+    let wallets = store.getState().userData.wallets;
+    let currency_type = localStorage.getItem('currency_type');
+    let currency_wallets = wallets.filter(function(wallet) {
+      if(parseInt(wallet.currency_type) == currency_type)
+        return true;
+      else
+        return false;
+    });
+    return currency_wallets[0];
   },
   sendTXNSuccess(processing_duration) {
     return { type: SEND.SEND_TXN_SUCCESSFUL, data: processing_duration };

@@ -26,7 +26,7 @@
 				<div class="form-group amount-field col-xs-6 col-sm-4">
 					<label>{getText('common_amount_label')}</label>
 					<div class="input-group">
-						<span class="input-group-addon">{getText('common_label_cash_unit')}</span>
+						<span class="input-group-addon">{getCurrencyUnit()}</span>
 						<input type="text" id="amount-input" min="0" step="1" class="form-control">
 					</div>
 					<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>

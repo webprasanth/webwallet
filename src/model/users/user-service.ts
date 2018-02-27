@@ -95,9 +95,7 @@ export default class UserService {
 
   getMyWallets() {
     return new Promise(resolve => {
-      var userSelectedCurrency = localStorage.getItem('currency_type');
-      let params = { currency_type: userSelectedCurrency };
-      AppService.getInstance().myWallets(params, resp => {
+      AppService.getInstance().myWallets({}, resp => {
         resolve(resp);
       });
     });

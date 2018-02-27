@@ -14,7 +14,7 @@
 								<div class="amount-field form-group">
 									<label>{getText('common_amount_label')}</label>
 									<div class="input-group">
-										<span class="input-group-addon" id="basic-addon1">{getText('common_label_cash_unit')}</span>
+										<span class="input-group-addon" id="basic-addon1">{getCurrencyUnit()}</span>
 										<input id="contact-request-amount" type="text" class="form-control" placeholder='{getText("common_amount_label")}' aria-describedby="basic-addon1">
 									</div>
 									<div show={errorMessage} class="pin-incorrect">{errorMessage}</div>
