@@ -8,6 +8,7 @@ import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
+import { pendingActions } from '../../model/pending/actions';
 import { CURRENCY_TYPE } from '../../model/currency';
 import { removeIdToken } from '../../model/utils';
 import { getText } from '../localise';
@@ -114,6 +115,12 @@ export default class Navbar extends BaseElement {
     riot.mount('home-activity');
     riot.mount('home-contacts');
     riot.mount('home-profile');
+    riot.mount('home-send');
+    riot.mount('home-request');
+
+    // passing 2 for default "Incoming Request" tab
+    store.dispatch(pendingActions.setActiveTab(2));
+
     //home activity, contacts, header, profile, fountain, User info,
   }
 }
