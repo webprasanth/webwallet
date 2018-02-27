@@ -223,6 +223,7 @@ export default class HomePending extends BaseElement {
     let fromDate = new Date(fromDateTmp.setHours(0, 0, 0, 0)).toISOString();
     let toDateTmp = this.toDateObject.datepicker('getDate');
     let toDate = new Date(toDateTmp.setHours(23, 59, 59, 999)).toISOString();
+    var userSelectedCurrency = localStorage.getItem('currency_type');
 
     let pageSettings = {
       type: this.currentActiveTabId,
@@ -231,6 +232,7 @@ export default class HomePending extends BaseElement {
       start: (pageNumber - 1) * pageSize,
       size: pageSize,
       status: [0],
+      currency_type: userSelectedCurrency,
     };
 
     store.dispatch(pendingActions.getMoreRequest(pageSettings));
