@@ -7,7 +7,9 @@ import Premium from 'Premium';
 import nacl from 'tweetnacl';
 import { getText } from '../components/localise';
 
-import { Address, NETWORK } from './wallet';
+import { Address, NETWORKS } from './wallet';
+import { CURRENCY_TYPE } from './currency';
+import { APP_MODE } from './app-service';
 
 interface UserKey {
   idToken: string;
@@ -147,11 +149,29 @@ export function getUserKey(): UserKey | any {
 }
 
 export function calcFee(amount) {
-  return 0.001; // default fee for web-wallet transaction
+  let currency_type = parseInt(localStorage.getItem('currency_type'));
+  switch (currency_type) {
+    case CURRENCY_TYPE.FLASH:
+    default:
+      return 0.001; // default fee for web-wallet transaction
+      break;
+    case CURRENCY_TYPE.BTC: 
+      return 0.0005;
+      break;
+  }
 }
 
 export function formatCurrency(amount) {
-  return `${amount} Flash`;
+  let currency_type = parseInt(localStorage.getItem('currency_type'));
+  switch (currency_type) {
+    case CURRENCY_TYPE.FLASH:
+    default:
+      return `${amount} Flash`;
+      break;
+    case CURRENCY_TYPE.BTC: 
+      return `${amount} BTC`;
+      break;
+  }
 }
 
 export function getDisplayDate(date, toTimeZone) {
@@ -312,6 +332,36 @@ export function isValidFlashAddress(value) {
     if (
       address.version === NETWORK.pubKeyHash ||
       address.version === NETWORK.scriptHash
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
+export function isValidCryptoAddress(value) {
+  try {
+    let address = Address.fromBase58Check(value);
+    var network;
+    switch (parseInt(localStorage.getItem('currency_type'))) {
+      case CURRENCY_TYPE.BTC:
+        if (APP_MODE == 'PROD') {
+          network = NETWORKS.BTC;
+        }
+        else
+          network = NETWORKS.BTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        network = NETWORKS.FLASH;
+        break;
+    }
+    if (
+      address.version === network.pubKeyHash ||
+      address.version === network.scriptHash
     ) {
       return true;
     } else {

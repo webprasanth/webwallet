@@ -49,7 +49,7 @@ export default class HomeRequest extends BaseElement {
       return;
     }
 
-    if (utils.isValidFlashAddress(term)) {
+    if (utils.isValidCryptoAddress(term)) {
       tag.receiverWallet = {};
       tag.receiverWallet.address = term;
       tag.isValidAddress = true;

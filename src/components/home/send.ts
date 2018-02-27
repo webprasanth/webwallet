@@ -51,7 +51,7 @@ export default class HomeSend extends BaseElement {
     }
 
     if (
-      utils.isValidFlashAddress(term) &&
+      utils.isValidCryptoAddress(term) &&
       term != store.getState().profileData.wallet.address
     ) {
       tag.sendWallet = {};
@@ -113,8 +113,19 @@ export default class HomeSend extends BaseElement {
       this.emailErrorMessage = this.getText('invalid_receiver_address_error');
       return;
     }
+    else {
+      //checking if entered value and selected address is same
+      if(tag.sendWallet.address != $('#to-email-id').val()) {
+        if(typeof tag.sendWallet.email == undefined || tag.sendWallet.email != $('#to-email-id').val()) {
+          tag.isValidAddress = false;
+          tag.addressSelected = false;
+          this.emailErrorMessage = this.getText('invalid_receiver_address_error');
+          return;
+        }
+      }
+    }
 
-    if (utils.isValidFlashAddress($('#to-email-id').val())) {
+    if (utils.isValidCryptoAddress($('#to-email-id').val())) {
       // # disable checking phone verification to do withdraw
       // if (store.getState().userData.user.phone_verified == 0) {
       //     super.showMessage('', 'You need to provide and verify your phone number.', () => {

@@ -2,43 +2,43 @@ import bitcoin from 'bitcoinjs-lib';
 import bip39 from 'bip39';
 import base58check from 'bs58check';
 import { CURRENCY_TYPE } from './currency';
+import { APP_MODE } from './app-service';
 
-export const NETWORK = {
-  messagePrefix: '\x18Flashcoin Signed Message:\n',
-  bip32: {
-    public: 0x0488b21e,
-    private: 0x0488ade4,
+export const NETWORKS = {
+  FLASH: {
+    messagePrefix: '\x18Flashcoin Signed Message:\n',
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4,
+    },
+    pubKeyHash: 0x44,
+    scriptHash: 0x82,
+    wif: 0xc4,
+    dustThreshold: 546,
   },
-  pubKeyHash: 0x44,
-  scriptHash: 0x82,
-  wif: 0xc4,
-  dustThreshold: 546,
-};
-
-const BITCOIN_NETWORK = {
+  BTC: {
     messagePrefix: '\x18Bitcoin Coin Signed Message:\n',
     bip32: {
-        public: 0x0488b21e,
-        private: 0x0488ade4
+      public: 0x0488b21e,
+      private: 0x0488ade4
     },
     pubKeyHash: 0x00,
     scriptHash: 0x05,
     wif: 0x80,
     dustThreshold: 546,
-};
- 
-
-const BITCOIN_TESTNET_NETWORK = {
+  },
+  BTC_TESTNET: {
     messagePrefix: '\x18Bitcoin Coin Signed Message:\n',
     bip32: {
-        public: 0x043587cf,
-        private: 0x04358394
+      public: 0x043587cf,
+      private: 0x04358394
     },
     pubKeyHash: 0x6f,
     scriptHash: 0xc4,
     wif: 0xef,
     dustThreshold: 546,
-};
+  }
+}
 
 const NETWORK_NAME = 'flashcoin';
 
@@ -50,11 +50,14 @@ export default class Wallet {
       var currency_type = parseInt(localStorage.getItem('currency_type'));
       switch (currency_type) {
         case CURRENCY_TYPE.BTC:
-          network = BITCOIN_TESTNET_NETWORK;
+          if(APP_MODE == 'PROD')
+            network = NETWORKS.BTC;
+          else
+            network = NETWORKS.BTC_TESTNET;
           break;
         case CURRENCY_TYPE.FLASH:
         default:
-          network = NETWORK;
+          network = NETWORKS.FLASH;
           break;
       }
       return network;
