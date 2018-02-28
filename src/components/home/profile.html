@@ -15,7 +15,7 @@
                                     <span class="text">{getText('profile_tab_account_settings')}</span>
                                 </a>
                             </li>
-                            <li id="tab-3" role="presentation" class="next" onclick={onTabSelect.bind(this, 'fountain')}>
+                            <li id="tab-3" show={isFountainAvailable} role="presentation" class="next" onclick={onTabSelect.bind(this, 'fountain')}>
                                 <a href="#fountain" role="tab" id="fountain-tab" data-toggle="tab" aria-controls="fountain">
                                     <span class="text">{getText('profile_tab_fountain')}</span>
                                 </a>

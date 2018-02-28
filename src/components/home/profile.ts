@@ -5,6 +5,7 @@ import Constants from '../../model/constants';
 import { getUrlParam } from '../../model/utils';
 import { TABS, PROFILE } from '../../model/action-types';
 import { getText } from '../localise';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 @template(HomeProfileTemplate)
 export default class HomeProfile extends Element {
@@ -17,12 +18,16 @@ export default class HomeProfile extends Element {
   private isSetting = false;
   private isFountain = false;
   private isQuestioning = false;
+  private isFountainAvailable = false;
 
   mounted() {
     if (HomeProfile.unsubscribe) HomeProfile.unsubscribe();
     HomeProfile.unsubscribe = store.subscribe(
       this.onApplicationStateChanged.bind(this)
     );
+
+    if(parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
+      this.isFountainAvailable = true;
 
     this.userProfile = store.getState().userData.user;
     this.avartarServer = Constants.AvatarServer;
@@ -47,7 +52,9 @@ export default class HomeProfile extends Element {
     riot.mount('#profile-avatar', 'profile-avatar', {});
     riot.mount('#user-info', 'user-info', {});
     riot.mount('#account-setting', 'account-setting', {});
-    riot.mount('#fountain-setting', 'fountain-setting', {});
+    if (this.isFountainAvailable) {
+      riot.mount('#fountain-setting', 'fountain-setting', {});
+    }
     riot.mount('#security-question', 'security-question', {});
   }
 
