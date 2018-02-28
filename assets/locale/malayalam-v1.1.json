@@ -168,7 +168,7 @@
     "pending_table_header_avatar"              : "അവതാര്‍",
     "pending_table_header_name"                : "പേര്",
     "pending_table_header_email"               : "ഇമെയില്‍",
-    "pending_table_header_amount"              : "തുക (ഫ്ളാഷ്)",
+    "pending_table_header_amount"              : "തുക ",
     "pending_table_header_status"              : "സ്റ്റാറ്റസ്",
     "pending_table_header_note"                : "കുറിപ്പ്",
     "pending_table_header_date"                : "തീയതി/സമയം",

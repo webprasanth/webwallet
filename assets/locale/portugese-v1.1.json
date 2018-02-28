@@ -168,7 +168,7 @@
   "pending_table_header_avatar"              : "Avatar",
   "pending_table_header_name"                : "Nome",
   "pending_table_header_email"               : "E-mail",
-  "pending_table_header_amount"              : "Quantia (Flash)",
+  "pending_table_header_amount"              : "Quantia",
   "pending_table_header_status"              : "Status",
   "pending_table_header_note"                : "Nota",
   "pending_table_header_date"                : "Data/Hora",

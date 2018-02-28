@@ -169,7 +169,7 @@
     "pending_table_header_avatar"              : "Avatar",
     "pending_table_header_name"                : "Name",
     "pending_table_header_email"               : "Email",
-    "pending_table_header_amount"              : "Amount (Flash)",
+    "pending_table_header_amount"              : "Amount",
     "pending_table_header_status"              : "Status",
     "pending_table_header_note"                : "Note",
     "pending_table_header_date"                : "Date/Time",

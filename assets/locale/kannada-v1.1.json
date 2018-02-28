@@ -166,7 +166,7 @@
     "pending_table_header_avatar"              : "ಅವತಾರ್",
     "pending_table_header_name"                : "ಹೆಸರು",
     "pending_table_header_email"               : "ಈ ಮೇಲ್",
-    "pending_table_header_amount"              : "ಮೊತ್ತ (ಫ್ಲಾಶ್)",
+    "pending_table_header_amount"              : "ಮೊತ್ತ ",
     "pending_table_header_status"              : "ಸ್ಥಿತಿ",
     "pending_table_header_note"                : "ಗಮನಿಸಿ",
     "pending_table_header_date"                : "ಸಮಯ/ದಿನಾಂಕ",

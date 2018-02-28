@@ -169,7 +169,7 @@
     "pending_table_header_avatar"              : "アバター",
     "pending_table_header_name"                : "名前",
     "pending_table_header_email"               : "イメール",
-    "pending_table_header_amount"              : "額(ファラシュ)",
+    "pending_table_header_amount"              : "額",
     "pending_table_header_status"              : "状態",
     "pending_table_header_note"                : "ノート",
     "pending_table_header_date"                : "日付／お時間",

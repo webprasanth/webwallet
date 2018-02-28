@@ -147,7 +147,7 @@
     "pending_table_header_avatar"              : "అవతార్",
     "pending_table_header_name"                : "పేరు",
     "pending_table_header_email"               : "ఈమెయిల్",
-    "pending_table_header_amount"              : "నగదు(ఫ్లాష్)",
+    "pending_table_header_amount"              : "నగదు",
     "pending_table_header_status"              : "స్థితి",
     "pending_table_header_note"                : "గమనిక",
     "pending_table_header_date"                : "తేదీ/సమయం",

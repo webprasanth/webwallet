@@ -8,6 +8,7 @@ import * as utils from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 import { FCEvent } from '../../model/types';
 import BaseElement from '../base-element';
+import { getCurrencyUnit } from '../../model/currency';
 
 @template(HomePendingTemplate)
 export default class HomePending extends BaseElement {
@@ -33,6 +34,7 @@ export default class HomePending extends BaseElement {
   private TAB = TAB;
   private tabs = store.getState().pendingData.tabs;
   private money_requests = [];
+  private getCurrencyUnit = getCurrencyUnit;
 
   mounted() {
     let state = store.getState();

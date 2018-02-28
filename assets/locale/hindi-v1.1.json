@@ -171,7 +171,7 @@
     "pending_table_header_avatar"              : "अवतार",
     "pending_table_header_name"                : "नाम",
     "pending_table_header_email"               : "ईमेल ",
-    "pending_table_header_amount"              : "राशि (फ्लैश)",
+    "pending_table_header_amount"              : "राशि ",
     "pending_table_header_status"              : "स्थिति",
     "pending_table_header_note"                : "टिप्पणी",
     "pending_table_header_date"                : "दिनांक / समय",

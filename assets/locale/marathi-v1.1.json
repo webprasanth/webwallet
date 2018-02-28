@@ -169,7 +169,7 @@
     "pending_table_header_avatar"              : "अवतार",
     "pending_table_header_name"                : "नाव",
     "pending_table_header_email"               : "ईमेल",
-    "pending_table_header_amount"              : "रक्कम (फ्लॅश)",
+    "pending_table_header_amount"              : "रक्कम ",
     "pending_table_header_status"              : "स्थिती",
     "pending_table_header_note"                : "टीप",
     "pending_table_header_date"                : "दिनांक / वेळ",

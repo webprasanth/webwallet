@@ -161,7 +161,7 @@
 "pending_table_header_avatar":"아바타",
 "pending_table_header_name":"이름",
 "pending_table_header_email":"이메일",
-"pending_table_header_amount":"금액(플래시)",
+"pending_table_header_amount":"금액",
 "pending_table_header_status":"신분",
 "pending_table_header_note":"참고",
 "pending_table_header_date":"날짜/시간",

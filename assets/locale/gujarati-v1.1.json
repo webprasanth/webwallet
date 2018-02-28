@@ -169,7 +169,7 @@
     "pending_table_header_avatar"              : "Avatar",
     "pending_table_header_name"                : "નામ",
     "pending_table_header_email"               : "ઇમેઇલ",
-    "pending_table_header_amount"              : "એમાઉન્ટ (Flash)",
+    "pending_table_header_amount"              : "એમાઉન્ટ ",
     "pending_table_header_status"              : "સ્ટેટ્સ",
     "pending_table_header_note"                : "નોટ",
     "pending_table_header_date"                : "તારીખ/સમય",

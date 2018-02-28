@@ -166,7 +166,7 @@
     "pending_table_header_avatar"              : "அவதார்",
     "pending_table_header_name"                : "பெயர்",
     "pending_table_header_email"               : "மின்னஞ்சல்",
-    "pending_table_header_amount"              : "தொகை (ஃப்ளாஷ்)",
+    "pending_table_header_amount"              : "தொகை ",
     "pending_table_header_status"              : "நிலைமை",
     "pending_table_header_note"                : "குறிப்பு",
     "pending_table_header_date"                : "தேதி நேரம்",

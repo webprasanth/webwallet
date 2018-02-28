@@ -146,7 +146,7 @@
     "pending_table_header_avatar"              : "অবতার",
     "pending_table_header_name"                : "নাম",
     "pending_table_header_email"               : "ইমেল",
-    "pending_table_header_amount"              : "পরিমাণ(ফ্ল্যাশ)",
+    "pending_table_header_amount"              : "পরিমাণ",
     "pending_table_header_status"              : "অবস্থা",
     "pending_table_header_note"                : "দ্রষ্টব্য",
     "pending_table_header_date"                : "তারিখ/সময়",
