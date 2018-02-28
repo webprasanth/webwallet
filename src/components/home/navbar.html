@@ -17,13 +17,30 @@
                 </div>
             </div>
 
+            <div class="btn-group select-currency-container">
+                <button type="button" class="btn btn-default dropdown-toggle" id="selected-currency-container" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img id="selected-currency-icon" src="assets/images/flash-icon.png">
+                  <span id="selected-currency-text">FLASH</span>
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                
+                <ul id="select-currency" class="dropdown-menu">
+                  <li data-currency="1" onclick={onCurrencySelection}>
+                    <a href="#" title="Select FLASH"><img src="assets/images/flash-icon.png"><span>FLASH</span></a>
+                  </li>
+                  <li data-currency="2"  onclick={onCurrencySelection}>
+                    <a href="#" title="Select BTC"><img src="assets/images/btc-icon.png"><span>BTC</span></a>
+                  </li>
+                </ul>
+            </div>
             <ul class="nav navbar-nav">
-                <li>
+                <!--<li>
                 <select class="select-currency" id="select-currency" onchange={onCurrencySelection}>
                     <option value='flashcoin'>Flash</option>
                     <option value='bitcoin'>BitCoin</option>
                 </select>
-                </li>
+                </li>-->
+
                 <li each="{tab in tabs}" class={active: tab.isActive} id={tab.id} onclick={onTabItemClick}>
                     <a href="">{tab.name}<label show="{(tab.id=='pending' && (pendingNum > 0))}" class="orange-circle">{pendingNum}</label></a>
                 </li>

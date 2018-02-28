@@ -541,16 +541,38 @@ h5.title-table{
     color: #DA332F;
 }
 
-.navbar-sc ul li .select-currency{
-	margin-top: 10px;
-	background: bottom;
-	color : #fff;
-	font-size : 15pt;
-	}
-
-.navbar-sc ul li .select-currency option{
-	background : bottom;
+.select-currency-container {
+  color: #FFFFFF;
+  float: left;
 }
+.select-currency-container #selected-currency-container {
+  background-color: transparent;
+  width: 160px;
+  border: none;
+}
+.select-currency-container #selected-currency-container span{
+  color: white;
+}
+.select-currency-container #selected-currency-icon {
+  width: 34px;
+}
+.select-currency-container ul#select-currency {
+  background-color: #428bca;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+.select-currency-container ul#select-currency li a{
+  padding: 10px 35px;
+}
+.select-currency-container ul#select-currency li img{
+  width: 30px;
+}
+.select-currency-container ul#select-currency li span{
+  padding-left: 10px;
+}
+
 /*Transaction Acitivity*/
 .transaction-activity .transaction-activity-table tr {
     cursor: pointer;

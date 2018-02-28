@@ -81,24 +81,22 @@ export default class Navbar extends BaseElement {
   }
 
   onCurrencySelection(event: Event) {
-    var DropdownList = document.getElementById(
-      'select-currency'
-    ) as HTMLSelectElement;
 
     //Adding 1 here as index of select is 0 for FLASH and KeyServer is using 1 for FLASH.
-    var currencyIndex = DropdownList.selectedIndex + 1;
+    var selectedCurrencyElement = event.target.closest('li');
+    var currencyIndex = parseInt(selectedCurrencyElement.getAttribute('data-currency'));
 
     switch (currencyIndex) {
-      case CURRENCY_TYPE.FLASH:
-        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH);
-        break;
       case CURRENCY_TYPE.BTC:
         localStorage.setItem('currency_type', CURRENCY_TYPE.BTC);
         break;
+      case CURRENCY_TYPE.FLASH:
       default:
         localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
         break;
     }
+    $('#selected-currency-container #selected-currency-text').html($(selectedCurrencyElement).find('span').html());
+    $('#selected-currency-container #selected-currency-icon').attr('src', $(selectedCurrencyElement).find('img').attr('src'));
     this.performCurrencyChangeOperation();
   }
 
