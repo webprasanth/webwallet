@@ -373,7 +373,7 @@
 	"send_payment_email_placeholder"           : "ईमेल किंवा सार्वजनिक पत्ता प्रविष्ट करा",
     "send_transactionsent_message"             : "आपला व्यवहार पाठविला गेला आहे!",
     "send_transactionprocessing_message"       : "आपल्या व्यवहारावर प्रक्रिया करीत आहे!",
-    "send_transactionfee_label"                : "फ्लॅश व्यवहार शुल्क",
+    "send_transactionfee_label"                : "व्यवहार शुल्क",
     "send_transactionfail_error"               : "व्यवहार अयशस्वी",
     "send_processtime_message"                 : "प्रसंस्करण वेळ: %(processing_duration)s सेकंदा (सेकंद)",
     "send_success_message2"                    : "आपला व्यवहार लवकरच आपल्या क्रियाकलाप टॅबमध्ये दिसेल.",

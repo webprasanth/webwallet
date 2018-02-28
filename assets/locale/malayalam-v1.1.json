@@ -372,7 +372,7 @@
 	"send_payment_email_placeholder"           : "ഇമെയിൽ അല്ലെങ്കിൽ പൊതുവിലാസം നൽകുക",
     "send_transactionsent_message"             : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍അയച്ചിട്ടുണ്ട്!",
     "send_transactionprocessing_message"       : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍പ്രോസസ്സ് ചെയ്യുന്നു!",
-    "send_transactionfee_label"                : "ഫ്ളാഷ് ട്രാന്‍സാക്ഷന്‍ഫീ",
+    "send_transactionfee_label"                : "ട്രാന്‍സാക്ഷന്‍ഫീ",
     "send_transactionfail_error"               : "ട്രാന്‍സാക്ഷന്‍പരാജയം",
     "send_processtime_message"                 : "പ്രോസസ്സിംഗ് സമയം: %(processing_duration)s സെക്കന്‍ഡുകള്‍",
     "send_success_message2"                    : "താങ്കളുടെ ട്രാന്‍സാക്ഷന്‍താങ്കളുടെ ആക്ടിവിറ്റി ടാബില്‍താമസിയാകെ പ്രത്യക്ഷപ്പെടുന്നതാണ്.",

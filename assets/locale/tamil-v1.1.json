@@ -370,7 +370,7 @@
 	"send_payment_email_placeholder"           : "மின்னஞ்சல் அல்லது பொது முகவரி உள்ளிடவும்",
     "send_transactionsent_message"             : "உங்கள் பரிவர்த்தனை அனுப்பப்பட்டது!",
     "send_transactionprocessing_message"       : "உங்கள் பரிவர்த்தனை செயலாக்கப்படுகின்றன!",
-    "send_transactionfee_label"                : "FLASH பரிவர்த்தனை கட்டணம்",
+    "send_transactionfee_label"                : "பரிவர்த்தனை கட்டணம்",
     "send_transactionfail_error"               : "பரிவர்த்தனை தோல்வி",
     "send_processtime_message"                 : "செயலாக்க நேரம்: %(processing_duration)s கள் இரண்டாவது (கள்)",
     "send_success_message2"                    : "உங்கள் பரிவர்த்தனை விரைவில் உங்கள் செயல்பாட்டு தாவலில் தோன்றும்.",

@@ -373,7 +373,7 @@
 	"send_payment_email_placeholder"           : "ઇમેઇલ અથવા પબ્લિક એડ્રેસ દાખલ કરો",
     "send_transactionsent_message"             : "તમારું ટ્રાન્જેક્શન મોકલવામાં આવ્યું છે!",
     "send_transactionprocessing_message"       : "તમારૃ ટ્રાન્જેક્શન પ્રોસેસ માં છે!",
-    "send_transactionfee_label"                : "FLASH ટ્રાન્જેક્શન ફી",
+    "send_transactionfee_label"                : "ટ્રાન્જેક્શન ફી",
     "send_transactionfail_error"               : "ટ્રાન્ઝેક્શન નિષ્ફળ",
     "send_processtime_message"                 : "પ્રોસેસિંગ સમય: %(processing_duration)s સેકન્ડ(સ)",
     "send_success_message2"                    : "તમારૂ ટ્રાન્જેક્શન ટૂંક સમયમાં તમારી એકટીવીટી  ટૅબમાં દેખાશે.",

@@ -374,7 +374,7 @@
 	"send_payment_email_placeholder"           : "ای میل یا عوامی پتہ درج کریں",
     "send_transactionsent_message"             : " آپ کا ٹرانزیکشن بھیجا گیا ہے!",
     "send_transactionprocessing_message"       : " آپ کا ٹرانزیکشن پروسیس ہورہا ہے!",
-    "send_transactionfee_label"                : " فلیش ٹرانزیکشن فیس ",
+    "send_transactionfee_label"                : "ٹرانزیکشن فیس",
     "send_transactionfail_error"               : " ٹرانزیکشن ناکام ہوگيا",
     "send_processtime_message"                 : "پروسیسنگ کا وقت:٪(processing_duration)s second(s)",
     "send_success_message2"                    : " آپ کا ٹرانزیکشن جلد ہی آپ کی سرگرمی ٹیب میں دکھائى دے گا.",

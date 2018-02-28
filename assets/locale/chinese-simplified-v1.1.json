@@ -635,7 +635,7 @@
 
 	"send_transactionprocessing_message": "正在处理您的交易！",
 
-	"send_transactionfee_label": "FLASH交易费",
+	"send_transactionfee_label": "交易费",
 
 	"send_transactionfail_error": "交易失败",
 

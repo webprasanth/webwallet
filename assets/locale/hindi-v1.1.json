@@ -374,7 +374,7 @@
 	"send_payment_email_placeholder"           : "ईमेल या सार्वजनिक पता दर्ज करें",
     "send_transactionsent_message"             : "आपका लेनदेन भेजा गया है!",
     "send_transactionprocessing_message"       : "आपका लेनदेन प्रसंस्करण है!",
-    "send_transactionfee_label"                : "फ्लैश लेनदेन शुल्क",
+    "send_transactionfee_label"                : "लेनदेन शुल्क",
     "send_transactionfail_error"               : "लेनदेन असफल",
     "send_processtime_message"                 : "संस्करण समय: %(processing_duration)s सेकेंड",
     "send_success_message2"                    : "आपका लेन-देन जल्द ही आपकी गतिविधि टैब में दिखाई देगा।",

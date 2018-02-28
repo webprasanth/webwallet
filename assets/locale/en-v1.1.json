@@ -373,7 +373,7 @@
 	"send_payment_email_placeholder"           : "Enter email or public address",
     "send_transactionsent_message"             : "Your transaction has been sent!",
     "send_transactionprocessing_message"       : "Your transaction are processing!",
-    "send_transactionfee_label"                : "FLASH transaction fee",
+    "send_transactionfee_label"                : "transaction fee",
     "send_transactionfail_error"               : "Transaction Fail",
     "send_processtime_message"                 : "Processing time: %(processing_duration)s second(s)",
     "send_success_message2"                    : "Your transaction will appear in your activity tab shortly.",

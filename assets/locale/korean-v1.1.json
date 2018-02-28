@@ -370,7 +370,7 @@
 "send_payment_email_placeholder"           : "Enter email or public address",
 "send_transactionsent_message":"당신의 트랜잭션이 전송되었습니다!",
 "send_transactionprocessing_message":"당신의 트랜잭션은 처리 중입니다!",
-"send_transactionfee_label":"FLASH거래 수수료",
+"send_transactionfee_label":"거래 수수료",
 "send_transactionfail_error":"거래 실패",
 "send_processtime_message":"처리 시간:%(processing_duration)s",
 "send_success_message2":"당신의 활동 탭에 곧 거래 내용이 나타납니다.",

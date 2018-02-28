@@ -94,8 +94,7 @@ export const sendActions = {
                       .getTxnById(txn_info)
                       .then((resp: any) => {
                         count++;
-
-                        if (resp && resp.rc === 1 && resp.txn.status === 1) {
+                        if (resp && resp.rc === 1 && (resp.txn.status === 1 || userSelectedCurrency != CURRENCY_TYPE.FLASH)) {
                           dispatch(
                             sendActions.sendTXNSuccess(
                               resp.txn.processing_duration.toFixed(3)

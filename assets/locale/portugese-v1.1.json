@@ -372,7 +372,7 @@
   "send_payment_email_placeholder"           : "Digite e-mail ou endereço público",
   "send_transactionsent_message"             : "Sua transação foi efetuada!",
   "send_transactionprocessing_message"       : "Sua transação está sendo processada!",
-  "send_transactionfee_label"                : "Taxa de transação FLASH",
+  "send_transactionfee_label"                : "Taxa de transação",
   "send_transactionfail_error"               : "Falha na transação",
   "send_processtime_message"                 : "Tempo de processamento: %(processing_duration)s segundo(s)",
   "send_success_message2"                    : "Sua transação aparecerá em seu registro de atividades em breve.",

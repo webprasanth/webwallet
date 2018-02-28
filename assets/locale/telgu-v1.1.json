@@ -351,7 +351,7 @@
 	"send_payment_email_placeholder"           : "ఇమెయిల్ లేదా పబ్లిక్ చిరునామాను నమోదు చేయండి",
     "send_transactionsent_message"             : "మీ చెల్లింపు పంపించబడింది!",
     "send_transactionprocessing_message"       : "మీ లావాదేవీ ప్రక్రియ జరుగుతోంది!",
-    "send_transactionfee_label"                : "ఫ్లాష్ లావాదేవీ రుసుం",
+    "send_transactionfee_label"                : "లావాదేవీ రుసుం",
     "send_transactionfail_error"               : "లావాదేవీ విఫలమైంది",
     "send_processtime_message"                 : "ప్రక్రియ సమయం: %(processing_duration)s సెకండ్లు",
     "send_success_message2"                    	: "మీ కార్యకలాపాల ట్యాబ్లో మీ లావాదేవీ త్వరలో ప్రత్యక్షమవుతుంది.",

@@ -373,7 +373,7 @@
 	"send_payment_email_placeholder"           : "Ingrese el correo electrónico o la dirección pública",
     "send_transactionsent_message"             : "¡Su transacción ha sido enviada!",
     "send_transactionprocessing_message"       : "¡Su transacción se está procesando!",
-    "send_transactionfee_label"                : "Comisión de transacción FLASH",
+    "send_transactionfee_label"                : "Comisión de transacción",
     "send_transactionfail_error"               : "Error de transacción",
     "send_processtime_message"                 : "Tiempo de procesamiento: %(processing_duration)s segundo(s)",
     "send_success_message2"                    : "Su transacción aparecerá en breve en su pestaña de actividad.",

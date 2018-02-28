@@ -82,6 +82,11 @@ export function satoshiToFlash(num) {
   return parseFloat(new Big(num).div(10000000000).toString());
 }
 
+export function satoshiToBtc(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(new Big(num).div(100000000).toString());
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(num).toLocaleString('en',{maximumFractionDigits:8});
@@ -373,14 +378,13 @@ export function isValidCryptoAddress(value) {
 }
 
 export function filterNumberEdit(event) {
-  let charCode = parseInt(event.charCode);
-  let keyCode = parseInt(event.keyCode);
+  let keyCode = event.key;
   let isValidAmountCharCode =
-    (charCode >= 48 && charCode <= 57) ||
-    keyCode == 8 ||
-    keyCode == 9 ||
-    keyCode == 46 ||
-    keyCode == 127;
+    (parseInt(keyCode) >= 0 && parseInt(keyCode) <= 9) ||
+    keyCode == 'Backspace' ||
+    keyCode == 'Tab' ||
+    keyCode == 'Delete' ||
+    keyCode == '.';
   if (!isValidAmountCharCode) {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
   } else {

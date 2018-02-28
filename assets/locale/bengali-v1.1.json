@@ -349,7 +349,7 @@
 	"send_payment_email_placeholder"           : "ইমেল বা পাবলিক ঠিকানা লিখুন",
     "send_transactionsent_message"             : "আপনার লেনদেন পাঠানো হয়ে গেছে!",
     "send_transactionprocessing_message"       : "আপনার লেনদেনের প্রক্রিয়াকরণ চলছে!",
-    "send_transactionfee_label"                : "ফ্ল্যাশ লেনদেন ফী",
+    "send_transactionfee_label"                : "লেনদেন ফী",
     "send_transactionfail_error"               : "লেনদেন ব্যর্থ",
     "send_processtime_message"                 : "প্রক্রিয়াকরণের সময়: %(processing_duration)s সেকেন্ড(s)",
     "send_success_message2"                    : "আপনার লেনদেন শীঘ্রই আপনার অ্যাক্টিভিটি ট্যাবে দেখাবে।",

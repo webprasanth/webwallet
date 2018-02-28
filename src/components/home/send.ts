@@ -8,6 +8,7 @@ import _ from 'lodash';
 import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 let tag = null;
 
@@ -144,7 +145,7 @@ export default class HomeSend extends BaseElement {
       return;
     }
 
-    if (amount < 1) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }

@@ -5,6 +5,7 @@ import Constants from '../../../model/constants';
 import {
   decimalFormat,
   satoshiToFlash,
+  satoshiToBtc,
   formatCurrency,
   getDisplayDateTime,
   localizeFlash,
@@ -23,6 +24,7 @@ export default class TransactionDetails extends Element {
   private CURRENCY_TYPE = CURRENCY_TYPE;
 
   satoshiToFlash = satoshiToFlash;
+  satoshiToBtc = satoshiToBtc;
   formatCurrency = formatCurrency;
   decimalFormat = decimalFormat;
   getDisplayDateTime = getDisplayDateTime;
@@ -34,6 +36,19 @@ export default class TransactionDetails extends Element {
 
   mounted() {
     var self = this;
+
+    let currency_type = parseInt(localStorage.getItem('currency_type'));
+    switch (currency_type) {
+      case CURRENCY_TYPE.BTC:
+        this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        this.txnDetail.fee = satoshiToFlash(this.txnDetail.fee);
+        break;
+    }
+    this.update();
+
     $('#txDetailDlg').modal('show');
     $('#txDetailDlg').on('hidden.bs.modal', function() {
       if (self.opts.cb) {

@@ -360,7 +360,7 @@
 	"send_payment_email_placeholder"           : "ಇಮೇಲ್ ಅಥವಾ ಸಾರ್ವಜನಿಕ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
     "send_transactionsent_message"             : " ನಿಮ್ಮ ವ್ಯವಹಾರವನ್ನು ಕಳುಹಿಸಿ!",
     "send_transactionprocessing_message"       : ", ನಿಮ್ಮ ವ್ಯವಹಾರಗಳು ಪ್ರಗತಿಯಲ್ಲಿವೆ!.",
-    "send_transactionfee_label"                : "ಫ್ಲಾಶ್ ವ್ಯವಹಾರ ಶುಲ್ಕ",
+    "send_transactionfee_label"                : "ವ್ಯವಹಾರ ಶುಲ್ಕ",
     "send_transactionfail_error"               : "ವ್ಯವಹಾರ ಸಾಧ್ಯವಾಗಿಲ್ಲ",
     "send_processtime_message"                 : "ಪ್ರಕ್ರಿಯೆಯ ಸಮಯ %(processing_duration)s ಸೆಕೆಂಡುಗಳು",
     "send_success_message2"                    : "ನಿಮ್ಮ ವ್ಯವಹಾರವು ಚಟುವಟಿಕೆ ಭಾಗದಲ್ಲಿ ಸಧ್ಯದಲ್ಲಿಯೇ ಕಂಡುಬರಲಿದೆ",

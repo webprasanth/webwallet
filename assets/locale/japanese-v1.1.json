@@ -376,7 +376,7 @@
 	"send_payment_email_placeholder"           : "Enter email or public address",
     "send_transactionsent_message"        :"あなたの取引は送信されました!",
     "send_transactionprocessing_message"     :"あなたの取引は処理中です!",
-    "send_transactionfee_label"                : "フラッシュ取引手数料",
+    "send_transactionfee_label"                : "取引手数料",
     "send_transactionfail_error"             :"トランザクションが失敗する",
     "send_processtime_message"                :"処理時間：%(processing_duration)s 秒",
     "send_success_message2"                  :"あなたの取引はすぐにあなたの アクティビテイタブに表示されます.",
