@@ -20,7 +20,7 @@
 					<div class="header-qr-desktop" onclick={onShowWalletAddressClick} title="Click to see wallet address"><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span></div>
 					<p class="top-balance-text">
 						<img src={refreshIconUrl} onmouseover={onLoadBalanceButtonHoverIn} onmouseout={onLoadBalanceButtonHoverOut} onclick={onLoadBalanceButtonClick} title="Click to refresh balance" height="20px" />
-						<span onclick={onShowBalanceButtonClick} title="Click to see full balance"><span class="hidden-xs" >{getText('common_balance_label')}:</span> {formattedBalance} {getCurrencyUnitUpcase()}</span>
+						<span onclick={onShowBalanceButtonClick} title="Click to see full balance"><span class="hidden-xs" >{getText('common_balance_label')}:</span> {formattedBalance} <img src={getCurrencyIconUrl()} height="20px" /> {getCurrencyUnitUpcase()}</span>
 					</p>
 				</div>
 				<div class="header-right col-xs-12 col-sm-4 hidden-xs">
