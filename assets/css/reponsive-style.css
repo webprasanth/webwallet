@@ -39,6 +39,12 @@
 @media only screen and (max-width: 780px) {
 }
 
+@media (min-width: 768px) {
+    .navbar-sc .select-currency-container {
+        float: left;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .container{
         width: auto !important;
@@ -243,6 +249,10 @@
         transition-duration: 0.5s;
         overflow: auto;
         z-index: 100;
+    }
+    .navbar-sc .select-currency-container {
+        background: #428bca;
+        width: 100%;
     }
     .navbar-sc .container{
         padding: 0;

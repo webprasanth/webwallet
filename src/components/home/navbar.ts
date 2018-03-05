@@ -81,7 +81,7 @@ export default class Navbar extends BaseElement {
   }
 
   onCurrencySelection(event: Event) {
-    //Adding 1 here as index of select is 0 for FLASH and KeyServer is using 1 for FLASH.
+    
     var selectedCurrencyElement = event.target.closest('li');
     var currencyIndex = parseInt(
       selectedCurrencyElement.getAttribute('data-currency')
