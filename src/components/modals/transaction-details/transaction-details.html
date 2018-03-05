@@ -59,7 +59,7 @@
 					</div>
 					<div class="listItems" show={nonflash}>
 						<div class="name-item">{getText('pending_table_header_status')}</div>
-						<div class="data-item">{meta.status}</div>
+						<div class="data-item">{txnDetail.status ? txnDetail.status : meta.status}</div>
 					</div>
 				</div>
 				<div class="modal-footer">

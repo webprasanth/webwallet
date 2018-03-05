@@ -64,6 +64,9 @@ export default class ActivityService {
 
     let temp = null;
 
+    if(obj.status)
+      tran.status = obj.status;
+
     for (let i = 0; i < obj.vin.length; i++) {
       temp = obj.vin[i];
       tran.ins.push({
