@@ -123,7 +123,11 @@ export default class HomeHeader extends BaseElement {
             amount: note.amount,
             time: utcDateToLocal(note.created_ts),
           };
-          message = this.getText('common_got_money_request_alert', params) + ' ' + this.getText('common_label_cash_unit_upcase');
+
+          let notification_currency = note.currency ? parseInt(note.currency) : this.CURRENCY_TYPE.FLASH;
+          let notification_currency_name = this.getCurrencyUnitUpcase(notification_currency);
+
+          message = this.getText('common_got_money_request_alert', params) + ' ' + notification_currency_name;
           $.notify(message, 'info');
         }
         break;
@@ -185,6 +189,9 @@ export default class HomeHeader extends BaseElement {
       return;
     }
 
+    let notification_currency = note.currency_type ? parseInt(note.currency_type) : this.CURRENCY_TYPE.FLASH;
+    let notification_currency_name = this.getCurrencyUnitUpcase(notification_currency);
+
     if (note.sender_email == store.getState().userData.user.email) {
       if (!note.transaction_type) {
         return;
@@ -205,7 +212,7 @@ export default class HomeHeader extends BaseElement {
       }
     } else {
       let params = { sender_email: note.sender_email, amount: note.amount };
-      message = this.getText('common_receive_money_alert', params) + ' ' + this.getText('common_label_cash_unit_upcase');
+      message = this.getText('common_receive_money_alert', params) + ' ' + notification_currency_name;
     }
 
     $.notify(message, 'info');

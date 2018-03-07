@@ -7,6 +7,7 @@ import {
   getCurrencyUnitUpcase,
   getCurrencyUnit,
   getCurrencyIconUrl,
+  CURRENCY_TYPE,
 } from '../model/currency';
 
 export default class BaseElement extends Element {
@@ -14,6 +15,7 @@ export default class BaseElement extends Element {
   protected getCurrencyUnitUpcase = getCurrencyUnitUpcase;
   protected getCurrencyUnit = getCurrencyUnit;
   protected getCurrencyIconUrl = getCurrencyIconUrl;
+  protected CURRENCY_TYPE = CURRENCY_TYPE;
 
   /**
    * Show error dialog
