@@ -19,7 +19,6 @@ export default class TransactionDetails extends Element {
   private txnDetail = store.getState().activityData.txn_detail;
   private meta = store.getState().activityData.txn_detail.meta;
   private getText = getText;
-  private nonflash = false;
   private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
   private AvatarServer = Constants.AvatarServer;
   private CURRENCY_TYPE = CURRENCY_TYPE;
@@ -42,7 +41,6 @@ export default class TransactionDetails extends Element {
     switch (currency_type) {
       case CURRENCY_TYPE.BTC:
         this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
-        this.nonflash = true;
         break;
       case CURRENCY_TYPE.FLASH:
       default:

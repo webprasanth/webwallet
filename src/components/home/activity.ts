@@ -22,7 +22,6 @@ export default class HomeActivity extends BaseElement {
   private decimalFormat = decimalFormat;
   private static unsubscribe = null;
   private isTnxDetailOpened = false;
-  private nonflash = false;
   /**
    * flag for reset Pagination
    * + equal true when change Tab or reload data
@@ -51,11 +50,6 @@ export default class HomeActivity extends BaseElement {
     tag = this;
     var state = store.getState();
     this.timeZone = state.userData.user.timezone;
-
-    let currency_type = parseInt(localStorage.getItem('currency_type'));
-    if(currency_type != CURRENCY_TYPE.FLASH)
-      this.nonflash = true;
-    
 
     this.initDatePickers(false);
     this.loadTxns();
