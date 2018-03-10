@@ -266,6 +266,7 @@
 	"merchant_tools_button_width_label"		   : "بٹن کی چوڑائی",
 	"merchant_tools_widget_code_label"		   : "ویجیٹ کوڈ",
 	"merchant_tools_receiving_address_label"   : "آپ کا وصول کردہ پتہ",
+	"merchant_tools_renegerate_info"		   : "اگر اسٹیکرز مناسب طریقے سے ظاہر نہیں کیے جاتے ہیں، تو پھر براہ کرم دوبارہ تخلیق کرنے کیلئے بٹن پیدا کریں.",
 	"merchant_tools_merchant_name_label"	   : "مرچنٹ کا نام (اختیاری)",
 
     "common_anonymous_label"                   : " گمنام",

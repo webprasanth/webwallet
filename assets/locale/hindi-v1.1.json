@@ -267,6 +267,7 @@
 	"merchant_tools_button_width_label"		   : "बटन चौड़ाई",
 	"merchant_tools_widget_code_label"		   : "विजेट कोड",
 	"merchant_tools_receiving_address_label"   : "आपका प्राप्तकर्ता पता",
+	"merchant_tools_renegerate_info"		   : "यदि स्टिकर ठीक से प्रदर्शित नहीं होते हैं, तो कृपया पुन: निर्माण करने के लिए 'जेनरेट करें' बटन पर क्लिक करें।",
 	"merchant_tools_merchant_name_label"	   : "व्यापारी का नाम (वैकल्पिक)",
 
     "common_anonymous_label"                   : "गुमनाम",

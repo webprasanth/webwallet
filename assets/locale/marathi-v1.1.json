@@ -265,6 +265,7 @@
 	"merchant_tools_button_width_label"		   : "बटण रूंदी",
 	"merchant_tools_widget_code_label"		   : "विजेट कोड",
 	"merchant_tools_receiving_address_label"   : "आपला प्राप्त करण्याचा पत्ता",
+	"merchant_tools_renegerate_info"		   : "स्टिकर्स योग्यरित्या प्रदर्शित होत नसल्यास, पुन्हा तयार करण्यासाठी 'व्युत्पन्न करा' बटणावर क्लिक करा.",
 	"merchant_tools_merchant_name_label"	   : "व्यापारी नाव (पर्यायी)",
 
     "common_anonymous_label"                   : "अनामिक",

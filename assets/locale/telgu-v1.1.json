@@ -243,6 +243,7 @@
 	"merchant_tools_button_width_label"		   : "బటన్ వెడల్పు",
 	"merchant_tools_widget_code_label"		   : "విడ్జెట్ కోడ్",
 	"merchant_tools_receiving_address_label"   : "మీ రిసీవింగ్ చిరునామా",
+	"merchant_tools_renegerate_info"		   : "స్టికర్లు సరిగ్గా ప్రదర్శించబడకపోతే, దయచేసి మళ్లీ రూపొందించడానికి 'సృష్టించు' బటన్పై క్లిక్ చేయండి.",
 	"merchant_tools_merchant_name_label"	   : "వ్యాపారి పేరు (ఆప్షనల్)",
 
     "common_anonymous_label"                   : "అజ్ఞాతవ్యక్తి",

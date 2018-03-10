@@ -265,6 +265,7 @@
 	"merchant_tools_button_width_label"		   : "Button Width",
 	"merchant_tools_widget_code_label"		   : "Widget Code",
 	"merchant_tools_receiving_address_label"   : "Your Receiving Address",
+	"merchant_tools_renegerate_info"		   : "If stickers are not displayed properly, please click on 'Generate' button to recreate.",
 	"merchant_tools_merchant_name_label"	   : "Merchant Name (Optional)",
 
     "common_anonymous_label"                   : "Anonymous",

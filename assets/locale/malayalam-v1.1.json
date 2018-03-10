@@ -264,6 +264,7 @@
 	"merchant_tools_button_width_label"		   : "ബട്ടൺ വീതി",
 	"merchant_tools_widget_code_label"		   : "വിഡ്ജെറ്റ് കോഡ്",
 	"merchant_tools_receiving_address_label"   : "നിങ്ങളുടെ റിവിവിംഗ് വിലാസം",
+	"merchant_tools_renegerate_info"		   : "സ്റ്റിക്കറുകൾ ശരിയായി ദൃശ്യമാകുന്നില്ലെങ്കിൽ, പുനരാരംഭിക്കുന്നതിന് 'ജനറേറ്റുചെയ്യുക' ബട്ടൺ ക്ലിക്കുചെയ്യുക.",
 	"merchant_tools_merchant_name_label"	   : "വ്യാപാരി നാമം (ഓപ്ഷണൽ)",
 
     "common_anonymous_label"                   : "അജ്ഞാതനാമകം",

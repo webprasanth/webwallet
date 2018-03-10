@@ -259,6 +259,7 @@
 	"merchant_tools_button_width_label"		   : "ಬಟನ್ ಅಗಲ",
 	"merchant_tools_widget_code_label"		   : "ವಿಜೆಟ್ ಕೋಡ್",
 	"merchant_tools_receiving_address_label"   : "ನಿಮ್ಮ ಸ್ವೀಕರಿಸುವ ವಿಳಾಸ",
+	"merchant_tools_renegerate_info"		   : "ಸ್ಟಿಕ್ಕರ್ಗಳನ್ನು ಸರಿಯಾಗಿ ಪ್ರದರ್ಶಿಸದಿದ್ದರೆ, ಪುನಃ ರಚಿಸಲು 'Generate' ಗುಂಡಿಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ.",
 	"merchant_tools_merchant_name_label"	   : "ವ್ಯಾಪಾರಿ ಹೆಸರು (ಐಚ್ಛಿಕ)",
 	
     "common_anonymous_label"                   : "ಅನಾಮಿಕ",

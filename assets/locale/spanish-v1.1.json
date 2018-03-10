@@ -265,6 +265,7 @@
 	"merchant_tools_button_width_label"		   : "Ancho del botón",
 	"merchant_tools_widget_code_label"		   : "Código de widget",
 	"merchant_tools_receiving_address_label"   : "Su dirección de recepción",
+	"merchant_tools_renegerate_info"		   : "Si las pegatinas no se muestran correctamente, haga clic en el botón 'Generar' para volver a crearlas.",
 	"merchant_tools_merchant_name_label"	   : "Nombre del comerciante (opcional)",
 
     "common_anonymous_label"                   : "Anónimo",

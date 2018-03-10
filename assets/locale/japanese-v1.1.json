@@ -267,6 +267,7 @@
 	"merchant_tools_button_width_label"		   : "ボタンの幅",
 	"merchant_tools_widget_code_label"		   : "ウィジェットコード",
 	"merchant_tools_receiving_address_label"   : "あなたの受取人の住所",
+	"merchant_tools_renegerate_info"		   : "ステッカーが正しく表示されない場合は、[Generate]ボタンをクリックして再作成してください。",
 	"merchant_tools_merchant_name_label"	   : "販売者名（オプション）",
 
     "common_anonymous_label"                   : "匿名",

@@ -262,6 +262,7 @@
 	"merchant_tools_button_width_label"		   : "பட்டன் அகலம்",
 	"merchant_tools_widget_code_label"		   : "சாளரம் கோட்",
 	"merchant_tools_receiving_address_label"   : "உங்கள் பெறுதல் முகவரி",
+	"merchant_tools_renegerate_info"		   : "ஸ்டிக்கர்கள் ஒழுங்காக காட்டப்படாவிட்டால், மீண்டும் உருவாக்க 'உருவாக்கு' பொத்தானை கிளிக் செய்க.",
 	"merchant_tools_merchant_name_label"	   : "வணிகர் பெயர் (விருப்பம்)",
 
     "common_anonymous_label"                   : "பெயரில்லா",

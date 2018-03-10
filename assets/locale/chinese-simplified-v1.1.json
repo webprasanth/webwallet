@@ -426,6 +426,7 @@
 	"merchant_tools_button_width_label"		   : "按钮宽度",
 	"merchant_tools_widget_code_label"		   : "小部件代码",
 	"merchant_tools_receiving_address_label"   : "您的收件地址",
+	"merchant_tools_renegerate_info"		   : "如果贴纸显示不正确，请点击'生成'按钮重新创建。",
 	"merchant_tools_merchant_name_label"	   : "商家名称（可选）",
 
 

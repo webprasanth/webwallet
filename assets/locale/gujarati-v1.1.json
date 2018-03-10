@@ -265,6 +265,7 @@
 	"merchant_tools_button_width_label"		   : "બટન પહોળાઈ",
 	"merchant_tools_widget_code_label"		   : "વિજેટ કોડ",
 	"merchant_tools_receiving_address_label"   : "તમારા પ્રાપ્ત સરનામું",
+	"merchant_tools_renegerate_info"		   : "જો સ્ટીકરો યોગ્ય રીતે દર્શાવવામાં ન આવે, તો કૃપા કરીને ફરીથી જનરેટ કરવા માટે 'જનરેટ' બટન પર ક્લિક કરો.",
 	"merchant_tools_merchant_name_label"	   : "વેપારીનું નામ (વૈકલ્પિક)",
 
     "common_anonymous_label"                   : "અનામિક",

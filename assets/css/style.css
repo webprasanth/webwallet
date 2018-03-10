@@ -821,6 +821,10 @@ h5.title-table{
 .merchant-tools-page #donate_widget_container, .merchant-tools-page #accept_widget_container{
   padding-bottom: 15px;
 }
+
+.merchant-tools-page .merchant-stickets-regenerate-info {
+  padding: 10px 0 15px;
+}
 /*==============*/
 /*Style list account*/
 .email-account{

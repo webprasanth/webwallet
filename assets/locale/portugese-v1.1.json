@@ -264,6 +264,7 @@
 	"merchant_tools_button_width_label"		   : "Largura do botão",
 	"merchant_tools_widget_code_label"		   : "Código de Widget",
 	"merchant_tools_receiving_address_label"   : "Seu endereço de recebimento",
+	"merchant_tools_renegerate_info"		   : "Se os adesivos não forem exibidos corretamente, clique no botão 'Gerar' para recriar.",
 	"merchant_tools_merchant_name_label"	   : "Nome do comerciante (opcional)",
 
   "common_anonymous_label"                   : "Anônimo",

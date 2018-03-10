@@ -257,6 +257,7 @@
 	"merchant_tools_button_width_label"		   : "버튼 너비",
 	"merchant_tools_widget_code_label"		   : "위젯 코드",
 	"merchant_tools_receiving_address_label"   : "귀하의 수신 주소",
+	"merchant_tools_renegerate_info"		   : "스티커가 제대로 표시되지 않으면 '생성'버튼을 클릭하여 다시 작성하십시오.",
 	"merchant_tools_merchant_name_label"	   : "판매자 이름 (선택 사항)",
 
 "common_anonymous_label":"익명인",

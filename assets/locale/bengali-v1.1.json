@@ -242,6 +242,7 @@
 	"merchant_tools_button_width_label"		   : "বোতাম প্রস্থ",
 	"merchant_tools_widget_code_label"		   : "উইজেট কোড",
 	"merchant_tools_receiving_address_label"   : "আপনার প্রাপক ঠিকানা",
+	"merchant_tools_renegerate_info"		   : "স্টিকারগুলি যদি সঠিকভাবে প্রদর্শিত না হয় তবে অনুগ্রহপূর্বক পুনঃনির্ধারণ করার জন্য 'জেনারেট করুন' বোতামে ক্লিক করুন।",
 	"merchant_tools_merchant_name_label"	   : "মার্চেন্ট নাম (ঐচ্ছিক)",
 
     "common_anonymous_label"                   : "নামপরিচয়হীন",
