@@ -83,7 +83,10 @@
                     localStorage.setItem("flc-loginresp", JSON.stringify(res));
                     window.location.href = "home.html";
                 } else {
-                    showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
+                    if(res.status == 'ACCOUNT_LOCKED')
+                        showError(res.reason);
+                    else
+                        showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
                 }
             });
         }
