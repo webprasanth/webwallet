@@ -299,7 +299,7 @@ export default class UserInfo extends BaseElement {
 
     if (tag.phone.length != 0) {
       store.dispatch(
-        profileActions.sendVerificationSms({ phone_number: tag.phone })
+        profileActions.sendVerificationSms({ phoneNumber: tag.phone })
       );
     }
   }

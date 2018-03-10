@@ -339,6 +339,15 @@
         background: #519EE0 url("../images/pages/icon_contact_w.png") no-repeat 15px center;
         background-size: 20px 20px;
     }
+    .navbar-sc #merchant-tools a{
+        background: url("../images/pages/icon_merchant_tools.png") no-repeat 15px center;
+        background-size: 20px 20px;
+    }
+    .navbar-sc #merchant-tools:hover a,
+    .navbar-sc li.active#merchant-tools a{
+        background: #519EE0 url("../images/pages/icon_merchant_tools_w.png") no-repeat 15px center;
+        background-size: 20px 20px;
+    }
     .navbar-sc #profile a{
         background: url("../images/pages/icon_profile.png") no-repeat 15px center;
         background-size: 21px 21px;

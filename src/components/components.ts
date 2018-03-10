@@ -12,6 +12,9 @@ import FullBalance from './modals/full-balance/full-balance';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
 import SetupPassword from './setuppassword/setuppassword';
+import MerchantStand from './home/merchant-tools/merchant-stand';
+import MerchantStickers from './home/merchant-tools/merchant-stickers';
+import MerchantWidgets from './home/merchant-tools/merchant-widgets';
 import ProfileAvatar from './home/profile/avatar';
 import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
@@ -37,6 +40,9 @@ import RequestPassword from './modals/request-password/request-password';
 
 export {
   LoadingIndicator,
+  MerchantStand,
+  MerchantStickers,
+  MerchantWidgets,
   ProfileAvatar,
   UserInfo,
   AccountSetting,

@@ -209,7 +209,14 @@ export default class HomeSend extends BaseElement {
         if (containsColumn >= 0) {
           result = result.substring(containsColumn + 1, result.length);
         }
-        if (result.length != 34) QRcodeScanError();
+
+        //check for qt wallet
+        let containsQueMark = result.indexOf('?');
+        if (containsQueMark >= 0) {
+          result = result.substring(0, containsQueMark);
+        }
+
+        if (result.length < 25 || result.length > 34) QRcodeScanError();
         else {
           $('#to-email-id').val(result);
           this.checkAddress();
