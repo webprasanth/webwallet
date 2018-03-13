@@ -35,11 +35,14 @@ export default class SubmitEmail extends BaseElement {
 
   onApplicationStateChanged() {
     let state = store.getState();
-    let data = state.pendingData;
+    let data = state.resetPassData;
     let actionType = state.lastAction.type;
 
     if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_SUCCESS) {
       this.isVerifyEmailSent = true;
+    }else if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_FAILED) {
+      super.showError('', data.resetPassMailErrReason);
+      grecaptcha.reset(this.captchaId);
     }
 
     this.update();
