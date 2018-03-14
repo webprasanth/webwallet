@@ -30,6 +30,14 @@ export default class ResetPassService {
     });
   }
 
+  enableAccount(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().enableAccount(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   ssoResetPassword(params) {
     return new Promise(resolve => {
       AppService.getInstance().resetPassword(params, resp => {

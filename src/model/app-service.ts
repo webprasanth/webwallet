@@ -393,6 +393,17 @@ export default class AppService {
     $.ajax(options);
   }
 
+  enableAccount(params, cb) {
+    let options = this.makeRequestOption(
+      'api/enableAccount',
+      params,
+      'get',
+      cb
+    );
+    options.headers.authorization = params.idToken;
+    $.ajax(options);
+  }
+
   createFlashWallet(params, cb) {
     let options = this.makeRequestOption(
       'api/createFlashWallet',

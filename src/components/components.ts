@@ -33,6 +33,7 @@ import ConfirmDialog from './modals/confirm-dialog/confirm-dialog';
 import ContactRequestMoney from './modals/contact-request-money/contact-request-money';
 import ContactSendMoney from './modals/contact-send-money/contact-send-money';
 import SecurityQuestions from './reset-pass/security-questions';
+import EnableAccount from './enable-account/enable-account';
 import MessageDialog from './modals/message-dialog/message-dialog';
 import VerifyPhone from './modals/verify-phone/verify-phone';
 import RequestDetail from './modals/request-detail/request-detail';
@@ -71,6 +72,7 @@ export {
   ContactRequestMoney,
   ContactSendMoney,
   SecurityQuestions,
+  EnableAccount,
   MessageDialog,
   VerifyPhone,
   Navbar,

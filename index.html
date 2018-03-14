@@ -83,7 +83,22 @@
                     localStorage.setItem("flc-loginresp", JSON.stringify(res));
                     window.location.href = "home.html";
                 } else {
-                    showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
+                    if(res.status == 'ACCOUNT_LOCKED')
+                        showError(res.reason);
+                    else
+                    {
+                        if(res.failed_count && res.failed_count >= 3)
+                        {
+                            if(res.failed_count == 3)
+                                var attmpt_count = '3rd';
+                            else
+                                var attmpt_count = '4th';
+
+                            showError('Email or password is not correct. This is your '+res.failed_count+' failed attempt. After 5 failed attempts, your account will be locked.');
+                        }
+                        else
+                            showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
+                    }
                 }
             });
         }
