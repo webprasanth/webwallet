@@ -468,6 +468,26 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getBCMedianTxSize(params, cb) {
+    let options = this.makeRequestOption(
+      'api/bc-median-tx-size',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getBTCSatoshiPerByte(cb) {
+    let options = {
+      url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
+      type: 'get',
+      contentType: 'application/json',
+      success: cb,
+    };
+    $.ajax(options);
+  }
+
   setAuthInfo(authVersion, sessionToken) {
     this.authVersion = authVersion;
     this.sessionToken = sessionToken;

@@ -153,15 +153,18 @@ export function getUserKey(): UserKey | any {
   return userKey;
 }
 
-export function calcFee(amount) {
+export function calcFee(amount, bcMedianTxSize, fastestFee) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
   switch (currency_type) {
     case CURRENCY_TYPE.FLASH:
     default:
       return 0.001; // default fee for web-wallet transaction
       break;
-    case CURRENCY_TYPE.BTC: 
-      return 0.0005;
+    case CURRENCY_TYPE.BTC:
+    console.log(bcMedianTxSize, fastestFee);
+      let satoshis = bcMedianTxSize * fastestFee;
+      console.log(satoshis);
+      return satoshiToBtc(satoshis);
       break;
   }
 }

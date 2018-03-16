@@ -23,20 +23,43 @@ export default class HomeSend extends BaseElement {
   private addressSelected = false;
   private avatarServer = Constants.AvatarServer;
   private isDesktop = utils.isDesktop();
+  private bcMedianTxSize = 250;
+  private BTCSatoshiPerByte = 20;
 
   mounted() {
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
-      'propertychange change click  paste',
+      'propertychange change click paste',
       _.debounce(e => {
         this.searchWallet();
       }, 500)
     );
     $('#to-email-id').on(
-      'propertychange change click  paste',
+      'propertychange change click paste',
       this.checkAddress
     );
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getBTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
+    $('#amount-input').on(
+      'propertychange change click paste',
+      this.calculateFee
+    );
+
     $('#continue-send-bt').on('blur', this.resetErrorMessages);
     $('#amount-input').on('blur', utils.formatAmountInput);
     $('#amount-input').keypress(utils.filterNumberEdit);
@@ -63,6 +86,13 @@ export default class HomeSend extends BaseElement {
       tag.update();
       return;
     }
+  }
+
+  calculateFee() {
+    let amount = $('#amount-input').val();
+    amount = utils.toOrginalNumber(amount);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    $('#fee-input').val(fee);
   }
 
   searchWallet = () => {
@@ -138,7 +168,7 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount);
+    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.BTCSatoshiPerByte);
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');

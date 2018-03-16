@@ -4,9 +4,12 @@ import AcceptMoneyRequestTemplate from './accept-money-request.html!text';
 import * as utils from '../../../model/utils';
 import Constants from '../../../model/constants';
 import { commonActions } from '../../../model/common/actions';
+import CommonService from '../../../model/common/common-service';
 import { COMMON } from '../../../model/action-types';
 import { getText } from '../../localise';
-import { getCurrencyUnit } from '../../../model/currency';
+import { CURRENCY_TYPE, getCurrencyUnit } from '../../../model/currency';
+
+let tag = null;
 
 @template(AcceptMoneyRequestTemplate)
 export default class AcceptMoneyRequest extends Element {
@@ -18,6 +21,8 @@ export default class AcceptMoneyRequest extends Element {
   private static unsubscribe = null;
   private getText = getText;
   private getCurrencyUnit = getCurrencyUnit;
+  private bcMedianTxSize = 250;
+  private BTCSatoshiPerByte = 20;
 
   constructor() {
     super();
@@ -36,10 +41,27 @@ export default class AcceptMoneyRequest extends Element {
   }
 
   mounted() {
+    tag = this;
+
     if (AcceptMoneyRequest.unsubscribe) AcceptMoneyRequest.unsubscribe();
     AcceptMoneyRequest.unsubscribe = store.subscribe(
       this.onApplicationStateChanged.bind(this)
     );
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getBTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
 
     $('#acceptRequestDialog').modal('show');
     var userSelectedCurrency = localStorage.getItem('currency_type');
@@ -56,7 +78,7 @@ export default class AcceptMoneyRequest extends Element {
 
   enableForm(data) {
     let amount = this.opts.amount;
-    let fee = utils.calcFee(amount);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
     let balance = store.getState().userData.user.balance;
     this.notEnoughBalanceMsg = null;
     this.sendWallet = data.results[0];
@@ -88,7 +110,7 @@ export default class AcceptMoneyRequest extends Element {
         riot.mount('#confirm-send', 'send-money-confirm', {
           to: this.sendWallet.address,
           amount: this.opts.amount,
-          fee: utils.calcFee(this.opts.amount),
+          fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte),
           wallet: this.sendWallet,
         });
       }

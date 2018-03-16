@@ -119,6 +119,7 @@ export default class Navbar extends BaseElement {
     riot.mount('home-profile');
     riot.mount('home-send');
     riot.mount('home-request');
+    riot.mount('home-pending');
 
     // passing 2 for default "Incoming Request" tab
     store.dispatch(pendingActions.setActiveTab(2));

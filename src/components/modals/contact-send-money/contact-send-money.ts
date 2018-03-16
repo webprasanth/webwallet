@@ -6,6 +6,8 @@ import Constants from '../../../model/constants';
 import { sendActions } from '../../../model/send/actions';
 import { SEND } from '../../../model/action-types';
 import BaseElement from '../../base-element';
+import { CURRENCY_TYPE } from '../../../model/currency';
+import CommonService from '../../../model/common/common-service';
 
 let tag = null;
 
@@ -18,6 +20,8 @@ export default class ContactSendMoney extends BaseElement {
   private title = this.getText('send_payment_message');
   private errorMessage = null;
   private static unsubscribe = null;
+  private bcMedianTxSize = 250;
+  private BTCSatoshiPerByte = 20;
 
   constructor() {
     super();
@@ -48,6 +52,21 @@ export default class ContactSendMoney extends BaseElement {
       this.onApplicationStateChanged.bind(this)
     );
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getBTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
     $('#sendByContact').modal('show');
     $('#contact-send-amount').keypress(utils.filterNumberEdit);
     $('#contact-send-amount').blur(utils.formatAmountInput);
@@ -63,7 +82,7 @@ export default class ContactSendMoney extends BaseElement {
       return;
     }
 
-    let fee = utils.calcFee(amount);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
 
     if (amount < 1) {
       return (tag.errorMessage = this.getText(

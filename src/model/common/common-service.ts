@@ -51,4 +51,24 @@ export default class CommonService {
     };
     AppService.getInstance().getMessages(params, CommonService.messageHandler);
   }
+
+  getBCMedianTxSize() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      currency_type: userSelectedCurrency,
+    };
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getBCMedianTxSize(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getBTCSatoshiPerByte() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getBTCSatoshiPerByte(resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
