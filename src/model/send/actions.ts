@@ -10,14 +10,14 @@ import { CURRENCY_TYPE } from '../currency';
 import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const sendActions = {
-  createRawTx(targetWallet, amount, message) {
+  createRawTx(targetWallet, amount, custom_fee, message) {
     let tx = null;
     let wallet = sendActions.getActiveWallet();
     var userSelectedCurrency = localStorage.getItem('currency_type');
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
       SendService.singleton()
-        .createRawTx(targetWallet.address, amount, message)
+        .createRawTx(targetWallet.address, amount, custom_fee, message)
         .then((resp: any) => {
           if (resp.rc === 1) {
             tx = wallet.signTx(resp.transaction.rawtx);

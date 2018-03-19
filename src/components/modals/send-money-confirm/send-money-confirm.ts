@@ -110,6 +110,7 @@ export default class SendMoneyConfirm extends BaseElement {
       sendActions.createRawTx(
         this.opts.wallet,
         this.opts.amount,
+        this.opts.fee,
         this.opts.wallet.memo
       )
     );
