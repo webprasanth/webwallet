@@ -447,6 +447,20 @@ export function isDesktop() {
   return window.innerWidth > 766;
 }
 
+export function isMobile() {
+  let isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+  return isMobile;
+}
+
+export function isAndroid() {
+  let isAndroid = /Android.+Mobile/i.test(
+    navigator.userAgent
+  );
+  return isAndroid;
+}
+
 export function getSecurityQuestion() {
   return {
     A: [

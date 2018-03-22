@@ -12,6 +12,9 @@ import FullBalance from './modals/full-balance/full-balance';
 import App from './app/app';
 import SubmitEmail from './reset-pass/submit-email';
 import SetupPassword from './setuppassword/setuppassword';
+import MerchantStand from './home/merchant-tools/merchant-stand';
+import MerchantStickers from './home/merchant-tools/merchant-stickers';
+import MerchantWidgets from './home/merchant-tools/merchant-widgets';
 import ProfileAvatar from './home/profile/avatar';
 import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
@@ -30,6 +33,7 @@ import ConfirmDialog from './modals/confirm-dialog/confirm-dialog';
 import ContactRequestMoney from './modals/contact-request-money/contact-request-money';
 import ContactSendMoney from './modals/contact-send-money/contact-send-money';
 import SecurityQuestions from './reset-pass/security-questions';
+import EnableAccount from './enable-account/enable-account';
 import MessageDialog from './modals/message-dialog/message-dialog';
 import VerifyPhone from './modals/verify-phone/verify-phone';
 import RequestDetail from './modals/request-detail/request-detail';
@@ -37,6 +41,9 @@ import RequestPassword from './modals/request-password/request-password';
 
 export {
   LoadingIndicator,
+  MerchantStand,
+  MerchantStickers,
+  MerchantWidgets,
   ProfileAvatar,
   UserInfo,
   AccountSetting,
@@ -65,6 +72,7 @@ export {
   ContactRequestMoney,
   ContactSendMoney,
   SecurityQuestions,
+  EnableAccount,
   MessageDialog,
   VerifyPhone,
   Navbar,
