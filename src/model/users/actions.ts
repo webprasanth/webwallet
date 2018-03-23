@@ -496,26 +496,33 @@ export const userActions = {
   },
   getBalance() {
     return dispatch => {
-      var userSelectedCurrency = localStorage.getItem('currency_type');
+      var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
       let params = { currency_type: userSelectedCurrency };
       UserService.singleton()
         .getBalance(params)
         .then((resp: any) => {
           if (resp.rc === 1) {
+            if(!resp.ubalance)
+            {
+              resp.ubalance = 0;
+            }
             console.log('get Balance()', resp.balance);
+            console.log('get uBalance()', resp.ubalance);
             console.log(
               'get Balance() utils.satoshiToFlash(resp.balance)',
-              utils.satoshiToFlash(resp.balance)
+              utils.satoshiToFlash(resp.balance),
+              'get uBalance() utils.satoshiToFlash(resp.balance)',
+              utils.satoshiToFlash(resp.ubalance)
             );
+            var balanceData = {balance: 0, ubalance: 0};
             if (userSelectedCurrency == CURRENCY_TYPE.FLASH) {
-              dispatch(
-                userActions.getBalanceSuccess(
-                  utils.satoshiToFlash(resp.balance)
-                )
-              );
+              balanceData.balance = utils.satoshiToFlash(resp.balance);
+              balanceData.ubalance = utils.satoshiToFlash(resp.ubalance);
             } else if (userSelectedCurrency == CURRENCY_TYPE.BTC) {
-              dispatch(userActions.getBalanceSuccess(resp.balance));
+              balanceData.balance = resp.balance;
+              balanceData.ubalance = resp.ubalance;
             }
+            dispatch(userActions.getBalanceSuccess(balanceData));
           } else {
             console.log('get getBalanceFailed()');
             dispatch(userActions.getBalanceFailed(resp));
@@ -523,8 +530,8 @@ export const userActions = {
         });
     };
   },
-  getBalanceSuccess(balance) {
-    return { type: USERS.GET_BALANCE_SUCCESS, data: balance };
+  getBalanceSuccess(balanceData) {
+    return { type: USERS.GET_BALANCE_SUCCESS, data: balanceData };
   },
   getBalanceFailed(resp) {
     return { type: USERS.GET_BALANCE_FAILED, data: resp };

@@ -22,7 +22,9 @@ export default class HomeHeader extends BaseElement {
   private avatarUrl: string = null;
   private refreshIconUrl: string = 'assets/images/refresh_icon_white.png';
   private balance = 0;
+  private ubalance = 0;
   private formattedBalance = '0';
+  private formattedUBalance = '0';
   private decimalFormat = decimalFormat;
   private static unsubscribe = null;
   private isDisconnect = false;
@@ -40,8 +42,13 @@ export default class HomeHeader extends BaseElement {
     if (user.balance) {
       this.balance = user.balance;
       this.formattedBalance = flashNFormatter(this.balance, 2);
-
     }
+
+    if (user.ubalance) {
+      this.ubalance = user.ubalance;
+      this.formattedBalance = flashNFormatter(this.ubalance, 2);
+    }
+
     if (user.profile_pic_url) {
       this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
     }
@@ -90,8 +97,10 @@ export default class HomeHeader extends BaseElement {
 
     switch (state.lastAction.type) {
       case USERS.GET_BALANCE_SUCCESS:
-        this.balance = state.lastAction.data;
+        this.balance = state.lastAction.data.balance;
+        this.ubalance = state.lastAction.data.ubalance;
         this.formattedBalance = flashNFormatter(this.balance, 2);
+        this.formattedUBalance = flashNFormatter(this.ubalance, 2);
         this.refreshIconUrl = 'assets/images/refresh_icon_white.png';
         let msg = this.getText('notify_balance_updated', {
           balance: this.balance,
@@ -258,7 +267,9 @@ export default class HomeHeader extends BaseElement {
 
   onShowBalanceButtonClick(event: Event) {
     riot.mount('#confirm-send', 'full-balance', {
-      balance: localizeFlash(this.balance) + ' ' + this.getCurrencyUnitUpcase()
+      balance: localizeFlash(this.balance) + ' ' + this.getCurrencyUnitUpcase(),
+      ubalance: localizeFlash(this.ubalance) + ' ' + this.getCurrencyUnitUpcase(),
+      unconfirmed: this.CURRENCY_TYPE.FLASH != parseInt(localStorage.getItem('currency_type'))
     });
   }
 

@@ -12,6 +12,7 @@ interface IUser {
   created_ts: string;
   timezone: string;
   balance: number;
+  ubalance: number;
   phone: string;
   phone_verified: number;
   totp_enabled: number;
