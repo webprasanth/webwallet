@@ -16,6 +16,7 @@ export default class ContactSendMoney extends BaseElement {
   private AvatarServer = Constants.AvatarServer;
   private formEnabled: boolean = true;
   private success: boolean = false;
+  private confirmed: boolean = false;
   private processing_duration: number = 2.0;
   private title = this.getText('send_payment_message');
   private errorMessage = null;
@@ -37,6 +38,8 @@ export default class ContactSendMoney extends BaseElement {
       this.success = true;
       this.processing_duration = state.sendData.processing_duration;
       this.title = this.getText('send_success_message');
+      if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
+        this.confirmed = true;
     } else if (actionType == SEND.SEND_TXN_FAILED) {
       super.showError('', state.lastAction.data);
     }
@@ -84,7 +87,7 @@ export default class ContactSendMoney extends BaseElement {
 
     let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
 
-    if (amount < 1) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));

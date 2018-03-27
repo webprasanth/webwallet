@@ -46,7 +46,7 @@
 				<virtual show={success}>
 					<div class="modal-body">
 						<div class="confirm-success">
-							<p>{getText('send_processtime_message', {processing_duration})}</p>
+							<p show={confirmed}>{getText('send_processtime_message', {'processing_duration': processing_duration})}</p>
 							<p>{getText('send_success_message2')}</p>
 						</div>
 					</div>
