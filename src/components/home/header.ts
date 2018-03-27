@@ -103,8 +103,8 @@ export default class HomeHeader extends BaseElement {
         this.formattedUBalance = flashNFormatter(this.ubalance, 2);
         this.refreshIconUrl = 'assets/images/refresh_icon_white.png';
         let msg = this.getText('notify_balance_updated', {
-          balance: this.balance,
-        });
+          balance: this.formattedBalance,
+        }) + ' ' + this.getCurrencyUnitUpcase();
         $.notify(msg, 'info');
         break;
       case COMMON.NEED_UPDATE_BALANCE:
