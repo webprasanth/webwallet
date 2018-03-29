@@ -63,6 +63,21 @@ export default class AcceptMoneyRequest extends Element {
       });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getLTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
     $('#acceptRequestDialog').modal('show');
     var userSelectedCurrency = localStorage.getItem('currency_type');
     //Get sender's wallet info

@@ -22,7 +22,7 @@ export default class ContactSendMoney extends BaseElement {
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
   private BTCSatoshiPerByte = 20;
-
+  
   constructor() {
     super();
   }
@@ -62,6 +62,21 @@ export default class ContactSendMoney extends BaseElement {
       });
       CommonService.singleton()
       .getBTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getLTCSatoshiPerByte()
       .then((resp: any) => {
         tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
       });
