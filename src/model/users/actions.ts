@@ -236,8 +236,8 @@ export const userActions = {
                   console.log('+++++ createFlashWallet failed, reason:', _resp);
                 }
               });
-            if(profile.auth_version == 4) {
-              UserService.singleton()
+
+            UserService.singleton()
               .createBTCWallet(createWalletParams)
               .then((_resp: any) => {
                 if (_resp.rc === 1) {
@@ -252,8 +252,20 @@ export const userActions = {
                   console.log('+++++ createBTCWallet failed, reason:', _resp);
                 }
               });
-            }
 
+            UserService.singleton()
+              .createLTCWallet(createWalletParams)
+              .then((_resp: any) => {
+                if (_resp.rc === 1) {
+                  dispatch(userActions.getBalance());
+                  dispatch(
+                    userActions.getMyWallets(profile.auth_version, password)
+                  );
+                } else {
+                  console.log('+++++ createLTCWallet failed, reason:', _resp);
+                }
+              });
+			  
             UserService.singleton()
               .setRecoveryKeys(params)
               .then((___resp: any) => {});
@@ -413,7 +425,7 @@ export const userActions = {
         .getMyWallets()
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if (resp.my_wallets.length > 1 || (resp.my_wallets.length == 1 && auth_version != 4)) {
+            if (resp.my_wallets.length > 2) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
             } else {
               let userProfile = store.getState().userData.user;
@@ -449,9 +461,34 @@ export const userActions = {
                   });
               }
               //if no BTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0 && auth_version == 4) {
+              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0) {
                 UserService.singleton()
                   .createBTCWallet(params)
+                  .then((resp: any) => {
+                    if (resp.rc === 1) {
+                      UserService.singleton()
+                        .getMyWallets()
+                        .then((resp: any) => {
+                          if (resp.rc === 1) {
+                            decryptWallets(
+                              dispatch,
+                              resp.my_wallets,
+                              auth_version,
+                              password
+                            );
+                          } else {
+                            dispatch(userActions.getMyWalletsFailed(resp));
+                          }
+                        });
+                    } else {
+                      console.log('createBTCWallet failed, reason:', resp);
+                    }
+                  });
+              }
+              //if no LTC wallet
+              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.LTC).length == 0) {
+                UserService.singleton()
+                  .createLTCWallet(params)
                   .then((resp: any) => {
                     if (resp.rc === 1) {
                       UserService.singleton()
@@ -497,33 +534,29 @@ export const userActions = {
   },
   getBalance() {
     return dispatch => {
-      var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       let params = { currency_type: userSelectedCurrency };
       UserService.singleton()
         .getBalance(params)
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if(!resp.ubalance)
-            {
-              resp.ubalance = 0;
-            }
             console.log('get Balance()', resp.balance);
-            console.log('get uBalance()', resp.ubalance);
             console.log(
               'get Balance() utils.satoshiToFlash(resp.balance)',
-              utils.satoshiToFlash(resp.balance),
-              'get uBalance() utils.satoshiToFlash(resp.balance)',
-              utils.satoshiToFlash(resp.ubalance)
+              utils.satoshiToFlash(resp.balance)
             );
-            var balanceData = {balance: 0, ubalance: 0};
             if (userSelectedCurrency == CURRENCY_TYPE.FLASH) {
-              balanceData.balance = utils.satoshiToFlash(resp.balance);
-              balanceData.ubalance = utils.satoshiToFlash(resp.ubalance);
+              dispatch(
+                userActions.getBalanceSuccess(
+                  utils.satoshiToFlash(resp.balance)
+                )
+              );
             } else if (userSelectedCurrency == CURRENCY_TYPE.BTC) {
-              balanceData.balance = resp.balance;
-              balanceData.ubalance = resp.ubalance;
+              dispatch(userActions.getBalanceSuccess(resp.balance));
             }
-            dispatch(userActions.getBalanceSuccess(balanceData));
+            } else if (userSelectedCurrency == CURRENCY_TYPE.LTC) {
+              dispatch(userActions.getBalanceSuccess(resp.balance));  //DO the formatting of LTC if required
+            }
           } else {
             console.log('get getBalanceFailed()');
             dispatch(userActions.getBalanceFailed(resp));
@@ -531,8 +564,8 @@ export const userActions = {
         });
     };
   },
-  getBalanceSuccess(balanceData) {
-    return { type: USERS.GET_BALANCE_SUCCESS, data: balanceData };
+  getBalanceSuccess(balance) {
+    return { type: USERS.GET_BALANCE_SUCCESS, data: balance };
   },
   getBalanceFailed(resp) {
     return { type: USERS.GET_BALANCE_FAILED, data: resp };

@@ -55,6 +55,21 @@ export default class HomeSend extends BaseElement {
       });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getLTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
     $('#amount-input').on(
       'propertychange change click paste',
       this.calculateFee

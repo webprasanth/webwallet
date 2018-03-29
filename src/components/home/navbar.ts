@@ -93,6 +93,9 @@ export default class Navbar extends BaseElement {
       case CURRENCY_TYPE.BTC:
         localStorage.setItem('currency_type', CURRENCY_TYPE.BTC);
         break;
+      case CURRENCY_TYPE.LTC:
+        localStorage.setItem('currency_type', CURRENCY_TYPE.LTC);
+        break;
       case CURRENCY_TYPE.FLASH:
       default:
         localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash

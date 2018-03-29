@@ -4,21 +4,25 @@
 export const CURRENCY_TYPE = {
   FLASH: 1,
   BTC: 2,
+  LTC: 3,
 };
 
 export const CURRENCY_TYPE_UNIT = {
   1: 'Flash',
   2: 'BTC',
+  3: 'LTC',
 };
 
 export const CURRENCY_TYPE_UNIT_UPCASE = {
   1: 'FLASH',
   2: 'BTC',
+  3: 'LTC',
 };
 
 export const CURRENCY_ICON_URL = {
   1: 'assets/images/flash-icon.png',
   2: 'assets/images/btc-icon.png',
+  3: 'assets/images/ltc-icon.png',
 };
 
 export function getCurrencyUnitUpcase(currency_type) {

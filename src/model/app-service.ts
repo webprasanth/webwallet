@@ -426,6 +426,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  createLTCWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createLtcWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/setRecoveryKeys',
