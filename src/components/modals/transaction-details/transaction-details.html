@@ -61,6 +61,9 @@
 						<div class="name-item">{getText('pending_table_header_status')}</div>
 						<div class="data-item">{txnDetail.status ? txnDetail.status : meta.status}</div>
 					</div>
+					<div class="listItems text-center" show={showConfirmationNotice && meta.type==2}>
+						<p><Strong>Note:</strong> BTC txn is available after 1 confirmation</p>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>

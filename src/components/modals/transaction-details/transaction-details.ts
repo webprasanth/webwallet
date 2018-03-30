@@ -22,6 +22,7 @@ export default class TransactionDetails extends Element {
   private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
   private AvatarServer = Constants.AvatarServer;
   private CURRENCY_TYPE = CURRENCY_TYPE;
+  private showConfirmationNotice = false;
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
@@ -41,6 +42,7 @@ export default class TransactionDetails extends Element {
     switch (currency_type) {
       case CURRENCY_TYPE.BTC:
         this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
+        this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:
       default:
