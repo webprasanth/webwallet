@@ -1,6 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keys.flashcoin.io/';
-export const APP_MODE = 'PROD';  //DEV, PROD
+const HOST_URL = 'https://dev02keys.flashcoin.io/';
+export const APP_MODE = 'DEV'; //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -387,17 +387,6 @@ export default class AppService {
   getRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/getRecoveryKeys',
-      params,
-      'get',
-      cb
-    );
-    options.headers.authorization = params.idToken;
-    $.ajax(options);
-  }
-
-  enableAccount(params, cb) {
-    let options = this.makeRequestOption(
-      'api/enableAccount',
       params,
       'get',
       cb

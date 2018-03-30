@@ -265,7 +265,7 @@ export const userActions = {
                   console.log('+++++ createLTCWallet failed, reason:', _resp);
                 }
               });
-			  
+
             UserService.singleton()
               .setRecoveryKeys(params)
               .then((___resp: any) => {});
@@ -436,7 +436,12 @@ export const userActions = {
                 appId: 'flashcoin',
               };
               //if no FLASH wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.FLASH).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.FLASH
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createFlashWallet(params)
                   .then((resp: any) => {
@@ -461,7 +466,12 @@ export const userActions = {
                   });
               }
               //if no BTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.BTC
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createBTCWallet(params)
                   .then((resp: any) => {
@@ -486,7 +496,12 @@ export const userActions = {
                   });
               }
               //if no LTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.LTC).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.LTC
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createLTCWallet(params)
                   .then((resp: any) => {
@@ -524,12 +539,10 @@ export const userActions = {
     return { type: USERS.GET_MY_WALLETS_FAILED, data: resp };
   },
   getCurrencyWallet(wallets, currency_type) {
-    if(!wallets)  return [];
+    if (!wallets) return [];
     return wallets.filter(function(wallet) {
-      if(parseInt(wallet.currency_type) == currency_type)
-        return true;
-      else
-        return false;
+      if (parseInt(wallet.currency_type) == currency_type) return true;
+      else return false;
     });
   },
   getBalance() {
@@ -553,9 +566,8 @@ export const userActions = {
               );
             } else if (userSelectedCurrency == CURRENCY_TYPE.BTC) {
               dispatch(userActions.getBalanceSuccess(resp.balance));
-            }
             } else if (userSelectedCurrency == CURRENCY_TYPE.LTC) {
-              dispatch(userActions.getBalanceSuccess(resp.balance));  //DO the formatting of LTC if required
+              dispatch(userActions.getBalanceSuccess(resp.balance)); //DO the formatting of LTC if required
             }
           } else {
             console.log('get getBalanceFailed()');

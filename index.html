@@ -66,7 +66,7 @@
                 return;
             }
 
-            var url = 'https://keys.flashcoin.io/api/login';
+            var url = 'https://dev02keys.flashcoin.io/api/login';
             var params = {
                 email: email,
                 password: password,
@@ -84,22 +84,7 @@
                     localStorage.setItem('currency_type', '1'); //Setting Default currency Flash
                     window.location.href = "home.html";
                 } else {
-                    if(res.status == 'ACCOUNT_LOCKED')
-                        showError(res.reason);
-                    else
-                    {
-                        if(res.failed_count && res.failed_count >= 3)
-                        {
-                            if(res.failed_count == 3)
-                                var attmpt_count = '3rd';
-                            else
-                                var attmpt_count = '4th';
-
-                            showError('Email or password is not correct. This is your '+res.failed_count+' failed attempt. After 5 failed attempts, your account will be locked.');
-                        }
-                        else
-                            showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
-                    }
+                    showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
                 }
             });
         }
@@ -278,7 +263,7 @@
                 credentials.trackId = query.track_id;
             }
 
-            var url = 'https://keys.flashcoin.io/api/createEasy';
+            var url = 'https://dev02keys.flashcoin.io/api/createEasy';
             $("#loading-icon").show();
 
             $.post(url, credentials, function (resp) {
@@ -302,7 +287,7 @@
         }
 
         function checkLocation() {
-            var url = 'https://keys.flashcoin.io/api/check-location';
+            var url = 'https://dev02keys.flashcoin.io/api/check-location';
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -321,7 +306,7 @@
             var idToken = localStorage.getItem('fl-idtoken-2606');
 
             if (idToken) {
-                var url = 'https://keys.flashcoin.io/api/session';
+                var url = 'https://dev02keys.flashcoin.io/api/session';
                 $("#loading-icon").show();
 
                 $.ajax({
@@ -385,7 +370,7 @@
                 <option value='spanish-v1.1'>Español</option>
                 <option value='portugese-v1.1'>Portugues</option>
 				<option value='chinese-simplified-v1.1'>简体中文</option>
-                <option value='japanese-v1.1'>日本語</option>
+                <option value='japanese-v1.1'>韓国語</option>
                 <option value='korean-v1.1'>한국어</option>
                 <option value='marathi-v1.1'>मराठी</option>
                 <option value='tamil-v1.1'>தமிழ்</option>
