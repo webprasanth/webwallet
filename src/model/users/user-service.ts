@@ -109,6 +109,14 @@ export default class UserService {
     });
   }
 
+  createBTCWallet(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().createBTCWallet(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getWalletSecret(idToken) {
     return new Promise(resolve => {
       AppService.getInstance().walletSecret(idToken, resp => {
@@ -117,9 +125,9 @@ export default class UserService {
     });
   }
 
-  getBalance() {
+  getBalance(params) {
     return new Promise(resolve => {
-      AppService.getInstance().balance({}, resp => {
+      AppService.getInstance().balance(params, resp => {
         resolve(resp);
       });
     });

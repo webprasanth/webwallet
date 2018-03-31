@@ -8,6 +8,7 @@ import _ from 'lodash';
 import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 let tag = null;
 
@@ -22,20 +23,43 @@ export default class HomeSend extends BaseElement {
   private addressSelected = false;
   private avatarServer = Constants.AvatarServer;
   private isDesktop = utils.isDesktop();
+  private bcMedianTxSize = 250;
+  private BTCSatoshiPerByte = 20;
 
   mounted() {
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
-      'propertychange change click  paste',
+      'propertychange change click paste',
       _.debounce(e => {
         this.searchWallet();
       }, 500)
     );
     $('#to-email-id').on(
-      'propertychange change click  paste',
+      'propertychange change click paste',
       this.checkAddress
     );
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+      CommonService.singleton()
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
+      CommonService.singleton()
+      .getBTCSatoshiPerByte()
+      .then((resp: any) => {
+        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+      });
+    }
+
+    $('#amount-input').on(
+      'propertychange change click paste',
+      this.calculateFee
+    );
+
     $('#continue-send-bt').on('blur', this.resetErrorMessages);
     $('#amount-input').on('blur', utils.formatAmountInput);
     $('#amount-input').keypress(utils.filterNumberEdit);
@@ -51,7 +75,7 @@ export default class HomeSend extends BaseElement {
     }
 
     if (
-      utils.isValidFlashAddress(term) &&
+      utils.isValidCryptoAddress(term) &&
       term != store.getState().profileData.wallet.address
     ) {
       tag.sendWallet = {};
@@ -64,14 +88,22 @@ export default class HomeSend extends BaseElement {
     }
   }
 
+  calculateFee() {
+    let amount = $('#amount-input').val();
+    amount = utils.toOrginalNumber(amount);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    $('#fee-input').val(fee);
+  }
+
   searchWallet = () => {
     tag.choosingAddress = true;
-
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let term: string = $('#to-email-id').val();
     let params = {
       term,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
 
     CommonService.singleton()
@@ -112,8 +144,19 @@ export default class HomeSend extends BaseElement {
       this.emailErrorMessage = this.getText('invalid_receiver_address_error');
       return;
     }
+    else {
+      //checking if entered value and selected address is same
+      if(tag.sendWallet.address != $('#to-email-id').val()) {
+        if(typeof tag.sendWallet.email == undefined || tag.sendWallet.email != $('#to-email-id').val()) {
+          tag.isValidAddress = false;
+          tag.addressSelected = false;
+          this.emailErrorMessage = this.getText('invalid_receiver_address_error');
+          return;
+        }
+      }
+    }
 
-    if (utils.isValidFlashAddress($('#to-email-id').val())) {
+    if (utils.isValidCryptoAddress($('#to-email-id').val())) {
       // # disable checking phone verification to do withdraw
       // if (store.getState().userData.user.phone_verified == 0) {
       //     super.showMessage('', 'You need to provide and verify your phone number.', () => {
@@ -125,14 +168,14 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount);
+    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.BTCSatoshiPerByte);
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
       return;
     }
 
-    if (amount < 1) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }

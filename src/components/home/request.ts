@@ -8,6 +8,7 @@ import _ from 'lodash';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 import { commonActions } from '../../model/common/actions';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 let tag = null;
 
@@ -49,7 +50,7 @@ export default class HomeRequest extends BaseElement {
       return;
     }
 
-    if (utils.isValidFlashAddress(term)) {
+    if (utils.isValidCryptoAddress(term)) {
       tag.receiverWallet = {};
       tag.receiverWallet.address = term;
       tag.isValidAddress = true;
@@ -62,13 +63,14 @@ export default class HomeRequest extends BaseElement {
 
   searchWallet = () => {
     tag.choosingAddress = true;
-
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let term: string = $('#rq_to_email_id').val();
 
     let params = {
       term,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
 
     CommonService.singleton()
@@ -121,7 +123,7 @@ export default class HomeRequest extends BaseElement {
       return;
     }
 
-    if (amount < 1) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }

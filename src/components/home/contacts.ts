@@ -91,6 +91,9 @@ export default class HomeContacts extends BaseElement {
           });
         }
         break;
+      case CONTACTS.GET_WALLETS_BY_EMAIL_FAILED:
+        super.showError('', 'This contact does not have '+ this.getCurrencyUnitUpcase() +' wallet');
+        break;
       default:
         break;
     }
@@ -141,21 +144,25 @@ export default class HomeContacts extends BaseElement {
   }
 
   requestForm(event: FCEvent) {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     tag.actionSelected = ACTION_REQUEST;
     let account = {
       email: event.item.email,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
     store.dispatch(contactsActions.getWalletsByEmail(account));
   }
 
   sendForm(event: FCEvent) {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     tag.actionSelected = ACTION_SEND;
     let account = {
       email: event.item.email,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
     store.dispatch(contactsActions.getWalletsByEmail(account));
   }

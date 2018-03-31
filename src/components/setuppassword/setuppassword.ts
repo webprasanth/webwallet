@@ -8,6 +8,7 @@ import SetupPasswordTemplate from './setuppassword.html!text';
 import BaseElement from '../base-element';
 import { USERS } from '../../model/action-types';
 import * as utils from '../../model/utils';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 let tag = null;
 @template(SetupPasswordTemplate)
@@ -36,6 +37,7 @@ export default class SetupPassword extends BaseElement {
       'change keyup',
       this.onRePasswordChanged.bind(this)
     );
+    localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH);
   }
 
   checkSecureQuestion() {

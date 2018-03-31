@@ -10,6 +10,8 @@ import SendService from '../../../model/send/send-service';
 import BaseElement from '../../base-element';
 import * as utils from '../../../model/utils';
 import { USERS } from '../../../model/action-types';
+import { CURRENCY_TYPE } from '../../../model/currency';
+import { getCurrencyUnitUpcase } from '../../../model/currency';
 
 @template(SendMoneyConfirmTemplate)
 export default class SendMoneyConfirm extends BaseElement {
@@ -17,6 +19,7 @@ export default class SendMoneyConfirm extends BaseElement {
   private confirmation: boolean = true;
   private sending: boolean = false;
   private success: boolean = false;
+  private confirmed: boolean = false;
   private requirePassword: boolean = false;
   private incorrectPassword: boolean = false;
   private processing_duration: number = 2.0;
@@ -24,6 +27,7 @@ export default class SendMoneyConfirm extends BaseElement {
   private formatAmountInput = formatAmountInput;
   private AvatarServer = Constants.AvatarServer;
   private static unsubscribe = null;
+  private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
 
   constructor() {
     super();
@@ -44,6 +48,10 @@ export default class SendMoneyConfirm extends BaseElement {
       this.confirmation = false;
       this.sending = false;
       this.success = true;
+      if (
+        parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+      )
+        this.confirmed = true;
       this.processing_duration = state.sendData.processing_duration;
       this.opts.dlgTitle = this.getText('send_success_message');
       if (this.opts.cb) {
@@ -102,6 +110,7 @@ export default class SendMoneyConfirm extends BaseElement {
       sendActions.createRawTx(
         this.opts.wallet,
         this.opts.amount,
+        this.opts.fee,
         this.opts.wallet.memo
       )
     );

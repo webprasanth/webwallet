@@ -11,6 +11,7 @@ import {
 } from '../../model/utils';
 import { FCEvent } from '../../model/types';
 import BaseElement from '../base-element';
+import { CURRENCY_TYPE } from '../../model/currency';
 
 let tag = null;
 @template(HomeActivityTemplate)
@@ -49,6 +50,7 @@ export default class HomeActivity extends BaseElement {
     tag = this;
     var state = store.getState();
     this.timeZone = state.userData.user.timezone;
+
     this.initDatePickers(false);
     this.loadTxns();
     this.check2FA();

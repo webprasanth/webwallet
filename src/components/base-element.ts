@@ -3,9 +3,19 @@
  */
 import { riot, template, Element } from './riot-ts';
 import { getText } from './localise';
+import {
+  getCurrencyUnitUpcase,
+  getCurrencyUnit,
+  getCurrencyIconUrl,
+  CURRENCY_TYPE,
+} from '../model/currency';
 
 export default class BaseElement extends Element {
   protected getText = getText;
+  protected getCurrencyUnitUpcase = getCurrencyUnitUpcase;
+  protected getCurrencyUnit = getCurrencyUnit;
+  protected getCurrencyIconUrl = getCurrencyIconUrl;
+  protected CURRENCY_TYPE = CURRENCY_TYPE;
 
   /**
    * Show error dialog

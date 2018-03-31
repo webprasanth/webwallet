@@ -86,10 +86,12 @@ export default class AccountSetting extends BaseElement {
   }
 
   getWallet() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     let account = {
       email: this.userProfile.email,
       start: 0,
       size: 1,
+      currency_type: userSelectedCurrency,
     };
 
     store.dispatch(profileActions.getWalletsByEmail(account));

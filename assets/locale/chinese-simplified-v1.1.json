@@ -219,7 +219,7 @@
 
 	"activity_table_header_email": "电子邮件",
 
-	"activity_table_header_email_pubic_address": "电子邮件/电话/公共地址",
+	"activity_table_header_email_pubic_address": "网络钱包电子邮件地址/ %(currencyName)s 公共地址",
 
 	"activity_table_header_note": "交易记录",
 
@@ -261,7 +261,7 @@
 
 	"pending_table_header_email": "电子邮件",
 
-	"pending_table_header_amount": "金额（Flash）",
+	"pending_table_header_amount": "金额",
 
 	"pending_table_header_status": "状态",
 
@@ -655,7 +655,7 @@
 
 	"send_transactionprocessing_message": "正在处理您的交易！",
 
-	"send_transactionfee_label": "FLASH交易费",
+	"send_transactionfee_label": "交易费",
 
 	"send_transactionfail_error": "交易失败",
 

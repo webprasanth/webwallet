@@ -42,7 +42,33 @@ export default class CommonService {
   }
 
   getMessage() {
-    let params = { offset: 0, size: 5, date_from: 0 };
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      offset: 0,
+      size: 5,
+      date_from: 0,
+      currency_type: userSelectedCurrency,
+    };
     AppService.getInstance().getMessages(params, CommonService.messageHandler);
+  }
+
+  getBCMedianTxSize() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      currency_type: userSelectedCurrency,
+    };
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getBCMedianTxSize(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getBTCSatoshiPerByte() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getBTCSatoshiPerByte(resp => {
+        resolve(resp);
+      });
+    });
   }
 }

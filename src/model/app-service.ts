@@ -1,5 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
 const HOST_URL = 'https://keys.flashcoin.io/';
+export const APP_MODE = 'PROD';  //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -285,6 +286,7 @@ export default class AppService {
   }
 
   balance(params, cb) {
+    //alert('in app balance API services params is ' + params.currency_type);
     let options = this.makeRequestOption('api/balance', params, 'get', cb);
     $.ajax(options);
   }
@@ -414,6 +416,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  createBTCWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createBtcWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/setRecoveryKeys',
@@ -464,6 +476,26 @@ export default class AppService {
       'get',
       cb
     );
+    $.ajax(options);
+  }
+
+  getBCMedianTxSize(params, cb) {
+    let options = this.makeRequestOption(
+      'api/bc-median-tx-size',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getBTCSatoshiPerByte(cb) {
+    let options = {
+      url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
+      type: 'get',
+      contentType: 'application/json',
+      success: cb,
+    };
     $.ajax(options);
   }
 

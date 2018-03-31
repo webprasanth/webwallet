@@ -39,11 +39,11 @@
 					</div>
 					<div class="listItems">
 						<div class="name-item">{getText('common_amount_label')}</div>
-						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{localizeFlash(meta.amount.toString())}&nbsp;{getText('common_label_cash_unit_upcase')}</b></div>
+						<div class="data-item"><b>{meta.type == 2 ? '+' : '-'}&nbsp;{localizeFlash(meta.amount.toString())}&nbsp;{getCurrencyUnitUpcase()}</b></div>
 					</div>
 					<div class="listItems" show={meta.type==1}>
 						<div class="name-item">{getText('common_tx_fee_label')}</div>
-						<div class="data-item">&nbsp;{satoshiToFlash(txnDetail.fee)}&nbsp;{getText('common_label_cash_unit_upcase')}</div>
+						<div class="data-item">&nbsp;{txnDetail.fee}&nbsp;{getCurrencyUnitUpcase()}</div>
 					</div>
 					<div class="listItems">
 						<div class="name-item">{getText('common_note_label')}</div>
@@ -57,10 +57,13 @@
 							<p class="_value_attr form-control">{meta.transaction_id}</p>
 						</div>
 					</div>
-					<!--<div class="listItems">
+					<div class="listItems">
 						<div class="name-item">{getText('pending_table_header_status')}</div>
-						<div class="data-item">{meta.status}</div>
-					</div>-->
+						<div class="data-item">{txnDetail.status ? txnDetail.status : meta.status}</div>
+					</div>
+					<div class="listItems text-center" show={showConfirmationNotice && meta.type==2 && meta.status == 'pending'}>
+						<p><Strong>Note:</strong> The above BTC will be available for spending after 1 confirmation.</p>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">{getText('common_close_label')}</button>

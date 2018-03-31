@@ -5,21 +5,27 @@ import Constants from '../../../model/constants';
 import {
   decimalFormat,
   satoshiToFlash,
+  satoshiToBtc,
   formatCurrency,
   getDisplayDateTime,
   localizeFlash,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
+import { CURRENCY_TYPE, getCurrencyUnitUpcase } from '../../../model/currency';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
   private txnDetail = store.getState().activityData.txn_detail;
   private meta = store.getState().activityData.txn_detail.meta;
   private getText = getText;
+  private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
   private AvatarServer = Constants.AvatarServer;
+  private CURRENCY_TYPE = CURRENCY_TYPE;
+  private showConfirmationNotice = false;
 
   satoshiToFlash = satoshiToFlash;
+  satoshiToBtc = satoshiToBtc;
   formatCurrency = formatCurrency;
   decimalFormat = decimalFormat;
   getDisplayDateTime = getDisplayDateTime;
@@ -31,8 +37,21 @@ export default class TransactionDetails extends Element {
 
   mounted() {
     var self = this;
-    $('#txDetailDlg').modal('show');
 
+    let currency_type = parseInt(localStorage.getItem('currency_type'));
+    switch (currency_type) {
+      case CURRENCY_TYPE.BTC:
+        this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
+        this.showConfirmationNotice = true;
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        this.txnDetail.fee = satoshiToFlash(this.txnDetail.fee);
+        break;
+    }
+    this.update();
+
+    $('#txDetailDlg').modal('show');
     $('#txDetailDlg').on('hidden.bs.modal', function() {
       if (self.opts.cb) {
         self.opts.cb();

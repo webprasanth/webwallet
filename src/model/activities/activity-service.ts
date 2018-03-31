@@ -22,6 +22,7 @@ export default class ActivityService {
         size = 10,
         order = 'desc',
       } = pageSettings;
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       var credentials = {
         date_from: date_from,
         date_to: date_to,
@@ -29,6 +30,7 @@ export default class ActivityService {
         start: start,
         size: size,
         order: order,
+        currency_type: userSelectedCurrency,
       };
       AppService.getInstance().getTransactions(credentials, resp => {
         resolve(resp);
@@ -38,8 +40,10 @@ export default class ActivityService {
 
   getTransactionDetail(transactionId) {
     return new Promise(resolve => {
+      var userSelectedCurrency = localStorage.getItem('currency_type');
       let params = {
         transaction_id: transactionId,
+        currency_type: userSelectedCurrency,
       };
       AppService.getInstance().getTransactionDetail(params, resp => {
         resolve(resp);
@@ -59,6 +63,9 @@ export default class ActivityService {
     };
 
     let temp = null;
+
+    if(obj.status)
+      tran.status = obj.status;
 
     for (let i = 0; i < obj.vin.length; i++) {
       temp = obj.vin[i];

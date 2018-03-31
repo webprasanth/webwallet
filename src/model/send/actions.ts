@@ -6,23 +6,25 @@ import { riot } from '../../components/riot-ts';
 import { removeUserKey, getUserKey, getLocation } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
+import { CURRENCY_TYPE } from '../currency';
 import { PAGE_SIZE } from '../../components/home/contacts';
 
 export const sendActions = {
-  createRawTx(targetWallet, amount, message) {
+  createRawTx(targetWallet, amount, custom_fee, message) {
     let tx = null;
-    let wallet = store.getState().userData.wallets[0];
+    let wallet = sendActions.getActiveWallet();
+    var userSelectedCurrency = localStorage.getItem('currency_type');
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
       SendService.singleton()
-        .createRawTx(targetWallet.address, amount, message)
+        .createRawTx(targetWallet.address, amount, custom_fee, message)
         .then((resp: any) => {
           if (resp.rc === 1) {
             tx = wallet.signTx(resp.transaction.rawtx);
             let txn_info: any = {
               ip: getLocation().info.ip,
               amount: amount,
-              currency_type: 1,
+              currency_type: userSelectedCurrency,
               receiver_bare_uid: targetWallet.email,
               receiver_public_address: targetWallet.address,
               receiver_id: targetWallet.username,
@@ -44,6 +46,7 @@ export const sendActions = {
                       request_id: targetWallet.RequestId,
                       sender_bare_uid: targetWallet.email,
                       note_processing: targetWallet.memo,
+                      currency_type: userSelectedCurrency,
                     };
 
                     SendService.singleton()
@@ -91,8 +94,7 @@ export const sendActions = {
                       .getTxnById(txn_info)
                       .then((resp: any) => {
                         count++;
-
-                        if (resp && resp.rc === 1 && resp.txn.status === 1) {
+                        if (resp && resp.rc === 1 && (resp.txn.status === 1 || userSelectedCurrency != CURRENCY_TYPE.FLASH)) {
                           dispatch(
                             sendActions.sendTXNSuccess(
                               resp.txn.processing_duration.toFixed(3)
@@ -116,12 +118,26 @@ export const sendActions = {
                 }
               });
           }
+          else {
+            dispatch(this.sendTXNFailed(resp));
+          }
         });
     };
   },
 
   clearForm() {
     return { type: SEND.CLEAR_FORM };
+  },
+  getActiveWallet() {
+    let wallets = store.getState().userData.wallets;
+    let currency_type = localStorage.getItem('currency_type');
+    let currency_wallets = wallets.filter(function(wallet) {
+      if(parseInt(wallet.currency_type) == currency_type)
+        return true;
+      else
+        return false;
+    });
+    return currency_wallets[0];
   },
   sendTXNSuccess(processing_duration) {
     return { type: SEND.SEND_TXN_SUCCESSFUL, data: processing_duration };

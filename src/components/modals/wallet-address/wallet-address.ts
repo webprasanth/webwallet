@@ -26,6 +26,19 @@ export default class WalletAddress extends Element {
     super();
   }
 
+  onApplicationStateChanged() {
+
+    let state: ApplicationState = store.getState();
+    
+    switch (state.lastAction.type) {
+      case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
+          this.update();
+        break;
+      default:
+        break;
+    }
+  }
+
   mounted() {
     var self = this;
     let state = store.getState();

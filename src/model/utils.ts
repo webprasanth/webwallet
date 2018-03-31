@@ -7,7 +7,9 @@ import Premium from 'Premium';
 import nacl from 'tweetnacl';
 import { getText } from '../components/localise';
 
-import { Address, NETWORK } from './wallet';
+import { Address, NETWORKS } from './wallet';
+import { CURRENCY_TYPE } from './currency';
+import { APP_MODE } from './app-service';
 
 interface UserKey {
   idToken: string;
@@ -80,6 +82,11 @@ export function satoshiToFlash(num) {
   return parseFloat(new Big(num).div(10000000000).toString());
 }
 
+export function satoshiToBtc(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(new Big(num).div(100000000).toString());
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(num).toLocaleString('en',{maximumFractionDigits:8});
@@ -146,12 +153,33 @@ export function getUserKey(): UserKey | any {
   return userKey;
 }
 
-export function calcFee(amount) {
-  return 0.001; // default fee for web-wallet transaction
+export function calcFee(amount, bcMedianTxSize, fastestFee) {
+  let currency_type = parseInt(localStorage.getItem('currency_type'));
+  switch (currency_type) {
+    case CURRENCY_TYPE.FLASH:
+    default:
+      return 0.001; // default fee for web-wallet transaction
+      break;
+    case CURRENCY_TYPE.BTC:
+    console.log(bcMedianTxSize, fastestFee);
+      let satoshis = bcMedianTxSize * fastestFee;
+      console.log(satoshis);
+      return satoshiToBtc(satoshis);
+      break;
+  }
 }
 
 export function formatCurrency(amount) {
-  return `${amount} Flash`;
+  let currency_type = parseInt(localStorage.getItem('currency_type'));
+  switch (currency_type) {
+    case CURRENCY_TYPE.FLASH:
+    default:
+      return `${amount} Flash`;
+      break;
+    case CURRENCY_TYPE.BTC: 
+      return `${amount} BTC`;
+      break;
+  }
 }
 
 export function getDisplayDate(date, toTimeZone) {
@@ -322,15 +350,44 @@ export function isValidFlashAddress(value) {
   }
 }
 
+export function isValidCryptoAddress(value) {
+  try {
+    let address = Address.fromBase58Check(value);
+    var network;
+    switch (parseInt(localStorage.getItem('currency_type'))) {
+      case CURRENCY_TYPE.BTC:
+        if (APP_MODE == 'PROD') {
+          network = NETWORKS.BTC;
+        }
+        else
+          network = NETWORKS.BTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        network = NETWORKS.FLASH;
+        break;
+    }
+    if (
+      address.version === network.pubKeyHash ||
+      address.version === network.scriptHash
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
 export function filterNumberEdit(event) {
-  let charCode = parseInt(event.charCode);
-  let keyCode = parseInt(event.keyCode);
+  let keyCode = event.key;
   let isValidAmountCharCode =
-    (charCode >= 48 && charCode <= 57) ||
-    keyCode == 8 ||
-    keyCode == 9 ||
-    keyCode == 46 ||
-    keyCode == 127;
+    (parseInt(keyCode) >= 0 && parseInt(keyCode) <= 9) ||
+    keyCode == 'Backspace' ||
+    keyCode == 'Tab' ||
+    keyCode == 'Delete' ||
+    keyCode == '.';
   if (!isValidAmountCharCode) {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
   } else {

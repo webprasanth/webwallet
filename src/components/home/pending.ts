@@ -8,6 +8,7 @@ import * as utils from '../../model/utils';
 import { TAB } from '../../model/pending/types';
 import { FCEvent } from '../../model/types';
 import BaseElement from '../base-element';
+import { getCurrencyUnit } from '../../model/currency';
 
 @template(HomePendingTemplate)
 export default class HomePending extends BaseElement {
@@ -33,6 +34,7 @@ export default class HomePending extends BaseElement {
   private TAB = TAB;
   private tabs = store.getState().pendingData.tabs;
   private money_requests = [];
+  private getCurrencyUnit = getCurrencyUnit;
 
   mounted() {
     let state = store.getState();
@@ -223,6 +225,7 @@ export default class HomePending extends BaseElement {
     let fromDate = new Date(fromDateTmp.setHours(0, 0, 0, 0)).toISOString();
     let toDateTmp = this.toDateObject.datepicker('getDate');
     let toDate = new Date(toDateTmp.setHours(23, 59, 59, 999)).toISOString();
+    var userSelectedCurrency = localStorage.getItem('currency_type');
 
     let pageSettings = {
       type: this.currentActiveTabId,
@@ -231,6 +234,7 @@ export default class HomePending extends BaseElement {
       start: (pageNumber - 1) * pageSize,
       size: pageSize,
       status: [0],
+      currency_type: userSelectedCurrency,
     };
 
     store.dispatch(pendingActions.getMoreRequest(pageSettings));
@@ -279,9 +283,11 @@ export default class HomePending extends BaseElement {
       message: 'Are you sure you want to cancel this request?',
       callback: function(result) {
         if (result) {
+          var userSelectedCurrency = localStorage.getItem('currency_type');
           let criteria = {
             request_id: event.item.id,
             receiver_bare_uid: event.item.receiver_email,
+            currency_type: userSelectedCurrency,
           };
 
           store.dispatch(pendingActions.markCancelledMoneyRequests(criteria));

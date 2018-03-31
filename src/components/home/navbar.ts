@@ -8,6 +8,8 @@ import Constants from '../../model/constants';
 import { USERS, COMMON, PROFILE, PENDING } from '../../model/action-types';
 import { FCEvent } from '../../model/types';
 import { TAB } from '../../model/pending/types';
+import { pendingActions } from '../../model/pending/actions';
+import { CURRENCY_TYPE } from '../../model/currency';
 import { removeIdToken } from '../../model/utils';
 import { getText } from '../localise';
 
@@ -76,5 +78,58 @@ export default class Navbar extends BaseElement {
 
     let tab = event.item.tab;
     route(tab.id);
+  }
+
+  onCurrencySelection(event: Event) {
+    
+    var selectedCurrencyElement = event.target.closest('li');
+    var currencyIndex = parseInt(
+      selectedCurrencyElement.getAttribute('data-currency')
+    );
+
+    switch (currencyIndex) {
+      case CURRENCY_TYPE.BTC:
+        localStorage.setItem('currency_type', CURRENCY_TYPE.BTC);
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        localStorage.setItem('currency_type', CURRENCY_TYPE.FLASH); //Setting Default currency as Flash
+        break;
+    }
+    $('#selected-currency-container #selected-currency-text').html(
+      $(selectedCurrencyElement)
+        .find('span')
+        .html()
+    );
+    $('#selected-currency-container #selected-currency-icon').attr(
+      'src',
+      $(selectedCurrencyElement)
+        .find('img')
+        .attr('src')
+    );
+    this.performCurrencyChangeOperation(currencyIndex);
+  }
+
+  performCurrencyChangeOperation(currencyIndex) {
+    let user = store.getState().userData.user;
+    store.dispatch(userActions.getBalance());
+    store.dispatch(userActions.getProfile(user));
+    riot.mount('home-activity');
+    riot.mount('home-contacts');
+    riot.mount('home-profile');
+    riot.mount('home-send');
+    riot.mount('home-request');
+    riot.mount('home-pending');
+
+    // passing 2 for default "Incoming Request" tab
+    store.dispatch(pendingActions.setActiveTab(2));
+    //home activity, contacts, header, profile, fountain, User info,
+
+    if(CURRENCY_TYPE.FLASH != currencyIndex) {
+      console.log($('.navbar-sc .navbar-nav li.active'));
+      console.log($('.navbar-sc .navbar-nav li.active').attr('id'));
+      if($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
+        route('activity');
+    }
   }
 }

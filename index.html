@@ -81,6 +81,7 @@
                     res.secretKey = password;
                     res.email = email;
                     localStorage.setItem("flc-loginresp", JSON.stringify(res));
+                    localStorage.setItem('currency_type', '1'); //Setting Default currency Flash
                     window.location.href = "home.html";
                 } else {
                     if(res.status == 'ACCOUNT_LOCKED')
@@ -337,6 +338,7 @@
                                 profile: resp,
                                 rc: 1
                             }));
+                            localStorage.setItem('currency_type', '1');
                             window.location.href = "home.html";
                         }
                     }
