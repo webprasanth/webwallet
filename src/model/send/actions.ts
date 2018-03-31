@@ -118,6 +118,9 @@ export const sendActions = {
                 }
               });
           }
+          else {
+            dispatch(this.sendTXNFailed(resp));
+          }
         });
     };
   },
