@@ -219,7 +219,7 @@
 
 	"activity_table_header_email": "电子邮件",
 
-	"activity_table_header_email_pubic_address": "FLASH 网络钱包电子邮件地址/ %(currencyName)s 公共地址",
+	"activity_table_header_email_pubic_address": "网络钱包电子邮件地址/ %(currencyName)s 公共地址",
 
 	"activity_table_header_note": "交易记录",
 

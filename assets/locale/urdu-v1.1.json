@@ -149,7 +149,7 @@
     "activity_filter_no_result"                : "آپ کی تاریخ کی حد سے پہلے دیگر ٹرانزیکشنز ہیں. ملاحظہ کرنے کیلئے تمام سرگرمی کو کلک کریں پر کلک کریں.",
     "activity_table_header_name"               : " نام",
     "activity_table_header_email"              : " ای میل",
-    "activity_table_header_email_pubic_address": " ویب پرس ای میل پتہ FLASH / %(currencyName)s کے پبلک ایڈریس",
+    "activity_table_header_email_pubic_address": " ویب پرس ای میل پتہ / %(currencyName)s کے پبلک ایڈریس",
     "activity_table_header_note"               : " ٹرانزیکشن نوٹ",
     "activity_table_header_amount"             : " رقم",
     "activity_table_header_date"               : " تاریخ/ وقت ",

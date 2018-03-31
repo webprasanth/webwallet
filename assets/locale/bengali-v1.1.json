@@ -125,7 +125,7 @@
     "activity_filter_no_result"                : "আপনার এই তারিখের সীমার আগে অন্য লেনদেন আছে। অনুগ্রহ করে দেখতে শো অল অ্যাক্টিভিটি-তে ক্লিক করুন।",
     "activity_table_header_name"               : "নাম",
     "activity_table_header_email"              : "ইমেল",
-    "activity_table_header_email_pubic_address": "FLASH ওয়েব ওয়ালেট ইমেইল ঠিকানা / %(currencyName)s পাবলিক ঠিকানা",
+    "activity_table_header_email_pubic_address": "ওয়েব ওয়ালেট ইমেইল ঠিকানা / %(currencyName)s পাবলিক ঠিকানা",
     "activity_table_header_note"               : "লেনদেন নোট",
     "activity_table_header_amount"             : "পরিমাণ",
     "activity_table_header_date"               : "তারিখ/সময়",

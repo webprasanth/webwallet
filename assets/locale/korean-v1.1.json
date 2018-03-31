@@ -138,7 +138,7 @@
 "activity_filter_no_result":"이 날짜 범위 이전에 다른 트랜잭션이 있습니다. 보려는 모든 작업 표시를 클릭하십시오.",
 "activity_table_header_name":"이름",
 "activity_table_header_email":"이메일",
-"activity_table_header_email_pubic_address":"FLASH 웹 지갑 전자 메일 주소 / %(currencyName)s 공용 주소",
+"activity_table_header_email_pubic_address":"웹 지갑 전자 메일 주소 / %(currencyName)s 공용 주소",
 "activity_table_header_note":"거래 메모",
 "activity_table_header_avount":"금액",
 "activity_table_header_date":"날짜/시간",

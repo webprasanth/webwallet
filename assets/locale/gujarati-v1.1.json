@@ -148,7 +148,7 @@
     "activity_filter_no_result"                : "આ સમયગાળા પહેલાં તમારી પાસે અન્ય વ્યવહારો છે.   જોવા માટે Show All એકટીવીટી પર ક્લિક કરો.",
     "activity_table_header_name"               : "નામ",
     "activity_table_header_email"              : "ઇમેઇલ",
-    "activity_table_header_email_pubic_address": "FLASH વેબ વૉલેટ ઇમેઇલ સરનામું / %(currencyName)s પબ્લિક સરનામું",
+    "activity_table_header_email_pubic_address": "વેબ વૉલેટ ઇમેઇલ સરનામું / %(currencyName)s પબ્લિક સરનામું",
     "activity_table_header_note"               : "ટ્રાન્ઝેક્શન નોંધ",
     "activity_table_header_amount"             : "એમાઉન્ટ",
     "activity_table_header_date"               : "તારીખ/સમય",

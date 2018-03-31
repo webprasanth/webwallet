@@ -148,7 +148,7 @@
     "activity_filter_no_result"                : "या तारखेपर्यंत आपल्याकडे इतर व्यवहार आहेत.कृपया पाहण्यासाठी सर्व गतिविधी दर्शवा क्लिक करा.",
     "activity_table_header_name"               : "नाव",
     "activity_table_header_email"              : "ईमेल",
-    "activity_table_header_email_pubic_address": "FLASH वेब वॉलेट ईमेल पत्ता / %(currencyName)s सार्वजनिक पत्ता",
+    "activity_table_header_email_pubic_address": "वेब वॉलेट ईमेल पत्ता / %(currencyName)s सार्वजनिक पत्ता",
     "activity_table_header_note"               : "व्यवहार टीप",
     "activity_table_header_amount"             : "रक्कम",
     "activity_table_header_date"               : "दिनांक / वेळ",
