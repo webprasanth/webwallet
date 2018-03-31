@@ -147,7 +147,7 @@
     "activity_filter_no_result"                : "താങ്കള്‍ക്ക് ഈ തീയതി ശ്രേണിയില്‍മറ്റ് ട്രാന്‍സാക്ഷനുകളുണ്ട്. കാണുന്നതിനായി എല്ലാ പ്രവര്‍ത്തനങ്ങളും കാണിക്കുക ക്ലിക്ക് ചെയ്യുക",
     "activity_table_header_name"               : "പേര്",
     "activity_table_header_email"              : "ഇമെയില്‍",
-    "activity_table_header_email_pubic_address": "ഇമെയില്‍ / പബ്ലിക് വിലാസം",
+    "activity_table_header_email_pubic_address": "FLASH വെബ് വിലാസം ഇമെയിൽ വിലാസം / %(currencyName)s പബ്ലിക് വിലാസം",
     "activity_table_header_note"               : "ട്രാന്‍സാക്ഷന്‍നോട്ട്",
     "activity_table_header_amount"             : "തുക",
     "activity_table_header_date"               : "തീയതി / സമയം",

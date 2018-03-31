@@ -148,7 +148,7 @@
     "activity_filter_no_result"                : "You have other transactions before this date range.   Please click Show All Activity to view.",
     "activity_table_header_name"               : "Name",
     "activity_table_header_email"              : "Email",
-    "activity_table_header_email_pubic_address": "Email/Public address",
+    "activity_table_header_email_pubic_address": "FLASH web wallet Email address / %(currencyName)s Public address",
     "activity_table_header_note"               : "Transaction Note",
     "activity_table_header_amount"             : "Amount",
     "activity_table_header_date"               : "Date/Time",

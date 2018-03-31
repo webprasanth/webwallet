@@ -148,7 +148,7 @@
     "activity_filter_no_result"                : "この 日付の前に他の取引があります。表示するすべてのアクティビテイを表示するにはクリックしてください.",
     "activity_table_header_name"               : "名前",
     "activity_table_header_email"              : "イメール",
-    "activity_table_header_email_pubic_address": "イメール／公共の住所",
+    "activity_table_header_email_pubic_address": "FLASH ウェブウォレット電子メールアドレス/ %(currencyName)s パブリックアドレス",
     "activity_table_header_note"               : "取引ノート",
     "activity_table_header_amount"             : "額",
     "activity_table_header_date"               : "日付／お時間",

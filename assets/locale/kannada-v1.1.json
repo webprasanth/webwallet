@@ -145,7 +145,7 @@
     "activity_filter_no_result"                : "ಈ ದಿನಾಂಕದಿಂದ ಹಿಂದಕ್ಕೆ ಇರುವ ಇತರೆ ವ್ಯವಹಾರಗಳಿವೆ. ಎಲ್ಲಾ ಚಟುವಟಿಕೆಗಳನ್ನೂ ತೋರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
     "activity_table_header_name"               : "ಹೆಸರು",
     "activity_table_header_email"              : "ಈ ಮೇಲ್",
-    "activity_table_header_email_pubic_address": "ಈಮೇಲ್/ಸಾರ್ವಜನಿಕ (ಪಬ್ಲಿಕ್) ವಿಳಾಸ",
+    "activity_table_header_email_pubic_address": "FLASH ವೆಬ್ ವ್ಯಾಲೆಟ್ ಇಮೇಲ್ ವಿಳಾಸ / %(currencyName)s ಸಾರ್ವಜನಿಕ ವಿಳಾಸ",
     "activity_table_header_note"               : "ವ್ಯವಹಾರ ನೋಟ್",
     "activity_table_header_amount"             : "ಮೊತ್ತ",
     "activity_table_header_date"               : "ದಿನ/ಸಮಯ",

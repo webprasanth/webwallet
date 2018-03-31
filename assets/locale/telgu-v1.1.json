@@ -126,7 +126,7 @@
     "activity_filter_no_result"                : "ఆ తేదీ కంటే ముందు మీకు ఇతర లావాదేవీలు ఉన్నాయి. దయచేసి అన్ని కార్యకలాపాలను చూపండిని నొక్కండి.",
     "activity_table_header_name"               : "పేరు",
     "activity_table_header_email"              : "ఈమెయిల్",
-    "activity_table_header_email_pubic_address": "ఈమెయిల్/పబ్లిక్ చిరునామా",
+    "activity_table_header_email_pubic_address": "FLASH వెబ్ వాలెట్ ఇమెయిల్ చిరునామా / %(currencyName)s పబ్లిక్ చిరునామా",
     "activity_table_header_note"               : "లావాదేవీ గమనిక",
     "activity_table_header_amount"             : "నగదు",
     "activity_table_header_date"               : "తేదీ/సమయం",

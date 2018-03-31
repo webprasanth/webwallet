@@ -150,7 +150,7 @@
     "activity_filter_no_result"                : "आपके पास इस तिथि सीमा से पहले अन्य लेन-देन हैं। कृपया देखने के लिए सभी गतिविधि दिखाएं क्लिक करें",
     "activity_table_header_name"               : "नाम ",
     "activity_table_header_email"              : "ईमेल ",
-    "activity_table_header_email_pubic_address": "ईमेल / सार्वजनिक पता",
+    "activity_table_header_email_pubic_address": "FLASH वेब बटुआ ईमेल पता / %(currencyName)s सार्वजनिक पता",
     "activity_table_header_note"               : "लेनदेन नोट",
     "activity_table_header_amount"             : "रकम",
     "activity_table_header_date"               : "दिनांक/ समय",

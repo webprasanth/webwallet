@@ -145,7 +145,7 @@
     "activity_filter_no_result"                : "இந்த தேதி வரம்பிற்கு முன் வேறு பரிவர்த்தனைகள் உள்ளன. தயவுசெய்து பார்வையிட எல்லா செயல்பாட்டையும் காண்பி என்பதைக் கிளிக் செய்க.",
     "activity_table_header_name"               : "பெயர்",
     "activity_table_header_email"              : "மின்னஞ்சல்",
-    "activity_table_header_email_pubic_address": "மின்னஞ்சல் / பொது முகவரி",
+    "activity_table_header_email_pubic_address": "FLASH மின்னஞ்சல் முகவரி / %(currencyName)s பொது முகவரி",
     "activity_table_header_note"               : "பரிவர்த்தனை குறிப்பு",
     "activity_table_header_amount"             : "தொகை",
     "activity_table_header_date"               : "தேதி நேரம்",

@@ -148,7 +148,7 @@
     "activity_filter_no_result"                : "Tiene otras transacciones antes de este intervalo de fechas. Haga clic en Mostrar toda la actividad para verla.",
     "activity_table_header_name"               : "Nombre",
     "activity_table_header_email"              : "Correo electrónico",
-    "activity_table_header_email_pubic_address": "Correo electrónico/Dirección pública",
+    "activity_table_header_email_pubic_address": "billetera web FLASH Dirección de correo electrónico / Dirección pública %(currencyName)s",
     "activity_table_header_note"               : "Nota de transacción",
     "activity_table_header_amount"             : "Monto",
     "activity_table_header_date"               : "Fecha y hora",
