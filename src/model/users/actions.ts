@@ -236,8 +236,8 @@ export const userActions = {
                   console.log('+++++ createFlashWallet failed, reason:', _resp);
                 }
               });
-
-            UserService.singleton()
+            if(profile.auth_version == 4) {
+              UserService.singleton()
               .createBTCWallet(createWalletParams)
               .then((_resp: any) => {
                 if (_resp.rc === 1) {
@@ -252,6 +252,7 @@ export const userActions = {
                   console.log('+++++ createBTCWallet failed, reason:', _resp);
                 }
               });
+            }
 
             UserService.singleton()
               .setRecoveryKeys(params)
@@ -412,7 +413,7 @@ export const userActions = {
         .getMyWallets()
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if (resp.my_wallets.length > 1) {
+            if (resp.my_wallets.length > 1 || (resp.my_wallets.length == 1 && auth_version != 4)) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
             } else {
               let userProfile = store.getState().userData.user;
@@ -448,7 +449,7 @@ export const userActions = {
                   });
               }
               //if no BTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0) {
+              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0 && auth_version == 4) {
                 UserService.singleton()
                   .createBTCWallet(params)
                   .then((resp: any) => {

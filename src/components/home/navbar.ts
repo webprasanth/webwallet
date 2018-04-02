@@ -24,6 +24,7 @@ export default class Navbar extends BaseElement {
   private incommingReqNum = 0;
   private pendingNum = 0;
   private tabs = null;
+  private auth_version = 0;
 
   mounted() {
     this.state = store.getState();
@@ -37,6 +38,7 @@ export default class Navbar extends BaseElement {
     if (user.profile_pic_url) {
       this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
     }
+    this.auth_version = user.auth_version;
   }
 
   onApplicationStateChanged() {
