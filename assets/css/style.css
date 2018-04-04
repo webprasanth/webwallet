@@ -666,6 +666,198 @@ h5.title-table{
 	cursor: pointer;
 }
 /*==============*/
+/*Merchant and Tools*/
+.merchant-tools-page .box-content{
+  padding-top: 15px;
+}
+.merchant-tools-page .generate-merchant-qr-section{
+  padding-right: 15px;
+}
+.merchant-tools-page .merchant-qr-section{
+  padding-left: 15px;
+}
+.merchant-tools-page #download_merchant_qr{
+  width: 2400px;
+}
+.merchant-tools-page  .download_merchant_tools_media{
+  text-align: center;
+  padding: 8%;
+  background: #FFFFFF;
+  margin-top: 500px;
+}
+.merchant-tools-page  #download_merchant_stickers_1{
+  width: 2390px;
+  border: 1px solid black;
+  border-radius: 50px;
+  height: 1765px;
+  padding: 96px;
+  margin-top: 500px;
+}
+.merchant-tools-page .download_merchant_stickers_1_header{
+  padding: 20px 0 115px;
+  overflow: hidden;
+  border-bottom: 1px solid;
+}
+.merchant-tools-page #dmq_merchant_stickers_1{
+  float: left;
+}
+.merchant-tools-page #download_merchant_stickers_1_we_accept{
+  float: left;
+  font-size: 225px;
+  text-align: center;
+  width: 1546px;
+  line-height: 650px;
+  padding-left: 40px;
+  font-weight: bold;
+  height: 650px;
+}
+.merchant-tools-page #download_merchant_stickers_1_we_accept span{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+.merchant-tools-page .download_merchant_stickers_1_logo_header{
+  padding-top: 90px;
+  width: 2203px;
+}
+.merchant-tools-page #download_merchant_stickers_2 {
+  width: 2390px;
+  margin-top: 500px;
+}
+.merchant-tools-page #download_merchant_stickers_2{
+  text-align: center;
+  padding: 96px;
+  background: #FFFFFF;
+  margin-top: 500px;
+  border: 1px solid;
+  border-radius: 50px;
+}
+.merchant-tools-page .download_merchant_stickers_2_div1{
+  float: left;
+  font-size: 86px;
+  font-weight: bold;
+  padding-right: 65px;
+  height: 400px;
+  width: 480px;
+  border-right: 1px solid;
+  line-height: 400px;
+}
+.merchant-tools-page .download_merchant_stickers_2_div1 span{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+.merchant-tools-page .download_merchant_stickers_2_logo_header{
+  float: left;
+  width: 1230px;
+  padding: 35px 64px 0;
+}
+.merchant-tools-page #dmq_merchant_stickers_2{
+  float: left;
+  padding-left: 65px;
+  border-left: 1px solid;
+}
+.merchant-tools-page  #download_merchant_stickers_3 {
+  width: 1300px;
+  text-align: center;
+  padding: 80px;
+  background: #FFFFFF;
+  margin-top: 500px;
+  border: 1px solid black;
+  border-radius: 50px;
+}
+.merchant-tools-page .dmq-logo-flash-icon{
+  width: 500px;
+  padding-top: 66px;
+}
+.merchant-tools-page .dmq-logo-flash-text{
+  width: 1000px;
+  padding-top: 96px;
+}
+.merchant-tools-page #dmq_merchant_stickers_3{
+  padding-top: 96px;
+}
+.merchant-tools-page .dmq-header-we-accept{
+  font-size: 224px;
+  line-height: 224px;
+  font-weight: bold;
+}
+.merchant-tools-page .dmq-logo-header{
+  width: 63%;
+  padding-top: 5%;
+}
+.merchant-tools-page .dmq-accepted-here{
+  border: none;
+  display: block;
+  margin: 0 auto;
+  padding-top: 2%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 180px;
+  width: 58%;
+  line-height: 190px;
+}
+.merchant-tools-page .dmq-merchant-name{
+  border: none;
+  display: block;
+  border-bottom: 2px solid #0E76BC;
+  margin: 0 auto 5%;
+  padding: 5% 0px 0px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 120px;
+  width: 53%;
+  height: 290px;
+}
+.merchant-tools-page #dmq-merchant-qr{
+  text-align: center;
+  padding-top: 4%;
+}
+.merchant-tools-page #dmq_merchant_stickers_3 img{
+  display: inline !important;
+}
+.merchant-tools-page #dmq-merchant-qr img{
+  display: inline !important;
+  width: 57%;
+}
+.merchant-tools-page .dmq-footer{
+  font-size: 48px;
+  margin: 4% auto;
+  padding: 1%;
+  color: black;
+  width: 70%
+}
+.merchant-tools-page #dmq-download-print-image {
+  width: 100%;
+}
+.merchant-tools-page #download_merchant_stickers_1-image, .merchant-tools-page #download_merchant_stickers_2-image{
+  width: 100%;
+}
+.merchant-tools-page #download_merchant_stickers_3-image{
+  width: 325px;
+}
+.merchant-tools-page .send__buttons{
+  padding-top: 10px;
+}
+.merchant-tools-page #regenerate-qr-bt{
+  margin-top: 24px;
+  margin-left: 15px;
+}
+
+.merchant-tools-page .merchant-widgets-content [class*="col-"]{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.merchant-tools-page #donate_widget_container, .merchant-tools-page #accept_widget_container{
+  padding-bottom: 15px;
+}
+
+.merchant-tools-page .merchant-stickets-regenerate-info {
+  padding: 10px 0 15px;
+}
+/*==============*/
 /*Style list account*/
 .email-account{
     position: relative;

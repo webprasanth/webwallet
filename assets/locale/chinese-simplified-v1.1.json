@@ -11,6 +11,7 @@
 	"menu_label_request": "请求",
 	"menu_label_pending": "挂起",
 	"menu_label_contact": "联系",
+	"menu_label_merchant_tools"                : "商家工具",
 	"menu_label_profile": "我的帐户",
 	"menu_label_notification": "通知",
 	"footer_label_about": "关于",
@@ -218,7 +219,7 @@
 
 	"activity_table_header_email": "电子邮件",
 
-	"activity_table_header_email_pubic_address": "电子邮件/电话/公共地址",
+	"activity_table_header_email_pubic_address": "网络钱包电子邮件地址/ %(currencyName)s 公共地址",
 
 	"activity_table_header_note": "交易记录",
 
@@ -411,6 +412,22 @@
 	"contact_msg_no_result": "您还没有任何联系人，当您与其他用户有活动时，他们的联系 将自动添加到这里。",
 
 	"contact_msg_verify_condition": "我们需要验证你的电子邮件地址和电话号码，然后才能发送和请求要钱，如果没有这些验证，你只能接受 钱，你现在想要核实一下吗？",
+	
+	"merchant_tools_page_title"				   : "商家工具",
+    "merchant_tools_tab_stand"                 : "柜台",
+    "merchant_tools_tab_stickers"                 : "贴纸",
+	"merchant_tools_tab_widgets"                 : "小工具",
+	"merchant_tools_we_accept_title"		   : "我们接受",
+	"merchant_tools_donate_now_title"		   : "立即捐款",
+	"merchant_tools_accepted_here_title"	   : "在此处接受",
+	"merchant_tools_donate_form_title" 		   : "捐赠 FLASH",
+	"merchant_tools_accept_form_title" 		   : "接受 FLASH",
+	"merchant_tools_popup_title_label"		   : "弹出标题",
+	"merchant_tools_button_width_label"		   : "按钮宽度",
+	"merchant_tools_widget_code_label"		   : "小部件代码",
+	"merchant_tools_receiving_address_label"   : "您的收件地址",
+	"merchant_tools_renegerate_info"		   : "如果贴纸显示不正确，请点击'生成'按钮重新创建。",
+	"merchant_tools_merchant_name_label"	   : "商家名称（可选）",
 
 
 	"common_anonymous_label": "匿名",
@@ -538,6 +555,9 @@
 	"common_update_label": "更新",
 
 	"common_service_unavailable_error": "服务不可用",
+	"common_download_label"         		   : "下载",
+	"common_print_label"         		       : "打印",
+    "common_generate_label"                       : "生成",
 
 	"request_page_title": "请求付款",
 

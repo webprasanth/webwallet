@@ -103,6 +103,11 @@ gulp.task('copy-images', function() {
 gulp.task('copy-locale', function() {
   return gulp.src('assets/locale/**/*').pipe(gulp.dest('public/assets/locale'));
 });
+gulp.task('copy-widgets', function() {
+  return gulp
+    .src('assets/widgets/**/*')
+    .pipe(gulp.dest('public/assets/widgets'));
+});
 
 gulp.task('copy-lib', function() {
   var maps = [{ from: 'assets/lib/**/*', to: 'public/assets/lib/' }];
@@ -120,6 +125,7 @@ gulp.task('copy-rs-mobile', [
   'copy-css',
   'copy-images',
   'copy-locale',
+  'copy-widgets',
   'copy-lib',
   'copy-fonts',
   'copy-sound',
@@ -134,6 +140,7 @@ gulp.task('copy-rs', [
   'copy-css',
   'copy-images',
   'copy-locale',
+  'copy-widgets',
   'copy-lib',
   'copy-fonts',
   'copy-sound',

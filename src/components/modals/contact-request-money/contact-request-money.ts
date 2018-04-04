@@ -6,6 +6,7 @@ import Constants from '../../../model/constants';
 import { requestActions } from '../../../model/request/actions';
 import { REQUEST } from '../../../model/action-types';
 import BaseElement from '../../base-element';
+import { CURRENCY_TYPE } from '../../../model/currency';
 
 let tag = null;
 
@@ -38,7 +39,10 @@ export default class ContactRequestMoney extends BaseElement {
       return;
     }
 
-    if (amount < 1) {
+    if (
+      amount < 1 &&
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));

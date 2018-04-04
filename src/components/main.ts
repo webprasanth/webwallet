@@ -33,6 +33,7 @@ route(action => {
     !state.userData.user &&
     (action != 'reset_password' &&
       action != 'account_created' &&
+      action != 'enable_account' &&
       action != 'submit_email')
   ) {
     return route('login');
@@ -48,6 +49,8 @@ route(action => {
       break;
     case 'reset_password':
       return riot.mount('#main', 'security-questions');
+    case 'enable_account':
+      return riot.mount('#main', 'enable-account');
     case 'account_created':
       return riot.mount('#main', 'setuppassword');
     case 'submit_email':
@@ -65,6 +68,7 @@ store.subscribe(() => {
     !state.userData.user &&
     (currentAction !== 'reset_password' &&
       currentAction != 'account_created' &&
+      currentAction != 'enable_account' &&
       currentAction != 'submit_email')
   ) {
     route('login');

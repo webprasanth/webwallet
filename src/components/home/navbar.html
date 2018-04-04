@@ -44,7 +44,7 @@
                 </select>
                 </li>-->
 
-                <li each="{tab in tabs}" class={active: tab.isActive} id={tab.id} onclick={onTabItemClick}>
+                <li each="{tab in tabs}" class={active: tab.isActive} show={tab.id != 'merchant-tools' || parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH} id={tab.id} onclick={onTabItemClick}>
                     <a href="">{tab.name}<label show="{(tab.id=='pending' && (pendingNum > 0))}" class="orange-circle">{pendingNum}</label></a>
                 </li>
                 <li class="logout"><a onclick={onLogoutButtonClick}><span class="glyphicon glyphicon-log-out"></span>{getText('common_logout_label')}</a></li>

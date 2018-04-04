@@ -10,6 +10,7 @@ SystemJS.config({
     Premium: './assets/lib/Premium/build.js',
     cropbox: './assets/lib/cropbox.js',
     QRCode: './assets/lib/qrcode.min.js',
+    html2canvas: './assets/lib/html2canvas.js',
   },
   devConfig: {
     map: {

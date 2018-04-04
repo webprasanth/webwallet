@@ -1,0 +1,56 @@
+<merchant-widgets>
+    <div class="merchant-widgets-content box-content col-xs-12">
+        <div class="col-xs-12 col-sm-6 merchant-tool-accept-flash-widget">
+            <div id="donate_widget_editor" class="col-xs-12 text-center">
+                <h3 class="title">{getText('merchant_tools_donate_form_title')}</h3>
+                <div class="form-group wallet-address-field col-xs-12">
+                    <label>{getText('merchant_tools_receiving_address_label')}</label>
+                    <input class="form-control" id="donateWalletAddress" name="walletAddress" type="text" disabled="">
+                </div>
+                <div class="form-group wallet-address-field col-xs-12 col-sm-6">
+                    <label>{getText('merchant_tools_popup_title_label')}</label>
+                    <input class="form-control" id="donateText" name="donateText" type="text" value="Donate FLASH">
+                </div>
+                <div class="form-group wallet-address-field col-xs-12 col-sm-6">
+                    <label>{getText('merchant_tools_button_width_label')}</label>
+                    <input class="form-control" id="donateWidth" name="donateWidth" type="text" value="300">
+                </div>
+                <div class="send__buttons form-group col-xs-12">
+                    <button type="button" class="btn btn-primary" id="generate-qr-bt" onclick={onGenerateButtonClick.bind(this, 'donate')}>{getText('common_update_label')}</button>
+                    <button type="button" class="btn btn-default" onclick={clearForms.bind(this, 'donate')}>{getText('common_clear_label')}</button>
+                </div>
+            </div>
+            <div id="donate_widget_container" class="col-xs-12 text-center"></div>
+            <div class="form-group col-xs-12">
+                <label>{getText('merchant_tools_widget_code_label')}</label>
+                <textarea id="donate_widget_code" rows="8" class="col-xs-12"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 merchant-tool-accept-flash-widget">
+            <div id="accept_widget_editor" class="col-xs-12 text-center">
+                <h3 class="title">{getText('merchant_tools_accept_form_title')}</h3>
+                <div class="form-group wallet-address-field col-xs-12">
+                    <label>{getText('merchant_tools_receiving_address_label')}</label>
+                    <input class="form-control" id="acceptWalletAddress" name="walletAddress" type="text" disabled="">
+                </div>
+                <div class="form-group wallet-address-field col-xs-12 col-sm-6">
+                    <label>{getText('merchant_tools_popup_title_label')}</label>
+                    <input class="form-control" id="acceptText" name="acceptText" type="text" value="Send FLASH">
+                </div>
+                <div class="form-group wallet-address-field col-xs-12 col-sm-6">
+                    <label>{getText('merchant_tools_button_width_label')}</label>
+                    <input class="form-control" id="acceptWidth" name="acceptWidth" type="text" value="300">
+                </div>
+                <div class="send__buttons form-group col-xs-12">
+                    <button type="button" class="btn btn-primary" id="generate-qr-bt" onclick={onGenerateButtonClick.bind(this, 'accept')}>{getText('common_update_label')}</button>
+                    <button type="button" class="btn btn-default" onclick={clearForms.bind(this, 'accept')}>{getText('common_clear_label')}</button>
+                </div>
+            </div>
+            <div id="accept_widget_container" class="col-xs-12 text-center"></div>
+            <div class="form-group col-xs-12">
+                <label>{getText('merchant_tools_widget_code_label')}</label>
+                <textarea id="accept_widget_code" rows="8" class="col-xs-12"></textarea>
+            </div>
+        </div>
+    </div>
+</merchant-widgets>

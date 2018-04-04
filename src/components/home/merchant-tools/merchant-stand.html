@@ -1,0 +1,27 @@
+<merchant-stand>
+    <div class="merchant-stand-content box-content">
+        <div class="col-xs-12 col-sm-6 generate-merchant-qr-section">
+            <h4 class="title">{getText('common_generate_label')} {getText('merchant_tools_tab_stand')}</h4>
+            <div class="form-group wallet-address-field col-xs-12">
+                <label>{getText('merchant_tools_receiving_address_label')}</label>
+                <input class="form-control" id="walletAddress" name="walletAddress" type="text" disabled="">
+            </div>
+            <div class="form-group wallet-address-field col-xs-12">
+                <label>{getText('merchant_tools_merchant_name_label')}</label>
+                <input class="form-control" id="displayText" name="displayText" type="text">
+            </div>
+            <div class="send__buttons form-group col-xs-12">
+                <button type="button" class="btn btn-primary" id="generate-qr-bt" onclick={onGenerateButtonClick}>{getText('common_update_label')}</button>
+                <button type="button" class="btn btn-default" onclick={clearForms}>{getText('common_clear_label')}</button>
+                <a id="dmq-download-a-link" style="display: none" target="_blank">Download</a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 merchant-qr-section">
+            <img id="dmq-download-print-image" src="" />
+            <div class="send__buttons form-group col-xs-12 text-center">
+                <button type="button" class="btn btn-primary" onclick={onDownloadButtonClick}>{getText('common_download_label')}</button>
+                <button type="button" class="btn btn-primary" onclick={onPrintButtonClick}>{getText('common_print_label')}</button>
+            </div>
+        </div>
+    </div>
+</merchant-stand>

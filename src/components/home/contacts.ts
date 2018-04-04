@@ -91,6 +91,14 @@ export default class HomeContacts extends BaseElement {
           });
         }
         break;
+      case CONTACTS.GET_WALLETS_BY_EMAIL_FAILED:
+        super.showError(
+          '',
+          'This contact does not have ' +
+            this.getCurrencyUnitUpcase() +
+            ' wallet'
+        );
+        break;
       default:
         break;
     }

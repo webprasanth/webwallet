@@ -82,4 +82,27 @@ export const resetPassActions = {
   ssoResetPasswordFailed(resp) {
     return { type: RESET_PASS.SSO_RESET_PASSWORD_FAILED, data: resp };
   },
+  enableAccount(params) {
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+
+      ResetPassService.singleton()
+        .enableAccount(params)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+
+          if (resp.rc == 1) {
+            dispatch(resetPassActions.enableAccountSuccess(resp));
+          } else {
+            dispatch(resetPassActions.enableAccountFailed(resp));
+          }
+        });
+    };
+  },
+  enableAccountSuccess(resp) {
+    return { type: RESET_PASS.ENABLE_ACCOUNT_SUCCESS, data: resp };
+  },
+  enableAccountFailed(resp) {
+    return { type: RESET_PASS.ENABLE_ACCOUNT_FAILED, data: resp };
+  },
 };

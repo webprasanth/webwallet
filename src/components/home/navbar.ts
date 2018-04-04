@@ -81,7 +81,6 @@ export default class Navbar extends BaseElement {
   }
 
   onCurrencySelection(event: Event) {
-    
     var selectedCurrencyElement = event.target.closest('li');
     var currencyIndex = parseInt(
       selectedCurrencyElement.getAttribute('data-currency')
@@ -110,10 +109,10 @@ export default class Navbar extends BaseElement {
         .find('img')
         .attr('src')
     );
-    this.performCurrencyChangeOperation();
+    this.performCurrencyChangeOperation(currencyIndex);
   }
 
-  performCurrencyChangeOperation() {
+  performCurrencyChangeOperation(currencyIndex) {
     let user = store.getState().userData.user;
     store.dispatch(userActions.getBalance());
     store.dispatch(userActions.getProfile(user));
@@ -127,5 +126,12 @@ export default class Navbar extends BaseElement {
     // passing 2 for default "Incoming Request" tab
     store.dispatch(pendingActions.setActiveTab(2));
     //home activity, contacts, header, profile, fountain, User info,
+
+    if (CURRENCY_TYPE.FLASH != currencyIndex) {
+      console.log($('.navbar-sc .navbar-nav li.active'));
+      console.log($('.navbar-sc .navbar-nav li.active').attr('id'));
+      if ($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
+        route('activity');
+    }
   }
 }

@@ -42,32 +42,32 @@ export default class HomeSend extends BaseElement {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
-      .getBTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getBTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+        });
     }
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
-      .getLTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getLTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+        });
     }
 
     $('#amount-input').on(
@@ -158,14 +158,18 @@ export default class HomeSend extends BaseElement {
     } else if (!tag.isValidAddress) {
       this.emailErrorMessage = this.getText('invalid_receiver_address_error');
       return;
-    }
-    else {
+    } else {
       //checking if entered value and selected address is same
-      if(tag.sendWallet.address != $('#to-email-id').val()) {
-        if(typeof tag.sendWallet.email == undefined || tag.sendWallet.email != $('#to-email-id').val()) {
+      if (tag.sendWallet.address != $('#to-email-id').val()) {
+        if (
+          typeof tag.sendWallet.email == undefined ||
+          tag.sendWallet.email != $('#to-email-id').val()
+        ) {
           tag.isValidAddress = false;
           tag.addressSelected = false;
-          this.emailErrorMessage = this.getText('invalid_receiver_address_error');
+          this.emailErrorMessage = this.getText(
+            'invalid_receiver_address_error'
+          );
           return;
         }
       }
@@ -183,14 +187,21 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.BTCSatoshiPerByte);
+    let fee = utils.calcFee(
+      amount,
+      this.bcMedianTxSize,
+      this.BTCSatoshiPerByte
+    );
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
       return;
     }
 
-    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
+    if (
+      amount < 1 &&
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }
@@ -267,7 +278,14 @@ export default class HomeSend extends BaseElement {
         if (containsColumn >= 0) {
           result = result.substring(containsColumn + 1, result.length);
         }
-        if (result.length != 34) QRcodeScanError();
+
+        //check for qt wallet
+        let containsQueMark = result.indexOf('?');
+        if (containsQueMark >= 0) {
+          result = result.substring(0, containsQueMark);
+        }
+
+        if (result.length < 25 || result.length > 34) QRcodeScanError();
         else {
           $('#to-email-id').val(result);
           this.checkAddress();

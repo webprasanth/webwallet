@@ -1,7 +1,7 @@
 import { RESET_PASS } from '../action-types';
 
 export default function resetPassReducer(
-  state = { keys: {}, resetPassErrReason: '' },
+  state = { keys: {}, resetPassErrReason: '', resetPassMailErrReason: '' },
   action
 ) {
   switch (action.type) {
@@ -9,6 +9,8 @@ export default function resetPassReducer(
       return Object.assign({}, state, { keys: action.data });
     case RESET_PASS.SSO_RESET_PASSWORD_FAILED:
       return Object.assign({}, state, { resetPassErrReason: action.data });
+    case RESET_PASS.SSO_RESET_PASSWORD_MAIL_FAILED:
+      return Object.assign({}, state, { resetPassMailErrReason: action.data });
     default:
       return state;
   }

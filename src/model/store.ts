@@ -12,6 +12,7 @@ interface IUser {
   created_ts: string;
   timezone: string;
   balance: number;
+  ubalance: number;
   phone: string;
   phone_verified: number;
   totp_enabled: number;
@@ -57,7 +58,11 @@ export interface ApplicationState {
   };
   contactsData: { contacts: any[]; totalContacts: number; contactWallet: any };
   tabData: { tabs: ITAB[] };
-  resetPassData: { keys: any; resetPassErrReason: any };
+  resetPassData: {
+    keys: any;
+    resetPassErrReason: any;
+    resetPassMailErrReason: any;
+  };
 }
 
 const logger = store => next => action => {
