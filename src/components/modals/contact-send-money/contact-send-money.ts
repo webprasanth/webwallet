@@ -23,7 +23,7 @@ export default class ContactSendMoney extends BaseElement {
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
   private BTCSatoshiPerByte = 20;
-  
+
   constructor() {
     super();
   }
@@ -38,7 +38,9 @@ export default class ContactSendMoney extends BaseElement {
       this.success = true;
       this.processing_duration = state.sendData.processing_duration;
       this.title = this.getText('send_success_message');
-      if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
+      if (
+        parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+      )
         this.confirmed = true;
     } else if (actionType == SEND.SEND_TXN_FAILED) {
       super.showError('', state.lastAction.data);
@@ -57,32 +59,32 @@ export default class ContactSendMoney extends BaseElement {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
-      .getBTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getBTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+        });
     }
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
-      .getLTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getLTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+        });
     }
 
     $('#sendByContact').modal('show');
@@ -102,7 +104,10 @@ export default class ContactSendMoney extends BaseElement {
 
     let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
 
-    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
+    if (
+      amount < 1 &&
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));

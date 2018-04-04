@@ -24,7 +24,6 @@ export default class Navbar extends BaseElement {
   private incommingReqNum = 0;
   private pendingNum = 0;
   private tabs = null;
-  private auth_version = 0;
 
   mounted() {
     this.state = store.getState();
@@ -38,7 +37,6 @@ export default class Navbar extends BaseElement {
     if (user.profile_pic_url) {
       this.avatarUrl = `${Constants.AvatarServer}${user.profile_pic_url}`;
     }
-    this.auth_version = user.auth_version;
   }
 
   onApplicationStateChanged() {
@@ -83,7 +81,6 @@ export default class Navbar extends BaseElement {
   }
 
   onCurrencySelection(event: Event) {
-    
     var selectedCurrencyElement = event.target.closest('li');
     var currencyIndex = parseInt(
       selectedCurrencyElement.getAttribute('data-currency')
@@ -130,10 +127,10 @@ export default class Navbar extends BaseElement {
     store.dispatch(pendingActions.setActiveTab(2));
     //home activity, contacts, header, profile, fountain, User info,
 
-    if(CURRENCY_TYPE.FLASH != currencyIndex) {
+    if (CURRENCY_TYPE.FLASH != currencyIndex) {
       console.log($('.navbar-sc .navbar-nav li.active'));
       console.log($('.navbar-sc .navbar-nav li.active').attr('id'));
-      if($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
+      if ($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
         route('activity');
     }
   }

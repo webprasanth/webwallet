@@ -48,6 +48,7 @@ export default class TransactionDetails extends Element {
         break;
       case CURRENCY_TYPE.LTC:
         this.txnDetail.fee = satoshiToLtc(this.txnDetail.fee);
+        this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:
       default:

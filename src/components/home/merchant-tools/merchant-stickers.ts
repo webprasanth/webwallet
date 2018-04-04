@@ -14,7 +14,6 @@ let tag = null;
 
 @template(MerchantStickersTemplate)
 export default class MerchantStickers extends Element {
-  
   private walletAddress = '';
   isMobile = isMobile;
   private getText = getText;
@@ -25,27 +24,33 @@ export default class MerchantStickers extends Element {
     let data = state.profileData;
     this.walletAddress = data.wallet.address;
 
-    let qrCode = new QRCode('dmq_merchant_stickers_1', {width: 650 , height: 650});
+    let qrCode = new QRCode('dmq_merchant_stickers_1', {
+      width: 650,
+      height: 650,
+    });
     qrCode.makeCode('flashcoin:' + this.walletAddress);
 
-    let qrCode2 = new QRCode('dmq_merchant_stickers_2', {width: 400 , height: 400});
+    let qrCode2 = new QRCode('dmq_merchant_stickers_2', {
+      width: 400,
+      height: 400,
+    });
     qrCode2.makeCode('flashcoin:' + this.walletAddress);
 
-    let qrCode3 = new QRCode('dmq_merchant_stickers_3', {width: 500 , height: 500});
+    let qrCode3 = new QRCode('dmq_merchant_stickers_3', {
+      width: 500,
+      height: 500,
+    });
     qrCode3.makeCode('flashcoin:' + this.walletAddress);
 
     $('#walletAddress_sticker').val(this.walletAddress);
 
     if (tag.isMobile()) {
       var timeout = 5000;
-    }
-    else
-      var timeout = 3000;
+    } else var timeout = 3000;
 
     setTimeout(function() {
       tag.onGenerateButtonClick();
     }, timeout);
-    
   }
 
   onGenerateButtonClick() {
@@ -54,10 +59,18 @@ export default class MerchantStickers extends Element {
     this.generateImage('download_merchant_stickers_3', 1300, 2600);
   }
 
-  generateImage(templateid, width=2400, height=3000) {
-
-    var options = {useCORS: true, async: false, width:width, height: height, windowWidth: width, widnowHeight: height, scale:1, logging:false};
-    switch (templateid) {  
+  generateImage(templateid, width = 2400, height = 3000) {
+    var options = {
+      useCORS: true,
+      async: false,
+      width: width,
+      height: height,
+      windowWidth: width,
+      widnowHeight: height,
+      scale: 1,
+      logging: false,
+    };
+    switch (templateid) {
       case 'download_merchant_stickers_1':
       case 'download_merchant_stickers_2':
         options.x = 625;
@@ -67,7 +80,7 @@ export default class MerchantStickers extends Element {
         break;
     }
     if (this.isMobile()) {
-      switch (templateid) {  
+      switch (templateid) {
         case 'download_merchant_stickers_1':
           options.y = 1999;
           break;
@@ -80,46 +93,59 @@ export default class MerchantStickers extends Element {
       }
     }
 
-    $('#'+templateid).show();
-    html2canvas(document.getElementById(templateid), options).then(function(canvas) {
+    $('#' + templateid).show();
+    html2canvas(document.getElementById(templateid), options).then(function(
+      canvas
+    ) {
       try {
         //document.body.appendChild(canvas);
-        $('#'+templateid).hide();
-        var b64Data = canvas.toDataURL("image/png");
-        $('#'+templateid+'-image').attr('src', b64Data);
-      }
-      catch (err) {
-        $('#'+templateid).hide();
+        $('#' + templateid).hide();
+        var b64Data = canvas.toDataURL('image/png');
+        $('#' + templateid + '-image').attr('src', b64Data);
+      } catch (err) {
+        $('#' + templateid).hide();
         console.log(err);
       }
     });
   }
 
   onPrintStickersClick(stickerid) {
-    var Pagelink = "";
-    var pwa = window.open(Pagelink, "_new");
+    var Pagelink = '';
+    var pwa = window.open(Pagelink, '_new');
     pwa.document.open();
-    if(stickerid == 'stickers_3')
-      var style = "height='1000px'";
-    else
-      var style="width='100%'";
-    pwa.document.write(this.imagetoPrint($('#download_merchant_'+stickerid+'-image').attr('src'), style));
+    if (stickerid == 'stickers_3') var style = "height='1000px'";
+    else var style = "width='100%'";
+    pwa.document.write(
+      this.imagetoPrint(
+        $('#download_merchant_' + stickerid + '-image').attr('src'),
+        style
+      )
+    );
     pwa.document.close();
   }
 
   imagetoPrint(source, style) {
-    return "<html><head><script>function step1(){\n" +
-        "setTimeout('step2()', 10);}\n" +
-        "function step2(){window.print();window.close()}\n" +
-        "</scri" + "pt><style>@page { size: auto;  margin: 0mm; }</style></head><body style='text-align:center' onload='step1()'>\n" +
-        "<img "+style+" src='" + source + "' /></body></html>";
+    return (
+      '<html><head><script>function step1(){\n' +
+      "setTimeout('step2()', 10);}\n" +
+      'function step2(){window.print();window.close()}\n' +
+      '</scri' +
+      "pt><style>@page { size: auto;  margin: 0mm; }</style></head><body style='text-align:center' onload='step1()'>\n" +
+      '<img ' +
+      style +
+      " src='" +
+      source +
+      "' /></body></html>"
+    );
   }
 
   onDownloadStickersClick(stickerid) {
     var link = document.getElementById('dmq-download-a-link');
     link.setAttribute('download', 'merchant_image.png');
-    link.setAttribute('href', $('#download_merchant_'+stickerid+'-image').attr('src'));
+    link.setAttribute(
+      'href',
+      $('#download_merchant_' + stickerid + '-image').attr('src')
+    );
     link.click();
   }
-
 }

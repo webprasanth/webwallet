@@ -11,7 +11,6 @@ import html2canvas from 'html2canvas';
 
 @template(HomeMerchantToolsTemplate)
 export default class HomeMerchantTools extends BaseElement {
-
   private isMerchantStand = true;
   private isMerchantStickers = false;
   private isMerchantWidgets = false;

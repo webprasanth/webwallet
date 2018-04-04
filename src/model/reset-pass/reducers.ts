@@ -1,7 +1,7 @@
 import { RESET_PASS } from '../action-types';
 
 export default function resetPassReducer(
-  state = { keys: {}, resetPassErrReason: '', resetPassMailErrReason: ''},
+  state = { keys: {}, resetPassErrReason: '', resetPassMailErrReason: '' },
   action
 ) {
   switch (action.type) {

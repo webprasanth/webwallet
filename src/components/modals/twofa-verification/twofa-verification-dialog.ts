@@ -53,19 +53,19 @@ export default class TwoFAVerificationDialog extends Element {
   onVerify(event: Event) {
     let googleCode: number = $('#google-code').val();
     let userKey = getUserKey() || {};
-	
-    if(this.opts.profile.auth_version == 3){
-        let userAuthVersion = 3; 	//Used for V1 accounts
-        var params = {
-          idToken: userKey.idToken,
-          authVersion : userAuthVersion,
-          code: googleCode,
-        };
+
+    if (this.opts.profile.auth_version == 3) {
+      let userAuthVersion = 3; //Used for V1 accounts
+      var params = {
+        idToken: userKey.idToken,
+        authVersion: userAuthVersion,
+        code: googleCode,
+      };
     } else {
-        var params = {
-          idToken: userKey.idToken,
-          code: googleCode,
-        };	
+      var params = {
+        idToken: userKey.idToken,
+        code: googleCode,
+      };
     }
     store.dispatch(userActions.check2faCode(params));
   }
