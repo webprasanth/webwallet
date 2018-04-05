@@ -509,6 +509,15 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getLTCSatoshiPerByte(cb) {
+    let options = {
+      url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
+      type: 'get',
+      contentType: 'application/json',
+      success: cb,
+    };
+    $.ajax(options);
+  }
   setAuthInfo(authVersion, sessionToken) {
     this.authVersion = authVersion;
     this.sessionToken = sessionToken;

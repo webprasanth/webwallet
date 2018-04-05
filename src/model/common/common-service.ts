@@ -71,4 +71,11 @@ export default class CommonService {
       });
     });
   }
+  getLTCSatoshiPerByte() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getLTCSatoshiPerByte(resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
