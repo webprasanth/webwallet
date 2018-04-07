@@ -87,7 +87,7 @@ export function satoshiToBtc(num) {
   return parseFloat(new Big(num).div(100000000).toString());
 }
 
-export function satoshiToLtc(num) {
+export function litoshiToLtc(num) {
   if (num == undefined || num === '') return;
   return parseFloat(new Big(num).div(100000000).toString());
 }
@@ -172,10 +172,11 @@ export function calcFee(amount, bcMedianTxSize, fastestFee) {
       return satoshiToBtc(satoshis);
       break;
     case CURRENCY_TYPE.LTC:
+      fastestFee = new Big(fastestFee).div(1024); //Converting fee rate in per byte
       console.log(bcMedianTxSize, fastestFee);
-      let satoshis = bcMedianTxSize * fastestFee;
-      console.log(satoshis);
-      return satoshiToBtc(satoshis);
+      let litoshis = bcMedianTxSize * fastestFee;
+      console.log(litoshis);
+      return litoshiToLtc(litoshis.toFixed(0));
       break;
   }
 }

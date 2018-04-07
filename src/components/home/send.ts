@@ -24,7 +24,7 @@ export default class HomeSend extends BaseElement {
   private avatarServer = Constants.AvatarServer;
   private isDesktop = utils.isDesktop();
   private bcMedianTxSize = 250;
-  private BTCSatoshiPerByte = 20;
+  private SatoshiPerByte = 20;
 
   mounted() {
     tag = this;
@@ -51,7 +51,7 @@ export default class HomeSend extends BaseElement {
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
-          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+          tag.SatoshiPerByte = parseInt(resp.fastestFee);
         });
     }
 
@@ -66,7 +66,7 @@ export default class HomeSend extends BaseElement {
       CommonService.singleton()
         .getLTCSatoshiPerByte()
         .then((resp: any) => {
-          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+          tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
         });
     }
 
@@ -106,7 +106,7 @@ export default class HomeSend extends BaseElement {
   calculateFee() {
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
     $('#fee-input').val(fee);
   }
 
@@ -187,11 +187,7 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(
-      amount,
-      this.bcMedianTxSize,
-      this.BTCSatoshiPerByte
-    );
+    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.SatoshiPerByte);
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');

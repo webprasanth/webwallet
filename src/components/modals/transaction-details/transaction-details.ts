@@ -6,7 +6,7 @@ import {
   decimalFormat,
   satoshiToFlash,
   satoshiToBtc,
-  satoshiToLtc,
+  litoshiToLtc,
   formatCurrency,
   getDisplayDateTime,
   localizeFlash,
@@ -27,7 +27,7 @@ export default class TransactionDetails extends Element {
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
-  satoshiToLtc = satoshiToLtc;
+  litoshiToLtc = litoshiToLtc;
   formatCurrency = formatCurrency;
   decimalFormat = decimalFormat;
   getDisplayDateTime = getDisplayDateTime;
@@ -47,7 +47,7 @@ export default class TransactionDetails extends Element {
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.LTC:
-        this.txnDetail.fee = satoshiToLtc(this.txnDetail.fee);
+        this.txnDetail.fee = litoshiToLtc(this.txnDetail.fee);
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:
