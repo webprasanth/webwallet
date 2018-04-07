@@ -511,7 +511,7 @@ export default class AppService {
 
   getLTCSatoshiPerByte(cb) {
     let options = {
-      url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
+      url: 'https://api.blockcypher.com/v1/ltc/main',
       type: 'get',
       contentType: 'application/json',
       success: cb,
