@@ -22,7 +22,7 @@ export default class ContactSendMoney extends BaseElement {
   private errorMessage = null;
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
-  private BTCSatoshiPerByte = 20;
+  private SatoshiPerByte = 20;
 
   constructor() {
     super();
@@ -68,7 +68,7 @@ export default class ContactSendMoney extends BaseElement {
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
-          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+          tag.SatoshiPerByte = parseInt(resp.fastestFee);
         });
     }
 
@@ -83,7 +83,7 @@ export default class ContactSendMoney extends BaseElement {
       CommonService.singleton()
         .getLTCSatoshiPerByte()
         .then((resp: any) => {
-          tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
+          tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
         });
     }
 
@@ -102,7 +102,7 @@ export default class ContactSendMoney extends BaseElement {
       return;
     }
 
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
 
     if (
       amount < 1 &&
