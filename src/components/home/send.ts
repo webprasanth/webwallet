@@ -206,12 +206,12 @@ export default class HomeSend extends BaseElement {
       this.userProfile.balance >= amount &&
       this.userProfile.balance < amount + fee
     ) {
-      super.showError('', this.getText('send_not_enough_fund_error'));
+      super.showError('', this.getText('send_not_enough_fee_error'));
       return;
     }
 
     if (this.userProfile.balance < amount + fee) {
-      super.showError('', this.getText('send_not_enough_fee_error'));
+      super.showError('', this.getText('send_not_enough_fund_error'));
       return;
     }
 
