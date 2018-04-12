@@ -58,11 +58,7 @@ export interface ApplicationState {
   };
   contactsData: { contacts: any[]; totalContacts: number; contactWallet: any };
   tabData: { tabs: ITAB[] };
-  resetPassData: {
-    keys: any;
-    resetPassErrReason: any;
-    resetPassMailErrReason: any;
-  };
+  resetPassData: { keys: any; resetPassErrReason: any; resetPassMailErrReason: any };
 }
 
 const logger = store => next => action => {
