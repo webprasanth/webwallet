@@ -94,12 +94,7 @@ export const sendActions = {
                       .getTxnById(txn_info)
                       .then((resp: any) => {
                         count++;
-                        if (
-                          resp &&
-                          resp.rc === 1 &&
-                          (resp.txn.status === 1 ||
-                            userSelectedCurrency != CURRENCY_TYPE.FLASH)
-                        ) {
+                        if (resp && resp.rc === 1 && (resp.txn.status === 1 || userSelectedCurrency != CURRENCY_TYPE.FLASH)) {
                           dispatch(
                             sendActions.sendTXNSuccess(
                               resp.txn.processing_duration.toFixed(3)
@@ -122,7 +117,8 @@ export const sendActions = {
                   dispatch(this.sendTXNFailed(resp));
                 }
               });
-          } else {
+          }
+          else {
             dispatch(this.sendTXNFailed(resp));
           }
           else {
@@ -139,8 +135,10 @@ export const sendActions = {
     let wallets = store.getState().userData.wallets;
     let currency_type = localStorage.getItem('currency_type');
     let currency_wallets = wallets.filter(function(wallet) {
-      if (parseInt(wallet.currency_type) == currency_type) return true;
-      else return false;
+      if(parseInt(wallet.currency_type) == currency_type)
+        return true;
+      else
+        return false;
     });
     return currency_wallets[0];
   },

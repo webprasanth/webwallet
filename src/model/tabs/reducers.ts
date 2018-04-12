@@ -24,11 +24,7 @@ function initTabs() {
     { id: 'request', name: getText('menu_label_request'), isActive: false },
     { id: 'pending', name: getText('menu_label_pending'), isActive: false },
     { id: 'contacts', name: getText('menu_label_contact'), isActive: false },
-    {
-      id: 'merchant-tools',
-      name: getText('menu_label_merchant_tools'),
-      isActive: false,
-    },
+    { id: 'merchant-tools', name: getText('menu_label_merchant_tools'), isActive: false },
     { id: 'profile', name: getText('menu_label_profile'), isActive: false },
   ];
 }

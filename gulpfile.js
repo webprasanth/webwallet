@@ -104,9 +104,7 @@ gulp.task('copy-locale', function() {
   return gulp.src('assets/locale/**/*').pipe(gulp.dest('public/assets/locale'));
 });
 gulp.task('copy-widgets', function() {
-  return gulp
-    .src('assets/widgets/**/*')
-    .pipe(gulp.dest('public/assets/widgets'));
+  return gulp.src('assets/widgets/**/*').pipe(gulp.dest('public/assets/widgets'));
 });
 
 gulp.task('copy-lib', function() {

@@ -42,12 +42,12 @@ export default class HomeSend extends BaseElement {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-        .getBCMedianTxSize()
-        .then((resp: any) => {
-          if (resp.rc === 1 && resp.median_tx_size) {
-            tag.bcMedianTxSize = resp.median_tx_size;
-          }
-        });
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
@@ -158,18 +158,14 @@ export default class HomeSend extends BaseElement {
     } else if (!tag.isValidAddress) {
       this.emailErrorMessage = this.getText('invalid_receiver_address_error');
       return;
-    } else {
+    }
+    else {
       //checking if entered value and selected address is same
-      if (tag.sendWallet.address != $('#to-email-id').val()) {
-        if (
-          typeof tag.sendWallet.email == undefined ||
-          tag.sendWallet.email != $('#to-email-id').val()
-        ) {
+      if(tag.sendWallet.address != $('#to-email-id').val()) {
+        if(typeof tag.sendWallet.email == undefined || tag.sendWallet.email != $('#to-email-id').val()) {
           tag.isValidAddress = false;
           tag.addressSelected = false;
-          this.emailErrorMessage = this.getText(
-            'invalid_receiver_address_error'
-          );
+          this.emailErrorMessage = this.getText('invalid_receiver_address_error');
           return;
         }
       }
@@ -194,10 +190,7 @@ export default class HomeSend extends BaseElement {
       return;
     }
 
-    if (
-      amount < 1 &&
-      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
-    ) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }

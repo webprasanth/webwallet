@@ -97,18 +97,18 @@ export function localizeFlash(num) {
   return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
 }
 export function flashNFormatter(num, digits) {
-  if (num == undefined || num === '') return 0.0;
+  if (num == undefined || num === '') return 0.00;
   num = parseFloat(num);
-  if (num <= 10000)
-    return num.toLocaleString('en', { maximumFractionDigits: 8 });
+  if(num <= 10000)
+    return num.toLocaleString('en',{maximumFractionDigits:8});
   var si = [
-    { value: 1, symbol: '' },
-    { value: 1e3, symbol: 'K' },
-    { value: 1e6, symbol: 'M' },
-    { value: 1e9, symbol: 'G' },
-    { value: 1e12, symbol: 'T' },
-    { value: 1e15, symbol: 'P' },
-    { value: 1e18, symbol: 'E' },
+    { value: 1, symbol: "" },
+    { value: 1E3, symbol: "K" },
+    { value: 1E6, symbol: "M" },
+    { value: 1E9, symbol: "G" },
+    { value: 1E12, symbol: "T" },
+    { value: 1E15, symbol: "P" },
+    { value: 1E18, symbol: "E" }
   ];
   var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
   var i;
@@ -117,7 +117,7 @@ export function flashNFormatter(num, digits) {
       break;
     }
   }
-  return (num / si[i].value).toFixed(digits).replace(rx, '$1') + si[i].symbol;
+  return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
 }
 
 export function flashToSatoshi(num) {
@@ -166,7 +166,7 @@ export function calcFee(amount, bcMedianTxSize, fastestFee) {
       return 0.001; // default fee for web-wallet transaction
       break;
     case CURRENCY_TYPE.BTC:
-      console.log(bcMedianTxSize, fastestFee);
+    console.log(bcMedianTxSize, fastestFee);
       let satoshis = bcMedianTxSize * fastestFee;
       console.log(satoshis);
       return satoshiToBtc(satoshis);
@@ -188,7 +188,7 @@ export function formatCurrency(amount) {
     default:
       return `${amount} Flash`;
       break;
-    case CURRENCY_TYPE.BTC:
+    case CURRENCY_TYPE.BTC: 
       return `${amount} BTC`;
       break;
     case CURRENCY_TYPE.LTC:
@@ -373,7 +373,9 @@ export function isValidCryptoAddress(value) {
       case CURRENCY_TYPE.BTC:
         if (APP_MODE == 'PROD') {
           network = NETWORKS.BTC;
-        } else network = NETWORKS.BTC_TESTNET;
+        }
+        else
+            network = NETWORKS.BTC_TESTNET;
         break;
       case CURRENCY_TYPE.LTC:
         if (APP_MODE == 'PROD') {
@@ -473,7 +475,9 @@ export function isMobile() {
 }
 
 export function isAndroid() {
-  let isAndroid = /Android.+Mobile/i.test(navigator.userAgent);
+  let isAndroid = /Android.+Mobile/i.test(
+    navigator.userAgent
+  );
   return isAndroid;
 }
 

@@ -38,9 +38,7 @@ export default class ContactSendMoney extends BaseElement {
       this.success = true;
       this.processing_duration = state.sendData.processing_duration;
       this.title = this.getText('send_success_message');
-      if (
-        parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
-      )
+      if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
         this.confirmed = true;
     } else if (actionType == SEND.SEND_TXN_FAILED) {
       super.showError('', state.lastAction.data);
@@ -59,12 +57,12 @@ export default class ContactSendMoney extends BaseElement {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-        .getBCMedianTxSize()
-        .then((resp: any) => {
-          if (resp.rc === 1 && resp.median_tx_size) {
-            tag.bcMedianTxSize = resp.median_tx_size;
-          }
-        });
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
@@ -104,10 +102,7 @@ export default class ContactSendMoney extends BaseElement {
 
     let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
 
-    if (
-      amount < 1 &&
-      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
-    ) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));
