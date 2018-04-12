@@ -11,6 +11,7 @@ import { getText } from '../../localise';
 let tag = null;
 @template(MerchantWidgetsTemplate)
 export default class MerchantWidgets extends Element {
+  
   private walletAddress = '';
   isMobile = isMobile;
   private getText = getText;
@@ -20,7 +21,7 @@ export default class MerchantWidgets extends Element {
     let state = store.getState();
     let data = state.profileData;
     this.walletAddress = data.wallet.address;
-
+    
     $('#donateWalletAddress').val(this.walletAddress);
     $('#acceptWalletAddress').val(this.walletAddress);
 
@@ -29,26 +30,20 @@ export default class MerchantWidgets extends Element {
   }
 
   initializeWidgetCode(type) {
-    var domain =
-      location.protocol +
-      '//' +
-      location.hostname +
-      (location.port ? ':' + location.port : '');
-    var code =
-      '<script id="flashWidgetScript" type="text/javascript" src="' +
-      domain +
-      '/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-language="{language}" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="' +
-      this.walletAddress +
-      '"></div>';
-
+    var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+    var code = '<script id="flashWidgetScript" type="text/javascript" src="'+domain+'/assets/widgets/donate.js"></script><div class="flash-donate-widget" data-language="{language}" data-text="{popupTitle}" data-width="{buttonWidth}" data-currency="FLASH" data-type="{type}" data-wallet="'+this.walletAddress+'"></div>';
+    
     var lang = this.getLanguage();
     code = code.replace('{language}', lang);
 
-    if (type == 'donate') this.initializeDonateCode(code);
-    else this.initializeAcceptCode(code);
+    if(type == 'donate')
+        this.initializeDonateCode(code);
+    else
+        this.initializeAcceptCode(code);
   }
 
-  getLanguage() {
+  getLanguage()
+  {
     var language = localStorage.getItem('id_lang');
     switch (language) {
       case 'chinese-simplified-v1.1':
@@ -80,7 +75,7 @@ export default class MerchantWidgets extends Element {
   initializeDonateCode(code) {
     var donateText = $('#donateText').val();
     var donateWidth = $('#donateWidth').val();
-
+    
     var donateCode = code.replace(/{type}/g, 'donate');
 
     donateCode = donateCode.replace('{popupTitle}', donateText);
@@ -93,7 +88,7 @@ export default class MerchantWidgets extends Element {
   initializeAcceptCode(code) {
     var acceptText = $('#acceptText').val();
     var acceptWidth = $('#acceptWidth').val();
-
+    
     var acceptCode = code.replace(/{type}/g, 'accept');
 
     acceptCode = acceptCode.replace('{popupTitle}', acceptText);
@@ -107,10 +102,12 @@ export default class MerchantWidgets extends Element {
     this.initializeWidgetCode(type);
   }
   clearForms(type) {
-    if (type == 'donate') $('#donateText').val('Donate FLASH');
-    else $('#acceptText').val('Send FLASH');
+    if(type == 'donate')
+      $('#donateText').val('Donate FLASH');
+    else
+      $('#acceptText').val('Send FLASH');
 
-    $('#' + type + 'Width').val(300);
+    $('#'+type+'Width').val(300);
     this.onGenerateButtonClick(type);
   }
 }

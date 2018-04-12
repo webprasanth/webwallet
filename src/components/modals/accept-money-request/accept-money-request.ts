@@ -50,12 +50,12 @@ export default class AcceptMoneyRequest extends Element {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-        .getBCMedianTxSize()
-        .then((resp: any) => {
-          if (resp.rc === 1 && resp.median_tx_size) {
-            tag.bcMedianTxSize = resp.median_tx_size;
-          }
-        });
+      .getBCMedianTxSize()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.median_tx_size) {
+          tag.bcMedianTxSize = resp.median_tx_size;
+        }
+      });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
@@ -125,11 +125,7 @@ export default class AcceptMoneyRequest extends Element {
         riot.mount('#confirm-send', 'send-money-confirm', {
           to: this.sendWallet.address,
           amount: this.opts.amount,
-          fee: utils.calcFee(
-            this.opts.amount,
-            tag.bcMedianTxSize,
-            tag.SatoshiPerByte
-          ),
+          fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.SatoshiPerByte),
           wallet: this.sendWallet,
         });
       }

@@ -39,10 +39,7 @@ export default class ContactRequestMoney extends BaseElement {
       return;
     }
 
-    if (
-      amount < 1 &&
-      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
-    ) {
+    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));
