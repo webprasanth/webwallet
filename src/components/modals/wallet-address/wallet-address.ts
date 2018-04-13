@@ -10,6 +10,7 @@ import {
 } from '../../../model/utils';
 import { getText } from '../../localise';
 import QRCode from 'QRCode';
+import { CURRENCY_TYPE } from '../../../model/currency';
 
 @template(WalletAddressTemplate)
 export default class WalletAddress extends Element {
@@ -46,7 +47,12 @@ export default class WalletAddress extends Element {
     this.publicKeyList = [data.wallet];
     if (!document.getElementById('header-qrcode-desktop').hasChildNodes()) {
       let qrCode = new QRCode('header-qrcode-desktop');
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       qrCode.makeCode('flashcoin:' + data.wallet.address);
+      }
+      else {
+      qrCode.makeCode(data.wallet.address);  //generating QR code for non flash withot appending word flashcoin
+      }
     }
     this.update();
   }
