@@ -9,6 +9,7 @@ import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 import { CURRENCY_TYPE } from '../../model/currency';
+import { USERS } from '../../model/action-types';
 
 let tag = null;
 
@@ -27,6 +28,13 @@ export default class HomeSend extends BaseElement {
   private SatoshiPerByte = 20;
 
   mounted() {
+  
+  let state = store.getState();
+    if (HomeSend.unsubscribe) HomeSend.unsubscribe();
+    HomeSend.unsubscribe = store.subscribe(
+      this.onApplicationStateChanged.bind(this)
+    );
+	
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
@@ -78,6 +86,14 @@ export default class HomeSend extends BaseElement {
     $('#continue-send-bt').on('blur', this.resetErrorMessages);
     $('#amount-input').on('blur', utils.formatAmountInput);
     $('#amount-input').keypress(utils.filterNumberEdit);
+  }
+
+  onApplicationStateChanged() {
+    let state: ApplicationState = store.getState();
+    if(state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
+        this.userProfile = store.getState().userData.user;
+      }
+    this.update();
   }
 
   checkAddress() {
