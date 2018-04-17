@@ -499,6 +499,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getThresHoldAmount(params, cb) {
+    let options = this.makeRequestOption(
+      'api/threshold-amount',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
   getBTCSatoshiPerByte(cb) {
     let options = {
       url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',

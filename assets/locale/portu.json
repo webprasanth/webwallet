@@ -261,6 +261,7 @@
   "common_label_verify_email"                : "Por favor, verifique seu endereço de e-mail",
   "common_label_verify_phone"                : "Por favor, verifique seu número de telefone",
   "common_alert_minimum_cash_unit"           : "A quantia deve ser pelo menos de 1",
+  "common_alert_threshold_amount"            : "O valor é menor que o valor limite",
   "common_alert_int_cash_unit"               : "A quantia deve ser um valor inteiro",
   "common_receive_money_alert"               : "%(sender_email)s enviou para você %(amount)s",
   "common_like_sent_money_alert"             : "Você acabou de curtir e enviar para %(recipient_email)s %(amount)s tokens em recompensa",

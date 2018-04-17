@@ -279,6 +279,7 @@
     "common_label_verify_email"                : "કૃપા કરીને તમારું ઇમેઇલ એડ્રેસ ચકાસો",
     "common_label_verify_phone"                : "કૃપા કરીને તમારો ફોન નંબર ચકાસો",
     "common_alert_minimum_cash_unit"           : "ઓછામાં ઓછી 1 અમાઉન્ટ હોવી જોઈએ",
+    "common_alert_threshold_amount"            : "રકમ થ્રેશોલ્ડ મૂલ્ય કરતાં ઓછી છે",
     "common_alert_int_cash_unit"               : "અમાઉન્ટ નંબર હોવો જોઈએ",
     "common_receive_money_alert"               : "%(sender_email)s એ તમને %(amount)s મોકલ્યા છે",
     "common_like_sent_money_alert"             : "તમે હમણાં પસંદ કર્યું છે અને તે %(recipient_email)s ને %(amount)s ટોકન્સ રિવોર્ડ તરીકે મોકલ્યા છે",

@@ -23,7 +23,8 @@ export default class ContactSendMoney extends BaseElement {
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
-
+  private thresholdAmount = 0.00001 ;
+  
   constructor() {
     super();
   }
@@ -54,6 +55,16 @@ export default class ContactSendMoney extends BaseElement {
     ContactSendMoney.unsubscribe = store.subscribe(
       this.onApplicationStateChanged.bind(this)
     );
+
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
@@ -107,6 +118,10 @@ export default class ContactSendMoney extends BaseElement {
         'common_alert_minimum_cash_unit'
       ));
     }
+
+    if(amount < this.thresholdAmount ){
+      return (tag.errorMessage = this.getText('common_alert_threshold_amount'));
+	}
 
     let balance = store.getState().userData.user.balance;
 
