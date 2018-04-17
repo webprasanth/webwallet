@@ -26,6 +26,7 @@ export default class HomeSend extends BaseElement {
   private isDesktop = utils.isDesktop();
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
+  private thresholdAmount = 0.00001 ;
 
   mounted() {
   
@@ -48,6 +49,16 @@ export default class HomeSend extends BaseElement {
       this.checkAddress
     );
 
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
+	
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
       .getBCMedianTxSize()
@@ -211,6 +222,11 @@ export default class HomeSend extends BaseElement {
       return;
     }
 
+    if(amount < this.thresholdAmount ){
+      this.amountErrorMessage = this.getText('common_alert_threshold_amount');
+	  return;
+	}
+	
     if (
       this.userProfile.balance >= amount &&
       this.userProfile.balance < amount + fee

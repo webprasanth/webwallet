@@ -279,6 +279,7 @@
     "common_label_verify_email"                : "कृपया आपला ईमेल पत्ता सत्यापित करा",
     "common_label_verify_phone"                : "कृपया आपला फोन नंबर सत्यापित करा",
     "common_alert_minimum_cash_unit"           : "रक्कम किमान 1 असणे आवश्यक आहे",
+    "common_alert_threshold_amount"            : "रक्कम थ्रेशोल्ड मूल्यापेक्षा कमी आहे",
     "common_alert_int_cash_unit"               : "रक्कम पूर्णांक मूल्य असणे आवश्यक आहे",
     "common_receive_money_alert"               : "% (प्रेषक_ईमेल) ने आपल्याला% (रक्कम) s पाठविले",
     "common_like_sent_money_alert"             : "आपण नुकतेच पसंत केले आहे आणि बक्षीस म्हणून% (प्राप्तकर्ता_ईमेल) s% (रक्कम) चे टोकन पाठविले आहे",

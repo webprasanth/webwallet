@@ -281,6 +281,7 @@
     "common_label_verify_email"                : "イメールを確認してください",
     "common_label_verify_phone"                : "電話番号を確認してください",
     "common_alert_minimum_cash_unit"           : "金額は少なくても1でなければなりません",
+    "common_alert_threshold_amount"            : "金額がしきい値未満です",
     "common_alert_int_cash_unit"               : "金額は整数値でなければなりません",
     "common_receive_money_alert"               : "%(sender_email)s から送信された %(amount)s",
     "common_like_sent_money_alert"             : "あなたは報酬として%(recipient_email)s %(amount)s トークンを好きで送信しました",

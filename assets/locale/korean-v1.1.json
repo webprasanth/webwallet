@@ -273,6 +273,7 @@
 "common_label_verify_email":"이메일 주소를 확인하십시오.",
 "common_label_verify_phone":"전화 번호를 확인하십시오.",
 "common_alert_minimum_cash_unit":"금액은 최소 1이어야 합니다.",
+"common_alert_threshold_amount" : "금액이 임계 값보다 작습니다.",
 "common_alert_int_cash_unit":"금액은 정수 값이어야 합니다.",
 "common_receive_money_alert":"%(sender_email)s이(가)사용자에게%(amount)s전송되었습니다.",
 "common_like_sent_Money_alert":" 귀하는 방금%(recipient_email)s%(amount)s의 토큰을 좋아하고 보상으로 보냈습니다.",

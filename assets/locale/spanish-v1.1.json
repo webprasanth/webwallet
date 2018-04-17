@@ -279,6 +279,7 @@
     "common_label_verify_email"                : "Por favor verifique su dirección de correo electrónico",
     "common_label_verify_phone"                : "Por favor Verifique su número de teléfono",
     "common_alert_minimum_cash_unit"           : "La cantidad debe ser al menos 1",
+    "common_alert_threshold_amount"            : "La cantidad es menor que el valor umbral",
     "common_alert_int_cash_unit"               : "El monto debe ser un número",
     "common_receive_money_alert"               : "%(sender_email)s le envió %(amount)s",
     "common_like_sent_money_alert"             : "Le has gustado y enviado %(recipient_email)s %(amount)s tokens como recompensa",
