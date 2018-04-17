@@ -223,7 +223,7 @@ export default class HomeSend extends BaseElement {
     }
 
     if(amount < this.thresholdAmount ){
-      this.amountErrorMessage = this.getText('common_alert_threshold_amount');
+      super.showError('', this.getText('common_alert_threshold_amount'));
 	  return;
 	}
 	
