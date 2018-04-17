@@ -40,6 +40,17 @@ export default class HomeRequest extends BaseElement {
     $('#continue-request-bt').on('blur', this.resetErrorMessages);
     $('#requestAmount').on('blur', utils.formatAmountInput);
     $('#requestAmount').keypress(utils.filterNumberEdit);
+
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
+	
   }
 
   checkAddress() {
@@ -127,16 +138,6 @@ export default class HomeRequest extends BaseElement {
     if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
-    }
-
-    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
-      CommonService.singleton()
-      .getThresHoldAmount()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.threshold_amount) {
-          tag.thresholdAmount = resp.threshold_amount;
-        }
-      });
     }
 
     if(amount < this.thresholdAmount ){
