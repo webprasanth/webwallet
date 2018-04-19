@@ -22,7 +22,7 @@ export default class AcceptMoneyRequest extends Element {
   private getText = getText;
   private getCurrencyUnit = getCurrencyUnit;
   private bcMedianTxSize = 250;
-  private BTCSatoshiPerByte = 20;
+  private SatoshiPerByte = 20;
 
   constructor() {
     super();
@@ -57,10 +57,25 @@ export default class AcceptMoneyRequest extends Element {
         }
       });
       CommonService.singleton()
-      .getBTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getBTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.fastestFee);
+        });
+    }
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getLTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
+        });
     }
 
     $('#acceptRequestDialog').modal('show');
@@ -78,7 +93,7 @@ export default class AcceptMoneyRequest extends Element {
 
   enableForm(data) {
     let amount = this.opts.amount;
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
     let balance = store.getState().userData.user.balance;
     this.notEnoughBalanceMsg = null;
     this.sendWallet = data.results[0];
@@ -110,7 +125,7 @@ export default class AcceptMoneyRequest extends Element {
         riot.mount('#confirm-send', 'send-money-confirm', {
           to: this.sendWallet.address,
           amount: this.opts.amount,
-          fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte),
+          fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.SatoshiPerByte),
           wallet: this.sendWallet,
         });
       }

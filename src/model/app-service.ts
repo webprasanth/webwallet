@@ -1,6 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
 const HOST_URL = 'https://keys.flashcoin.io/';
-export const APP_MODE = 'PROD';  //DEV, PROD
+export const APP_MODE = 'PROD'; //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -426,6 +426,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  createLTCWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createLtcWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/setRecoveryKeys',
@@ -489,6 +499,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getThresHoldAmount(params, cb) {
+    let options = this.makeRequestOption(
+      'api/threshold-amount',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
   getBTCSatoshiPerByte(cb) {
     let options = {
       url: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
@@ -499,6 +519,15 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getLTCSatoshiPerByte(cb) {
+    let options = {
+      url: 'https://api.blockcypher.com/v1/ltc/main',
+      type: 'get',
+      contentType: 'application/json',
+      success: cb,
+    };
+    $.ajax(options);
+  }
   setAuthInfo(authVersion, sessionToken) {
     this.authVersion = authVersion;
     this.sessionToken = sessionToken;

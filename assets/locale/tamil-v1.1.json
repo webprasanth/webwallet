@@ -276,6 +276,7 @@
     "common_label_verify_email"                : "உங்கள் மின்னஞ்சல் முகவரியை சரிபார்க்கவும்",
     "common_label_verify_phone"                : "உங்கள் தொலைபேசி எண்ணைச் சரிபார்க்கவும்",
     "common_alert_minimum_cash_unit"           : "தொகை குறைந்தபட்சம் 1 ஆக இருக்க வேண்டும்",
+    "common_alert_threshold_amount"            : "தொகையை விட குறைவான தொகை",
     "common_alert_int_cash_unit"               : "தொகை கண்டிப்பாக முழு மதிப்பாக இருக்க வேண்டும்",
     "common_receive_money_alert"               : "% (அனுப்புநர்_மெயில்) கள் உங்களுக்கு% (அளவு) கள் அனுப்பியுள்ளன",
     "common_like_sent_money_alert"             : "நீங்கள் விரும்பினீர்கள் மற்றும்% (recipient_email) கள் (அளவு) கள் டோக்கன்களை வெகுமதியாக அனுப்பியுள்ளீர்கள்",

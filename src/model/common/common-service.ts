@@ -64,9 +64,28 @@ export default class CommonService {
     });
   }
 
+  getThresHoldAmount() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      currency_type: userSelectedCurrency,
+    };
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getThresHoldAmount(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getBTCSatoshiPerByte() {
     return new Promise((resolve, reject) => {
       AppService.getInstance().getBTCSatoshiPerByte(resp => {
+        resolve(resp);
+      });
+    });
+  }
+  getLTCSatoshiPerByte() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getLTCSatoshiPerByte(resp => {
         resolve(resp);
       });
     });

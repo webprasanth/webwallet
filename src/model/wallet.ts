@@ -37,8 +37,30 @@ export const NETWORKS = {
     scriptHash: 0xc4,
     wif: 0xef,
     dustThreshold: 546,
-  }
-}
+  },
+  LTC: {
+    messagePrefix: '\x18Litecoin Coin Signed Message:\n',
+    bip32: {
+      public: 0x019da462,
+      private: 0x019d9cfe,
+    },
+    pubKeyHash: 0x30,
+    scriptHash: 0x32,
+    wif: 0xb0,
+    dustThreshold: 546,
+  },
+  LTC_TESTNET: {
+    messagePrefix: '\x18Litecoin Coin Signed Message:\n',
+    bip32: {
+      public: 0x0436f6e1,
+      private: 0x0436ef7d,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0x3a,
+    wif: 0xef,
+    dustThreshold: 546,
+  },
+};
 
 const NETWORK_NAME = 'flashcoin';
 
@@ -47,21 +69,27 @@ export default class Wallet {
   currency_type = null;
 
   getCryptoNetwork(currency_type) {
-      let network;
-      var currency_type = parseInt(currency_type);
-      switch (currency_type) {
-        case CURRENCY_TYPE.BTC:
-          if(APP_MODE == 'PROD')
-            network = NETWORKS.BTC;
-          else
-            network = NETWORKS.BTC_TESTNET;
-          break;
-        case CURRENCY_TYPE.FLASH:
-        default:
-          network = NETWORKS.FLASH;
-          break;
-      }
-      return network;
+    let network;
+    var currency_type = parseInt(currency_type);
+    switch (currency_type) {
+      case CURRENCY_TYPE.BTC:
+        if (APP_MODE == 'PROD') 
+          network = NETWORKS.BTC;
+        else 
+          network = NETWORKS.BTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.LTC:
+        if (APP_MODE == 'PROD') 
+          network = NETWORKS.LTC;
+        else 
+          network = NETWORKS.LTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.FLASH:
+      default:
+        network = NETWORKS.FLASH;
+        break;
+    }
+    return network;
   }
 
   openWallet(wdata) {

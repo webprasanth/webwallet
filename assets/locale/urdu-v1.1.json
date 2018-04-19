@@ -280,6 +280,7 @@
     "common_label_verify_email"                : " براہ مہربانی اپنے ای میل ایڈریس کی توثیق کریں ",
     "common_label_verify_phone"                : " براہ مہربانی اپنے فون نمبر کی توثیق کریں ",
     "common_alert_minimum_cash_unit"           : " رقم کم از کم 1 ہونا ضروری ہے ",
+    "common_alert_threshold_amount"            : "حد حد حد سے کم ہے",
     "common_alert_int_cash_unit"               : " رقم لازمی طور پر عددى قدر ہونا ضروری ہے ",
     "common_receive_money_alert"               : "(بھیجنے والے كا اى میل) نے آپ کو٪ (رقم) بھیجا ہے ",
     "common_like_sent_money_alert"             : " آپ نے (وصول کنندہ_ كا اي میل) كو پسند کیا اور (رقم) ٹوکن انعام کے طور پر بھیجا ہے ",

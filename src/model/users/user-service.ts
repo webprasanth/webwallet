@@ -117,6 +117,14 @@ export default class UserService {
     });
   }
 
+  createLTCWallet(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().createLTCWallet(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getWalletSecret(idToken) {
     return new Promise(resolve => {
       AppService.getInstance().walletSecret(idToken, resp => {

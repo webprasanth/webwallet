@@ -281,6 +281,7 @@
     "common_label_verify_email"                : "अपना ईमेल एड्रेस सुनिश्चित करें",
     "common_label_verify_phone"                : "कृपया अपना फ़ोन नंबर सत्यापित करें",
     "common_alert_minimum_cash_unit"           : "राशि कम से कम 1 होनी चाहिए",
+    "common_alert_threshold_amount"            : "राशि सीमा मूल्य से कम है",
     "common_alert_int_cash_unit"               : "राशि पूर्णांक मूल्य होना चाहिए",
     "common_receive_money_alert"               : "% (प्रेषक_ईमेल) ने आपको% (राशि) एस भेजा है",
     "common_like_sent_money_alert"             : "आपने सिर्फ एक इनाम के रूप में% (प्राप्तकर्ता_मेल) s% (राशि) टोकन पसंद किया और भेजा है",

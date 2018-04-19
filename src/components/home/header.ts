@@ -272,5 +272,4 @@ export default class HomeHeader extends BaseElement {
       unconfirmed: this.CURRENCY_TYPE.FLASH != parseInt(localStorage.getItem('currency_type'))
     });
   }
-
 }

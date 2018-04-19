@@ -256,6 +256,7 @@
     "common_label_verify_email"                : "দয়া করে আপনার ইমেল এড্রেস যাচাই করুন",
     "common_label_verify_phone"                : "দয়া করে আপনার ফোন নম্বর যাচাই করুন",
     "common_alert_minimum_cash_unit"           : "পরিমাণ অন্তত 1 হতে হবে",
+    "common_alert_threshold_amount"            : "পরিমাণ থ্রেশহোল্ড মান থেকে কম",
     "common_alert_int_cash_unit"               : "পরিমাণ অবশ্যই পূর্ণসংখ্যা মানের হতে হবে",
     "common_receive_money_alert"               : "%(sender_email)s আপনাকে পাঠিয়েছে %(amount)s",
     "common_like_sent_money_alert"             : "আপনি পছন্দ করেছেন এবং %(recipient_email)s %(amount)s টোকেন পুরস্কাররুপে পাঠিয়েছেন",

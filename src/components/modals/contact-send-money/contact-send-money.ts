@@ -22,8 +22,9 @@ export default class ContactSendMoney extends BaseElement {
   private errorMessage = null;
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
-  private BTCSatoshiPerByte = 20;
-
+  private SatoshiPerByte = 20;
+  private thresholdAmount = 0.00001 ;
+  
   constructor() {
     super();
   }
@@ -55,6 +56,16 @@ export default class ContactSendMoney extends BaseElement {
       this.onApplicationStateChanged.bind(this)
     );
 
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
+
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
       .getBCMedianTxSize()
@@ -64,10 +75,25 @@ export default class ContactSendMoney extends BaseElement {
         }
       });
       CommonService.singleton()
-      .getBTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getBTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.fastestFee);
+        });
+    }
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getLTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
+        });
     }
 
     $('#sendByContact').modal('show');
@@ -85,13 +111,17 @@ export default class ContactSendMoney extends BaseElement {
       return;
     }
 
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
 
     if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));
     }
+
+    if(amount < this.thresholdAmount ){
+      return (tag.errorMessage = this.getText('common_alert_threshold_amount'));
+	}
 
     let balance = store.getState().userData.user.balance;
 

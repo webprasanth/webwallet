@@ -9,6 +9,7 @@ import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 import { CURRENCY_TYPE } from '../../model/currency';
+import { USERS } from '../../model/action-types';
 
 let tag = null;
 
@@ -24,9 +25,17 @@ export default class HomeSend extends BaseElement {
   private avatarServer = Constants.AvatarServer;
   private isDesktop = utils.isDesktop();
   private bcMedianTxSize = 250;
-  private BTCSatoshiPerByte = 20;
+  private SatoshiPerByte = 20;
+  private thresholdAmount = 0.00001 ;
 
   mounted() {
+  
+  let state = store.getState();
+    if (HomeSend.unsubscribe) HomeSend.unsubscribe();
+    HomeSend.unsubscribe = store.subscribe(
+      this.onApplicationStateChanged.bind(this)
+    );
+	
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
@@ -40,6 +49,16 @@ export default class HomeSend extends BaseElement {
       this.checkAddress
     );
 
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
+	
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
       .getBCMedianTxSize()
@@ -49,10 +68,25 @@ export default class HomeSend extends BaseElement {
         }
       });
       CommonService.singleton()
-      .getBTCSatoshiPerByte()
-      .then((resp: any) => {
-        tag.BTCSatoshiPerByte = parseInt(resp.fastestFee);
-      });
+        .getBTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.fastestFee);
+        });
+    }
+
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getLTCSatoshiPerByte()
+        .then((resp: any) => {
+          tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
+        });
     }
 
     $('#amount-input').on(
@@ -63,6 +97,14 @@ export default class HomeSend extends BaseElement {
     $('#continue-send-bt').on('blur', this.resetErrorMessages);
     $('#amount-input').on('blur', utils.formatAmountInput);
     $('#amount-input').keypress(utils.filterNumberEdit);
+  }
+
+  onApplicationStateChanged() {
+    let state: ApplicationState = store.getState();
+    if(state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
+        this.userProfile = store.getState().userData.user;
+      }
+    this.update();
   }
 
   checkAddress() {
@@ -91,7 +133,7 @@ export default class HomeSend extends BaseElement {
   calculateFee() {
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
     $('#fee-input').val(fee);
   }
 
@@ -168,7 +210,7 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.BTCSatoshiPerByte);
+    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.SatoshiPerByte);
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
@@ -180,16 +222,21 @@ export default class HomeSend extends BaseElement {
       return;
     }
 
+    if(amount < this.thresholdAmount ){
+      super.showError('', this.getText('common_alert_threshold_amount'));
+	  return;
+	}
+	
     if (
       this.userProfile.balance >= amount &&
       this.userProfile.balance < amount + fee
     ) {
-      super.showError('', this.getText('send_not_enough_fund_error'));
+      super.showError('', this.getText('send_not_enough_fee_error'));
       return;
     }
 
     if (this.userProfile.balance < amount + fee) {
-      super.showError('', this.getText('send_not_enough_fee_error'));
+      super.showError('', this.getText('send_not_enough_fund_error'));
       return;
     }
 

@@ -22,6 +22,7 @@ export default class HomeRequest extends BaseElement {
   private choosingAddress = false;
   private addressSelected = false;
   private avatarServer = Constants.AvatarServer;
+  private thresholdAmount = 0.00001 ;
 
   mounted() {
     tag = this;
@@ -39,6 +40,17 @@ export default class HomeRequest extends BaseElement {
     $('#continue-request-bt').on('blur', this.resetErrorMessages);
     $('#requestAmount').on('blur', utils.formatAmountInput);
     $('#requestAmount').keypress(utils.filterNumberEdit);
+
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+      CommonService.singleton()
+      .getThresHoldAmount()
+      .then((resp: any) => {
+        if (resp.rc === 1 && resp.threshold_amount) {
+          tag.thresholdAmount = resp.threshold_amount;
+        }
+      });
+    }
+	
   }
 
   checkAddress() {
@@ -128,6 +140,11 @@ export default class HomeRequest extends BaseElement {
       return;
     }
 
+    if(amount < this.thresholdAmount ){
+      tag.amountErrorMessage = this.getText('common_alert_threshold_amount');
+      return;
+	}
+	
     this.receiverWallet.memo = $('#requestPaymentMemo').val();
 
     let callback = function() {

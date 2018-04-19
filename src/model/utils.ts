@@ -87,9 +87,14 @@ export function satoshiToBtc(num) {
   return parseFloat(new Big(num).div(100000000).toString());
 }
 
+export function litoshiToLtc(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(new Big(num).div(100000000).toString());
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
-  return parseFloat(num).toLocaleString('en',{maximumFractionDigits:8});
+  return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
 }
 export function flashNFormatter(num, digits) {
   if (num == undefined || num === '') return 0.00;
@@ -166,6 +171,13 @@ export function calcFee(amount, bcMedianTxSize, fastestFee) {
       console.log(satoshis);
       return satoshiToBtc(satoshis);
       break;
+    case CURRENCY_TYPE.LTC:
+      fastestFee = new Big(fastestFee).div(1024); //Converting fee rate in per byte
+      console.log(bcMedianTxSize, fastestFee);
+      let litoshis = bcMedianTxSize * fastestFee;
+      console.log(litoshis);
+      return litoshiToLtc(litoshis.toFixed(0));
+      break;
   }
 }
 
@@ -178,6 +190,9 @@ export function formatCurrency(amount) {
       break;
     case CURRENCY_TYPE.BTC: 
       return `${amount} BTC`;
+      break;
+    case CURRENCY_TYPE.LTC:
+      return `${amount} LTC`;
       break;
   }
 }
@@ -360,7 +375,12 @@ export function isValidCryptoAddress(value) {
           network = NETWORKS.BTC;
         }
         else
-          network = NETWORKS.BTC_TESTNET;
+            network = NETWORKS.BTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.LTC:
+        if (APP_MODE == 'PROD') {
+          network = NETWORKS.LTC;
+        } else network = NETWORKS.LTC_TESTNET;
         break;
       case CURRENCY_TYPE.FLASH:
       default:

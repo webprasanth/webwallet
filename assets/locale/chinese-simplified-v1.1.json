@@ -450,6 +450,8 @@
 
 	"common_alert_minimum_cash_unit": "金额必须至少为 1",
 
+    "common_alert_threshold_amount" : "金额小于阈值",
+
 	"common_alert_int_cash_unit": "金额必须是整数值",
 
 	"common_receive_money_alert": "xx（发件人电邮）发给你xx（金额）",
