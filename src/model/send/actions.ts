@@ -121,9 +121,6 @@ export const sendActions = {
           else {
             dispatch(this.sendTXNFailed(resp));
           }
-          else {
-            dispatch(this.sendTXNFailed(resp));
-          }
         });
     };
   },
