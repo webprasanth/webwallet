@@ -33,6 +33,12 @@ export default function userReducer(
       return Object.assign({}, state, { wallets: action.data });
     case USERS.NEED_VERIFY_GOOGLE_2FA:
       return Object.assign({}, state, { loginData: action.data });
+    case USERS.MIGRATE_V1_TO_V2_SUCCESS:
+      return Object.assign({}, state, { user: action.data });
+    case USERS.MIGRATE_V1_TO_V2_FAILED:
+      return Object.assign({}, state, { loginData: action.data });
+    case USERS.NEED_MIGRATION_TO_V2:
+      return Object.assign({}, state, { loginData: action.data });
     case USERS.GET_BALANCE_SUCCESS:
       oldProfile = state.user;
       oldProfile.balance = action.data.balance;

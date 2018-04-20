@@ -34,6 +34,7 @@ import ContactRequestMoney from './modals/contact-request-money/contact-request-
 import ContactSendMoney from './modals/contact-send-money/contact-send-money';
 import SecurityQuestions from './reset-pass/security-questions';
 import EnableAccount from './enable-account/enable-account';
+import MigrateV1ToV2 from './migrate-v1-to-v2/migrate-v1-to-v2';
 import MessageDialog from './modals/message-dialog/message-dialog';
 import VerifyPhone from './modals/verify-phone/verify-phone';
 import RequestDetail from './modals/request-detail/request-detail';
@@ -73,6 +74,7 @@ export {
   ContactSendMoney,
   SecurityQuestions,
   EnableAccount,
+  MigrateV1ToV2,
   MessageDialog,
   VerifyPhone,
   Navbar,

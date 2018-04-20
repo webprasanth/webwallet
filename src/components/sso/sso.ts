@@ -56,6 +56,13 @@ export default class Sso extends BaseElement {
           data.loginData
         );
         break;
+      case USERS.NEED_MIGRATION_TO_V2:
+        riot.mount(
+          '#main',
+          'migrate-v1-to-v2',
+          data.loginData
+        );
+        break;
       default:
         break;
     }
