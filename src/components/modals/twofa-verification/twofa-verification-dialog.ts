@@ -20,9 +20,11 @@ export default class TwoFAVerificationDialog extends Element {
 
     switch (actionType) {
       case USERS.CHECK_2FA_CODE_SUCCESS:
-        store.dispatch(userActions.loginSuccess(this.opts.profile));
-        store.dispatch(userActions.getBalance());
-        store.dispatch(userActions.getProfile(this.opts.profile));
+        if(this.opts.profile.auth_version == 4) {
+          store.dispatch(userActions.loginSuccess(this.opts.profile));
+          store.dispatch(userActions.getBalance());
+          store.dispatch(userActions.getProfile(this.opts.profile));
+        }
         store.dispatch(
           userActions.getMyWallets(
             this.opts.profile.auth_version,

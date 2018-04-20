@@ -47,6 +47,14 @@ export default class UserService {
     });
   }
 
+  migrateAccount(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().migrateAccount(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   ssoLogin(params) {
     return new Promise((resolve, reject) => {
       AppService.getInstance().session(params, resp => {
@@ -96,6 +104,14 @@ export default class UserService {
   getMyWallets() {
     return new Promise(resolve => {
       AppService.getInstance().myWallets({}, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  migrateFlashWallet(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().migrateFlashWallet(params, resp => {
         resolve(resp);
       });
     });

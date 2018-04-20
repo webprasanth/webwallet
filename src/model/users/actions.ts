@@ -284,6 +284,140 @@ export const userActions = {
     return { type: USERS.SET_RECOVERY_KEY_FAILED, data: resp };
   },
 
+  migrateAccount(
+    password: string,
+    questionA: string,
+    answerA: string,
+    questionB: string,
+    answerB: string,
+    questionC: string,
+    answerC: string
+  ) {
+    let keypair = nacl.box.keyPair();
+    let pubKey = keypair.publicKey;
+    let privKey = keypair.secretKey;
+    let pubKeyBase64 = utils.encodeBase64(pubKey);
+    let privKeyBase64 = utils.encodeBase64(privKey);
+
+    let privKeyHex = utils.base64ToHex(privKeyBase64);
+    let keyByteSize = 256;
+    let encryptedPrivKey = JSON.stringify(
+      Premium.xaesEncrypt(keyByteSize, password, privKeyHex)
+    );
+
+    let params = {
+      password: password,
+      privateKey: encryptedPrivKey,
+      publicKey: pubKeyBase64,
+    };
+
+    let sc = secrets.share(privKeyHex, 3, 2);
+    let answers = [answerA, answerB, answerC];
+
+    // May hash one more time
+    let checksum = answers.join('*');
+    let encryptedSc1 = JSON.stringify(
+      Premium.xaesEncrypt(keyByteSize, checksum, sc[0])
+    );
+
+    return dispatch => {
+
+      UserService.singleton()
+        .migrateAccount(params)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+
+          if (resp.rc === 1) {
+            let _params = {
+              idToken: resp.profile.idToken,
+              sc1: encryptedSc1,
+              sc2: sc[1],
+              sc3: sc[2],
+              security_question_1: questionA,
+              security_question_2: questionB,
+              security_question_3: questionC,
+            };
+
+            let userKey = {
+              idToken: resp.profile.idToken,
+              encryptedPrivKey: encryptedPrivKey,
+              publicKey: pubKeyBase64,
+            };
+
+            let wallets = store.getState().userData.wallets;
+            let currency_wallets = wallets.filter(function(wallet) {
+              if(parseInt(wallet.currency_type) == 1)
+                return true;
+              else
+                return false;
+            });
+            let wallet = currency_wallets[0];
+
+            //let _params = {
+            let createWalletParams = {
+              sessionToken: resp.profile.sessionToken,
+              publicKey: userKey.publicKey,
+              appId: 'flashcoin',
+              passphrase: wallet.pure_passphrase
+            };
+
+            utils.storeUserKey(userKey);
+
+            // resp.profile.auth_version
+            //dispatch(userActions.createWallet(_params, password, resp.profile));
+            dispatch(
+              userActions.setRecoveryKeysForMigration(
+                _params,
+                createWalletParams,
+                password,
+                resp.profile
+              )
+            );
+            //dispatch(userActions.migrateAccountSuccess(resp.profile));
+          } else {
+            dispatch(userActions.migrateAccountFailed(resp));
+          }
+        });
+    };
+  },
+
+  migrateAccountSuccess() {
+    return { type: USERS.MIGRATE_V1_TO_V2_SUCCESS, data: {}};
+  },
+
+  migrateAccountFailed(resp) {
+    return { type: USERS.MIGRATE_V1_TO_V2_FAILED, data: resp };
+  },
+
+
+  setRecoveryKeysForMigration(params, createWalletParams, password, profile) {
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+
+      //UserService.singleton().createFlashWallet(params).then((_resp: any) => {
+      UserService.singleton()
+        .setRecoveryKeys(params)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+          if (resp.rc === 1) {
+            UserService.singleton()
+              .migrateFlashWallet(createWalletParams)
+              .then((_resp: any) => {
+                if (_resp.rc === 1) {
+                  dispatch(userActions.migrateAccountSuccess());
+                } else {
+                  console.log('+++++ migrateFlashWallet failed, reason:', _resp);
+                  dispatch(userActions.migrateAccountFailed(resp));
+                }
+              });
+            //dispatch(userActions.setRecoveryKeysSuccess(resp));
+          } else {
+            dispatch(userActions.migrateAccountFailed(resp));
+          }
+        });
+    };
+  },
+
   login(email, password) {
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
@@ -329,6 +463,8 @@ export const userActions = {
         if (resp.profile.totp_enabled === 1) {
           let loginData = { profile: resp.profile, password: password };
           dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
+        } else if (resp.profile.auth_version === 3) {
+          dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
         } else {
           dispatch(userActions.loginSuccess(resp.profile));
           dispatch(userActions.getBalance());
@@ -427,6 +563,10 @@ export const userActions = {
           if (resp.rc === 1) {
             if (resp.my_wallets.length > 2 || (resp.my_wallets.length == 1 && auth_version != 4)) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
+              if(auth_version == 3) {
+                let loginData = { password: password };
+                dispatch({ type: USERS.NEED_MIGRATION_TO_V2, data: loginData });
+              }
             } else {
               let userProfile = store.getState().userData.user;
               let userKey = utils.getUserKey();
@@ -640,14 +780,17 @@ function decryptPassphraseV1(dispatch, wallets) {
         let decryptedWallets = wallets.map(w => {
           let str = utils.b64DecodeUnicode(w.passphrase);
           w.pure_passphrase = Premium.xaesDecrypt(resp.wallet.secret, str);
-          w.email = userProfile.email;
-          return new Wallet().openWallet(w);
+          if(userProfile && userProfile.email)
+            w.email = userProfile.email;
+          return new Wallet().openWallet(w, true);
         });
         dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
-        dispatch({
+        if(userProfile) {
+          dispatch({
           type: USERS.STORE_FOUNTAIN_SECRET,
           data: resp.wallet.secret,
         });
+        }
       }
     });
 }

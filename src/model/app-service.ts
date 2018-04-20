@@ -464,6 +464,33 @@ export default class AppService {
     $.ajax(options);
   }
 
+  migrateAccount(params, cb) {
+    let self = this;
+    let _cb = function(resp) {
+      if (resp.rc == 1) {
+        self.setAuthInfo(resp.profile.auth_version, resp.profile.sessionToken);
+      }
+      cb(resp);
+    };
+    let options = this.makeRequestOption(
+      'api/migrateAccountV1ToV2',
+      params,
+      'post',
+      _cb
+    );
+    $.ajax(options);
+  }
+
+  migrateFlashWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/migrateFlashWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   createEasy(params, cb) {
     let options = this.makeRequestOption('api/createEasy', params, 'post', cb);
     $.ajax(options);

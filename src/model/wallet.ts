@@ -67,6 +67,7 @@ const NETWORK_NAME = 'flashcoin';
 export default class Wallet {
   private accounts = null;
   currency_type = null;
+  pure_passphrase = null;
 
   getCryptoNetwork(currency_type) {
     let network;
@@ -92,7 +93,7 @@ export default class Wallet {
     return network;
   }
 
-  openWallet(wdata) {
+  openWallet(wdata, return_passphrase) {
     let mnemonic = wdata.pure_passphrase;
     let valid = bip39.validateMnemonic(mnemonic);
 
@@ -110,6 +111,8 @@ export default class Wallet {
       internalAccount: accountZero.derive(1),
     };
     this.currency_type = wdata.currency_type;
+    if(return_passphrase)
+      this.pure_passphrase = wdata.pure_passphrase;
 
     return this;
   }

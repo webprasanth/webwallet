@@ -34,7 +34,8 @@ route(action => {
     (action != 'reset_password' &&
       action != 'account_created' &&
       action != 'enable_account' &&
-      action != 'submit_email')
+      action != 'submit_email' &&
+      action != 'migrate_v1_to_v2')
   ) {
     return route('login');
   }
@@ -55,6 +56,8 @@ route(action => {
       return riot.mount('#main', 'setuppassword');
     case 'submit_email':
       return riot.mount('#main', 'submit-email');
+    case 'migrate_v1_to_v2':
+      return riot.mount('#main', 'migrate-v1-to-v2');
     default:
       break;
   }
@@ -62,14 +65,15 @@ route(action => {
 
 store.subscribe(() => {
   var state = store.getState();
-  if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS) {
+  if (state.lastAction.type == actions.USERS.GET_PROFILE_SUCCESS && state.userData.user.auth_version != 3) {
     route('');
   } else if (
     !state.userData.user &&
     (currentAction !== 'reset_password' &&
       currentAction != 'account_created' &&
       currentAction != 'enable_account' &&
-      currentAction != 'submit_email')
+      currentAction != 'submit_email' &&
+      currentAction != 'migrate_v1_to_v2')
   ) {
     route('login');
   }
