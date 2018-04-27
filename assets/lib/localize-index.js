@@ -21,7 +21,7 @@ function initIndexLocal(cb) {
 		textsIndex_default = json;
 	  }
 	});
-	
+	console.log(lang_file);
 	$.ajax({
 	  url: lang_file,
 	  dataType: 'json',
