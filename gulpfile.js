@@ -40,6 +40,8 @@ gulp.task('copy-wiki-page', function() {
     { from: 'support.html', to: 'public/' },
     { from: 'terms-of-service.html', to: 'public/' },
     { from: 'crowdsale.html', to: 'public/' },
+    { from: 'header.html', to: 'public/' },
+    { from: 'footer.html', to: 'public/' },
   ];
 
   var tasks = maps.map(m => {
@@ -75,9 +77,8 @@ gulp.task('copy-html-mobile', function() {
 
 gulp.task('copy-favicon', function() {
   return gulp
-    .src('assets/images/pages/coin.png')
-    .pipe(rename('favicon.ico'))
-    .pipe(gulp.dest('public'));
+    .src('favicon.png')
+    .pipe(gulp.dest('public/'));
 });
 
 gulp.task('copy-css', function() {
