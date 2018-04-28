@@ -254,8 +254,8 @@
 		border: 0 !important;
 		padding: 0 !important;
 	}
-	.responsive-sticky-header #logo {
-		display: block !important;
+	.responsive-sticky-header #select-language-container {
+		 padding: 18px 0;
 	}
 	#logo a.standard-logo { display: inline-block; }
 
