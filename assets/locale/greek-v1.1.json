@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Το Flashcoin.io σας παρέχεται απο την Flashcoin Foundation,Liechtenstein. Υποστήριξη απο την κοινότητα του FLASH.",
 	"login_by_clicking_create_wallet": "Πατώντας στο δημιουργία Wallet, συμφωνώ με τους <a href=\"/terms-of-service.html\" target=\"_blank\">Όρους χρήσης υπηρεσίας</a> and <a href=\"/privacy-policy.html\" target=\"_blank\">Privacy Policy.</a>",
 	"login_Forgot_password": "Ξεχάσατε τον κωδικό σας?",
+	"login_dont_have_account"		       	   : "Δεν έχετε λογαριασμό;",
+	"login_create_one"						   : "Δημιουργία νέου",
 
 
 	"account_not_exist_label": "** Θέλετε να δημιουργήσετε ένα Flashcoin wallet?",

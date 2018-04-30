@@ -55,6 +55,8 @@
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io Flashcoin Foundation, Liechtenstein tarafından sağlanmaktadır. FLASH topluluğu tarafından desteklenmektedir.",
     "login_by_clicking_create_wallet"	       : "Cüzdan oluştura tıklayarak, <a href=\"/terms-of-service.html\" target=\"_blank\">Kullanım şartlarını </a> ve <a href=\"/privacy-policy.html\" target=\"_blank\">Gizlilik politikasını</a> kabul ediyorum.",
     "login_Forgot_password"		       		   : "Şifremi unuttum",
+	"login_dont_have_account"		       	   : "Hesabın yok mu?",
+	"login_create_one"						   : "Yeni oluşturmak",
     "account_not_exist_label"                  : "** Flashcoin cüzdanı oluşturmak ister misiniz?",
     "ask_fullname_label"                       : "** Tam adınızı giriniz",
     "button_crowdsale_label"                   : "Crowdsale",

@@ -60,6 +60,8 @@
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io надається Flashcoin Foundation, Ліхтенштейн. Підтримується спільнотою FLASH.",
     "login_by_clicking_create_wallet"	       : "Натискаючи Створити Гаманець, я погоджуюсь з <a href=\"/terms-of-service.html\" target=\"_blank\">Умовами Обслуговування</a> та <a href=\"/privacy-policy.html\" target=\"_blank\">Політикою Конфіденційності.</a>",
     "login_Forgot_password"		       		   : "Забули Пароль?",
+	"login_dont_have_account"		       	   : "Не маєте облікового запису?",
+	"login_create_one"						   : "Створити новий",
 
 
     "account_not_exist_label"                  : "** Ви хочете створити гаманець Flashcoin?",

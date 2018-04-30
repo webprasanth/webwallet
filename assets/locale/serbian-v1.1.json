@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Flashcoin.io is provided by the Flashcoin Foundation,Liechtenstein.Supported by the FLASH community.",
 	"login_by_clicking_create_wallet": "Кликом на креирај новчаник, прихватам <a href=\"/terms-of-service.html\" target=\"_blank\">Услове услуге</a> и <a href=\"/privacy-policy.html\" target=\"_blank\">Правила о приватности.</a>",
 	"login_Forgot_password": "Заборавили сте шифру?",
+	"login_dont_have_account"		       	   : "Немате налог?",
+	"login_create_one"						   : "Створи ново",
 
 
 	"account_not_exist_label": "** Да ли желите да креирате Flashcoin новчаник?",
