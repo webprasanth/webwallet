@@ -337,6 +337,7 @@
         function showSignUp(){
             $('.login-form').hide();
             $('.singup-form').show();
+            grecaptcha.reset(captchaId);
         }
 
         function backLogin(){
