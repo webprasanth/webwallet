@@ -2,6 +2,12 @@
     font-family: 'SITKAB';
     src: url('../fonts/SITKAB.TTC');
 }
+
+@font-face {
+    font-family: 'futura-medium-bt';
+    src: url('../fonts/futura-medium-bt.ttf');
+}
+
 html{
    height: 100%;
     box-sizing: border-box;
@@ -11,7 +17,8 @@ body{
     position: relative;
     box-sizing: inherit;
     background-color: #f6f6f6 !important;
-     padding-bottom: 6em;
+    padding-bottom: 6em;
+    font-family: 'futura-medium-bt';
 }
 .size-22{
   font-size: 22px;
@@ -713,7 +720,6 @@ h5.title-table{
   width: 1546px;
   line-height: 650px;
   padding-left: 40px;
-  font-weight: bold;
   height: 650px;
 }
 .merchant-tools-page #download_merchant_stickers_1_we_accept span{
@@ -740,7 +746,6 @@ h5.title-table{
 .merchant-tools-page .download_merchant_stickers_2_div1{
   float: left;
   font-size: 86px;
-  font-weight: bold;
   padding-right: 65px;
   height: 400px;
   width: 480px;
@@ -783,9 +788,8 @@ h5.title-table{
   padding-top: 96px;
 }
 .merchant-tools-page .dmq-header-we-accept{
-  font-size: 224px;
+  font-size: 180px;
   line-height: 224px;
-  font-weight: bold;
 }
 .merchant-tools-page .dmq-logo-header{
   width: 63%;
@@ -797,8 +801,7 @@ h5.title-table{
   margin: 0 auto;
   padding-top: 2%;
   text-align: center;
-  font-weight: bold;
-  font-size: 180px;
+  font-size: 165px;
   width: 58%;
   line-height: 190px;
 }
