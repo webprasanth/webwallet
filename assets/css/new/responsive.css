@@ -1713,21 +1713,11 @@ only screen and (                min-resolution: 2dppx) {
 	.widget_pages li a,
 	.widget_rss li a,
 	.widget_recent_comments li a {
-		background-image: url("../images/icons/widget-link@2x.png");
 		background-size: 4px 20px;
 	}
 
 	.dark .widget_recent_comments li { background-image: url("../images/icons/widget-comment-dark@2x.png"); }
 
-	.dark .widget_nav_menu li a,
-	.dark .widget_links li a,
-	.dark .widget_meta li a,
-	.dark .widget_archive li a,
-	.dark .widget_recent_entries li a,
-	.dark .widget_categories li a,
-	.dark .widget_pages li a,
-	.dark .widget_rss li a,
-	.dark .widget_recent_comments li a { background-image: url("../images/icons/widget-link-dark@2x.png"); }
 
 }
 

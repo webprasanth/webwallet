@@ -13580,9 +13580,6 @@ body:not(.no-transition) #wrapper,
 }
 
 /*zluck custom css*/
-#header #logo img{
+#header:not(.sticky-header):not(.responsive-sticky-header) #logo img{
 	display: none;
-}
-#header.sticky-header #logo img{
-	display: block;
 }
