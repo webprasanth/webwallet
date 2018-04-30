@@ -55,6 +55,8 @@
   "login_flashcoin_provided_by": "Flashcoin.io được phát hành bởi Flashcoin Foundation, Liechtenstein. Hỗ trợ bởi cộng đồng FLASH.",
   "login_by_clicking_create_wallet": "Bằng việc nhấn vào Tạo Ví, tôi đồng ý với <a href=\"/terms-of-service.html\" target=\"_blank\">Điều khoản sử dụng</a> và <a href=\"/privacy-policy.html\" target=\"_blank\">Chính sách quyền riêng tư.</a>",
   "login_Forgot_password": "Quên mật khẩu?",
+  "login_dont_have_account"		       	   : "Bạn chưa có tài khoản?",
+  "login_create_one"						   : "Tạo mới",
   "account_not_exist_label": "** Bạn có muốn tạo ví Flashcoin?",
   "ask_fullname_label": "** Nhập họ tên của bạn",
   "button_crowdsale_label": "Crowdsale",

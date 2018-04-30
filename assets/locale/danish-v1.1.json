@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Flashcoin.io er stillet til rådighed af Flashcoin Fundamentet ,Liechtenstein. Støttet af FLASH fælleskabet.",
 	"login_by_clicking_create_wallet": "Ved at klikke Lav Tegnebog, Jeg er enig med <a href=\"/terms-of-service.html\" target=\"_blank\">Terms of Service</a> and <a href=\"/privacy-policy.html\" target=\"_blank\">Privacy Policy.</a>",
 	"login_Forgot_password": "Glemt Kodeord?",
+	"login_dont_have_account"		       	   : "Har du ikke en konto?",
+	"login_create_one"						   : "Lav ny",
 
 
 	"account_not_exist_label": "** Vil Du lave en Flashcoin tegnebog?",

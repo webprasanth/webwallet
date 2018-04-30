@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Flashcoin.io é fornito dalla Flashcoin Foundation, Liechtenstein. Supportato dalla comunità FLASH.",
 	"login_by_clicking_create_wallet": "Cliccando su Crea Portafoglio, accetto i <a href=\"/terms-of-service.html\" target=\"_blank\">Terms of Service</a> e <a href=\"/privacy-policy.html\" target=\"_blank\">Privacy Policy.</a>",
 	"login_Forgot_password": "Hai dimenticato la Password?",
+	"login_dont_have_account"		       	   : "Non hai un account?",
+	"login_create_one"						   : "Creare nuovo",
 
 
 	"account_not_exist_label": "** Vuoi creare un portafoglio Flashcoin?",

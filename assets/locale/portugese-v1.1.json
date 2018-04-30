@@ -59,6 +59,8 @@
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io é fornecido pela Third Millennium Foundation for Economics and Culture, Liechtenstein. Apoiado pela comunidade FLASH.",
     "login_by_clicking_create_wallet"	       : "Ao clicar em 'Criar Carteira', eu aceito os <a  href=\"/terms-of-service.html\" target=\"_blank\">termos de serviço</a> e a <a href=\"/privacy-policy.html\" target=\"_blank\">política de privacidade.</a>",
     "login_Forgot_password"		       		   : "Esqueceu a senha?",
+	"login_dont_have_account"		       	   : "Não tem uma conta?",
+	"login_create_one"						   : "Crie um novo",
 
 
     "account_not_exist_label"                  : "** Deseja criar uma carteira de Flashcoin?",

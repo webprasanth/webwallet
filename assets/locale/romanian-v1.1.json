@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Flashcoin.io este furnizat de catre Flashcoin Foundation,Liechtenstein.Sprijinit de comunitatea FLASH.",
 	"login_by_clicking_create_wallet": "Atunci cand dau click pe Creeaza Portofel, sunt de acord cu <a href=\"/terms-of-service.html\" target=\"_blank\">Termenii de Serviciu</a> si <a href=\"/privacy-policy.html\" target=\"_blank\">Polita de Confidentialitate.</a>",
 	"login_Forgot_password": "Ai uitat Parola?",
+	"login_dont_have_account"		       	   : "Nu ave?i un cont?",
+	"login_create_one"						   : "Creaza nou",
 
 
 	"account_not_exist_label": "** Vrei sa creezi un portofel Flashcoin?",
