@@ -60,6 +60,8 @@
     "login_flashcoin_provided_by"	       	   : " Flashcoin.io  كو فلاش كوائن فاؤنڈیشن، لیچسٹینسٹ کی طرف سے فراہم کیا جاتا ہے اور فلیش کمیونٹی کی طرف سے حمایت کی جاتى ہے.",
     "login_by_clicking_create_wallet"	       : " والٹ کی تخلیق پر کلک کرکے، میں <a  href=\"/terms-of-service.html\" target=\"_blank\"> سروس کی شرائط </a> اور <a  href=\"/privacy-policy.html\" target=\"_blank\"> پرائیویسی پالیسی </a> سے متفق ہوں.",
     "login_Forgot_password"		       		   : " پاسورڈ بھول گے؟",
+	"login_dont_have_account"		       	   : "کیا اکاؤنٹ نہیں ہے؟",
+	"login_create_one"						   : "نیا بنائیں",
 
 
     "account_not_exist_label"                  : "** Do کیا آپ ایک Flashcoin والٹ بنانا چاہتے ہیں؟",

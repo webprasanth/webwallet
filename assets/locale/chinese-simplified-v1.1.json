@@ -60,6 +60,8 @@
 	"login_flashcoin_provided_by": "Flashcoin.io由FlashcoinFoundation提供，列支敦士登由FLASH社区提供支持。.",
 	"login_by_clicking_create_wallet": "通过点击创建电子钱包，我同意服务条款和隐私政策。.",
 	"login_Forgot_password": "忘记密码？",
+	"login_dont_have_account"		       	   : "没有账号？",
+	"login_create_one"						   : "创建新的",
 
 	"account_not_exist_label": "**你想创建一个Flash钱包吗？",
 

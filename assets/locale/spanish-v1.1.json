@@ -61,6 +61,8 @@
     "login_flashcoin_provided_by"	       	   : "Flashcoin.io es otorgado por la Flashcoin Foundation, con base en Liechtenstein. Con el apoyo de la comunidad de FLASH.",
     "login_by_clicking_create_wallet"	       : "Al hacer click en Crear monedero, acepto los <a href=\"/terms-of-service.html\" target=\"_blank\">Términos de Servicio</a> and <a href=\"/privacy-policy.html\" target=\"_blank\">Política de Privacidad.</a>",
     "login_Forgot_password"		       		   : "¿Olvidó su contraseña?",
+	"login_dont_have_account"		       	   : "No tienes una cuenta?",
+	"login_create_one"						   : "Crear nuevo",
 
     "account_not_exist_label"                  : "** ¿Desea crear un monedero Flashcoin?",
     "ask_fullname_label"                       : "** Escriba su nombre completo",

@@ -53,6 +53,8 @@
 "login_flaschoin_provided_by":"발이스코인.아이오은발이스코인커뮤니티에 의해 지원되는발이스코인 리히텐슈타인. 지지선 에서 제공됩니다.",
 "login_by_clicking_create_wallets":"지갑을 만들기를 클릭하면 서비스 및 개인 정보 보호 정책에 동의합니다.",
 "login_Forgot_password":"암호를 잊어 버림?",
+"login_dont_have_account"		       	   : "계정이 없으십니까?",
+"login_create_one"						   : "새로 만들기",
 "account_not_exist_label":"**플래시 코트를 만들고 싶으십니까?",
 "ask_fullname_label":"**전체 이름을 입력하십시오.",
 "button_crowdsale_label":"군중판매",

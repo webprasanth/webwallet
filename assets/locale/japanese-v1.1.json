@@ -60,6 +60,8 @@
     "login_flashcoin_provided_by"		   : "ファラシュコイン.ioはファラシュコイン、ファウンデーション、リヒテンシュタインによって提供されています。フラッシュコミュニティによってサポートされています.ウオレットの作成をクリックして、",
     "login_by_clicking_create_wallet"	       : "私は利用規約とプライバシーポリシーに同意します。",
     "login_Forgot_password"				   : "パスワードをお忘れですか。",
+	"login_dont_have_account"		       	   : "アカウントを持っていないのですか？",
+	"login_create_one"						   : "新しく作る",
 
 
     "account_not_exist_label":"**フラッシュコインウオレットを作成したいですか。?",

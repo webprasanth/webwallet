@@ -14,13 +14,13 @@
 					</div>
 				</div>
 				<div class="logo col-xs-4 col-xs-5 hidden-xs">
-					<a><img src="assets/images/pages/logo.png" /></a>
+					<a><img src="assets/images/logo.png" /></a>
 				</div>
 				<div class="top-balance text-center col-xs-12 color-custom">
 					<div class="header-qr-desktop" onclick={onShowWalletAddressClick} title="Click to see wallet address"><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span></div>
 					<p class="top-balance-text">
 						<img src={refreshIconUrl} onmouseover={onLoadBalanceButtonHoverIn} onmouseout={onLoadBalanceButtonHoverOut} onclick={onLoadBalanceButtonClick} title="Click to refresh balance" height="20px" />
-						<span onclick={onShowBalanceButtonClick} title="Click to see full balance"><span class="hidden-xs" >{getText('common_balance_label')}:</span> {formattedBalance} <img src={getCurrencyIconUrl()} height="20px" /> {getCurrencyUnitUpcase()}</span>
+						<span onclick={onShowBalanceButtonClick} title="Click to see full balance"><span class="hidden-xs" >{getText('common_balance_label')}:</span> {formattedBalance} <img src={getCurrencyIconUrl()} height="20px" /><span class="hidden-xs" > {getCurrencyUnitUpcase()}</span></span>
 					</p>
 				</div>
 				<div class="header-right col-xs-12 col-sm-4 hidden-xs">

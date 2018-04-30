@@ -2,6 +2,12 @@
     font-family: 'SITKAB';
     src: url('../fonts/SITKAB.TTC');
 }
+
+@font-face {
+    font-family: 'futura-medium-bt';
+    src: url('../fonts/futura-medium-bt.ttf');
+}
+
 html{
    height: 100%;
     box-sizing: border-box;
@@ -11,7 +17,8 @@ body{
     position: relative;
     box-sizing: inherit;
     background-color: #f6f6f6 !important;
-     padding-bottom: 6em;
+    padding-bottom: 6em;
+    font-family: 'futura-medium-bt';
 }
 .size-22{
   font-size: 22px;
@@ -297,17 +304,21 @@ textarea {
 }
 .nav-pills>li>a{
     border-radius:0;
-    background: linear-gradient(to bottom, #dddddd 0%,#f2f2f2 100%);
+    background: linear-gradient(to bottom, #000000 0%,#191714 100%);
     margin: 0;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
     font-weight: 600;
     border: none;
-    border-bottom: 2px solid #0E76BC;
-    color: #555;
+    border-bottom: 2px solid #E0AE27;
+    color: #E0AE27;
 }
 .nav-pills>li>a:hover{
-    border-bottom: 2px solid #0E76BC;
+    border-bottom: 2px solid #E0AE27;
+    color: #E0AE27;
+}
+.nav-pills>li>a{
+    color: #FFFFFF;
 }
 .nav-pills>li+li{
     margin: 0 !important;
@@ -358,7 +369,7 @@ h5.title-table{
     padding: 10px;
 }
 .nav-tabs-responsive{
-    border-bottom: 1px solid #0E76BC;
+    border-bottom: 1px solid #E0AE27;
 }
 .date-time{
     margin-bottom: 4%;
@@ -380,7 +391,7 @@ h5.title-table{
     /*===================*/
 /*Header*/
 .header-SC{
-    background-color: #0E76BC;
+    background: url("../images/header.png") repeat-x center;
     position: relative;
     height: 100px;
     line-height: 100px;
@@ -469,12 +480,12 @@ h5.title-table{
 /*Navbar PC*/
 .navbar-sc{
     z-index: 99;
-    background: #428bca;
+    background: #191714;
     margin-top: 1px;
     /*background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0E76BC), color-stop(1, #1983CA) );*/
 }
 .navbar-sc .top-menu{
-    background:#337ab7;
+    background:#191714;
 }
 .navbar-sc .logo{
         padding: 15px 5px 0;
@@ -515,7 +526,7 @@ h5.title-table{
 .navbar-sc ul li.active a,
 .navbar-sc ul li a:hover,
 .navbar-sc ul li a:focus{
-    background-color: #519EE0;
+    background-color: #E0AE27;
 }
 .navbar-sc ul li a .orange-circle{
     position: absolute;
@@ -556,10 +567,10 @@ h5.title-table{
   width: 34px;
 }
 .select-currency-container ul#select-currency {
-  background-color: #428bca;
+  background-color: #191714;
   padding: 0;
   margin: 0;
-  border: none;
+  border: 1px #000000;
   border-radius: 0;
 }
 .select-currency-container ul#select-currency li a{
@@ -578,8 +589,9 @@ h5.title-table{
 }
 .contact-page .title-page h2.title,
 .pending-page .title-page h2.title,
+.merchant-tools-page .title-page h2.title,
 .transaction-activity .title-page h2.title{
-    color: #0E76BC;
+    color: #191714;
 }
 .pending-page .date-pending-btn,
 .transaction-activity .date-activity-btn{
@@ -689,7 +701,7 @@ h5.title-table{
   width: 2390px;
   border: 1px solid black;
   border-radius: 50px;
-  height: 1765px;
+  height: 1898px;
   padding: 96px;
   margin-top: 500px;
 }
@@ -708,7 +720,6 @@ h5.title-table{
   width: 1546px;
   line-height: 650px;
   padding-left: 40px;
-  font-weight: bold;
   height: 650px;
 }
 .merchant-tools-page #download_merchant_stickers_1_we_accept span{
@@ -735,7 +746,6 @@ h5.title-table{
 .merchant-tools-page .download_merchant_stickers_2_div1{
   float: left;
   font-size: 86px;
-  font-weight: bold;
   padding-right: 65px;
   height: 400px;
   width: 480px;
@@ -750,7 +760,7 @@ h5.title-table{
 .merchant-tools-page .download_merchant_stickers_2_logo_header{
   float: left;
   width: 1230px;
-  padding: 35px 64px 0;
+  padding: 0 64px;
 }
 .merchant-tools-page #dmq_merchant_stickers_2{
   float: left;
@@ -778,9 +788,8 @@ h5.title-table{
   padding-top: 96px;
 }
 .merchant-tools-page .dmq-header-we-accept{
-  font-size: 224px;
+  font-size: 180px;
   line-height: 224px;
-  font-weight: bold;
 }
 .merchant-tools-page .dmq-logo-header{
   width: 63%;
@@ -792,8 +801,7 @@ h5.title-table{
   margin: 0 auto;
   padding-top: 2%;
   text-align: center;
-  font-weight: bold;
-  font-size: 180px;
+  font-size: 165px;
   width: 58%;
   line-height: 190px;
 }
@@ -868,7 +876,7 @@ h5.title-table{
 }
 .email-account .input-search-account.active{
     box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
-   border: 1px solid #72c6ff;
+   border: 1px solid #FFDD4D;
 }
 .email-account .input-search-account.active input{
     border: none;
@@ -1097,8 +1105,8 @@ h5.title-table{
 /*==============*/
 /*Modal custom*/
 .modal-header{
-    background: #428BCA;
-    color: #fff;
+    background: #191714 !important;
+    color: #E0AE27 !important;
 }
 .modal-body ._amount ._value{
     font-size: 25pt;
@@ -1233,7 +1241,7 @@ h5.title-table{
     width: 100%;
 }
 .title-header{
-    background: #428BCA;
+    background: #191714;
     color: #fff;
 }
 .title-header .title{
@@ -1438,12 +1446,12 @@ footer p {
 }
 .change-confirm-password .btn-create-account{
     text-decoration: none;
-    background: #286FBF;
+    background: #191714;
     padding: 11px 30px;
     font-size: 15pt;
     font-weight: bold;
     color: #fff;
-    border: 1px solid #193E92;
+    border: 1px solid #000000;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 25px;
@@ -1553,7 +1561,7 @@ footer p {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #E0AE27;
 }
 
 input:focus + .slider {
@@ -1708,4 +1716,19 @@ input:checked + .slider:before {
     .crowdfunding-terms{
         margin-top: 20px;
     }
+}
+
+
+
+/* ======== new design ========== */
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background-color: #191714;
+  border-color: #191714;
+  color: #E0AE27;
+}
+.pagination>li>a, .pagination>li>span {
+  color: #191714;
+}
+select:active, select:hover {
+  outline-color: #E0AE27
 }
