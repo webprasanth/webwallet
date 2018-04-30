@@ -94,6 +94,11 @@
 	Bootstrap Adjustments
 -----------------------------------------------------------------*/
 
+@font-face {
+    font-family: 'futura-medium-bt';
+    src: url('../../fonts/futura-medium-bt.ttf');
+}
+
 @media (min-width: 576px) {
 	.container { max-width: 540px; }
 }
@@ -164,7 +169,7 @@ dl, dt, dd, ol, ul, li {
 body {
 	line-height: 1.5;
 	color: #555;
-	font-family: 'Nunito Sans1', sans-serif;
+	font-family: 'futura-medium-bt','Nunito Sans1', sans-serif;
 }
 
 a {
@@ -196,7 +201,7 @@ h6 {
 	font-weight: 600;
 	line-height: 1.5;
 	margin: 0 0 30px 0;
-	font-family: 'Nunito Sans', sans-serif;
+	font-family: 'futura-medium-bt','Nunito Sans', sans-serif;
 }
 
 h5,
