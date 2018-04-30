@@ -1106,7 +1106,7 @@ h5.title-table{
 /*Modal custom*/
 .modal-header{
     background: #191714 !important;
-    color: #E0AE27;
+    color: #E0AE27 !important;
 }
 .modal-body ._amount ._value{
     font-size: 25pt;
