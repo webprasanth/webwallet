@@ -431,7 +431,11 @@ animation: spin 10s linear infinite;
 }
 
 #select-language-container {
-     display: inline;
-     float: right;
-     padding: 39px 0;
-  }
+   display: inline;
+   float: right;
+   padding: 39px 0;
+}
+
+#social-forum {
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
