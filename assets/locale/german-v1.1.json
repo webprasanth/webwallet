@@ -58,7 +58,7 @@
 	"login_With_the_web_wallet": "Mit dem Web Wallet können Sie ihre Email Adresse oder Öffentliche (Public) Adresse verwenden um Coins zu senden und zu empfangen. Das Web Wallet unterstützt die meisten Browser und Mobilen Geräte. Für maximalen Komfort sind keine Downloads und Installationen nötig",
 
 	"login_flashcoin_provided_by": "Flashcoin.io wird bereitgestellt von der Flashcoin Foundation, Liechtenstein. Unterstützt durch die FLASH Community..",
-	"login_by_clicking_create_wallet": "Durch Click auf \"Wallet erstellen\" stimmen Sie den Nutzungsbedingungen und Datenschutzbestimmungen zu.",
+	"login_by_clicking_create_wallet": "Wenn Sie auf \"Wallet erstellen\" klicken, stimmen Sie den <a href=\"/terms-of-service.html\" target=\"_blank\">Nutzungsbedingungen</a> und <a href=\"/privacy-policy.html\" target=\"_blank\">Datenschutzrichtlinie.</a>",
 	"login_Forgot_password": "Passwort vergessen?",
 
 
