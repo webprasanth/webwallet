@@ -24,6 +24,7 @@ export default class ContactSendMoney extends BaseElement {
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
   private thresholdAmount = 0.00001 ;
+  private fixedTxnFee = 0.00002;
   
   constructor() {
     super();
@@ -96,6 +97,21 @@ export default class ContactSendMoney extends BaseElement {
         });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getFixedTransactionFee()
+        .then((resp: any) => {
+          tag.fixedTxnFee = resp.fixed_txn_fee;
+        });
+    }
+
     $('#sendByContact').modal('show');
     $('#contact-send-amount').keypress(utils.filterNumberEdit);
     $('#contact-send-amount').blur(utils.formatAmountInput);
@@ -110,8 +126,12 @@ export default class ContactSendMoney extends BaseElement {
       tag.errorMessage = this.getText('common_alert_int_cash_unit');
       return;
     }
-
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    let fee = 0;
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      fee = tag.fixedTxnFee;
+    } else {
+      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    }
 
     if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
       return (tag.errorMessage = this.getText(

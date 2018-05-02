@@ -27,6 +27,7 @@ export default class HomeSend extends BaseElement {
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
   private thresholdAmount = 0.00001 ;
+  private fixedTxnFee = 0.00002;  //This we will get from API call for DASH
 
   mounted() {
   
@@ -89,6 +90,21 @@ export default class HomeSend extends BaseElement {
         });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getFixedTransactionFee()
+        .then((resp: any) => {
+          tag.fixedTxnFee = resp.fixed_txn_fee;
+        });
+    }
+
     $('#amount-input').on(
       'propertychange change click paste',
       this.calculateFee
@@ -132,8 +148,13 @@ export default class HomeSend extends BaseElement {
 
   calculateFee() {
     let amount = $('#amount-input').val();
+    let fee = 0;
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      fee = tag.fixedTxnFee;
+    } else {
+      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    }
     $('#fee-input').val(fee);
   }
 

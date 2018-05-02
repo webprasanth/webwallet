@@ -81,6 +81,13 @@ gulp.task('copy-favicon', function() {
     .pipe(gulp.dest('public/'));
 });
 
+gulp.task('copy-favicon-ico', function() {
+  return gulp
+    .src('favicon.png')
+    .pipe(rename('favicon.ico'))
+    .pipe(gulp.dest('public'));
+});
+
 gulp.task('copy-css', function() {
   return gulp.src('assets/css/**/*').pipe(gulp.dest('public/assets/css'));
 });
@@ -129,6 +136,7 @@ gulp.task('copy-rs-mobile', [
   'copy-fonts',
   'copy-sound',
   'copy-favicon',
+  'copy-favicon-ico',
   'copy-docs',
 ]);
 
@@ -144,6 +152,7 @@ gulp.task('copy-rs', [
   'copy-fonts',
   'copy-sound',
   'copy-favicon',
+  'copy-favicon-ico',
   'copy-docs',
 ]);
 

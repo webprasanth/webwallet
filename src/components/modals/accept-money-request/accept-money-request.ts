@@ -23,7 +23,8 @@ export default class AcceptMoneyRequest extends Element {
   private getCurrencyUnit = getCurrencyUnit;
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
-
+  private fixedTxnFee = 0.00002;
+  
   constructor() {
     super();
   }
@@ -78,6 +79,21 @@ export default class AcceptMoneyRequest extends Element {
         });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      CommonService.singleton()
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
+      CommonService.singleton()
+        .getFixedTransactionFee()
+        .then((resp: any) => {
+          tag.fixedTxnFee = resp.fixed_txn_fee;
+        });
+    }
+
     $('#acceptRequestDialog').modal('show');
     var userSelectedCurrency = localStorage.getItem('currency_type');
     //Get sender's wallet info
@@ -93,7 +109,12 @@ export default class AcceptMoneyRequest extends Element {
 
   enableForm(data) {
     let amount = this.opts.amount;
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    let fee = 0;
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      fee = tag.fixedTxnFee;
+    } else {
+      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    }
     let balance = store.getState().userData.user.balance;
     this.notEnoughBalanceMsg = null;
     this.sendWallet = data.results[0];

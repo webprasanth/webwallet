@@ -92,6 +92,11 @@ export function litoshiToLtc(num) {
   return parseFloat(new Big(num).div(100000000).toString());
 }
 
+export function duffToDash(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(new Big(num).div(100000000).toString());
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
@@ -178,6 +183,13 @@ export function calcFee(amount, bcMedianTxSize, fastestFee) {
       console.log(litoshis);
       return litoshiToLtc(litoshis.toFixed(0));
       break;
+    case CURRENCY_TYPE.DASH:
+      fastestFee = new Big(fastestFee).div(1024); //Converting fee rate in per byte
+      console.log(bcMedianTxSize, fastestFee);
+      let duff = bcMedianTxSize * fastestFee;
+      console.log(duff);
+      return duffToDash(duff.toFixed(0));
+      break;
   }
 }
 
@@ -193,6 +205,9 @@ export function formatCurrency(amount) {
       break;
     case CURRENCY_TYPE.LTC:
       return `${amount} LTC`;
+      break;
+    case CURRENCY_TYPE.DASH:
+      return `${amount} DASH`;
       break;
   }
 }
@@ -381,6 +396,11 @@ export function isValidCryptoAddress(value) {
         if (APP_MODE == 'PROD') {
           network = NETWORKS.LTC;
         } else network = NETWORKS.LTC_TESTNET;
+        break;
+      case CURRENCY_TYPE.DASH:
+        if (APP_MODE == 'PROD') {
+          network = NETWORKS.DASH;
+        } else network = NETWORKS.DASH_TESTNET;
         break;
       case CURRENCY_TYPE.FLASH:
       default:
