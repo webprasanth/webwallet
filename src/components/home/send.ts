@@ -231,8 +231,12 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, this.bcMedianTxSize, this.SatoshiPerByte);
-
+    let fee = 0;
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+      fee = tag.fixedTxnFee;
+    } else {
+      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+    }
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
       return;
