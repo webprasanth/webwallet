@@ -142,11 +142,16 @@ export default class AcceptMoneyRequest extends Element {
         this.sendWallet.memo = $('#Note').val();
         this.sendWallet.needUpdateRequestId = true;
         this.sendWallet.RequestId = this.opts.receive_id;
-
+        let txnFee = 0;
+        if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+          txnFee = tag.fixedTxnFee;
+        } else {
+          txnFee = utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
+        }
         riot.mount('#confirm-send', 'send-money-confirm', {
           to: this.sendWallet.address,
           amount: this.opts.amount,
-          fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.SatoshiPerByte),
+          fee: txnFee,
           wallet: this.sendWallet,
         });
       }
