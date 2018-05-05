@@ -92,13 +92,6 @@ export default class HomeSend extends BaseElement {
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
       CommonService.singleton()
-        .getBCMedianTxSize()
-        .then((resp: any) => {
-          if (resp.rc === 1 && resp.median_tx_size) {
-            tag.bcMedianTxSize = resp.median_tx_size;
-          }
-        });
-      CommonService.singleton()
         .getFixedTransactionFee()
         .then((resp: any) => {
           tag.fixedTxnFee = resp.fixed_txn_fee;
@@ -148,13 +141,9 @@ export default class HomeSend extends BaseElement {
 
   calculateFee() {
     let amount = $('#amount-input').val();
-    let fee = 0;
     amount = utils.toOrginalNumber(amount);
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
-      fee = tag.fixedTxnFee;
-    } else {
-      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
-    }
+    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte, tag.fixedTxnFee);
+
     $('#fee-input').val(fee);
   }
 
@@ -231,12 +220,9 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = 0;
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
-      fee = tag.fixedTxnFee;
-    } else {
-      fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte);
-    }
+    
+    let  fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte, tag.fixedTxnFee);
+
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
       return;

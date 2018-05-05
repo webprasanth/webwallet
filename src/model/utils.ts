@@ -163,7 +163,7 @@ export function getUserKey(): UserKey | any {
   return userKey;
 }
 
-export function calcFee(amount, bcMedianTxSize, fastestFee) {
+export function calcFee(amount, bcMedianTxSize, fastestFee , fixedTxnFee) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
   switch (currency_type) {
     case CURRENCY_TYPE.FLASH:
@@ -184,12 +184,14 @@ export function calcFee(amount, bcMedianTxSize, fastestFee) {
       return litoshiToLtc(litoshis.toFixed(0));
       break;
     case CURRENCY_TYPE.DASH:
-      fastestFee = new Big(fastestFee).div(1024); //Converting fee rate in per byte
+      return fixedTxnFee ;
+      break;
+      //Below Code will be used for calculating fee dynamically
+      /*fastestFee = new Big(fastestFee).div(1024); 
       console.log(bcMedianTxSize, fastestFee);
       let duff = bcMedianTxSize * fastestFee;
       console.log(duff);
-      return duffToDash(duff.toFixed(0));
-      break;
+      return duffToDash(duff.toFixed(0));  */
   }
 }
 
