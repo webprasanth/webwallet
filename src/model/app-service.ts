@@ -1,5 +1,5 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keysstg.flashcoin.io/';
+const HOST_URL = 'https://keys.flashcoin.io/';
 export const APP_MODE = 'PROD'; //DEV, PROD
 
 export default class AppService {
