@@ -90,4 +90,22 @@ export default class CommonService {
       });
     });
   }
+  getDASHSatoshiPerByte() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getDASHSatoshiPerByte(resp => {
+        resolve(resp);
+      });
+    });
+  }
+  getFixedTransactionFee() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      currency_type: userSelectedCurrency,
+    };
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getFixedTransactionFee(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

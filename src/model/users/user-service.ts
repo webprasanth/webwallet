@@ -141,6 +141,14 @@ export default class UserService {
     });
   }
 
+  createDASHWallet(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().createDASHWallet(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getWalletSecret(idToken) {
     return new Promise(resolve => {
       AppService.getInstance().walletSecret(idToken, resp => {

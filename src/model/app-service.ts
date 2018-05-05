@@ -436,6 +436,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  createDASHWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createDashWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/setRecoveryKeys',
@@ -555,6 +565,26 @@ export default class AppService {
     };
     $.ajax(options);
   }
+
+  getDASHSatoshiPerByte(cb) {
+    let options = {
+      url: 'https://api.blockcypher.com/v1/dash/main',
+      type: 'get',
+      contentType: 'application/json',
+      success: cb,
+    };
+    $.ajax(options);
+  }
+
+  getFixedTransactionFee(params, cb) {
+    let options = this.makeRequestOption(
+      'api/fixed-txn-fee',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }  
   setAuthInfo(authVersion, sessionToken) {
     this.authVersion = authVersion;
     this.sessionToken = sessionToken;
