@@ -108,4 +108,15 @@ export default class CommonService {
       });
     });
   }
+  getEtherGasValues() {
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      currency_type: userSelectedCurrency,
+    };
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getEtherGasValues(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

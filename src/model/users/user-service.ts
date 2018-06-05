@@ -149,6 +149,14 @@ export default class UserService {
     });
   }
 
+  createETHWallet(params) {
+    return new Promise(resolve => {
+      AppService.getInstance().createETHWallet(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getWalletSecret(idToken) {
     return new Promise(resolve => {
       AppService.getInstance().walletSecret(idToken, resp => {

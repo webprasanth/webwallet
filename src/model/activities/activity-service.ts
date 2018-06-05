@@ -1,5 +1,7 @@
 import Big from 'big.js';
 import AppService from '../app-service';
+import { CURRENCY_TYPE } from '../currency';
+import { ethToWei, weiToEth } from '../utils';
 
 export default class ActivityService {
   private static _instance: ActivityService;
@@ -52,6 +54,10 @@ export default class ActivityService {
   }
 
   convertToTnx(obj) {
+    var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
+    if(userSelectedCurrency == CURRENCY_TYPE.ETH)
+      return this.convertToTxnFromEtherBasedTxn(obj);
+
     let tran = {
       id: obj.txid,
       amount: new Big(obj.vout[0].value).times(100000000),
@@ -82,6 +88,36 @@ export default class ActivityService {
         amount: new Big(temp.value).times(100000000),
       });
     }
+
+    return tran;
+  }
+
+  convertToTxnFromEtherBasedTxn(obj) {
+    let tran = {
+      id: obj.hash,
+      amount: weiToEth(obj.value),
+      timestamp: '',
+      confirmations: obj.currentBlockNumber - obj.blockNumber,
+      fee: obj.gas * parseInt(obj.gasPrice),
+      ins: [],
+      outs: [],
+    };
+    let temp = null;
+
+    if(obj.status)
+      tran.status = obj.status;
+
+    
+    tran.ins.push({
+      address: obj.from,
+      amount: weiToEth(obj.value),
+    });
+    
+
+    tran.outs.push({
+        address: obj.to,
+        amount: weiToEth(obj.value),
+      });
 
     return tran;
   }

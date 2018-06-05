@@ -5,6 +5,7 @@ import moment from 'moment-timezone';
 import Wallet from './wallet';
 import Premium from 'Premium';
 import nacl from 'tweetnacl';
+import { keccak256 } from 'js-sha3';
 import { getText } from '../components/localise';
 
 import { Address, NETWORKS } from './wallet';
@@ -97,6 +98,11 @@ export function duffToDash(num) {
   return parseFloat(new Big(num).div(100000000).toString());
 }
 
+export function weiToEth(num) {
+  if (num == undefined || num === '') return;
+  return parseFloat(new Big(num).div(1000000000000000000).toString());
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
@@ -128,6 +134,11 @@ export function flashNFormatter(num, digits) {
 export function flashToSatoshi(num) {
   if (num == undefined || num === '') return;
   return parseInt(new Big(num).times(10000000000).toString(), 10);
+}
+
+export function ethToWei(num) {
+  if (num == undefined || num === '') return;
+  return parseInt(new Big(num).times(1000000000000000000).toString(), 10);
 }
 
 export function storeIdToken(idToken: string) {
@@ -183,8 +194,15 @@ export function calcFee(amount, bcMedianTxSize, fastestFee , fixedTxnFee) {
       console.log(litoshis);
       return litoshiToLtc(litoshis.toFixed(0));
       break;
+    case CURRENCY_TYPE.ETH:
+      //let wei = gas * gasPrice  //actual
+      console.log(bcMedianTxSize, fastestFee);
+      let wei = bcMedianTxSize * fastestFee;
+      console.log(wei);
+      return weiToEth(wei);
+      break;
     case CURRENCY_TYPE.DASH:
-      return fixedTxnFee ;
+      return fixedTxnFee;
       break;
       //Below Code will be used for calculating fee dynamically
       /*fastestFee = new Big(fastestFee).div(1024); 
@@ -210,6 +228,9 @@ export function formatCurrency(amount) {
       break;
     case CURRENCY_TYPE.DASH:
       return `${amount} DASH`;
+      break;
+    case CURRENCY_TYPE.ETH:
+      return `${amount} ETH`;
       break;
   }
 }
@@ -383,44 +404,90 @@ export function isValidFlashAddress(value) {
 }
 
 export function isValidCryptoAddress(value) {
-  try {
-    let address = Address.fromBase58Check(value);
-    var network;
-    switch (parseInt(localStorage.getItem('currency_type'))) {
-      case CURRENCY_TYPE.BTC:
-        if (APP_MODE == 'PROD') {
-          network = NETWORKS.BTC;
+  switch (parseInt(localStorage.getItem('currency_type'))) {
+    case CURRENCY_TYPE.ETH:
+      return isEtherAddress(value);
+    default:
+      try {
+        let address = Address.fromBase58Check(value);
+        var network;
+        switch (parseInt(localStorage.getItem('currency_type'))) {
+          case CURRENCY_TYPE.BTC:
+            if (APP_MODE == 'PROD') {
+              network = NETWORKS.BTC;
+            }
+            else
+                network = NETWORKS.BTC_TESTNET;
+            break;
+          case CURRENCY_TYPE.LTC:
+            if (APP_MODE == 'PROD') {
+              network = NETWORKS.LTC;
+            } else network = NETWORKS.LTC_TESTNET;
+            break;
+          case CURRENCY_TYPE.DASH:
+            if (APP_MODE == 'PROD') {
+              network = NETWORKS.DASH;
+            } else network = NETWORKS.DASH_TESTNET;
+            break;
+          case CURRENCY_TYPE.FLASH:
+          default:
+            network = NETWORKS.FLASH;
+            break;
         }
-        else
-            network = NETWORKS.BTC_TESTNET;
-        break;
-      case CURRENCY_TYPE.LTC:
-        if (APP_MODE == 'PROD') {
-          network = NETWORKS.LTC;
-        } else network = NETWORKS.LTC_TESTNET;
-        break;
-      case CURRENCY_TYPE.DASH:
-        if (APP_MODE == 'PROD') {
-          network = NETWORKS.DASH;
-        } else network = NETWORKS.DASH_TESTNET;
-        break;
-      case CURRENCY_TYPE.FLASH:
-      default:
-        network = NETWORKS.FLASH;
-        break;
-    }
-    if (
-      address.version === network.pubKeyHash ||
-      address.version === network.scriptHash
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (e) {
-    return false;
+        if (
+          address.version === network.pubKeyHash ||
+          address.version === network.scriptHash
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
   }
+  
 }
+
+/**
+ * Checks if the given string is an address
+ *
+ * @method isAddress
+ * @param {String} address the given HEX adress
+ * @return {Boolean}
+*/
+var isEtherAddress = function (address) {
+    if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+        // check if it has the basic requirements of an address
+        return false;
+    } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+        // If it's all small caps or all all caps, return true
+        return true;
+    } else {
+        // Otherwise check each case
+        return isChecksumAddress(address);
+    }
+};
+
+/**
+ * Checks if the given string is a checksummed address
+ *
+ * @method isChecksumAddress
+ * @param {String} address the given HEX adress
+ * @return {Boolean}
+*/
+var isChecksumAddress = function (address) {
+    // Check each case
+    address = address.replace('0x','');
+    var addressHash = keccak256(address.toLowerCase());
+    for (var i = 0; i < 40; i++ ) {
+        // the nth letter should be uppercase if the nth digit of casemap is 1
+        if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+            return false;
+        }
+    }
+    return true;
+};
 
 export function filterNumberEdit(event) {
   let keyCode = event.key;

@@ -278,6 +278,19 @@ export const userActions = {
                     console.log('+++++ createDASHWallet failed, reason:', _resp);
                   }
                 });
+
+              UserService.singleton()
+                .createETHWallet(createWalletParams)
+                .then((_resp: any) => {
+                  if (_resp.rc === 1) {
+                    dispatch(userActions.getBalance());
+                    dispatch(
+                      userActions.getMyWallets(profile.auth_version, password)
+                    );
+                  } else {
+                    console.log('+++++ createETHWallet failed, reason:', _resp);
+                  }
+                });
             }
             UserService.singleton()
               .setRecoveryKeys(params)
@@ -574,7 +587,7 @@ export const userActions = {
         .getMyWallets()
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if (resp.my_wallets.length > 3 || (resp.my_wallets.length == 1 && auth_version != 4)) {
+            if (resp.my_wallets.length > 4 || (resp.my_wallets.length == 1 && auth_version != 4)) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
               if(auth_version == 3) {
                 let loginData = { password: password };
@@ -685,6 +698,32 @@ export const userActions = {
                         });
                     } else {
                       console.log('createDASHWallet failed, reason:', resp);
+                    }
+                  });
+              }
+
+              //if no ETH wallet
+              if ( userActions.getCurrencyWallet(resp.my_wallets,CURRENCY_TYPE.ETH).length == 0) {
+                UserService.singleton()
+                  .createETHWallet(params)
+                  .then((resp: any) => {
+                    if (resp.rc === 1) {
+                      UserService.singleton()
+                        .getMyWallets()
+                        .then((resp: any) => {
+                          if (resp.rc === 1) {
+                            decryptWallets(
+                              dispatch,
+                              resp.my_wallets,
+                              auth_version,
+                              password
+                            );
+                          } else {
+                            dispatch(userActions.getMyWalletsFailed(resp));
+                          }
+                        });
+                    } else {
+                      console.log('createETHWallet failed, reason:', resp);
                     }
                   });
               }

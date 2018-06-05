@@ -3,7 +3,7 @@ import { commonActions } from '../common/actions';
 import { contactsActions } from '../contacts/actions';
 import store from '../store';
 import { riot } from '../../components/riot-ts';
-import { removeUserKey, getUserKey, getLocation } from '../utils';
+import { removeUserKey, getUserKey, getLocation, ethToWei } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
 import { CURRENCY_TYPE } from '../currency';
@@ -41,6 +41,135 @@ export const sendActions = {
               .addTxn(txn_info, wallet)
               .then((resp: any) => {
                 if (resp.rc == 1) {
+                  if (targetWallet.needUpdateRequestId) {
+                    let criteria = {
+                      request_id: targetWallet.RequestId,
+                      sender_bare_uid: targetWallet.email,
+                      note_processing: targetWallet.memo,
+                      currency_type: userSelectedCurrency,
+                    };
+
+                    SendService.singleton()
+                      .markSentMoneyRequests(criteria)
+                      .then((resp: any) => {
+                        // TODO: Reload all TXN in pending page
+                        if (resp.rc == 1) {
+                          dispatch(
+                            sendActions.markSentMoneyRequestsSuccess(resp)
+                          );
+                        } else {
+                          console.log('markSentMoneyRequests failed');
+                        }
+                      });
+                  } else {
+                    dispatch(sendActions.clearForm());
+                  }
+                  //Auto Approve
+                  if (targetWallet.email) {
+                    let criteria = {
+                      bare_uid: targetWallet.email,
+                    };
+                    SendService.singleton()
+                      .addToRoster(criteria)
+                      .then((resp: any) => {
+                        if (resp.rc === 1) {
+                          let params = {
+                            subs_start: 0,
+                            subs_size: PAGE_SIZE,
+                            sent_start: -1,
+                            sent_size: 0,
+                            recv_start: -1,
+                            recv_size: 0,
+                          };
+                          dispatch(contactsActions.getRoster(params));
+                        } else {
+                          console.log('Add to roster failed');
+                        }
+                      });
+                  }
+
+                  let count = 0;
+                  let checkTx = () => {
+                    SendService.singleton()
+                      .getTxnById(txn_info)
+                      .then((resp: any) => {
+                        count++;
+                        if (resp && resp.rc === 1 && (resp.txn.status === 1 || userSelectedCurrency != CURRENCY_TYPE.FLASH)) {
+                          dispatch(
+                            sendActions.sendTXNSuccess(
+                              resp.txn.processing_duration.toFixed(3)
+                            )
+                          );
+                        } else if (count < 5) {
+                          setTimeout(checkTx, 1000);
+                        } else {
+                          dispatch(
+                            sendActions.sendTXNSuccess(Number(2).toFixed(3))
+                          );
+                        }
+                      });
+                  };
+                  // TODO: dispatch action "wallet-ready"
+                  checkTx();
+                  dispatch(commonActions.toggleLoading(false));
+                  dispatch({ type: COMMON.NEED_UPDATE_BALANCE, data: {} });
+                } else {
+                  dispatch(this.sendTXNFailed(resp));
+                }
+              });
+          }
+          else {
+            dispatch(this.sendTXNFailed(resp));
+          }
+        });
+    };
+  },
+
+  createAndSignRawTx(targetWallet, amount, message, sender_address, gasPrice, gasLimit) {
+    let tx = null;
+    let wallet = sendActions.getActiveWallet();
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let rawTx = {
+      nonce: 0,  //will be changed below
+      to: targetWallet.address,
+      value: ethToWei(amount),
+      gasPrice: gasPrice,
+      gasLimit: gasLimit,
+      chainId: 0  //will be changed while signing
+    };
+
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+      SendService.singleton()
+        .getEthTransactionCount({address: sender_address, currency_type: parseInt(localStorage.getItem('currency_type'))})
+        .then((resp: any) => {
+          if (resp.rc === 1) {
+            rawTx.nonce = resp.tx_count;
+            tx = wallet.signEtherBasedTx(rawTx);
+            var serializedTx = tx.serialize()
+            let txn_info: any = {
+              ip: getLocation().info.ip,
+              amount: amount,
+              currency_type: userSelectedCurrency,
+              receiver_bare_uid: targetWallet.email,
+              receiver_public_address: targetWallet.address,
+              receiver_id: targetWallet.username,
+              transaction_id: '',
+              transaction_hex: serializedTx.toString('hex'),
+              memo: message,
+            };
+
+            if (targetWallet.needUpdateRequestId) {
+              txn_info.request_id = targetWallet.RequestId;
+              txn_info.status = 0;
+            }
+            SendService.singleton()
+              .addTxn(txn_info, wallet)
+              .then((resp: any) => {
+                if (resp.rc == 1) {
+
+                  txn_info.transaction_id = resp.transaction_id;
+                  
                   if (targetWallet.needUpdateRequestId) {
                     let criteria = {
                       request_id: targetWallet.RequestId,

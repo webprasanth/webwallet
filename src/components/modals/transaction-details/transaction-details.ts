@@ -11,6 +11,7 @@ import {
   formatCurrency,
   getDisplayDateTime,
   localizeFlash,
+  weiToEth
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -54,6 +55,10 @@ export default class TransactionDetails extends Element {
         break;
       case CURRENCY_TYPE.DASH:
         this.txnDetail.fee = duffToDash(this.txnDetail.fee);
+        this.showConfirmationNotice = true;
+        break;
+      case CURRENCY_TYPE.ETH:
+        this.txnDetail.fee = weiToEth(this.txnDetail.fee);
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:

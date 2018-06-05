@@ -87,6 +87,18 @@ export default class AcceptMoneyRequest extends Element {
         });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.ETH) {
+      CommonService.singleton()
+        .getEtherGasValues()
+        .then((resp: any) => {
+          console.log(resp);
+          if(resp.rc == 1 && resp.gas_price && resp.gas_limit) {
+            tag.SatoshiPerByte = parseInt(resp.gas_price);  //price per gas in Wei (Wei unit of Ether)
+            tag.bcMedianTxSize = parseInt(resp.gas_limit);  //max gas to be used
+          }
+        });
+    }
+
     $('#acceptRequestDialog').modal('show');
     var userSelectedCurrency = localStorage.getItem('currency_type');
     //Get sender's wallet info
@@ -137,6 +149,8 @@ export default class AcceptMoneyRequest extends Element {
           amount: this.opts.amount,
           fee: utils.calcFee(this.opts.amount, tag.bcMedianTxSize, tag.SatoshiPerByte ,tag.fixedTxnFee),
           wallet: this.sendWallet,
+          SatoshiPerByte: parseInt(tag.SatoshiPerByte),  //price per gas in Wei (Wei unit of Ether)
+          bcMedianTxSize: parseInt(tag.bcMedianTxSize)  //max gas to be used
         });
       }
     }
