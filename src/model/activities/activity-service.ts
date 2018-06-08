@@ -97,7 +97,7 @@ export default class ActivityService {
       id: obj.hash,
       amount: weiToEth(obj.value),
       timestamp: '',
-      confirmations: obj.currentBlockNumber - obj.blockNumber,
+      confirmations: obj.confirmations,
       fee: obj.gas * parseInt(obj.gasPrice),
       ins: [],
       outs: [],
