@@ -70,7 +70,7 @@ export default class SendMoneyConfirm extends BaseElement {
     $('#sendDialog').modal('show');
     let wallet = store.getState().userData.wallets[0];
 
-    if (!wallet.accounts) {
+    if (!wallet.accounts && !wallet.addrNode) {
       this.requirePassword = true;
       this.confirmation = false;
       this.update();
