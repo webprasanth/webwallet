@@ -94,11 +94,11 @@ export default class ActivityService {
 
   convertToTxnFromEtherBasedTxn(obj) {
     let tran = {
-      id: obj.hash,
+      id: obj.txid,
       amount: weiToEth(obj.value),
       timestamp: '',
       confirmations: obj.confirmations,
-      fee: obj.gas * parseInt(obj.gasPrice),
+      fee: ethToWei(obj.fees),
       ins: [],
       outs: [],
     };
