@@ -331,7 +331,7 @@ export default class HomeSend extends BaseElement {
           result = result.substring(0, containsQueMark);
         }
 
-        if (result.length < 25 || result.length > 34) QRcodeScanError();
+        if (result.length < 25 || result.length > 42) QRcodeScanError();
         else {
           $('#to-email-id').val(result);
           this.checkAddress();
