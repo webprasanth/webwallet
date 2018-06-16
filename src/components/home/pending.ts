@@ -111,7 +111,7 @@ export default class HomePending extends BaseElement {
       );
     }
 
-    this.toDateObject.datepicker('setDate', '-0d');
+    this.toDateObject.datepicker('setDate', this.getDisplayDate(new Date(), state.userData.user.timezone));
 
     // Auto set date range validation
     this.fromDateObject.datepicker(
@@ -126,7 +126,7 @@ export default class HomePending extends BaseElement {
       'setStartDate',
       this.fromDateObject.datepicker('getDate')
     );
-    this.toDateObject.datepicker('setEndDate', '+0d');
+    this.toDateObject.datepicker('setEndDate', this.getDisplayDate(new Date(), state.userData.user.timezone));
 
     // Add date range validation on change
     this.fromDateObject.on('changeDate', selectedDate => {
