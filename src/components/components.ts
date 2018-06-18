@@ -20,6 +20,7 @@ import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
 import ProfileSecurityQuestions from './home/profile/question';
+import ShareCoin from './home/profile/sharecoin';
 import ErrorAlert from './modals/error-alert/error-alert';
 import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
@@ -50,6 +51,7 @@ export {
   AccountSetting,
   FountainSetting,
   ProfileSecurityQuestions,
+  ShareCoin,
   TransactionDetails,
   WalletAddress,
   FullBalance,

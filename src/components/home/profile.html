@@ -25,6 +25,12 @@
                                     <span class="text">{getText('profile_tab_questions')}</span>
                                 </a>
                             </li>
+                            </li>
+                            <li id="tab-5" show={isShareAvailable} role="presentation" class="next" onclick={onTabSelect.bind(this, 'sharecoin')}>
+                                <a href="#sharecoin" role="tab" id="sharecoin-tab" data-toggle="tab" aria-controls="sharecoin">
+                                    <span class="text">Share</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -36,6 +42,7 @@
                             <div show={isSetting} id="account-setting"></div>
                             <div show={isFountain} id="fountain-setting"></div>
                             <div show={isQuestioning} id="security-question"></div>
+                            <div show={isShare} id="share-coin"></div>
                         </div>
                     </div>
                 </div>

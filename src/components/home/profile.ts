@@ -17,8 +17,11 @@ export default class HomeProfile extends Element {
   private isProfile = true;
   private isSetting = false;
   private isFountain = false;
+  private isShare = false;
   private isQuestioning = false;
   private isFountainAvailable = false;
+  private isShareAvailable = false;
+
 
   mounted() {
     if (HomeProfile.unsubscribe) HomeProfile.unsubscribe();
@@ -26,9 +29,10 @@ export default class HomeProfile extends Element {
       this.onApplicationStateChanged.bind(this)
     );
 
-    if(parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
+    if(parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH){
       this.isFountainAvailable = true;
-
+      this.isShareAvailable = true;
+    }
     this.userProfile = store.getState().userData.user;
     this.avartarServer = Constants.AvatarServer;
     this.mountComponents();
@@ -56,6 +60,9 @@ export default class HomeProfile extends Element {
       riot.mount('#fountain-setting', 'fountain-setting', {});
     }
     riot.mount('#security-question', 'security-question', {});
+    if (this.isShareAvailable) {
+      riot.mount('#share-coin', 'share-coin', {});
+    }
   }
 
   onTabSelect(tab) {
@@ -64,21 +71,31 @@ export default class HomeProfile extends Element {
       this.isSetting = false;
       this.isFountain = false;
       this.isQuestioning = false;
+      this.isShare = false;
     } else if (tab == 'setting') {
       this.isProfile = false;
       this.isSetting = true;
       this.isFountain = false;
       this.isQuestioning = false;
+      this.isShare = false;
     } else if (tab == 'fountain') {
       this.isProfile = false;
       this.isSetting = false;
       this.isFountain = true;
       this.isQuestioning = false;
+      this.isShare = false;
     } else if (tab == 'securityquestion') {
       this.isProfile = false;
       this.isSetting = false;
       this.isFountain = false;
       this.isQuestioning = true;
+      this.isShare = false;
+    } else if (tab == 'sharecoin') {
+      this.isProfile = false;
+      this.isSetting = false;
+      this.isFountain = false;
+      this.isQuestioning = false;
+      this.isShare = true;
     }
   }
 }

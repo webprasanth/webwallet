@@ -97,7 +97,7 @@
                     return;
                 }
 
-            var url = 'https://keys.flashcoin.io/api/login';
+            var url = 'https://dev02keys.flashcoin.io/api/login';
                 var params = {
                     email: email,
                     password: password,
@@ -256,7 +256,7 @@
                 credentials.trackId = query.track_id;
             }
 
-            var url = 'https://keys.flashcoin.io/api/createEasy';
+            var url = 'https://dev02keys.flashcoin.io/api/createEasy';
             $("#loading-icon").show();
 
             $.post(url, credentials, function (resp) {
@@ -280,7 +280,7 @@
         }
 
         function checkLocation() {
-            var url = 'https://keys.flashcoin.io/api/check-location';
+            var url = 'https://dev02keys.flashcoin.io/api/check-location';
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -299,7 +299,7 @@
             var idToken = localStorage.getItem('fl-idtoken-2606');
 
             if (idToken) {
-                var url = 'https://keys.flashcoin.io/api/session';
+                var url = 'https://dev02keys.flashcoin.io/api/session';
                 $("#loading-icon").show();
 
                 $.ajax({
