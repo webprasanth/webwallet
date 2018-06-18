@@ -120,8 +120,8 @@ export default class HomeActivity extends BaseElement {
         new Date(new Date(from).setHours(0, 0, 0, 0))
       );
     }
-
-    this.toDateObject.datepicker('setDate', '-0d');
+    
+    this.toDateObject.datepicker('setDate', getDisplayDate(new Date(), state.userData.user.timezone));
 
     // Auto set date range validation
     this.fromDateObject.datepicker(
@@ -136,7 +136,7 @@ export default class HomeActivity extends BaseElement {
       'setStartDate',
       this.fromDateObject.datepicker('getDate')
     );
-    this.toDateObject.datepicker('setEndDate', '+0d');
+    this.toDateObject.datepicker('setEndDate', getDisplayDate(new Date(), state.userData.user.timezone));
 
     // Add date range validation on change
     this.fromDateObject.on('changeDate', selectedDate => {

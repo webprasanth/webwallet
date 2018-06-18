@@ -8,6 +8,9 @@
       "bitcoinjs-lib": "npm:bitcoinjs-lib@^2.3.0",
       "bs58check": "npm:bs58check@^1.2.0",
       "core-js": "npm:core-js@^2.4.1",
+      "ethereumjs-tx": "npm:ethereumjs-tx@1.1.4",
+      "hdkey": "npm:hdkey@0.7.0",
+      "js-sha3": "npm:js-sha3@^0.7.0",
       "lodash": "npm:lodash@^4.16.6",
       "maulikvora/qr-code-scanner": "github:maulikvora/qr-code-scanner@master",
       "moment-timezone": "npm:moment-timezone@^0.5.9",
@@ -102,6 +105,9 @@
         "jspmNodeConversion": false,
         "format": "cjs"
       },
+      "npm:pbkdf2@3.0.16": {
+        "main": "browser.js"
+      },
       "npm:readable-stream@1.1.14": {
         "map": {
           "stream": "stream-browserify/index"
@@ -116,6 +122,9 @@
           "string_decoder": "~0.10.0",
           "stream-browserify": "^1.0.0"
         }
+      },
+      "npm:safe-buffer@5.1.2": {
+        "browser": "index.js"
       },
       "npm:typescript@2.0.7": {
         "browser": {},
@@ -147,7 +156,8 @@
     "typescript": "^2.0.8"
   },
   "dependencies": {
-    "compression": "^1.6.2"
+    "compression": "^1.6.2",
+    "hdkey": "^0.7.0"
   },
   "scripts": {
     "pre-commit": "lint-staged"

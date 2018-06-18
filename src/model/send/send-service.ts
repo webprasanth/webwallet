@@ -59,4 +59,12 @@ export default class SendService {
       });
     });
   }
+
+  getEthTransactionCount(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getEthTransactionCount(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

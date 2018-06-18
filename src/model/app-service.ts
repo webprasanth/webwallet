@@ -446,6 +446,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  createETHWallet(params, cb) {
+    let options = this.makeRequestOption(
+      'api/createEthWallet',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setRecoveryKeys(params, cb) {
     let options = this.makeRequestOption(
       'api/setRecoveryKeys',
@@ -584,7 +594,28 @@ export default class AppService {
       cb
     );
     $.ajax(options);
-  }  
+  }
+
+  getEtherGasValues(params, cb) {
+    let options = this.makeRequestOption(
+      'api/gas-values',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getEthTransactionCount(params, cb) {
+    let options = this.makeRequestOption(
+      'api/eth-txn-count',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
   setAuthInfo(authVersion, sessionToken) {
     this.authVersion = authVersion;
     this.sessionToken = sessionToken;

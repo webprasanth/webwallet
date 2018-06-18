@@ -98,6 +98,18 @@ export default class HomeSend extends BaseElement {
         });
     }
 
+    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.ETH) {
+      CommonService.singleton()
+        .getEtherGasValues()
+        .then((resp: any) => {
+          console.log(resp);
+          if(resp.rc == 1 && resp.gas_price && resp.gas_limit) {
+            tag.SatoshiPerByte = parseInt(resp.gas_price);  //price per gas in Wei (Wei unit of Ether)
+            tag.bcMedianTxSize = parseInt(resp.gas_limit);  //max gas to be used
+          }
+        });
+    }
+
     $('#amount-input').on(
       'propertychange change click paste',
       this.calculateFee
@@ -259,6 +271,8 @@ export default class HomeSend extends BaseElement {
       fee: fee,
       wallet: this.sendWallet,
       cb: this.clearForms.bind(this),
+      SatoshiPerByte: parseInt(tag.SatoshiPerByte),  //price per gas in Wei (Wei unit of Ether)
+      bcMedianTxSize: parseInt(tag.bcMedianTxSize)  //max gas to be used
     });
 
     /* Below code is commented as 2fa while transaction is not required as of now. 
@@ -317,7 +331,7 @@ export default class HomeSend extends BaseElement {
           result = result.substring(0, containsQueMark);
         }
 
-        if (result.length < 25 || result.length > 34) QRcodeScanError();
+        if (result.length < 25 || result.length > 42) QRcodeScanError();
         else {
           $('#to-email-id').val(result);
           this.checkAddress();

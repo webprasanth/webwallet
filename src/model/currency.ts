@@ -6,6 +6,7 @@ export const CURRENCY_TYPE = {
   BTC: 2,
   LTC: 3,
   DASH: 4,
+  ETH: 5,
 };
 
 export const CURRENCY_TYPE_UNIT = {
@@ -13,6 +14,7 @@ export const CURRENCY_TYPE_UNIT = {
   2: 'BTC',
   3: 'LTC',
   4: 'DASH',
+  5: 'ETH',
 };
 
 export const CURRENCY_TYPE_UNIT_UPCASE = {
@@ -20,6 +22,7 @@ export const CURRENCY_TYPE_UNIT_UPCASE = {
   2: 'BTC',
   3: 'LTC',
   4: 'DASH',
+  5: 'ETH',
 };
 
 export const CURRENCY_ICON_URL = {
@@ -27,6 +30,7 @@ export const CURRENCY_ICON_URL = {
   2: 'assets/images/btc-icon.png',
   3: 'assets/images/ltc-icon.png',
   4: 'assets/images/dash-icon.png',
+  5: 'assets/images/eth-icon.png',
 };
 
 export function getCurrencyUnitUpcase(currency_type) {

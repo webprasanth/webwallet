@@ -1,6 +1,9 @@
 import bitcoin from 'bitcoinjs-lib';
 import bip39 from 'bip39';
 import base58check from 'bs58check';
+import hdkey from 'hdkey';
+import ethTx from 'ethereumjs-tx';
+
 import { CURRENCY_TYPE } from './currency';
 import { APP_MODE } from './app-service';
 
@@ -82,12 +85,19 @@ export const NETWORKS = {
     wif: 0xef,
     dustThreshold: 546
   },
+  ETH: {
+    chainId: 1,
+  },
+  ETH_TESTNET: {
+    chainId: 4
+  },
 };
 
 const NETWORK_NAME = 'flashcoin';
 
 export default class Wallet {
   private accounts = null;
+  private addrNode = null;
   currency_type = null;
   pure_passphrase = null;
 
@@ -113,6 +123,12 @@ export default class Wallet {
         else 
           network = NETWORKS.DASH_TESTNET;
         break;
+      case CURRENCY_TYPE.ETH:
+        if (APP_MODE == 'PROD') 
+          network = NETWORKS.ETH;
+        else 
+          network = NETWORKS.ETH_TESTNET;
+        break;
       case CURRENCY_TYPE.FLASH:
       default:
         network = NETWORKS.FLASH;
@@ -130,14 +146,20 @@ export default class Wallet {
     }
 
     let seed = bip39.mnemonicToSeedHex(mnemonic);
-    let accountZero = bitcoin.HDNode.fromSeedHex(seed, this.getCryptoNetwork(wdata.currency_type)).deriveHardened(
-      0
-    );
+    if(wdata.currency_type != CURRENCY_TYPE.ETH) {
+      let accountZero = bitcoin.HDNode.fromSeedHex(seed, this.getCryptoNetwork(wdata.currency_type)).deriveHardened(
+        0
+      );
 
-    this.accounts = {
-      externalAccount: accountZero.derive(0),
-      internalAccount: accountZero.derive(1),
-    };
+      this.accounts = {
+        externalAccount: accountZero.derive(0),
+        internalAccount: accountZero.derive(1),
+      };
+    } else {
+      let seed = bip39.mnemonicToSeed(mnemonic);
+      let root = hdkey.fromMasterSeed(seed);
+      this.addrNode = root.derive("m/44'/60'/0'/0/0");
+    }
     this.currency_type = wdata.currency_type;
     if(return_passphrase)
       this.pure_passphrase = wdata.pure_passphrase;
@@ -155,6 +177,19 @@ export default class Wallet {
     }
 
     return txBuilder.build();
+  }
+
+  signEtherBasedTx(rawTx) {
+    let network = this.getCryptoNetwork(parseInt(localStorage.getItem('currency_type')));
+    rawTx.chainId = network.chainId;
+
+    let tx = new ethTx(rawTx);
+    //Signing the transaction with the correct private key
+    tx.sign(this.addrNode._privateKey);
+    //var serializedTx = tx.serialize()
+    //console.log(serializedTx.toString('hex'));
+
+    return tx;
   }
 }
 
