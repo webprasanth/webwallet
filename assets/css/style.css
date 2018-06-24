@@ -1732,3 +1732,12 @@ input:checked + .slider:before {
 select:active, select:hover {
   outline-color: #E0AE27
 }
+
+/* ======= Share Coin style ========*/
+    .sharecoin-remarks {
+        width:auto;
+    }
+    .share-percent {
+        width:40px;
+    }
+	

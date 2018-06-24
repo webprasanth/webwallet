@@ -1,52 +1,82 @@
 <share-coin>
-	<div class="change-confirm-password">
-		<div class="slide-top">
-			<div class="form-active container">
-				<div class="col-xs-12 content-slide right" id="content-slide1">
-					<h2 class="">{getText('sc_question_page_title')}</h2>
-					<div class="box-change-password">
-						<div class="col-xs-12">
-							<div class="col-xs-12 col-sm-6 security-question">
-								<div id="sesure-msg" class="pointing basic label" style="color:red" show={sesureMsg}>
-									<span>{sesureMsg}</span>
-								</div>
-								<div class="col-xs-12 form-group">
-									<select class="form-control" id="questionA">
-                                        <option value="">{getText('sc_question_1')}</option>
-                                        <option each="{question in questionsA}" value="{question}">{question}</option>
-                                    </select>
-								</div>
-								<div class="form-group">
-									<input class="form-control" id="answerA" placeholder="Your Answer">
-								</div>
-								<div class="col-xs-12 form-group">
-									<select class="form-control" id="questionB">
-                                        <option value="">{getText('sc_question_2')}</option>
-                                        <option each="{question in questionsB}" value="{question}">{question}</option>
-                                    </select>
-								</div>
-								<div class="form-group">
-									<input class="form-control" id="answerB" placeholder="Your Answer">
-								</div>
-								<div class="col-xs-12 form-group">
-									<select class="form-control" id="questionC">
-                                        <option value="">{getText('sc_question_3')}</option>
-                                        <option each="{question in questionsC}" value="{question}">{question}</option>
-                                    </select>
-								</div>
-								<div class="form-group">
-									<input class="form-control" id="answerC" placeholder="Your Answer">
-								</div>
-								<div class="create-account form-group text-center">
-									<button id="btn-submit" data-loading-text="{getText('sc_question_proccess_msg')}" class="btn-create-account" type="submit" onclick={checkSecureQuestion}>{getText('sc_question_submit_label')}</button>
-								</div>
-							</div>
-						</div>
-
-						
-					</div>
-				</div>
+<div class ="container">
+	<div class ="my-share-code" style="width:80%">
+		<h3 class="title">My Share Code</h3>
+		<div class="form-input">
+			<div class="form-group col-xs-12 col-sm-6">
+				<input class="" id="mysharecode" type="text" disabled="true">
+				<input class="" id="myshare-percent" type="text" style="width:40px">
+				<button type="button" class="btn btn-primary" id="generate-sharecode" onclick={generateMyShareCode} show={showGenerateButton}>generate</button>
 			</div>
 		</div>
+		<div class="form-address" id="address-to-pay" show={showAddressForm}>
+		  <div class= "row0">
+			<span class="title">Flash Address</span>
+			<span class="title">Percent to share</span>
+			<span class="title">Remark</span>
+		  </div>
+		<div class= "row1">
+			<input type="text" id="share-address1">
+			<input type="text" id="share-percent1" class="share-percent" value="0">
+			<input type="text" id="remark1" class="sharecoin-remarks">
+		  </div>
+		  <div class= "row2">
+			<input type="text" id="share-address2">
+			<input type="text" id="share-percent2" class="share-percent" value="0">
+			<input type="text" id="remark2">
+		  </div>
+		  <div class= "row3">
+			<input type="text" id="share-address3">
+			<input type="text" id="share-percent3" class="share-percent" value="0">
+			<input type="text" id="remark3">
+		  </div>
+		  <div class= "row4">
+			<input type="text" id="share-address4">
+			<input type="text" id="share-percent4" class="share-percent" value="0">
+			<input type="text" id="remark4">
+		  </div>
+		  <div class= "row5">
+			<input type="text" id="share-address5">
+			<input type="text" id="share-percent5" class="share-percent" value="0">
+			<input type="text" id="remark5">
+		  </div>
+		  <div class= "row6">
+			<input type="text" id="share-address6">
+			<input type="text" id="share-percent6" class="share-percent" value="0">
+			<input type="text" id="remark6">
+		  </div>
+		  <div class= "row7">
+			<input type="text" id="share-address7">
+			<input type="text" id="share-percent7" class="share-percent" value="0">
+			<input type="text" id="remark7">
+		  </div>
+		  <div class= "row8">
+			<input type="text" id="share-address8">
+			<input type="text" id="share-percent8" class="share-percent" value="0">
+			<input type="text" id="remark8">
+		  </div>
+		  <div class= "row9">
+			<input type="text" id="share-address9">
+			<input type="text" id="share-percent9" class="share-percent" value="0">
+			<input type="text" id="remark9">
+		  </div>
+		  <div class= "row10">
+			<input type="text" id="share-address10">
+			<input type="text" id="share-percent10" class="share-percent" value="0">
+			<input type="text" id="remark10">
+		  </div>
+		<button type="button" class="btn btn-primary" id="edit-address" onclick={removeShareCode}>edit</button>
+		<button type="button" class="btn btn-primary" id="submit-address" onclick={submitAddressDetail}>Submit</button>
+        <button type="button" class="btn btn-primary" id="remove-sharecode" onclick={deleteMyShareCode}>remove</button>
+      </div>
 	</div>
+	<div class="payout-share-code style="width:20%">
+		<h3 class="title">My Payout Share Code</h3>
+		<div class="form-group col-xs-12 col-sm-6">
+			<input class="form-control" id="mypayoutcode" type="text" disabled={this.disabled}>
+			<button type="button" class="btn btn-primary" id="update-payoutcode" onclick={addPayoutCode}>Add Code</button>
+			<button type="button" class="btn btn-primary" id="remove-payoutcode" onclick={removePayoutCode}>remove</button>
+		</div>
+	</div>
+</div>
 </share-coin>

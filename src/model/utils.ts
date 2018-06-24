@@ -589,3 +589,13 @@ export function getSecurityQuestion() {
     ],
   };
 }
+
+export function getSixCharString() {
+  var randomText = "";
+  var possible = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+
+  for (var i = 0; i < 6; i++)
+    randomText += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return randomText;
+}
