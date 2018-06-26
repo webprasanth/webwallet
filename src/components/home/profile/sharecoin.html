@@ -5,7 +5,7 @@
 		<div class="form-input">
 			<div class="form-group col-xs-12 col-sm-6">
 				<input class="" id="mysharecode" type="text" disabled="true">
-				<input class="" id="myshare-percent" type="text" style="width:40px">
+				<input class="" id="txnshare-percent" type="text" style="width:40px">
 				<button type="button" class="btn btn-primary" id="generate-sharecode" onclick={generateMyShareCode} show={showGenerateButton}>generate</button>
 			</div>
 		</div>
@@ -65,9 +65,8 @@
 			<input type="text" id="share-percent10" class="share-percent" value="0">
 			<input type="text" id="remark10">
 		  </div>
-		<button type="button" class="btn btn-primary" id="edit-address" onclick={removeShareCode}>edit</button>
+		<button type="button" class="btn btn-primary" id="edit-address" onclick={editShareCode}>edit</button>
 		<button type="button" class="btn btn-primary" id="submit-address" onclick={submitAddressDetail}>Submit</button>
-        <button type="button" class="btn btn-primary" id="remove-sharecode" onclick={deleteMyShareCode}>remove</button>
       </div>
 	</div>
 	<div class="payout-share-code style="width:20%">

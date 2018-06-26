@@ -114,4 +114,20 @@ export default class ProfileService {
       });
     });
   }
+
+  addSharecoinDetails(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addSharecoinDetails(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getSharingCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getSharingCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }  
 }

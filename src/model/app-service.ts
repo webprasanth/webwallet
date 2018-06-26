@@ -1,5 +1,5 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://dev02keys.flashcoin.io/';
+const HOST_URL = 'https://dev03keys.flashcoin.io/';
 export const APP_MODE = 'DEV'; //DEV, PROD
 
 export default class AppService {
@@ -662,4 +662,25 @@ export default class AppService {
       success: cb,
     };
   }
+
+  addSharecoinDetails(params, cb) {
+    let options = this.makeRequestOption(
+      'api/add-sharing-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getSharingCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-sharing-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+  
 }

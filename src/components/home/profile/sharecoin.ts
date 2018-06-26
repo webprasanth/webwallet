@@ -4,6 +4,8 @@
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
 import { userActions } from '../../../model/users/actions';
+import { profileActions } from '../../../model/profile/actions';
+import { PROFILE } from '../../../model/action-types';
 import ShareCoinTemplate from './sharecoin.html!text';
 import BaseElement from '../../base-element';
 import { USERS } from '../../../model/action-types';
@@ -12,9 +14,9 @@ import * as utils from '../../../model/utils';
 let tag = null;
 @template(ShareCoinTemplate)
 export default class ShareCoin extends BaseElement {
-  private sesureMsg: string = null;
   private static unsubscribe = null;
   private sixDigitCode = null;
+  private txnPercent = 0;
   private showAddressForm = false;
   private showGenerateButton = true;
   private sumPercent = 0;
@@ -26,10 +28,50 @@ export default class ShareCoin extends BaseElement {
 	//TODO 2 Call function and populate MyPayoutShare code
     
 	//call get-sharing-code  , if response not null , set showAddress form true and showgenerate true, vice versa and populate other detail
-	var i;
-	for (i = 1; i <= 10; i++) {
+    this.getSharingCode();
+	
+	if (ShareCoin.unsubscribe) ShareCoin.unsubscribe();
+    ShareCoin.unsubscribe = store.subscribe(
+      this.onApplicationStateChanged.bind(this)
+    );
+	
+	$("#txnshare-percent").keypress(utils.filterNumberEdit);
+	for (var i = 1; i <= 10; i++) {
 		$("#share-percent" + i).keypress(utils.filterNumberEdit);
 	}	
+  }
+
+    onApplicationStateChanged() {
+    let state = store.getState();
+    let type = state.lastAction.type;
+    let data = state.lastAction.data;
+	//alert('type is ' + type);
+    switch (type) {
+      case PROFILE.ADD_SHARECOIN_SUCCESS:
+        super.showMessage('', this.getText('UPDATE_SHARECOIN_SUCCESS'));
+        break;
+      case PROFILE.ADD_SHARECOIN_FAILED:
+        super.showMessage('', this.getText('UPDATE_SHARECOIN_FAILED'));
+        break;
+      case PROFILE.GET_SHARECODE_SUCCESS:
+	    if(data.sharing_code.length != 0){
+          this.showGenerateButton = false;
+		  this.showAddressForm = true;
+		  this.sixDigitCode = data.sharing_code[0].code;
+		  this.txnPercent = data.sharing_code[0].sharing_fee;
+		}
+		this.populateShareDetails(data);
+		
+	    super.showMessage('', this.getText('GET_SHARECODE_SUCCESS'));
+		alert(data.sharing_code[0].address);
+        break;
+      case PROFILE.GET_SHARECODE_FAILED:
+        super.showMessage('', this.getText('GET_SHARECODE_FAILED'));
+        break;
+	default: break;
+    }
+
+    this.update();
   }
 
   //Add a method to Generate Share code
@@ -55,26 +97,39 @@ export default class ShareCoin extends BaseElement {
 	1. Validate all address is valid flash Address
 	2. Sum of percentage makes excatly 100%	
 	*/
-	var i;
-	for (i = 1; i <= 3; i++) {
-        var flashShareAddress = $("#share-address" + i).val();
-		var percentToShare = $("#share-percent" + i).val();
-		alert( 'address is ' + flashShareAddress);
-		if(flashShareAddress == ''){
-		$("#share-percent" + i).val('0');
-			alert('cannot be blank');
-		}
+	this.txnPercent = $("#txnshare-percent").val();
+	if(this.txnPercent === ''){
+	  super.showError('', 'Transaction Share Percent cannot be empty');
+	  $("#txnshare-percent").focus().select();
+	  //TODO test this focus feature
+      return;
 	}
 	
+	for (var i = 1; i <= 10; i++) {
+        var flashShareAddress = $("#share-address" + i).val();
+		var percentToShare = $("#share-percent" + i).val();
+		if(flashShareAddress == ''){
+		$("#share-percent" + i).val('0');
+			continue;
+		}
+		if(!this.isValidFlashAddress(flashShareAddress)){
+          super.showError('', 'Invalid flash address');
+          return;
+		}
+		
+	}
+		
 	this.sumPercent =  parseFloat($('#share-percent1').val()) + parseFloat($('#share-percent2').val()) + parseFloat($('#share-percent3').val()) + 
 	                   parseFloat($('#share-percent4').val()) + parseFloat($('#share-percent5').val()) + parseFloat($('#share-percent6').val()) + 
                        parseFloat($('#share-percent7').val()) + parseFloat($('#share-percent8').val()) + parseFloat($('#share-percent9').val()) + 
                        parseFloat($('#share-percent10').val());
-	alert('submit share code form' + this.sumPercent);
-	if(!this.checkAllAddress()){
-        alert('invalid flash address');
-		return;
-    }
+					   
+	if(this.sumPercent != '100'){
+      super.showError('', 'Sum of all share percent must be 100' + this.sumPercent);
+      return;
+	}
+
+    this.addShareAddressAndPercentage();
 }
   
   addPayoutCode(){
@@ -91,13 +146,19 @@ export default class ShareCoin extends BaseElement {
     alert('removePayoutCode');
   }
 
-  generateSixDigitShareCode(){
-  //return a 6 digit share code
-      alert('generateSixDigitShareCode');
+  populateShareDetails(data){
+	$("#mysharecode").val(this.sixDigitCode);
+	$("#txnshare-percent").val(this.txnPercent);
+	
+	for (var i = 0; i < data.sharing_code.length ; i++) {
+        $("#share-address" + (i+1)).val(data.sharing_code[i].address);
+		$("#share-percent" + (i+1)).val(data.sharing_code[i].percentage);
+        $("#remark" + (i+1)).val(data.sharing_code[i].label);		
+    }
   }
 
-  checkAllAddress() {
-    let term = $('#share-address1').val();
+  isValidFlashAddress(term) {
+    //let term = $('#share-address1').val();
 
     if (term == '') {
       return false;
@@ -110,87 +171,26 @@ export default class ShareCoin extends BaseElement {
 	    return true ;
     }
   }  
-  checkSecureQuestion() {
-    let questionA = $('#questionA').val();
-    let questionB = $('#questionB').val();
-    let questionC = $('#questionC').val();
-    let answerA = $('#answerA').val();
-    let answerB = $('#answerB').val();
-    let answerC = $('#answerC').val();
 
-    if (
-      !questionA ||
-      !questionB ||
-      !questionC ||
-      !answerA ||
-      !answerB ||
-      !answerC
-    ) {
-      this.sesureMsg = this.getText('sc_question_required_msg');
-      return;
-    }
+  addShareAddressAndPercentage() {
 
-    this.sesureMsg = null;
-    riot.mount('#confirm-send', 'request-password', {
-      cb: this.setSecurityQuestion,
-    });
+    let params = {
+	  sharing_code: this.sixDigitCode,
+	  sharing_fee: this.txnPercent,
+	  address_1:$('#share-address1').val(),
+	  label_1:$('#remark1').val(),
+	  percentage_1:$('#share-percent1').val(),
+	  address_2:$('#share-address2').val(),
+	  label_2:$('#remark2').val(),
+	  percentage_2:$('#share-percent2').val(),
+	  };
+//TODO create param object
+    store.dispatch(profileActions.addSharecoinDetails(params));
+  }
+  
+  getSharingCode() {
+    let params = {};
+    store.dispatch(profileActions.getSharingCode(params));
   }
 
-  setSecurityQuestion(password) {
-    $('#btn-submit').button('loading');
-
-    let questionA: string = $('#questionA').val();
-    let questionB: string = $('#questionB').val();
-    let questionC: string = $('#questionC').val();
-    let answerA: string = $('#answerA').val();
-    let answerB: string = $('#answerB').val();
-    let answerC: string = $('#answerC').val();
-    let answers = [answerA, answerB, answerC];
-
-    store.dispatch(
-      userActions.updateRecoveryKeys(
-        questionA,
-        answerA,
-        questionB,
-        answerB,
-        questionC,
-        answerC,
-        password
-      )
-    );
-  }
-
-  clearField() {
-    $('#questionA').val('');
-    $('#questionB').val('');
-    $('#questionC').val('');
-    $('#answerA').val('');
-    $('#answerB').val('');
-    $('#answerC').val('');
-  }
-
-  onApplicationStateChanged() {
-    let state = store.getState();
-    let data = state.userData;
-    let type = state.lastAction.type;
-
-    switch (type) {
-      case USERS.UPDATE_SECURITY_QUESTIONS_FAIL:
-        $('#btn-submit').button('reset');
-        super.showError('', this.getText('sc_question_update_fail'));
-        break;
-      case USERS.UPDATE_SECURITY_QUESTIONS_SUCCESS:
-        $('#btn-submit').button('reset');
-        super.showMessage(
-          '',
-          this.getText('sc_question_update_ok'),
-          this.clearField
-        );
-        break;
-      default:
-        break;
-    }
-
-    this.update();
-  }
 }

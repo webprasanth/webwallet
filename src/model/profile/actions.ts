@@ -336,4 +336,49 @@ export const profileActions = {
   verifyPhoneFailed(resp) {
     return { type: PROFILE.VERIFY_PHONE_FAILED, data: resp };
   },
+  
+  addSharecoinDetails(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .addSharecoinDetails(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.addSharecoinDetailsSuccess(resp));
+          } else {
+            dispatch(profileActions.addSharecoinDetailsFailed(resp));
+          }
+        });
+    };
+  },
+
+  addSharecoinDetailsSuccess(resp) {
+    return { type: PROFILE.ADD_SHARECOIN_SUCCESS, data: resp };
+  },
+
+  addSharecoinDetailsFailed(resp) {
+    return { type: PROFILE.ADD_SHARECOIN_FAILED, data: resp };
+  },
+
+  getSharingCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .getSharingCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.getSharingCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.getSharingCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+ getSharingCodeSuccess(resp) {
+    return { type: PROFILE.GET_SHARECODE_SUCCESS, data: resp };
+  },
+
+  getSharingCodeFailed(resp) {
+    return { type: PROFILE.GET_SHARECODE_FAILED, data: resp };
+  },  
+  
 };
