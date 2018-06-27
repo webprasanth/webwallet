@@ -123,6 +123,14 @@ export default class ProfileService {
     });
   }
 
+  updateSharecoinDetails(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().updateSharecoinDetails(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+  
   getSharingCode(params) {
     return new Promise((resolve, reject) => {
       AppService.getInstance().getSharingCode(params, resp => {
@@ -130,4 +138,29 @@ export default class ProfileService {
       });
     });
   }  
+
+  addPayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addPayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getCurrentPayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getCurrentPayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }    
+
+  removePayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().removePayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  } 
+
 }

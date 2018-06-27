@@ -65,16 +65,16 @@
 			<input type="text" id="share-percent10" class="share-percent" value="0">
 			<input type="text" id="remark10">
 		  </div>
-		<button type="button" class="btn btn-primary" id="edit-address" onclick={editShareCode}>edit</button>
-		<button type="button" class="btn btn-primary" id="submit-address" onclick={submitAddressDetail}>Submit</button>
+		<button type="button" class="btn btn-primary" id="edit-address" onclick={updateSharecodeRecords} show={showUpdateButton}>Update</button>
+		<button type="button" class="btn btn-primary" id="submit-address" onclick={submitAddressDetail} show={showSubmitAddressButton}>Submit</button>
       </div>
 	</div>
 	<div class="payout-share-code style="width:20%">
 		<h3 class="title">My Payout Share Code</h3>
 		<div class="form-group col-xs-12 col-sm-6">
-			<input class="form-control" id="mypayoutcode" type="text" disabled={this.disabled}>
-			<button type="button" class="btn btn-primary" id="update-payoutcode" onclick={addPayoutCode}>Add Code</button>
-			<button type="button" class="btn btn-primary" id="remove-payoutcode" onclick={removePayoutCode}>remove</button>
+            <input class="form-control" id="mypayoutcode" type="text" maxlength="6" >
+            <button type="button" class="btn btn-primary" id="update-payoutcode" onclick={submitPayoutCode}>Add Code</button>
+            <button type="button" class="btn btn-primary" id="remove-payoutcode" onclick={removePayoutCode}>remove</button>
 		</div>
 	</div>
 </div>

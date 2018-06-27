@@ -673,6 +673,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  updateSharecoinDetails(params, cb) {
+    let options = this.makeRequestOption(
+      'api/update-sharing-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }  
+  
   getSharingCode(params, cb) {
     let options = this.makeRequestOption(
       'api/get-sharing-code',
@@ -682,5 +692,35 @@ export default class AppService {
     );
     $.ajax(options);
   }
-  
+
+  addPayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/add-payout-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getCurrentPayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-payout-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  removePayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/remove-payout-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
 }

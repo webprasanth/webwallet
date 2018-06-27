@@ -359,6 +359,28 @@ export const profileActions = {
     return { type: PROFILE.ADD_SHARECOIN_FAILED, data: resp };
   },
 
+  updateSharecoinDetails(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .updateSharecoinDetails(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.updateSharecoinDetailsSuccess(resp));
+          } else {
+            dispatch(profileActions.updateSharecoinDetailsFailed(resp));
+          }
+        });
+    };
+  },
+
+  updateSharecoinDetailsSuccess(resp) {
+    return { type: PROFILE.UPDATE_SHARECOIN_SUCCESS, data: resp };
+  },
+
+  updateSharecoinDetailsFailed(resp) {
+    return { type: PROFILE.UPDATE_SHARECOIN_FAILED, data: resp };
+  },
+
   getSharingCode(params) {
     return dispatch => {
       ProfileService.singleton()
@@ -380,5 +402,72 @@ export const profileActions = {
   getSharingCodeFailed(resp) {
     return { type: PROFILE.GET_SHARECODE_FAILED, data: resp };
   },  
+
+  addPayoutCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .addPayoutCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.addPayoutCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.addPayoutCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+ addPayoutCodeSuccess(resp) {
+    return { type: PROFILE.ADD_PAYOUTCODE_SUCCESS, data: resp };
+  },
+
+  addPayoutCodeFailed(resp) {
+    return { type: PROFILE.ADD_PAYOUTCODE_FAILED, data: resp };
+  },
+ 
+  getCurrentPayoutCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .getCurrentPayoutCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.getCurrentPayoutCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.getCurrentPayoutCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+ getCurrentPayoutCodeSuccess(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_SUCCESS, data: resp };
+  },
+
+  getCurrentPayoutCodeFailed(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_FAILED, data: resp };
+  }, 
+ 
+  removePayoutCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .removePayoutCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.removePayoutCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.removePayoutCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+ removePayoutCodeSuccess(resp) {
+    return { type: PROFILE.REMOVE_PAYOUTCODE_SUCCESS, data: resp };
+  },
+
+  removePayoutCodeFailed(resp) {
+    return { type: PROFILE.REMOVE_PAYOUTCODE_FAILED, data: resp };
+  }, 
   
+ 
 };
