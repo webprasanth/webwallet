@@ -1734,10 +1734,57 @@ select:active, select:hover {
 }
 
 /* ======= Share Coin style ========*/
-    .sharecoin-remarks {
-        width:auto;
-    }
-    .share-percent {
-        width:40px;
-    }
-	
+.sharecoin-adress{
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+}
+.sharecoin-remarks {
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+  margin-left:5px;
+}
+.share-percent {
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+  margin-left:5px;
+}
+.txn-share{
+  width :50%;
+  padding-left : 7px;
+  margin-left : 10px;
+}
+.flash-share-heading{
+  margin-left : 10px;
+}
+.address-row{
+  margin-top:3px;
+}
+
+.flash-desc{
+  font-weight:700;
+  line-height:2.0;
+}
+.flash-desc-percent{
+  font-weight:700;
+  margin-left:5px;
+  line-height:2.0;
+}
+.flash-desc-remark{
+  font-weight:700;
+  margin-left:5px;
+  line-height:2.0;
+}
+
+#mysharecode {
+  padding-left:5px;
+  font-size:large;
+}
+#mypayoutcode {
+  font-size:large;
+}
+.btn-submit-update{
+  margin-top:15px;
+}

@@ -11,7 +11,6 @@ import BaseElement from '../../base-element';
 import { USERS } from '../../../model/action-types';
 import * as utils from '../../../model/utils';
 
-let tag = null;
 @template(ShareCoinTemplate)
 export default class ShareCoin extends BaseElement {
   private static unsubscribe = null;
@@ -247,7 +246,6 @@ export default class ShareCoin extends BaseElement {
   }  
 
   addShareAddressAndPercentage() {
-
     let params = {
 	  sharing_code: this.sixDigitCode,
 	  sharing_fee: this.txnPercent,
