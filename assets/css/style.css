@@ -1734,22 +1734,25 @@ select:active, select:hover {
 }
 
 /* ======= Share Coin style ========*/
-.sharecoin-adress{
+.sharecoin-address{
   padding-left:5px;
   border : 1px solid #ccc;
   border-radius : 4px;
+  line-height : 2.0;
 }
 .sharecoin-remarks {
   padding-left:5px;
   border : 1px solid #ccc;
   border-radius : 4px;
   margin-left:5px;
+  line-height : 2.0;
 }
 .share-percent {
   padding-left:5px;
   border : 1px solid #ccc;
   border-radius : 4px;
   margin-left:5px;
+  line-height : 2.0;
 }
 .txn-share{
   width :50%;
@@ -1765,17 +1768,14 @@ select:active, select:hover {
 
 .flash-desc{
   font-weight:700;
-  line-height:2.0;
 }
 .flash-desc-percent{
   font-weight:700;
   margin-left:5px;
-  line-height:2.0;
 }
 .flash-desc-remark{
   font-weight:700;
   margin-left:5px;
-  line-height:2.0;
 }
 
 #mysharecode {

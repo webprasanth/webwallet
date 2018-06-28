@@ -143,7 +143,7 @@ export default class ShareCoin extends BaseElement {
   isValidTxnAmountPercent(){
     this.txnPercent = $("#txnshare-percent").val();
       if(this.txnPercent === ''){
-        super.showError('', 'Transaction Share Percent cannot be empty');
+        super.showError('', 'Share Percent cannot be empty');
         $("#txnshare-percent").focus().select();
         return false;
       }
