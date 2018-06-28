@@ -19,7 +19,7 @@ export default class SendService {
         amount: amount,
         message: message,
         currency_type: userSelectedCurrency,
-        custom_fee: custom_fee
+        custom_fee: custom_fee,
       };
 
       AppService.getInstance().rawTransaction(params, resp => {
@@ -28,9 +28,33 @@ export default class SendService {
     });
   }
 
+  createRawTxMulti(toAddresses, custom_fee, message) {
+    return new Promise((resolve, reject) => {
+      var userSelectedCurrency = localStorage.getItem('currency_type');
+      let params = {
+        toAddresses: toAddresses,
+        message: message,
+        currency_type: userSelectedCurrency,
+        custom_fee: custom_fee,
+      };
+
+      AppService.getInstance().rawTransactionMulti(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   addTxn(params, wallet) {
     return new Promise((resolve, reject) => {
       AppService.getInstance().addTransaction(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  addTxnMulti(params, wallet) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addTransactionMulti(params, resp => {
         resolve(resp);
       });
     });

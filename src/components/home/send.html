@@ -43,6 +43,15 @@
 						<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
 					</div>
 				</div>
+				<div show={showSharingFee} class="col-xs-12">
+					<div class="form-group amount-field col-xs-6 col-sm-4">
+						<label>{getText('common_sharing_tx_fee_label')}</label>
+						<div class="input-group">
+							<span class="input-group-addon">{getCurrencyUnit()}</span>
+							<input readonly type="text" value="0.00" id="sharing-fee-input" min="0" step="1" class="form-control">
+						</div>
+					</div>
+				</div>
 				<div class="form-group col-xs-12">
 					<label>Note</label>
 					<textarea type="text" class="form-control" id="payment-memo" placeholder="" maxlength="50"></textarea>

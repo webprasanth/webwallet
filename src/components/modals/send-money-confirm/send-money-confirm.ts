@@ -106,17 +106,30 @@ export default class SendMoneyConfirm extends BaseElement {
   createRawTx() {
     this.confirmation = true;
     this.sending = true;
-    if(parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.ETH) {
-      store.dispatch(
-        sendActions.createRawTx(
-          this.opts.wallet,
-          this.opts.amount,
-          this.opts.fee,
-          this.opts.wallet.memo
-        )
-      );
-    }
-    else {  //Ether based transactions
+    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.ETH) {
+      if (parseFloat(this.opts.sharingFee) > 0) {
+        store.dispatch(
+          sendActions.createRawTxMulti(
+            this.opts.wallet,
+            this.opts.amount,
+            this.opts.fee,
+            this.opts.wallet.memo,
+            this.opts.sharingFee,
+            this.opts.payoutInfo
+          )
+        );
+      } else {
+        store.dispatch(
+          sendActions.createRawTx(
+            this.opts.wallet,
+            this.opts.amount,
+            this.opts.fee,
+            this.opts.wallet.memo
+          )
+        );
+      }
+    } else {
+      //Ether based transactions
       store.dispatch(
         sendActions.createAndSignRawTx(
           this.opts.wallet,

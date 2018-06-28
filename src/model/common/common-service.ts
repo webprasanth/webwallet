@@ -119,4 +119,12 @@ export default class CommonService {
       });
     });
   }
+
+  getPayoutInfo() {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getPayoutInfo(resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
