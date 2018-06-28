@@ -45,6 +45,10 @@
 						<div class="name-item">{getText('common_tx_fee_label')}</div>
 						<div class="data-item">&nbsp;{txnDetail.fee}&nbsp;{getCurrencyUnitUpcase()}</div>
 					</div>
+					<div class="listItems" show={meta.type==1 && meta.sharing_fee && meta.sharing_fee != 0}>
+						<div class="name-item">{getText('common_sharing_tx_fee_label')}</div>
+						<div class="data-item">&nbsp;{meta.sharing_fee}&nbsp;{getCurrencyUnitUpcase()}</div>
+					</div>
 					<div class="listItems">
 						<div class="name-item">{getText('common_note_label')}</div>
 						<div class="data-item">
