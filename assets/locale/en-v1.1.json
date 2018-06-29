@@ -146,6 +146,8 @@
     "activity_tab_all_transaction"             : "All Transactions",
     "activity_tab_received_transaction"        : "Payments Received",
     "activity_tab_sent_transaction"            : "Payments Sent",
+    "activity_tab_sharing_in_transaction"      : "Sharing IN",
+    "activity_tab_sharing_out_transaction"     : "Sharing OUT",
     "activity_description_date_range"          : "from %(fromDate)s to %(toDate)s",
     "activity_filter_no_result"                : "You have other transactions before this date range.   Please click Show All Activity to view.",
     "activity_table_header_name"               : "Name",
