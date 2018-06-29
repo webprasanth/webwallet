@@ -1,5 +1,5 @@
 /**
- * Landing page
+ * Landing page of Flash wallet Share
  */
 import { riot, template } from '../../riot-ts';
 import store from '../../../model/store';
@@ -20,6 +20,9 @@ export default class ShareCoin extends BaseElement {
   private showGenerateButton = true;
   private showSubmitAddressButton = false;
   private showUpdateButton = true;
+  private showSubmitPayoutButton = false;
+  private showRemovePayoutButton = true;
+  private showCopyButton = false ;
   private sumPercent = 0;
   private payoutCode = '';
   private payoutCodeResponse = '';
@@ -48,16 +51,18 @@ export default class ShareCoin extends BaseElement {
     switch (type) {
       case PROFILE.ADD_SHARECOIN_SUCCESS:
         this.showGenerateButton = false;
+        this.showCopyButton = true;
         this.showUpdateButton = true;
         this.showSubmitAddressButton = false;
-        super.showMessage('', this.getText('Your Details is added succesfully'));
+        super.showMessage('', this.getText('wallet_share_record_added'));
         break;
       case PROFILE.ADD_SHARECOIN_FAILED:
-        super.showMessage('', this.getText('Addition of records failed !!'));
+        super.showMessage('', this.getText('wallet_share_record_failed'));
         break;
       case PROFILE.GET_SHARECODE_SUCCESS:
 	    if(data.sharing_code.length != 0){
 		  this.showGenerateButton = false;
+		  this.showCopyButton = true;
 		  this.showUpdateButton = true;
 		  this.showSubmitAddressButton = false;
 		  this.showAddressForm = true;
@@ -67,38 +72,45 @@ export default class ShareCoin extends BaseElement {
 		}
 		else {
 		  this.showGenerateButton = true;
+		  this.showCopyButton = false;
 		  this.showUpdateButton = false;
 		  this.showSubmitAddressButton = true;		
 		}
        break;
       case PROFILE.GET_SHARECODE_FAILED:
-        super.showMessage('', this.getText('Can not get your Sharecode !!'));
+        super.showMessage('', this.getText('wallet_share_code_not_get'));
         break;
       case PROFILE.UPDATE_SHARECOIN_SUCCESS:
-        super.showMessage('', this.getText('Your Details is updated succesfully'));
+        super.showMessage('', this.getText('wallet_share_record_updated'));
         break;
       case PROFILE.UPDATE_SHARECOIN_FAILED:
-        super.showMessage('', this.getText('updation of records failed !!'));
+        super.showMessage('', this.getText('wallet_share_update_failed'));
         break;
       case PROFILE.ADD_PAYOUTCODE_SUCCESS:
-        super.showMessage('', this.getText('Your Payout code is added succesfully'));
+        this.showSubmitPayoutButton = false;
+        this.showRemovePayoutButton = true;
+        super.showMessage('', this.getText('wallet_share_payout_added'));
         break;
       case PROFILE.ADD_PAYOUTCODE_FAILED:
-	    
         super.showMessage('', this.getText('ERROR : ' + data.reason));
         break;
       case PROFILE.GET_PAYOUTCODE_SUCCESS:
         this.payoutCodeResponse = data;
-        $("#mypayoutcode").val(this.payoutCodeResponse.payout_code);
-        //super.showMessage('', this.getText('Your Payout code is added succesfully'));
+        this.payoutCode = this.payoutCodeResponse.payout_code;
+        if(this.payoutCode == ''){
+          this.showSubmitPayoutButton = true;
+          this.showRemovePayoutButton = false;
+        }
+        $("#mypayoutcode").val(this.payoutCode);
         break;
       case PROFILE.GET_PAYOUTCODE_FAILED:
-        //super.showMessage('', this.getText('Payout code retrieval is failed !!'));
         break;
       case PROFILE.REMOVE_PAYOUTCODE_SUCCESS:
         this.payoutCode = '';
         $("#mypayoutcode").val(this.payoutCode);
-        super.showMessage('', this.getText('Your Payout code is removed succesfully'));
+        this.showSubmitPayoutButton = true;
+        this.showRemovePayoutButton = false;
+        super.showMessage('', this.getText('wallet_share_payout_removed'));
         break;
       case PROFILE.REMOVE_PAYOUTCODE_FAILED:	    
         super.showMessage('', this.getText('ERROR : ' + data.reason));
@@ -111,12 +123,11 @@ export default class ShareCoin extends BaseElement {
 
   generateMyShareCode(){
     //this button should be disabled if any code is generated and valid
-    //alert('generating my 6 digit share code');
 	this.sixDigitCode = utils.getSixCharString();
     $('#mysharecode').val(this.sixDigitCode);
     this.showAddressForm = true;
 	this.showGenerateButton = false;
-  }
+ }
   
   
   submitAddressDetail(){
@@ -143,7 +154,7 @@ export default class ShareCoin extends BaseElement {
   isValidTxnAmountPercent(){
     this.txnPercent = $("#txnshare-percent").val();
       if(this.txnPercent === ''){
-        super.showError('', 'Share Percent cannot be empty');
+        super.showError('', this.getText('wallet_share_percent_nonempty'));
         $("#txnshare-percent").focus().select();
         return false;
       }
@@ -161,7 +172,7 @@ export default class ShareCoin extends BaseElement {
 			continue;
 		}
 		if(!this.isValidFlashAddress(flashShareAddress)){
-          super.showError('', 'Invalid flash address');
+          super.showError('', this.getText('wallet_share_invalid_flash_address'));
           return false;
 		}
 	  }
@@ -175,7 +186,7 @@ export default class ShareCoin extends BaseElement {
                        parseFloat($('#share-percent10').val());
 					   
 	if(this.sumPercent != '100'){
-      super.showError('', 'Sum of all share percent must be 100');
+      super.showError('', this.getText('wallet_share_sum_hundread'));
       return false;
 	} else {
 	  return true;
@@ -184,16 +195,17 @@ export default class ShareCoin extends BaseElement {
 	
 
   submitPayoutCode(){
-  // get percent of txn fee , and show that as alert  , this much will be extra charged per 100 flash
+
     this.payoutCode = $("#mypayoutcode").val();
 	if(this.payoutCode === ''){
-	  super.showError('', 'Payout Code cannot be empty');
+	  super.showError('', this.getText('wallet_share_payout_nonempty'));
 	  return ;
 	}  
+    /*
     if(this.payoutCode === this.sixDigitCode){
-      super.showError('', 'Can not add self ShareCode as payout code');
+      super.showError('', this.getText('Can not add self ShareCode as payout code'));
 	  return ;
-	}
+	} */
 
     let params = {
 	  sharing_code: this.payoutCode,
@@ -210,11 +222,11 @@ export default class ShareCoin extends BaseElement {
  removePayoutCode (){ 
     let params = {};
 	if(this.payoutCode == ''){	
-	  super.showError('', 'There is no payout Code to remove. You need to add first .');
+	  super.showError('', this.getText('no_payout_code'));
 	  return;
 	}
     if(this.payoutCodeResponse.payout_code_is_locked == '1'){
-	 super.showError('', 'This Payout Code is locked hence can not be removed');
+	 super.showError('', this.getText('locked_payout_code'));
 	 return;
     }
     store.dispatch(profileActions.removePayoutCode(params));
@@ -328,4 +340,12 @@ export default class ShareCoin extends BaseElement {
     store.dispatch(profileActions.updateSharecoinDetails(params));
   }
   
+  copyMyShareCode() {
+    var copyText = document.getElementById("mysharecode");
+    copyText.disabled=false;	
+    copyText.select();
+    document.execCommand("copy");
+    copyText.disabled = true;
+    super.showMessage('', this.getText('wallet_share_code_copied'));
+  }  
 }

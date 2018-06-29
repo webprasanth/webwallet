@@ -339,7 +339,10 @@
 	"common_download_label"         		   : "Download",
 	"common_print_label"         		       : "Print",
     "common_generate_label"                       : "Generate",
-
+    "common_copy_label"                        : "Copy",
+    "common_submit_label"                      : "Submit",	
+    "common_addcode_label"                     : "Add Code",
+    "common_remove_label"                      : "Remove",	
     "request_page_title"                       : "Request Payment",
     "request_page_desc"                        : "Enter the information below to request a payment.",
 
@@ -410,5 +413,25 @@
 	
 	"or_scan_qr_code"                          : "OR Scan QR",
     "error_in_scan_qr"                         : "We couldn't scan QR code, please try again",
-    "timeout_in_scan_qr"                       : "Time out while scanning QR code, please try again"
+    "timeout_in_scan_qr"                       : "Time out while scanning QR code, please try again",
+
+	"wallet_share_my_share_code"               : "My Share Code",
+	"wallet_share_my_share_percent"            : "Share Percent",
+	"wallet_share_flash_address"               : "Flash Address",
+	"wallet_share_remark"                      : "Remark",
+	"wallet_share_payout_code"                 : "My Payout Code",
+	"wallet_share_record_added"                : "Your Details is added succesfully",
+	"wallet_share_record_failed"	           : "Addition of records failed !!",
+	"wallet_share_code_not_get"                : "Can not get your Sharecode !!",
+	"wallet_share_record_updated"              : "Your Details is updated succesfully",
+	"wallet_share_update_failed"               : "updation of records failed !!",
+	"wallet_share_payout_added"                : "Your Payout code is added succesfully",
+	"wallet_share_payout_removed"              : "Your Payout code is removed succesfully",
+	"wallet_share_percent_nonempty"            : "Share Percent cannot be empty",
+	"wallet_share_invalid_flash_address"       : "Invalid flash address",
+	"wallet_share_sum_hundread"                : "Sum of all share percent must be 100.",
+	"wallet_share_payout_nonempty"	           : "Payout Code cannot be empty",
+	"no_payout_code"                           : "There is no payout Code to remove. You need to add first .",
+	"locked_payout_code"                       : "This Payout Code is locked hence can not be removed",
+	"wallet_share_code_copied"                 : "Your Share Code is copied to clipboard"
 }

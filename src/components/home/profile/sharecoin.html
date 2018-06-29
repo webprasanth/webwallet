@@ -3,22 +3,23 @@
 	<div class ="my-share-code col-sm-9 col-xs-12" >
 		<div class="form-input">
 			<div class="form-group col-xs-12 col-sm-6">
-				<h3 >My Share Code</h3>
+				<h3 >{getText('wallet_share_my_share_code')}</h3>
 				<input class="form-control col-xs-6" id="mysharecode" type="text" disabled="true">
 			</div>
 			<div class="form-group col-xs-12 col-sm-6">
-                <h3 class="flash-share-heading">Share Percent</h3>
+                <h3 class="flash-share-heading">{getText('wallet_share_my_share_percent')}</h3>
                 <input class="form-control txn-share" id="txnshare-percent" type="text" >
 			</div>
 			<div class=" col-xs-12 ">
-				<button type="button" class="btn btn-primary" id="generate-sharecode" onclick={generateMyShareCode} show={showGenerateButton}>generate</button>
+				<button type="button" class="btn btn-primary" id="generate-sharecode" onclick={generateMyShareCode} show={showGenerateButton}>{getText('common_generate_label')}</button>
+				<button type="button" class="btn btn-default" id="copy-sharecode" onclick={copyMyShareCode} show={showCopyButton}>{getText('common_copy_label')}</button>
 			</div>
 		</div>
 		<div class="form-address col-xs-12" id="address-to-pay" show={showAddressForm}>
 		  <div class= "col-xs-12 row0">
-			<span class="col-xs-6 flash-desc">Flash Address</span>
+			<span class="col-xs-6 flash-desc">{getText('wallet_share_flash_address')}</span>
 			<span class="col-xs-1 flash-desc-percent">%</span>
-			<span class="col-xs-4 flash-desc-remark">Remark</span>
+			<span class="col-xs-4 flash-desc-remark">{getText('wallet_share_remark')}</span>
 		  </div>
 		  <div class= "col-xs-12 address-row  row1">
 			<input type="text" id="share-address1" class="col-xs-6 sharecoin-address"> 
@@ -71,19 +72,19 @@
 			<input type="text" id="remark10" class="sharecoin-remarks col-xs-4">
 		  </div>
 		  <div>
-			<button type="button" class="btn btn-primary btn-submit-update" id="edit-address" onclick={updateSharecodeRecords} show={showUpdateButton}>Update</button>
-			<button type="button" class="btn btn-primary btn-submit-update" id="submit-address" onclick={submitAddressDetail} show={showSubmitAddressButton}>Submit</button>
+			<button type="button" class="btn btn-primary btn-submit-update" id="edit-address" onclick={updateSharecodeRecords} show={showUpdateButton}>{getText('common_update_label')}</button>
+			<button type="button" class="btn btn-primary btn-submit-update" id="submit-address" onclick={submitAddressDetail} show={showSubmitAddressButton}>{getText('common_submit_label')}</button>
 		  </div>
 		</div>
 	</div>
 	<div class="payout-share-code  col-sm-3 col-xs-12">
-		<h3 class="title">My Payout Code</h3>
+		<h3 class="title">{getText('wallet_share_payout_code')}</h3>
 		<div class="form-group col-xs-12 col-sm-12">
             <input class="form-control" id="mypayoutcode" type="text" maxlength="6" >
 		</div>
 		<div class="col-xs-12 col-sm-12">
-            <button type="button" class="btn btn-primary" id="update-payoutcode" onclick={submitPayoutCode}>Add Code</button>
-            <button type="button" class="btn btn-primary" id="remove-payoutcode" onclick={removePayoutCode}>Remove</button>
+            <button type="button" class="btn btn-primary" id="update-payoutcode" onclick={submitPayoutCode} show={showSubmitPayoutButton}>{getText('common_addcode_label')}</button>
+            <button type="button" class="btn btn-primary" id="remove-payoutcode" onclick={removePayoutCode} show={showRemovePayoutButton}>{getText('common_remove_label')}</button>
 		</div>
 	</div>
 </div>
