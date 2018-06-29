@@ -36,7 +36,7 @@
 			</div>
 			<div class="col-xs-12 main-content">
 				<ul id="tabs-togglable" class="nav nav-pills nav-tabs-responsive" role="tablist">
-					<li role="presentation" each="{tabItem in tabs}" class="{active: tabItem.isActive}">
+					<li role="presentation" each="{tabItem in tabs}" class="{active: tabItem.isActive}" show={parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH || !tabItem.flashOnly}>
 						<a href="" role="tab" data-toggle="tab" onclick="{onTabItemClick}">
 							<span class="text">{tabItem.name}</span>
 						</a>
@@ -52,7 +52,7 @@
 									<th>{getText('activity_table_header_date')}</th>
 									<th>{getText('activity_table_header_email')}</th>
 									<th>{getText('activity_table_header_name')}</th>
-									<th>{getText('activity_table_header_amount')}</th>
+									<th>{currentActiveTabId == 4 ? getText('common_sharing_tx_fee_label') : getText('activity_table_header_amount') } </th>
 									<th>{getText('activity_table_header_note')}</th>
 									<th>{getText('pending_table_header_status')}</th>
 								</tr>
@@ -62,7 +62,7 @@
 									<td>{getDisplayDateTime(txn.created_ts, timeZone)}</td>
 									<td>{txn.type==2 ? (txn.sender_email?txn.sender_email:'Anonymous') : (txn.receiver_email?txn.receiver_email:'Anonymous')}</td>
 									<td>{txn.type==2 ? (txn.sender_display_name?txn.sender_display_name:'Anonymous') : (txn.receiver_display_name?txn.receiver_display_name:'Anonymous')}</td>
-									<td style="{txn.type==2 ? 'color:#008000' : 'color:#DB2828'}">{txn.type==2 ? '' : '-'}{formatDecimalAmount(txn.amount)}</td>
+									<td style="{txn.type==2 ? 'color:#008000' : 'color:#DB2828'}">{txn.type==2 ? '' : '-'}{currentActiveTabId == 4 ? formatDecimalAmount(txn.sharing_fee) : formatDecimalAmount(txn.amount) }</td>
 									<td>{txn.memo}</td>
 									<td>{txn.status}</td>
 								</tr>

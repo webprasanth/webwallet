@@ -48,18 +48,35 @@ function initTabs() {
       code: 'ALL',
       name: getText('activity_tab_all_transaction'),
       isActive: true,
+      flashOnly: false,
     },
     {
       id: 2,
       code: 'RECEIVED',
       name: getText('activity_tab_received_transaction'),
       isActive: false,
+      flashOnly: false,
     },
     {
       id: 1,
       code: 'SENT',
       name: getText('activity_tab_sent_transaction'),
       isActive: false,
+      flashOnly: false,
+    },
+    {
+      id: 3,
+      code: 'SHARING_IN',
+      name: getText('activity_tab_sharing_in_transaction'),
+      isActive: false,
+      flashOnly: true,
+    },
+    {
+      id: 4,
+      code: 'SHARING_OUT',
+      name: getText('activity_tab_sharing_out_transaction'),
+      isActive: false,
+      flashOnly: true,
     },
   ];
 }
