@@ -23,6 +23,8 @@ export default class ShareCoin extends BaseElement {
   private showSubmitPayoutButton = false;
   private showRemovePayoutButton = true;
   private showCopyButton = false ;
+  private showAddRowButton = true;
+  private counterOfRow = 1;
   private sumPercent = 0;
   private payoutCode = '';
   private payoutCodeResponse = '';
@@ -68,7 +70,11 @@ export default class ShareCoin extends BaseElement {
         super.showMessage('', this.getText('wallet_share_record_failed'));
         break;
       case PROFILE.GET_SHARECODE_SUCCESS:
-        if(data.sharing_code.length != 0){
+        if(data.sharing_code.length == 10){
+          this.showAddRowButton = false;
+          this.counterOfRow = 10;
+        }
+	  if(data.sharing_code.length != 0){
           this.showGenerateButton = false;
           this.showCopyButton = true;
           this.showUpdateButton = true;
@@ -78,12 +84,18 @@ export default class ShareCoin extends BaseElement {
           this.txnPercent = data.sharing_code[0].sharing_fee;
           this.populateShareDetails(data);
           this.disableSharePercent();
+          this.counterOfRow = data.sharing_code.length;
+          for (var i = 1; i <= this.counterOfRow; i++) {
+              $("#row" + i).show();
+            } 
         }
         else {
           this.showGenerateButton = true;
           this.showCopyButton = false;
           this.showUpdateButton = false;
-          this.showSubmitAddressButton = true;		
+          this.showSubmitAddressButton = true;	
+          this.showAddRowButton = true;
+		  $("#row1").show();
         }
        break;
       case PROFILE.GET_SHARECODE_FAILED:
@@ -191,13 +203,18 @@ export default class ShareCoin extends BaseElement {
       return true;	  
 	}
 
-  sumHundredPercent(){
- 	this.sumPercent =  parseFloat($('#share-percent1').val()) + parseFloat($('#share-percent2').val()) + parseFloat($('#share-percent3').val()) + 
-	                   parseFloat($('#share-percent4').val()) + parseFloat($('#share-percent5').val()) + parseFloat($('#share-percent6').val()) + 
-                       parseFloat($('#share-percent7').val()) + parseFloat($('#share-percent8').val()) + parseFloat($('#share-percent9').val()) + 
-                       parseFloat($('#share-percent10').val());
-					   
-	if(this.sumPercent != '100'){
+  sumHundredPercent(){ 
+    var currentRowPercent = 0;  
+	var totalRowPercentSum = 0;
+  	for (var i = 1; i <= 10; i++) {
+      currentRowPercent = $("#share-percent" + i).val();
+      if(currentRowPercent == '') 
+         currentRowPercent = 0;
+ 	   totalRowPercentSum =  parseFloat(totalRowPercentSum) + parseFloat(currentRowPercent);
+	}
+    this.sumPercent = totalRowPercentSum ;
+	
+    if(this.sumPercent != '100'){
       super.showError('', this.getText('wallet_share_sum_hundread'));
       return false;
 	} else {
@@ -279,7 +296,7 @@ export default class ShareCoin extends BaseElement {
 	  address_4:$('#share-address4').val(),
 	  address_5:$('#share-address5').val(),
 	  address_6:$('#share-address6').val(),
-	  address_6:$('#share-address7').val(),
+	  address_7:$('#share-address7').val(),
 	  address_8:$('#share-address8').val(),
 	  address_9:$('#share-address9').val(),
 	  address_10:$('#share-address10').val(),
@@ -323,7 +340,7 @@ export default class ShareCoin extends BaseElement {
 	  address_4:$('#share-address4').val(),
 	  address_5:$('#share-address5').val(),
 	  address_6:$('#share-address6').val(),
-	  address_6:$('#share-address7').val(),
+	  address_7:$('#share-address7').val(),
 	  address_8:$('#share-address8').val(),
 	  address_9:$('#share-address9').val(),
 	  address_10:$('#share-address10').val(),
@@ -364,4 +381,13 @@ export default class ShareCoin extends BaseElement {
     var txnshareElement = document.getElementById("txnshare-percent");
     txnshareElement.disabled=true;
   }
+  
+  displayNextRow(){
+    this.counterOfRow = this.counterOfRow + 1;
+    $("#row" + this.counterOfRow).show();
+    if(this.counterOfRow == 10) {
+    $("#add-rows").hide();
+    }
+  }
+  
 }
