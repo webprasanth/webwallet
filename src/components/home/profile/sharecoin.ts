@@ -2,7 +2,7 @@
  * Landing page of Flash wallet Share
  */
 import { riot, template } from '../../riot-ts';
-import store from '../../../model/store';
+import store, { ApplicationState } from '../../../model/store';
 import { userActions } from '../../../model/users/actions';
 import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
@@ -26,9 +26,13 @@ export default class ShareCoin extends BaseElement {
   private sumPercent = 0;
   private payoutCode = '';
   private payoutCodeResponse = '';
+  private myWalletAddress = '';
   
 
   mounted() {
+    let state = store.getState();
+    let data = state.profileData;
+
     this.getSharingCode();
     this.getPayoutCode();
 	
@@ -47,35 +51,40 @@ export default class ShareCoin extends BaseElement {
     let state = store.getState();
     let type = state.lastAction.type;
     let data = state.lastAction.data;
-	//alert('type is ' + type);
+	//alert('type is ' + type + 'address' + state.profileData.wallet.address );
     switch (type) {
+      case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
+        this.myWalletAddress = state.profileData.wallet.address ;
+        break;	  
       case PROFILE.ADD_SHARECOIN_SUCCESS:
         this.showGenerateButton = false;
         this.showCopyButton = true;
         this.showUpdateButton = true;
         this.showSubmitAddressButton = false;
+        this.disableSharePercent();
         super.showMessage('', this.getText('wallet_share_record_added'));
         break;
       case PROFILE.ADD_SHARECOIN_FAILED:
         super.showMessage('', this.getText('wallet_share_record_failed'));
         break;
       case PROFILE.GET_SHARECODE_SUCCESS:
-	    if(data.sharing_code.length != 0){
-		  this.showGenerateButton = false;
-		  this.showCopyButton = true;
-		  this.showUpdateButton = true;
-		  this.showSubmitAddressButton = false;
-		  this.showAddressForm = true;
-		  this.sixDigitCode = data.sharing_code[0].code;
-		  this.txnPercent = data.sharing_code[0].sharing_fee;
-		  this.populateShareDetails(data);
-		}
-		else {
-		  this.showGenerateButton = true;
-		  this.showCopyButton = false;
-		  this.showUpdateButton = false;
-		  this.showSubmitAddressButton = true;		
-		}
+        if(data.sharing_code.length != 0){
+          this.showGenerateButton = false;
+          this.showCopyButton = true;
+          this.showUpdateButton = true;
+          this.showSubmitAddressButton = false;
+          this.showAddressForm = true;
+          this.sixDigitCode = data.sharing_code[0].code;
+          this.txnPercent = data.sharing_code[0].sharing_fee;
+          this.populateShareDetails(data);
+          this.disableSharePercent();
+        }
+        else {
+          this.showGenerateButton = true;
+          this.showCopyButton = false;
+          this.showUpdateButton = false;
+          this.showSubmitAddressButton = true;		
+        }
        break;
       case PROFILE.GET_SHARECODE_FAILED:
         super.showMessage('', this.getText('wallet_share_code_not_get'));
@@ -171,7 +180,10 @@ export default class ShareCoin extends BaseElement {
 		$("#share-percent" + i).val('0');
 			continue;
 		}
-		if(!this.isValidFlashAddress(flashShareAddress)){
+        if(flashShareAddress == this.myWalletAddress){
+          return true;
+        }
+        if(!this.isValidFlashAddress(flashShareAddress)){
           super.showError('', this.getText('wallet_share_invalid_flash_address'));
           return false;
 		}
@@ -201,11 +213,11 @@ export default class ShareCoin extends BaseElement {
 	  super.showError('', this.getText('wallet_share_payout_nonempty'));
 	  return ;
 	}  
-    /*
+    
     if(this.payoutCode === this.sixDigitCode){
       super.showError('', this.getText('Can not add self ShareCode as payout code'));
-	  return ;
-	} */
+      return ;
+	}
 
     let params = {
 	  sharing_code: this.payoutCode,
@@ -348,4 +360,8 @@ export default class ShareCoin extends BaseElement {
     copyText.disabled = true;
     super.showMessage('', this.getText('wallet_share_code_copied'));
   }  
+  disableSharePercent(){
+    var txnshareElement = document.getElementById("txnshare-percent");
+    txnshareElement.disabled=true;
+  }
 }
