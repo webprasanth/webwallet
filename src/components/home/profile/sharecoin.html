@@ -8,7 +8,7 @@
 			</div>
 			<div class="form-group col-xs-12 col-sm-6">
                 <h3 class="flash-share-heading">{getText('wallet_share_my_share_percent')}</h3>
-                <input class="form-control txn-share" id="txnshare-percent" type="text" >
+                <input class="form-control txn-share" id="txnshare-percent" type="text"  >
 			</div>
 			<div class=" col-xs-12 ">
 				<button type="button" class="btn btn-primary" id="generate-sharecode" onclick={generateMyShareCode} show={showGenerateButton}>{getText('common_generate_label')}</button>
@@ -21,52 +21,52 @@
 			<span class="col-xs-1 flash-desc-percent">%</span>
 			<span class="col-xs-4 flash-desc-remark">{getText('wallet_share_remark')}</span>
 		  </div>
-		  <div class= "col-xs-12 address-row  row1">
+		  <div class= "col-xs-12 address-row" id="row1">
 			<input type="text" id="share-address1" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent1" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark1" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row2">
+		  <div class= "col-xs-12 address-row" id="row2">
 			<input type="text" id="share-address2" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent2" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark2" class="sharecoin-remarks col-xs-4" >
 		  </div>
-		  <div class= "col-xs-12 address-row  row3">
+		  <div class= "col-xs-12 address-row" id="row3">
 			<input type="text" id="share-address3" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent3" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark3" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row4">
+		  <div class= "col-xs-12 address-row" id="row4">
 			<input type="text" id="share-address4" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent4" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark4" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row5">
+		  <div class= "col-xs-12 address-row" id="row5">
 			<input type="text" id="share-address5" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent5" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark5" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row6">
+		  <div class= "col-xs-12 address-row" id="row6">
 			<input type="text" id="share-address6" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent6" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark6" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row7">
+		  <div class= "col-xs-12 address-row" id="row7">
 			<input type="text" id="share-address7" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent7" class="share-percent col-xs-1" value="0">
 			<input type="text" id="remark7" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row8">
+		  <div class= "col-xs-12 address-row" id="row8">
 			<input type="text" id="share-address8" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent8" class="share-percent share-percent col-xs-1" value="0">
 			<input type="text" id="remark8" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row9">
+		  <div class= "col-xs-12 address-row" id="row9">
 			<input type="text" id="share-address9" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent9" class="share-percent share-percent col-xs-1" value="0">
 			<input type="text" id="remark9" class="sharecoin-remarks col-xs-4">
 		  </div>
-		  <div class= "col-xs-12 address-row  row10">
+		  <div class= "col-xs-12 address-row" id="row10">
 			<input type="text" id="share-address10" class="col-xs-6 sharecoin-address"> 
 			<input type="text" id="share-percent10" class="share-percent share-percent col-xs-1" value="0">
 			<input type="text" id="remark10" class="sharecoin-remarks col-xs-4">
@@ -74,6 +74,7 @@
 		  <div>
 			<button type="button" class="btn btn-primary btn-submit-update" id="edit-address" onclick={updateSharecodeRecords} show={showUpdateButton}>{getText('common_update_label')}</button>
 			<button type="button" class="btn btn-primary btn-submit-update" id="submit-address" onclick={submitAddressDetail} show={showSubmitAddressButton}>{getText('common_submit_label')}</button>
+			<button type="button" class="btn btn-default btn-submit-update" id="add-rows" onclick={displayNextRow} show={showAddRowButton}>Add Rows</button>
 		  </div>
 		</div>
 	</div>

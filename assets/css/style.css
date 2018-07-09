@@ -1764,6 +1764,7 @@ select:active, select:hover {
 }
 .address-row{
   margin-top:3px;
+  display : none;
 }
 
 .flash-desc{

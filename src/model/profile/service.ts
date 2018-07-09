@@ -130,14 +130,14 @@ export default class ProfileService {
       });
     });
   }
-  
+
   getSharingCode(params) {
     return new Promise((resolve, reject) => {
       AppService.getInstance().getSharingCode(params, resp => {
         resolve(resp);
       });
     });
-  }  
+  }
 
   addPayoutCode(params) {
     return new Promise((resolve, reject) => {
@@ -153,7 +153,7 @@ export default class ProfileService {
         resolve(resp);
       });
     });
-  }    
+  }
 
   removePayoutCode(params) {
     return new Promise((resolve, reject) => {
@@ -161,6 +161,13 @@ export default class ProfileService {
         resolve(resp);
       });
     });
-  } 
+  }
 
+  validateNewSharingCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().validateNewSharingCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

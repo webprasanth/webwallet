@@ -336,7 +336,7 @@ export const profileActions = {
   verifyPhoneFailed(resp) {
     return { type: PROFILE.VERIFY_PHONE_FAILED, data: resp };
   },
-  
+
   addSharecoinDetails(params) {
     return dispatch => {
       ProfileService.singleton()
@@ -395,13 +395,13 @@ export const profileActions = {
     };
   },
 
- getSharingCodeSuccess(resp) {
+  getSharingCodeSuccess(resp) {
     return { type: PROFILE.GET_SHARECODE_SUCCESS, data: resp };
   },
 
   getSharingCodeFailed(resp) {
     return { type: PROFILE.GET_SHARECODE_FAILED, data: resp };
-  },  
+  },
 
   addPayoutCode(params) {
     return dispatch => {
@@ -417,14 +417,14 @@ export const profileActions = {
     };
   },
 
- addPayoutCodeSuccess(resp) {
+  addPayoutCodeSuccess(resp) {
     return { type: PROFILE.ADD_PAYOUTCODE_SUCCESS, data: resp };
   },
 
   addPayoutCodeFailed(resp) {
     return { type: PROFILE.ADD_PAYOUTCODE_FAILED, data: resp };
   },
- 
+
   getCurrentPayoutCode(params) {
     return dispatch => {
       ProfileService.singleton()
@@ -439,14 +439,14 @@ export const profileActions = {
     };
   },
 
- getCurrentPayoutCodeSuccess(resp) {
+  getCurrentPayoutCodeSuccess(resp) {
     return { type: PROFILE.GET_PAYOUTCODE_SUCCESS, data: resp };
   },
 
   getCurrentPayoutCodeFailed(resp) {
     return { type: PROFILE.GET_PAYOUTCODE_FAILED, data: resp };
-  }, 
- 
+  },
+
   removePayoutCode(params) {
     return dispatch => {
       ProfileService.singleton()
@@ -461,13 +461,33 @@ export const profileActions = {
     };
   },
 
- removePayoutCodeSuccess(resp) {
+  removePayoutCodeSuccess(resp) {
     return { type: PROFILE.REMOVE_PAYOUTCODE_SUCCESS, data: resp };
   },
 
   removePayoutCodeFailed(resp) {
     return { type: PROFILE.REMOVE_PAYOUTCODE_FAILED, data: resp };
-  }, 
-  
- 
+  },
+
+  validateNewSharingCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .validateNewSharingCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.validateNewSharingCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.validateNewSharingCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+  validateNewSharingCodeSuccess(resp) {
+    return { type: PROFILE.GET_NEW_SHARECODE_SUCCESS, data: resp };
+  },
+
+  validateNewSharingCodeFailed(resp) {
+    return { type: PROFILE.GET_NEW_SHARECODE_FAILED, data: resp };
+  },
 };
