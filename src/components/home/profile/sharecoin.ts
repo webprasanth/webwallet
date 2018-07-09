@@ -10,7 +10,9 @@ import ShareCoinTemplate from './sharecoin.html!text';
 import BaseElement from '../../base-element';
 import { USERS } from '../../../model/action-types';
 import * as utils from '../../../model/utils';
+import CommonService from '../../../model/common/common-service';
 
+let tag = null;
 @template(ShareCoinTemplate)
 export default class ShareCoin extends BaseElement {
   private static unsubscribe = null;
@@ -29,9 +31,12 @@ export default class ShareCoin extends BaseElement {
   private payoutCode = '';
   private payoutCodeResponse = '';
   private myWalletAddress = '';
+  private myEmailAddress = '' ;
+  private allValidAddress = [false,false,false,false,false,false,false,false,false,false] ;
   
 
   mounted() {
+    tag = this;
     let state = store.getState();
     let data = state.profileData;
 
@@ -46,7 +51,8 @@ export default class ShareCoin extends BaseElement {
 	$("#txnshare-percent").keypress(utils.filterNumberEdit);
 	for (var i = 1; i <= 10; i++) {
 		$("#share-percent" + i).keypress(utils.filterNumberEdit);
-	}	
+        $("#share-address" + i).on('propertychange  click keyup paste',this.verifyEmailId);	
+	}
   }
 
     onApplicationStateChanged() {
@@ -57,6 +63,7 @@ export default class ShareCoin extends BaseElement {
     switch (type) {
       case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
         this.myWalletAddress = state.profileData.wallet.address ;
+        this.myEmailAddress = state.userData.user.email;
         break;	  
       case PROFILE.ADD_SHARECOIN_SUCCESS:
         this.showGenerateButton = false;
@@ -186,14 +193,21 @@ export default class ShareCoin extends BaseElement {
 
     isValidAllShareAddress(){
 	  for (var i = 1; i <= 10; i++) {
+        if(tag.allValidAddress[i-1] == true){
+          continue;
+        }
         var flashShareAddress = $("#share-address" + i).val();
         var percentToShare = $("#share-percent" + i).val();
         if(flashShareAddress == ''){
 		$("#share-percent" + i).val('0');
-			continue;
-		}
-        if(flashShareAddress == this.myWalletAddress){
-          return true;
+          continue;
+        }
+        if(flashShareAddress == this.myWalletAddress ){
+          continue;
+        }
+        if(flashShareAddress == this.myEmailAddress){
+          tag.allValidAddress[i-1] = true ;
+          continue;
         }
         if(!this.isValidFlashAddress(flashShareAddress)){
           super.showError('', this.getText('wallet_share_invalid_flash_address'));
@@ -232,7 +246,7 @@ export default class ShareCoin extends BaseElement {
 	}  
     
     if(this.payoutCode === this.sixDigitCode){
-      super.showError('', this.getText('Can not add self ShareCode as payout code'));
+      super.showError('', this.getText('wallet_self_code_error'));
       return ;
 	}
 
@@ -266,7 +280,14 @@ export default class ShareCoin extends BaseElement {
 	$("#txnshare-percent").val(this.txnPercent);
 	
 	for (var i = 0; i < data.sharing_code.length ; i++) {
-        $("#share-address" + (i+1)).val(data.sharing_code[i].address);
+        if(data.sharing_code[i].email != null){
+          $("#share-address" + (i+1)).val(data.sharing_code[i].email);
+          tag.allValidAddress[i] = true;
+        }
+        else {	
+          $("#share-address" + (i+1)).val(data.sharing_code[i].address);
+          tag.allValidAddress[i] = false;
+        }
 		$("#share-percent" + (i+1)).val(data.sharing_code[i].percentage);
         $("#remark" + (i+1)).val(data.sharing_code[i].label);		
     }
@@ -389,5 +410,31 @@ export default class ShareCoin extends BaseElement {
     $("#add-rows").hide();
     }
   }
-  
+
+  verifyEmailId(){
+    var currentRowid = $(this).attr('id');
+    var currentIndex = currentRowid.substr(13) - 1; //as we need number after 13 length in id ex share-address1
+    var term = document.getElementById(currentRowid).value;
+	if (term == '') {
+      return ;
+    }  
+    var userSelectedCurrency = localStorage.getItem('currency_type');
+    let params = {
+      term,
+      start: 0,
+      size: 1,
+      currency_type: userSelectedCurrency,
+    };
+
+    CommonService.singleton().searchWallet(params).then((resp: any) => {
+        if (resp.rc == 1 && resp.wallets.length > 0) {
+          if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
+          tag.allValidAddress[currentIndex] = true ;
+          } 
+        }
+        else {
+          tag.allValidAddress[currentIndex] = false ;
+        }
+      });
+  }
 }

@@ -435,5 +435,6 @@
 	"wallet_share_payout_nonempty"	           : "Payout Code cannot be empty",
 	"no_payout_code"                           : "There is no payout Code to remove. You need to add first .",
 	"locked_payout_code"                       : "This Payout Code is locked hence can not be removed",
-	"wallet_share_code_copied"                 : "Your Share Code is copied to clipboard"
+	"wallet_share_code_copied"                 : "Your Share Code is copied to clipboard",
+	"wallet_self_code_error"                   : "Can not add self ShareCode as payout code"
 }
