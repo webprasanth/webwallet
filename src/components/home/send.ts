@@ -9,7 +9,7 @@ import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 import { CURRENCY_TYPE } from '../../model/currency';
-import { USERS } from '../../model/action-types';
+import { USERS, PROFILE } from '../../model/action-types';
 
 let tag = null;
 
@@ -136,9 +136,34 @@ export default class HomeSend extends BaseElement {
 
   onApplicationStateChanged() {
     let state: ApplicationState = store.getState();
-    if (state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
-      this.userProfile = store.getState().userData.user;
+    let type = state.lastAction.type;
+
+    switch (type) {
+      case USERS.GET_BALANCE_SUCCESS:
+        this.userProfile = store.getState().userData.user;
+        break;
+
+      case PROFILE.ADD_PAYOUTCODE_SUCCESS:
+      case PROFILE.UPDATE_SHARECOIN_SUCCESS:
+        let self = this;
+        CommonService.singleton()
+          .getPayoutInfo()
+          .then((resp: any) => {
+            if (resp.rc === 1 && resp.payout_info) {
+              self.payoutInfo = resp.payout_info;
+              self.showSharingFee = true;
+              self.update();
+              $('#amount-input').keyup(self.updateSharingFee);
+            }
+          });
+        break;
+
+      case PROFILE.REMOVE_PAYOUTCODE_SUCCESS:
+        this.payoutInfo = { payout_sharing_fee: 0 };
+        this.showSharingFee = false;
+        break;
     }
+
     this.update();
   }
 

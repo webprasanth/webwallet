@@ -1,7 +1,7 @@
 import { riot, template } from '../riot-ts';
 import store, { ApplicationState } from '../../model/store';
 import { activityActions } from '../../model/activities/actions';
-import { ACTIVITIES } from '../../model/action-types';
+import { ACTIVITIES, PROFILE } from '../../model/action-types';
 import { COMMON, TABS } from '../../model/action-types';
 import HomeActivityTemplate from './activity.html!text';
 import {
@@ -36,7 +36,9 @@ export default class HomeActivity extends BaseElement {
   private timeZone = null;
 
   public txns = [];
+  public total_sharing_fee = 0;
   public tabs = store.getState().activityData.tabs;
+  public showSharingUsageTab = false;
 
   constructor() {
     super();
@@ -120,8 +122,11 @@ export default class HomeActivity extends BaseElement {
         new Date(new Date(from).setHours(0, 0, 0, 0))
       );
     }
-    
-    this.toDateObject.datepicker('setDate', getDisplayDate(new Date(), state.userData.user.timezone));
+
+    this.toDateObject.datepicker(
+      'setDate',
+      getDisplayDate(new Date(), state.userData.user.timezone)
+    );
 
     // Auto set date range validation
     this.fromDateObject.datepicker(
@@ -136,7 +141,10 @@ export default class HomeActivity extends BaseElement {
       'setStartDate',
       this.fromDateObject.datepicker('getDate')
     );
-    this.toDateObject.datepicker('setEndDate', getDisplayDate(new Date(), state.userData.user.timezone));
+    this.toDateObject.datepicker(
+      'setEndDate',
+      getDisplayDate(new Date(), state.userData.user.timezone)
+    );
 
     // Add date range validation on change
     this.fromDateObject.on('changeDate', selectedDate => {
@@ -199,7 +207,15 @@ export default class HomeActivity extends BaseElement {
       case ACTIVITIES.GET_MORE_TXN_SUCCESS:
         this.buildPagination();
         this.txns = data.txns;
+        if (data.total_sharing_fee)
+          this.total_sharing_fee = data.total_sharing_fee;
         this.tabs = data.tabs;
+        break;
+      case PROFILE.GET_SHARECODE_SUCCESS:
+        var sharecodeData = state.lastAction.data;
+        if (sharecodeData.sharing_code.length != 0)
+          this.showSharingUsageTab = true;
+        else this.showSharingUsageTab = false;
         break;
       case ACTIVITIES.SET_ACTIVE_TAB:
         let activeTab = data.tabs.filter(tab => {
@@ -221,6 +237,23 @@ export default class HomeActivity extends BaseElement {
         if (!this.isTnxDetailOpened) {
           this.isTnxDetailOpened = true;
           riot.mount('#transaction-detail', 'transaction-details', opts);
+        }
+        break;
+      case ACTIVITIES.GET_SHARING_TXN_DETAIL_SUCCESS:
+        let self1 = this;
+        let opts1 = {
+          cb: function() {
+            self1.isTnxDetailOpened = false;
+          },
+        };
+
+        if (!this.isTnxDetailOpened) {
+          this.isTnxDetailOpened = true;
+          riot.mount(
+            '#transaction-detail',
+            'sharing-transaction-details',
+            opts1
+          );
         }
         break;
       case COMMON.ON_NEW_TX_ADDED:
@@ -270,7 +303,13 @@ export default class HomeActivity extends BaseElement {
     event.stopPropagation();
 
     let state = store.getState();
-    store.dispatch(activityActions.getTransactionDetail(event.item.txn));
+    if (this.currentActiveTabId != 5)
+      store.dispatch(activityActions.getTransactionDetail(event.item.txn));
+    //sharing usage
+    else
+      store.dispatch(
+        activityActions.getSharingTransactionDetail(event.item.txn)
+      );
   }
 
   formatDecimalAmount(amount) {

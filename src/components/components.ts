@@ -7,6 +7,7 @@ import HomeHeader from './home/header';
 import Navbar from './home/navbar';
 import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
+import SharingTransactionDetails from './modals/sharing-transaction-details/sharing-transaction-details';
 import WalletAddress from './modals/wallet-address/wallet-address';
 import FullBalance from './modals/full-balance/full-balance';
 import App from './app/app';
@@ -53,6 +54,7 @@ export {
   ProfileSecurityQuestions,
   ShareCoin,
   TransactionDetails,
+  SharingTransactionDetails,
   WalletAddress,
   FullBalance,
   MobileLogin,

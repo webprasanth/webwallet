@@ -1,6 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keys.flashcoin.io/';
-export const APP_MODE = 'PROD'; //DEV, PROD
+const HOST_URL = 'https://dev03keys.flashcoin.io/';
+export const APP_MODE = 'DEV'; //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -549,6 +549,16 @@ export default class AppService {
   getTransactionDetail(params, cb) {
     let options = this.makeRequestOption(
       'api/transaction-detail',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getSharingTransactionDetail(params, cb) {
+    let options = this.makeRequestOption(
+      'api/sharing-transaction-detail',
       params,
       'get',
       cb

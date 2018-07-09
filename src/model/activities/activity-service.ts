@@ -53,9 +53,22 @@ export default class ActivityService {
     });
   }
 
+  getSharingTransactionDetail(transactionId) {
+    return new Promise(resolve => {
+      var userSelectedCurrency = localStorage.getItem('currency_type');
+      let params = {
+        transaction_id: transactionId,
+        currency_type: userSelectedCurrency,
+      };
+      AppService.getInstance().getSharingTransactionDetail(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   convertToTnx(obj) {
     var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
-    if(userSelectedCurrency == CURRENCY_TYPE.ETH)
+    if (userSelectedCurrency == CURRENCY_TYPE.ETH)
       return this.convertToTxnFromEtherBasedTxn(obj);
 
     let tran = {
@@ -70,8 +83,7 @@ export default class ActivityService {
 
     let temp = null;
 
-    if(obj.status)
-      tran.status = obj.status;
+    if (obj.status) tran.status = obj.status;
 
     for (let i = 0; i < obj.vin.length; i++) {
       temp = obj.vin[i];
@@ -104,20 +116,17 @@ export default class ActivityService {
     };
     let temp = null;
 
-    if(obj.status)
-      tran.status = obj.status;
+    if (obj.status) tran.status = obj.status;
 
-    
     tran.ins.push({
       address: obj.from,
       amount: weiToEth(obj.value),
     });
-    
 
     tran.outs.push({
-        address: obj.to,
-        amount: weiToEth(obj.value),
-      });
+      address: obj.to,
+      amount: weiToEth(obj.value),
+    });
 
     return tran;
   }

@@ -66,4 +66,31 @@ export const activityActions = {
   getTransactionDetailFailed(resp) {
     return { type: ACTIVITIES.GET_TXN_DETAIL_FAILED, data: resp };
   },
+  getSharingTransactionDetail(txn) {
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+
+      ActivityService.singleton()
+        .getSharingTransactionDetail(txn.transaction_id)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+
+          if (resp.rc === 1) {
+            let txData: any = resp;
+            txData.meta = txn;
+            dispatch(
+              activityActions.getSharingTransactionDetailSuccess(txData)
+            );
+          } else {
+            dispatch(activityActions.getSharingTransactionDetailFailed(resp));
+          }
+        });
+    };
+  },
+  getSharingTransactionDetailSuccess(resp) {
+    return { type: ACTIVITIES.GET_SHARING_TXN_DETAIL_SUCCESS, data: resp };
+  },
+  getSharingTransactionDetailFailed(resp) {
+    return { type: ACTIVITIES.GET_SHARING_TXN_DETAIL_FAILED, data: resp };
+  },
 };

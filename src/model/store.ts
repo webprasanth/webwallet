@@ -36,6 +36,7 @@ export interface ApplicationState {
   activityData: {
     txns: any[];
     total_txns: number;
+    total_sharing_fee: number;
     page_size: number;
     tabs: ITAB[];
     txn_detail: any;
@@ -58,7 +59,11 @@ export interface ApplicationState {
   };
   contactsData: { contacts: any[]; totalContacts: number; contactWallet: any };
   tabData: { tabs: ITAB[] };
-  resetPassData: { keys: any; resetPassErrReason: any; resetPassMailErrReason: any };
+  resetPassData: {
+    keys: any;
+    resetPassErrReason: any;
+    resetPassMailErrReason: any;
+  };
 }
 
 const logger = store => next => action => {
