@@ -163,4 +163,11 @@ export default class ProfileService {
     });
   } 
 
+  validateNewSharingCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().validateNewSharingCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  } 
 }

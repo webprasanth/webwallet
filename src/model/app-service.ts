@@ -742,4 +742,14 @@ export default class AppService {
     );
     $.ajax(options);
   }
+
+  validateNewSharingCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/is-sharing-code-available',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
 }

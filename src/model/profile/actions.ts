@@ -469,5 +469,25 @@ export const profileActions = {
     return { type: PROFILE.REMOVE_PAYOUTCODE_FAILED, data: resp };
   }, 
   
- 
+  validateNewSharingCode(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .validateNewSharingCode(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.validateNewSharingCodeSuccess(resp));
+          } else {
+            dispatch(profileActions.validateNewSharingCodeFailed(resp));
+          }
+        });
+    };
+  },
+
+ validateNewSharingCodeSuccess(resp) {
+    return { type: PROFILE.GET_NEW_SHARECODE_SUCCESS, data: resp };
+  },
+
+  validateNewSharingCodeFailed(resp) {
+    return { type: PROFILE.GET_NEW_SHARECODE_FAILED, data: resp };
+  },  
 };

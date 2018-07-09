@@ -143,18 +143,29 @@ export default class ShareCoin extends BaseElement {
       case PROFILE.REMOVE_PAYOUTCODE_FAILED:	    
         super.showMessage('', this.getText('ERROR : ' + data.reason));
         break;
-		default: break;
+      case PROFILE.GET_NEW_SHARECODE_SUCCESS:
+        if(data.available){
+          $('#mysharecode').val(this.sixDigitCode);
+          this.showAddressForm = true;
+          this.showGenerateButton = false;
+        }
+        else {
+          super.showMessage('', this.getText('wallet_share_code_exist'));
+        }
+        break;
+      case PROFILE.GET_NEW_SHARECODE_FAILED:
+        super.showMessage('', this.getText('wallet_share_code_exist'));
+        break;
+      default: break;
     }
 
     this.update();
   }
 
   generateMyShareCode(){
-    //this button should be disabled if any code is generated and valid
 	this.sixDigitCode = utils.getSixCharString();
-    $('#mysharecode').val(this.sixDigitCode);
-    this.showAddressForm = true;
-	this.showGenerateButton = false;
+    let params = {sharing_code:this.sixDigitCode};
+    store.dispatch(profileActions.validateNewSharingCode(params));
  }
   
   
