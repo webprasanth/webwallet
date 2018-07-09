@@ -437,5 +437,6 @@
 	"locked_payout_code"                       : "This Payout Code is locked hence can not be removed",
 	"wallet_share_code_copied"                 : "Your Share Code is copied to clipboard",
 	"wallet_self_code_error"                   : "Can not add self ShareCode as payout code",
-	"wallet_share_code_exist"                  : "Geneated share code already in use, please try again !"
+	"wallet_share_code_exist"                  : "Geneated share code already in use, please try again !",
+	"payout_confirm_delete_msg"                : "Are you sure you want to remove this Payout Code ?"
 }

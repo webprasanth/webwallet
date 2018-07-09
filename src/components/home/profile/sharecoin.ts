@@ -274,7 +274,6 @@ export default class ShareCoin extends BaseElement {
   } 
 
  removePayoutCode (){ 
-    let params = {};
 	if(this.payoutCode == ''){	
 	  super.showError('', this.getText('no_payout_code'));
 	  return;
@@ -283,7 +282,16 @@ export default class ShareCoin extends BaseElement {
 	 super.showError('', this.getText('locked_payout_code'));
 	 return;
     }
-    store.dispatch(profileActions.removePayoutCode(params));
+    riot.mount('#confirm-send', 'confirm-dialog', {
+      title: this.getText('common_remove_label'),
+      message: this.getText('payout_confirm_delete_msg'),
+      callback: function(result) {
+        if (result) {
+          let params = {};
+          store.dispatch(profileActions.removePayoutCode(params));
+        }
+      },
+    });
   }
 
   populateShareDetails(data){
