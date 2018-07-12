@@ -153,7 +153,6 @@ export default class HomeSend extends BaseElement {
               self.payoutInfo = resp.payout_info;
               self.showSharingFee = true;
               self.update();
-              $('#amount-input').keyup(self.updateSharingFee);
             }
           });
         break;
@@ -201,6 +200,33 @@ export default class HomeSend extends BaseElement {
     );
 
     $('#fee-input').val(fee);
+    tag.updateTotal();
+  }
+
+  updateSharingFee() {
+    let amount = $('#amount-input').val();
+    amount = utils.toOrginalNumber(amount);
+    let sharing_fee = utils.calcSharingFee(
+      amount,
+      tag.payoutInfo.payout_sharing_fee
+    );
+    $('#sharing-fee-input').val(sharing_fee);
+    tag.updateTotal();
+  }
+
+  updateTotal() {
+    setTimeout(function() {
+      let total_amount = 0;
+      let amount = $('#amount-input').val();
+      amount = utils.toOrginalNumber(amount);
+
+      let txn_fee = parseFloat($('#fee-input').val());
+      let sharing_fee = parseFloat($('#sharing-fee-input').val());
+
+      total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
+
+      $('#total-input').val(total_amount);
+    }, 100);
   }
 
   searchWallet = () => {
@@ -288,7 +314,7 @@ export default class HomeSend extends BaseElement {
       tag.fixedTxnFee
     );
     let sharingFee = parseFloat(
-      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee)
+      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee, 8)
     );
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
@@ -375,14 +401,6 @@ export default class HomeSend extends BaseElement {
     tag.emailErrorMessage = '';
     tag.amountErrorMessage = '';
     tag.update();
-  }
-
-  updateSharingFee() {
-    let sharing_fee = utils.calcSharingFee(
-      $('#amount-input').val(),
-      tag.payoutInfo.payout_sharing_fee
-    );
-    $('#sharing-fee-input').val(sharing_fee);
   }
 
   openQRcodeScan() {

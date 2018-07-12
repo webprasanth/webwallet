@@ -23,9 +23,11 @@ export default class ContactSendMoney extends BaseElement {
   private static unsubscribe = null;
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
-  private thresholdAmount = 0.00001 ;
+  private thresholdAmount = 0.00001;
   private fixedTxnFee = 0.00002;
-  
+  private payoutInfo = { payout_sharing_fee: 0 };
+  private showSharingFee = false;
+
   constructor() {
     super();
   }
@@ -40,7 +42,9 @@ export default class ContactSendMoney extends BaseElement {
       this.success = true;
       this.processing_duration = state.sendData.processing_duration;
       this.title = this.getText('send_success_message');
-      if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH)
+      if (
+        parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+      )
         this.confirmed = true;
     } else if (actionType == SEND.SEND_TXN_FAILED) {
       super.showError('', state.lastAction.data);
@@ -57,24 +61,37 @@ export default class ContactSendMoney extends BaseElement {
       this.onApplicationStateChanged.bind(this)
     );
 
-    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+    if (
+      parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH
+    ) {
       CommonService.singleton()
-      .getThresHoldAmount()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.threshold_amount) {
-          tag.thresholdAmount = resp.threshold_amount;
-        }
-      });
+        .getThresHoldAmount()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.threshold_amount) {
+            tag.thresholdAmount = resp.threshold_amount;
+          }
+        });
+    } else {
+      CommonService.singleton()
+        .getPayoutInfo()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.payout_info) {
+            tag.payoutInfo = resp.payout_info;
+            tag.showSharingFee = true;
+            tag.update();
+            $('#contact-send-amount').keyup(tag.updateSharingFee);
+          }
+        });
     }
 
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
@@ -110,17 +127,62 @@ export default class ContactSendMoney extends BaseElement {
         .getEtherGasValues()
         .then((resp: any) => {
           console.log(resp);
-          if(resp.rc == 1 && resp.gas_price && resp.gas_limit) {
-            tag.SatoshiPerByte = parseInt(resp.gas_price);  //price per gas in Wei (Wei unit of Ether)
-            tag.bcMedianTxSize = parseInt(resp.gas_limit);  //max gas to be used
+          if (resp.rc == 1 && resp.gas_price && resp.gas_limit) {
+            tag.SatoshiPerByte = parseInt(resp.gas_price); //price per gas in Wei (Wei unit of Ether)
+            tag.bcMedianTxSize = parseInt(resp.gas_limit); //max gas to be used
           }
         });
     }
+
+    $('#contact-send-amount').on(
+      'propertychange change click paste',
+      this.calculateFee
+    );
 
     $('#sendByContact').modal('show');
     $('#contact-send-amount').keypress(utils.filterNumberEdit);
     $('#contact-send-amount').blur(utils.formatAmountInput);
     $('#contact-send-bt').on('blur', this.resetErrorMessages);
+  }
+
+  calculateFee() {
+    let amount = $('#contact-send-amount').val();
+    amount = utils.toOrginalNumber(amount);
+    let fee = utils.calcFee(
+      amount,
+      tag.bcMedianTxSize,
+      tag.SatoshiPerByte,
+      tag.fixedTxnFee
+    );
+
+    $('#contact-send-fee').val(fee);
+    tag.updateTotal();
+  }
+
+  updateSharingFee() {
+    let amount = $('#contact-send-amount').val();
+    amount = utils.toOrginalNumber(amount);
+    let sharing_fee = utils.calcSharingFee(
+      amount,
+      tag.payoutInfo.payout_sharing_fee
+    );
+    $('#contact-send-sharing-fee').val(sharing_fee);
+    tag.updateTotal();
+  }
+
+  updateTotal() {
+    setTimeout(function() {
+      let total_amount = 0;
+      let amount = $('#contact-send-amount').val();
+      amount = utils.toOrginalNumber(amount);
+
+      let txn_fee = parseFloat($('#contact-send-fee').val());
+      let sharing_fee = parseFloat($('#contact-send-sharing-fee').val());
+
+      total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
+
+      $('#contact-send-total').val(total_amount);
+    }, 100);
   }
 
   sendMoney() {
@@ -131,25 +193,36 @@ export default class ContactSendMoney extends BaseElement {
       tag.errorMessage = this.getText('common_alert_int_cash_unit');
       return;
     }
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte, tag.fixedTxnFee);
+    let fee = utils.calcFee(
+      amount,
+      tag.bcMedianTxSize,
+      tag.SatoshiPerByte,
+      tag.fixedTxnFee
+    );
+    let sharingFee = parseFloat(
+      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee, 8)
+    );
 
-    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
+    if (
+      amount < 1 &&
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       return (tag.errorMessage = this.getText(
         'common_alert_minimum_cash_unit'
       ));
     }
 
-    if(amount < this.thresholdAmount ){
+    if (amount < this.thresholdAmount) {
       return (tag.errorMessage = this.getText('common_alert_threshold_amount'));
-	}
+    }
 
     let balance = store.getState().userData.user.balance;
 
-    if (balance >= amount && balance < amount + fee) {
+    if (balance >= amount && balance < amount + fee + sharingFee) {
       return (tag.errorMessage = this.getText('send_not_enough_fee_error'));
     }
 
-    if (balance < amount + fee) {
+    if (balance < amount + fee + sharingFee) {
       return (tag.errorMessage = this.getText('send_not_enough_fund_error'));
     }
 
@@ -162,8 +235,10 @@ export default class ContactSendMoney extends BaseElement {
       amount: amount,
       fee: fee,
       wallet: this.opts.sendAddr,
-      SatoshiPerByte: parseInt(tag.SatoshiPerByte),  //price per gas in Wei (Wei unit of Ether)
-      bcMedianTxSize: parseInt(tag.bcMedianTxSize)  //max gas to be used
+      SatoshiPerByte: parseInt(tag.SatoshiPerByte), //price per gas in Wei (Wei unit of Ether)
+      bcMedianTxSize: parseInt(tag.bcMedianTxSize), //max gas to be used
+      sharingFee: sharingFee,
+      payoutInfo: this.payoutInfo,
     });
     //store.dispatch(sendActions.createRawTx(this.opts.sendAddr, amount, memo));
   }

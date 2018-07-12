@@ -162,8 +162,9 @@ export const sendActions = {
       var address = payout_info.addresses[i];
       console.log(address);
       var address_sharing_fee = parseFloat(
-        calcSharingFee(sharing_fee, address.percentage, 4)
+        calcSharingFee(sharing_fee, address.percentage, 8)
       );
+
       if (
         address_sharing_fee > remaining_sharing_fee ||
         i == payout_info.addresses.length
@@ -175,7 +176,9 @@ export const sendActions = {
         address: address.address,
         amount: address_sharing_fee,
       });
-      remaining_sharing_fee = remaining_sharing_fee - address_sharing_fee;
+      remaining_sharing_fee = parseFloat(
+        (remaining_sharing_fee - address_sharing_fee).toFixed(8)
+      );
     }
 
     return dispatch => {
