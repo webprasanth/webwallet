@@ -1761,6 +1761,7 @@ select:active, select:hover {
 }
 .flash-share-heading{
   margin-left : 10px;
+  font-size : 23px; 
 }
 .address-row{
   margin-top:3px;
@@ -1791,4 +1792,16 @@ select:active, select:hover {
 }
 .form-address{
   margin-top:10px;
+}
+.info-icon{
+  height:18px;
+  margin-bottom: 3px; 
+  margin-left: 2px;
+}
+
+.share-title-style{
+  font-size : 23px; 
+}
+.tooltip{
+ font-weight : bold;
 }
