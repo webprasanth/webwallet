@@ -421,15 +421,15 @@
     "error_in_scan_qr"                         : "We couldn't scan QR code, please try again",
     "timeout_in_scan_qr"                       : "Time out while scanning QR code, please try again",
 
-	"wallet_share_my_share_code"               : "My Share Code",
+	"wallet_share_my_share_code"               : "My Flash Share Code",
 	"wallet_share_my_share_percent"            : "Share Percent",
 	"wallet_share_flash_address"               : "Flash Address",
 	"wallet_share_remark"                      : "Remark",
-	"wallet_share_payout_code"                 : "My Payout Code",
+	"wallet_share_payout_code"                 : "Giveaway Code",
 	"wallet_share_record_added"                : "Your Details is added succesfully",
 	"wallet_share_record_failed"	           : "Addition of records failed !!",
 	"wallet_share_code_not_get"                : "Can not get your Sharecode !!",
-	"wallet_share_record_updated"              : "Your Details is updated succesfully",
+	"wallet_share_record_updated"              : "Details updated succesfully",
 	"wallet_share_update_failed"               : "updation of records failed !!",
 	"wallet_share_payout_added"                : "Your Payout code is added succesfully",
 	"wallet_share_payout_removed"              : "Your Payout code is removed succesfully",
@@ -442,5 +442,7 @@
 	"wallet_share_code_copied"                 : "Your Share Code is copied to clipboard",
 	"wallet_self_code_error"                   : "Can not add self ShareCode as payout code",
 	"wallet_share_code_exist"                  : "Geneated share code already in use, please try again !",
-	"payout_confirm_delete_msg"                : "Are you sure you want to remove this Payout Code ?"
+	"payout_confirm_delete_msg"                : "Are you sure you want to remove this Payout Code ?",
+	"wallet_share_code_info"                   : "You can add those flash address here with whom you want to share flash.You have to distribute this Code to your friends to use this as there Giveaway code.",
+	"payout_code_info"                         : "Once you add a Code here. You will be charged extra fee which is  a fixed percent of your transaction amount . This percent is fixed by user whose Giveaway code you are adding. The extra fee is distributed among users whose address is mentioned in this Giveaway code."
 }

@@ -52,6 +52,8 @@ export default class ShareCoin extends BaseElement {
 
     this.getSharingCode();
     this.getPayoutCode();
+    $('[data-toggle="tooltip-share"]').tooltip({ placement: 'left' });
+    $('[data-toggle="tooltip-giveaway"]').tooltip({ placement: 'left' });
 
     if (ShareCoin.unsubscribe) ShareCoin.unsubscribe();
     ShareCoin.unsubscribe = store.subscribe(
