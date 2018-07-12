@@ -175,7 +175,7 @@ export default class AcceptMoneyRequest extends Element {
 
       total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
 
-      $('#accept-money-total').val(total_amount);
+      $('#accept-money-total').val(utils.formatAmountInput(total_amount));
     }, 100);
   }
 

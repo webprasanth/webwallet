@@ -181,7 +181,7 @@ export default class ContactSendMoney extends BaseElement {
 
       total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
 
-      $('#contact-send-total').val(total_amount);
+      $('#contact-send-total').val(utils.formatAmountInput(total_amount));
     }, 100);
   }
 

@@ -224,8 +224,7 @@ export default class HomeSend extends BaseElement {
       let sharing_fee = parseFloat($('#sharing-fee-input').val());
 
       total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
-
-      $('#total-input').val(total_amount);
+      $('#total-input').val(utils.formatAmountInput(total_amount));
     }, 100);
   }
 

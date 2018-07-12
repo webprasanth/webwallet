@@ -9,9 +9,10 @@ import {
   litoshiToLtc,
   duffToDash,
   formatCurrency,
+  formatAmountInput,
   getDisplayDateTime,
   localizeFlash,
-  weiToEth
+  weiToEth,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -26,6 +27,7 @@ export default class TransactionDetails extends Element {
   private AvatarServer = Constants.AvatarServer;
   private CURRENCY_TYPE = CURRENCY_TYPE;
   private showConfirmationNotice = false;
+  private total_amount = 0;
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
@@ -35,6 +37,7 @@ export default class TransactionDetails extends Element {
   decimalFormat = decimalFormat;
   getDisplayDateTime = getDisplayDateTime;
   localizeFlash = localizeFlash;
+  formatAmountInput = formatAmountInput;
 
   constructor() {
     super();
@@ -66,6 +69,17 @@ export default class TransactionDetails extends Element {
         this.txnDetail.fee = satoshiToFlash(this.txnDetail.fee);
         break;
     }
+
+    let total_amount = this.meta.amount;
+    if (this.meta.type == 1) {
+      total_amount = parseFloat((total_amount + this.txnDetail.fee).toFixed(8));
+      if (this.meta.sharing_fee > 0)
+        total_amount = parseFloat(
+          (total_amount + this.meta.sharing_fee).toFixed(8)
+        );
+    }
+    this.total_amount = total_amount;
+
     this.update();
 
     $('#txDetailDlg').modal('show');
