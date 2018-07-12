@@ -444,5 +444,6 @@
 	"wallet_share_code_exist"                  : "Geneated share code already in use, please try again !",
 	"payout_confirm_delete_msg"                : "Are you sure you want to remove this Payout Code ?",
 	"wallet_share_code_info"                   : "You can add those flash address here with whom you want to share flash.You have to distribute this Code to your friends to use this as there Giveaway code.",
-	"payout_code_info"                         : "Once you add a Code here. You will be charged extra fee which is  a fixed percent of your transaction amount . This percent is fixed by user whose Giveaway code you are adding. The extra fee is distributed among users whose address is mentioned in this Giveaway code."
+	"payout_code_info"                         : "Once you add a Code here. You will be charged extra fee which is  a fixed percent of your transaction amount . This percent is fixed by user whose Giveaway code you are adding. The extra fee is distributed among users whose address is mentioned in this Giveaway code.",
+	"wallet_share_percent_info"                : "This share percentage associated with My Flash share code denotes the percentage of transacted flash which will be deducted along with transacted amount while your Flash share code is used."
 }
