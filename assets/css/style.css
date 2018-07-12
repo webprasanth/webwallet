@@ -1755,7 +1755,7 @@ select:active, select:hover {
   line-height : 2.0;
 }
 .txn-share{
-  width :50%;
+  width :60%;
   padding-left : 7px;
   margin-left : 10px;
 }
@@ -1786,6 +1786,7 @@ select:active, select:hover {
 }
 #mypayoutcode {
   font-size:large;
+  width:100%;
 }
 .btn-submit-update{
   margin-top:15px;
@@ -1800,8 +1801,16 @@ select:active, select:hover {
 }
 
 .share-title-style{
-  font-size : 23px; 
+  font-size : 22px; 
 }
 .tooltip{
  font-weight : bold;
+}
+
+.border-right {
+    border-right: 1px solid #E0AE27;
+}
+
+.payout-share-code {
+  padding-left:17px;
 }
