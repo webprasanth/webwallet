@@ -67,9 +67,29 @@ export default class AppService {
     $.ajax(options);
   }
 
+  addTransactionMulti(params, cb) {
+    let options = this.makeRequestOption(
+      'api/add-transaction-multi',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   rawTransaction(params, cb) {
     let options = this.makeRequestOption(
       'api/raw-transaction',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  rawTransactionMulti(params, cb) {
+    let options = this.makeRequestOption(
+      'api/raw-transaction-multi',
       params,
       'post',
       cb
@@ -536,6 +556,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getSharingTransactionDetail(params, cb) {
+    let options = this.makeRequestOption(
+      'api/sharing-transaction-detail',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
   getBCMedianTxSize(params, cb) {
     let options = this.makeRequestOption(
       'api/bc-median-tx-size',
@@ -597,12 +627,7 @@ export default class AppService {
   }
 
   getEtherGasValues(params, cb) {
-    let options = this.makeRequestOption(
-      'api/gas-values',
-      params,
-      'get',
-      cb
-    );
+    let options = this.makeRequestOption('api/gas-values', params, 'get', cb);
     $.ajax(options);
   }
 
@@ -613,6 +638,11 @@ export default class AppService {
       'get',
       cb
     );
+    $.ajax(options);
+  }
+
+  getPayoutInfo(cb) {
+    let options = this.makeRequestOption('api/get-payout-info', {}, 'get', cb);
     $.ajax(options);
   }
 
@@ -661,5 +691,75 @@ export default class AppService {
       },
       success: cb,
     };
+  }
+
+  addSharecoinDetails(params, cb) {
+    let options = this.makeRequestOption(
+      'api/add-sharing-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  updateSharecoinDetails(params, cb) {
+    let options = this.makeRequestOption(
+      'api/update-sharing-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getSharingCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-sharing-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  addPayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/add-payout-code',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getCurrentPayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-payout-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  removePayoutCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/remove-payout-code',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  validateNewSharingCode(params, cb) {
+    let options = this.makeRequestOption(
+      'api/is-sharing-code-available',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
   }
 }

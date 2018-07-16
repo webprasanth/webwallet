@@ -7,6 +7,7 @@ import HomeHeader from './home/header';
 import Navbar from './home/navbar';
 import LoadingIndicator from './loading-indicator/loading-indicator';
 import TransactionDetails from './modals/transaction-details/transaction-details';
+import SharingTransactionDetails from './modals/sharing-transaction-details/sharing-transaction-details';
 import WalletAddress from './modals/wallet-address/wallet-address';
 import FullBalance from './modals/full-balance/full-balance';
 import App from './app/app';
@@ -20,6 +21,7 @@ import UserInfo from './home/profile/user-info';
 import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
 import ProfileSecurityQuestions from './home/profile/question';
+import ShareCoin from './home/profile/sharecoin';
 import ErrorAlert from './modals/error-alert/error-alert';
 import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
@@ -50,7 +52,9 @@ export {
   AccountSetting,
   FountainSetting,
   ProfileSecurityQuestions,
+  ShareCoin,
   TransactionDetails,
+  SharingTransactionDetails,
   WalletAddress,
   FullBalance,
   MobileLogin,

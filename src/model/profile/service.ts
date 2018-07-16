@@ -114,4 +114,60 @@ export default class ProfileService {
       });
     });
   }
+
+  addSharecoinDetails(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addSharecoinDetails(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  updateSharecoinDetails(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().updateSharecoinDetails(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getSharingCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getSharingCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  addPayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().addPayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  getCurrentPayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getCurrentPayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  removePayoutCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().removePayoutCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  validateNewSharingCode(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().validateNewSharingCode(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

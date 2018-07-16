@@ -1732,3 +1732,85 @@ input:checked + .slider:before {
 select:active, select:hover {
   outline-color: #E0AE27
 }
+
+/* ======= Share Coin style ========*/
+.sharecoin-address{
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+  line-height : 2.0;
+}
+.sharecoin-remarks {
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+  margin-left:5px;
+  line-height : 2.0;
+}
+.share-percent {
+  padding-left:5px;
+  border : 1px solid #ccc;
+  border-radius : 4px;
+  margin-left:5px;
+  line-height : 2.0;
+}
+.txn-share{
+  width :60%;
+  padding-left : 7px;
+  margin-left : 10px;
+}
+.flash-share-heading{
+  margin-left : 10px;
+  font-size : 23px; 
+}
+.address-row{
+  margin-top:3px;
+  display : none;
+}
+
+.flash-desc{
+  font-weight:700;
+}
+.flash-desc-percent{
+  font-weight:700;
+  margin-left:5px;
+}
+.flash-desc-remark{
+  font-weight:700;
+  margin-left:5px;
+}
+
+#mysharecode {
+  padding-left:5px;
+  font-size:large;
+}
+#mypayoutcode {
+  font-size:large;
+  width:100%;
+}
+.btn-submit-update{
+  margin-top:15px;
+}
+.form-address{
+  margin-top:10px;
+}
+.info-icon{
+  height:18px;
+  margin-bottom: 3px; 
+  margin-left: 2px;
+}
+
+.share-title-style{
+  font-size : 22px; 
+}
+.tooltip{
+ font-weight : bold;
+}
+
+.border-right {
+    border-right: 1px solid #E0AE27;
+}
+
+.payout-share-code {
+  padding-left:17px;
+}

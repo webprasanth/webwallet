@@ -16,6 +16,28 @@
 								<input type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon1" value={formatAmountInput(opts.amount)}>
 							</div>
 						</div>
+						<div class="form-group amount-field">
+							<label>{getText('common_tx_fee_label')}</label>
+							<div class="input-group">
+								<span class="input-group-addon">{getCurrencyUnit()}</span>
+								<input readonly type="text" id="accept-money-fee" min="0" step="1" class="form-control">
+							</div>
+							<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
+						</div>
+						<div show={showSharingFee} class="form-group amount-field">
+							<label>{getText('common_sharing_tx_fee_label')}</label>
+							<div class="input-group">
+								<span class="input-group-addon">{getCurrencyUnit()}</span>
+								<input readonly type="text" value="0.00" id="accept-money-sharing-fee" min="0" step="1" class="form-control">
+							</div>
+						</div>
+						<div class="form-group amount-field">
+							<label>{getText('send_total_label')}</label>
+							<div class="input-group">
+								<span class="input-group-addon">{getCurrencyUnit()}</span>
+								<input readonly type="text" id="accept-money-total" min="0" step="1" class="form-control">
+							</div>
+						</div>
 						<div class="note-field form-group">
 							<label>{getText('common_note_label')}</label>
 							<textarea class="form-control" type="text" id='Note' cols="50" maxlength="50"></textarea>

@@ -108,18 +108,18 @@ export function localizeFlash(num) {
   return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
 }
 export function flashNFormatter(num, digits) {
-  if (num == undefined || num === '') return 0.00;
+  if (num == undefined || num === '') return 0.0;
   num = parseFloat(num);
-  if(num <= 10000)
-    return num.toLocaleString('en',{maximumFractionDigits:8});
+  if (num <= 10000)
+    return num.toLocaleString('en', { maximumFractionDigits: 8 });
   var si = [
-    { value: 1, symbol: "" },
-    { value: 1E3, symbol: "K" },
-    { value: 1E6, symbol: "M" },
-    { value: 1E9, symbol: "G" },
-    { value: 1E12, symbol: "T" },
-    { value: 1E15, symbol: "P" },
-    { value: 1E18, symbol: "E" }
+    { value: 1, symbol: '' },
+    { value: 1e3, symbol: 'K' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e9, symbol: 'G' },
+    { value: 1e12, symbol: 'T' },
+    { value: 1e15, symbol: 'P' },
+    { value: 1e18, symbol: 'E' },
   ];
   var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
   var i;
@@ -128,7 +128,7 @@ export function flashNFormatter(num, digits) {
       break;
     }
   }
-  return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+  return (num / si[i].value).toFixed(digits).replace(rx, '$1') + si[i].symbol;
 }
 
 export function flashToSatoshi(num) {
@@ -174,7 +174,7 @@ export function getUserKey(): UserKey | any {
   return userKey;
 }
 
-export function calcFee(amount, bcMedianTxSize, fastestFee , fixedTxnFee) {
+export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
   switch (currency_type) {
     case CURRENCY_TYPE.FLASH:
@@ -182,7 +182,7 @@ export function calcFee(amount, bcMedianTxSize, fastestFee , fixedTxnFee) {
       return 0.001; // default fee for web-wallet transaction
       break;
     case CURRENCY_TYPE.BTC:
-    console.log(bcMedianTxSize, fastestFee);
+      console.log(bcMedianTxSize, fastestFee);
       let satoshis = bcMedianTxSize * fastestFee;
       console.log(satoshis);
       return satoshiToBtc(satoshis);
@@ -204,12 +204,34 @@ export function calcFee(amount, bcMedianTxSize, fastestFee , fixedTxnFee) {
     case CURRENCY_TYPE.DASH:
       return fixedTxnFee;
       break;
-      //Below Code will be used for calculating fee dynamically
-      /*fastestFee = new Big(fastestFee).div(1024); 
+    //Below Code will be used for calculating fee dynamically
+    /*fastestFee = new Big(fastestFee).div(1024); 
       console.log(bcMedianTxSize, fastestFee);
       let duff = bcMedianTxSize * fastestFee;
       console.log(duff);
       return duffToDash(duff.toFixed(0));  */
+  }
+}
+
+export function calcSharingFee(amount, sharingFeePercentage, fixed_to) {
+  let currency_type = parseInt(localStorage.getItem('currency_type'));
+  if (!fixed_to) fixed_to = 2;
+  switch (currency_type) {
+    case CURRENCY_TYPE.FLASH:
+    default:
+      let sharing_fee = 0.0;
+      if (amount != '' && sharingFeePercentage != 0) {
+        sharing_fee = (sharingFeePercentage / 100) * amount;
+        sharing_fee = sharing_fee.toFixed(parseInt(fixed_to));
+      }
+      return sharing_fee;
+      break;
+    case CURRENCY_TYPE.BTC:
+    case CURRENCY_TYPE.LTC:
+    case CURRENCY_TYPE.ETH:
+    case CURRENCY_TYPE.DASH:
+      return 0;
+      break;
   }
 }
 
@@ -220,7 +242,7 @@ export function formatCurrency(amount) {
     default:
       return `${amount} Flash`;
       break;
-    case CURRENCY_TYPE.BTC: 
+    case CURRENCY_TYPE.BTC:
       return `${amount} BTC`;
       break;
     case CURRENCY_TYPE.LTC:
@@ -415,9 +437,7 @@ export function isValidCryptoAddress(value) {
           case CURRENCY_TYPE.BTC:
             if (APP_MODE == 'PROD') {
               network = NETWORKS.BTC;
-            }
-            else
-                network = NETWORKS.BTC_TESTNET;
+            } else network = NETWORKS.BTC_TESTNET;
             break;
           case CURRENCY_TYPE.LTC:
             if (APP_MODE == 'PROD') {
@@ -446,7 +466,6 @@ export function isValidCryptoAddress(value) {
         return false;
       }
   }
-  
 }
 
 /**
@@ -455,18 +474,21 @@ export function isValidCryptoAddress(value) {
  * @method isAddress
  * @param {String} address the given HEX adress
  * @return {Boolean}
-*/
-var isEtherAddress = function (address) {
-    if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-        // check if it has the basic requirements of an address
-        return false;
-    } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-        // If it's all small caps or all all caps, return true
-        return true;
-    } else {
-        // Otherwise check each case
-        return isChecksumAddress(address);
-    }
+ */
+var isEtherAddress = function(address) {
+  if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+    // check if it has the basic requirements of an address
+    return false;
+  } else if (
+    /^(0x)?[0-9a-f]{40}$/.test(address) ||
+    /^(0x)?[0-9A-F]{40}$/.test(address)
+  ) {
+    // If it's all small caps or all all caps, return true
+    return true;
+  } else {
+    // Otherwise check each case
+    return isChecksumAddress(address);
+  }
 };
 
 /**
@@ -475,18 +497,23 @@ var isEtherAddress = function (address) {
  * @method isChecksumAddress
  * @param {String} address the given HEX adress
  * @return {Boolean}
-*/
-var isChecksumAddress = function (address) {
-    // Check each case
-    address = address.replace('0x','');
-    var addressHash = keccak256(address.toLowerCase());
-    for (var i = 0; i < 40; i++ ) {
-        // the nth letter should be uppercase if the nth digit of casemap is 1
-        if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
-            return false;
-        }
+ */
+var isChecksumAddress = function(address) {
+  // Check each case
+  address = address.replace('0x', '');
+  var addressHash = keccak256(address.toLowerCase());
+  for (var i = 0; i < 40; i++) {
+    // the nth letter should be uppercase if the nth digit of casemap is 1
+    if (
+      (parseInt(addressHash[i], 16) > 7 &&
+        address[i].toUpperCase() !== address[i]) ||
+      (parseInt(addressHash[i], 16) <= 7 &&
+        address[i].toLowerCase() !== address[i])
+    ) {
+      return false;
     }
-    return true;
+  }
+  return true;
 };
 
 export function filterNumberEdit(event) {
@@ -564,9 +591,7 @@ export function isMobile() {
 }
 
 export function isAndroid() {
-  let isAndroid = /Android.+Mobile/i.test(
-    navigator.userAgent
-  );
+  let isAndroid = /Android.+Mobile/i.test(navigator.userAgent);
   return isAndroid;
 }
 
@@ -588,4 +613,14 @@ export function getSecurityQuestion() {
       getText('sc_question_c3'),
     ],
   };
+}
+
+export function getSixCharString() {
+  var randomText = "";
+  var possible = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+
+  for (var i = 0; i < 6; i++)
+    randomText += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return randomText;
 }

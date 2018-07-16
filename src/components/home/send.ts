@@ -9,7 +9,7 @@ import qrCodeScanner from 'maulikvora/qr-code-scanner';
 import Constants from '../../model/constants';
 import { FCEvent } from '../../model/types';
 import { CURRENCY_TYPE } from '../../model/currency';
-import { USERS } from '../../model/action-types';
+import { USERS, PROFILE } from '../../model/action-types';
 
 let tag = null;
 
@@ -26,17 +26,18 @@ export default class HomeSend extends BaseElement {
   private isDesktop = utils.isDesktop();
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
-  private thresholdAmount = 0.00001 ;
-  private fixedTxnFee = 0.00002;  //This we will get from API call for DASH
+  private thresholdAmount = 0.00001;
+  private fixedTxnFee = 0.00002; //This we will get from API call for DASH
+  private payoutInfo = { payout_sharing_fee: 0 };
+  private showSharingFee = false;
 
   mounted() {
-  
-  let state = store.getState();
+    let state = store.getState();
     if (HomeSend.unsubscribe) HomeSend.unsubscribe();
     HomeSend.unsubscribe = store.subscribe(
       this.onApplicationStateChanged.bind(this)
     );
-	
+
     tag = this;
     this.userProfile = store.getState().userData.user;
     $('#to-email-id').on(
@@ -50,24 +51,37 @@ export default class HomeSend extends BaseElement {
       this.checkAddress
     );
 
-    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH) {
+    if (
+      parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH
+    ) {
       CommonService.singleton()
-      .getThresHoldAmount()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.threshold_amount) {
-          tag.thresholdAmount = resp.threshold_amount;
-        }
-      });
+        .getThresHoldAmount()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.threshold_amount) {
+            tag.thresholdAmount = resp.threshold_amount;
+          }
+        });
+    } else {
+      CommonService.singleton()
+        .getPayoutInfo()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.payout_info) {
+            tag.payoutInfo = resp.payout_info;
+            tag.showSharingFee = true;
+            tag.update();
+            $('#amount-input').keyup(tag.updateSharingFee);
+          }
+        });
     }
-	
+
     if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
-      .getBCMedianTxSize()
-      .then((resp: any) => {
-        if (resp.rc === 1 && resp.median_tx_size) {
-          tag.bcMedianTxSize = resp.median_tx_size;
-        }
-      });
+        .getBCMedianTxSize()
+        .then((resp: any) => {
+          if (resp.rc === 1 && resp.median_tx_size) {
+            tag.bcMedianTxSize = resp.median_tx_size;
+          }
+        });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
@@ -103,9 +117,9 @@ export default class HomeSend extends BaseElement {
         .getEtherGasValues()
         .then((resp: any) => {
           console.log(resp);
-          if(resp.rc == 1 && resp.gas_price && resp.gas_limit) {
-            tag.SatoshiPerByte = parseInt(resp.gas_price);  //price per gas in Wei (Wei unit of Ether)
-            tag.bcMedianTxSize = parseInt(resp.gas_limit);  //max gas to be used
+          if (resp.rc == 1 && resp.gas_price && resp.gas_limit) {
+            tag.SatoshiPerByte = parseInt(resp.gas_price); //price per gas in Wei (Wei unit of Ether)
+            tag.bcMedianTxSize = parseInt(resp.gas_limit); //max gas to be used
           }
         });
     }
@@ -122,9 +136,33 @@ export default class HomeSend extends BaseElement {
 
   onApplicationStateChanged() {
     let state: ApplicationState = store.getState();
-    if(state.lastAction.type == USERS.GET_BALANCE_SUCCESS) {
+    let type = state.lastAction.type;
+
+    switch (type) {
+      case USERS.GET_BALANCE_SUCCESS:
         this.userProfile = store.getState().userData.user;
-      }
+        break;
+
+      case PROFILE.ADD_PAYOUTCODE_SUCCESS:
+      case PROFILE.UPDATE_SHARECOIN_SUCCESS:
+        let self = this;
+        CommonService.singleton()
+          .getPayoutInfo()
+          .then((resp: any) => {
+            if (resp.rc === 1 && resp.payout_info) {
+              self.payoutInfo = resp.payout_info;
+              self.showSharingFee = true;
+              self.update();
+            }
+          });
+        break;
+
+      case PROFILE.REMOVE_PAYOUTCODE_SUCCESS:
+        this.payoutInfo = { payout_sharing_fee: 0 };
+        this.showSharingFee = false;
+        break;
+    }
+
     this.update();
   }
 
@@ -154,9 +192,40 @@ export default class HomeSend extends BaseElement {
   calculateFee() {
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte, tag.fixedTxnFee);
+    let fee = utils.calcFee(
+      amount,
+      tag.bcMedianTxSize,
+      tag.SatoshiPerByte,
+      tag.fixedTxnFee
+    );
 
     $('#fee-input').val(fee);
+    tag.updateTotal();
+  }
+
+  updateSharingFee() {
+    let amount = $('#amount-input').val();
+    amount = utils.toOrginalNumber(amount);
+    let sharing_fee = utils.calcSharingFee(
+      amount,
+      tag.payoutInfo.payout_sharing_fee
+    );
+    $('#sharing-fee-input').val(sharing_fee);
+    tag.updateTotal();
+  }
+
+  updateTotal() {
+    setTimeout(function() {
+      let total_amount = 0;
+      let amount = $('#amount-input').val();
+      amount = utils.toOrginalNumber(amount);
+
+      let txn_fee = parseFloat($('#fee-input').val());
+      let sharing_fee = parseFloat($('#sharing-fee-input').val());
+
+      total_amount = parseFloat((amount + txn_fee + sharing_fee).toFixed(8));
+      $('#total-input').val(utils.formatAmountInput(total_amount));
+    }, 100);
   }
 
   searchWallet = () => {
@@ -207,14 +276,18 @@ export default class HomeSend extends BaseElement {
     } else if (!tag.isValidAddress) {
       this.emailErrorMessage = this.getText('invalid_receiver_address_error');
       return;
-    }
-    else {
+    } else {
       //checking if entered value and selected address is same
-      if(tag.sendWallet.address != $('#to-email-id').val()) {
-        if(typeof tag.sendWallet.email == undefined || tag.sendWallet.email != $('#to-email-id').val()) {
+      if (tag.sendWallet.address != $('#to-email-id').val()) {
+        if (
+          typeof tag.sendWallet.email == undefined ||
+          tag.sendWallet.email != $('#to-email-id').val()
+        ) {
           tag.isValidAddress = false;
           tag.addressSelected = false;
-          this.emailErrorMessage = this.getText('invalid_receiver_address_error');
+          this.emailErrorMessage = this.getText(
+            'invalid_receiver_address_error'
+          );
           return;
         }
       }
@@ -232,33 +305,44 @@ export default class HomeSend extends BaseElement {
 
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    
-    let  fee = utils.calcFee(amount, tag.bcMedianTxSize, tag.SatoshiPerByte, tag.fixedTxnFee);
+
+    let fee = utils.calcFee(
+      amount,
+      tag.bcMedianTxSize,
+      tag.SatoshiPerByte,
+      tag.fixedTxnFee
+    );
+    let sharingFee = parseFloat(
+      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee, 8)
+    );
 
     if (!amount.toString().match(/^(\d+\.?\d*|\.\d+)$/)) {
       this.amountErrorMessage = this.getText('common_alert_int_cash_unit');
       return;
     }
 
-    if (amount < 1 && parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
+    if (
+      amount < 1 &&
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       this.amountErrorMessage = this.getText('common_alert_minimum_cash_unit');
       return;
     }
 
-    if(amount < this.thresholdAmount ){
+    if (amount < this.thresholdAmount) {
       super.showError('', this.getText('common_alert_threshold_amount'));
-	  return;
-	}
-	
+      return;
+    }
+
     if (
       this.userProfile.balance >= amount &&
-      this.userProfile.balance < amount + fee
+      this.userProfile.balance < amount + fee + sharingFee
     ) {
       super.showError('', this.getText('send_not_enough_fee_error'));
       return;
     }
 
-    if (this.userProfile.balance < amount + fee) {
+    if (this.userProfile.balance < amount + fee + sharingFee) {
       super.showError('', this.getText('send_not_enough_fund_error'));
       return;
     }
@@ -271,8 +355,10 @@ export default class HomeSend extends BaseElement {
       fee: fee,
       wallet: this.sendWallet,
       cb: this.clearForms.bind(this),
-      SatoshiPerByte: parseInt(tag.SatoshiPerByte),  //price per gas in Wei (Wei unit of Ether)
-      bcMedianTxSize: parseInt(tag.bcMedianTxSize)  //max gas to be used
+      SatoshiPerByte: parseInt(tag.SatoshiPerByte), //price per gas in Wei (Wei unit of Ether)
+      bcMedianTxSize: parseInt(tag.bcMedianTxSize), //max gas to be used
+      sharingFee: sharingFee,
+      payoutInfo: this.payoutInfo,
     });
 
     /* Below code is commented as 2fa while transaction is not required as of now. 
