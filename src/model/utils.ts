@@ -157,7 +157,7 @@ export function contractToWei(num, currency_type) {
   switch (currency_type) {
     case CURRENCY_TYPE.OMG: //18 decimals
     default:
-      return parseInt(new Big(num).times(1000000000000000000).toString(), 10);
+      return new Big(num).times(1000000000000000000).toFixed();
   }
 }
 
