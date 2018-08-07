@@ -103,6 +103,16 @@ export function weiToEth(num) {
   return parseFloat(new Big(num).div(1000000000000000000).toString());
 }
 
+export function contractToEth(num, currency_type) {
+  if (num == undefined || num === '') return;
+
+  switch (currency_type) {
+    case CURRENCY_TYPE.OMG: //18 decimals
+    default:
+      return parseFloat(new Big(num).div(1000000000000000000).toString());
+  }
+}
+
 export function localizeFlash(num) {
   if (num == undefined || num === '') return;
   return parseFloat(num).toLocaleString('en', { maximumFractionDigits: 8 });
@@ -139,6 +149,16 @@ export function flashToSatoshi(num) {
 export function ethToWei(num) {
   if (num == undefined || num === '') return;
   return parseInt(new Big(num).times(1000000000000000000).toString(), 10);
+}
+
+export function contractToWei(num, currency_type) {
+  if (num == undefined || num === '') return;
+
+  switch (currency_type) {
+    case CURRENCY_TYPE.OMG: //18 decimals
+    default:
+      return parseInt(new Big(num).times(1000000000000000000).toString(), 10);
+  }
 }
 
 export function storeIdToken(idToken: string) {
@@ -195,6 +215,7 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
       return litoshiToLtc(litoshis.toFixed(0));
       break;
     case CURRENCY_TYPE.ETH:
+    case CURRENCY_TYPE.OMG:
       //let wei = gas * gasPrice  //actual
       console.log(bcMedianTxSize, fastestFee);
       let wei = bcMedianTxSize * fastestFee;
@@ -229,6 +250,7 @@ export function calcSharingFee(amount, sharingFeePercentage, fixed_to) {
     case CURRENCY_TYPE.BTC:
     case CURRENCY_TYPE.LTC:
     case CURRENCY_TYPE.ETH:
+    case CURRENCY_TYPE.OMG:
     case CURRENCY_TYPE.DASH:
       return 0;
       break;
@@ -253,6 +275,8 @@ export function formatCurrency(amount) {
       break;
     case CURRENCY_TYPE.ETH:
       return `${amount} ETH`;
+    case CURRENCY_TYPE.OMG:
+      return `${amount} OMG`;
       break;
   }
 }
@@ -428,6 +452,7 @@ export function isValidFlashAddress(value) {
 export function isValidCryptoAddress(value) {
   switch (parseInt(localStorage.getItem('currency_type'))) {
     case CURRENCY_TYPE.ETH:
+    case CURRENCY_TYPE.OMG:
       return isEtherAddress(value);
     default:
       try {
@@ -515,6 +540,26 @@ var isChecksumAddress = function(address) {
   }
   return true;
 };
+
+export function isEtherBasedCurrency(currency_type) {
+  switch (parseInt(currency_type)) {
+    case CURRENCY_TYPE.ETH:
+    case CURRENCY_TYPE.OMG:
+      return true;
+    default:
+      return false;
+  }
+}
+
+export function getContractAddress(currency_type) {
+  switch (parseInt(currency_type)) {
+    case CURRENCY_TYPE.OMG:
+      if (APP_MODE == 'PROD') return NETWORKS.OMG.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+    default:
+      return '';
+  }
+}
 
 export function filterNumberEdit(event) {
   let keyCode = event.key;
@@ -616,8 +661,8 @@ export function getSecurityQuestion() {
 }
 
 export function getSixCharString() {
-  var randomText = "";
-  var possible = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+  var randomText = '';
+  var possible = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
 
   for (var i = 0; i < 6; i++)
     randomText += possible.charAt(Math.floor(Math.random() * possible.length));

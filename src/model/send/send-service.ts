@@ -91,4 +91,12 @@ export default class SendService {
       });
     });
   }
+
+  getContractTransferData(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getContractTransferData(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

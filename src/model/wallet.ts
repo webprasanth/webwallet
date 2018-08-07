@@ -23,7 +23,7 @@ export const NETWORKS = {
     messagePrefix: '\x18Bitcoin Coin Signed Message:\n',
     bip32: {
       public: 0x0488b21e,
-      private: 0x0488ade4
+      private: 0x0488ade4,
     },
     pubKeyHash: 0x00,
     scriptHash: 0x05,
@@ -34,7 +34,7 @@ export const NETWORKS = {
     messagePrefix: '\x18Bitcoin Coin Signed Message:\n',
     bip32: {
       public: 0x043587cf,
-      private: 0x04358394
+      private: 0x04358394,
     },
     pubKeyHash: 0x6f,
     scriptHash: 0xc4,
@@ -66,8 +66,8 @@ export const NETWORKS = {
   DASH: {
     messagePrefix: '\x18Dash Coin Signed Message:\n',
     bip32: {
-        public: 0x0488b21e,
-        private: 0x0488ade4
+      public: 0x0488b21e,
+      private: 0x0488ade4,
     },
     pubKeyHash: 0x4c,
     scriptHash: 0x10,
@@ -77,19 +77,25 @@ export const NETWORKS = {
   DASH_TESTNET: {
     messagePrefix: '\x18Dash Coin Signed Message:\n',
     bip32: {
-        public: 0x043587cf,
-        private: 0x04358394
+      public: 0x043587cf,
+      private: 0x04358394,
     },
     pubKeyHash: 0x8c,
     scriptHash: 0x13,
     wif: 0xef,
-    dustThreshold: 546
+    dustThreshold: 546,
   },
   ETH: {
     chainId: 1,
   },
   ETH_TESTNET: {
-    chainId: 4
+    chainId: 4,
+  },
+  OMG: {
+    contract_address: '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07',
+  },
+  OMG_TESTNET: {
+    contract_address: '0x2Ff7535a5EDda98C9A20D289F711cD4cE29C92b6',
   },
 };
 
@@ -106,28 +112,20 @@ export default class Wallet {
     var currency_type = parseInt(currency_type);
     switch (currency_type) {
       case CURRENCY_TYPE.BTC:
-        if (APP_MODE == 'PROD') 
-          network = NETWORKS.BTC;
-        else 
-          network = NETWORKS.BTC_TESTNET;
+        if (APP_MODE == 'PROD') network = NETWORKS.BTC;
+        else network = NETWORKS.BTC_TESTNET;
         break;
       case CURRENCY_TYPE.LTC:
-        if (APP_MODE == 'PROD') 
-          network = NETWORKS.LTC;
-        else 
-          network = NETWORKS.LTC_TESTNET;
+        if (APP_MODE == 'PROD') network = NETWORKS.LTC;
+        else network = NETWORKS.LTC_TESTNET;
         break;
       case CURRENCY_TYPE.DASH:
-        if (APP_MODE == 'PROD') 
-          network = NETWORKS.DASH;
-        else 
-          network = NETWORKS.DASH_TESTNET;
+        if (APP_MODE == 'PROD') network = NETWORKS.DASH;
+        else network = NETWORKS.DASH_TESTNET;
         break;
       case CURRENCY_TYPE.ETH:
-        if (APP_MODE == 'PROD') 
-          network = NETWORKS.ETH;
-        else 
-          network = NETWORKS.ETH_TESTNET;
+        if (APP_MODE == 'PROD') network = NETWORKS.ETH;
+        else network = NETWORKS.ETH_TESTNET;
         break;
       case CURRENCY_TYPE.FLASH:
       default:
@@ -146,10 +144,11 @@ export default class Wallet {
     }
 
     let seed = bip39.mnemonicToSeedHex(mnemonic);
-    if(wdata.currency_type != CURRENCY_TYPE.ETH) {
-      let accountZero = bitcoin.HDNode.fromSeedHex(seed, this.getCryptoNetwork(wdata.currency_type)).deriveHardened(
-        0
-      );
+    if (wdata.currency_type != CURRENCY_TYPE.ETH) {
+      let accountZero = bitcoin.HDNode.fromSeedHex(
+        seed,
+        this.getCryptoNetwork(wdata.currency_type)
+      ).deriveHardened(0);
 
       this.accounts = {
         externalAccount: accountZero.derive(0),
@@ -161,15 +160,17 @@ export default class Wallet {
       this.addrNode = root.derive("m/44'/60'/0'/0/0");
     }
     this.currency_type = wdata.currency_type;
-    if(return_passphrase)
-      this.pure_passphrase = wdata.pure_passphrase;
+    if (return_passphrase) this.pure_passphrase = wdata.pure_passphrase;
 
     return this;
   }
 
   signTx(rawTx) {
     let tx = bitcoin.Transaction.fromHex(rawTx);
-    let txBuilder = bitcoin.TransactionBuilder.fromTransaction(tx, this.getCryptoNetwork(this.currency_type));
+    let txBuilder = bitcoin.TransactionBuilder.fromTransaction(
+      tx,
+      this.getCryptoNetwork(this.currency_type)
+    );
     let keyPair = this.accounts.externalAccount.derive(0).keyPair;
 
     for (var i = 0; i < tx.ins.length; i++) {
@@ -180,7 +181,9 @@ export default class Wallet {
   }
 
   signEtherBasedTx(rawTx) {
-    let network = this.getCryptoNetwork(parseInt(localStorage.getItem('currency_type')));
+    let network = this.getCryptoNetwork(
+      parseInt(localStorage.getItem('currency_type'))
+    );
     rawTx.chainId = network.chainId;
 
     let tx = new ethTx(rawTx);

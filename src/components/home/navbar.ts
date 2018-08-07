@@ -83,7 +83,6 @@ export default class Navbar extends BaseElement {
   }
 
   onCurrencySelection(event: Event) {
-    
     var selectedCurrencyElement = event.target.closest('li');
     var currencyIndex = parseInt(
       selectedCurrencyElement.getAttribute('data-currency')
@@ -101,6 +100,9 @@ export default class Navbar extends BaseElement {
         break;
       case CURRENCY_TYPE.ETH:
         localStorage.setItem('currency_type', CURRENCY_TYPE.ETH);
+        break;
+      case CURRENCY_TYPE.OMG:
+        localStorage.setItem('currency_type', CURRENCY_TYPE.OMG);
         break;
       case CURRENCY_TYPE.FLASH:
       default:
@@ -136,10 +138,10 @@ export default class Navbar extends BaseElement {
     store.dispatch(pendingActions.setActiveTab(2));
     //home activity, contacts, header, profile, fountain, User info,
 
-    if(CURRENCY_TYPE.FLASH != currencyIndex) {
+    if (CURRENCY_TYPE.FLASH != currencyIndex) {
       console.log($('.navbar-sc .navbar-nav li.active'));
       console.log($('.navbar-sc .navbar-nav li.active').attr('id'));
-      if($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
+      if ($('.navbar-sc .navbar-nav li.active').attr('id') == 'merchant-tools')
         route('activity');
     }
   }

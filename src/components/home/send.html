@@ -37,7 +37,7 @@
 					<div class="form-group amount-field col-xs-6 col-sm-4">
 						<label>{getText('common_tx_fee_label')}</label>
 						<div class="input-group">
-							<span class="input-group-addon">{getCurrencyUnit()}</span>
+							<span class="input-group-addon">{getCurrencyUnitForFee()}</span>
 							<input readonly type="text" id="fee-input" min="0" step="1" class="form-control">
 						</div>
 						<div show={amountErrorMessage} class="pin-incorrect">{amountErrorMessage}</div>
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12">
+				<div show={!isFeeCurrencyDifferent} class="col-xs-12">
 					<div class="form-group amount-field col-xs-6 col-sm-4">
 						<label>{getText('send_total_label')}</label>
 						<div class="input-group">

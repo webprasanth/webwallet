@@ -13,6 +13,7 @@ interface IUser {
   timezone: string;
   balance: number;
   ubalance: number;
+  ebalance: number;
   phone: string;
   phone_verified: number;
   totp_enabled: number;

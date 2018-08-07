@@ -1,6 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keys.flashcoin.io/';
-export const APP_MODE = 'PROD'; //DEV, PROD
+const HOST_URL = 'https://dev03keys.flashcoin.io/';
+export const APP_MODE = 'DEV'; //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -636,6 +636,16 @@ export default class AppService {
       'api/eth-txn-count',
       params,
       'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getContractTransferData(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-contract-transfer-data',
+      params,
+      'post',
       cb
     );
     $.ajax(options);

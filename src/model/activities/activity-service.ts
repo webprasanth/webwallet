@@ -1,7 +1,7 @@
 import Big from 'big.js';
 import AppService from '../app-service';
 import { CURRENCY_TYPE } from '../currency';
-import { ethToWei, weiToEth } from '../utils';
+import { ethToWei, weiToEth, isEtherBasedCurrency } from '../utils';
 
 export default class ActivityService {
   private static _instance: ActivityService;
@@ -68,7 +68,7 @@ export default class ActivityService {
 
   convertToTnx(obj) {
     var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
-    if (userSelectedCurrency == CURRENCY_TYPE.ETH)
+    if (isEtherBasedCurrency(userSelectedCurrency))
       return this.convertToTxnFromEtherBasedTxn(obj);
 
     let tran = {

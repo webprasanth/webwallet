@@ -43,13 +43,13 @@
 					</div>
 					<div class="listItems" show={meta.type==1}>
 						<div class="name-item">{getText('common_tx_fee_label')}</div>
-						<div class="data-item">-&nbsp;{txnDetail.fee}&nbsp;{getCurrencyUnitUpcase()}</div>
+						<div class="data-item">-&nbsp;{txnDetail.fee}&nbsp;{getCurrencyUnitUpcaseForFee()}</div>
 					</div>
 					<div class="listItems" show={meta.type==1 && meta.sharing_fee && meta.sharing_fee != 0}>
 						<div class="name-item">{getText('common_sharing_tx_fee_label')}</div>
 						<div class="data-item">-&nbsp;{meta.sharing_fee}&nbsp;{getCurrencyUnitUpcase()}</div>
 					</div>
-					<div class="listItems" show={meta.type==1}>
+					<div class="listItems" show={meta.type==1 && !isFeeCurrencyDifferent}>
 						<div class="name-item">{getText('send_total_label')}</div>
 						<div class="data-item">-&nbsp;{formatAmountInput(total_amount)}&nbsp;{getCurrencyUnitUpcase()}</div>
 					</div>
