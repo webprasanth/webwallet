@@ -75,7 +75,7 @@ export default class TransactionDetails extends Element {
         break;
       case CURRENCY_TYPE.FLASH:
       default:
-        this.txnDetail.fee = satoshiToFlash(this.txnDetail.fee);
+        this.txnDetail.fee = 0.001; //satoshiToFlash(this.txnDetail.fee);
         break;
     }
 
