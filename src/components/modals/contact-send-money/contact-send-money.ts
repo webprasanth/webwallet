@@ -27,6 +27,7 @@ export default class ContactSendMoney extends BaseElement {
   private fixedTxnFee = 0.00002;
   private payoutInfo = { payout_sharing_fee: 0 };
   private showSharingFee = false;
+  private isFeeCurrencyDifferent = false;
 
   constructor() {
     super();
@@ -61,9 +62,9 @@ export default class ContactSendMoney extends BaseElement {
       this.onApplicationStateChanged.bind(this)
     );
 
-    if (
-      parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH
-    ) {
+    var current_currency = parseInt(localStorage.getItem('currency_type'));
+
+    if (current_currency != CURRENCY_TYPE.FLASH) {
       CommonService.singleton()
         .getThresHoldAmount()
         .then((resp: any) => {
@@ -84,7 +85,7 @@ export default class ContactSendMoney extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+    if (current_currency == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
@@ -99,7 +100,7 @@ export default class ContactSendMoney extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+    if (current_currency == CURRENCY_TYPE.LTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
@@ -114,7 +115,7 @@ export default class ContactSendMoney extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+    if (current_currency == CURRENCY_TYPE.DASH) {
       CommonService.singleton()
         .getFixedTransactionFee()
         .then((resp: any) => {
@@ -122,7 +123,13 @@ export default class ContactSendMoney extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.ETH) {
+    if (utils.isEtherBasedCurrency(current_currency)) {
+      //ERC20 tokens trasfer fee is charged in ETH
+      if (current_currency != CURRENCY_TYPE.ETH) {
+        this.isFeeCurrencyDifferent = true;
+        tag.update();
+      }
+
       CommonService.singleton()
         .getEtherGasValues()
         .then((resp: any) => {
@@ -218,12 +225,25 @@ export default class ContactSendMoney extends BaseElement {
 
     let balance = store.getState().userData.user.balance;
 
-    if (balance >= amount && balance < amount + fee + sharingFee) {
-      return (tag.errorMessage = this.getText('send_not_enough_fee_error'));
-    }
+    if (this.isFeeCurrencyDifferent) {
+      //For ERC20 tokens fees are in ETH, in future can be other tokens or currencies too
+      if (balance < amount) {
+        return (tag.errorMessage = this.getText('send_not_enough_fund_error'));
+      }
 
-    if (balance < amount + fee + sharingFee) {
-      return (tag.errorMessage = this.getText('send_not_enough_fund_error'));
+      let ebalance = store.getState().userData.user.ebalance;
+      if (ebalance < fee) {
+        return (tag.errorMessage = this.getText('send_not_enough_fee_error'));
+      }
+    } else {
+      // non-erc20 token transaction where fee and transfers are in same currencies
+      if (balance >= amount && balance < amount + fee + sharingFee) {
+        return (tag.errorMessage = this.getText('send_not_enough_fee_error'));
+      }
+
+      if (balance < amount + fee + sharingFee) {
+        return (tag.errorMessage = this.getText('send_not_enough_fund_error'));
+      }
     }
 
     this.opts.sendAddr.memo = $('#Note').val();

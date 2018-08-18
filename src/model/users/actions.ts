@@ -236,22 +236,22 @@ export const userActions = {
                   console.log('+++++ createFlashWallet failed, reason:', _resp);
                 }
               });
-            if(profile.auth_version == 4) {
+            if (profile.auth_version == 4) {
               UserService.singleton()
-              .createBTCWallet(createWalletParams)
-              .then((_resp: any) => {
-                if (_resp.rc === 1) {
-                  /*In case of BTC wallet succes ,Not all action is required so commenting some calls*/
-                  //dispatch(userActions.loginSuccess(profile));
-                  dispatch(userActions.getBalance());
-                  //dispatch(userActions.getProfile(profile));
-                  dispatch(
-                    userActions.getMyWallets(profile.auth_version, password)
-                  );
-                } else {
-                  console.log('+++++ createBTCWallet failed, reason:', _resp);
-                }
-              });
+                .createBTCWallet(createWalletParams)
+                .then((_resp: any) => {
+                  if (_resp.rc === 1) {
+                    /*In case of BTC wallet succes ,Not all action is required so commenting some calls*/
+                    //dispatch(userActions.loginSuccess(profile));
+                    dispatch(userActions.getBalance());
+                    //dispatch(userActions.getProfile(profile));
+                    dispatch(
+                      userActions.getMyWallets(profile.auth_version, password)
+                    );
+                  } else {
+                    console.log('+++++ createBTCWallet failed, reason:', _resp);
+                  }
+                });
 
               UserService.singleton()
                 .createLTCWallet(createWalletParams)
@@ -275,7 +275,10 @@ export const userActions = {
                       userActions.getMyWallets(profile.auth_version, password)
                     );
                   } else {
-                    console.log('+++++ createDASHWallet failed, reason:', _resp);
+                    console.log(
+                      '+++++ createDASHWallet failed, reason:',
+                      _resp
+                    );
                   }
                 });
 
@@ -347,7 +350,6 @@ export const userActions = {
     );
 
     return dispatch => {
-
       UserService.singleton()
         .migrateAccount(params)
         .then((resp: any) => {
@@ -372,10 +374,8 @@ export const userActions = {
 
             let wallets = store.getState().userData.wallets;
             let currency_wallets = wallets.filter(function(wallet) {
-              if(parseInt(wallet.currency_type) == 1)
-                return true;
-              else
-                return false;
+              if (parseInt(wallet.currency_type) == 1) return true;
+              else return false;
             });
             let wallet = currency_wallets[0];
 
@@ -384,7 +384,7 @@ export const userActions = {
               sessionToken: resp.profile.sessionToken,
               publicKey: userKey.publicKey,
               appId: 'flashcoin',
-              passphrase: wallet.pure_passphrase
+              passphrase: wallet.pure_passphrase,
             };
 
             utils.storeUserKey(userKey);
@@ -408,13 +408,12 @@ export const userActions = {
   },
 
   migrateAccountSuccess() {
-    return { type: USERS.MIGRATE_V1_TO_V2_SUCCESS, data: {}};
+    return { type: USERS.MIGRATE_V1_TO_V2_SUCCESS, data: {} };
   },
 
   migrateAccountFailed(resp) {
     return { type: USERS.MIGRATE_V1_TO_V2_FAILED, data: resp };
   },
-
 
   setRecoveryKeysForMigration(params, createWalletParams, password, profile) {
     return dispatch => {
@@ -432,7 +431,10 @@ export const userActions = {
                 if (_resp.rc === 1) {
                   dispatch(userActions.migrateAccountSuccess());
                 } else {
-                  console.log('+++++ migrateFlashWallet failed, reason:', _resp);
+                  console.log(
+                    '+++++ migrateFlashWallet failed, reason:',
+                    _resp
+                  );
                   dispatch(userActions.migrateAccountFailed(resp));
                 }
               });
@@ -490,7 +492,9 @@ export const userActions = {
           let loginData = { profile: resp.profile, password: password };
           dispatch({ type: USERS.NEED_VERIFY_GOOGLE_2FA, data: loginData });
         } else if (resp.profile.auth_version === 3) {
-          dispatch(userActions.getMyWallets(resp.profile.auth_version, password));
+          dispatch(
+            userActions.getMyWallets(resp.profile.auth_version, password)
+          );
         } else {
           dispatch(userActions.loginSuccess(resp.profile));
           dispatch(userActions.getBalance());
@@ -587,9 +591,12 @@ export const userActions = {
         .getMyWallets()
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if (resp.my_wallets.length > 4 || (resp.my_wallets.length == 1 && auth_version != 4)) {
+            if (
+              resp.my_wallets.length > 4 ||
+              (resp.my_wallets.length == 1 && auth_version != 4)
+            ) {
               decryptWallets(dispatch, resp.my_wallets, auth_version, password);
-              if(auth_version == 3) {
+              if (auth_version == 3) {
                 let loginData = { password: password };
                 dispatch({ type: USERS.NEED_MIGRATION_TO_V2, data: loginData });
               }
@@ -602,7 +609,12 @@ export const userActions = {
                 appId: 'flashcoin',
               };
               //if no FLASH wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.FLASH).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.FLASH
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createFlashWallet(params)
                   .then((resp: any) => {
@@ -627,7 +639,13 @@ export const userActions = {
                   });
               }
               //if no BTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets, CURRENCY_TYPE.BTC).length == 0 && auth_version == 4) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.BTC
+                ).length == 0 &&
+                auth_version == 4
+              ) {
                 UserService.singleton()
                   .createBTCWallet(params)
                   .then((resp: any) => {
@@ -652,7 +670,12 @@ export const userActions = {
                   });
               }
               //if no LTC wallet
-              if (userActions.getCurrencyWallet(resp.my_wallets,CURRENCY_TYPE.LTC).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.LTC
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createLTCWallet(params)
                   .then((resp: any) => {
@@ -677,7 +700,12 @@ export const userActions = {
                   });
               }
               //if no DASH wallet
-              if ( userActions.getCurrencyWallet(resp.my_wallets,CURRENCY_TYPE.DASH).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.DASH
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createDASHWallet(params)
                   .then((resp: any) => {
@@ -703,7 +731,12 @@ export const userActions = {
               }
 
               //if no ETH wallet
-              if ( userActions.getCurrencyWallet(resp.my_wallets,CURRENCY_TYPE.ETH).length == 0) {
+              if (
+                userActions.getCurrencyWallet(
+                  resp.my_wallets,
+                  CURRENCY_TYPE.ETH
+                ).length == 0
+              ) {
                 UserService.singleton()
                   .createETHWallet(params)
                   .then((resp: any) => {
@@ -741,41 +774,41 @@ export const userActions = {
     return { type: USERS.GET_MY_WALLETS_FAILED, data: resp };
   },
   getCurrencyWallet(wallets, currency_type) {
-    if(!wallets)  return [];
+    if (!wallets) return [];
     return wallets.filter(function(wallet) {
-      if(parseInt(wallet.currency_type) == currency_type)
-        return true;
-      else
-        return false;
+      if (parseInt(wallet.currency_type) == currency_type) return true;
+      else return false;
     });
   },
   getBalance() {
     return dispatch => {
-      var userSelectedCurrency = parseInt(localStorage.getItem('currency_type'));
+      var userSelectedCurrency = parseInt(
+        localStorage.getItem('currency_type')
+      );
       let params = { currency_type: userSelectedCurrency };
       UserService.singleton()
         .getBalance(params)
         .then((resp: any) => {
           if (resp.rc === 1) {
-            if(!resp.ubalance)
-            {
+            if (!resp.ubalance) {
               resp.ubalance = 0;
+            }
+            if (!resp.ebalance) {
+              //Ether balance for Contract Addresses
+              resp.ebalance = 0;
             }
             console.log('get Balance()', resp.balance);
             console.log('get uBalance()', resp.ubalance);
-            console.log(
-              'get Balance() utils.satoshiToFlash(resp.balance)',
-              utils.satoshiToFlash(resp.balance),
-              'get uBalance() utils.satoshiToFlash(resp.balance)',
-              utils.satoshiToFlash(resp.ubalance)
-            );
-            var balanceData = {balance: 0, ubalance: 0};
+            console.log('get eBalance()', resp.ebalance);
+            var balanceData = { balance: 0, ubalance: 0, ebalance: 0 };
             if (userSelectedCurrency == CURRENCY_TYPE.FLASH) {
               balanceData.balance = utils.satoshiToFlash(resp.balance);
               balanceData.ubalance = utils.satoshiToFlash(resp.ubalance);
-            } else if (userSelectedCurrency != CURRENCY_TYPE.FLASH ) {
+              balanceData.ebalance = utils.satoshiToFlash(resp.ebalance);
+            } else if (userSelectedCurrency != CURRENCY_TYPE.FLASH) {
               balanceData.balance = resp.balance;
               balanceData.ubalance = resp.ubalance;
+              balanceData.ebalance = resp.ebalance;
             }
             dispatch(userActions.getBalanceSuccess(balanceData));
           } else {
@@ -849,16 +882,15 @@ function decryptPassphraseV1(dispatch, wallets) {
         let decryptedWallets = wallets.map(w => {
           let str = utils.b64DecodeUnicode(w.passphrase);
           w.pure_passphrase = Premium.xaesDecrypt(resp.wallet.secret, str);
-          if(userProfile && userProfile.email)
-            w.email = userProfile.email;
+          if (userProfile && userProfile.email) w.email = userProfile.email;
           return new Wallet().openWallet(w, true);
         });
         dispatch(userActions.getMyWalletsSuccess(decryptedWallets));
-        if(userProfile) {
+        if (userProfile) {
           dispatch({
-          type: USERS.STORE_FOUNTAIN_SECRET,
-          data: resp.wallet.secret,
-        });
+            type: USERS.STORE_FOUNTAIN_SECRET,
+            data: resp.wallet.secret,
+          });
         }
       }
     });

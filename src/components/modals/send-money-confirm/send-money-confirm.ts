@@ -11,7 +11,10 @@ import BaseElement from '../../base-element';
 import * as utils from '../../../model/utils';
 import { USERS } from '../../../model/action-types';
 import { CURRENCY_TYPE } from '../../../model/currency';
-import { getCurrencyUnitUpcase } from '../../../model/currency';
+import {
+  getCurrencyUnitUpcase,
+  getCurrencyUnitUpcaseForFee,
+} from '../../../model/currency';
 
 @template(SendMoneyConfirmTemplate)
 export default class SendMoneyConfirm extends BaseElement {
@@ -28,6 +31,8 @@ export default class SendMoneyConfirm extends BaseElement {
   private AvatarServer = Constants.AvatarServer;
   private static unsubscribe = null;
   private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
+  private getCurrencyUnitUpcaseForFee = getCurrencyUnitUpcaseForFee;
+  private isFeeCurrencyDifferent = false;
 
   constructor() {
     super();
@@ -66,6 +71,16 @@ export default class SendMoneyConfirm extends BaseElement {
   }
 
   mounted() {
+    if (
+      utils.isEtherBasedCurrency(
+        parseInt(localStorage.getItem('currency_type'))
+      ) &&
+      parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.ETH
+    ) {
+      //ERC20 tokens trasfer fee is charged in ETH
+      this.isFeeCurrencyDifferent = true;
+      this.update();
+    }
     this.userProfile = store.getState().userData.user;
     $('#sendDialog').modal('show');
     let wallet = store.getState().userData.wallets[0];
@@ -106,7 +121,11 @@ export default class SendMoneyConfirm extends BaseElement {
   createRawTx() {
     this.confirmation = true;
     this.sending = true;
-    if (parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.ETH) {
+    if (
+      !utils.isEtherBasedCurrency(
+        parseInt(localStorage.getItem('currency_type'))
+      )
+    ) {
       if (parseFloat(this.opts.sharingFee) > 0) {
         store.dispatch(
           sendActions.createRawTxMulti(

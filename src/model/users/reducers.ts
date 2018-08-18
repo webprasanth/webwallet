@@ -43,6 +43,8 @@ export default function userReducer(
       oldProfile = state.user;
       oldProfile.balance = action.data.balance;
       oldProfile.ubalance = action.data.ubalance;
+      if (action.data.ebalance) oldProfile.ebalance = action.data.ebalance;
+      else oldProfile.ebalance = 0;
       return Object.assign({}, state, { user: oldProfile });
     case USERS.STORE_FOUNTAIN_SECRET:
       oldProfile = state.user;

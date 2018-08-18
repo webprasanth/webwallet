@@ -641,6 +641,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getContractTransferData(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-contract-transfer-data',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
   getPayoutInfo(cb) {
     let options = this.makeRequestOption('api/get-payout-info', {}, 'get', cb);
     $.ajax(options);

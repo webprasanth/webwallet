@@ -30,6 +30,7 @@ export default class HomeSend extends BaseElement {
   private fixedTxnFee = 0.00002; //This we will get from API call for DASH
   private payoutInfo = { payout_sharing_fee: 0 };
   private showSharingFee = false;
+  private isFeeCurrencyDifferent = false;
 
   mounted() {
     let state = store.getState();
@@ -51,9 +52,9 @@ export default class HomeSend extends BaseElement {
       this.checkAddress
     );
 
-    if (
-      parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.FLASH
-    ) {
+    let current_currency = parseInt(localStorage.getItem('currency_type'));
+
+    if (current_currency != CURRENCY_TYPE.FLASH) {
       CommonService.singleton()
         .getThresHoldAmount()
         .then((resp: any) => {
@@ -74,7 +75,7 @@ export default class HomeSend extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+    if (current_currency == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
@@ -89,7 +90,7 @@ export default class HomeSend extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+    if (current_currency == CURRENCY_TYPE.LTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
@@ -104,7 +105,7 @@ export default class HomeSend extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+    if (current_currency == CURRENCY_TYPE.DASH) {
       CommonService.singleton()
         .getFixedTransactionFee()
         .then((resp: any) => {
@@ -112,7 +113,10 @@ export default class HomeSend extends BaseElement {
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.ETH) {
+    if (utils.isEtherBasedCurrency(current_currency)) {
+      if (current_currency != CURRENCY_TYPE.ETH)
+        //ERC20 tokens trasfer fee is charged in ETH
+        this.isFeeCurrencyDifferent = true;
       CommonService.singleton()
         .getEtherGasValues()
         .then((resp: any) => {
@@ -334,17 +338,31 @@ export default class HomeSend extends BaseElement {
       return;
     }
 
-    if (
-      this.userProfile.balance >= amount &&
-      this.userProfile.balance < amount + fee + sharingFee
-    ) {
-      super.showError('', this.getText('send_not_enough_fee_error'));
-      return;
-    }
+    if (this.isFeeCurrencyDifferent) {
+      //For ERC20 tokens fees are in ETH, in future can be other tokens or currencies too
+      if (this.userProfile.balance < amount) {
+        super.showError('', this.getText('send_not_enough_fund_error'));
+        return;
+      }
 
-    if (this.userProfile.balance < amount + fee + sharingFee) {
-      super.showError('', this.getText('send_not_enough_fund_error'));
-      return;
+      if (this.userProfile.ebalance < fee) {
+        super.showError('', this.getText('send_not_enough_fee_error'));
+        return;
+      }
+    } else {
+      // non-erc20 token transaction where fee and transfers are in same currencies
+      if (
+        this.userProfile.balance >= amount &&
+        this.userProfile.balance < amount + fee + sharingFee
+      ) {
+        super.showError('', this.getText('send_not_enough_fee_error'));
+        return;
+      }
+
+      if (this.userProfile.balance < amount + fee + sharingFee) {
+        super.showError('', this.getText('send_not_enough_fund_error'));
+        return;
+      }
     }
 
     this.sendWallet.memo = $('#payment-memo').val();

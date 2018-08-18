@@ -7,7 +7,11 @@ import { commonActions } from '../../../model/common/actions';
 import CommonService from '../../../model/common/common-service';
 import { COMMON } from '../../../model/action-types';
 import { getText } from '../../localise';
-import { CURRENCY_TYPE, getCurrencyUnit } from '../../../model/currency';
+import {
+  CURRENCY_TYPE,
+  getCurrencyUnit,
+  getCurrencyUnitForFee,
+} from '../../../model/currency';
 
 let tag = null;
 
@@ -21,6 +25,7 @@ export default class AcceptMoneyRequest extends Element {
   private static unsubscribe = null;
   private getText = getText;
   private getCurrencyUnit = getCurrencyUnit;
+  private getCurrencyUnitForFee = getCurrencyUnitForFee;
   private bcMedianTxSize = 250;
   private SatoshiPerByte = 20;
   private fixedTxnFee = 0.00002;
@@ -29,6 +34,7 @@ export default class AcceptMoneyRequest extends Element {
   private get_wallet_completed = false;
   private get_sharing_fee_completed = false;
   private wallet_action_data = null;
+  private isFeeCurrencyDifferent = false;
 
   constructor() {
     super();
@@ -58,63 +64,71 @@ export default class AcceptMoneyRequest extends Element {
       this.onApplicationStateChanged.bind(this)
     );
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.BTC) {
+    var current_currency = parseInt(localStorage.getItem('currency_type'));
+
+    if (current_currency == CURRENCY_TYPE.BTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
           if (resp.rc === 1 && resp.median_tx_size) {
             tag.bcMedianTxSize = resp.median_tx_size;
+            tag.calculateFee();
           }
         });
       CommonService.singleton()
         .getBTCSatoshiPerByte()
         .then((resp: any) => {
           tag.SatoshiPerByte = parseInt(resp.fastestFee);
+          tag.calculateFee();
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.LTC) {
+    if (current_currency == CURRENCY_TYPE.LTC) {
       CommonService.singleton()
         .getBCMedianTxSize()
         .then((resp: any) => {
           if (resp.rc === 1 && resp.median_tx_size) {
             tag.bcMedianTxSize = resp.median_tx_size;
+            tag.calculateFee();
           }
         });
       CommonService.singleton()
         .getLTCSatoshiPerByte()
         .then((resp: any) => {
           tag.SatoshiPerByte = parseInt(resp.high_fee_per_kb);
+          tag.calculateFee();
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.DASH) {
+    if (current_currency == CURRENCY_TYPE.DASH) {
       CommonService.singleton()
         .getFixedTransactionFee()
         .then((resp: any) => {
           tag.fixedTxnFee = resp.fixed_txn_fee;
+          tag.calculateFee();
         });
     }
 
-    if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.ETH) {
+    if (utils.isEtherBasedCurrency(current_currency)) {
+      if (current_currency != CURRENCY_TYPE.ETH)
+        //ERC20 tokens trasfer fee is charged in ETH
+        this.isFeeCurrencyDifferent = true;
+
       CommonService.singleton()
         .getEtherGasValues()
         .then((resp: any) => {
-          console.log(resp);
           if (resp.rc == 1 && resp.gas_price && resp.gas_limit) {
             tag.SatoshiPerByte = parseInt(resp.gas_price); //price per gas in Wei (Wei unit of Ether)
             tag.bcMedianTxSize = parseInt(resp.gas_limit); //max gas to be used
+            tag.calculateFee();
           }
         });
     }
 
-    if (
-      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
-    ) {
+    if (current_currency == CURRENCY_TYPE.FLASH) {
       CommonService.singleton()
         .getPayoutInfo()
         .then((resp: any) => {
-          console.log('sharing  done');
           tag.get_sharing_fee_completed = true;
           if (resp.rc === 1 && resp.payout_info) {
             tag.payoutInfo = resp.payout_info;
@@ -124,17 +138,19 @@ export default class AcceptMoneyRequest extends Element {
           if (tag.get_wallet_completed) tag.enableForm(tag.wallet_action_data);
           tag.update();
         });
+    } else {
+      this.get_sharing_fee_completed = true;
     }
 
     $('#acceptRequestDialog').modal('show');
-    var userSelectedCurrency = localStorage.getItem('currency_type');
+
     //Get sender's wallet info
     store.dispatch(
       commonActions.getWalletsByEmail({
         email: this.opts.sender_email,
         start: 0,
         size: 1,
-        currency_type: userSelectedCurrency,
+        currency_type: current_currency,
       })
     );
   }
@@ -197,16 +213,34 @@ export default class AcceptMoneyRequest extends Element {
     this.notEnoughBalanceMsg = null;
     this.sendWallet = data.results[0];
 
-    if (balance < amount + fee + sharingFee) {
-      if (amount <= balance) {
-        this.notEnoughBalanceMsg = this.getText('send_not_enough_fee_error');
-      } else {
+    if (this.isFeeCurrencyDifferent) {
+      //For ERC20 tokens fees are in ETH, in future can be other tokens or currencies too
+      let ebalance = store.getState().userData.user.ebalance;
+      console.log(ebalance);
+      console.log(fee);
+      if (balance < amount) {
         this.notEnoughBalanceMsg = this.getText('send_not_enough_fund_error');
+        this.notEnoughBalance = true;
+      } else if (ebalance < fee) {
+        this.notEnoughBalanceMsg = this.getText('send_not_enough_fee_error');
+        this.notEnoughBalance = true;
+      } else {
+        this.notEnoughBalance = false;
       }
-      this.notEnoughBalance = true;
     } else {
-      this.notEnoughBalance = false;
+      // non-erc20 token transaction where fee and transfers are in same currencies
+      if (balance < amount + fee + sharingFee) {
+        if (amount <= balance) {
+          this.notEnoughBalanceMsg = this.getText('send_not_enough_fee_error');
+        } else {
+          this.notEnoughBalanceMsg = this.getText('send_not_enough_fund_error');
+        }
+        this.notEnoughBalance = true;
+      } else {
+        this.notEnoughBalance = false;
+      }
     }
+
     this.requestProcessing = false;
   }
 

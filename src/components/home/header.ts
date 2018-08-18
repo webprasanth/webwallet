@@ -23,8 +23,10 @@ export default class HomeHeader extends BaseElement {
   private refreshIconUrl: string = 'assets/images/refresh_icon_white.png';
   private balance = 0;
   private ubalance = 0;
+  private ebalance = 0;
   private formattedBalance = '0';
   private formattedUBalance = '0';
+  private formattedEBalance = '0';
   private decimalFormat = decimalFormat;
   private static unsubscribe = null;
   private isDisconnect = false;
@@ -46,7 +48,12 @@ export default class HomeHeader extends BaseElement {
 
     if (user.ubalance) {
       this.ubalance = user.ubalance;
-      this.formattedBalance = flashNFormatter(this.ubalance, 2);
+      this.formattedUBalance = flashNFormatter(this.ubalance, 2);
+    }
+
+    if (user.ebalance) {
+      this.ebalance = user.ebalance;
+      this.formattedEBalance = flashNFormatter(this.ebalance, 2);
     }
 
     if (user.profile_pic_url) {
@@ -99,12 +106,17 @@ export default class HomeHeader extends BaseElement {
       case USERS.GET_BALANCE_SUCCESS:
         this.balance = state.lastAction.data.balance;
         this.ubalance = state.lastAction.data.ubalance;
+        this.ebalance = state.lastAction.data.ebalance;
         this.formattedBalance = flashNFormatter(this.balance, 2);
         this.formattedUBalance = flashNFormatter(this.ubalance, 2);
+        this.formattedEBalance = flashNFormatter(this.ebalance, 2);
         this.refreshIconUrl = 'assets/images/refresh_icon_white.png';
-        let msg = this.getText('notify_balance_updated', {
-          balance: this.formattedBalance,
-        }) + ' ' + this.getCurrencyUnitUpcase();
+        let msg =
+          this.getText('notify_balance_updated', {
+            balance: this.formattedBalance,
+          }) +
+          ' ' +
+          this.getCurrencyUnitUpcase();
         $.notify(msg, 'info');
         break;
       case COMMON.NEED_UPDATE_BALANCE:
@@ -133,10 +145,17 @@ export default class HomeHeader extends BaseElement {
             time: utcDateToLocal(note.created_ts),
           };
 
-          let notification_currency = note.currency ? parseInt(note.currency) : this.CURRENCY_TYPE.FLASH;
-          let notification_currency_name = this.getCurrencyUnitUpcase(notification_currency);
+          let notification_currency = note.currency
+            ? parseInt(note.currency)
+            : this.CURRENCY_TYPE.FLASH;
+          let notification_currency_name = this.getCurrencyUnitUpcase(
+            notification_currency
+          );
 
-          message = this.getText('common_got_money_request_alert', params) + ' ' + notification_currency_name;
+          message =
+            this.getText('common_got_money_request_alert', params) +
+            ' ' +
+            notification_currency_name;
           $.notify(message, 'info');
         }
         break;
@@ -146,7 +165,7 @@ export default class HomeHeader extends BaseElement {
         }`;
         break;
       case PROFILE.GET_WALLETS_BY_EMAIL_SUCCESS:
-        if(!(($('#walletAddressDlg').data('bs.modal') || {}).isShown))
+        if (!($('#walletAddressDlg').data('bs.modal') || {}).isShown)
           riot.mount('#wallet-address', 'wallet-address');
         break;
       default:
@@ -198,8 +217,12 @@ export default class HomeHeader extends BaseElement {
       return;
     }
 
-    let notification_currency = note.currency_type ? parseInt(note.currency_type) : this.CURRENCY_TYPE.FLASH;
-    let notification_currency_name = this.getCurrencyUnitUpcase(notification_currency);
+    let notification_currency = note.currency_type
+      ? parseInt(note.currency_type)
+      : this.CURRENCY_TYPE.FLASH;
+    let notification_currency_name = this.getCurrencyUnitUpcase(
+      notification_currency
+    );
 
     if (note.sender_email == store.getState().userData.user.email) {
       if (!note.transaction_type) {
@@ -221,7 +244,10 @@ export default class HomeHeader extends BaseElement {
       }
     } else {
       let params = { sender_email: note.sender_email, amount: note.amount };
-      message = this.getText('common_receive_money_alert', params) + ' ' + notification_currency_name;
+      message =
+        this.getText('common_receive_money_alert', params) +
+        ' ' +
+        notification_currency_name;
     }
 
     $.notify(message, 'info');
@@ -256,20 +282,27 @@ export default class HomeHeader extends BaseElement {
   }
 
   onLoadBalanceButtonHoverIn(event: Event) {
-    if(this.refreshIconUrl != 'assets/images/reload.svg')
-      this.refreshIconUrl = "assets/images/refresh_icon_orange.png";
+    if (this.refreshIconUrl != 'assets/images/reload.svg')
+      this.refreshIconUrl = 'assets/images/refresh_icon_orange.png';
   }
 
   onLoadBalanceButtonHoverOut(event: Event) {
-    if(this.refreshIconUrl != 'assets/images/reload.svg')
-      this.refreshIconUrl = "assets/images/refresh_icon_white.png";
+    if (this.refreshIconUrl != 'assets/images/reload.svg')
+      this.refreshIconUrl = 'assets/images/refresh_icon_white.png';
   }
 
   onShowBalanceButtonClick(event: Event) {
     riot.mount('#confirm-send', 'full-balance', {
       balance: localizeFlash(this.balance) + ' ' + this.getCurrencyUnitUpcase(),
-      ubalance: localizeFlash(this.ubalance) + ' ' + this.getCurrencyUnitUpcase(),
-      unconfirmed: this.CURRENCY_TYPE.FLASH != parseInt(localStorage.getItem('currency_type'))
+      ubalance:
+        localizeFlash(this.ubalance) + ' ' + this.getCurrencyUnitUpcase(),
+      ebalance:
+        localizeFlash(this.ebalance) +
+        ' ' +
+        this.getCurrencyUnitUpcase(this.CURRENCY_TYPE.ETH),
+      unconfirmed:
+        this.CURRENCY_TYPE.FLASH !=
+        parseInt(localStorage.getItem('currency_type')),
     });
   }
 }

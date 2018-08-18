@@ -9,6 +9,9 @@ import {
   getLocation,
   ethToWei,
   calcSharingFee,
+  contractToWei,
+  isEtherBasedCurrency,
+  getContractAddress,
 } from '../utils';
 import SendService from './send-service';
 import Wallet from '../wallet';
@@ -317,7 +320,13 @@ export const sendActions = {
       gasPrice: gasPrice,
       gasLimit: gasLimit,
       chainId: 0, //will be changed while signing
+      data: '',
     };
+
+    if (parseInt(userSelectedCurrency) != CURRENCY_TYPE.ETH) {
+      rawTx.value = 0; //erc20 transaction
+      rawTx.to = getContractAddress(userSelectedCurrency);
+    }
 
     return dispatch => {
       dispatch(commonActions.toggleLoading(true));
@@ -327,8 +336,40 @@ export const sendActions = {
           currency_type: parseInt(localStorage.getItem('currency_type')),
         })
         .then((resp: any) => {
+          console.log('old response', resp);
+          if (
+            parseInt(localStorage.getItem('currency_type')) != CURRENCY_TYPE.ETH
+          ) {
+            //EERC20 token transfers
+            return new Promise(function(resolve, reject) {
+              SendService.singleton()
+                .getContractTransferData({
+                  fromAddress: sender_address,
+                  toAddress: targetWallet.address,
+                  amount: contractToWei(amount, parseInt(userSelectedCurrency)), //contract to wei
+                  currency_type: parseInt(
+                    localStorage.getItem('currency_type')
+                  ),
+                })
+                .then((res: any) => {
+                  console.log('inner response', res);
+                  res.tx_count = resp.tx_count;
+                  resolve(res);
+                });
+            });
+          } else return resp;
+        })
+        .then((resp: any) => {
+          console.log('new response', resp);
           if (resp.rc === 1) {
             rawTx.nonce = resp.tx_count;
+
+            if (
+              parseInt(localStorage.getItem('currency_type')) !=
+              CURRENCY_TYPE.ETH
+            )
+              rawTx.data = resp.input; //erc20 transaction
+
             tx = wallet.signEtherBasedTx(rawTx);
             var serializedTx = tx.serialize();
             let txn_info: any = {
@@ -446,9 +487,14 @@ export const sendActions = {
   },
   getActiveWallet() {
     let wallets = store.getState().userData.wallets;
-    let currency_type = localStorage.getItem('currency_type');
+    let currency_type = parseInt(localStorage.getItem('currency_type'));
     let currency_wallets = wallets.filter(function(wallet) {
-      if (parseInt(wallet.currency_type) == currency_type) return true;
+      if (
+        parseInt(wallet.currency_type) == currency_type ||
+        (parseInt(wallet.currency_type) == CURRENCY_TYPE.ETH &&
+          isEtherBasedCurrency(currency_type))
+      )
+        return true;
       else return false;
     });
     return currency_wallets[0];

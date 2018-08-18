@@ -6,6 +6,7 @@ import { getText } from './localise';
 import {
   getCurrencyUnitUpcase,
   getCurrencyUnit,
+  getCurrencyUnitForFee,
   getCurrencyIconUrl,
   CURRENCY_TYPE,
 } from '../model/currency';
@@ -14,6 +15,7 @@ export default class BaseElement extends Element {
   protected getText = getText;
   protected getCurrencyUnitUpcase = getCurrencyUnitUpcase;
   protected getCurrencyUnit = getCurrencyUnit;
+  protected getCurrencyUnitForFee = getCurrencyUnitForFee;
   protected getCurrencyIconUrl = getCurrencyIconUrl;
   protected CURRENCY_TYPE = CURRENCY_TYPE;
 

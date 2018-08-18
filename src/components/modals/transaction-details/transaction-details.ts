@@ -13,10 +13,15 @@ import {
   getDisplayDateTime,
   localizeFlash,
   weiToEth,
+  isEtherBasedCurrency,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
-import { CURRENCY_TYPE, getCurrencyUnitUpcase } from '../../../model/currency';
+import {
+  CURRENCY_TYPE,
+  getCurrencyUnitUpcase,
+  getCurrencyUnitUpcaseForFee,
+} from '../../../model/currency';
 
 @template(TransactionDetailsTemplate)
 export default class TransactionDetails extends Element {
@@ -24,10 +29,12 @@ export default class TransactionDetails extends Element {
   private meta = store.getState().activityData.txn_detail.meta;
   private getText = getText;
   private getCurrencyUnitUpcase = getCurrencyUnitUpcase;
+  private getCurrencyUnitUpcaseForFee = getCurrencyUnitUpcaseForFee;
   private AvatarServer = Constants.AvatarServer;
   private CURRENCY_TYPE = CURRENCY_TYPE;
   private showConfirmationNotice = false;
   private total_amount = 0;
+  private isFeeCurrencyDifferent = false; //erc20 tokens transaction fees are charged in ETH
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
@@ -38,6 +45,7 @@ export default class TransactionDetails extends Element {
   getDisplayDateTime = getDisplayDateTime;
   localizeFlash = localizeFlash;
   formatAmountInput = formatAmountInput;
+  isEtherBasedCurrency = isEtherBasedCurrency;
 
   constructor() {
     super();
@@ -61,18 +69,27 @@ export default class TransactionDetails extends Element {
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.ETH:
+      case CURRENCY_TYPE.OMG: //ether based tokens will have fees always in ETH
         this.txnDetail.fee = weiToEth(this.txnDetail.fee);
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:
       default:
-        this.txnDetail.fee = satoshiToFlash(this.txnDetail.fee);
+        this.txnDetail.fee = 0.001; //satoshiToFlash(this.txnDetail.fee);
         break;
     }
 
     let total_amount = this.meta.amount;
     if (this.meta.type == 1) {
-      total_amount = parseFloat((total_amount + this.txnDetail.fee).toFixed(8));
+      if (
+        !isEtherBasedCurrency(currency_type) ||
+        currency_type == CURRENCY_TYPE.ETH
+      ) {
+        //don't consider fees in total_amount if its ERC20 tokens
+        total_amount = parseFloat(
+          (total_amount + this.txnDetail.fee).toFixed(8)
+        );
+      } else this.isFeeCurrencyDifferent = true;
       if (this.meta.sharing_fee > 0)
         total_amount = parseFloat(
           (total_amount + this.meta.sharing_fee).toFixed(8)
