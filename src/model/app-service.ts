@@ -1,6 +1,6 @@
 import { storeUserKey, getUserKey } from './utils';
-const HOST_URL = 'https://keys.flashcoin.io/';
-export const APP_MODE = 'PROD'; //DEV, PROD
+const HOST_URL = 'https://dev02keys.flashcoin.io/';
+export const APP_MODE = 'DEV'; //DEV, PROD
 
 export default class AppService {
   private authVersion = 4;
@@ -766,6 +766,36 @@ export default class AppService {
   validateNewSharingCode(params, cb) {
     let options = this.makeRequestOption(
       'api/is-sharing-code-available',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getERC20Tokens(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-selected-currencies',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  updateERC20Tokens(params, cb) {
+    let options = this.makeRequestOption(
+      'api/update-selected-currencies',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getActiveCurrencies(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-active-currencies',
       params,
       'get',
       cb

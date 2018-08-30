@@ -21,7 +21,7 @@ export default class HomeProfile extends Element {
   private isQuestioning = false;
   private isFountainAvailable = false;
   private isShareAvailable = false;
-
+  private isERC20Tokens = false;
 
   mounted() {
     if (HomeProfile.unsubscribe) HomeProfile.unsubscribe();
@@ -29,7 +29,9 @@ export default class HomeProfile extends Element {
       this.onApplicationStateChanged.bind(this)
     );
 
-    if(parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH){
+    if (
+      parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH
+    ) {
       this.isFountainAvailable = true;
       this.isShareAvailable = true;
     }
@@ -63,6 +65,7 @@ export default class HomeProfile extends Element {
     if (this.isShareAvailable) {
       riot.mount('#share-coin', 'share-coin', {});
     }
+    riot.mount('#erc20-tokens', 'erc20-tokens', {});
   }
 
   onTabSelect(tab) {
@@ -72,30 +75,42 @@ export default class HomeProfile extends Element {
       this.isFountain = false;
       this.isQuestioning = false;
       this.isShare = false;
+      this.isERC20Tokens = false;
     } else if (tab == 'setting') {
       this.isProfile = false;
       this.isSetting = true;
       this.isFountain = false;
       this.isQuestioning = false;
       this.isShare = false;
+      this.isERC20Tokens = false;
     } else if (tab == 'fountain') {
       this.isProfile = false;
       this.isSetting = false;
       this.isFountain = true;
       this.isQuestioning = false;
       this.isShare = false;
+      this.isERC20Tokens = false;
     } else if (tab == 'securityquestion') {
       this.isProfile = false;
       this.isSetting = false;
       this.isFountain = false;
       this.isQuestioning = true;
       this.isShare = false;
+      this.isERC20Tokens = false;
     } else if (tab == 'sharecoin') {
       this.isProfile = false;
       this.isSetting = false;
       this.isFountain = false;
       this.isQuestioning = false;
       this.isShare = true;
+      this.isERC20Tokens = false;
+    } else if (tab == 'erc20tokens') {
+      this.isProfile = false;
+      this.isSetting = false;
+      this.isFountain = false;
+      this.isQuestioning = false;
+      this.isShare = false;
+      this.isERC20Tokens = true;
     }
   }
 }

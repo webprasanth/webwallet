@@ -127,4 +127,12 @@ export default class CommonService {
       });
     });
   }
+
+  getActiveCurrencies(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getActiveCurrencies(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

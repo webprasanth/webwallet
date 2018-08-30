@@ -94,6 +94,21 @@ export const NETWORKS = {
   OMG: {
     contract_address: '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07',
   },
+  AE: {
+    contract_address: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d',
+  },
+  LINK: {
+    contract_address: '0x514910771af9ca656af840dff83e8264ecf986ca',
+  },
+  MKR: {
+    contract_address: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
+  },
+  RHOC: {
+    contract_address: '0x168296bb09e24a88805cb9c33356536b980d3fc5',
+  },
+  WTC: {
+    contract_address: '0xb7cb1c96db6b22b0d3d9536e0108d062bd488f74',
+  },
   OMG_TESTNET: {
     contract_address: '0x2Ff7535a5EDda98C9A20D289F711cD4cE29C92b6',
   },

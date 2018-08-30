@@ -5,6 +5,8 @@
 	"home_link_support": "支持",
 	"home_link_contact": "联系",
 
+	"lbl_save"   : "保存",
+
 	"menu_label_togglenav": "切换导航",
 	"menu_label_activity": "活动",
 	"menu_label_send": "发送",
