@@ -129,4 +129,26 @@ export const commonActions = {
   onConnect() {
     store.dispatch({ type: COMMON.ON_CONNECT });
   },
+
+  getActiveCurrencies(params) {
+    return dispatch => {
+      CommonService.singleton()
+        .getActiveCurrencies(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(commonActions.getActiveCurrenciesSuccess(resp));
+          } else {
+            dispatch(commonActions.getActiveCurrenciesFailed(resp));
+          }
+        });
+    };
+  },
+
+  getActiveCurrenciesSuccess(resp) {
+    return { type: COMMON.GET_ACTIVE_CURRENCIES_SUCCESS, data: resp };
+  },
+
+  getActiveCurrenciesFailed(resp) {
+    return { type: COMMON.GET_ACTIVE_CURRENCIES_FAILED, data: resp };
+  },
 };

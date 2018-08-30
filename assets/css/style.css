@@ -527,6 +527,8 @@ h5.title-table{
 .navbar-sc ul li a:hover,
 .navbar-sc ul li a:focus{
     background-color: #E0AE27;
+    color: #262626;
+    text-decoration: none;
 }
 .navbar-sc ul li a .orange-circle{
     position: absolute;
@@ -572,15 +574,35 @@ h5.title-table{
   margin: 0;
   border: 1px #000000;
   border-radius: 0;
+  /*max-height: 250px;
+  height: auto;
+  overflow-y: auto; */
 }
 .select-currency-container ul#select-currency li a{
   padding: 10px 35px;
+  display: block;
+  clear: both;
+  font-weight: 400;
+  white-space: nowrap;
 }
+.select-currency-container ul#select-currency li.currency-deactivated{
+  opacity: 0.4;
+}
+/*
+.select-currency-container ul#select-currency li.currency-deactivated a{
+  pointer-events: none;
+} 
+*/ 
 .select-currency-container ul#select-currency li img{
   width: 30px;
 }
 .select-currency-container ul#select-currency li span{
   padding-left: 10px;
+}
+.select-currency-container ul#select-currency .ss-scroll {
+background-color: #E0AE27;
+border-radius: 0;
+opacity: 1;
 }
 
 /*Transaction Acitivity*/
@@ -1813,4 +1835,51 @@ select:active, select:hover {
 
 .payout-share-code {
   padding-left:17px;
+}
+
+.erc20tokensDiv {
+  margin: 15px 10px;
+}
+.erc20tokensDiv .erc20tkn {
+  padding: 8px 2px;
+  border: 2px solid #F3F3F3;
+  border-radius: 4px;
+  margin: 2px;
+}
+.erc20tokensDiv div.erc20tkn:hover {
+  cursor: pointer;
+  border: 2px solid #4387DB;
+  border-radius: 4px;
+}
+.erc20tokensDiv .erc20tkn.selected {
+  cursor: pointer;
+  border: 2px solid #4387DB;
+  border-radius: 4px;
+}  
+.erc20tokensDiv .erc20tkn .lbl {
+  width: 100%;
+  cursor: pointer;
+}
+.erc20tokensDiv .erc20tkn .tkncode {
+  width: 100%;
+  padding: 5px 5px 0 5px;
+  display: block;
+  text-align: center;
+}
+.erc20tokensDiv .erc20tkn .tkname {
+  width: 100%;
+  padding: 0 5px;
+  display: block;
+  text-align: center;
+  font-weight: normal;
+}
+.erc20tokensDiv .erc20tkn .chk-style1 {
+  margin: 5px auto;
+  padding: 5px;
+  display: block;
+}
+.erc20tokensDiv img.erc20tokenImg {
+  width: 30px;
+  display: block;
+  margin: 0 auto;
 }

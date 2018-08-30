@@ -14,6 +14,7 @@ import {
   localizeFlash,
   weiToEth,
   isEtherBasedCurrency,
+  contractToEth,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -69,8 +70,16 @@ export default class TransactionDetails extends Element {
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.ETH:
-      case CURRENCY_TYPE.OMG: //ether based tokens will have fees always in ETH
         this.txnDetail.fee = weiToEth(this.txnDetail.fee);
+        this.showConfirmationNotice = true;
+        break;
+      case CURRENCY_TYPE.OMG: //ether based tokens will have fees always in ETH
+      case CURRENCY_TYPE.AE:
+      case CURRENCY_TYPE.LINK:
+      case CURRENCY_TYPE.MKR:
+      case CURRENCY_TYPE.RHOC:
+      case CURRENCY_TYPE.WTC:
+        this.txnDetail.fee = contractToEth(this.txnDetail.fee, currency_type);
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.FLASH:

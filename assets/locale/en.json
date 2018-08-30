@@ -5,6 +5,8 @@
     "home_link_support"                        : "SUPPORT",
     "home_link_contact"                        : "CONTACT",
 
+    "lbl_save"                                 : "Save",
+
     "menu_label_togglenav"                     : "Toggle navigation",
     "menu_label_activity"                      : "Activity",
     "menu_label_send"                          : "Send",

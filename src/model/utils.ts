@@ -9,7 +9,7 @@ import { keccak256 } from 'js-sha3';
 import { getText } from '../components/localise';
 
 import { Address, NETWORKS } from './wallet';
-import { CURRENCY_TYPE } from './currency';
+import { CURRENCY_TYPE, ALL_COINS } from './currency';
 import { APP_MODE } from './app-service';
 
 interface UserKey {
@@ -107,7 +107,13 @@ export function contractToEth(num, currency_type) {
   if (num == undefined || num === '') return;
 
   switch (currency_type) {
+    case CURRENCY_TYPE.RHOC: //8 decimals
+      return parseFloat(new Big(num).div(100000000).toString());
     case CURRENCY_TYPE.OMG: //18 decimals
+    case CURRENCY_TYPE.AE: //18 decimals
+    case CURRENCY_TYPE.LINK: //18 decimals
+    case CURRENCY_TYPE.MKR: //18 decimals
+    case CURRENCY_TYPE.WTC: //18 decimals
     default:
       return parseFloat(new Big(num).div(1000000000000000000).toString());
   }
@@ -155,7 +161,13 @@ export function contractToWei(num, currency_type) {
   if (num == undefined || num === '') return;
 
   switch (currency_type) {
+    case CURRENCY_TYPE.RHOC: //8 decimals
+      return new Big(num).times(100000000).toFixed();
     case CURRENCY_TYPE.OMG: //18 decimals
+    case CURRENCY_TYPE.AE: //18 decimals
+    case CURRENCY_TYPE.LINK: //18 decimals
+    case CURRENCY_TYPE.MKR: //18 decimals
+    case CURRENCY_TYPE.WTC: //18 decimals
     default:
       return new Big(num).times(1000000000000000000).toFixed();
   }
@@ -215,12 +227,23 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
       return litoshiToLtc(litoshis.toFixed(0));
       break;
     case CURRENCY_TYPE.ETH:
-    case CURRENCY_TYPE.OMG:
       //let wei = gas * gasPrice  //actual
       console.log(bcMedianTxSize, fastestFee);
       let wei = bcMedianTxSize * fastestFee;
       console.log(wei);
       return weiToEth(wei);
+      break;
+    case CURRENCY_TYPE.OMG:
+    case CURRENCY_TYPE.AE:
+    case CURRENCY_TYPE.LINK:
+    case CURRENCY_TYPE.MKR:
+    case CURRENCY_TYPE.RHOC:
+    case CURRENCY_TYPE.WTC:
+      //let wei = gas * gasPrice  //actual
+      console.log(bcMedianTxSize, fastestFee);
+      let wei = bcMedianTxSize * fastestFee;
+      console.log(wei);
+      return contractToEth(wei);
       break;
     case CURRENCY_TYPE.DASH:
       return fixedTxnFee;
@@ -249,9 +272,14 @@ export function calcSharingFee(amount, sharingFeePercentage, fixed_to) {
       break;
     case CURRENCY_TYPE.BTC:
     case CURRENCY_TYPE.LTC:
+    case CURRENCY_TYPE.DASH:
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.DASH:
+    case CURRENCY_TYPE.AE:
+    case CURRENCY_TYPE.LINK:
+    case CURRENCY_TYPE.MKR:
+    case CURRENCY_TYPE.RHOC:
+    case CURRENCY_TYPE.WTC:
       return 0;
       break;
   }
@@ -263,21 +291,26 @@ export function formatCurrency(amount) {
     case CURRENCY_TYPE.FLASH:
     default:
       return `${amount} Flash`;
-      break;
     case CURRENCY_TYPE.BTC:
       return `${amount} BTC`;
-      break;
     case CURRENCY_TYPE.LTC:
       return `${amount} LTC`;
-      break;
     case CURRENCY_TYPE.DASH:
       return `${amount} DASH`;
-      break;
     case CURRENCY_TYPE.ETH:
       return `${amount} ETH`;
     case CURRENCY_TYPE.OMG:
       return `${amount} OMG`;
-      break;
+    case CURRENCY_TYPE.AE:
+      return `${amount} AE`;
+    case CURRENCY_TYPE.LINK:
+      return `${amount} LINK`;
+    case CURRENCY_TYPE.MKR:
+      return `${amount} MKR`;
+    case CURRENCY_TYPE.RHOC:
+      return `${amount} RHOC`;
+    case CURRENCY_TYPE.WTC:
+      return `${amount} WTC`;
   }
 }
 
@@ -453,6 +486,11 @@ export function isValidCryptoAddress(value) {
   switch (parseInt(localStorage.getItem('currency_type'))) {
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
+    case CURRENCY_TYPE.AE:
+    case CURRENCY_TYPE.LINK:
+    case CURRENCY_TYPE.MKR:
+    case CURRENCY_TYPE.RHOC:
+    case CURRENCY_TYPE.WTC:
       return isEtherAddress(value);
     default:
       try {
@@ -545,6 +583,11 @@ export function isEtherBasedCurrency(currency_type) {
   switch (parseInt(currency_type)) {
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
+    case CURRENCY_TYPE.AE:
+    case CURRENCY_TYPE.LINK:
+    case CURRENCY_TYPE.MKR:
+    case CURRENCY_TYPE.RHOC:
+    case CURRENCY_TYPE.WTC:
       return true;
     default:
       return false;
@@ -556,6 +599,27 @@ export function getContractAddress(currency_type) {
     case CURRENCY_TYPE.OMG:
       if (APP_MODE == 'PROD') return NETWORKS.OMG.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
+
+    case CURRENCY_TYPE.AE:
+      if (APP_MODE == 'PROD') return NETWORKS.AE.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+
+    case CURRENCY_TYPE.LINK:
+      if (APP_MODE == 'PROD') return NETWORKS.LINK.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+
+    case CURRENCY_TYPE.MKR:
+      if (APP_MODE == 'PROD') return NETWORKS.MKR.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+
+    case CURRENCY_TYPE.RHOC:
+      if (APP_MODE == 'PROD') return NETWORKS.RHOC.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+
+    case CURRENCY_TYPE.WTC:
+      if (APP_MODE == 'PROD') return NETWORKS.WTC.contract_address;
+      else return NETWORKS.OMG_TESTNET.contract_address;
+
     default:
       return '';
   }
@@ -668,4 +732,13 @@ export function getSixCharString() {
     randomText += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return randomText;
+}
+
+export function getERC20Tokens() {
+  var allTokens = Object.values(ALL_COINS);
+  let erc20Tokens = allTokens.filter(function(token) {
+    if (token.is_erc20) return true;
+    else return false;
+  });
+  return erc20Tokens;
 }

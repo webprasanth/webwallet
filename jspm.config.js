@@ -11,6 +11,7 @@ SystemJS.config({
     cropbox: './assets/lib/cropbox.js',
     QRCode: './assets/lib/qrcode.min.js',
     html2canvas: './assets/lib/html2canvas.js',
+    simpleScrollbar: './assets/lib/simple-scrollbar.min.js',
   },
   devConfig: {
     map: {
