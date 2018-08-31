@@ -14,11 +14,11 @@ export const CURRENCY_TYPE = {
 
   // ADT: 21,
   // ARN: 22,
-  AE: 23,
+  // AE: 23,
   // AST: 24,
   // AMB: 25,
   // APPC: 26,
-  LINK: 27,
+  // LINK: 27,
   // CND: 28,
   // DAI: 29,
   // MANA: 30,
@@ -34,7 +34,7 @@ export const CURRENCY_TYPE = {
   // KCS: 40,
   // LRC: 41,
   // LUN: 42,
-  MKR: 43,
+  // MKR: 43,
   // MDS: 44,
   // MLN: 45,
   // MTL: 46,
@@ -46,7 +46,7 @@ export const CURRENCY_TYPE = {
   // QTUM: 52,
   // QSP: 53,
   // RDN: 54,
-  RHOC: 55,
+  // RHOC: 55,
   // REQ: 56,
   // R: 57,
   // RVT: 58,
@@ -58,9 +58,13 @@ export const CURRENCY_TYPE = {
   // TNB: 64,
   // VERI: 65,
   // VIB: 66,
-  WTC: 67,
+  // WTC: 67,
   // WAX: 68,
   // TRST: 69,
+  BNB: 70,
+  GNT: 71,
+  PAY: 72,
+  BAT: 73,
 };
 
 export const ALL_COINS = {
@@ -110,12 +114,12 @@ export const ALL_COINS = {
   //   'currency_type': 22,
   //   'is_erc20': true
   // },
-  23: {
-    name: 'Aeternity',
-    code: 'AE',
-    currency_type: 23,
-    is_erc20: true,
-  },
+  // 23: {
+  //   name: 'Aeternity',
+  //   code: 'AE',
+  //   currency_type: 23,
+  //   is_erc20: true,
+  // },
   // 24: { 'name': 'AirSwap',
   //   'code': 'AST',
   //   'currency_type': 24,
@@ -131,12 +135,12 @@ export const ALL_COINS = {
   //   'currency_type': 26,
   //   'is_erc20': true
   // },
-  27: {
-    name: 'ChainLink',
-    code: 'LINK',
-    currency_type: 27,
-    is_erc20: true,
-  },
+  // 27: {
+  //   name: 'ChainLink',
+  //   code: 'LINK',
+  //   currency_type: 27,
+  //   is_erc20: true,
+  // },
   // 28: { 'name': 'Cindicator',
   //   'code': 'CND',
   //   'currency_type': 28,
@@ -212,12 +216,12 @@ export const ALL_COINS = {
   //   'currency_type': 42,
   //   'is_erc20': true
   // },
-  43: {
-    name: 'Maker',
-    code: 'MKR',
-    currency_type: 43,
-    is_erc20: true,
-  },
+  // 43: {
+  //   name: 'Maker',
+  //   code: 'MKR',
+  //   currency_type: 43,
+  //   is_erc20: true,
+  // },
   // 44: { 'name': 'MediShares',
   //   'code': 'MDS',
   //   'currency_type': 44,
@@ -273,12 +277,12 @@ export const ALL_COINS = {
   //   'currency_type': 54,
   //   'is_erc20': true
   // },
-  55: {
-    name: 'RChain',
-    code: 'RHOC',
-    currency_type: 55,
-    is_erc20: true,
-  },
+  // 55: {
+  //   name: 'RChain',
+  //   code: 'RHOC',
+  //   currency_type: 55,
+  //   is_erc20: true,
+  // },
   // 56: { 'name': 'Request',
   //   'code': 'REQ',
   //   'currency_type': 56,
@@ -334,12 +338,12 @@ export const ALL_COINS = {
   //   'currency_type': 66,
   //   'is_erc20': true
   // },
-  67: {
-    name: 'Walton',
-    code: 'WTC',
-    currency_type: 67,
-    is_erc20: true,
-  },
+  // 67: {
+  //   name: 'Walton',
+  //   code: 'WTC',
+  //   currency_type: 67,
+  //   is_erc20: true,
+  // },
   // 68: { 'name': 'Wax',
   //   'code': 'WAX',
   //   'currency_type': 68,
@@ -350,6 +354,30 @@ export const ALL_COINS = {
   //   'currency_type': 69,
   //   'is_erc20': true
   // },
+  70: {
+    name: 'Binance',
+    code: 'BNB',
+    currency_type: 70,
+    is_erc20: true,
+  },
+  71: {
+    name: 'Golem',
+    code: 'GNT',
+    currency_type: 71,
+    is_erc20: true,
+  },
+  72: {
+    name: 'TenX',
+    code: 'PAY',
+    currency_type: 72,
+    is_erc20: true,
+  },
+  73: {
+    name: 'BAT',
+    code: 'BAT',
+    currency_type: 73,
+    is_erc20: true,
+  },
 };
 
 export const CURRENCY_TYPE_UNIT = {
@@ -380,11 +408,11 @@ export const CURRENCY_ICON_URL = {
 
   // 21: 'assets/images/currency/adt-icon.png',
   // 22: 'assets/images/currency/arn-icon.png',
-  23: 'assets/images/currency/ae-icon.png',
+  // 23: 'assets/images/currency/ae-icon.png',
   // 24: 'assets/images/currency/ast-icon.png',
   // 25: 'assets/images/currency/amb-icon.png',
   // 26: 'assets/images/currency/appc-icon.png',
-  27: 'assets/images/currency/link-icon.png',
+  // 27: 'assets/images/currency/link-icon.png',
   // 28: 'assets/images/currency/cnd-icon.png',
   // 29: 'assets/images/currency/dai-icon.png',
   // 30: 'assets/images/currency/mana-icon.png',
@@ -400,7 +428,7 @@ export const CURRENCY_ICON_URL = {
   // 40: 'assets/images/currency/kcs-icon.png',
   // 41: 'assets/images/currency/lrc-icon.png',
   // 42: 'assets/images/currency/lun-icon.png',
-  43: 'assets/images/currency/mkr-icon.png',
+  // 43: 'assets/images/currency/mkr-icon.png',
   // 44: 'assets/images/currency/mds-icon.png',
   // 45: 'assets/images/currency/mln-icon.png',
   // 46: 'assets/images/currency/mtl-icon.png',
@@ -412,7 +440,7 @@ export const CURRENCY_ICON_URL = {
   // 52: 'assets/images/currency/qtum-icon.png',
   // 53: 'assets/images/currency/qsp-icon.png',
   // 54: 'assets/images/currency/rdn-icon.png',
-  55: 'assets/images/currency/rhoc-icon.png',
+  // 55: 'assets/images/currency/rhoc-icon.png',
   // 56: 'assets/images/currency/req-icon.png',
   // 57: 'assets/images/currency/r-icon.png',
   // 58: 'assets/images/currency/rvt-icon.png',
@@ -424,9 +452,13 @@ export const CURRENCY_ICON_URL = {
   // 64: 'assets/images/currency/tnb-icon.png',
   // 65: 'assets/images/currency/veri-icon.png',
   // 66: 'assets/images/currency/vib-icon.png',
-  67: 'assets/images/currency/wtc-icon.png',
+  // 67: 'assets/images/currency/wtc-icon.png',
   // 68: 'assets/images/currency/wax-icon.png',
   // 69: 'assets/images/currency/trst-icon.png',
+  70: 'assets/images/currency/bnb-icon.png',
+  71: 'assets/images/currency/gnt-icon.png',
+  72: 'assets/images/currency/pay-icon.png',
+  73: 'assets/images/currency/bat-icon.png',
 };
 
 export function getCurrencyUnitUpcase(currency_type) {

@@ -94,20 +94,17 @@ export const NETWORKS = {
   OMG: {
     contract_address: '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07',
   },
-  AE: {
-    contract_address: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d',
+  BNB: {
+    contract_address: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
   },
-  LINK: {
-    contract_address: '0x514910771af9ca656af840dff83e8264ecf986ca',
+  GNT: {
+    contract_address: '0xa74476443119A942dE498590Fe1f2454d7D4aC0d',
   },
-  MKR: {
-    contract_address: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
+  PAY: {
+    contract_address: '0xB97048628DB6B661D4C2aA833e95Dbe1A905B280',
   },
-  RHOC: {
-    contract_address: '0x168296bb09e24a88805cb9c33356536b980d3fc5',
-  },
-  WTC: {
-    contract_address: '0xb7cb1c96db6b22b0d3d9536e0108d062bd488f74',
+  BAT: {
+    contract_address: '0x0d8775f648430679a709e98d2b0cb6250d2887ef',
   },
   OMG_TESTNET: {
     contract_address: '0x2Ff7535a5EDda98C9A20D289F711cD4cE29C92b6',
