@@ -74,11 +74,10 @@ export default class TransactionDetails extends Element {
         this.showConfirmationNotice = true;
         break;
       case CURRENCY_TYPE.OMG: //ether based tokens will have fees always in ETH
-      case CURRENCY_TYPE.AE:
-      case CURRENCY_TYPE.LINK:
-      case CURRENCY_TYPE.MKR:
-      case CURRENCY_TYPE.RHOC:
-      case CURRENCY_TYPE.WTC:
+      case CURRENCY_TYPE.BNB:
+      case CURRENCY_TYPE.GNT:
+      case CURRENCY_TYPE.PAY:
+      case CURRENCY_TYPE.BAT:
         this.txnDetail.fee = contractToEth(this.txnDetail.fee, currency_type);
         this.showConfirmationNotice = true;
         break;

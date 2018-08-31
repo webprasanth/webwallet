@@ -107,13 +107,11 @@ export function contractToEth(num, currency_type) {
   if (num == undefined || num === '') return;
 
   switch (currency_type) {
-    case CURRENCY_TYPE.RHOC: //8 decimals
-      return parseFloat(new Big(num).div(100000000).toString());
     case CURRENCY_TYPE.OMG: //18 decimals
-    case CURRENCY_TYPE.AE: //18 decimals
-    case CURRENCY_TYPE.LINK: //18 decimals
-    case CURRENCY_TYPE.MKR: //18 decimals
-    case CURRENCY_TYPE.WTC: //18 decimals
+    case CURRENCY_TYPE.BNB: //18 decimals
+    case CURRENCY_TYPE.GNT: //18 decimals
+    case CURRENCY_TYPE.PAY: //18 decimals
+    case CURRENCY_TYPE.BAT: //18 decimals
     default:
       return parseFloat(new Big(num).div(1000000000000000000).toString());
   }
@@ -161,13 +159,11 @@ export function contractToWei(num, currency_type) {
   if (num == undefined || num === '') return;
 
   switch (currency_type) {
-    case CURRENCY_TYPE.RHOC: //8 decimals
-      return new Big(num).times(100000000).toFixed();
     case CURRENCY_TYPE.OMG: //18 decimals
-    case CURRENCY_TYPE.AE: //18 decimals
-    case CURRENCY_TYPE.LINK: //18 decimals
-    case CURRENCY_TYPE.MKR: //18 decimals
-    case CURRENCY_TYPE.WTC: //18 decimals
+    case CURRENCY_TYPE.BNB: //18 decimals
+    case CURRENCY_TYPE.GNT: //18 decimals
+    case CURRENCY_TYPE.PAY: //18 decimals
+    case CURRENCY_TYPE.BAT: //18 decimals
     default:
       return new Big(num).times(1000000000000000000).toFixed();
   }
@@ -234,11 +230,10 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
       return weiToEth(wei);
       break;
     case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.AE:
-    case CURRENCY_TYPE.LINK:
-    case CURRENCY_TYPE.MKR:
-    case CURRENCY_TYPE.RHOC:
-    case CURRENCY_TYPE.WTC:
+    case CURRENCY_TYPE.BNB:
+    case CURRENCY_TYPE.GNT:
+    case CURRENCY_TYPE.PAY:
+    case CURRENCY_TYPE.BAT:
       //let wei = gas * gasPrice  //actual
       console.log(bcMedianTxSize, fastestFee);
       let wei = bcMedianTxSize * fastestFee;
@@ -275,11 +270,10 @@ export function calcSharingFee(amount, sharingFeePercentage, fixed_to) {
     case CURRENCY_TYPE.DASH:
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.AE:
-    case CURRENCY_TYPE.LINK:
-    case CURRENCY_TYPE.MKR:
-    case CURRENCY_TYPE.RHOC:
-    case CURRENCY_TYPE.WTC:
+    case CURRENCY_TYPE.BNB:
+    case CURRENCY_TYPE.GNT:
+    case CURRENCY_TYPE.PAY:
+    case CURRENCY_TYPE.BAT:
       return 0;
       break;
   }
@@ -301,16 +295,14 @@ export function formatCurrency(amount) {
       return `${amount} ETH`;
     case CURRENCY_TYPE.OMG:
       return `${amount} OMG`;
-    case CURRENCY_TYPE.AE:
-      return `${amount} AE`;
-    case CURRENCY_TYPE.LINK:
-      return `${amount} LINK`;
-    case CURRENCY_TYPE.MKR:
-      return `${amount} MKR`;
-    case CURRENCY_TYPE.RHOC:
-      return `${amount} RHOC`;
-    case CURRENCY_TYPE.WTC:
-      return `${amount} WTC`;
+    case CURRENCY_TYPE.BNB:
+      return `${amount} BNB`;
+    case CURRENCY_TYPE.GNT:
+      return `${amount} GNT`;
+    case CURRENCY_TYPE.PAY:
+      return `${amount} PAY`;
+    case CURRENCY_TYPE.BAT:
+      return `${amount} BAT`;
   }
 }
 
@@ -486,11 +478,10 @@ export function isValidCryptoAddress(value) {
   switch (parseInt(localStorage.getItem('currency_type'))) {
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.AE:
-    case CURRENCY_TYPE.LINK:
-    case CURRENCY_TYPE.MKR:
-    case CURRENCY_TYPE.RHOC:
-    case CURRENCY_TYPE.WTC:
+    case CURRENCY_TYPE.BNB:
+    case CURRENCY_TYPE.GNT:
+    case CURRENCY_TYPE.PAY:
+    case CURRENCY_TYPE.BAT:
       return isEtherAddress(value);
     default:
       try {
@@ -583,11 +574,10 @@ export function isEtherBasedCurrency(currency_type) {
   switch (parseInt(currency_type)) {
     case CURRENCY_TYPE.ETH:
     case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.AE:
-    case CURRENCY_TYPE.LINK:
-    case CURRENCY_TYPE.MKR:
-    case CURRENCY_TYPE.RHOC:
-    case CURRENCY_TYPE.WTC:
+    case CURRENCY_TYPE.BNB:
+    case CURRENCY_TYPE.GNT:
+    case CURRENCY_TYPE.PAY:
+    case CURRENCY_TYPE.BAT:
       return true;
     default:
       return false;
@@ -600,24 +590,20 @@ export function getContractAddress(currency_type) {
       if (APP_MODE == 'PROD') return NETWORKS.OMG.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
 
-    case CURRENCY_TYPE.AE:
-      if (APP_MODE == 'PROD') return NETWORKS.AE.contract_address;
+    case CURRENCY_TYPE.BNB:
+      if (APP_MODE == 'PROD') return NETWORKS.BNB.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
 
-    case CURRENCY_TYPE.LINK:
-      if (APP_MODE == 'PROD') return NETWORKS.LINK.contract_address;
+    case CURRENCY_TYPE.GNT:
+      if (APP_MODE == 'PROD') return NETWORKS.GNT.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
 
-    case CURRENCY_TYPE.MKR:
-      if (APP_MODE == 'PROD') return NETWORKS.MKR.contract_address;
+    case CURRENCY_TYPE.PAY:
+      if (APP_MODE == 'PROD') return NETWORKS.PAY.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
 
-    case CURRENCY_TYPE.RHOC:
-      if (APP_MODE == 'PROD') return NETWORKS.RHOC.contract_address;
-      else return NETWORKS.OMG_TESTNET.contract_address;
-
-    case CURRENCY_TYPE.WTC:
-      if (APP_MODE == 'PROD') return NETWORKS.WTC.contract_address;
+    case CURRENCY_TYPE.BAT:
+      if (APP_MODE == 'PROD') return NETWORKS.BAT.contract_address;
       else return NETWORKS.OMG_TESTNET.contract_address;
 
     default:
