@@ -515,9 +515,11 @@ export const profileActions = {
 
   updateERC20Tokens(params) {
     return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
       ProfileService.singleton()
         .updateERC20Tokens(params)
         .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
           if (resp.rc == 1) {
             dispatch(profileActions.updateERC20TokensSuccess(resp));
           } else {
