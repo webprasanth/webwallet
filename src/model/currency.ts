@@ -387,6 +387,10 @@ export const CURRENCY_TYPE_UNIT = {
   4: 'DASH',
   5: 'ETH',
   6: 'OMG',
+  70: 'BNB',
+  71: 'GNT',
+  72: 'PAY',
+  73: 'BAT',
 };
 
 export const CURRENCY_TYPE_UNIT_UPCASE = {
@@ -396,6 +400,10 @@ export const CURRENCY_TYPE_UNIT_UPCASE = {
   4: 'DASH',
   5: 'ETH',
   6: 'OMG',
+  70: 'BNB',
+  71: 'GNT',
+  72: 'PAY',
+  73: 'BAT',
 };
 
 export const CURRENCY_ICON_URL = {
