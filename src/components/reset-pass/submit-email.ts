@@ -24,13 +24,16 @@ export default class SubmitEmail extends BaseElement {
 
   mounted() {
     var self = this;
-    $.getScript('https://www.google.com/recaptcha/api.js?render=explicit', function () {
-      setTimeout(function() {
-        self.captchaId = grecaptcha.render('gcaptcha', {
-            'sitekey': '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C'
-        });
-      }, 500);
-    })
+    $.getScript(
+      'https://www.google.com/recaptcha/api.js?render=explicit',
+      function() {
+        setTimeout(function() {
+          self.captchaId = grecaptcha.render('gcaptcha', {
+            sitekey: '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N',
+          });
+        }, 500);
+      }
+    );
   }
 
   onApplicationStateChanged() {
@@ -40,7 +43,7 @@ export default class SubmitEmail extends BaseElement {
 
     if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_SUCCESS) {
       this.isVerifyEmailSent = true;
-    }else if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_FAILED) {
+    } else if (actionType === RESET_PASS.SSO_RESET_PASSWORD_MAIL_FAILED) {
       super.showError('', data.resetPassMailErrReason);
       grecaptcha.reset(this.captchaId);
     }
@@ -61,8 +64,8 @@ export default class SubmitEmail extends BaseElement {
 
     let captchaResp = grecaptcha.getResponse(this.captchaId);
     if (!captchaResp || captchaResp.length == 0) {
-        super.showError('',this.getText('signup_invalid_captcha'));
-        return;
+      super.showError('', this.getText('signup_invalid_captcha'));
+      return;
     }
 
     let clientHost = window.location.host;

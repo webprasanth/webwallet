@@ -192,7 +192,7 @@ export default class MobileLogin extends BaseElement {
   renderCaptcha() {
     if (grecaptcha && !this.captchaId) {
       this.captchaId = grecaptcha.render('gcaptcha', {
-        sitekey: '6LcMRCgTAAAAAAsGwyHN0EF4zp_vZzVJKMRS5I8C',
+        sitekey: '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N',
       });
     }
   }
