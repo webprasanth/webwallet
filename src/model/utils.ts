@@ -232,19 +232,10 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
 
   if (isEtherBasedCurrency(currency_type)) {
-    if (currency_type == CURRENCY_TYPE.ETH) {
-      //let wei = gas * gasPrice  //actual
-      console.log(bcMedianTxSize, fastestFee);
-      let wei = bcMedianTxSize * fastestFee;
-      console.log(wei);
-      return weiToEth(wei);
-    } else {
-      //let wei = gas * gasPrice  //actual
-      console.log(bcMedianTxSize, fastestFee);
-      let wei = bcMedianTxSize * fastestFee;
-      console.log(wei);
-      return contractToEth(wei, currency_type);
-    }
+    console.log(bcMedianTxSize, fastestFee);
+    let wei = bcMedianTxSize * fastestFee;
+    console.log(wei);
+    return weiToEth(wei);
   }
 
   switch (currency_type) {
@@ -709,4 +700,38 @@ export function getERC20Tokens() {
     else return false;
   });
   return erc20Tokens;
+}
+
+export function getExternalTxnDetailUrl(txn_id, currency_type) {
+  if (txn_id == '' || txn_id == undefined) return '#';
+
+  let urlStr = '';
+  if (isEtherBasedCurrency(parseInt(currency_type))) {
+    if (APP_MODE == 'PROD') urlStr = 'https://etherscan.io/tx/' + txn_id;
+    else urlStr = 'https://rinkeby.etherscan.io/tx/' + txn_id;
+    return urlStr;
+  } else {
+    switch (parseInt(currency_type)) {
+      case CURRENCY_TYPE.FLASH:
+        urlStr = 'https://explorer.flashcoin.io/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.BTC:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://btc.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.138:3001/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.LTC:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://ltc.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.143:3001/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.DASH:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://dash.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.172:3001/tx/' + txn_id;
+        return urlStr;
+      default:
+        return '#';
+    }
+  }
 }
