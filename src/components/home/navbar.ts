@@ -174,4 +174,11 @@ export default class Navbar extends BaseElement {
         route('activity');
     }
   }
+
+  onAddMoreCurrency() {
+    route('profile');
+    setTimeout(function() {
+      store.dispatch({ type: PROFILE.SHOW_ERC20_TOKENS_TAB, data: null });
+    }, 300);
+  }
 }
