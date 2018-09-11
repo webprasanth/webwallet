@@ -51,6 +51,12 @@ export default class HomeProfile extends Element {
       this.onTabSelect('setting');
     }
 
+    if (type == PROFILE.SHOW_ERC20_TOKENS_TAB) {
+      $('.myaccount-page #tabs-togglable li').removeClass('active');
+      $('#tab-6').addClass('active');
+      this.onTabSelect('erc20tokens');
+    }
+
     this.update();
   }
 
