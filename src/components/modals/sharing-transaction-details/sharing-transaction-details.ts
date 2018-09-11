@@ -8,6 +8,7 @@ import {
   formatCurrency,
   getDisplayDateTime,
   localizeFlash,
+  getExternalTxnDetailUrl,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -35,6 +36,11 @@ export default class SharingTransactionDetails extends Element {
   mounted() {
     var self = this;
 
+    let currency_type = parseInt(localStorage.getItem('currency_type'));
+    this.externalTxnDetailUrl = getExternalTxnDetailUrl(
+      this.meta.transaction_id,
+      currency_type
+    );
     this.update();
 
     $('#txSharingDetailDlg').modal('show');

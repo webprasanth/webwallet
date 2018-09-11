@@ -15,6 +15,7 @@ import {
   weiToEth,
   isEtherBasedCurrency,
   contractToEth,
+  getExternalTxnDetailUrl,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -103,7 +104,10 @@ export default class TransactionDetails extends Element {
         );
     }
     this.total_amount = total_amount;
-
+    this.externalTxnDetailUrl = getExternalTxnDetailUrl(
+      this.meta.transaction_id,
+      currency_type
+    );
     this.update();
 
     $('#txDetailDlg').modal('show');

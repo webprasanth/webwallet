@@ -28,7 +28,7 @@
                   <li each={token in navbarAllTokens} show={(selectedERC20Tokens.indexOf(token.currency_type) != -1) || (!token.is_erc20)} data-currency="{token.currency_type}"  onclick={onCurrencySelection} class="{(activeCurrencies.indexOf(token.currency_type) == -1) ? 'currency-deactivated' : ''}">
                       <a title="Select {token.code}" href="#" ><img src="{currency_icon_url[token.currency_type]}"><span>{token.code}</span></a>
                   </li>
-                  <li onclick={onAddMoreCurrency}><a href="#" class="text-center">More +</a></li>
+                  <li onclick={onAddMoreCurrency}><a href="#" class="text-center">{getText('common_add_more_tokens_label')}</a></li>
                 </ul>
             </div>
             
