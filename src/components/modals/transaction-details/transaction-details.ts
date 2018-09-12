@@ -59,13 +59,8 @@ export default class TransactionDetails extends Element {
     let currency_type = parseInt(localStorage.getItem('currency_type'));
 
     if (isEtherBasedCurrency(currency_type)) {
-      if (currency_type == CURRENCY_TYPE.ETH) {
-        this.txnDetail.fee = weiToEth(this.txnDetail.fee);
-        this.showConfirmationNotice = true;
-      } else {
-        this.txnDetail.fee = contractToEth(this.txnDetail.fee, currency_type);
-        this.showConfirmationNotice = true;
-      }
+      this.txnDetail.fee = weiToEth(this.txnDetail.fee);
+      this.showConfirmationNotice = true;
     } else {
       switch (currency_type) {
         case CURRENCY_TYPE.BTC:
