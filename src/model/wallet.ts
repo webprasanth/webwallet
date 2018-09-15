@@ -115,9 +115,9 @@ export const NETWORKS = {
   APPC: {
     contract_address: '0x1a7a8bd9106f2b8d977e08582dc7d24c723ab0db',
   },
-  LINK: {
-    contract_address: '0x514910771af9ca656af840dff83e8264ecf986ca',
-  },
+  // LINK: {
+  //   contract_address: '0x514910771af9ca656af840dff83e8264ecf986ca',
+  // },
   CND: {
     contract_address: '0xd4c435f5b09f855c3317c8524cb1f586e42795fa',
   },
@@ -229,9 +229,9 @@ export const NETWORKS = {
   WAX: {
     contract_address: '0x39bb259f66e1c59d5abef88375979b4d20d98022',
   },
-  TRST: {
-    contract_address: '0xcb94be6f13a1182e4a4b6140cb7bf2025d28e41b',
-  },
+  // TRST: {
+  //   contract_address: '0xcb94be6f13a1182e4a4b6140cb7bf2025d28e41b',
+  // },
   BNB: {
     contract_address: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
   },

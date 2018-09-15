@@ -453,5 +453,6 @@
     "erc20Token_list_updated_successfully"     : "ERC20 Tokens updated succesfully",
     "erc20Token_failed_to_update_list"         : "Failed to update ERC20 Tokens",
     "common_active_currencies_failed_to_list"  : "Failed to list active currencies",
-    "common_add_more_tokens_label"             : "More +"
+    "common_add_more_tokens_label"             : "More +",
+    "txn_details_confirmation_instruction"     : "The above Amount will be available for spending after %(confirmationCount)s confirmation."
 }

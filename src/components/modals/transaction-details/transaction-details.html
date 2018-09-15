@@ -62,7 +62,7 @@
 					<div class="listItems">
 						<div class="name-item">{getText('common_tx_id_label')}</div>
 						<div class="data-item">
-							<p class="_value_attr form-control"><a href="{externalTxnDetailUrl}" target="_bland">{meta.transaction_id}</a></p>
+							<p class="_value_attr form-control"><a href="{externalTxnDetailUrl}" target="_blank">{meta.transaction_id}</a></p>
 						</div>
 					</div>
 					<div class="listItems">
@@ -70,7 +70,7 @@
 						<div class="data-item">{txnDetail.status ? txnDetail.status : meta.status}</div>
 					</div>
 					<div class="listItems text-center" show={showConfirmationNotice && meta.type==2 && meta.status == 'pending'}>
-						<p><Strong>Note:</strong> The above Amount will be available for spending after 1 confirmation.</p>
+						<p><Strong>{getText('pending_table_header_note')}:</strong> {getText('txn_details_confirmation_instruction',{confirmationCount: confirmationCount})}</p>
 					</div>
 				</div>
 				<div class="modal-footer">

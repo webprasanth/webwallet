@@ -37,6 +37,7 @@ export default class TransactionDetails extends Element {
   private showConfirmationNotice = false;
   private total_amount = 0;
   private isFeeCurrencyDifferent = false; //erc20 tokens transaction fees are charged in ETH
+  private confirmationCount = 0;
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
@@ -61,19 +62,23 @@ export default class TransactionDetails extends Element {
     if (isEtherBasedCurrency(currency_type)) {
       this.txnDetail.fee = weiToEth(this.txnDetail.fee);
       this.showConfirmationNotice = true;
+      this.confirmationCount = 3;
     } else {
       switch (currency_type) {
         case CURRENCY_TYPE.BTC:
           this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
           this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
           break;
         case CURRENCY_TYPE.LTC:
           this.txnDetail.fee = litoshiToLtc(this.txnDetail.fee);
           this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
           break;
         case CURRENCY_TYPE.DASH:
           this.txnDetail.fee = duffToDash(this.txnDetail.fee);
           this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
           break;
         case CURRENCY_TYPE.FLASH:
         default:
