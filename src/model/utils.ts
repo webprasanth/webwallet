@@ -693,13 +693,41 @@ export function getSixCharString() {
   return randomText;
 }
 
+export function getAllCoins() {
+  let Not_erc20Tokens = getRestOfERC20Tokens();
+  let erc20tokens = getERC20Tokens();
+  return Not_erc20Tokens.concat(erc20tokens);
+}
+
+export function getRestOfERC20Tokens() {
+  var allTokens = Object.values(ALL_COINS);
+  let Not_erc20Tokens = allTokens.filter(function(token) {
+    if (token.is_erc20) return false;
+    else return true;
+  });
+  return Not_erc20Tokens;
+}
+
 export function getERC20Tokens() {
   var allTokens = Object.values(ALL_COINS);
+  sortArrayOn(allTokens, 'code');
   let erc20Tokens = allTokens.filter(function(token) {
     if (token.is_erc20) return true;
     else return false;
   });
   return erc20Tokens;
+}
+
+export function sortArrayOn(arr, prop) {
+  arr.sort(function(a, b) {
+    if (a[prop] < b[prop]) {
+      return -1;
+    } else if (a[prop] > b[prop]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
 }
 
 export function getExternalTxnDetailUrl(txn_id, currency_type) {

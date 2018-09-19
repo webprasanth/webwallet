@@ -14,7 +14,7 @@ import {
   ALL_COINS,
   CURRENCY_ICON_URL,
 } from '../../model/currency';
-import { removeIdToken } from '../../model/utils';
+import { removeIdToken, getAllCoins } from '../../model/utils';
 import { getText } from '../localise';
 import SimpleScrollbar from 'simpleScrollbar';
 
@@ -38,7 +38,8 @@ export default class Navbar extends BaseElement {
     Navbar.unsubscribe = store.subscribe(
       this.onApplicationStateChanged.bind(this)
     );
-    this.navbarAllTokens = Object.values(ALL_COINS);
+
+    this.navbarAllTokens = getAllCoins();
     this.currency_icon_url = CURRENCY_ICON_URL;
     this.selectedERC20Tokens = [];
     this.activeCurrencies = [];
