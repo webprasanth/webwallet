@@ -169,10 +169,10 @@ export default class ContactSendMoney extends BaseElement {
   updateSharingFee() {
     let amount = $('#contact-send-amount').val();
     amount = utils.toOrginalNumber(amount);
-    let sharing_fee = utils.calcSharingFee(
-      amount,
-      tag.payoutInfo.payout_sharing_fee
+    let sharing_fee = parseFloat(
+      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee, 8)
     );
+
     $('#contact-send-sharing-fee').val(sharing_fee);
     tag.updateTotal();
   }

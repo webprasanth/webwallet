@@ -154,7 +154,7 @@ export const sendActions = {
     toAddresses.push({ address: targetWallet.address, amount: amount });
 
     sharing_fee = parseFloat(
-      calcSharingFee(amount, payout_info.payout_sharing_fee)
+      calcSharingFee(amount, payout_info.payout_sharing_fee, 8)
     );
     let remaining_sharing_fee = sharing_fee;
 

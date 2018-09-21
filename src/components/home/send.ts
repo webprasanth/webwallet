@@ -120,7 +120,6 @@ export default class HomeSend extends BaseElement {
       CommonService.singleton()
         .getEtherGasValues()
         .then((resp: any) => {
-          console.log(resp);
           if (resp.rc == 1 && resp.gas_price && resp.gas_limit) {
             tag.SatoshiPerByte = parseInt(resp.gas_price); //price per gas in Wei (Wei unit of Ether)
             tag.bcMedianTxSize = parseInt(resp.gas_limit); //max gas to be used
@@ -210,10 +209,10 @@ export default class HomeSend extends BaseElement {
   updateSharingFee() {
     let amount = $('#amount-input').val();
     amount = utils.toOrginalNumber(amount);
-    let sharing_fee = utils.calcSharingFee(
-      amount,
-      tag.payoutInfo.payout_sharing_fee
+    let sharing_fee = parseFloat(
+      utils.calcSharingFee(amount, tag.payoutInfo.payout_sharing_fee, 8)
     );
+
     $('#sharing-fee-input').val(sharing_fee);
     tag.updateTotal();
   }
