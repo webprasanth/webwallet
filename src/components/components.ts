@@ -22,6 +22,7 @@ import AccountSetting from './home/profile/setting';
 import FountainSetting from './home/profile/fountain';
 import ProfileSecurityQuestions from './home/profile/question';
 import ShareCoin from './home/profile/sharecoin';
+import ERC20Tokens from './home/profile/erc20-tokens';
 import ErrorAlert from './modals/error-alert/error-alert';
 import LocationError from './modals/location-error/location-error';
 import TwoFAVerification from './modals/twofa-verification/twofa-verification-dialog';
@@ -53,6 +54,7 @@ export {
   FountainSetting,
   ProfileSecurityQuestions,
   ShareCoin,
+  ERC20Tokens,
   TransactionDetails,
   SharingTransactionDetails,
   WalletAddress,

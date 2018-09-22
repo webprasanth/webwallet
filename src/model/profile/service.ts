@@ -170,4 +170,21 @@ export default class ProfileService {
       });
     });
   }
+
+  getERC20Tokens(params) {
+    return new Promise((resolve, reject) => {
+      //let resp = {'rc':1, 'selectedTokens' : [22,24,31,32,34,35,60,61]};
+      AppService.getInstance().getERC20Tokens(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
+  updateERC20Tokens(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().updateERC20Tokens(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
 }

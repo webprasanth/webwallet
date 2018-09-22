@@ -490,4 +490,50 @@ export const profileActions = {
   validateNewSharingCodeFailed(resp) {
     return { type: PROFILE.GET_NEW_SHARECODE_FAILED, data: resp };
   },
+
+  getERC20Tokens(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .getERC20Tokens(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.getERC20TokensSuccess(resp));
+          } else {
+            dispatch(profileActions.getERC20TokensFailed(resp));
+          }
+        });
+    };
+  },
+
+  getERC20TokensSuccess(resp) {
+    return { type: PROFILE.GET_ERC20_TOKENS_SUCCESS, data: resp };
+  },
+
+  getERC20TokensFailed(resp) {
+    return { type: PROFILE.GET_ERC20_TOKENS_FAILED, data: resp };
+  },
+
+  updateERC20Tokens(params) {
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+      ProfileService.singleton()
+        .updateERC20Tokens(params)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+          if (resp.rc == 1) {
+            dispatch(profileActions.updateERC20TokensSuccess(resp));
+          } else {
+            dispatch(profileActions.updateERC20TokensFailed(resp));
+          }
+        });
+    };
+  },
+
+  updateERC20TokensSuccess(resp) {
+    return { type: PROFILE.UPDATE_ERC20_TOKENS_SUCCESS, data: resp };
+  },
+
+  updateERC20TokensFailed(resp) {
+    return { type: PROFILE.UPDATE_ERC20_TOKENS_FAILED, data: resp };
+  },
 };

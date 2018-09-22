@@ -5,6 +5,8 @@
     "home_link_support"                        : "SUPPORT",
     "home_link_contact"                        : "CONTACT",
 
+    "lbl_save"                                 : "Save",
+
     "menu_label_togglenav"                     : "Toggle navigation",
     "menu_label_activity"                      : "Activity",
     "menu_label_send"                          : "Send",
@@ -445,5 +447,12 @@
 	"payout_confirm_delete_msg"                : "Are you sure you want to remove this Payout Code ?",
 	"wallet_share_code_info"                   : "Add FLASH addresses you want to share flash with (you personally, a company, charity, etc). Give to your friends for their Giveaway code and they will share with these addresses.",
 	"payout_code_info"                         : "Once you add a Code here. You will be charged extra fee which is  a fixed percent of your transaction amount . This percent is fixed by user whose Giveaway code you are adding. The extra fee is distributed among users whose address is mentioned in this Giveaway code.",
-	"wallet_share_percent_info"                : "This share percentage associated with My Flash share code denotes the percentage of transacted flash which will be deducted along with transacted amount while your Flash share code is used."
+	"wallet_share_percent_info"                : "This share percentage associated with My Flash share code denotes the percentage of transacted flash which will be deducted along with transacted amount while your Flash share code is used.",
+
+    "erc20Token_failed_to_get_list"            : "Failed to list ERC20 Tokens",
+    "erc20Token_list_updated_successfully"     : "ERC20 Tokens updated succesfully",
+    "erc20Token_failed_to_update_list"         : "Failed to update ERC20 Tokens",
+    "common_active_currencies_failed_to_list"  : "Failed to list active currencies",
+    "common_add_more_tokens_label"             : "More +",
+    "txn_details_confirmation_instruction"     : "The above Amount will be available for spending after %(confirmationCount)s confirmation."
 }

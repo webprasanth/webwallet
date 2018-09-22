@@ -1,0 +1,21 @@
+<erc20-tokens>
+<div id="erc20tokensFrm" class="col-xs-12 erc20tokensDiv">
+	<div class="row" style="margin-bottom: 10px;">
+		<div each={token in allERC20Tokens} class="col-lg-2 col-sm-3 col-xs-4 erc20tkn {(selectedTokens.indexOf(token.currency_type) == -1) ? '':'selected'}">
+			<label class="lbl" for="tkn_{token.code}">
+				<img class="erc20tokenImg" src="{currency_icon_url[token.currency_type]}" />
+				<span class="tkncode">{token.code}</span>
+				<span class="tkname">{token.name}</span>
+				<input class="form-check-input chk-style1 erc20TknChk" type="checkbox" value="{token.currency_type}" id="tkn_{token.code}" checked="{(selectedTokens.indexOf(token.currency_type) == -1) ? '':'checked'}" onclick="{onERC20TknClick}" />
+			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 col-sm-12 col-xs-12 text-center">	
+			<button id="save-tokens" class="btn btn-primary btn-lg" onclick={updateERC20Tokens}>
+	            {getText('lbl_save')}
+	        </button>
+    	</div>
+	</div>
+</div>
+</erc20-tokens>

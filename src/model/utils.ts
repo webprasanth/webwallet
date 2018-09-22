@@ -9,7 +9,7 @@ import { keccak256 } from 'js-sha3';
 import { getText } from '../components/localise';
 
 import { Address, NETWORKS } from './wallet';
-import { CURRENCY_TYPE } from './currency';
+import { CURRENCY_TYPE, ALL_COINS } from './currency';
 import { APP_MODE } from './app-service';
 
 interface UserKey {
@@ -106,8 +106,25 @@ export function weiToEth(num) {
 export function contractToEth(num, currency_type) {
   if (num == undefined || num === '') return;
 
-  switch (currency_type) {
-    case CURRENCY_TYPE.OMG: //18 decimals
+  let decimals = ALL_COINS[currency_type].decimals;
+  switch (decimals) {
+    case 0:
+      return parseFloat(new Big(num).toString());
+    case 2:
+      return parseFloat(new Big(num).div(100).toString());
+    case 3:
+      return parseFloat(new Big(num).div(1000).toString());
+    case 4:
+      return parseFloat(new Big(num).div(10000).toString());
+    case 6:
+      return parseFloat(new Big(num).div(1000000).toString());
+    case 8:
+      return parseFloat(new Big(num).div(100000000).toString());
+    case 9:
+      return parseFloat(new Big(num).div(1000000000).toString());
+    case 10:
+      return parseFloat(new Big(num).div(10000000000).toString());
+    case 18:
     default:
       return parseFloat(new Big(num).div(1000000000000000000).toString());
   }
@@ -154,8 +171,25 @@ export function ethToWei(num) {
 export function contractToWei(num, currency_type) {
   if (num == undefined || num === '') return;
 
-  switch (currency_type) {
-    case CURRENCY_TYPE.OMG: //18 decimals
+  let decimals = ALL_COINS[currency_type].decimals;
+  switch (decimals) {
+    case 0:
+      return new Big(num).toFixed();
+    case 2:
+      return new Big(num).times(100).toFixed();
+    case 3:
+      return new Big(num).times(1000).toFixed();
+    case 4:
+      return new Big(num).times(10000).toFixed();
+    case 6:
+      return new Big(num).times(1000000).toFixed();
+    case 8:
+      return new Big(num).times(100000000).toFixed();
+    case 9:
+      return new Big(num).times(1000000000).toFixed();
+    case 10:
+      return new Big(num).times(10000000000).toFixed();
+    case 18:
     default:
       return new Big(num).times(1000000000000000000).toFixed();
   }
@@ -196,6 +230,14 @@ export function getUserKey(): UserKey | any {
 
 export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
+
+  if (isEtherBasedCurrency(currency_type)) {
+    console.log(bcMedianTxSize, fastestFee);
+    let wei = bcMedianTxSize * fastestFee;
+    console.log(wei);
+    return weiToEth(wei);
+  }
+
   switch (currency_type) {
     case CURRENCY_TYPE.FLASH:
     default:
@@ -214,14 +256,6 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
       console.log(litoshis);
       return litoshiToLtc(litoshis.toFixed(0));
       break;
-    case CURRENCY_TYPE.ETH:
-    case CURRENCY_TYPE.OMG:
-      //let wei = gas * gasPrice  //actual
-      console.log(bcMedianTxSize, fastestFee);
-      let wei = bcMedianTxSize * fastestFee;
-      console.log(wei);
-      return weiToEth(wei);
-      break;
     case CURRENCY_TYPE.DASH:
       return fixedTxnFee;
       break;
@@ -237,48 +271,23 @@ export function calcFee(amount, bcMedianTxSize, fastestFee, fixedTxnFee) {
 export function calcSharingFee(amount, sharingFeePercentage, fixed_to) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
   if (!fixed_to) fixed_to = 2;
-  switch (currency_type) {
-    case CURRENCY_TYPE.FLASH:
-    default:
-      let sharing_fee = 0.0;
-      if (amount != '' && sharingFeePercentage != 0) {
-        sharing_fee = (sharingFeePercentage / 100) * amount;
-        sharing_fee = sharing_fee.toFixed(parseInt(fixed_to));
-      }
-      return sharing_fee;
-      break;
-    case CURRENCY_TYPE.BTC:
-    case CURRENCY_TYPE.LTC:
-    case CURRENCY_TYPE.ETH:
-    case CURRENCY_TYPE.OMG:
-    case CURRENCY_TYPE.DASH:
-      return 0;
-      break;
-  }
+
+  if (!(currency_type in ALL_COINS) || currency_type == CURRENCY_TYPE.FLASH) {
+    let sharing_fee = 0.0;
+    if (amount != '' && sharingFeePercentage != 0) {
+      sharing_fee = (sharingFeePercentage / 100) * amount;
+      sharing_fee = sharing_fee.toFixed(parseInt(fixed_to));
+    }
+    return sharing_fee;
+  } else return 0;
 }
 
 export function formatCurrency(amount) {
   let currency_type = parseInt(localStorage.getItem('currency_type'));
-  switch (currency_type) {
-    case CURRENCY_TYPE.FLASH:
-    default:
-      return `${amount} Flash`;
-      break;
-    case CURRENCY_TYPE.BTC:
-      return `${amount} BTC`;
-      break;
-    case CURRENCY_TYPE.LTC:
-      return `${amount} LTC`;
-      break;
-    case CURRENCY_TYPE.DASH:
-      return `${amount} DASH`;
-      break;
-    case CURRENCY_TYPE.ETH:
-      return `${amount} ETH`;
-    case CURRENCY_TYPE.OMG:
-      return `${amount} OMG`;
-      break;
-  }
+
+  if (!(currency_type in ALL_COINS)) return `${amount} FLASH`;
+
+  return `${amount} ` + ALL_COINS[currency_type].code;
 }
 
 export function getDisplayDate(date, toTimeZone) {
@@ -450,46 +459,40 @@ export function isValidFlashAddress(value) {
 }
 
 export function isValidCryptoAddress(value) {
-  switch (parseInt(localStorage.getItem('currency_type'))) {
-    case CURRENCY_TYPE.ETH:
-    case CURRENCY_TYPE.OMG:
-      return isEtherAddress(value);
-    default:
-      try {
-        let address = Address.fromBase58Check(value);
-        var network;
-        switch (parseInt(localStorage.getItem('currency_type'))) {
-          case CURRENCY_TYPE.BTC:
-            if (APP_MODE == 'PROD') {
-              network = NETWORKS.BTC;
-            } else network = NETWORKS.BTC_TESTNET;
-            break;
-          case CURRENCY_TYPE.LTC:
-            if (APP_MODE == 'PROD') {
-              network = NETWORKS.LTC;
-            } else network = NETWORKS.LTC_TESTNET;
-            break;
-          case CURRENCY_TYPE.DASH:
-            if (APP_MODE == 'PROD') {
-              network = NETWORKS.DASH;
-            } else network = NETWORKS.DASH_TESTNET;
-            break;
-          case CURRENCY_TYPE.FLASH:
-          default:
-            network = NETWORKS.FLASH;
-            break;
-        }
-        if (
-          address.version === network.pubKeyHash ||
-          address.version === network.scriptHash
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (e) {
-        return false;
+  if (isEtherBasedCurrency(parseInt(localStorage.getItem('currency_type'))))
+    return isEtherAddress(value);
+  else {
+    try {
+      let address = Address.fromBase58Check(value);
+      var network;
+      switch (parseInt(localStorage.getItem('currency_type'))) {
+        case CURRENCY_TYPE.BTC:
+          if (APP_MODE == 'PROD') network = NETWORKS.BTC;
+          else network = NETWORKS.BTC_TESTNET;
+          break;
+        case CURRENCY_TYPE.LTC:
+          if (APP_MODE == 'PROD') network = NETWORKS.LTC;
+          else network = NETWORKS.LTC_TESTNET;
+          break;
+        case CURRENCY_TYPE.DASH:
+          if (APP_MODE == 'PROD') network = NETWORKS.DASH;
+          else network = NETWORKS.DASH_TESTNET;
+          break;
+        case CURRENCY_TYPE.FLASH:
+        default:
+          network = NETWORKS.FLASH;
+          break;
       }
+
+      if (
+        address.version === network.pubKeyHash ||
+        address.version === network.scriptHash
+      )
+        return true;
+      else return false;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
@@ -542,22 +545,32 @@ var isChecksumAddress = function(address) {
 };
 
 export function isEtherBasedCurrency(currency_type) {
-  switch (parseInt(currency_type)) {
-    case CURRENCY_TYPE.ETH:
-    case CURRENCY_TYPE.OMG:
-      return true;
-    default:
-      return false;
-  }
+  currency_type = parseInt(currency_type);
+  if (!(currency_type in ALL_COINS)) return false;
+
+  if (currency_type == CURRENCY_TYPE.ETH) return true;
+
+  return ALL_COINS[currency_type].is_erc20;
 }
 
 export function getContractAddress(currency_type) {
-  switch (parseInt(currency_type)) {
-    case CURRENCY_TYPE.OMG:
-      if (APP_MODE == 'PROD') return NETWORKS.OMG.contract_address;
-      else return NETWORKS.OMG_TESTNET.contract_address;
-    default:
+  currency_type = parseInt(currency_type);
+
+  if (APP_MODE != 'PROD') return NETWORKS.OMG_TESTNET.contract_address;
+  else {
+    if (
+      !(currency_type in ALL_COINS) ||
+      ALL_COINS[currency_type].code == undefined
+    )
       return '';
+
+    if (
+      !(ALL_COINS[currency_type].code in NETWORKS) ||
+      NETWORKS[ALL_COINS[currency_type].code].contract_address == undefined
+    )
+      return '';
+
+    return NETWORKS[ALL_COINS[currency_type].code].contract_address;
   }
 }
 
@@ -583,14 +596,24 @@ export function decimalFormat(number, n?, x?) {
   n = n || 1;
 
   let arr = number.toString().split('.');
+  let current_currency = parseInt(localStorage.getItem('currency_type'));
+  let decimals = ALL_COINS[current_currency].decimals;
+
   let max = 2;
+  let maxLimit = 8;
+  if (decimals < maxLimit) maxLimit = decimals;
+
   if (arr.length > 1 && arr[1].length > max) {
     max = arr[1].length;
 
-    if (max > 8) {
-      max = 8;
+    if (max > maxLimit) {
+      max = maxLimit;
     }
   }
+
+  if (max > decimals) max = decimals;
+
+  if (n > decimals) n = decimals;
 
   var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
   return toFixedFloor(parseFloat(number), Math.max(max, ~~n)).replace(
@@ -668,4 +691,75 @@ export function getSixCharString() {
     randomText += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return randomText;
+}
+
+export function getAllCoins() {
+  let Not_erc20Tokens = getRestOfERC20Tokens();
+  let erc20tokens = getERC20Tokens();
+  return Not_erc20Tokens.concat(erc20tokens);
+}
+
+export function getRestOfERC20Tokens() {
+  var allTokens = Object.values(ALL_COINS);
+  let Not_erc20Tokens = allTokens.filter(function(token) {
+    if (token.is_erc20) return false;
+    else return true;
+  });
+  return Not_erc20Tokens;
+}
+
+export function getERC20Tokens() {
+  var allTokens = Object.values(ALL_COINS);
+  sortArrayOn(allTokens, 'code');
+  let erc20Tokens = allTokens.filter(function(token) {
+    if (token.is_erc20) return true;
+    else return false;
+  });
+  return erc20Tokens;
+}
+
+export function sortArrayOn(arr, prop) {
+  arr.sort(function(a, b) {
+    if (a[prop] < b[prop]) {
+      return -1;
+    } else if (a[prop] > b[prop]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+export function getExternalTxnDetailUrl(txn_id, currency_type) {
+  if (txn_id == '' || txn_id == undefined) return '#';
+
+  let urlStr = '';
+  if (isEtherBasedCurrency(parseInt(currency_type))) {
+    if (APP_MODE == 'PROD') urlStr = 'https://etherscan.io/tx/' + txn_id;
+    else urlStr = 'https://rinkeby.etherscan.io/tx/' + txn_id;
+    return urlStr;
+  } else {
+    switch (parseInt(currency_type)) {
+      case CURRENCY_TYPE.FLASH:
+        urlStr = 'https://explorer.flashcoin.io/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.BTC:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://btc.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.138:3001/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.LTC:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://ltc.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.143:3001/tx/' + txn_id;
+        return urlStr;
+      case CURRENCY_TYPE.DASH:
+        if (APP_MODE == 'PROD')
+          urlStr = 'https://dash.flashcoin.io/tx/' + txn_id;
+        else urlStr = 'http://82.221.106.172:3001/tx/' + txn_id;
+        return urlStr;
+      default:
+        return '#';
+    }
+  }
 }

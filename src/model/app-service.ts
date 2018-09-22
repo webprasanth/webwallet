@@ -772,4 +772,34 @@ export default class AppService {
     );
     $.ajax(options);
   }
+
+  getERC20Tokens(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-selected-currencies',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  updateERC20Tokens(params, cb) {
+    let options = this.makeRequestOption(
+      'api/update-selected-currencies',
+      params,
+      'post',
+      cb
+    );
+    $.ajax(options);
+  }
+
+  getActiveCurrencies(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-active-currencies',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
 }

@@ -1,5 +1,10 @@
+import { APP_MODE } from './app-service';
+
 export default class Constants {
-  public static readonly AvatarServer = 'https://keys.flashcoin.io/profile/';
+  public static readonly AvatarServer =
+    APP_MODE == 'DEV'
+      ? 'https://dev03keys.flashcoin.io/profile/'
+      : 'https://keys.flashcoin.io/profile/';
   public static readonly clientHost = 'flashcoin.io';
 
   public static readonly ROSTER_OPERATION = {

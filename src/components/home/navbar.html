@@ -24,27 +24,14 @@
                   <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
                 
-                <ul id="select-currency" class="dropdown-menu">
-                  <li data-currency="1" onclick={onCurrencySelection}>
-                    <a href="#" title="Select FLASH"><img src="assets/images/flash-icon.png"><span>FLASH</span></a>
+                <ul id="select-currency" class="dropdown-menu"  style="height: 250px;" ss-container>
+                  <li each={token in navbarAllTokens} show={(selectedERC20Tokens.indexOf(token.currency_type) != -1) || (!token.is_erc20)} data-currency="{token.currency_type}"  onclick={onCurrencySelection} class="{(activeCurrencies.indexOf(token.currency_type) == -1) ? 'currency-deactivated' : ''}">
+                      <a title="{(activeCurrencies.indexOf(token.currency_type) == -1) ? 'Disabled' : 'Select ' + token.code}" href="#" ><img src="{currency_icon_url[token.currency_type]}"><span>{token.code}</span></a>
                   </li>
-                  <li data-currency="2"  onclick={onCurrencySelection}>
-                    <a href="#" title="Select BTC"><img src="assets/images/btc-icon.png"><span>BTC</span></a>
-                  </li>
-                  <li data-currency="5"  onclick={onCurrencySelection}>
-                    <a href="#" title="Select ETH"><img src="assets/images/eth-icon.png"><span>ETH</span></a>
-                  </li>
-                  <li data-currency="3"  onclick={onCurrencySelection}>
-                    <a href="#" title="Select LTC"><img src="assets/images/ltc-icon.png"><span>LTC</span></a>
-                  </li>
-                  <li data-currency="4"  onclick={onCurrencySelection}>
-                    <a href="#" title="Select DASH"><img src="assets/images/dash-icon.png"><span>DASH</span></a>
-                  </li>
-                  <li data-currency="6"  onclick={onCurrencySelection}>
-                    <a href="#" title="Select OMG"><img src="assets/images/omg-icon.png"><span>OMG</span></a>
-                  </li>
+                  <li onclick={onAddMoreCurrency}><a href="#" class="text-center">{getText('common_add_more_tokens_label')}</a></li>
                 </ul>
             </div>
+            
             <ul class="nav navbar-nav">
                 <!--<li>
                 <select class="select-currency" id="select-currency" onchange={onCurrencySelection}>

@@ -14,6 +14,8 @@ import {
   localizeFlash,
   weiToEth,
   isEtherBasedCurrency,
+  contractToEth,
+  getExternalTxnDetailUrl,
 } from '../../../model/utils';
 
 import { getText } from '../../localise';
@@ -35,6 +37,7 @@ export default class TransactionDetails extends Element {
   private showConfirmationNotice = false;
   private total_amount = 0;
   private isFeeCurrencyDifferent = false; //erc20 tokens transaction fees are charged in ETH
+  private confirmationCount = 0;
 
   satoshiToFlash = satoshiToFlash;
   satoshiToBtc = satoshiToBtc;
@@ -55,28 +58,33 @@ export default class TransactionDetails extends Element {
     var self = this;
 
     let currency_type = parseInt(localStorage.getItem('currency_type'));
-    switch (currency_type) {
-      case CURRENCY_TYPE.BTC:
-        this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
-        this.showConfirmationNotice = true;
-        break;
-      case CURRENCY_TYPE.LTC:
-        this.txnDetail.fee = litoshiToLtc(this.txnDetail.fee);
-        this.showConfirmationNotice = true;
-        break;
-      case CURRENCY_TYPE.DASH:
-        this.txnDetail.fee = duffToDash(this.txnDetail.fee);
-        this.showConfirmationNotice = true;
-        break;
-      case CURRENCY_TYPE.ETH:
-      case CURRENCY_TYPE.OMG: //ether based tokens will have fees always in ETH
-        this.txnDetail.fee = weiToEth(this.txnDetail.fee);
-        this.showConfirmationNotice = true;
-        break;
-      case CURRENCY_TYPE.FLASH:
-      default:
-        this.txnDetail.fee = 0.001; //satoshiToFlash(this.txnDetail.fee);
-        break;
+
+    if (isEtherBasedCurrency(currency_type)) {
+      this.txnDetail.fee = weiToEth(this.txnDetail.fee);
+      this.showConfirmationNotice = true;
+      this.confirmationCount = 3;
+    } else {
+      switch (currency_type) {
+        case CURRENCY_TYPE.BTC:
+          this.txnDetail.fee = satoshiToBtc(this.txnDetail.fee);
+          this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
+          break;
+        case CURRENCY_TYPE.LTC:
+          this.txnDetail.fee = litoshiToLtc(this.txnDetail.fee);
+          this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
+          break;
+        case CURRENCY_TYPE.DASH:
+          this.txnDetail.fee = duffToDash(this.txnDetail.fee);
+          this.showConfirmationNotice = true;
+          this.confirmationCount = 1;
+          break;
+        case CURRENCY_TYPE.FLASH:
+        default:
+          this.txnDetail.fee = 0.001; //satoshiToFlash(this.txnDetail.fee);
+          break;
+      }
     }
 
     let total_amount = this.meta.amount;
@@ -96,7 +104,10 @@ export default class TransactionDetails extends Element {
         );
     }
     this.total_amount = total_amount;
-
+    this.externalTxnDetailUrl = getExternalTxnDetailUrl(
+      this.meta.transaction_id,
+      currency_type
+    );
     this.update();
 
     $('#txDetailDlg').modal('show');
