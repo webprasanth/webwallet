@@ -11,7 +11,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="" style="margin-bottom:5px;">
-						<input id="google-code" class="form-control" placeholder='Enter verification code' on-enter="onValidatePin" onfocus={onFocus}>
+						<input id="google-code" class="form-control" placeholder='Enter verification code' on-enter="onValidatePin" onkeyup="{verify2FAOnEnterKey}" onfocus={onFocus}>
 						<div show={isIncorrectPasscode} class="pin-incorrect">
 							<strong>{getText('common_label_error_title')} </strong>{getText('common_incorrect_tfacode_error')}
 						</div>

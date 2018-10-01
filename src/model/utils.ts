@@ -574,6 +574,12 @@ export function getContractAddress(currency_type) {
   }
 }
 
+export function isEnterKey(event) {
+  let keyCode = event.keyCode;
+  if (parseInt(keyCode) == 13) return true;
+  else return false;
+}
+
 export function filterNumberEdit(event) {
   let keyCode = event.key;
   let isValidAmountCharCode =

@@ -8,6 +8,7 @@ import { profileActions } from '../../../model/profile/actions';
 import { PROFILE } from '../../../model/action-types';
 import QRCode from 'QRCode';
 import BaseElement from '../../base-element';
+import { isEnterKey } from '../../../model/utils';
 import { CURRENCY_TYPE } from '../../../model/currency';
 
 @template(AccountSettingTemplate)
@@ -17,6 +18,7 @@ export default class AccountSetting extends BaseElement {
   private publicKeyList = [];
   private is2FA: boolean = false;
   private static unsubscribe = null;
+  private isEnterKey = isEnterKey;
 
   mounted() {
     this.userProfile = store.getState().userData.user;
@@ -38,11 +40,14 @@ export default class AccountSetting extends BaseElement {
         this.publicKeyList = [data.wallet];
         if (!document.getElementById('qrcode').hasChildNodes()) {
           let qrCode = new QRCode('qrcode');
-        if (parseInt(localStorage.getItem('currency_type')) == CURRENCY_TYPE.FLASH) {
-           qrCode.makeCode('flashcoin:' + data.wallet.address);
-         } else {
-           qrCode.makeCode(data.wallet.address);  //generating QR code for non flash withot appending word flashcoin
-         }
+          if (
+            parseInt(localStorage.getItem('currency_type')) ==
+            CURRENCY_TYPE.FLASH
+          ) {
+            qrCode.makeCode('flashcoin:' + data.wallet.address);
+          } else {
+            qrCode.makeCode(data.wallet.address); //generating QR code for non flash withot appending word flashcoin
+          }
         }
         break;
       case PROFILE.ENABLE_2FA_SUCCESS:
@@ -127,6 +132,10 @@ export default class AccountSetting extends BaseElement {
   disable2FA() {
     let params = {};
     store.dispatch(profileActions.disable2FA(params));
+  }
+
+  confirm2FACodeOnEnterKey(event: Event) {
+    if (isEnterKey(event)) this.confirm2FACode();
   }
 
   confirm2FACode() {
