@@ -6,7 +6,7 @@
 -----------------------------------------------------------------*/
 
 #slider {
-  background: url('../../images/bg_hero.jpg') no-repeat center right;
+  background: url('../../images/bg_hero.png') no-repeat center right;
   background-size: cover;
 }
 
@@ -17,8 +17,8 @@
 }
 
 #wallet {
-  background: url('../../images/bg_section-wallet.jpg') scroll no-repeat bottom/cover;
-  min-height: 900px;
+  background: url('../../images/bg_section-wallet.png') scroll no-repeat bottom/cover;
+  min-height: 720px;
 }
 
 #whitepaper {
@@ -26,6 +26,41 @@
   background-size: cover;
 }
 
+/* Home page slider - START */
+#slider .vertical-middle {
+  margin-top: 0 !important;
+  top: 0% !important;
+}
+
+#slider .login-form-container {
+  padding: 5px 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-top: 10px;
+}
+
+#slider .login-form {
+  margin-top: 50px !important;
+}
+
+.main-section-image {
+  padding: 0 0 30px;
+}
+
+.main-section-image img {
+  width: 140px !important;
+  padding: 11px;
+}
+
+.webmainpart {
+    background: url('../../images/WebsiteActualBar.png?124') no-repeat bottom center;
+        background-size: auto auto;
+    background-size: cover;
+}
+
+#gcaptcha > div {
+  margin: 0 auto;
+}
+/* Home page slider - END */
 
 /*Header background color*/
 
@@ -418,8 +453,12 @@ animation: spin 10s linear infinite;
 }
 
 .signup-header {
-  font-size: 40px;
+  font-size: 32px;
   margin-bottom: 10px;
+}
+
+.sign-up-frm {
+  margin-top: 5px;
 }
 
 .select-language, .select-language option {
@@ -427,7 +466,6 @@ animation: spin 10s linear infinite;
   background-color: #000000;
   border: 1px solid #FFFFFF;
   font-weight: 700;
-  padding: 5px;
 }
 
 #select-language-container {

@@ -770,7 +770,9 @@ html[xmlns] .slider-wrap {display: block;}
 
 /* Top Links
 ---------------------------------*/
-
+.txt-uppercase {
+	text-transform: uppercase;
+}
 
 .top-links {
 	position: relative;
@@ -7037,6 +7039,22 @@ body:not(.device-touch) .button.button-full strong {
 .button-reveal.button-yellow:hover,
 .button-border.button-yellow:hover,
 .button-border.button-yellow.button-fill:before { background-color: #E0AE27 !important; }
+
+.button-border.button-yellow,
+.button-border.button-yellow.button-fill.button-light:hover {
+	color: #E0AE27 !important;
+	border-color: #E0AE27 !important;
+}
+
+.button-yellow-border { 
+	background-color: rgba(0, 0, 0, 0.7);
+    color: #FFFFFF;
+    border: 2px solid #E0AE27;
+}
+.button-yellow-border:hover { 
+	background-color: #E0AE27 !important;
+	color: #000000 !important;
+}
 
 .button-border.button-yellow,
 .button-border.button-yellow.button-fill.button-light:hover {
