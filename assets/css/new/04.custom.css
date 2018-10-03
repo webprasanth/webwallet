@@ -72,6 +72,9 @@
   border-left: 1px solid white;
 }
 
+#wallet .flash-paper-wallet-btn {
+  margin-left: 50px;
+}
 
 /*ul.icon-social {display: inline;}
 ul.icon-social li {display: inline;}
@@ -251,6 +254,7 @@ a.button.button-rounded.button-reveal.button-large.button-yellow.button-light.tr
   }
   .vertical-middle {
     padding-bottom: 0 !important;
+    padding-top: 0 !important;
   }
   .topmargin-lg {
     margin-top: 0 !important;
@@ -267,6 +271,13 @@ a.button.button-rounded.button-reveal.button-large.button-yellow.button-light.tr
   }
   #news .col-sm-1 {
     display: none;
+  }
+  #select-language-container {
+    padding: 22px 0 !important;
+  }
+
+  #wallet .flash-paper-wallet-btn {
+    margin: 30px 0;
   }
 
   /*#primary-menu-trigger {right:0 !important;left: auto !important;}
