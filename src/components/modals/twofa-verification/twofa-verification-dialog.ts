@@ -1,6 +1,6 @@
 import { riot, template, Element } from '../../riot-ts';
 import store from '../../../model/store';
-import { getUserKey } from '../../../model/utils';
+import { getUserKey, isEnterKey } from '../../../model/utils';
 import { userActions } from '../../../model/users/actions';
 import { USERS } from '../../../model/action-types';
 import TwoFADialogTemplate from './twofa-verification-dialog.html!text';
@@ -12,6 +12,7 @@ export default class TwoFAVerificationDialog extends Element {
   // Flag to show/hide error message
   private isIncorrectPasscode: boolean = false;
   private getText = getText;
+  private isEnterKey = isEnterKey;
 
   onApplicationStateChanged() {
     let state = store.getState();
@@ -20,7 +21,7 @@ export default class TwoFAVerificationDialog extends Element {
 
     switch (actionType) {
       case USERS.CHECK_2FA_CODE_SUCCESS:
-        if(this.opts.profile.auth_version == 4) {
+        if (this.opts.profile.auth_version == 4) {
           store.dispatch(userActions.loginSuccess(this.opts.profile));
           store.dispatch(userActions.getBalance());
           store.dispatch(userActions.getProfile(this.opts.profile));
@@ -52,22 +53,26 @@ export default class TwoFAVerificationDialog extends Element {
     );
   }
 
+  verify2FAOnEnterKey(event: Event) {
+    if (isEnterKey(event)) this.onVerify();
+  }
+
   onVerify(event: Event) {
     let googleCode: number = $('#google-code').val();
     let userKey = getUserKey() || {};
-	
-    if(this.opts.profile.auth_version == 3){
-        let userAuthVersion = 3; 	//Used for V1 accounts
-        var params = {
-          idToken: userKey.idToken,
-          authVersion : userAuthVersion,
-          code: googleCode,
-        };
+
+    if (this.opts.profile.auth_version == 3) {
+      let userAuthVersion = 3; //Used for V1 accounts
+      var params = {
+        idToken: userKey.idToken,
+        authVersion: userAuthVersion,
+        code: googleCode,
+      };
     } else {
-        var params = {
-          idToken: userKey.idToken,
-          code: googleCode,
-        };	
+      var params = {
+        idToken: userKey.idToken,
+        code: googleCode,
+      };
     }
     store.dispatch(userActions.check2faCode(params));
   }

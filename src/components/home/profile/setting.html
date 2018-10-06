@@ -38,7 +38,7 @@
                 <br>
                 <div class="verification-code col-xs-12 col-sm-6">
                     <p>{getText('profile_label_verify_code')}</p>
-                    <input id="google-2fa-code" class="form-control" type="text">
+                    <input id="google-2fa-code" class="form-control" type="text" onkeyup="{confirm2FACodeOnEnterKey}">
                     <div class="button-active m10t">
                         <button class="btn btn-primary" onclick={confirm2FACode}>{getText('sc_question_submit_label')}</button>
                     </div>

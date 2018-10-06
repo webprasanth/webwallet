@@ -367,33 +367,33 @@
             <section id="slider" class="full-screen slider-element clearfix">
 
                 <div class="vertical-middle ignore-header clearfix need-full-display" style="z-index: 2;">
-                    <div class="container">
-                        <div class="row clearfix">
-                            <div class="col-lg-7 d-none d-sm-block textcenter-sm">
-                                <img class="bottommargin-sm" src="https://flashcoin.io/images/logo@2x.png" style="width:180px;" />
-                                <h3 class="t300" style="font-size: 18px;">CONNECTING THE WORLD IN A FLASH<br />#GOFASTER</h3>
+                    <div class="">
+                        <div class="row clearfix webmainpart">
+                            <div class="col-lg-12 text-center">
+                                <div class="text-center main-section-image">
+                                    <img class="" src="assets/images/WebsiteActualLogo.png?ver=1.1" />
+                                </div>
                             </div>
-                            <div class="col-lg-5 login-form">
-                                <div class="col-xs-12">
-                                    <div class="text-center">
-                                        <img src="https://flashcoin.io/images/logo-dark.png">
-                                    </div>
-                                    <div class="col-xs-12 flash-login-control">
-                                        <input id="identifer" type="text" class="validate form-control text-center" placeholder="e-mail address">
-                                    </div>
-                                    <div class="col-xs-12 flash-login-control">
-                                        <input id="loginpassword" type="password" class="form-control text-center" placeholder="password">
-                                    </div>
-                                    <div class="btn-login form-group col-xs-12 text-center">
-                                        <button id="btn-dologin" class="btn button-yellow"><script>writeTextIndexLocale('common_login_label')</script></button>
-                                    </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-4">&nbsp;</div>
+                            <div class="col-lg-4 login-form-container">
+                            <div class="col-lg-12 login-form">
+                                <div class="col-xs-12 flash-login-control">
+                                    <input id="identifer" type="text" class="validate form-control text-center" placeholder="e-mail address">
+                                </div>
+                                <div class="col-xs-12 flash-login-control">
+                                    <input id="loginpassword" type="password" class="form-control text-center" placeholder="password">
+                                </div>
+                                <div class="btn-login form-group col-xs-12 text-center" style="margin-top: 5px;">
+                                    <button id="btn-dologin" class="btn button-yellow-border txt-uppercase"><script>writeTextIndexLocale('common_login_label')</script></button>
                                 </div>
                                 <div class="forgot-pwd col-xs-12 text-center" style="padding-left: 13px;">
                                     <a id="forgot-pwd-btn" class="foget-psd" href="javascript:void(0)"><script>writeTextIndexLocale('common_continue_forgotpassword')</script></a>
                                 </div>
                                 <p class="text-center create-an-account col-xs-12" style="font-size: 15px;"><script>writeTextIndexLocale('login_dont_have_account')</script> <a href="#" onclick="showSignUp()" class="btn-move-signup"><script>writeTextIndexLocale('login_create_one')</script></a></p>
                             </div>
-                            <div class="col-lg-5 topmargin-sm" id="notify-check" style="display: none;">
+                            <div class="col-lg-12 topmargin-sm" id="notify-check" style="display: none;">
                                 <div class="text-center">
                                     <h2 class="signup-header"><script>writeTextIndexLocale('login_Get_web_wallet')</script></h2>
                                     <p class="p1-line"><script>writeTextIndexLocale('login_Earn_and_spend')</script></p>
@@ -404,13 +404,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 singup-form" style="display: none;">
+                            <div class="col-lg-12 singup-form" style="display: none;">
                                 <div class="text-center">
                                     <h2 class="signup-header"><script>writeTextIndexLocale('login_Get_web_wallet')</script></h2>
                                     <p class="p1-line"><script>writeTextIndexLocale('login_Earn_and_spend')</script></p>
                                     <p class="p1-line"><script>writeTextIndexLocale('login_Share_friends')</script></p>
                                 </div>
-                                <form id="sign_up_form" class="col-xs-12">
+                                <form id="sign_up_form" class="col-xs-12 sign-up-frm">
                                     <div class="form-group col-xs-12">
                                         <input class="form-control text-center" type="text" id="firstname" maxlength="50" name="firstname" placeholder="First name" on-focus="firstname-focus">
                                         <span id="usernameValidationText" style="display:none;"></span>
@@ -425,10 +425,16 @@
                                         <div id="gcaptcha"></div>
                                     </div>
                                 </form>
-                                <p class="p2-line col-xs-12" style="margin-bottom: 10px;"><script>writeTextIndexLocale('login_by_clicking_create_wallet')</script></p>
-                                <div id="create-account-btn" class="btn-create-wallet form-group col-xs-12 text-center" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn button-yellow"><script>writeTextIndexLocale('login_create_wallet_label')</script></a></div>
-                                <p class="back-login col-xs-12" style="margin-top: 20px;margin: 20px auto 50px;"><a href="#" onclick="backLogin()" style="color: #ffffff; font-size: 14px;"><img style="width: 8px;margin-right: 5px;margin-top: -3px;" src="assets/images/pages/back.png">Back to Login</a></p>
+                                <p class="p2-line col-xs-12 text-center" style="margin-bottom: 10px;"><script>writeTextIndexLocale('login_by_clicking_create_wallet')</script></p>
+                                <div id="create-account-btn" class="btn-create-wallet form-group col-xs-12 text-center" onclick={onSignupButtonClick}> <a href="javascript:void(0)" class="btn button-yellow-border txt-uppercase"><script>writeTextIndexLocale('login_create_wallet_label')</script></a></div>
+                                <p class="back-login col-xs-12" style="margin: 20px auto 50px;">
+                                    <a href="#" onclick="backLogin()" style="color: #ffffff; font-size: 14px;">
+                                        <img style="width: 8px;margin-right: 5px;margin-top: -3px;" src="assets/images/pages/back.png">Back to Login
+                                    </a>
+                                </p>
                             </div>
+                            </div>    
+
                         </div>
                     </div>
 
@@ -437,21 +443,60 @@
             <!-- Community
                 ============================================= -->
                     <a name="section-community"></a>
+
+                    <!-- About ============================================= -->
+                    <div id="about" class="about-flash-section page-section">
+                        <div class="container content-wrap" style="padding:20px 0px 40px">
+                            <div class="fancy-title title-border title-center nopadding">
+                                <h1><span>About FLASH</span></h1>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg-4 text-center">
+                                    <div class="topmargin-lg text-center">
+                                        <div class="inner-section first-child">
+                                            <h2>What is FLASH?</h2>
+                                            <h4>FLASH is a reinvention of Litecoin, built to scale for worldwide commerce and fast enough to handle everyday transactions. The flexible and easy to integrate core code allows exchanges and wallets to add FLASH to their platform within hours. With a settlement time of around 5 seconds and consensus within 2 minutes, anyone, anywhere can use the FLASH mobile wallet as easily as cash or credit card.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <div class="topmargin-lg text-center">
+                                        <div class="inner-section second-child">
+                                            <h2>What is it for?</h2>
+                                            <h4>FLASH is designed to make it easy, inexpensive, and fast to transfer value worldwide. Imagine buying groceries, purchasing products online, and sending FLASH to friends and family in the blink of an eye, anywhere in the world, all for way less than a penny.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <div class="topmargin-lg text-center">
+                                        <div class="inner-section last-child">
+                                            <h2>Who can use it?</h2>
+                                            <h4>Anyone can use FLASH, as it is designed for the common person and doesn't require a middleman, like a bank. FLASH remittance payments are nearly instant and with fees that are near zero, anyone can send FLASH worldwide or buy products or services locally with unparalleled convenience.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .row end -->
+                        </div>
+                        <!-- .container end -->
+                    </div>
+                    <!-- #section-about end -->    
+
                     <div id="social-forum" class="page-section bottommargin-sm">
                         <div class="container clearfix">
                             <div class="row">
                                 <ul class="icon-social">
-                                    <li><a href="https://discord.gg/2nFmMqA" target="_blank"><i class="fab fa-discord"></i><span>Discord</span></a></li>
-                                    <li><a href="https://t.me/joinchat/C5go9ExsGGNeVvForEgb6w" target="_blank"><i class="fab fa-telegram"></i><span>Telegram</span></a></li>
-                                    <li><a href="https://medium.com/@FlashCoin" target="_blank"><i class="fab fa-medium"></i><span>Medium</span></a></li>
-                                    <li><a href="https://www.instagram.com/flashcoin.io/" target="_blank"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
-                                    <li><a href="https://twitter.com/FlashCoins" target="_blank"><i class="fab fa-twitter"></i><span>Twitter</span></a></li>
-                                    <li><a href="https://www.youtube.com/channel/UCMOYSMroaTrgCNslbaQ6Urw" target="_blank"><i class="fab fa-youtube"></i><span>YouTube</span></a></li>
-                                    <li><a href="https://plus.google.com/u/0/b/110236490072104998071/110236490072104998071" target="_blank"><i class="fab fa-google-plus"></i><span>Google+</span></a></li>
-                                    <li><a href="https://github.com/flash-coin" target="_blank"><i class="fab fa-github"></i><span>Github</span></a></li>
-                                    <li><a href="https://bitcointalk.org/index.php?topic=1605453.0" target="_blank"><i class="fab fa-bitcoin"></i><span>BitcoinTalk</span></a></li>
-                                    <li><a href="https://www.reddit.com/r/FlashCoins/" target="_blank"><i class="fab fa-reddit"></i><span>Reddit</span></a></li>
-                                    <li><a href="https://steemit.com/@flash.coin" target="_blank"><i class="fas fa-comments"></i><span>SteemIt</span></a></li>
+                                    <li><a href="https://discord.gg/2nFmMqA" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i><span>Discord</span></a></li>
+                                    <li><a href="https://t.me/joinchat/C5go9ExsGGNeVvForEgb6w" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i><span>Telegram</span></a></li>
+                                    <li><a href="https://medium.com/@FlashCoin" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium"></i><span>Medium</span></a></li>
+                                    <li><a href="https://www.instagram.com/flashcoin.io/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
+                                    <li><a href="https://twitter.com/FlashCoins" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i><span>Twitter</span></a></li>
+                                    <li><a href="https://www.youtube.com/channel/UCMOYSMroaTrgCNslbaQ6Urw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i><span>YouTube</span></a></li>
+                                    <li><a href="https://plus.google.com/u/0/b/110236490072104998071/110236490072104998071" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-plus"></i><span>Google+</span></a></li>
+                                    <li><a href="https://github.com/flash-coin" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span>Github</span></a></li>
+                                    <li><a href="https://bitcointalk.org/index.php?topic=1605453.0" target="_blank" rel="noopener noreferrer"><i class="fab fa-bitcoin"></i><span>BitcoinTalk</span></a></li>
+                                    <li><a href="https://www.reddit.com/r/FlashCoins/" target="_blank" rel="noopener noreferrer"><i class="fab fa-reddit"></i><span>Reddit</span></a></li>
+                                    <li><a href="https://steemit.com/@flash.coin" target="_blank" rel="noopener noreferrer"><i class="fas fa-comments"></i><span>SteemIt</span></a></li>
                                     <li><a href="https://blog.flashcoin.io/" target="_blank"><i class="fa fa-rss-square"></i><span>Blog</span></a></li>
                                 </ul>
                             </div>
@@ -459,29 +504,6 @@
                         <!-- .container end -->
                     </div>
                     <!-- #social-forum end -->
-
-                    <!-- Intro
-                ============================================= -->
-                    <div class="page-section topmargin-sm">
-
-                        <div class="container clearfix">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h4><script>writeTextIndexLocale('login_Flash_is_designed_for_small_payments')</script></h4>
-                                    <ul style="padding-left: 30px">
-                                        <li><script>writeTextIndexLocale('login_The_number_of_coins')</script></li>
-                                        <li><script>writeTextIndexLocale('login_Zero_inflation')</script></li>
-                                        <li><script>writeTextIndexLocale('login_Processing_is_optimized')</script></li>
-                                        <li><script>writeTextIndexLocale('login_No_developer_slush_fund')</script></li>
-                                        <li><script>writeTextIndexLocale('login_Project_can_be_developed_by_anyone')</script></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- #section-about-exchanges end -->
 
                     <!-- Wallet
                 ============================================= -->
@@ -491,18 +513,18 @@
                                 <div class="fancy-title title-border title-center">
                                     <h1><span>Wallet</span></h1>
                                 </div>
-                                <span>FLASH supports a number of online wallets including <a href="https://coinomi.com/" target="_blank">Coinomi</a>, <a href="https://www.coinpayments.net/" target="_blank">Coin Payments</a>, <a href="https://www.ethos.io/" target="_blank">ETHOS</a>, QT (Window, Mac, Linux) and an easy to use online wallet designed for the mass consumer market. If you can make online payments, you already know how to use FLASH.</span>
+                                <span>FLASH supports a number of online wallets including <a href="https://coinomi.com/" target="_blank" rel="noopener noreferrer">Coinomi</a>, <a href="https://www.coinpayments.net/" target="_blank" rel="noopener noreferrer">Coin Payments</a>, <a href="https://www.ethos.io/" target="_blank" rel="noopener noreferrer">ETHOS</a>, QT (Window, Mac, Linux) and an easy to use online wallet designed for the mass consumer market. If you can make online payments, you already know how to use FLASH.</span>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-lg-4 d-md-block">
                                     <div class="fancy-title title-border">
                                         <h2>Flash <span>Android</span> Wallet</h2>
                                     </div>
-                                    <a href="https://play.google.com/store/apps/details?id=com.flash.wallet.android" target="_blank" class="button topmargin-sm play-store-btn"><img src="https://www.flashcoin.io/images/icons/playstor1.png"></a>
+                                    <a href="https://play.google.com/store/apps/details?id=com.flash.wallet.android" target="_blank" rel="noopener noreferrer" class="button topmargin-sm play-store-btn"><img src="https://www.flashcoin.io/images/icons/playstor1.png"></a>
                                     <div class="fancy-title title-border">
                                         <h2>Flash <span>iOS</span> Wallet</h2>
                                     </div>
-                                    <a href="https://itunes.apple.com/in/app/coinodes-flash-wallet/id1397010514" target="_blank" class="button topmargin-sm app-store-btn"><img style="height:45px" src="https://www.flashcoin.io/images/icons/app-store.png"></a>
+                                    <a href="https://itunes.apple.com/in/app/coinodes-flash-wallet/id1397010514" target="_blank" rel="noopener noreferrer" class="button topmargin-sm app-store-btn"><img style="height:45px" src="https://www.flashcoin.io/images/icons/app-store.png"></a>
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="max-height col-lg-12">
@@ -557,7 +579,9 @@
                                         <div class="fancy-title title-border">
                                             <h2>Flash <span>Paper</span> Wallet</h2>
                                         </div>
-                                        <a href="https://paperwallet.flashcoin.io/" target="_blank" class="button button-3d topmargin-sm" style="margin-left: 25px;">Flash Paper Wallet</a>
+                                        <div class="col-lg-12 text-center">
+                                            <a href="https://paperwallet.flashcoin.io/" target="_blank" class="btn button-yellow-border topmargin-sm txt-uppercase flash-paper-wallet-btn float-lg-left">Flash Paper Wallet</a>
+                                        </div>
                                     </div>
                                 </div>
 
