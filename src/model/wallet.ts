@@ -310,6 +310,9 @@ export const NETWORKS = {
   UTK: {
     contract_address: '0x70a72833d6bf7f508c8224ce59ea1ef3d0ea3a38',
   },
+  ELF: {
+    contract_address: '0xbf2179859fc6d5bee9bf9158632dc51678a4100e',
+  },
 };
 
 const NETWORK_NAME = 'flashcoin';

@@ -87,6 +87,7 @@ export const CURRENCY_TYPE = {
   STORJ: 93,
   WINGS: 94,
   UTK: 95,
+  ELF: 96,
 };
 
 export const ALL_COINS = {
@@ -657,6 +658,13 @@ export const ALL_COINS = {
     is_erc20: true,
     decimals: 18,
   },
+  96: {
+    name: 'Aelf',
+    code: 'ELF',
+    currency_type: 96,
+    is_erc20: true,
+    decimals: 18,
+  },
 };
 
 export const CURRENCY_TYPE_UNIT = {
@@ -741,6 +749,7 @@ export const CURRENCY_TYPE_UNIT = {
   93: 'STORJ',
   94: 'WINGS',
   95: 'UTK',
+  96: 'ELF',
 };
 
 export const CURRENCY_TYPE_UNIT_UPCASE = {
@@ -825,6 +834,7 @@ export const CURRENCY_TYPE_UNIT_UPCASE = {
   93: 'STORJ',
   94: 'WINGS',
   95: 'UTK',
+  96: 'ELF',
 };
 
 export const CURRENCY_ICON_URL = {
@@ -910,6 +920,7 @@ export const CURRENCY_ICON_URL = {
   93: 'assets/images/currency/storj-icon.png',
   94: 'assets/images/currency/wings-icon.png',
   95: 'assets/images/currency/utk-icon.png',
+  96: 'assets/images/currency/elf-icon.png',
 };
 
 export function getCurrencyUnitUpcase(currency_type) {
