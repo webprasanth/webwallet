@@ -743,6 +743,16 @@ export default class AppService {
     $.ajax(options);
   }
 
+  getPayoutCodeInfo(params, cb) {
+    let options = this.makeRequestOption(
+      'api/get-payout-code-info',
+      params,
+      'get',
+      cb
+    );
+    $.ajax(options);
+  }
+
   getCurrentPayoutCode(params, cb) {
     let options = this.makeRequestOption(
       'api/get-payout-code',

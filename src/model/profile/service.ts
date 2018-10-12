@@ -147,6 +147,14 @@ export default class ProfileService {
     });
   }
 
+  getPayoutCodeInfo(params) {
+    return new Promise((resolve, reject) => {
+      AppService.getInstance().getPayoutCodeInfo(params, resp => {
+        resolve(resp);
+      });
+    });
+  }
+
   getCurrentPayoutCode(params) {
     return new Promise((resolve, reject) => {
       AppService.getInstance().getCurrentPayoutCode(params, resp => {

@@ -46,6 +46,10 @@ export default class TwoFAVerificationDialog extends Element {
 
   mounted() {
     $('#verifyPinDialog').modal('show');
+    $('#verifyPinDialog').on('shown.bs.modal', function() {
+      $('#google-code').focus();
+    });
+
     if (TwoFAVerificationDialog.unsubscribe)
       TwoFAVerificationDialog.unsubscribe();
     TwoFAVerificationDialog.unsubscribe = store.subscribe(

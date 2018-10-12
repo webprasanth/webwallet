@@ -425,6 +425,28 @@ export const profileActions = {
     return { type: PROFILE.ADD_PAYOUTCODE_FAILED, data: resp };
   },
 
+  getPayoutCodeInfo(params) {
+    return dispatch => {
+      ProfileService.singleton()
+        .getPayoutCodeInfo(params)
+        .then((resp: any) => {
+          if (resp.rc == 1) {
+            dispatch(profileActions.getPayoutCodeInfoSuccess(resp));
+          } else {
+            dispatch(profileActions.getPayoutCodeInfoFailed(resp));
+          }
+        });
+    };
+  },
+
+  getPayoutCodeInfoSuccess(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_INFO_SUCCESS, data: resp };
+  },
+
+  getPayoutCodeInfoFailed(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_INFO_FAILED, data: resp };
+  },
+
   getCurrentPayoutCode(params) {
     return dispatch => {
       ProfileService.singleton()

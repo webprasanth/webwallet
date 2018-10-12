@@ -74,6 +74,7 @@
                     $("#create-account-btn").click(onSignupButtonClick);
                     setLocalePlaceholders();
                     checkLocation();
+                    $('#identifer').focus();
             });
 
             function login() {
@@ -337,12 +338,14 @@
         function showSignUp(){
             $('.login-form').hide();
             $('.singup-form').show();
+            $('#firstname').focus();
             grecaptcha.reset(captchaId);
         }
 
         function backLogin(){
             $('.singup-form').hide();
             $('.login-form').show();
+            $('#identifer').focus();
         }
             </script>
     </head>

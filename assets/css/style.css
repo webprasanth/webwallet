@@ -1756,6 +1756,12 @@ select:active, select:hover {
 }
 
 /* ======= Share Coin style ========*/
+.share-percent-section {
+  padding-left: 5px;
+}
+.sharecoin-remarks-section {
+  padding-left: 5px;
+}
 .sharecoin-address{
   padding-left:5px;
   border : 1px solid #ccc;
@@ -1766,25 +1772,25 @@ select:active, select:hover {
   padding-left:5px;
   border : 1px solid #ccc;
   border-radius : 4px;
-  margin-left:5px;
   line-height : 2.0;
 }
 .share-percent {
   padding-left:5px;
   border : 1px solid #ccc;
   border-radius : 4px;
-  margin-left:5px;
   line-height : 2.0;
 }
-.txn-share{
-  width :60%;
-  padding-left : 7px;
-  margin-left : 10px;
+.txn-share-percent {
+  padding: 0px 10px;
 }
+.txn-share{
+  padding-left : 7px;
+}
+
 .flash-share-heading{
-  margin-left : 10px;
   font-size : 23px; 
 }
+
 .address-row{
   margin-top:3px;
   display : none;
@@ -1810,10 +1816,15 @@ select:active, select:hover {
   font-size:large;
   width:100%;
 }
+.flash-payout-percent-section {
+  font-weight: 700;
+}
+
 .btn-submit-update{
   margin-top:15px;
 }
 .form-address{
+  padding-right: 10px;
   margin-top:10px;
 }
 .info-icon{
@@ -1834,7 +1845,7 @@ select:active, select:hover {
 }
 
 .payout-share-code {
-  padding-left:17px;
+  padding-left:10px;
 }
 
 .erc20tokensDiv {
@@ -1883,3 +1894,18 @@ select:active, select:hover {
   display: block;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 767px) {
+.txn-share-percent {
+  padding: 0px;
+}
+#share-coin .border-right {
+  border-right: none;
+}
+#share-coin .payout-share-code {
+  padding-left: 0px;
+}
+.form-address{
+  padding-right: 0px;
+}
+}  
