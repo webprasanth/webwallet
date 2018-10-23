@@ -51,12 +51,16 @@
             initIndexLocal(function () {});
 
             var captchaId = null;
+            var captchaIdForLogin = null;
             var userLocation = null;
             var emailRegex =
             /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
             var onloadCallback = function () {
                 captchaId = grecaptcha.render('gcaptcha', {
+                    'sitekey': '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N'
+                });
+                captchaIdForLogin = grecaptcha.render('gcaptcha-for-login', {
                     'sitekey': '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N'
                 });
             };
@@ -83,11 +87,10 @@
 
                 if (!email || email.trim().length == 0) {
                     showError(writeTextIndexLocale('login_email_reuired_msg', {}, true));
-
                     return;
                 }
-                var checkEmail = email.toLowerCase().match(emailRegex);
 
+                var checkEmail = email.toLowerCase().match(emailRegex);
                 if (checkEmail === null) {
                     showError(writeTextIndexLocale('login_invalid_email_msg', {}, true));
                     return;
@@ -98,10 +101,17 @@
                     return;
                 }
 
+                var captchaRespForLogin = grecaptcha.getResponse(captchaIdForLogin);
+                if (!captchaRespForLogin || captchaRespForLogin.length == 0) {
+                    showError(writeTextIndexLocale('login_invalid_captcha', {}, true));
+                    return;
+                }
+
             var url = 'https://keys.flashcoin.io/api/login';
                 var params = {
                     email: email,
                     password: password,
+                    g_recaptcha_response: captchaRespForLogin,
                     res: 'web',
                 }
                 $("#loading-icon").show();
@@ -116,11 +126,16 @@
                         localStorage.setItem('currency_type', '1'); //Setting Default currency Flash
                         window.location.href = "home.html";
                     } else {
+                        grecaptcha.reset(captchaIdForLogin);
+
                         if(res.status == 'ACCOUNT_LOCKED')
                             showError(res.reason);
                         else
                         {
-                            if(res.failed_count && res.failed_count >= 3)
+                            if (res.status == 'RECAPTCHA_NOT_VERIFIED') {
+                                showError(writeTextIndexLocale('login_invalid_captcha', {}, true));
+                            }    
+                            else if(res.failed_count && res.failed_count >= 3)
                             {
                                 if(res.failed_count == 3)
                                     var attmpt_count = '3rd';
@@ -346,6 +361,7 @@
             $('.singup-form').hide();
             $('.login-form').show();
             $('#identifer').focus();
+            grecaptcha.reset(captchaIdForLogin);
         }
             </script>
     </head>
@@ -387,6 +403,9 @@
                                 </div>
                                 <div class="col-xs-12 flash-login-control">
                                     <input id="loginpassword" type="password" class="form-control text-center" placeholder="password">
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <div id="gcaptcha-for-login"></div>
                                 </div>
                                 <div class="btn-login form-group col-xs-12 text-center" style="margin-top: 5px;">
                                     <button id="btn-dologin" class="btn button-yellow-border txt-uppercase"><script>writeTextIndexLocale('common_login_label')</script></button>
