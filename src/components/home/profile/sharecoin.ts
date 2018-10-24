@@ -24,6 +24,7 @@ export default class ShareCoin extends BaseElement {
   private showUpdateButton = true;
   private showSubmitPayoutButton = false;
   private showRemovePayoutButton = true;
+  private showPayoutPercent = false;
   private showCopyButton = false;
   private showAddRowButton = true;
   private counterOfRow = 1;
@@ -129,9 +130,17 @@ export default class ShareCoin extends BaseElement {
       case PROFILE.UPDATE_SHARECOIN_FAILED:
         super.showMessage('', this.getText('wallet_share_update_failed'));
         break;
+      case PROFILE.GET_PAYOUTCODE_INFO_SUCCESS:
+        this.showConfirmationModalOnAddPayoutCode(data);
+        break;
+      case PROFILE.GET_PAYOUTCODE_INFO_FAILED:
+        super.showMessage('', this.getText('get-payout-code-info-failed'));
+        break;
       case PROFILE.ADD_PAYOUTCODE_SUCCESS:
         this.showSubmitPayoutButton = false;
         this.showRemovePayoutButton = true;
+        this.showPayoutPercent = true;
+        $('#flash-payout-percent').html(this.newPayoutCodeResponse.sharing_fee);
         super.showMessage('', this.getText('wallet_share_payout_added'));
         break;
       case PROFILE.ADD_PAYOUTCODE_FAILED:
@@ -140,11 +149,16 @@ export default class ShareCoin extends BaseElement {
       case PROFILE.GET_PAYOUTCODE_SUCCESS:
         this.payoutCodeResponse = data;
         this.payoutCode = this.payoutCodeResponse.payout_code;
+        this.showPayoutPercent = true;
         if (this.payoutCode == '') {
           this.showSubmitPayoutButton = true;
           this.showRemovePayoutButton = false;
+          this.showPayoutPercent = false;
         }
         $('#mypayoutcode').val(this.payoutCode);
+        $('#flash-payout-percent').html(
+          this.payoutCodeResponse.payout_sharing_fee
+        );
         break;
       case PROFILE.GET_PAYOUTCODE_FAILED:
         break;
@@ -153,6 +167,7 @@ export default class ShareCoin extends BaseElement {
         $('#mypayoutcode').val(this.payoutCode);
         this.showSubmitPayoutButton = true;
         this.showRemovePayoutButton = false;
+        this.showPayoutPercent = false;
         super.showMessage('', this.getText('wallet_share_payout_removed'));
         break;
       case PROFILE.REMOVE_PAYOUTCODE_FAILED:
@@ -213,13 +228,40 @@ export default class ShareCoin extends BaseElement {
 
   isValidAllShareAddress() {
     for (var i = 1; i <= 10; i++) {
-      if (tag.allValidAddress[i - 1] == true) {
-        continue;
-      }
       var flashShareAddress = $('#share-address' + i).val();
       var percentToShare = $('#share-percent' + i).val();
+      var walletAdrs = $('#share-address' + i).data('addresss');
+
+      if (flashShareAddress != '') {
+        if (tag.allValidAddress[i - 1] == false) {
+          walletAdrs = flashShareAddress;
+          $('#share-address' + i).data('addresss', flashShareAddress);
+        }
+      } else {
+        walletAdrs = '';
+        $('#share-address' + i).data('addresss', walletAdrs);
+      }
+
+      //show message on duplicate address
+      if (i > 1 && walletAdrs != '') {
+        for (var j = 1; j < i; j++) {
+          var tempWalletAdrs = $('#share-address' + j).data('addresss');
+          if (walletAdrs == tempWalletAdrs) {
+            super.showError(
+              '',
+              this.getText('wallet_share_duplicate_flash_address')
+            );
+            return false;
+          }
+        }
+      }
+
       if (flashShareAddress == '') {
         $('#share-percent' + i).val('0');
+        continue;
+      }
+
+      if (tag.allValidAddress[i - 1] == true) {
         continue;
       }
       if (flashShareAddress == this.myWalletAddress) {
@@ -229,11 +271,13 @@ export default class ShareCoin extends BaseElement {
         tag.allValidAddress[i - 1] = true;
         continue;
       }
+
       if (!this.isValidFlashAddress(flashShareAddress)) {
         super.showError('', this.getText('wallet_share_invalid_flash_address'));
         return false;
       }
     }
+
     return true;
   }
 
@@ -256,7 +300,7 @@ export default class ShareCoin extends BaseElement {
     }
   }
 
-  submitPayoutCode() {
+  confirmPayoutCode() {
     this.payoutCode = $('#mypayoutcode').val();
     if (this.payoutCode === '') {
       super.showError('', this.getText('wallet_share_payout_nonempty'));
@@ -271,8 +315,28 @@ export default class ShareCoin extends BaseElement {
     let params = {
       sharing_code: this.payoutCode,
     };
+    store.dispatch(profileActions.getPayoutCodeInfo(params));
+  }
 
-    store.dispatch(profileActions.addPayoutCode(params));
+  showConfirmationModalOnAddPayoutCode(data) {
+    let share_percent = data.sharing_fee;
+    if (share_percent != undefined && share_percent != '') {
+      this.newPayoutCodeResponse = data;
+      this.payoutCode = $('#mypayoutcode').val();
+      share_percent = parseFloat(share_percent);
+      riot.mount('#confirm-send', 'confirm-dialog', {
+        title: this.getText('add-giveaway-code-title'),
+        message: this.getText('add-giveaway-code-confirmation', {
+          share_percent: share_percent,
+        }),
+        callback: function(result) {
+          if (result) {
+            let params = { sharing_code: $('#mypayoutcode').val() };
+            store.dispatch(profileActions.addPayoutCode(params));
+          }
+        },
+      });
+    }
   }
 
   getPayoutCode() {
@@ -459,6 +523,8 @@ export default class ShareCoin extends BaseElement {
       .then((resp: any) => {
         if (resp.rc == 1 && resp.wallets.length > 0) {
           if (resp.wallets.length == 1 && term == resp.wallets[0].email) {
+            $('#' + currentRowid).data('email', resp.wallets[0].email);
+            $('#' + currentRowid).data('addresss', resp.wallets[0].address);
             tag.allValidAddress[currentIndex] = true;
           }
         } else {

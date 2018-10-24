@@ -64,7 +64,7 @@
     "login_Forgot_password"		       		   : "Forgot Password?",
 	"login_dont_have_account"		       	   : "Don't have an account?",
 	"login_create_one"						   : "Create One",
-
+    "login_invalid_captcha"                    : "Please verify that you are not a robot",
 
     "account_not_exist_label"                  : "** Do you want to create a Flashcoin walllet?",
     "ask_fullname_label"                       : "** Enter your full name",
@@ -437,6 +437,7 @@
 	"wallet_share_payout_removed"              : "Your Payout code is removed succesfully",
 	"wallet_share_percent_nonempty"            : "Share Percent cannot be empty",
 	"wallet_share_invalid_flash_address"       : "Invalid flash address",
+    "wallet_share_duplicate_flash_address"     : "Duplicate Flash address is not allowed",
 	"wallet_share_sum_hundread"                : "Sum of all share percent must be 100.",
 	"wallet_share_payout_nonempty"	           : "Payout Code cannot be empty",
 	"no_payout_code"                           : "There is no payout Code to remove. You need to add first .",
@@ -448,6 +449,10 @@
 	"wallet_share_code_info"                   : "Add FLASH addresses you want to share flash with (you personally, a company, charity, etc). Give to your friends for their Giveaway code and they will share with these addresses.",
 	"payout_code_info"                         : "Once you add a Code here. You will be charged extra fee which is  a fixed percent of your transaction amount . This percent is fixed by user whose Giveaway code you are adding. The extra fee is distributed among users whose address is mentioned in this Giveaway code.",
 	"wallet_share_percent_info"                : "This share percentage associated with My Flash share code denotes the percentage of transacted flash which will be deducted along with transacted amount while your Flash share code is used.",
+    "add-giveaway-code-title"                  : "Giveaway Code",
+    "add-giveaway-code-confirmation"           : "You will be charged extra fees of %(share_percent)s% on your FLASH transactions. Are you sure you want to add this giveaway Code?",
+    "get-payout-code-info-failed"              : "Invalid Giveaway Code",
+    "giveaway-percent-title"                   : "Giveaway Fee",
 
     "erc20Token_failed_to_get_list"            : "Failed to list ERC20 Tokens",
     "erc20Token_list_updated_successfully"     : "ERC20 Tokens updated succesfully",
