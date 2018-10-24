@@ -405,9 +405,11 @@ export const profileActions = {
 
   addPayoutCode(params) {
     return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
       ProfileService.singleton()
         .addPayoutCode(params)
         .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
           if (resp.rc == 1) {
             dispatch(profileActions.addPayoutCodeSuccess(resp));
           } else {
@@ -423,6 +425,30 @@ export const profileActions = {
 
   addPayoutCodeFailed(resp) {
     return { type: PROFILE.ADD_PAYOUTCODE_FAILED, data: resp };
+  },
+
+  getPayoutCodeInfo(params) {
+    return dispatch => {
+      dispatch(commonActions.toggleLoading(true));
+      ProfileService.singleton()
+        .getPayoutCodeInfo(params)
+        .then((resp: any) => {
+          dispatch(commonActions.toggleLoading(false));
+          if (resp.rc == 1) {
+            dispatch(profileActions.getPayoutCodeInfoSuccess(resp));
+          } else {
+            dispatch(profileActions.getPayoutCodeInfoFailed(resp));
+          }
+        });
+    };
+  },
+
+  getPayoutCodeInfoSuccess(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_INFO_SUCCESS, data: resp };
+  },
+
+  getPayoutCodeInfoFailed(resp) {
+    return { type: PROFILE.GET_PAYOUTCODE_INFO_FAILED, data: resp };
   },
 
   getCurrentPayoutCode(params) {

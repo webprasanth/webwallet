@@ -58,6 +58,10 @@
     background-size: cover;
 }
 
+#gcaptcha-for-login > div {
+  margin: 0 auto;
+}
+
 #gcaptcha > div {
   margin: 0 auto;
 }
