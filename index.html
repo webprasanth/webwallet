@@ -60,9 +60,6 @@
                 captchaId = grecaptcha.render('gcaptcha', {
                     'sitekey': '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N'
                 });
-                captchaIdForLogin = grecaptcha.render('gcaptcha-for-login', {
-                    'sitekey': '6Lfdgm4UAAAAALcYem_1X7NP3ZRyroPqdoDNOc5N'
-                });
             };
 
             $(function() {
@@ -101,54 +98,59 @@
                     return;
                 }
 
-                var captchaRespForLogin = grecaptcha.getResponse(captchaIdForLogin);
+                /*var captchaRespForLogin = grecaptcha.getResponse(captchaIdForLogin);
                 if (!captchaRespForLogin || captchaRespForLogin.length == 0) {
                     showError(writeTextIndexLocale('login_invalid_captcha', {}, true));
                     return;
-                }
+                }*/
 
-            var url = 'https://keys.flashcoin.io/api/login';
-                var params = {
-                    email: email,
-                    password: password,
-                    g_recaptcha_response: captchaRespForLogin,
-                    res: 'web',
-                }
-                $("#loading-icon").show();
-
-                $.post(url, params, function (res) {
-                    $("#loading-icon").hide();
-
-                    if (res.rc == 1) {
-                        res.secretKey = password;
-                        res.email = email;
-                        localStorage.setItem("flc-loginresp", JSON.stringify(res));
-                        localStorage.setItem('currency_type', '1'); //Setting Default currency Flash
-                        window.location.href = "home.html";
-                    } else {
-                        grecaptcha.reset(captchaIdForLogin);
-
-                        if(res.status == 'ACCOUNT_LOCKED')
-                            showError(res.reason);
-                        else
-                        {
-                            if (res.status == 'RECAPTCHA_NOT_VERIFIED') {
-                                showError(writeTextIndexLocale('login_invalid_captcha', {}, true));
-                            }    
-                            else if(res.failed_count && res.failed_count >= 3)
-                            {
-                                if(res.failed_count == 3)
-                                    var attmpt_count = '3rd';
-                                else
-                                    var attmpt_count = '4th';
-
-                                showError('Email or password is not correct. This is your '+res.failed_count+' failed attempt. After 5 failed attempts, your account will be locked.');
-                            }
-                            else
-                                showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
-                        }
+                grecaptcha.execute('6LcSXXcUAAAAAGl9j4nKfBSAU6P8VbzfbGwYxJgp', {action: 'login'}).then(function(token) {
+                    var url = 'https://keys.flashcoin.io/api/login';
+                    var params = {
+                        email: email,
+                        password: password,
+                        g_recaptcha_response: token,
+                        res: 'web',
                     }
+                    $("#loading-icon").show();
+
+                    $.post(url, params, function (res) {
+                        $("#loading-icon").hide();
+
+                        if (res.rc == 1) {
+                            res.secretKey = password;
+                            res.email = email;
+                            localStorage.setItem("flc-loginresp", JSON.stringify(res));
+                            localStorage.setItem('currency_type', '1'); //Setting Default currency Flash
+                            window.location.href = "home.html";
+                        } else {
+                            //grecaptcha.reset(captchaIdForLogin);
+
+                            if(res.status == 'ACCOUNT_LOCKED')
+                                showError(res.reason);
+                            else
+                            {
+                                if (res.status == 'RECAPTCHA_NOT_VERIFIED') {
+                                    showError(writeTextIndexLocale('login_invalid_captcha', {}, true));
+                                }    
+                                else if(res.failed_count && res.failed_count >= 3)
+                                {
+                                    if(res.failed_count == 3)
+                                        var attmpt_count = '3rd';
+                                    else
+                                        var attmpt_count = '4th';
+
+                                    showError('Email or password is not correct. This is your '+res.failed_count+' failed attempt. After 5 failed attempts, your account will be locked.');
+                                }
+                                else
+                                    showError(writeTextIndexLocale('login_incorrect_usernamepassword_msg', {}, true));
+                            }
+                        }
+                    });
                 });
+
+
+            
             }
 
             function onForgotPassword(event) {
@@ -361,13 +363,13 @@
             $('.singup-form').hide();
             $('.login-form').show();
             $('#identifer').focus();
-            grecaptcha.reset(captchaIdForLogin);
+            //grecaptcha.reset(captchaIdForLogin);
         }
             </script>
     </head>
 
     <body class="stretched dark">
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=6LcSXXcUAAAAAGl9j4nKfBSAU6P8VbzfbGwYxJgp" async defer></script>
         <!-- Document Wrapper
     ============================================= -->
         <div id="wrapper" class="clearfix">
@@ -403,9 +405,6 @@
                                 </div>
                                 <div class="col-xs-12 flash-login-control">
                                     <input id="loginpassword" type="password" class="form-control text-center" placeholder="password">
-                                </div>
-                                <div class="form-group col-xs-12">
-                                    <div id="gcaptcha-for-login"></div>
                                 </div>
                                 <div class="btn-login form-group col-xs-12 text-center" style="margin-top: 5px;">
                                     <button id="btn-dologin" class="btn button-yellow-border txt-uppercase"><script>writeTextIndexLocale('common_login_label')</script></button>
