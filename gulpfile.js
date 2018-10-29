@@ -42,6 +42,7 @@ gulp.task('copy-wiki-page', function() {
     { from: 'crowdsale.html', to: 'public/' },
     { from: 'header.html', to: 'public/' },
     { from: 'footer.html', to: 'public/' },
+    { from: 'recaptcha.html', to: 'public/' },
   ];
 
   var tasks = maps.map(m => {
@@ -76,9 +77,7 @@ gulp.task('copy-html-mobile', function() {
 });
 
 gulp.task('copy-favicon', function() {
-  return gulp
-    .src('favicon.png')
-    .pipe(gulp.dest('public/'));
+  return gulp.src('favicon.png').pipe(gulp.dest('public/'));
 });
 
 gulp.task('copy-favicon-ico', function() {
@@ -112,7 +111,9 @@ gulp.task('copy-locale', function() {
   return gulp.src('assets/locale/**/*').pipe(gulp.dest('public/assets/locale'));
 });
 gulp.task('copy-widgets', function() {
-  return gulp.src('assets/widgets/**/*').pipe(gulp.dest('public/assets/widgets'));
+  return gulp
+    .src('assets/widgets/**/*')
+    .pipe(gulp.dest('public/assets/widgets'));
 });
 
 gulp.task('copy-lib', function() {
