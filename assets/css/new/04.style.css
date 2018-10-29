@@ -13601,3 +13601,7 @@ body:not(.no-transition) #wrapper,
 #header:not(.sticky-header):not(.responsive-sticky-header) #logo img{
 	display: none;
 }
+
+.grecaptcha-badge {
+  display: none;
+}
